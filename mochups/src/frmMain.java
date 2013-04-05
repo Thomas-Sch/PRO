@@ -2,24 +2,57 @@
 
 import javax.swing.*;
 
+
+/**
+* This code was edited or generated using CloudGarden's Jigloo
+* SWT/Swing GUI Builder, which is free for non-commercial
+* use. If Jigloo is being used commercially (ie, by a corporation,
+* company or business for any purpose whatever) then you
+* should purchase a license for each developer using Jigloo.
+* Please visit www.cloudgarden.com for details.
+* Use of Jigloo implies acceptance of these licensing terms.
+* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
+* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
+* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+*/
 public class frmMain extends javax.swing.JFrame {
 
-	private JMenuItem helpMenuItem;
-	private JMenu jMenu5;
-	private JMenuItem deleteMenuItem;
-	private JSeparator jSeparator1;
-	private JMenuItem pasteMenuItem;
-	private JMenuItem copyMenuItem;
-	private JMenuItem cutMenuItem;
-	private JMenu jMenu4;
-	private JMenuItem exitMenuItem;
-	private JSeparator jSeparator2;
-	private JMenuItem closeFileMenuItem;
-	private JMenuItem saveAsMenuItem;
-	private JMenuItem saveMenuItem;
-	private JMenuItem openFileMenuItem;
-	private JMenuItem newFileMenuItem;
-	private JMenu jMenu3;
+	{
+		//Set Look & Feel
+		try {
+			javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	private JMenuItem mniInterrogationHelp;
+	private JMenu mnuInterrogation;
+	private JMenuItem mniEditBudgetDelete;
+	private JMenuItem mniEditBudgetConsult;
+	private JMenuItem mniEditBudgetAdd;
+	private JMenuItem mniEditAccountDelete;
+	private JMenuItem mniEditAccountConsult;
+	private JMenuItem mniEditAccountAdd;
+	private JMenuItem mniShowListInterval;
+	private JMenuItem mniShowListLast20;
+	private JMenu mnuShowList;
+	private JMenu mnuShowGraphic;
+	private JMenuItem mniEditDoTransaction;
+	private JMenuItem mniEditDoExpense;
+	private JSeparator sepEditTwo;
+	private JMenuItem mniEditManageAuthor;
+	private JMenuItem mniEditManageCategory;
+	private JSeparator sepEditOne;
+	private JMenuItem mniEditOnTheFlyBudget;
+	private JMenu mnuEditBudget;
+	private JMenu mnuEditAccount;
+	private JMenuItem mniInterrogationAbout;
+	private JMenu mnuShow;
+	private JMenu mnuEdit;
+	private JMenuItem mniFileQuit;
+	private JMenu mnuFile;
 	private JMenuBar jMenuBar1;
 
 	/**
@@ -47,81 +80,131 @@ public class frmMain extends javax.swing.JFrame {
 				jMenuBar1 = new JMenuBar();
 				setJMenuBar(jMenuBar1);
 				{
-					jMenu3 = new JMenu();
-					jMenuBar1.add(jMenu3);
-					jMenu3.setText("File");
+					mnuFile = new JMenu();
+					jMenuBar1.add(mnuFile);
+					mnuFile.setText("Fichier");
 					{
-						newFileMenuItem = new JMenuItem();
-						jMenu3.add(newFileMenuItem);
-						newFileMenuItem.setText("New");
-					}
-					{
-						openFileMenuItem = new JMenuItem();
-						jMenu3.add(openFileMenuItem);
-						openFileMenuItem.setText("Open");
-					}
-					{
-						saveMenuItem = new JMenuItem();
-						jMenu3.add(saveMenuItem);
-						saveMenuItem.setText("Save");
-					}
-					{
-						saveAsMenuItem = new JMenuItem();
-						jMenu3.add(saveAsMenuItem);
-						saveAsMenuItem.setText("Save As ...");
-					}
-					{
-						closeFileMenuItem = new JMenuItem();
-						jMenu3.add(closeFileMenuItem);
-						closeFileMenuItem.setText("Close");
-					}
-					{
-						jSeparator2 = new JSeparator();
-						jMenu3.add(jSeparator2);
-					}
-					{
-						exitMenuItem = new JMenuItem();
-						jMenu3.add(exitMenuItem);
-						exitMenuItem.setText("Exit");
+						mniFileQuit = new JMenuItem();
+						mnuFile.add(mniFileQuit);
+						mniFileQuit.setText("Quitter");
 					}
 				}
 				{
-					jMenu4 = new JMenu();
-					jMenuBar1.add(jMenu4);
-					jMenu4.setText("Edit");
+					mnuEdit = new JMenu();
+					jMenuBar1.add(mnuEdit);
+					mnuEdit.setText("Edition");
 					{
-						cutMenuItem = new JMenuItem();
-						jMenu4.add(cutMenuItem);
-						cutMenuItem.setText("Cut");
+						mnuEditAccount = new JMenu();
+						mnuEdit.add(mnuEditAccount);
+						mnuEditAccount.setText("Comptes");
+						{
+							mniEditAccountAdd = new JMenuItem();
+							mnuEditAccount.add(mniEditAccountAdd);
+							mniEditAccountAdd.setText("Ajouter...");
+						}
+						{
+							mniEditAccountConsult = new JMenuItem();
+							mnuEditAccount.add(mniEditAccountConsult);
+							mniEditAccountConsult.setText("Consulter...");
+						}
+						{
+							mniEditAccountDelete = new JMenuItem();
+							mnuEditAccount.add(mniEditAccountDelete);
+							mniEditAccountDelete.setText("Supprimer...");
+						}
 					}
 					{
-						copyMenuItem = new JMenuItem();
-						jMenu4.add(copyMenuItem);
-						copyMenuItem.setText("Copy");
+						mnuEditBudget = new JMenu();
+						mnuEdit.add(mnuEditBudget);
+						mnuEditBudget.setText("Budgets");
+						{
+							mniEditBudgetAdd = new JMenuItem();
+							mnuEditBudget.add(mniEditBudgetAdd);
+							mniEditBudgetAdd.setText("Ajouter...");
+						}
+						{
+							mniEditBudgetConsult = new JMenuItem();
+							mnuEditBudget.add(mniEditBudgetConsult);
+							mniEditBudgetConsult.setText("Consulter...");
+						}
+						{
+							mniEditBudgetDelete = new JMenuItem();
+							mnuEditBudget.add(mniEditBudgetDelete);
+							mniEditBudgetDelete.setText("Supprimer...");
+						}
 					}
 					{
-						pasteMenuItem = new JMenuItem();
-						jMenu4.add(pasteMenuItem);
-						pasteMenuItem.setText("Paste");
+						mniEditOnTheFlyBudget = new JMenuItem();
+						mnuEdit.add(mniEditOnTheFlyBudget);
+						mniEditOnTheFlyBudget.setText("Créer un budget à la volée");
 					}
 					{
-						jSeparator1 = new JSeparator();
-						jMenu4.add(jSeparator1);
+						sepEditOne = new JSeparator();
+						mnuEdit.add(sepEditOne);
 					}
 					{
-						deleteMenuItem = new JMenuItem();
-						jMenu4.add(deleteMenuItem);
-						deleteMenuItem.setText("Delete");
+						mniEditManageCategory = new JMenuItem();
+						mnuEdit.add(mniEditManageCategory);
+						mniEditManageCategory.setText("Gérer les catégories...");
+					}
+					{
+						mniEditManageAuthor = new JMenuItem();
+						mnuEdit.add(mniEditManageAuthor);
+						mniEditManageAuthor.setText("Gérer les auteurs...");
+					}
+					{
+						sepEditTwo = new JSeparator();
+						mnuEdit.add(sepEditTwo);
+					}
+					{
+						mniEditDoExpense = new JMenuItem();
+						mnuEdit.add(mniEditDoExpense);
+						mniEditDoExpense.setText("Faire une dépense...");
+					}
+					{
+						mniEditDoTransaction = new JMenuItem();
+						mnuEdit.add(mniEditDoTransaction);
+						mniEditDoTransaction.setText("Faire une transaction...");
 					}
 				}
 				{
-					jMenu5 = new JMenu();
-					jMenuBar1.add(jMenu5);
-					jMenu5.setText("Help");
+					mnuShow = new JMenu();
+					jMenuBar1.add(mnuShow);
+					mnuShow.setText("Affichage");
 					{
-						helpMenuItem = new JMenuItem();
-						jMenu5.add(helpMenuItem);
-						helpMenuItem.setText("Help");
+						mnuShowGraphic = new JMenu();
+						mnuShow.add(mnuShowGraphic);
+						mnuShowGraphic.setText("Graphiques");
+					}
+					{
+						mnuShowList = new JMenu();
+						mnuShow.add(mnuShowList);
+						mnuShowList.setText("Listes");
+						{
+							mniShowListLast20 = new JMenuItem();
+							mnuShowList.add(mniShowListLast20);
+							mniShowListLast20.setText("Les 20 derniers mouvements d'argent");
+						}
+						{
+							mniShowListInterval = new JMenuItem();
+							mnuShowList.add(mniShowListInterval);
+							mniShowListInterval.setText("Mouvements d'argent dans un interval");
+						}
+					}
+				}
+				{
+					mnuInterrogation = new JMenu();
+					jMenuBar1.add(mnuInterrogation);
+					mnuInterrogation.setText("?");
+					{
+						mniInterrogationHelp = new JMenuItem();
+						mnuInterrogation.add(mniInterrogationHelp);
+						mniInterrogationHelp.setText("Aide...");
+					}
+					{
+						mniInterrogationAbout = new JMenuItem();
+						mnuInterrogation.add(mniInterrogationAbout);
+						mniInterrogationAbout.setText("A propos...");
 					}
 				}
 			}
