@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-
+package midas;
 /**
  * Launcher du programme pour tester les interfaces.
  * @author Biolzi Sébastien
