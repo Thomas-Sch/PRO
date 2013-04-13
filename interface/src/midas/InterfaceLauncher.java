@@ -14,7 +14,7 @@ package midas;
 
 import javax.swing.JFrame;
 
-import guis.JMainScreen;
+import guis.MainWindow;
 
 /**
  * Launcher du programme pour tester les interfaces.
@@ -31,7 +31,7 @@ public class InterfaceLauncher {
     * @param args Options de lancement.
     */
    public static void main(String[] args) {
-      JFrame i = new JMainScreen();
+      JFrame i = new MainWindow();
       i.setVisible(true);
    }
 
