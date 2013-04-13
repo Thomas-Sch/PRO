@@ -12,12 +12,17 @@
  */
 package guis;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.MenuBar;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -38,9 +43,6 @@ import javax.swing.JTabbedPane;
  */
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame{
-   
-   // Contraintes pour les composants graphiques
-   GridBagConstraints constraints = new GridBagConstraints();
       
    /**
     * Constructeur sans paramètre.
@@ -66,10 +68,11 @@ public class MainWindow extends JFrame{
       setLocationRelativeTo(null); //Ouvre le programme au milieu de l'écran.
       setResizable(false);
       setDefaultCloseOperation(EXIT_ON_CLOSE); 
-//      setSize(200, 100);
-      
+
       setContentPane(buildContent());
-      pack();
+      
+     // pack();
+      setSize(500, 300);
    }
    
    /**
@@ -85,22 +88,11 @@ public class MainWindow extends JFrame{
       
       // Définission du contenur principal.
       JPanel pnlContent = new JPanel();
-      pnlContent.setLayout(new FlowLayout());
+      pnlContent.setLayout(new BorderLayout());
       
-      constraints.insets = new Insets(3, 3, 3, 3);
-      constraints.fill = GridBagConstraints.HORIZONTAL;
-      
-      constraints.gridheight = 1;
-      constraints.gridwidth = 1;
-      constraints.gridx = 0;
-      constraints.gridy = 0;
-      
-      // Définission des onglets.
       JTabbedPane tbpMain = new JTabbedPane();
-      tbpMain.addTab("Salut", new JLabel("P"));
-      tbpMain.addTab("Hello", new JLabel("J"));
-     
-      pnlContent.add(tbpMain,constraints);
+      
+      pnlContent.add(tbpMain,BorderLayout.CENTER);
       return pnlContent;
    }   
    
