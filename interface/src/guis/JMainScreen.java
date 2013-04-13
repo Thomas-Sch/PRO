@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : InterfaceLauncher.java
+ * Nom du fichier   : frmMainScreen.java
  * ============================================================================
  * Date de création : 12 avr. 2013
  * ============================================================================
@@ -10,14 +10,16 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package midas;
+package guis;
+
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.JFrame;
 
-import guis.JMainScreen;
-
 /**
- * Launcher du programme pour tester les interfaces.
+ * GUI du menu d'accueil ou menu principal.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -25,14 +27,24 @@ import guis.JMainScreen;
  * @author Sinniger Marcel
  *
  */
-public class InterfaceLauncher {
-
+@SuppressWarnings("serial")
+public class JMainScreen extends JFrame{
+   
+   private final  GridBagConstraints constraints = new GridBagConstraints();
+   
    /**
-    * @param args Options de lancement.
+    * Constructeur sans paramètre.
     */
-   public static void main(String[] args) {
-      JFrame i = new JMainScreen();
-      i.setVisible(true);
+   public JMainScreen() {
+      super("Midas");
+      
+      // Initialisations diverses
+      setLocationRelativeTo(null); //Ouvre le programme au millieu de l'écran
+      setResizable(false);
+      setDefaultCloseOperation(EXIT_ON_CLOSE);      
    }
 
+   public Dimension getMinimumSize() {
+      return new Dimension(100, 200);
+   }
 }
