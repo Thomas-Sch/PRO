@@ -66,13 +66,11 @@ public class MainWindow extends JFrame{
     */
    private void init() {
       setLocationRelativeTo(null); //Ouvre le programme au milieu de l'écran.
-      setResizable(false);
       setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
       setContentPane(buildContent());
       
-     // pack();
-      setSize(500, 300);
+      pack();
    }
    
    /**
@@ -91,6 +89,7 @@ public class MainWindow extends JFrame{
       pnlContent.setLayout(new BorderLayout());
       
       JTabbedPane tbpMain = new JTabbedPane();
+      tbpMain.addTab("Accueil", new HomeScreen());
       
       pnlContent.add(tbpMain,BorderLayout.CENTER);
       return pnlContent;
