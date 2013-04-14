@@ -20,12 +20,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
+
+import com.toedter.calendar.JDateChooser;
 
 /**
  * Contient les éléments du menu d'accueil.
@@ -44,41 +50,40 @@ public class HomeScreen extends JPanel {
    public HomeScreen() {
       setLayout(new GridBagLayout());
       
-      GridBagConstraints gbl = new GridBagConstraints(); 
+      GridBagConstraints gblConstraints = new GridBagConstraints(); 
       // Options globales de contrainte.
-      gbl.fill = GridBagConstraints.BOTH;
+      gblConstraints.fill = GridBagConstraints.BOTH;
       
-      gbl.insets = new Insets(5, 5, 5, 5);
-      gbl.weighty = 0.5;
+      gblConstraints.insets = new Insets(5, 5, 5, 5);
+      gblConstraints.weighty = 0.5;
       
       // Paramétrage des contraintes et ajout du panel d'alerte.
-      gbl.weightx = 0.5;
-      gbl.gridx = 0;
-      gbl.gridy = 0;      
-      add(getWarningPanel(),gbl);
+      gblConstraints.weightx = 0.5;
+      gblConstraints.gridx = 0;
+      gblConstraints.gridy = 0;      
+      add(getWarningPanel(),gblConstraints);
       
       // Paramétrage des contraintes et ajout du panel des derniers mouvements d'argent.
-      gbl.weightx = 0.5;
-      gbl.gridx = 1;
-      gbl.gridy = 0;
-      add(getLastMoneyMovesPanel(),gbl);
+      gblConstraints.weightx = 0.5;
+      gblConstraints.gridx = 1;
+      gblConstraints.gridy = 0;
+      add(getLastMoneyMovesPanel(),gblConstraints);
       
       // Désormais, les composants suivants prennent toute la largeur verticale.
-      gbl.gridwidth = 2;
+      gblConstraints.gridwidth = 2;
       
       // Ajout du premier séparateur.
-      gbl.gridx = 0;
-      gbl.gridy = 1;
-      gbl.weighty = 0.0;
+      gblConstraints.gridx = 0;
+      gblConstraints.gridy = 1;
+      gblConstraints.weighty = 0.0;
       JSeparator sepOne = new JSeparator();
-      add(sepOne, gbl);
+      add(sepOne, gblConstraints);
       
       // Paramétrage des contraintes et ajout de la zone d'ajout de dépense rapide.
-      gbl.weighty = 0.5;
-      gbl.anchor = GridBagConstraints.NORTH;
-      gbl.gridx = 0;
-      gbl.gridy = 2;
-      add(getQuickExpensePanel(),gbl);
+      gblConstraints.anchor = GridBagConstraints.NORTH;
+      gblConstraints.gridx = 0;
+      gblConstraints.gridy = 2;
+      add(getQuickExpensePanel(),gblConstraints);
    }   
    
    
@@ -88,7 +93,49 @@ public class HomeScreen extends JPanel {
     */
    private JPanel getQuickExpensePanel() {
       JPanel pnlQuickExpense = new JPanel();
-      pnlQuickExpense.setBackground(Color.CYAN);
+      pnlQuickExpense.setLayout(new GridBagLayout());
+      
+      GridBagConstraints gblConstraints = new GridBagConstraints(); 
+      // Options globales de contrainte.
+      gblConstraints.fill = GridBagConstraints.HORIZONTAL;
+      
+      gblConstraints.insets = new Insets(5, 5, 5, 5);
+      gblConstraints.weighty = 0.0;
+      
+      // Paramétrage des contraintes et ajout du panel d'alerte.
+      gblConstraints.weightx = 0.1;
+      gblConstraints.gridx = 0;
+      gblConstraints.gridy = 0;     
+      gblConstraints.anchor = GridBagConstraints.NORTH;
+      pnlQuickExpense.add(new JLabel("Effectuer une dépense rapide..."), gblConstraints);
+      
+      // Ajout de la liste déroulante
+      gblConstraints.gridx = 0;
+      gblConstraints.gridy = 1;
+      JComboBox<String> cmbBudgets = new JComboBox<>();
+      
+      ComboBoxModel<String> cbmBudgetsData = new DefaultComboBoxModel<String>(
+            new String[] { "Selectionner un budget", "Maison", "Tourisme", "Cadeaux", "Nouveau budget..." });
+      
+      cmbBudgets.setModel(cbmBudgetsData);
+      pnlQuickExpense.add(cmbBudgets, gblConstraints);
+      
+      // Ajout de la zone de saisie d'un montant.
+      gblConstraints.gridx = 1;
+      gblConstraints.weightx = 0.0;
+      gblConstraints.anchor = GridBagConstraints.CENTER;
+      pnlQuickExpense.add(new JLabel("Montant:"), gblConstraints);
+      
+      gblConstraints.gridx = 2;
+      gblConstraints.weightx = 0.5;
+      gblConstraints.anchor = GridBagConstraints.NORTH;
+      pnlQuickExpense.add(new JTextField("..."), gblConstraints);
+      
+      gblConstraints.gridx = 3;
+      JDateChooser dchTime = new JDateChooser();
+      
+      pnlQuickExpense.add(dchTime, gblConstraints);
+      
       return pnlQuickExpense;
    }
 
