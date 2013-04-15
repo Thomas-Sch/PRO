@@ -112,13 +112,13 @@ public class HomeScreen extends JPanel {
       // Ajout de la liste déroulante
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 1;
-      JComboBox<String> cmbBudgets = new JComboBox<>();
+      JComboBox<String> cmbAuthors = new JComboBox<>();
       
-      ComboBoxModel<String> cbmBudgetsData = new DefaultComboBoxModel<String>(
-            new String[] { "Selectionner un budget", "Maison", "Tourisme", "Cadeaux", "Nouveau budget..." });
+      ComboBoxModel<String> cbmAuthors = new DefaultComboBoxModel<String>(
+            new String[] { "Selectionner un auteur", "Thomas", "Dieu", "Jo", "Nouvel auteur..." });
       
-      cmbBudgets.setModel(cbmBudgetsData);
-      pnlQuickExpense.add(cmbBudgets, gblConstraints);
+      cmbAuthors.setModel(cbmAuthors);
+      pnlQuickExpense.add(cmbAuthors, gblConstraints);
       
       // Ajout de la zone de saisie d'un montant.
       gblConstraints.gridx = 1;
@@ -130,6 +130,16 @@ public class HomeScreen extends JPanel {
       
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 2;
+      JComboBox<String> cmbBudgets = new JComboBox<>();
+      
+      ComboBoxModel<String> cbmBudgetsData = new DefaultComboBoxModel<String>(
+            new String[] { "Selectionner un budget", "Maison", "Tourisme", "Cadeaux", "Nouveau budget..." });
+      
+      cmbBudgets.setModel(cbmBudgetsData);
+      pnlQuickExpense.add(cmbBudgets, gblConstraints);
+     
+      
+      gblConstraints.gridx = 1;
       JComboBox<String> cmbCategory = new JComboBox<>();
       
       ComboBoxModel<String> cbmCategory = new DefaultComboBoxModel<String>(
@@ -138,7 +148,7 @@ public class HomeScreen extends JPanel {
       cmbCategory.setModel(cbmCategory);
       pnlQuickExpense.add(cmbCategory, gblConstraints);
       
-      gblConstraints.gridx = 1;
+      gblConstraints.gridx = 2;
       JComboBox<String> cmbSubCategory = new JComboBox<>();
       
       ComboBoxModel<String> cbmSubCategory = new DefaultComboBoxModel<String>(
