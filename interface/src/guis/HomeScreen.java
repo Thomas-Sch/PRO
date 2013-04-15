@@ -15,10 +15,10 @@ package guis;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Date;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
@@ -122,21 +122,56 @@ public class HomeScreen extends JPanel {
       
       // Ajout de la zone de saisie d'un montant.
       gblConstraints.gridx = 1;
-      gblConstraints.weightx = 0.0;
-      gblConstraints.anchor = GridBagConstraints.CENTER;
-      pnlQuickExpense.add(new JLabel("Montant:"), gblConstraints);
+      pnlQuickExpense.add(getAmountInputPanel(), gblConstraints);
+      
+      // Saisie de la date.
+      gblConstraints.gridx = 2;
+      pnlQuickExpense.add(getDateInputPanel(), gblConstraints);
+      
+      gblConstraints.gridx = 0;
+      gblConstraints.gridy = 2;
+      JComboBox<String> cmbCategory = new JComboBox<>();
+      
+      ComboBoxModel<String> cbmCategory = new DefaultComboBoxModel<String>(
+            new String[] { "Selectionner une catégorie", "Mirtille", "Poire", "Orange", "Nouvelle catégorie..." });
+      
+      cmbCategory.setModel(cbmCategory);
+      pnlQuickExpense.add(cmbCategory, gblConstraints);
+      
+      gblConstraints.gridx = 1;
+      JComboBox<String> cmbSubCategory = new JComboBox<>();
+      
+      ComboBoxModel<String> cbmSubCategory = new DefaultComboBoxModel<String>(
+            new String[] { "Selectionner une sous-catégorie", "Atome", "Proton", "Quark", "Nouvelle sous-catégorie..." });
+      
+      cmbSubCategory.setModel(cbmSubCategory);
+      pnlQuickExpense.add(cmbSubCategory, gblConstraints);
+      
+      gblConstraints.gridx = 0;
+      gblConstraints.gridy = 3;
+      gblConstraints.gridwidth = 3;
+      pnlQuickExpense.add(getReasonPanel(), gblConstraints);
       
       gblConstraints.gridx = 2;
-      gblConstraints.weightx = 0.5;
-      gblConstraints.anchor = GridBagConstraints.NORTH;
-      pnlQuickExpense.add(new JTextField("..."), gblConstraints);
-      
-      gblConstraints.gridx = 3;
-      JDateChooser dchTime = new JDateChooser();
-      
-      pnlQuickExpense.add(dchTime, gblConstraints);
+      gblConstraints.gridy = 4;
+      gblConstraints.gridwidth = 1;
+      pnlQuickExpense.add(new JButton("Valider la dépense"), gblConstraints);
       
       return pnlQuickExpense;
+   }
+
+
+   /**
+    * Construit le panel contenant le motif d'une dépense.
+    * @return le panel construit.
+    */
+   private Component getReasonPanel() {
+      JPanel pnlReasons = new JPanel(new BorderLayout(5,5));
+      
+      pnlReasons.add(new JLabel("Motif:"), BorderLayout.WEST);
+      pnlReasons.add(new JTextField("..."), BorderLayout.CENTER);
+      
+      return pnlReasons;
    }
 
 
@@ -188,5 +223,37 @@ public class HomeScreen extends JPanel {
       
       return pnlWarning;
    }
+   
+   /**
+    * Construit le panel de saisie du montant d'argent.
+    * @return le panel construit.
+    */
+   private JPanel getAmountInputPanel(){
+      JPanel pnlAmountInput = new JPanel();
+      pnlAmountInput.setLayout(new BorderLayout(5,5));
+      
+      pnlAmountInput.add(new JLabel("Montant:"), BorderLayout.WEST);
+      
+      JTextField txtAmountInput = new JTextField("...");
+      
+      pnlAmountInput.add(txtAmountInput, BorderLayout.CENTER);
+      
+      return pnlAmountInput;
+   }
+   
+   /**
+    * Construit le panel de saisie de la date.
+    * @return le panel construit.
+    */
+   private JPanel getDateInputPanel(){
+      JPanel pnlDateInput = new JPanel();
+      pnlDateInput.setLayout(new BorderLayout(5,5));
+      
+      pnlDateInput.add(new JLabel("Date:"), BorderLayout.WEST);      
+      JDateChooser dchTime = new JDateChooser(new Date());
+      pnlDateInput.add(dchTime, BorderLayout.CENTER);
+      return pnlDateInput;      
+   }
+   
 
 }
