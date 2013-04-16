@@ -12,6 +12,8 @@
  */
 package gui;
 
+import gui.component.ComboBoxAuthor;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -33,6 +35,8 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
+
+import data.AuthorData;
 
 /**
  * Contient les éléments du menu d'accueil.
@@ -113,13 +117,8 @@ public class HomeScreen extends JPanel {
       // Ajout de la liste déroulante
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 1;
-      JComboBox<String> cmbAuthors = new JComboBox<>();
-      
-      ComboBoxModel<String> cbmAuthors = new DefaultComboBoxModel<String>(
-            new String[] { "Selectionner un auteur", "Thomas", "Dieu", "Jo", "Nouvel auteur..." });
-      
-      cmbAuthors.setModel(cbmAuthors);
-      pnlQuickExpense.add(cmbAuthors, gblConstraints);
+
+      pnlQuickExpense.add(new ComboBoxAuthor(), gblConstraints);
       
       // Ajout de la zone de saisie d'un montant.
       gblConstraints.gridx = 1;
