@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : InterfaceLauncher.java
+ * Nom du fichier   : ComboBoxAuthor.java
  * ============================================================================
- * Date de création : 12 avr. 2013
+ * Date de création : 16 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,29 +10,21 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package midas;
+package gui.component;
 
-import javax.swing.JFrame;
-
-import gui.MainFrame;
+import javax.swing.JComboBox;
 
 /**
- * Launcher du programme pour tester les interfaces.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
+ * @param <E>
  *
  */
-public class InterfaceLauncher {
-
-   /**
-    * @param args Options de lancement.
-    */
-   public static void main(String[] args) {
-      JFrame i = new MainFrame();
-      i.setVisible(true);
-   }
+public class ComboBoxAuthor<E> extends JComboBox<E> {
+   private static final long serialVersionUID = 1L;
 
 }

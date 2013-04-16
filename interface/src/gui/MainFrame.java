@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : MainWindow.java
+ * Nom du fichier   : MainFrame.java
  * ============================================================================
  * Date de création : 12 avr. 2013
  * ============================================================================
@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package guis;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -29,12 +29,12 @@ import javax.swing.JTabbedPane;
  *
  */
 @SuppressWarnings("serial")
-public class MainWindow extends JFrame{
+public class MainFrame extends JFrame{
       
    /**
     * Constructeur sans paramètre.
     */
-   public MainWindow() {
+   public MainFrame() {
       super("Midas");
       
       // Aspect des fenêtres.

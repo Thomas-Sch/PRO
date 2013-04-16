@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package guis;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,6 +22,7 @@ import java.util.Date;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -203,8 +204,16 @@ public class HomeScreen extends JPanel {
       dlmLastMoneyMoves.addElement("C'est n'est pas le panel que vous recherchez.");
       
       JList<String> lstLastMoneyMoves = new JList<>(dlmLastMoneyMoves);
-      lstLastMoneyMoves.setSelectionBackground(Color.WHITE);
-      lstLastMoneyMoves.setSelectionForeground(Color.BLACK);
+      // Code obtenu sur http://tutiez.com/how-to-disable-jlist-selection-in-java.html
+      lstLastMoneyMoves.setCellRenderer(new DefaultListCellRenderer() {
+         
+         public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+                 boolean isSelected, boolean cellHasFocus) {
+             super.getListCellRendererComponent(list, value, index, false, false);
+      
+             return this;
+         }
+     });
       
       pnlLastMoneyMoves.add(lstLastMoneyMoves, BorderLayout.CENTER);
       return pnlLastMoneyMoves;
