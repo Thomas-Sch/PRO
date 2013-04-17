@@ -15,11 +15,12 @@ package gui;
 import gui.component.ComboBoxAuthor;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
 
 import javax.swing.ComboBoxModel;
@@ -35,8 +36,6 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
-
-import data.AuthorData;
 
 /**
  * Contient les éléments du menu d'accueil.
@@ -114,10 +113,9 @@ public class HomeScreen extends JPanel {
       gblConstraints.anchor = GridBagConstraints.NORTH;
       pnlQuickExpense.add(new JLabel("Effectuer une dépense rapide..."), gblConstraints);
       
-      // Ajout de la liste déroulante
+      // Ajout de la liste déroulante pour les auteurs.
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 1;
-
       pnlQuickExpense.add(new ComboBoxAuthor(), gblConstraints);
       
       // Ajout de la zone de saisie d'un montant.
@@ -165,7 +163,18 @@ public class HomeScreen extends JPanel {
       gblConstraints.gridx = 2;
       gblConstraints.gridy = 4;
       gblConstraints.gridwidth = 1;
-      pnlQuickExpense.add(new JButton("Valider la dépense"), gblConstraints);
+      
+      JButton btnValidate = new JButton("Valider la dépense");
+      pnlQuickExpense.add(btnValidate, gblConstraints);
+      
+      btnValidate.addActionListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent arg0) {
+            System.out.println("Salut");
+            new NewAuthorFrame(HomeScreen.this);
+         }
+      });
       
       return pnlQuickExpense;
    }

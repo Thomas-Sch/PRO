@@ -13,11 +13,8 @@
 package gui.component;
 
 import java.util.ArrayList;
-
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.event.ListDataListener;
 
 import data.AuthorData;
 
@@ -51,6 +48,6 @@ public class ComboBoxAuthor extends JComboBox<Object> {
       al.add("Nouvel auteur...");
       
       
-      setModel(new DefaultComboBoxModel(al.toArray()));
+      setModel(new DefaultComboBoxModel<Object>(al.toArray()));
    }   
 }
