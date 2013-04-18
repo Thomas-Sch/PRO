@@ -1,5 +1,6 @@
 package core;
 
 public class Bidon {
-   int j;
+   int j = 1;
+   
 }
