@@ -171,8 +171,8 @@ public class HomeScreen extends JPanel {
          
          @Override
          public void actionPerformed(ActionEvent arg0) {
-            System.out.println("Salut");
             new NewAuthorFrame(HomeScreen.this);
+            new NewAccountFrame(HomeScreen.this);
          }
       });
       

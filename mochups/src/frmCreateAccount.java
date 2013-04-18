@@ -110,7 +110,7 @@ public class frmCreateAccount extends javax.swing.JFrame {
 			{
 				lblAccountNumber = new JLabel();
 				getContentPane().add(lblAccountNumber, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-				lblAccountNumber.setText("Numéro de compte");
+				lblAccountNumber.setText("Numï¿½ro de compte");
 			}
 			{
 				txtAccountNumber = new JTextField();
