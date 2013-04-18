@@ -88,7 +88,8 @@ public class Midas {
       
       
       
-      Settings.createTemplateForLanguage("ru");
+      // Auto création du template de langue
+      Settings.createTemplateForLanguage("fr");
       
    }
 

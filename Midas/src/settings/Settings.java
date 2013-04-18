@@ -142,16 +142,9 @@ public class Settings {
    public static void createTemplateForLanguage(String languageCode) {
       
       File file = new File(LANGUAGES_FOLDER_PATH+ File.separator +
-            languageCode + "." + LANGUAGE_FILE_EXTENSION);
+            languageCode + "_template." + LANGUAGE_FILE_EXTENSION);
       
-      if (!file.exists()) {
-         Language.createTemplateLanguageFile(file);
-      }
-      else {
-         MidasLogs.messages.push("Settings", "Specified language already exist, template not created.");
-      }
-      
-      
+      Language.createTemplateLanguageFile(file);
       
    }
    
