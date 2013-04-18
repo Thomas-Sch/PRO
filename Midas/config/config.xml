@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+   <properties>
+      <language>fr</language>
+   </properties>
+   <frames>
+      <mainFrame title="Midas">
+         <pos> center</pos>
+         <width>700</width>
+         <height>500</height>
+      </mainFrame>
+   </frames>
+</settings>
