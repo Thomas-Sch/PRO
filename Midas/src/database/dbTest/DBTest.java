@@ -1,6 +1,6 @@
-package dbTest;
+package database.dbTest;
 
-import dbComponents.*;
+import database.dbComponents.*;
 
 public class DBTest {
 
@@ -8,8 +8,6 @@ public class DBTest {
     * @param args
     */
    public static void main(String[] args) {
-      
-      
       
       DBController dbController = new DBController();
       DBUser dbUser = dbController.createDBUser();

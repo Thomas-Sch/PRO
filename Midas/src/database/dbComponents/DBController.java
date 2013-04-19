@@ -1,4 +1,4 @@
-package dbComponents;
+package database.dbComponents;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+
 
 public class DBController {
    
@@ -58,6 +59,10 @@ public class DBController {
       }
    }
    
+   private void logSqlErrorToFile() {
+      // à faire /////////////////////////////////////////////
+   }
+   
    private void insert(PreparedStatement preparedStatement, DBComponent dbComponent) {
       try {
          preparedStatement.execute();
@@ -68,6 +73,7 @@ public class DBController {
          
       } catch (SQLException e) {
          // TODO Auto-generated catch block
+         // write SQLError to a File
          e.printStackTrace();
       }
    }
@@ -77,8 +83,21 @@ public class DBController {
          preparedStatement.execute();      
       } catch (SQLException e) {
          // TODO Auto-generated catch block
+         // write SQLError to a File
          e.printStackTrace();
       }
+   }
+   
+   private ResultSet select (PreparedStatement preparedStatement) {
+      ResultSet resultSet = null;
+      try {
+         resultSet = preparedStatement.executeQuery(); 
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         // write SQLError to a File
+         e.printStackTrace();
+      }
+      return resultSet;
    }
    
    public DBUser createDBUser() {
@@ -93,7 +112,7 @@ public class DBController {
       
       try {
          preparedStatement.setInt(1, id);
-         ResultSet result = preparedStatement.executeQuery();
+         ResultSet result = this.select(preparedStatement);
          
          result.next();
          dbUser = new DBUser();

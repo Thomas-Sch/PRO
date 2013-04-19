@@ -1,4 +1,4 @@
-package dbComponents;
+package database.dbComponents;
 
 public class DBAccount extends DBComponent {
 

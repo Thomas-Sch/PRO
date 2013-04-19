@@ -1,4 +1,4 @@
-package dbComponents;
+package database.dbComponents;
 
 import java.util.Date;
 

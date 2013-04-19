@@ -1,6 +1,6 @@
-package dbComponents;
+package database.dbComponents;
 
-public abstract class ComponentOld2 {
+public abstract class DBComponent {
 
    Integer id;
    

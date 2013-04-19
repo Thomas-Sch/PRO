@@ -1,12 +1,17 @@
-package dbComponents;
+package database.dbComponents;
 
 import java.util.Date;
 
-public class DBBudetOnTheFly extends DBBudget {
-
+public class DBRecurrence extends DBComponent {
+   String name;
    Date start;
    Date end;
-   
+   public String getName() {
+      return name;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
    public Date getStart() {
       return start;
    }
@@ -19,5 +24,5 @@ public class DBBudetOnTheFly extends DBBudget {
    public void setEnd(Date end) {
       this.end = end;
    }
-
+   
 }
