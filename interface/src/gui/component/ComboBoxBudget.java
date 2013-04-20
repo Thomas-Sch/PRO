@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : ComboBoxAuthor.java
+ * Nom du fichier   : ComboBoxBudget.java
  * ============================================================================
  * Date de création : 16 avr. 2013
  * ============================================================================
@@ -12,42 +12,18 @@
  */
 package gui.component;
 
-import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import gui.data.*;
-
 /**
- * Représente les éléments graphiques compris pour la sélection d'un auteur.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- * @param <E> Représentation des auteurs.
  *
  */
-public class ComboBoxAuthor extends JComboBox<Object> {
+public class ComboBoxBudget extends JComboBox<Object> {
    private static final long serialVersionUID = 1L;
 
-   /**
-    * 
-    */
-   public ComboBoxAuthor() {
-      
-      ArrayList<String> al = new ArrayList<>();
-      
-      AuthorData ad = new AuthorData();
-      
-      al.add("Sélectionner un auteur");
-      for (String s : ad.getAuthors()) {
-         al.add(s);
-      }
-      
-      al.add("Nouvel auteur...");
-      
-      
-      setModel(new DefaultComboBoxModel<Object>(al.toArray()));
-   }   
 }

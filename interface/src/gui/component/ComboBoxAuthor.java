@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import gui.data.*;
+import data.AuthorData;
 
 /**
  * Représente les éléments graphiques compris pour la sélection d'un auteur.
