@@ -44,7 +44,10 @@ public class Language {
        * nécessaires.
        */
       APP_TITLE,
-      ACTION_QUIT;
+      ACTION_QUIT,
+      
+      VALIDATE_BUTTON,
+      CANCEL_BUTTON;
       
       
       /* Fin des déclarations, ne pas modifier ci-dessous

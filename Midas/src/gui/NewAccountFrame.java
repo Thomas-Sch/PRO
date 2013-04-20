@@ -23,7 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.WindowConstants;
-
+import settings.*;
+import settings.Language.Text;
 /**
  * Fenêtre d'ajout de compte.
  * @author Biolzi Sébastien
@@ -44,6 +45,7 @@ public class NewAccountFrame extends JDialog {
     * Construit une nouvelle fenêtre pour ajouter un compte.
     */
    public NewAccountFrame(Component parent) {
+      setTitle(Text.APP_TITLE.toString());
       setLocationRelativeTo(parent);
       setVisible(true);
       GridBagLayout thisLayout = new GridBagLayout();

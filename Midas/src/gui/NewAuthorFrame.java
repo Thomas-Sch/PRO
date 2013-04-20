@@ -12,6 +12,8 @@
  */
 package gui;
 
+import gui.component.ValidateCancel;
+
 import java.awt.Component;
 
 import javax.swing.JButton;
@@ -20,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+
+import settings.Language.Text;
 
 /**
  * Classe représentant la fenêtre pour ajouter un nouvel auteur.
@@ -42,6 +46,7 @@ public class NewAuthorFrame extends JDialog {
     * 
     */
    public NewAuthorFrame(Component parent) {
+      setTitle(Text.APP_TITLE.toString());
       setVisible(true);
       setModal(true);
       setContentPane(buildContent());
@@ -58,11 +63,11 @@ public class NewAuthorFrame extends JDialog {
       
       JLabel lblAuthor = new JLabel("Saisissez le nom de l'auteur:");
       JTextField txtAuthor = new JTextField(20);
-      JButton btnValidate = new JButton("Valider");
+      ValidateCancel vlc = new ValidateCancel();
       
       pnlContent.add(lblAuthor);
       pnlContent.add(txtAuthor);
-      pnlContent.add(btnValidate);
+      pnlContent.add(vlc);
       
       
       //Contraintes du label par rapport au contenant.
@@ -75,11 +80,11 @@ public class NewAuthorFrame extends JDialog {
 
       //Contraintes pour la taille du contenant.
       splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, txtAuthor);
-      splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, btnValidate);
+      splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vlc);
       
       // Contraintes pour le bouton de validation.
-      splLayout.putConstraint(SpringLayout.EAST, btnValidate, -5, SpringLayout.EAST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, btnValidate, 5, SpringLayout.SOUTH, txtAuthor);
+      splLayout.putConstraint(SpringLayout.EAST, vlc, 0, SpringLayout.EAST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, vlc, 5, SpringLayout.SOUTH, txtAuthor);
       
       return pnlContent;
    }

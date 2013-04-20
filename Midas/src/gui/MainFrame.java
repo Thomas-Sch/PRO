@@ -36,11 +36,6 @@ public class MainFrame extends JFrame{
     */
    public MainFrame(String title, int posX, int posY, int width, int height)  {
       super(title);
-      setBounds(posX, posY, width, height);
-      
-      setDefaultCloseOperation(EXIT_ON_CLOSE);
-      
-      setVisible(true);
       
       // Aspect des fenêtres.
       try {
@@ -48,16 +43,17 @@ public class MainFrame extends JFrame{
       } catch(Exception e) {
          e.printStackTrace();
       }
-      
+      setBounds(posX, posY, width, height);
       init();
-      
    }
    
    /**
     * Initialisations des différentes éléments présents dans la vue.
     */
    private void init() {
-      setLocationRelativeTo(null); //Ouvre le programme au milieu de l'écran.
+      
+      setDefaultCloseOperation(EXIT_ON_CLOSE);
+      setVisible(true);
       setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
       setContentPane(buildContent());
