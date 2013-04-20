@@ -34,8 +34,13 @@ public class MainFrame extends JFrame{
    /**
     * Constructeur sans paramètre.
     */
-   public MainFrame() {
-      super("Midas");
+   public MainFrame(String title, int posX, int posY, int width, int height)  {
+      super(title);
+      setBounds(posX, posY, width, height);
+      
+      setDefaultCloseOperation(EXIT_ON_CLOSE);
+      
+      setVisible(true);
       
       // Aspect des fenêtres.
       try {

@@ -4,7 +4,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import settings.Language;
 import settings.Language.Text;
 import settings.Settings;
-import gui.AppMainFrame;
+import gui.MainFrame;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import core.Core;
@@ -76,7 +76,7 @@ public class Midas {
       
       Core core = new Core();
       
-      AppMainFrame mainFrame = new AppMainFrame(Text.APP_TITLE.toString(),
+      MainFrame mainFrame = new MainFrame(Text.APP_TITLE.toString(),
                                                 Settings.mainFrame.positionX,
                                                 Settings.mainFrame.positionY,
                                                 Settings.mainFrame.width,
