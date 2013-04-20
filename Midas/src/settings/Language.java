@@ -47,7 +47,8 @@ public class Language {
       ACTION_QUIT,
       
       VALIDATE_BUTTON,
-      CANCEL_BUTTON;
+      CANCEL_BUTTON,
+      ACCOUNT_NAME_LABEL;
       
       
       /* Fin des déclarations, ne pas modifier ci-dessous
