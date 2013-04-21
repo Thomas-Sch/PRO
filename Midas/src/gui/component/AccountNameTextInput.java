@@ -1,6 +1,6 @@
 package gui.component;
 
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,14 +16,17 @@ public class AccountNameTextInput extends JPanel {
    private static final long serialVersionUID = 5945902975916400712L;
 
    // Champs composant le panel.
-   private JLabel lblAccountName = new JLabel(Text.ACCOUNT_NAME_LABEL.toString());
-   private JTextField txtAccountName = new JTextField();
+   private JLabel lblAccountName;
+   private JTextField txtAccountName;
    
    public AccountNameTextInput() {
-      setLayout(new FlowLayout());
+      setLayout(new BorderLayout(5,5));
       
-      add(lblAccountName);
-      add(txtAccountName); 
+      lblAccountName = new JLabel(Text.ACCOUNT_NAME_LABEL.toString());
+      txtAccountName = new JTextField(30);
+      
+      add(lblAccountName,BorderLayout.WEST);
+      add(txtAccountName, BorderLayout.EAST); 
    }
 
 }

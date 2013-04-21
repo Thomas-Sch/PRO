@@ -48,6 +48,10 @@ public class Language {
       
       VALIDATE_BUTTON,
       CANCEL_BUTTON,
+      THRESHOLD_LABEL,
+      ACCOUNT_NUMBER_LABEL,
+      ACCOUNT_DESCRIPTION_LABEL,
+      RESET_BUTTON,
       ACCOUNT_NAME_LABEL;
       
       

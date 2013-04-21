@@ -18,7 +18,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
 /**
- * Classe contenant le menu principale de notre application
+ * Classe contenant le menu principal de notre application.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire

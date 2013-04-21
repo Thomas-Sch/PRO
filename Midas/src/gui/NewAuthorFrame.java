@@ -16,7 +16,6 @@ import gui.component.ValidateCancel;
 
 import java.awt.Component;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -50,7 +49,7 @@ public class NewAuthorFrame extends JDialog {
       setVisible(true);
       setModal(true);
       setContentPane(buildContent());
-      this.setLocationRelativeTo(parent);
+      setLocationRelativeTo(parent);
       setResizable(true);
       pack();
    }

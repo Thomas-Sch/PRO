@@ -17,12 +17,14 @@ public class ValidateCancel extends JPanel {
    private JButton btnValidate = new JButton(Text.VALIDATE_BUTTON.toString());
    private JButton btnCancel = new JButton(Text.CANCEL_BUTTON.toString());
    
+   private FlowLayout fltLayout = new FlowLayout();
+   
    public ValidateCancel() {
-      setLayout(new FlowLayout());
+      
+      setLayout(fltLayout);
       
       add(btnValidate);
       add(btnCancel);
       // TODO Auto-generated constructor stub
    }
-
 }

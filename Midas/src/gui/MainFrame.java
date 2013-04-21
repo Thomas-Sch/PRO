@@ -13,7 +13,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -54,10 +53,8 @@ public class MainFrame extends JFrame{
       
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       setVisible(true);
-      setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
       setContentPane(buildContent());
-      setMinimumSize(new Dimension(600, 400));
       
       pack();
    }
