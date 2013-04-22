@@ -13,6 +13,7 @@
 package gui;
 
 import gui.component.ComboBoxAuthor;
+import gui.component.ComboBoxCategory;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -138,22 +139,10 @@ public class HomeScreen extends JPanel {
      
       
       gblConstraints.gridx = 1;
-      JComboBox<String> cmbCategory = new JComboBox<>();
-      
-      ComboBoxModel<String> cbmCategory = new DefaultComboBoxModel<String>(
-            new String[] { "Selectionner une catégorie", "Mirtille", "Poire", "Orange", "Nouvelle catégorie..." });
-      
-      cmbCategory.setModel(cbmCategory);
-      pnlQuickExpense.add(cmbCategory, gblConstraints);
+      pnlQuickExpense.add(new ComboBoxCategory(), gblConstraints);
       
       gblConstraints.gridx = 2;
-      JComboBox<String> cmbSubCategory = new JComboBox<>();
-      
-      ComboBoxModel<String> cbmSubCategory = new DefaultComboBoxModel<String>(
-            new String[] { "Selectionner une sous-catégorie", "Atome", "Proton", "Quark", "Nouvelle sous-catégorie..." });
-      
-      cmbSubCategory.setModel(cbmSubCategory);
-      pnlQuickExpense.add(cmbSubCategory, gblConstraints);
+      pnlQuickExpense.add(new ComboBoxCategory(), gblConstraints);
       
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 3;

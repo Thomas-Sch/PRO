@@ -12,6 +12,11 @@
  */
 package gui.component;
 
+import gui.data.CategoryData;
+
+import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 /**
@@ -25,5 +30,22 @@ import javax.swing.JComboBox;
  */
 public class ComboBoxCategory extends JComboBox<Object> {
    private static final long serialVersionUID = 1L;
+   
+   public ComboBoxCategory() {
+      
+      ArrayList<String> data = new ArrayList<>();
+      
+      CategoryData dataModel = new CategoryData();
+      
+      data.add("Sélectionner une catégorie");
+      for (String s : dataModel.getList()) {
+         data.add(s);
+      }
+      
+      data.add("Nouvelle catégorie...");
+      
+      
+      setModel(new DefaultComboBoxModel<Object>(data.toArray()));
+   }   
 
 }

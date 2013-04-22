@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CategoryList.java
+ * Nom du fichier   : Data.java
  * ============================================================================
- * Date de création : 21 avr. 2013
+ * Date de création : 22 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,15 +10,12 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.component;
+package gui.data;
 
-import gui.data.CategoryData;
-
-import javax.swing.DefaultListModel;
-
+import java.util.LinkedList;
 
 /**
- * Liste de catégorie avec les boutons pour modifier les entrées.
+ * Classe temporaire pour stocker des données de test.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -26,24 +23,22 @@ import javax.swing.DefaultListModel;
  * @author Sinniger Marcel
  *
  */
-public class CategoryList extends ListTemplate {
+public abstract class Data<E> {
    
-   /**
-    * ID de série.
-    */
-   private static final long serialVersionUID = -7682417283987969152L;
-
-   /* (non-Javadoc)
-    * @see gui.component.ListTemplate#setData(javax.swing.DefaultListModel)
-    */
-   @Override
-   protected void setData(DefaultListModel<String> dlm) {
-      for(String s : new CategoryData().getList()) {
-         dlm.addElement(s);
-      }        
+   private LinkedList<E> data = new LinkedList<>();
+   
+   public void addItem(E e) {
+      data.add(e);
    }
-
-
-
-
+   
+   public LinkedList<E> getList() {
+      return data;
+   }
+   
+   public E[] getTab() {
+      @SuppressWarnings("unchecked")
+      E[] es = (E[]) data.toArray();
+      return es;
+   }
+   
 }

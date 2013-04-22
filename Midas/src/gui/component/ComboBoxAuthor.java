@@ -41,7 +41,7 @@ public class ComboBoxAuthor extends JComboBox<Object> {
       AuthorData ad = new AuthorData();
       
       al.add("Sélectionner un auteur");
-      for (String s : ad.getAuthors()) {
+      for (String s : ad.getList()) {
          al.add(s);
       }
       

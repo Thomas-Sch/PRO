@@ -12,7 +12,6 @@
  */
 package gui.data;
 
-import java.util.LinkedList;
 
 /**
  * Contient les données de test pour les auteurs.
@@ -23,21 +22,16 @@ import java.util.LinkedList;
  * @author Sinniger Marcel
  *
  */
-public class AuthorData {
-   LinkedList<String> data = new LinkedList<>();
+public class AuthorData extends Data<String>{
    
    /**
     * Crée un modèle de donnée de test.
     */
    public AuthorData() {
-      String[] ss = new String[] {"Thomas", "Dieu", "Jo", "Platon"};
-      
-      for(String s : ss) {
-         data.add(s);
-      }
-   }
-   
-   public LinkedList<String> getAuthors() {
-      return data;
+      addItem("Thomas");
+      addItem("Dieu");
+      addItem("Jo");
+      addItem("Platon");
+      addItem("Bob l'éponge");
    }
 }
