@@ -13,23 +13,12 @@
 package gui;
 
 import gui.component.CategoryList;
-import gui.component.NewEditDelete;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Panel;
 
-import javax.crypto.spec.GCMParameterSpec;
-import javax.swing.DefaultListModel;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 
-import settings.Language.Text;
 
 /**
  * Fenêtre de gestion des catégories.
@@ -40,50 +29,23 @@ import settings.Language.Text;
  * @author Sinniger Marcel
  *
  */
-public class ManageCategoryFrame extends JDialog {
+public class ManageCategoryFrame extends ManageFrame {
 
    /**
     * ID de série.
     */
    private static final long serialVersionUID = -3350759512131610325L;
    
-   public ManageCategoryFrame() {
-      setTitle(Text.APP_TITLE.toString());
-      setVisible(true);
-      setLocationRelativeTo(null);
+   protected JPanel initContent() {
+      super.initContent();
+         
+       getConstraints().gridx = 1;
+       getConstraints().anchor = GridBagConstraints.NORTH;
+       getConstraints().insets = new Insets(5, 50, 5, 5);
+       
+       getContent().add(new CategoryList(), getConstraints());
       
-      setContentPane(getContent());
-      
-      pack();
- 
+      return getContent();
    }
    
-   private JPanel getContent() {
-      JPanel pnlContent = new JPanel();
-      
-      GridBagConstraints gbcConstraints = new GridBagConstraints();
-      gbcConstraints.insets = new Insets(5, 5, 5, 5);
-//      gbcConstraints.fill = GridBagConstraints.BOTH;
-      gbcConstraints.weightx = 0.0;
-      gbcConstraints.weighty = 0.5;
-      
-      pnlContent.setLayout(new GridBagLayout());
-      
-      gbcConstraints.gridx = 0;
-      gbcConstraints.gridy = 0;
-
-      gbcConstraints.anchor = GridBagConstraints.NORTH;
-      
-      pnlContent.add(new CategoryList(), gbcConstraints);
-      
-      gbcConstraints.gridx = 1;
-      gbcConstraints.anchor = GridBagConstraints.NORTH;
-      gbcConstraints.insets = new Insets(5, 50, 5, 5);
-      
-      pnlContent.add(new CategoryList(), gbcConstraints);
-      
-      return pnlContent;
-   }
-   
-
 }
