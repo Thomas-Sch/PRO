@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.LinkedList;
 
 
+
 public class DBController {
    
    private final String dbPath = "jdbc:sqlite:Midas.sqlite3";
@@ -27,7 +28,7 @@ public class DBController {
          connection = DriverManager.getConnection(dbPath);
       }
       catch (SQLException e) {
-         System.out.println(e);
+         DBErrorHandler.connectionError(e);
       }
       
       return connection;
@@ -41,8 +42,7 @@ public class DBController {
          preparedStatement = connection.prepareStatement(sqlString, Statement.RETURN_GENERATED_KEYS);
          preparedStatement.setQueryTimeout(30);
       } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
+         DBErrorHandler.preparedStatementError(e);
       }
       
       return preparedStatement;
@@ -54,15 +54,10 @@ public class DBController {
             preparedStatement.getConnection().close();
          }
       } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
+         DBErrorHandler.preparedStatementError(e);
       }
    }
-   
-   private void logSqlErrorToFile() {
-      // à faire /////////////////////////////////////////////
-   }
-   
+      
    private void insert(PreparedStatement preparedStatement, DBComponent dbComponent) {
       try {
          preparedStatement.execute();
@@ -72,9 +67,7 @@ public class DBController {
          dbComponent.setId(result.getInt(1));
          
       } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         // write SQLError to a File
-         e.printStackTrace();
+         DBErrorHandler.executeError(e);
       }
    }
    
@@ -82,9 +75,7 @@ public class DBController {
       try {
          preparedStatement.execute();      
       } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         // write SQLError to a File
-         e.printStackTrace();
+         DBErrorHandler.executeError(e);
       }
    }
    
@@ -93,9 +84,7 @@ public class DBController {
       try {
          resultSet = preparedStatement.executeQuery(); 
       } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         // write SQLError to a File
-         e.printStackTrace();
+         DBErrorHandler.executeError(e);
       }
       return resultSet;
    }
@@ -121,8 +110,7 @@ public class DBController {
          dbUser.setLastName(result.getString(3));
 
       } catch (SQLException e) {
-         // TODO Auto-generated catch block         
-         e.printStackTrace();
+         DBErrorHandler.resultSetError(e);
       }
       finally {
          this.destroyPreparedStatement(preparedStatement);
@@ -131,7 +119,30 @@ public class DBController {
    }
    
    public LinkedList<DBUser> getAllDBUsers() {
-      return null;
+
+      String sqlString = "SELECT Use_Id, firstName, lastName FROM User";
+      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      DBUser dbUser;
+      LinkedList<DBUser> dbUsers = new LinkedList<DBUser>();
+      
+      try {
+         ResultSet result = this.select(preparedStatement);
+         
+         while (result.next()) {
+            dbUser = new DBUser();
+            dbUser.setId((result.getInt(1)));
+            dbUser.setFirstName(result.getString(2));
+            dbUser.setLastName(result.getString(3));
+            dbUsers.add(dbUser);
+         }
+
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }
+      return dbUsers;
    }
    
    public void saveToDatabase(DBUser dbUser) {
@@ -156,12 +167,110 @@ public class DBController {
             this.update(preparedStatement);
          }
       } catch (SQLException e) {
-         // TODO Auto-generated catch block         
-         e.printStackTrace();
+         DBErrorHandler.resultSetError(e);
       }
       finally {
          this.destroyPreparedStatement(preparedStatement);
       }
    }
    
+   
+   public DBAccount createDBAccount() {
+      return new DBAccount();
+   }
+   
+   public DBAccount getDBAccount(int id) {
+
+      String sqlString = "SELECT Acc_ID, Name, BankName, AccountNumber, Amount, AccountLimit FROM Account WHERE Use_ID = ?";
+      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      DBAccount dbAccount = null;
+      
+      try {
+         preparedStatement.setInt(1, id);
+         ResultSet result = this.select(preparedStatement);
+         
+         result.next();
+         dbAccount = new DBAccount();
+         dbAccount.setId((result.getInt(1)));
+         dbAccount.setName((result.getString(2)));
+         dbAccount.setNameBank((result.getString(3)));
+         dbAccount.setAccountNumber((result.getString(4)));
+         dbAccount.setAmount((result.getDouble(5)));
+         dbAccount.setOverdraftLimit((result.getDouble(6)));
+
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }
+      return dbAccount;
+   }
+   
+   public LinkedList<DBAccount> getAllDBAccounts() {
+
+      String sqlString = "SELECT Acc_Id, Name, BankName, AccountNumber, Amount, AccountLimit FROM Account";
+      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      DBAccount dbAccount;
+      LinkedList<DBAccount> dbAccounts = new LinkedList<DBAccount>();
+      
+      try {
+         ResultSet result = this.select(preparedStatement);
+         
+         while (result.next()) {
+            dbAccount = new DBAccount();
+            dbAccount.setId((result.getInt(1)));
+            dbAccount.setName((result.getString(2)));
+            dbAccount.setNameBank((result.getString(3)));
+            dbAccount.setAccountNumber((result.getString(4)));
+            dbAccount.setAmount((result.getDouble(5)));
+            dbAccount.setOverdraftLimit((result.getDouble(6)));
+         }
+
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }
+      return dbAccounts;
+   }
+   
+   public void saveToDatabase(DBAccount dbAccount) {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         if (dbAccount.getId() == null) {
+            sqlString = "INSERT INTO Account " +
+                        "VALUES (null, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = this.getPreparedStatement(sqlString);
+                        
+            preparedStatement.setInt(1, dbAccount.getId());
+            preparedStatement.setString(2, dbAccount.name);
+            preparedStatement.setString(3, dbAccount.nameBank);
+            preparedStatement.setString(4, dbAccount.getAccountNumber());
+            preparedStatement.setDouble(5, dbAccount.getAmount());
+            preparedStatement.setDouble(6, dbAccount.getOverdraftLimit());
+            
+            this.insert(preparedStatement, dbAccount);
+         } else {
+            sqlString = "UPDATE Account " +
+                        "SET Name = ?, BankName = ?, AccountNumber = ?, Amount = ?, AccountLimit = ? " +
+                        "WHERE Acc_Id = ?";
+            preparedStatement = this.getPreparedStatement(sqlString);
+            preparedStatement.setString(1, dbAccount.name);
+            preparedStatement.setString(2, dbAccount.nameBank);
+            preparedStatement.setString(3, dbAccount.getAccountNumber());
+            preparedStatement.setDouble(4, dbAccount.getAmount());
+            preparedStatement.setDouble(5, dbAccount.getOverdraftLimit());
+            preparedStatement.setInt(7, dbAccount.getId());
+            this.update(preparedStatement);
+         }
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }
+   }
 }

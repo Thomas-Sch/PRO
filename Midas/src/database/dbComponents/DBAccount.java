@@ -5,7 +5,6 @@ public class DBAccount extends DBComponent {
    String name;
    String nameBank;
    String accountNumber;
-   String description;
    Double amount;
    Double overdraftLimit;
 
@@ -33,14 +32,6 @@ public class DBAccount extends DBComponent {
       this.accountNumber = accountNumber;
    }
 
-   public String getDescription() {
-      return description;
-   }
-
-   public void setDescription(String description) {
-      this.description = description;
-   }
-
    public Double getAmount() {
       return amount;
    }
@@ -49,11 +40,11 @@ public class DBAccount extends DBComponent {
       this.amount = amount;
    }
 
-   public Double getoverdraftLimit() {
+   public Double getOverdraftLimit() {
       return overdraftLimit;
    }
 
-   public void setoverdraftLimit(Double overdraftLimit) {
+   public void setOverdraftLimit(Double overdraftLimit) {
       this.overdraftLimit = overdraftLimit;
    }
    

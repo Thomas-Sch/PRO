@@ -1,5 +1,7 @@
 package database.dbTest;
 
+import java.util.LinkedList;
+
 import database.dbComponents.*;
 
 public class DBTest {
@@ -28,7 +30,14 @@ public class DBTest {
                          dbUser3.getFirstName() + " " + 
                          dbUser3.getLastName());
       
-
+      LinkedList<DBUser> us = dbController.getAllDBUsers();
+      for (DBUser u : us) {
+         System.out.println(u.getId() + " " + 
+               u.getFirstName() + " " + 
+               u.getLastName());
+      }
+      
+      
    }
 
 }
