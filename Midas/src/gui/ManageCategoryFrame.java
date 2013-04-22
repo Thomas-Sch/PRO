@@ -12,7 +12,7 @@
  */
 package gui;
 
-import gui.component.CategoryList;
+import gui.data.CategoryList;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -38,6 +38,8 @@ public class ManageCategoryFrame extends ManageFrame {
    
    protected JPanel initContent() {
       super.initContent();
+      
+      getContent().add(new CategoryList(), getConstraints());
          
        getConstraints().gridx = 1;
        getConstraints().anchor = GridBagConstraints.NORTH;

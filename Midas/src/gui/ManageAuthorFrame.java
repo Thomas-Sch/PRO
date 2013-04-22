@@ -12,6 +12,10 @@
  */
 package gui;
 
+import gui.data.AuthorData;
+import gui.data.AuthorList;
+import gui.data.CategoryList;
+
 /**
  * TODO
  * @author Biolzi Sébastien
@@ -26,7 +30,16 @@ public class ManageAuthorFrame extends ManageFrame {
    /**
     * ID de série.
     */
-   private static final long serialVersionUID = 3252804495254018094L;
+   private static final long serialVersionUID = 3252804495254018094L;  
+   
+   /**
+    * 
+    */
+   public ManageAuthorFrame() {
+      // TODO Auto-generated constructor stub
+      getContent().add(new AuthorList(), getConstraints());
+   }
+   
    
    
 
