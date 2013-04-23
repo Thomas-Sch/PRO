@@ -1,6 +1,7 @@
 package database.dbComponents;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -246,8 +247,8 @@ public class DBController {
             preparedStatement = this.getPreparedStatement(sqlString);
                         
             preparedStatement.setInt(1, dbAccount.getId());
-            preparedStatement.setString(2, dbAccount.name);
-            preparedStatement.setString(3, dbAccount.nameBank);
+            preparedStatement.setString(2, dbAccount.getName());
+            preparedStatement.setString(3, dbAccount.getNameBank());
             preparedStatement.setString(4, dbAccount.getAccountNumber());
             preparedStatement.setDouble(5, dbAccount.getAmount());
             preparedStatement.setDouble(6, dbAccount.getOverdraftLimit());
@@ -258,8 +259,8 @@ public class DBController {
                         "SET Name = ?, BankName = ?, AccountNumber = ?, Amount = ?, AccountLimit = ? " +
                         "WHERE Acc_Id = ?";
             preparedStatement = this.getPreparedStatement(sqlString);
-            preparedStatement.setString(1, dbAccount.name);
-            preparedStatement.setString(2, dbAccount.nameBank);
+            preparedStatement.setString(1, dbAccount.getName());
+            preparedStatement.setString(2, dbAccount.getNameBank());
             preparedStatement.setString(3, dbAccount.getAccountNumber());
             preparedStatement.setDouble(4, dbAccount.getAmount());
             preparedStatement.setDouble(5, dbAccount.getOverdraftLimit());
@@ -271,6 +272,108 @@ public class DBController {
       }
       finally {
          this.destroyPreparedStatement(preparedStatement);
+      }   
+   }
+   
+   public DBFinancialTransaction createFinancialTransaction() {
+       return new DBFinancialTransaction();
+    }
+   
+   public DBFinancialTransaction getFinancialTransaction(int id) {
+
+	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
+      String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
+      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      DBFinancialTransaction dbFinancialTransaction = null;
+      
+      try {
+         preparedStatement.setInt(1, id);
+         ResultSet result = this.select(preparedStatement);
+         
+         result.next();
+         dbFinancialTransaction = new DBFinancialTransaction();
+         dbFinancialTransaction.setId((result.getInt(1)));
+         dbFinancialTransaction.setAmount((result.getDouble(2)));
+         dbFinancialTransaction.setDate((result.getDate(3)));
+         dbFinancialTransaction.setReason((result.getString(4)));
+         dbFinancialTransaction.setDbAccount((result.getInt(5)));
+
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
       }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }
+      return dbFinancialTransaction;
+   }
+   
+   public LinkedList<DBFinancialTransaction> getAllDBFinancialTransactions() {
+
+	   String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
+	      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+	      DBFinancialTransaction dbFinancialTransaction = null;
+	      LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
+	      
+	      try {
+	         ResultSet result = this.select(preparedStatement);
+	         
+	         while (result.next()) {
+	             dbFinancialTransaction = new DBFinancialTransaction();
+	             dbFinancialTransaction.setId((result.getInt(1)));
+	             dbFinancialTransaction.setAmount((result.getDouble(2)));
+	             dbFinancialTransaction.setDate((result.getDate(3)));
+	             dbFinancialTransaction.setReason((result.getString(4)));
+	             dbFinancialTransaction.setDbAccount((result.getInt(5)));
+	         }
+
+	      } catch (SQLException e) {
+	         DBErrorHandler.resultSetError(e);
+	      }
+	      finally {
+	         this.destroyPreparedStatement(preparedStatement);
+	      }
+	      return dbFinancialTransactions;
+	   }
+   
+   public void saveToDatabase(DBFinancialTransaction dbFinancialTransaction) {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         if (dbFinancialTransaction.getId() == null) {
+            sqlString = "INSERT INTO FinancialTransaction " +
+                        "VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
+            preparedStatement = this.getPreparedStatement(sqlString);
+                        
+            preparedStatement.setInt   (1, dbFinancialTransaction.getId());
+            preparedStatement.setDouble(2, dbFinancialTransaction.getAmount());
+            preparedStatement.setDate  (3, (Date) dbFinancialTransaction.getDate());
+            preparedStatement.setString(4, dbFinancialTransaction.getReason());
+            preparedStatement.setInt(5, dbFinancialTransaction.getDbCategory());
+            preparedStatement.setInt(6, dbFinancialTransaction.getDbBudget());
+            preparedStatement.setInt(7, dbFinancialTransaction.getDbAccount());
+            preparedStatement.setInt(8, dbFinancialTransaction.getDbUser());
+            
+            
+            this.insert(preparedStatement, dbFinancialTransaction);
+         } else {
+            sqlString = "UPDATE FinancialTransaction " +
+                        "SET Amount = ?, Date = ?, Reason = ?, Cat_ID = ?, Bud_ID = ?, Acc_ID = ?, Use_ID = ?" +
+                        "WHERE Tra_ID = ?";
+            preparedStatement.setDouble(1, dbFinancialTransaction.getAmount());
+            preparedStatement.setDate  (2, (Date) dbFinancialTransaction.getDate());
+            preparedStatement.setString(3, dbFinancialTransaction.getReason());
+            preparedStatement.setInt(4, 0);
+            preparedStatement.setInt(5, 0);
+            preparedStatement.setDouble(6, dbFinancialTransaction.getDbAccount());
+            preparedStatement.setInt(7, 0);
+            preparedStatement.setInt(8, dbFinancialTransaction.getId());
+            this.update(preparedStatement);
+         }
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }   
    }
 }

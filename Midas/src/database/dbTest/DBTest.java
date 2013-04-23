@@ -1,5 +1,6 @@
 package database.dbTest;
 
+import java.sql.Date;
 import java.util.LinkedList;
 
 import database.dbComponents.*;
@@ -37,7 +38,20 @@ public class DBTest {
                u.getLastName());
       }
       
-      
+      /* Test Transaction */
+      Date date = Date.valueOf("2010-05-03");
+      DBFinancialTransaction dbFinancialTransaction = 
+    		  dbController.createFinancialTransaction();
+	  dbFinancialTransaction.setAmount(2000.0);
+	  dbFinancialTransaction.setDate(date);
+	  dbFinancialTransaction.setReason("This is a test, mkaaay?");
+	  dbFinancialTransaction.setDbAccount(null); // We shall see.
+	  dbFinancialTransaction.setDbBudget(null);
+	  dbFinancialTransaction.setDbCategory(null);
+	  dbFinancialTransaction.setDbRecurrence(null);
+	  dbFinancialTransaction.setDbUser(null);
+	  dbController.saveToDatabase(dbFinancialTransaction);
+	  
    }
 
 }
