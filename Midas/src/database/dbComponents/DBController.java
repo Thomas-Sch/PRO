@@ -197,7 +197,7 @@ public class DBController {
          dbAccount.setNameBank((result.getString(3)));
          dbAccount.setAccountNumber((result.getString(4)));
          dbAccount.setAmount((result.getDouble(5)));
-         dbAccount.setOverdraftLimit((result.getDouble(6)));
+         dbAccount.setOverdraftLimit((result.getDouble(6)));     
 
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -226,6 +226,7 @@ public class DBController {
             dbAccount.setAccountNumber((result.getString(4)));
             dbAccount.setAmount((result.getDouble(5)));
             dbAccount.setOverdraftLimit((result.getDouble(6)));
+            dbAccounts.add(dbAccount);
          }
 
       } catch (SQLException e) {
@@ -309,31 +310,32 @@ public class DBController {
    
    public LinkedList<DBFinancialTransaction> getAllDBFinancialTransactions() {
 
-	   String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinacialTransaction WHERE Tra_ID = ?"; 
-	      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
-	      DBFinancialTransaction dbFinancialTransaction = null;
-	      LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
-	      
-	      try {
-	         ResultSet result = this.select(preparedStatement);
-	         
-	         while (result.next()) {
-	             dbFinancialTransaction = new DBFinancialTransaction();
-	             dbFinancialTransaction.setId((result.getInt(1)));
-	             dbFinancialTransaction.setAmount((result.getDouble(2)));
-	             dbFinancialTransaction.setDate((result.getDate(3)));
-	             dbFinancialTransaction.setReason((result.getString(4)));
-	             dbFinancialTransaction.setDbAccount((result.getInt(5)));
-	         }
+	  String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinacialTransaction"; 
+      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      DBFinancialTransaction dbFinancialTransaction = null;
+      LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
+      
+      try {
+         ResultSet result = this.select(preparedStatement);
+         
+         while (result.next()) {
+             dbFinancialTransaction = new DBFinancialTransaction();
+             dbFinancialTransaction.setId((result.getInt(1)));
+             dbFinancialTransaction.setAmount((result.getDouble(2)));
+             dbFinancialTransaction.setDate((result.getDate(3)));
+             dbFinancialTransaction.setReason((result.getString(4)));
+             dbFinancialTransaction.setDbAccount((result.getInt(5)));
+             dbFinancialTransactions.add(dbFinancialTransaction);
+         }
 
-	      } catch (SQLException e) {
-	         DBErrorHandler.resultSetError(e);
-	      }
-	      finally {
-	         this.destroyPreparedStatement(preparedStatement);
-	      }
-	      return dbFinancialTransactions;
-	   }
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }
+      return dbFinancialTransactions;
+   }
    
    public void saveToDatabase(DBFinancialTransaction dbFinancialTransaction) {
       String sqlString;
@@ -373,10 +375,101 @@ public class DBController {
             preparedStatement.setDate  (2, (Date) dbFinancialTransaction.getDate());
             preparedStatement.setString(3, dbFinancialTransaction.getReason());
             preparedStatement.setInt(4, 0);
-            preparedStatement.setInt(5, 0);
+            preparedStatement.setString(5, "B");
             preparedStatement.setDouble(6, dbFinancialTransaction.getDbAccount());
             preparedStatement.setInt(7, 0);
             preparedStatement.setInt(8, dbFinancialTransaction.getId());
+            this.update(preparedStatement);
+         }
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }   
+   }
+   
+   public DBCategory createCategory() {
+       return new DBCategory();
+    }
+   public DBCategory getCategory(int id) {
+
+	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
+      String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category WHERE Cat_ID = ?"; 
+      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      DBCategory dbCategory = null;
+      
+      try {
+         preparedStatement.setInt(1, id);
+         ResultSet result = this.select(preparedStatement);
+         
+         result.next();
+         dbCategory = new DBCategory();
+         dbCategory.setId((result.getInt(1)));
+         dbCategory.setName((result.getString(2)));
+         dbCategory.setParentDBCategory((result.getInt(3)));
+
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }
+      return dbCategory;
+   }
+   
+   public LinkedList<DBCategory> getAllDBCategory() {
+
+	  String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category"; 
+      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      DBCategory dbCategory = null;
+      LinkedList<DBCategory> dbCategories = new LinkedList<DBCategory>();
+      
+      try {
+         ResultSet result = this.select(preparedStatement);
+         
+         while (result.next()) {
+        	 dbCategory = new DBCategory();
+             dbCategory.setId((result.getInt(1)));
+             dbCategory.setName((result.getString(2)));
+             dbCategory.setParentDBCategory((result.getInt(3)));
+             dbCategories.add(dbCategory);
+         }
+
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         this.destroyPreparedStatement(preparedStatement);
+      }
+      return dbCategories;
+   }  
+
+   public void saveToDatabase(DBCategory dbCategory) {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         if (dbCategory.getId() == null) {
+            sqlString = "INSERT INTO Category " +
+                        "VALUES (null, ?, ?)";
+            preparedStatement = this.getPreparedStatement(sqlString);
+                        
+            preparedStatement.setString(1, dbCategory.getName());
+            if (dbCategory.getParentDBCategory() != null) {
+               preparedStatement.setInt(2, dbCategory.getParentDBCategory());
+            }
+            
+            this.insert(preparedStatement, dbCategory);
+         } else {
+            sqlString = "UPDATE Category " +
+                        "SET Name = ?, Par_Cat_ID = ? " +
+                        "WHERE Cat_ID = ?";
+            preparedStatement = this.getPreparedStatement(sqlString);
+            preparedStatement.setString(1, dbCategory.getName());
+            preparedStatement.setInt(2, dbCategory.getParentDBCategory());
+            preparedStatement.setInt(3, dbCategory.getId());
+            
+            
             this.update(preparedStatement);
          }
       } catch (SQLException e) {
