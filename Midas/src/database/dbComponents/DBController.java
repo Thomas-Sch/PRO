@@ -282,7 +282,7 @@ public class DBController {
    public DBFinancialTransaction getFinancialTransaction(int id) {
 
 	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
-      String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
+      String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinacialTransaction WHERE Tra_ID = ?"; 
       PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
       
@@ -309,7 +309,7 @@ public class DBController {
    
    public LinkedList<DBFinancialTransaction> getAllDBFinancialTransactions() {
 
-	   String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
+	   String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinacialTransaction WHERE Tra_ID = ?"; 
 	      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
 	      DBFinancialTransaction dbFinancialTransaction = null;
 	      LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
@@ -340,23 +340,33 @@ public class DBController {
       PreparedStatement preparedStatement = null;
       try {
          if (dbFinancialTransaction.getId() == null) {
-            sqlString = "INSERT INTO FinancialTransaction " +
+            sqlString = "INSERT INTO FinacialTransaction " +
                         "VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = this.getPreparedStatement(sqlString);
                         
-            preparedStatement.setInt   (1, dbFinancialTransaction.getId());
-            preparedStatement.setDouble(2, dbFinancialTransaction.getAmount());
-            preparedStatement.setDate  (3, (Date) dbFinancialTransaction.getDate());
-            preparedStatement.setString(4, dbFinancialTransaction.getReason());
-            preparedStatement.setInt(5, dbFinancialTransaction.getDbCategory());
-            preparedStatement.setInt(6, dbFinancialTransaction.getDbBudget());
-            preparedStatement.setInt(7, dbFinancialTransaction.getDbAccount());
-            preparedStatement.setInt(8, dbFinancialTransaction.getDbUser());
-            
+            preparedStatement.setDouble(1, dbFinancialTransaction.getAmount());
+            preparedStatement.setDate  (2, (Date) dbFinancialTransaction.getDate());
+            preparedStatement.setString(3, dbFinancialTransaction.getReason());
+            if (dbFinancialTransaction.getDbCategory() != null) {
+               preparedStatement.setInt(4, dbFinancialTransaction.getDbCategory());
+            }
+            if (dbFinancialTransaction.getDbBudget() != null) {
+               preparedStatement.setInt(5, dbFinancialTransaction.getDbBudget());   
+            }
+            if (dbFinancialTransaction.getDbAccount() != null) {
+               preparedStatement.setInt(6, dbFinancialTransaction.getDbAccount());   
+            } else { // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! temporairement tricher avec les contraintes de la BDD
+               preparedStatement.setInt(6, 0);
+            }
+            if (dbFinancialTransaction.getDbUser() != null) {
+               preparedStatement.setInt(7, dbFinancialTransaction.getDbUser());   
+            } else { // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! temporairement tricher avec les contraintes de la BDD
+               preparedStatement.setInt(7, 0);
+            }
             
             this.insert(preparedStatement, dbFinancialTransaction);
          } else {
-            sqlString = "UPDATE FinancialTransaction " +
+            sqlString = "UPDATE FinacialTransaction " +
                         "SET Amount = ?, Date = ?, Reason = ?, Cat_ID = ?, Bud_ID = ?, Acc_ID = ?, Use_ID = ?" +
                         "WHERE Tra_ID = ?";
             preparedStatement.setDouble(1, dbFinancialTransaction.getAmount());
