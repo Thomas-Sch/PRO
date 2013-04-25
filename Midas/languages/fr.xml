@@ -6,5 +6,9 @@
    <!-- GUI stuff -->
    <validate_button>Valider</validate_button>
    <cancel_button>Annuler</cancel_button>
-   <account_name_label>Nom de compte</accont_name_label>
+   <account_name_label>Nom de compte</account_name_label>
+   <threshold_label>Seuil</threshold_label>
+   <account_number_label>Numéro de compte</account_number_label>
+   <account_description_label>Description</account_description_label>
+   <reset_button>Initialiser</reset_button>
 </language>

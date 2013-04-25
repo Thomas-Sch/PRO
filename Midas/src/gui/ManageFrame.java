@@ -12,7 +12,7 @@
  */
 package gui;
 
-import gui.component.CategoryList;
+import gui.data.CategoryList;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -68,8 +68,6 @@ public abstract class ManageFrame extends JDialog {
       constraints.gridy = 0;
 
       constraints.anchor = GridBagConstraints.NORTH;
-      
-      content.add(new CategoryList(), constraints);
       
       return content;
    }
