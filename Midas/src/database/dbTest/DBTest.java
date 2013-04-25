@@ -81,8 +81,6 @@ public class DBTest {
                 c.getParentDBCategory() + " ");
        }
       
-      
-	  
    }
 
 }
