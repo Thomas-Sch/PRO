@@ -32,6 +32,8 @@ public class MidasLogs {
    
    public static Log errors = new Log("errors", new File("Errors.log"), 1);
    
+   public static Log sqlErrors = new Log("sqlErrors", new File("sqlErrors.log"), 1);
+   
    
    public static void addLogsToFrame(LogsFrame frame) {
       frame.addLogPanel(messages.createLogPanel());
