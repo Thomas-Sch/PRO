@@ -12,6 +12,8 @@
  */
 package core;
 
+import core.components.Account;
+import database.dbComponents.DBController;
 import settings.Settings;
 
 /**
@@ -25,10 +27,23 @@ import settings.Settings;
  */
 public class Core {
    
-   public Settings settings = new Settings(); 
+   private Settings settings = new Settings();
+   
+   private DBController dbController = new DBController();
    
    public Core() {
       settings.loadSettings();
    }
-
+   
+   
+   public Account createAccount() {
+      
+      return new Account(dbController.createDBAccount());
+      
+   }
+   
+   public Category getCategoryID(Integer id) {
+      return new Category(dbController.getCategory(id));
+   }
+   
 }
