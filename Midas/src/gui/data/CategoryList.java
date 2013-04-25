@@ -10,9 +10,9 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.data;
+package gui.component;
 
-import gui.component.ListTemplate;
+import gui.data.CategoryData;
 
 import javax.swing.DefaultListModel;
 
@@ -42,4 +42,8 @@ public class CategoryList extends ListTemplate {
          dlm.addElement(s);
       }        
    }
+
+
+
+
 }
