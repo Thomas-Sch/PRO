@@ -1,17 +1,20 @@
 package database.dbTest;
 
-import java.io.ObjectInputStream.GetField;
 import java.sql.Date;
 import java.util.LinkedList;
 
 import database.dbComponents.*;
+import database.utils.DatabaseConstraintViolation;
+import database.utils.DatabaseException;
 
 public class DBTest {
 
    /**
     * @param args
+    * @throws DatabaseException 
+    * @throws DatabaseConstraintViolation 
     */
-   public static void main(String[] args) {
+   public static void main(String[] args) throws DatabaseException, DatabaseConstraintViolation {
       
       DBController dbController = new DBController();
       DBUser dbUser = dbController.createDBUser();
@@ -74,7 +77,7 @@ public class DBTest {
       
       dbController.saveToDatabase(category1);
       LinkedList<DBCategory> ca = dbController.getAllDBCategory();
-      dbController.getCategory(1);
+      dbController.getDBCategory(1);
       for (DBCategory c : ca) {
           System.out.println(c.getId() + " " + 
                 c.getName() + " " + 

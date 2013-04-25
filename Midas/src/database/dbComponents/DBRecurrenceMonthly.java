@@ -1,6 +1,6 @@
 package database.dbComponents;
 
-public class DBRecurrenceMonth extends DBRecurrence {
+public class DBRecurrenceMonthly extends DBRecurrence {
 
    Integer everyXMonth;
 

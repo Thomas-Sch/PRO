@@ -13,7 +13,7 @@
 package core;
 
 import database.dbComponents.DBRecurrence;
-import database.dbComponents.DBRecurrenceMonth;
+import database.dbComponents.DBRecurrenceMonthly;
 
 /**
  * TODO
@@ -26,14 +26,14 @@ import database.dbComponents.DBRecurrenceMonth;
  */
 public class RecurrenceMonth extends Recurrence{
    
-   private DBRecurrenceMonth dbRecurrenceMonth;
+   private DBRecurrenceMonthly dbRecurrenceMonth;
    
    /**
     * @param dbRecurrence
     */
    public RecurrenceMonth(DBRecurrence dbRecurrence, int recurrence) {
       super(dbRecurrence);
-      this.dbRecurrenceMonth = new DBRecurrenceMonth();
+      this.dbRecurrenceMonth = new DBRecurrenceMonthly();
       this.dbRecurrenceMonth.setEveryXMonth(recurrence);
    }
    

@@ -1,65 +1,24 @@
 package database.dbComponents;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.LinkedList;
 
-
+import database.utils.*;
 
 public class DBController {
    
-   private final String dbPath = "jdbc:sqlite:Midas.sqlite3";
+   private DBAccess dbAccess;
    
-   private Connection getConnection() {
+   public DBController() {
       
-      Connection connection = null;
-      
-      try {
-         Class.forName("org.sqlite.JDBC");
-      } catch (ClassNotFoundException e) {
-         System.err.println(e);
-      }
-      
-      try {
-         connection = DriverManager.getConnection(dbPath);
-      }
-      catch (SQLException e) {
-         DBErrorHandler.connectionError(e);
-      }
-      
-      return connection;
+      this.dbAccess = new DBAccess("jdbc:sqlite:Midas.sqlite3");
       
    }
-   
-   private PreparedStatement getPreparedStatement(String sqlString) {
-      Connection connection = this.getConnection();
-      PreparedStatement preparedStatement = null;
-      try {
-         preparedStatement = connection.prepareStatement(sqlString, Statement.RETURN_GENERATED_KEYS);
-         preparedStatement.setQueryTimeout(30);
-      } catch (SQLException e) {
-         DBErrorHandler.preparedStatementError(e);
-      }
       
-      return preparedStatement;
-   }
-   
-   private void destroyPreparedStatement(PreparedStatement preparedStatement) {
-      try {
-         if (preparedStatement.getConnection() != null) {
-            preparedStatement.getConnection().close();
-         }
-      } catch (SQLException e) {
-         DBErrorHandler.preparedStatementError(e);
-      }
-   }
-      
-   private void insert(PreparedStatement preparedStatement, DBComponent dbComponent) {
+   private void insert(PreparedStatement preparedStatement, DBComponent dbComponent) throws DatabaseException {
       try {
          preparedStatement.execute();
          // récupérer l'identifiant créer par la BDD
@@ -68,24 +27,32 @@ public class DBController {
          dbComponent.setId(result.getInt(1));
          
       } catch (SQLException e) {
-         DBErrorHandler.executeError(e);
+         DBErrorHandler.executionError(e);
       }
    }
    
-   private void update (PreparedStatement preparedStatement) {
+   private void update (PreparedStatement preparedStatement) throws DatabaseException {
       try {
          preparedStatement.execute();      
       } catch (SQLException e) {
-         DBErrorHandler.executeError(e);
+         DBErrorHandler.executionError(e);
       }
    }
    
-   private ResultSet select (PreparedStatement preparedStatement) {
+   private void delete (PreparedStatement preparedStatement) throws DatabaseException {
+      try {
+         preparedStatement.execute();      
+      } catch (SQLException e) {
+         DBErrorHandler.executionError(e);
+      }
+   }
+   
+   private ResultSet select (PreparedStatement preparedStatement) throws DatabaseException {
       ResultSet resultSet = null;
       try {
          resultSet = preparedStatement.executeQuery(); 
       } catch (SQLException e) {
-         DBErrorHandler.executeError(e);
+         DBErrorHandler.executionError(e);
       }
       return resultSet;
    }
@@ -94,10 +61,10 @@ public class DBController {
       return new DBUser();
    }
    
-   public DBUser getUBUser(int id) {
+   public DBUser getUBUser(int id) throws DatabaseException {
 
       String sqlString = "SELECT Use_Id, firstName, lastName FROM User WHERE Use_ID = ?";
-      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBUser dbUser = null;
       
       try {
@@ -114,15 +81,15 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }
       return dbUser;
    }
    
-   public LinkedList<DBUser> getAllDBUsers() {
+   public LinkedList<DBUser> getAllDBUsers() throws DatabaseException {
 
       String sqlString = "SELECT Use_Id, firstName, lastName FROM User";
-      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBUser dbUser;
       LinkedList<DBUser> dbUsers = new LinkedList<DBUser>();
       
@@ -141,19 +108,19 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }
       return dbUsers;
    }
    
-   public void saveToDatabase(DBUser dbUser) {
+   public void saveToDatabase(DBUser dbUser) throws DatabaseException {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
          if (dbUser.getId() == null) {
             sqlString = "INSERT INTO User " +
                         "VALUES (null, ?, ?)";
-            preparedStatement = this.getPreparedStatement(sqlString);
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
             preparedStatement.setString(1, dbUser.getFirstName());
             preparedStatement.setString(2, dbUser.getLastName());
             this.insert(preparedStatement, dbUser);
@@ -161,7 +128,7 @@ public class DBController {
             sqlString = "UPDATE User " +
                         "SET firstName = ?, lastName = ? " +
                         "WHERE Use_Id = ?";
-            preparedStatement = this.getPreparedStatement(sqlString);
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
             preparedStatement.setString(1, dbUser.getFirstName());
             preparedStatement.setString(2, dbUser.getLastName());
             preparedStatement.setInt(3, dbUser.getId());
@@ -171,19 +138,35 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }
    }
    
+   public void deleteDbUser(Integer id) throws DatabaseException {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         sqlString = "DELETE INTO User " +
+                     "WHERE Use_Id = ?)";
+         preparedStatement = dbAccess.getPreparedStatement(sqlString);
+         preparedStatement.setInt(1, id);
+         this.delete(preparedStatement);
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+   }
    
    public DBAccount createDBAccount() {
       return new DBAccount();
    }
    
-   public DBAccount getDBAccount(int id) {
+   public DBAccount getDBAccount(int id) throws DatabaseException {
 
       String sqlString = "SELECT Acc_ID, Name, BankName, AccountNumber, Amount, AccountLimit FROM Account WHERE Use_ID = ?";
-      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBAccount dbAccount = null;
       
       try {
@@ -203,15 +186,15 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }
       return dbAccount;
    }
    
-   public LinkedList<DBAccount> getAllDBAccounts() {
+   public LinkedList<DBAccount> getAllDBAccounts() throws DatabaseException {
 
       String sqlString = "SELECT Acc_Id, Name, BankName, AccountNumber, Amount, AccountLimit FROM Account";
-      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBAccount dbAccount;
       LinkedList<DBAccount> dbAccounts = new LinkedList<DBAccount>();
       
@@ -233,19 +216,19 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }
       return dbAccounts;
    }
    
-   public void saveToDatabase(DBAccount dbAccount) {
+   public void saveToDatabase(DBAccount dbAccount) throws DatabaseException {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
          if (dbAccount.getId() == null) {
             sqlString = "INSERT INTO Account " +
                         "VALUES (null, ?, ?, ?, ?, ?, ?)";
-            preparedStatement = this.getPreparedStatement(sqlString);
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
                         
             preparedStatement.setInt(1, dbAccount.getId());
             preparedStatement.setString(2, dbAccount.getName());
@@ -259,7 +242,7 @@ public class DBController {
             sqlString = "UPDATE Account " +
                         "SET Name = ?, BankName = ?, AccountNumber = ?, Amount = ?, AccountLimit = ? " +
                         "WHERE Acc_Id = ?";
-            preparedStatement = this.getPreparedStatement(sqlString);
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
             preparedStatement.setString(1, dbAccount.getName());
             preparedStatement.setString(2, dbAccount.getNameBank());
             preparedStatement.setString(3, dbAccount.getAccountNumber());
@@ -272,19 +255,36 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }   
+   }
+   
+   public void deleteDbAccount(Integer id) throws DatabaseException {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         sqlString = "DELETE INTO Account " +
+                     "WHERE Acc_Id = ?)";
+         preparedStatement = dbAccess.getPreparedStatement(sqlString);
+         preparedStatement.setInt(1, id);
+         this.delete(preparedStatement);
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
    }
    
    public DBFinancialTransaction createFinancialTransaction() {
        return new DBFinancialTransaction();
     }
    
-   public DBFinancialTransaction getFinancialTransaction(int id) {
+   public DBFinancialTransaction getDBFinancialTransaction(int id) throws DatabaseException {
 
 	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
       String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinacialTransaction WHERE Tra_ID = ?"; 
-      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
       
       try {
@@ -303,15 +303,15 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }
       return dbFinancialTransaction;
    }
    
-   public LinkedList<DBFinancialTransaction> getAllDBFinancialTransactions() {
+   public LinkedList<DBFinancialTransaction> getAllDBFinancialTransactions() throws DatabaseException {
 
 	  String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinacialTransaction"; 
-      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
       LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
       
@@ -332,19 +332,19 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }
       return dbFinancialTransactions;
    }
    
-   public void saveToDatabase(DBFinancialTransaction dbFinancialTransaction) {
+   public void saveToDatabase(DBFinancialTransaction dbFinancialTransaction) throws DatabaseConstraintViolation, DatabaseException {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
          if (dbFinancialTransaction.getId() == null) {
             sqlString = "INSERT INTO FinacialTransaction " +
                         "VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
-            preparedStatement = this.getPreparedStatement(sqlString);
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
                         
             preparedStatement.setDouble(1, dbFinancialTransaction.getAmount());
             preparedStatement.setDate  (2, (Date) dbFinancialTransaction.getDate());
@@ -357,13 +357,13 @@ public class DBController {
             }
             if (dbFinancialTransaction.getDbAccount() != null) {
                preparedStatement.setInt(6, dbFinancialTransaction.getDbAccount());   
-            } else { // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! temporairement tricher avec les contraintes de la BDD
-               preparedStatement.setInt(6, 0);
+            } else {
+               DBErrorHandler.constraintViolation();
             }
             if (dbFinancialTransaction.getDbUser() != null) {
                preparedStatement.setInt(7, dbFinancialTransaction.getDbUser());   
-            } else { // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! temporairement tricher avec les contraintes de la BDD
-               preparedStatement.setInt(7, 0);
+            } else {
+               DBErrorHandler.constraintViolation();
             }
             
             this.insert(preparedStatement, dbFinancialTransaction);
@@ -371,6 +371,8 @@ public class DBController {
             sqlString = "UPDATE FinacialTransaction " +
                         "SET Amount = ?, Date = ?, Reason = ?, Cat_ID = ?, Bud_ID = ?, Acc_ID = ?, Use_ID = ?" +
                         "WHERE Tra_ID = ?";
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
+            
             preparedStatement.setDouble(1, dbFinancialTransaction.getAmount());
             preparedStatement.setDate  (2, (Date) dbFinancialTransaction.getDate());
             preparedStatement.setString(3, dbFinancialTransaction.getReason());
@@ -385,18 +387,35 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }   
+   }
+   
+   public void deleteDbFinancialTransaction(Integer id) throws DatabaseException {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         sqlString = "DELETE INTO FinacialTransaction " +
+                     "WHERE Tra_Id = ?)";
+         preparedStatement = dbAccess.getPreparedStatement(sqlString);
+         preparedStatement.setInt(1, id);
+         this.delete(preparedStatement);
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
    }
    
    public DBCategory createCategory() {
        return new DBCategory();
     }
-   public DBCategory getCategory(int id) {
+   public DBCategory getDBCategory(int id) throws DatabaseException {
 
 	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
       String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category WHERE Cat_ID = ?"; 
-      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBCategory dbCategory = null;
       
       try {
@@ -413,15 +432,15 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }
       return dbCategory;
    }
    
-   public LinkedList<DBCategory> getAllDBCategory() {
+   public LinkedList<DBCategory> getAllDBCategory() throws DatabaseException {
 
 	  String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category"; 
-      PreparedStatement preparedStatement = this.getPreparedStatement(sqlString);
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBCategory dbCategory = null;
       LinkedList<DBCategory> dbCategories = new LinkedList<DBCategory>();
       
@@ -440,19 +459,19 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }
       return dbCategories;
    }  
 
-   public void saveToDatabase(DBCategory dbCategory) {
+   public void saveToDatabase(DBCategory dbCategory) throws DatabaseException {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
          if (dbCategory.getId() == null) {
             sqlString = "INSERT INTO Category " +
                         "VALUES (null, ?, ?)";
-            preparedStatement = this.getPreparedStatement(sqlString);
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
                         
             preparedStatement.setString(1, dbCategory.getName());
             if (dbCategory.getParentDBCategory() != null) {
@@ -464,7 +483,7 @@ public class DBController {
             sqlString = "UPDATE Category " +
                         "SET Name = ?, Par_Cat_ID = ? " +
                         "WHERE Cat_ID = ?";
-            preparedStatement = this.getPreparedStatement(sqlString);
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
             preparedStatement.setString(1, dbCategory.getName());
             preparedStatement.setInt(2, dbCategory.getParentDBCategory());
             preparedStatement.setInt(3, dbCategory.getId());
@@ -476,7 +495,24 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         this.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement);
       }   
+   }
+   
+   public void deleteDbCategory(Integer id) throws DatabaseException {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         sqlString = "DELETE INTO Category " +
+                     "WHERE Cat_ID = ?)";
+         preparedStatement = dbAccess.getPreparedStatement(sqlString);
+         preparedStatement.setInt(1, id);
+         this.delete(preparedStatement);
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
    }
 }
