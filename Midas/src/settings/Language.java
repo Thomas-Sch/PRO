@@ -13,7 +13,7 @@
 package settings;
 
 import core.MidasLogs;
-import utils.XMLGetters;
+import utils.xml.XMLGetters;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -58,11 +58,16 @@ public class Language {
       /* Fin des déclarations, ne pas modifier ci-dessous
        */
       
-      private String text = "missing String";
+      private String text;
       
       @Override
       public String toString(){
-         return text;
+         if (text == null) {
+            return "Missing String";
+         }
+         else {
+            return text;
+         }
       }
       
       private String getXMLName(){
@@ -114,7 +119,15 @@ public class Language {
       
    }
    
+   public static void createUpdatedLanguageFile(File languageFile) {
+      createLanguageFile(languageFile, true);
+   }
+   
    public static void createTemplateLanguageFile(File languageFile) {
+      createLanguageFile(languageFile, false);
+   }
+   
+   private static void createLanguageFile(File languageFile, boolean createUpdate) {
       
       try {
          if(!languageFile.getParentFile().exists()) {
@@ -131,7 +144,13 @@ public class Language {
       Element textElement;
       for (Text text : Text.values()) {
          textElement = new Element(text.getXMLName());
-         textElement.setText(" TODO ");
+         
+         if (createUpdate) {
+            textElement.setText(text.toString());
+         }
+         else {
+            textElement.setText("TODO");
+         }
          
          root.addContent(textElement);
       }
