@@ -44,6 +44,10 @@ public class DBController {
          preparedStatement.execute();      
       } catch (SQLException e) {
          DBErrorHandler.executionError(e);
+         if (e.getErrorCode() == 19 ) { // SQLITE_CONSTRAINT  
+            
+         }
+         /////////////////////////////////////////////// tester si constraintViolation ou erreur de syntax
       }
    }
    
