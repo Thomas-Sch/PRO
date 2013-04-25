@@ -52,11 +52,12 @@ public class MainFrame extends JFrame{
    private void init() {
       
       setDefaultCloseOperation(EXIT_ON_CLOSE);
-      setVisible(true);
+      
 
       setContentPane(buildContent());
       
       pack();
+      setVisible(true);
    }
    
    /**

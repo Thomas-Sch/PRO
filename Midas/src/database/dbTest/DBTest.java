@@ -1,5 +1,7 @@
 package database.dbTest;
 
+import java.io.ObjectInputStream.GetField;
+import java.sql.Date;
 import java.util.LinkedList;
 
 import database.dbComponents.*;
@@ -37,6 +39,47 @@ public class DBTest {
                u.getLastName());
       }
       
+      /* Test Transaction */
+      Date date = Date.valueOf("2010-05-03");
+      Date date2 = Date.valueOf("2043-07-23");
+      DBFinancialTransaction dbFinancialTransaction = 
+    		  dbController.createFinancialTransaction();
+	  dbFinancialTransaction.setAmount(2200.0);
+	  dbFinancialTransaction.setDate(date2);
+	  dbFinancialTransaction.setReason("This is a test 2, mkaaay?");
+	  dbFinancialTransaction.setDbAccount(null); // We shall see.
+	  dbFinancialTransaction.setDbBudget(null);
+	  dbFinancialTransaction.setDbCategory(null);
+	  dbFinancialTransaction.setDbRecurrence(null);
+	  dbFinancialTransaction.setDbUser(null);
+	  dbController.saveToDatabase(dbFinancialTransaction);
+	  
+      LinkedList<DBFinancialTransaction> ft = dbController.getAllDBFinancialTransactions();
+      for (DBFinancialTransaction f : ft) {
+         System.out.println(f.getId() + " " + 
+               f.getReason() + " " + 
+               f.getAmount() + " " +
+               f.getDate());
+      }
+      
+      /*DBFinancialTransaction testFinance = new DBFinancialTransaction();
+      testFinance = dbController.getFinancialTransaction(1);
+      System.out.println(testFinance.getReason() + " " + testFinance.getDate());*/
+	  
+      
+      /*Category*/
+      DBCategory category1 = new DBCategory();
+      category1.setName("Cat1");
+      category1.setParentDBCategory(null);
+      
+      dbController.saveToDatabase(category1);
+      LinkedList<DBCategory> ca = dbController.getAllDBCategory();
+      dbController.getCategory(1);
+      for (DBCategory c : ca) {
+          System.out.println(c.getId() + " " + 
+                c.getName() + " " + 
+                c.getParentDBCategory() + " ");
+       }
       
    }
 

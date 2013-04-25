@@ -5,6 +5,7 @@
   <validate_button>Missing String</validate_button>
   <cancel_button>Missing String</cancel_button>
   <threshold_label>Missing String</threshold_label>
+  <account_number_label>Missing String</account_number_label>
   <account_description_label>Missing String</account_description_label>
   <reset_button>Missing String</reset_button>
   <account_name_label>Missing String</account_name_label>

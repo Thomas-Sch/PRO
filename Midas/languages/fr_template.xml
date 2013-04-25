@@ -4,5 +4,9 @@
   <action_quit>TODO</action_quit>
   <validate_button>TODO</validate_button>
   <cancel_button>TODO</cancel_button>
+  <threshold_label>TODO</threshold_label>
+  <account_number_label>TODO</account_number_label>
+  <account_description_label>TODO</account_description_label>
+  <reset_button>TODO</reset_button>
   <account_name_label>TODO</account_name_label>
 </language>

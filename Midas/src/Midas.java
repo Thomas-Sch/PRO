@@ -86,8 +86,9 @@ public class Midas {
       
       MidasLogs.messages.push("Launcher", "Initialization done.");
       
-      // Auto création du template de langue
-      Settings.createTemplateForLanguage("fr");  
+      // Auto création du template de langue et du fichier update
+      Settings.createTemplateForLanguage("fr");
+      Settings.createUpdateForLanguage("fr");
    }
 
 }
