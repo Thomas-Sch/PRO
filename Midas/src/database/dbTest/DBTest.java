@@ -18,7 +18,7 @@ public class DBTest {
       
       DBController dbController = new DBController();
       DBUser dbUser = dbController.createDBUser();
-      dbUser.setFirstName("Marcel");
+      //dbUser.setFirstName("Marcel");
       dbUser.setLastName("Sinniger");
       dbController.saveToDatabase(dbUser);
       
