@@ -6,7 +6,7 @@ import database.dbComponents.*;
 import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
 
-public class Test_Routine {
+public class TestRoutine {
   
    /**
     * @param args
