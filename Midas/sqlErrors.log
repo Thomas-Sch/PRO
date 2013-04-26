@@ -1,1 +1,1 @@
-2013-03-26 07:48:46 : [SQLITE_CONSTRAINT]  Abort due to constraint violation (column Bud_ID is not unique)
+2013-03-26 08:21:21 : [SQLITE_ERROR] SQL error or missing database (no such table: FinacialTransaction)

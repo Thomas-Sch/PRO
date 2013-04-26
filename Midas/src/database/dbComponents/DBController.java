@@ -22,8 +22,8 @@ public class DBController {
       PreparedStatement preparedStatement = null;
       try {
          sqlString = "DELETE FROM FinancialTransaction WHERE 1 = 1; " +
-                     "DELETE FROM Budget WHERE 1 = 1; " +
                      "DELETE FROM OnTheFlyBudget WHERE 1 = 1; " +
+                     "DELETE FROM Budget WHERE 1 = 1; " +
                      "DELETE FROM User WHERE 1 = 1; " +
                      "DELETE FROM Account WHERE 1 = 1;";
          
@@ -311,7 +311,7 @@ public class DBController {
    public DBFinancialTransaction getDbFinancialTransaction(int id) throws DatabaseException {
 
 	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
-      String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinacialTransaction WHERE Tra_ID = ?"; 
+      String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
       
@@ -338,7 +338,7 @@ public class DBController {
    
    public LinkedList<DBFinancialTransaction> getAllDBFinancialTransactions() throws DatabaseException {
 
-	  String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinacialTransaction"; 
+	  String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinancialTransaction"; 
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
       LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
@@ -370,7 +370,7 @@ public class DBController {
       PreparedStatement preparedStatement = null;
       try {
          if (dbFinancialTransaction.getId() == null) {
-            sqlString = "INSERT INTO FinacialTransaction " +
+            sqlString = "INSERT INTO FinancialTransaction " +
                         "VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
                         
@@ -396,7 +396,7 @@ public class DBController {
             
             this.insert(preparedStatement, dbFinancialTransaction);
          } else {
-            sqlString = "UPDATE FinacialTransaction " +
+            sqlString = "UPDATE FinancialTransaction " +
                         "SET Amount = ?, Date = ?, Reason = ?, Cat_ID = ?, Bud_ID = ?, Acc_ID = ?, Use_ID = ?" +
                         "WHERE Tra_ID = ?";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
@@ -423,7 +423,7 @@ public class DBController {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
-         sqlString = "DELETE INTO FinacialTransaction " +
+         sqlString = "DELETE INTO FinancialTransaction " +
                      "WHERE Tra_Id = ?)";
          preparedStatement = dbAccess.getPreparedStatement(sqlString);
          preparedStatement.setInt(1, id);

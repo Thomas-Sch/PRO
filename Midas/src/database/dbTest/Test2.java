@@ -8,6 +8,7 @@ import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
 
 public class Test2 {
+  
 
    /**
     * @param args
@@ -53,6 +54,21 @@ public class Test2 {
       DBFinancialTransaction t = dbController.createFinancialTransaction();
       t.setAmount(100.0);
       t.setDate(new Date(2012, 04, 1));
+      t.setDbAccount(account1.getId());
+      //t.setDbBudget(null);
+      //t.setDbCategory(null)
+      t.setDbRecurrence(null);
+      t.setDbUser(user1.getId());
+      t.setReason("That's why!");
+      dbController.saveToDatabase(t);
+      System.out.println(t);
+      
+      //----------------------------------------------------------------------------------------
+      // getAll-Test
+      // ---------------------------------------------------------------------------------------
+      
+      
+      
    }
 
 }
