@@ -1,4 +1,4 @@
-package database.dbTest;
+package database.test;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import database.dbComponents.*;
 import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
 
-public class Test2 {
+public class Test_Routine {
   
    /**
     * @param args
