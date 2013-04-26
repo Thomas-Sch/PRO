@@ -17,21 +17,42 @@ public class DBController {
       
    }
    
-   public void evilTestFunctionFromMarcel() throws DatabaseException, DatabaseConstraintViolation {
-      String sqlString;
-      PreparedStatement preparedStatement = null;
+   public void clearDatabase() throws DatabaseException, DatabaseConstraintViolation {
+      String sqlString1;
+      String sqlString2;
+      String sqlString3;
+      String sqlString4;
+      String sqlString5;
+      String sqlString6;
+      PreparedStatement preparedStatement1 = null;
+      PreparedStatement preparedStatement2 = null;
+      PreparedStatement preparedStatement3 = null;
+      PreparedStatement preparedStatement4 = null;
+      PreparedStatement preparedStatement5 = null;
+      PreparedStatement preparedStatement6 = null;
       try {
-         sqlString = "DELETE FROM FinancialTransaction WHERE 1 = 1; " +
-                     "DELETE FROM OnTheFlyBudget WHERE 1 = 1; " +
-                     "DELETE FROM Budget WHERE 1 = 1; " +
-                     "DELETE FROM User WHERE 1 = 1; " +
-                     "DELETE FROM Account WHERE 1 = 1;";
+         sqlString1 = "DELETE FROM FinancialTransaction";
+         sqlString2 = "DELETE FROM OnTheFlyBudget";
+         sqlString3 = "DELETE FROM Budget";
+         sqlString4 = "DELETE FROM User";
+         sqlString5 = "DELETE FROM Account";
+         sqlString6 = "DELETE FROM Category";
          
-         preparedStatement = dbAccess.getPreparedStatement(sqlString);
-         this.delete(preparedStatement);
+         preparedStatement1 = dbAccess.getPreparedStatement(sqlString1);
+         preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
+         preparedStatement3 = dbAccess.getPreparedStatement(sqlString3);
+         preparedStatement4 = dbAccess.getPreparedStatement(sqlString4);
+         preparedStatement5 = dbAccess.getPreparedStatement(sqlString5);
+         preparedStatement6 = dbAccess.getPreparedStatement(sqlString6);
+         this.delete(preparedStatement1);
+         this.delete(preparedStatement2);
+         this.delete(preparedStatement3);
+         this.delete(preparedStatement4);
+         this.delete(preparedStatement5);
+         this.delete(preparedStatement6);
       }
       finally {
-         dbAccess.destroyPreparedStatement(preparedStatement);
+         dbAccess.destroyPreparedStatement(preparedStatement1);
       }
    }
       
@@ -43,6 +64,18 @@ public class DBController {
          result.next();
          dbComponent.setId(result.getInt(1));
          
+      } catch (SQLException e) {
+         if (e.getErrorCode() == 19 ) { // Violation d'une contrainte de la BDD
+            DBErrorHandler.constraintViolation();
+         } else {
+            DBErrorHandler.executionError(e);
+         }
+      }
+   }
+   
+   private void insertWithoutSettingID(PreparedStatement preparedStatement, DBComponent dbComponent) throws DatabaseException, DatabaseConstraintViolation {
+      try {
+         preparedStatement.execute();         
       } catch (SQLException e) {
          if (e.getErrorCode() == 19 ) { // Violation d'une contrainte de la BDD
             DBErrorHandler.constraintViolation();
@@ -194,7 +227,9 @@ public class DBController {
    
    public DBAccount getDbAccount(int id) throws DatabaseException {
 
-      String sqlString = "SELECT Acc_ID, Name, BankName, AccountNumber, Amount, AccountLimit FROM Account WHERE Use_ID = ?";
+      String sqlString = "SELECT Acc_ID, Name, BankName, AccountNumber, Amount, AccountLimit " +
+      		             "FROM Account " +
+      		             "WHERE Acc_ID = ?";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBAccount dbAccount = null;
       
@@ -550,7 +585,9 @@ public class DBController {
    
    public DBBudget getDbBudget(int id) throws DatabaseException {
 
-      String sqlString = "SELECT Bud_Id, Name, BudgetLimit, Acc_ID WHERE Bud_Id = ?";
+      String sqlString = "SELECT Budget.Bud_Id, Name, BudgetLimit, Acc_ID " +
+      		             "FROM Budget " +
+      		             "WHERE Budget.Bud_Id = ?";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBBudget dbBudget = null;
       
@@ -576,7 +613,8 @@ public class DBController {
    
    public LinkedList<DBBudget> getAllDbBudgets() throws DatabaseException {
 
-      String sqlString = "SELECT Bud_Id, Name, BudgetLimit, Acc_ID WHERE Bud_Id = ?";
+      String sqlString = "SELECT Budget.Bud_Id, Name, BudgetLimit, Acc_ID " +
+                         "FROM Budget";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBBudget dbBudget;
       LinkedList<DBBudget> dbBudgets = new LinkedList<DBBudget>();
@@ -658,9 +696,10 @@ public class DBController {
    
    public DBBudgetOnTheFly getDbBudgetOnTheFly(int id) throws DatabaseException {
 
-      String sqlString = "SELECT Bud_Id, Name, BudgetLimit, Acc_ID, Start, End From Budget " +
-      		            "JOIN OnTheFlyBudget ON Budget.Bud_Id = OnTheFlyBudget.Bud_Id " +
-      		            "WHERE Budget.Bud_Id = ?";
+      String sqlString = "SELECT OnTheFlyBudget.Bud_Id, Name, BudgetLimit, Acc_ID, Start, End " +
+                         "FROM OnTheFlyBudget JOIN Budget ON Budget.Bud_Id = OnTheFlyBudget.Bud_Id " +
+                         "WHERE Budget.Bud_Id = ?";
+      
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBBudgetOnTheFly dbBudgetOnTheFly = null;
       
@@ -690,9 +729,9 @@ public class DBController {
    
    public LinkedList<DBBudgetOnTheFly> getAllDbBudgetOnTheFly() throws DatabaseException {
 
-      String sqlString = "SELECT Bud_Id, Name, BudgetLimit, Acc_ID, Start, End From Budget " +
-      		            "JOIN OnTheFlyBudget ON Budget.Bud_Id = OnTheFlyBudget.Bud_Id " +
-      		            "WHERE Budget.Bud_Id = ?";
+      String sqlString = "SELECT OnTheFlyBudget.Bud_Id, Name, BudgetLimit, Acc_ID, Start, End " +
+      		             "FROM Budget JOIN OnTheFlyBudget ON Budget.Bud_Id = OnTheFlyBudget.Bud_Id ";
+      
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBBudgetOnTheFly dbBudgetOnTheFly;
       LinkedList<DBBudgetOnTheFly> dbBudgetsOnTheFly = new LinkedList<DBBudgetOnTheFly>();
@@ -750,7 +789,7 @@ public class DBController {
             preparedStatement2.setInt(1, getDbBudgetOnTheFly.getId());
             preparedStatement2.setDate(2, new java.sql.Date(getDbBudgetOnTheFly.getStart().getTime()));
             preparedStatement2.setDate(3, new java.sql.Date(getDbBudgetOnTheFly.getEnd().getTime()));
-            this.insert(preparedStatement2, getDbBudgetOnTheFly);
+            this.insertWithoutSettingID(preparedStatement2, getDbBudgetOnTheFly);
             
             connection.commit();
          } else {

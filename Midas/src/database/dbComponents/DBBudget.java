@@ -33,8 +33,11 @@ public class DBBudget extends DBComponent {
    }
    @Override
    public String toString() {
-      return "DBBudget [limit=" + limit + ", dbRecurrence=" + dbRecurrence
-            + ", dbAccount=" + dbAccount + ", id=" + id + "]";
+      return "DBBudget [name=" + name + ", limit=" + limit + ", dbRecurrence="
+            + dbRecurrence + ", dbAccount=" + dbAccount + ", id=" + id + "]";
    }
+
+
+
 
 }
