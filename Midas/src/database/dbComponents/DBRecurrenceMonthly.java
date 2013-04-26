@@ -12,4 +12,10 @@ public class DBRecurrenceMonthly extends DBRecurrence {
       this.everyXMonth = everyXMonth;
    }
 
+   @Override
+   public String toString() {
+      return "DBRecurrenceMonthly [everyXMonth=" + everyXMonth + ", name="
+            + name + ", start=" + start + ", end=" + end + ", id=" + id + "]";
+   }
+
 }

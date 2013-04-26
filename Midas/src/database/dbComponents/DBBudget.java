@@ -2,10 +2,17 @@ package database.dbComponents;
 
 public class DBBudget extends DBComponent {
 
+   String name; 
    Double limit;
    Integer dbRecurrence;
    Integer dbAccount;
    
+   public String getName() {
+      return name;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
    public Double getLimit() {
       return limit;
    }
@@ -23,6 +30,11 @@ public class DBBudget extends DBComponent {
    }
    public void setDbAccount(Integer dbAccount) {
       this.dbAccount = dbAccount;
+   }
+   @Override
+   public String toString() {
+      return "DBBudget [limit=" + limit + ", dbRecurrence=" + dbRecurrence
+            + ", dbAccount=" + dbAccount + ", id=" + id + "]";
    }
 
 }

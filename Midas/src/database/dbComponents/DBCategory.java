@@ -17,5 +17,10 @@ public class DBCategory extends DBComponent {
    public void setParentDBCategory(Integer parentDBCategory) {
       this.parentDBCategory = parentDBCategory;
    }
+   @Override
+   public String toString() {
+      return "DBCategory [name=" + name + ", parentDBCategory="
+            + parentDBCategory + ", id=" + id + "]";
+   }
 
 }

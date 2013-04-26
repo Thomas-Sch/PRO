@@ -17,5 +17,10 @@ public class DBUser extends DBComponent {
    public void setLastName(String lastName) {
       this.lastName = lastName;
    }
+   @Override
+   public String toString() {
+      return "DBUser [firstName=" + firstName + ", lastName=" + lastName
+            + ", id=" + id + "]";
+   }
 
 }

@@ -14,7 +14,7 @@ package core;
 
 import java.util.Date;
 
-import database.dbComponents.DBBudetOnTheFly;
+import database.dbComponents.DBBudgetOnTheFly;
 import database.dbComponents.DBBudget;
 
 /**
@@ -28,14 +28,14 @@ import database.dbComponents.DBBudget;
  */
 public class BudgetOnTheFly extends Budget{
 
-   private DBBudetOnTheFly dbBudetOnTheFly;
+   private DBBudgetOnTheFly dbBudetOnTheFly;
    
    /**
     * @param dbBudget
     */
    public BudgetOnTheFly(Budget budget, Date startDate, Date endDate) {
       super(budget.getDBBudget());
-      this.dbBudetOnTheFly = new DBBudetOnTheFly();
+      this.dbBudetOnTheFly = new DBBudgetOnTheFly();
       this.dbBudetOnTheFly.setStart(startDate);
       this.dbBudetOnTheFly.setEnd(endDate);
    }
@@ -44,7 +44,7 @@ public class BudgetOnTheFly extends Budget{
    /**
     * @param dbBudget
     */
-   public BudgetOnTheFly(DBBudget dbBudget, DBBudetOnTheFly dbBudetOnTheFly) {
+   public BudgetOnTheFly(DBBudget dbBudget, DBBudgetOnTheFly dbBudetOnTheFly) {
       super(dbBudget);
       this.dbBudetOnTheFly = dbBudetOnTheFly;
    }

@@ -62,5 +62,13 @@ public class DBFinancialTransaction extends DBComponent {
    public void setDbRecurrence(Integer dbRecurrence) {
       this.dbRecurrence = dbRecurrence;
    }
+   @Override
+   public String toString() {
+      return "DBFinancialTransaction [amount=" + amount + ", date=" + date
+            + ", reason=" + reason + ", dbUser=" + dbUser + ", dbBudget="
+            + dbBudget + ", dbAccount=" + dbAccount + ", dbCategory="
+            + dbCategory + ", dbRecurrence=" + dbRecurrence + ", id=" + id
+            + "]";
+   }
 
 }

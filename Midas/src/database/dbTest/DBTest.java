@@ -17,72 +17,86 @@ public class DBTest {
    public static void main(String[] args) throws DatabaseException, DatabaseConstraintViolation {
       
       DBController dbController = new DBController();
+      
+      //----------------------------------------------------------------------------------------
+      // DBUser
+      // ---------------------------------------------------------------------------------------
+      // create
+      System.out.println("----- create");
       DBUser dbUser = dbController.createDBUser();
-      //dbUser.setFirstName("Marcel");
+      dbUser.setFirstName("Marcel");
       dbUser.setLastName("Sinniger");
       dbController.saveToDatabase(dbUser);
-      
+      // get
+      System.out.println("get");
       DBUser dbUser2 = dbController.getUBUser(dbUser.getId());
-      System.out.println(dbUser2.getId() + " " + 
-                         dbUser2.getFirstName() + " " + 
-                         dbUser2.getLastName());
-      
+      System.out.println(dbUser2);
+      // mod
+      System.out.println("mod");
       dbUser.setFirstName("asdf");
       dbController.saveToDatabase(dbUser);
-      
-      DBUser dbUser3 = dbController.getUBUser(dbUser.getId());
-      System.out.println(dbUser3.getId() + " " + 
-                         dbUser3.getFirstName() + " " + 
-                         dbUser3.getLastName());
-      
+      System.out.println(dbUser);
+      // getAll
+      System.out.println("getAll");
       LinkedList<DBUser> us = dbController.getAllDBUsers();
       for (DBUser u : us) {
-         System.out.println(u.getId() + " " + 
-               u.getFirstName() + " " + 
-               u.getLastName());
+         System.out.println(u);
       }
       
-      /* Test Transaction */
+      // ---------------------------------------------------------------------------------------
+      // Budget
+      // ---------------------------------------------------------------------------------------
+      // create
+      
+      
+      // ---------------------------------------------------------------------------------------
+      // Transaction
+      // ---------------------------------------------------------------------------------------
+      // create
       Date date = Date.valueOf("2010-05-03");
       Date date2 = Date.valueOf("2043-07-23");
       DBFinancialTransaction dbFinancialTransaction = 
-    		  dbController.createFinancialTransaction();
-	  dbFinancialTransaction.setAmount(2200.0);
-	  dbFinancialTransaction.setDate(date2);
-	  dbFinancialTransaction.setReason("This is a test 2, mkaaay?");
-	  dbFinancialTransaction.setDbAccount(null); // We shall see.
-	  dbFinancialTransaction.setDbBudget(null);
-	  dbFinancialTransaction.setDbCategory(null);
-	  dbFinancialTransaction.setDbRecurrence(null);
-	  dbFinancialTransaction.setDbUser(null);
-	  dbController.saveToDatabase(dbFinancialTransaction);
-	  
+            dbController.createFinancialTransaction();
+      dbFinancialTransaction.setAmount(2200.0);
+      dbFinancialTransaction.setDate(date2);
+      dbFinancialTransaction.setReason("This is a test 2, mkaaay?");
+      dbFinancialTransaction.setDbAccount(null);
+      dbFinancialTransaction.setDbBudget(null);
+      dbFinancialTransaction.setDbCategory(null);
+      dbFinancialTransaction.setDbRecurrence(null);
+      dbFinancialTransaction.setDbUser(null);
+      dbController.saveToDatabase(dbFinancialTransaction);
+      // get
+      
+      // mod
+      
+      // getAll
       LinkedList<DBFinancialTransaction> ft = dbController.getAllDBFinancialTransactions();
       for (DBFinancialTransaction f : ft) {
-         System.out.println(f.getId() + " " + 
-               f.getReason() + " " + 
-               f.getAmount() + " " +
-               f.getDate());
+         System.out.println(f);
       }
-      
-      /*DBFinancialTransaction testFinance = new DBFinancialTransaction();
-      testFinance = dbController.getFinancialTransaction(1);
-      System.out.println(testFinance.getReason() + " " + testFinance.getDate());*/
-	  
-      
-      /*Category*/
+
+     
+      // ---------------------------------------------------------------------------------------
+      // Category
+      // ---------------------------------------------------------------------------------------
+      // create
       DBCategory category1 = new DBCategory();
       category1.setName("Cat1");
       category1.setParentDBCategory(null);
+      // mod
+      
+      // get
+      
+      // getAll
+      
       
       dbController.saveToDatabase(category1);
       LinkedList<DBCategory> ca = dbController.getAllDBCategory();
-      dbController.getDBCategory(1);
+      dbController.getDbCategory(1);
       for (DBCategory c : ca) {
-          System.out.println(c.getId() + " " + 
-                c.getName() + " " + 
-                c.getParentDBCategory() + " ");
-       }
+          System.out.println(c);
+      }
       
    }
 

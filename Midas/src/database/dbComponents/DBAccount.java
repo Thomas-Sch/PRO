@@ -47,6 +47,13 @@ public class DBAccount extends DBComponent {
    public void setOverdraftLimit(Double overdraftLimit) {
       this.overdraftLimit = overdraftLimit;
    }
+
+   @Override
+   public String toString() {
+      return "DBAccount [name=" + name + ", nameBank=" + nameBank
+            + ", accountNumber=" + accountNumber + ", amount=" + amount
+            + ", overdraftLimit=" + overdraftLimit + ", id=" + id + "]";
+   }
    
    
 }

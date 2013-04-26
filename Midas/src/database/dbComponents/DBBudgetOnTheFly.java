@@ -2,16 +2,11 @@ package database.dbComponents;
 
 import java.util.Date;
 
-public class DBRecurrence extends DBComponent {
-   String name;
-   Date start;
-   Date end;
-   public String getName() {
-      return name;
-   }
-   public void setName(String name) {
-      this.name = name;
-   }
+public class DBBudgetOnTheFly extends DBBudget {
+
+   java.util.Date start;
+   java.util.Date end;
+   
    public Date getStart() {
       return start;
    }
@@ -26,8 +21,9 @@ public class DBRecurrence extends DBComponent {
    }
    @Override
    public String toString() {
-      return "DBRecurrence [name=" + name + ", start=" + start + ", end=" + end
-            + ", id=" + id + "]";
+      return super.toString() + "DBBudetOnTheFly [start=" + start + ", end=" + end + ", limit="
+            + limit + ", dbRecurrence=" + dbRecurrence + ", dbAccount="
+            + dbAccount + ", id=" + id + "]";
    }
-   
+
 }

@@ -16,7 +16,7 @@ public class DBAccess {
       
    }
    
-   private Connection getConnection() throws DatabaseException {
+   public Connection getConnection() throws DatabaseException {
       
       Connection connection = null;
       

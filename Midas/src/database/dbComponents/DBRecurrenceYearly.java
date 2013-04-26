@@ -12,4 +12,10 @@ public class DBRecurrenceYearly extends DBRecurrence {
       this.everyXYear = everyXYear;
    }
 
+   @Override
+   public String toString() {
+      return "DBRecurrenceYearly [everyXYear=" + everyXYear + ", name=" + name
+            + ", start=" + start + ", end=" + end + ", id=" + id + "]";
+   }
+
 }

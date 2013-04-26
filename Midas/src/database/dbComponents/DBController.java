@@ -1,6 +1,5 @@
 package database.dbComponents;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,8 +16,26 @@ public class DBController {
       this.dbAccess = new DBAccess("jdbc:sqlite:Midas.sqlite3");
       
    }
+   
+   public void evilTestFunctionFromMarcel() throws DatabaseException, DatabaseConstraintViolation {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         sqlString = "DELETE FROM FinancialTransaction WHERE 1 = 1; " +
+                     "DELETE FROM Budget WHERE 1 = 1; " +
+                     "DELETE FROM OnTheFlyBudget WHERE 1 = 1; " +
+                     "DELETE FROM User WHERE 1 = 1; " +
+                     "DELETE FROM Account WHERE 1 = 1;";
+         
+         preparedStatement = dbAccess.getPreparedStatement(sqlString);
+         this.delete(preparedStatement);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+   }
       
-   private void insert(PreparedStatement preparedStatement, DBComponent dbComponent) throws DatabaseException {
+   private void insert(PreparedStatement preparedStatement, DBComponent dbComponent) throws DatabaseException, DatabaseConstraintViolation {
       try {
          preparedStatement.execute();
          // récupérer l'identifiant créer par la BDD
@@ -27,27 +44,35 @@ public class DBController {
          dbComponent.setId(result.getInt(1));
          
       } catch (SQLException e) {
-         DBErrorHandler.executionError(e);
-      }
-   }
-   
-   private void update (PreparedStatement preparedStatement) throws DatabaseException {
-      try {
-         preparedStatement.execute();      
-      } catch (SQLException e) {
-         DBErrorHandler.executionError(e);
-      }
-   }
-   
-   private void delete (PreparedStatement preparedStatement) throws DatabaseException {
-      try {
-         preparedStatement.execute();      
-      } catch (SQLException e) {
-         DBErrorHandler.executionError(e);
-         if (e.getErrorCode() == 19 ) { // SQLITE_CONSTRAINT  
-            
+         if (e.getErrorCode() == 19 ) { // Violation d'une contrainte de la BDD
+            DBErrorHandler.constraintViolation();
+         } else {
+            DBErrorHandler.executionError(e);
          }
-         /////////////////////////////////////////////// tester si constraintViolation ou erreur de syntax
+      }
+   }
+   
+   private void update (PreparedStatement preparedStatement) throws DatabaseException, DatabaseConstraintViolation {
+      try {
+         preparedStatement.execute();      
+      } catch (SQLException e) {
+         if (e.getErrorCode() == 19 ) { // Violation d'une contrainte de la BDD
+            DBErrorHandler.constraintViolation();
+         } else {
+            DBErrorHandler.executionError(e);
+         }
+      }
+   }
+   
+   private void delete (PreparedStatement preparedStatement) throws DatabaseException, DatabaseConstraintViolation {
+      try {
+         preparedStatement.execute();      
+      } catch (SQLException e) {
+         if (e.getErrorCode() == 19 ) { // Violation d'une contrainte de la BDD
+            DBErrorHandler.constraintViolation();
+         } else {
+            DBErrorHandler.executionError(e);
+         }
       }
    }
    
@@ -117,7 +142,7 @@ public class DBController {
       return dbUsers;
    }
    
-   public void saveToDatabase(DBUser dbUser) throws DatabaseException {
+   public void saveToDatabase(DBUser dbUser) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
@@ -146,7 +171,7 @@ public class DBController {
       }
    }
    
-   public void deleteDbUser(Integer id) throws DatabaseException {
+   public void deleteDbUser(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
@@ -167,7 +192,7 @@ public class DBController {
       return new DBAccount();
    }
    
-   public DBAccount getDBAccount(int id) throws DatabaseException {
+   public DBAccount getDbAccount(int id) throws DatabaseException {
 
       String sqlString = "SELECT Acc_ID, Name, BankName, AccountNumber, Amount, AccountLimit FROM Account WHERE Use_ID = ?";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
@@ -225,21 +250,20 @@ public class DBController {
       return dbAccounts;
    }
    
-   public void saveToDatabase(DBAccount dbAccount) throws DatabaseException {
+   public void saveToDatabase(DBAccount dbAccount) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
          if (dbAccount.getId() == null) {
             sqlString = "INSERT INTO Account " +
-                        "VALUES (null, ?, ?, ?, ?, ?, ?)";
+                        "VALUES (null, ?, ?, ?, ?, ?)";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
                         
-            preparedStatement.setInt(1, dbAccount.getId());
-            preparedStatement.setString(2, dbAccount.getName());
-            preparedStatement.setString(3, dbAccount.getNameBank());
-            preparedStatement.setString(4, dbAccount.getAccountNumber());
-            preparedStatement.setDouble(5, dbAccount.getAmount());
-            preparedStatement.setDouble(6, dbAccount.getOverdraftLimit());
+            preparedStatement.setString(1, dbAccount.getName());
+            preparedStatement.setString(2, dbAccount.getNameBank());
+            preparedStatement.setString(3, dbAccount.getAccountNumber());
+            preparedStatement.setDouble(4, dbAccount.getAmount());
+            preparedStatement.setDouble(5, dbAccount.getOverdraftLimit());
             
             this.insert(preparedStatement, dbAccount);
          } else {
@@ -263,7 +287,7 @@ public class DBController {
       }   
    }
    
-   public void deleteDbAccount(Integer id) throws DatabaseException {
+   public void deleteDbAccount(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
@@ -284,7 +308,7 @@ public class DBController {
        return new DBFinancialTransaction();
     }
    
-   public DBFinancialTransaction getDBFinancialTransaction(int id) throws DatabaseException {
+   public DBFinancialTransaction getDbFinancialTransaction(int id) throws DatabaseException {
 
 	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
       String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinacialTransaction WHERE Tra_ID = ?"; 
@@ -351,7 +375,7 @@ public class DBController {
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
                         
             preparedStatement.setDouble(1, dbFinancialTransaction.getAmount());
-            preparedStatement.setDate  (2, (Date) dbFinancialTransaction.getDate());
+            preparedStatement.setDate  (2, new java.sql.Date(dbFinancialTransaction.getDate().getTime()));
             preparedStatement.setString(3, dbFinancialTransaction.getReason());
             if (dbFinancialTransaction.getDbCategory() != null) {
                preparedStatement.setInt(4, dbFinancialTransaction.getDbCategory());
@@ -378,7 +402,7 @@ public class DBController {
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
             
             preparedStatement.setDouble(1, dbFinancialTransaction.getAmount());
-            preparedStatement.setDate  (2, (Date) dbFinancialTransaction.getDate());
+            preparedStatement.setDate  (2, new java.sql.Date(dbFinancialTransaction.getDate().getTime()));
             preparedStatement.setString(3, dbFinancialTransaction.getReason());
             preparedStatement.setInt(4, 0);
             preparedStatement.setString(5, "B");
@@ -395,7 +419,7 @@ public class DBController {
       }   
    }
    
-   public void deleteDbFinancialTransaction(Integer id) throws DatabaseException {
+   public void deleteDbFinancialTransaction(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
@@ -415,7 +439,7 @@ public class DBController {
    public DBCategory createCategory() {
        return new DBCategory();
     }
-   public DBCategory getDBCategory(int id) throws DatabaseException {
+   public DBCategory getDbCategory(int id) throws DatabaseException {
 
 	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
       String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category WHERE Cat_ID = ?"; 
@@ -468,7 +492,7 @@ public class DBController {
       return dbCategories;
    }  
 
-   public void saveToDatabase(DBCategory dbCategory) throws DatabaseException {
+   public void saveToDatabase(DBCategory dbCategory) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
@@ -503,7 +527,7 @@ public class DBController {
       }   
    }
    
-   public void deleteDbCategory(Integer id) throws DatabaseException {
+   public void deleteDbCategory(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
@@ -519,4 +543,267 @@ public class DBController {
          dbAccess.destroyPreparedStatement(preparedStatement);
       }
    }
+   
+   public DBBudget createDbBudget() {
+      return new DBBudget();
+   }
+   
+   public DBBudget getDbBudget(int id) throws DatabaseException {
+
+      String sqlString = "SELECT Bud_Id, Name, BudgetLimit, Acc_ID WHERE Bud_Id = ?";
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
+      DBBudget dbBudget = null;
+      
+      try {
+         preparedStatement.setInt(1, id);
+         ResultSet result = this.select(preparedStatement);
+         
+         result.next();
+         dbBudget = new DBBudget();
+         dbBudget.setId(result.getInt(1));
+         dbBudget.setName(result.getString(2));  
+         dbBudget.setLimit(result.getDouble(3));
+         dbBudget.setDbAccount(result.getInt(4));
+         
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+      return dbBudget;
+   }
+   
+   public LinkedList<DBBudget> getAllDbBudgets() throws DatabaseException {
+
+      String sqlString = "SELECT Bud_Id, Name, BudgetLimit, Acc_ID WHERE Bud_Id = ?";
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
+      DBBudget dbBudget;
+      LinkedList<DBBudget> dbBudgets = new LinkedList<DBBudget>();
+      
+      try {
+         ResultSet result = this.select(preparedStatement);
+         
+         while (result.next()) {
+            dbBudget = new DBBudget();
+            dbBudget.setId(result.getInt(1));
+            dbBudget.setName(result.getString(2));
+            dbBudget.setLimit(result.getDouble(3));
+            dbBudget.setDbAccount(result.getInt(4));
+            dbBudgets.add(dbBudget);
+         }
+
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+      return dbBudgets;
+   }
+   
+   public void saveToDatabase(DBBudget dbBudget) throws DatabaseException, DatabaseConstraintViolation {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         if (dbBudget.getId() == null) {
+            sqlString = "INSERT INTO Budget " +
+                        "VALUES (null, ?, ?, ?)";
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
+                        
+            preparedStatement.setString(1, dbBudget.getName());
+            preparedStatement.setDouble(2, dbBudget.getLimit());
+            preparedStatement.setInt(3, dbBudget.getDbAccount());
+            this.insert(preparedStatement, dbBudget);
+         } else {
+            sqlString = "UPDATE Budget " +
+                        "SET Name = ?, BudgetLimit = ?, Acc_ID = ? " +
+                        "WHERE Bud_Id = ?";
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
+            
+            preparedStatement.setString(1, dbBudget.getName());
+            preparedStatement.setDouble(2, dbBudget.getLimit());
+            preparedStatement.setInt(3, dbBudget.getDbAccount());
+            preparedStatement.setInt(4, dbBudget.getId());
+            this.update(preparedStatement);
+         }
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }   
+   }
+   
+   public void deleteDbBudget(Integer id) throws DatabaseException, DatabaseConstraintViolation {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         sqlString = "DELETE INTO Budget " +
+                     "WHERE Bud_Id = ?)";
+         preparedStatement = dbAccess.getPreparedStatement(sqlString);
+         preparedStatement.setInt(1, id);
+         this.delete(preparedStatement);
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+   }
+   
+   public DBBudgetOnTheFly createDbBudgetOnTheFly() {
+      return new DBBudgetOnTheFly();
+   }
+   
+   public DBBudgetOnTheFly getDbBudgetOnTheFly(int id) throws DatabaseException {
+
+      String sqlString = "SELECT Bud_Id, Name, BudgetLimit, Acc_ID, Start, End From Budget " +
+      		            "JOIN OnTheFlyBudget ON Budget.Bud_Id = OnTheFlyBudget.Bud_Id " +
+      		            "WHERE Budget.Bud_Id = ?";
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
+      DBBudgetOnTheFly dbBudgetOnTheFly = null;
+      
+      try {
+         preparedStatement.setInt(1, id);
+         ResultSet result = this.select(preparedStatement);
+         
+         result.next();
+         dbBudgetOnTheFly = new DBBudgetOnTheFly();
+         // Budget
+         dbBudgetOnTheFly.setId(result.getInt(1));
+         dbBudgetOnTheFly.setName(result.getString(2));  
+         dbBudgetOnTheFly.setLimit(result.getDouble(3));
+         dbBudgetOnTheFly.setDbAccount(result.getInt(4));
+         // OnTheFlyBudget
+         dbBudgetOnTheFly.setStart(result.getDate(5));
+         dbBudgetOnTheFly.setEnd(result.getDate(6));
+         
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+      return dbBudgetOnTheFly;
+   }
+   
+   public LinkedList<DBBudgetOnTheFly> getAllDbBudgetOnTheFly() throws DatabaseException {
+
+      String sqlString = "SELECT Bud_Id, Name, BudgetLimit, Acc_ID, Start, End From Budget " +
+      		            "JOIN OnTheFlyBudget ON Budget.Bud_Id = OnTheFlyBudget.Bud_Id " +
+      		            "WHERE Budget.Bud_Id = ?";
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
+      DBBudgetOnTheFly dbBudgetOnTheFly;
+      LinkedList<DBBudgetOnTheFly> dbBudgetsOnTheFly = new LinkedList<DBBudgetOnTheFly>();
+      
+      try {
+         ResultSet result = this.select(preparedStatement);
+         
+         while (result.next()) {
+            dbBudgetOnTheFly = new DBBudgetOnTheFly();
+            // Budget
+            dbBudgetOnTheFly.setId(result.getInt(1));
+            dbBudgetOnTheFly.setName(result.getString(2));  
+            dbBudgetOnTheFly.setLimit(result.getDouble(3));
+            dbBudgetOnTheFly.setDbAccount(result.getInt(4));
+            // OnTheFlyBudget
+            dbBudgetOnTheFly.setStart(result.getDate(5));
+            dbBudgetOnTheFly.setEnd(result.getDate(6));
+            dbBudgetsOnTheFly.add(dbBudgetOnTheFly);
+         }
+
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+      return dbBudgetsOnTheFly;
+   }
+   
+   public void saveToDatabase(DBBudgetOnTheFly getDbBudgetOnTheFly) throws DatabaseException, DatabaseConstraintViolation {
+      String sqlString1;
+      String sqlString2;
+      java.sql.Connection connection = null;
+      PreparedStatement preparedStatement1 = null;
+      PreparedStatement preparedStatement2 = null;
+      try {
+         if (getDbBudgetOnTheFly.getId() == null) {
+            sqlString1 = "INSERT INTO Budget " +
+                         "VALUES (null, ?, ?, ?) ";
+            sqlString2 = "INSERT INTO OnTheFlyBudget " +
+                         "VALUES (?, ?, ?); ";
+            
+            connection = dbAccess.getConnection();
+            connection.setAutoCommit(false);
+            
+            preparedStatement1 = dbAccess.getPreparedStatement(sqlString1);
+            preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
+            
+            // Budget
+            preparedStatement1.setString(1, getDbBudgetOnTheFly.getName());
+            preparedStatement1.setDouble(2, getDbBudgetOnTheFly.getLimit());
+            preparedStatement1.setInt(3, getDbBudgetOnTheFly.getDbAccount());
+            this.insert(preparedStatement1, getDbBudgetOnTheFly);
+            // OnTheFlyBudget
+            preparedStatement2.setInt(1, getDbBudgetOnTheFly.getId());
+            preparedStatement2.setDate(2, new java.sql.Date(getDbBudgetOnTheFly.getStart().getTime()));
+            preparedStatement2.setDate(3, new java.sql.Date(getDbBudgetOnTheFly.getEnd().getTime()));
+            this.insert(preparedStatement2, getDbBudgetOnTheFly);
+            
+            connection.commit();
+         } else {
+            sqlString1 = "UPDATE Budget " +
+                         "SET Name = ?, BudgetLimit = ?, Acc_ID = ? " +
+                         "WHERE Bud_Id = ?";
+            sqlString2 = "UPDATE OnTheFlyBudget " +
+                         "SET Start = ?, End = ? " +
+                         "WHERE Bud_Id = ? ";
+            preparedStatement1 = dbAccess.getPreparedStatement(sqlString1);
+            preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
+
+            //Budget
+            preparedStatement1.setString(1, getDbBudgetOnTheFly.getName());
+            preparedStatement1.setDouble(2, getDbBudgetOnTheFly.getLimit());
+            preparedStatement1.setInt(3, getDbBudgetOnTheFly.getDbAccount());
+            preparedStatement1.setInt(4, getDbBudgetOnTheFly.getId());
+            this.update(preparedStatement1);
+            // OnTheFlyBudget
+            preparedStatement2.setDate(1, new java.sql.Date(getDbBudgetOnTheFly.getStart().getTime()));
+            preparedStatement2.setDate(2, new java.sql.Date(getDbBudgetOnTheFly.getEnd().getTime()));
+            preparedStatement2.setInt(3, getDbBudgetOnTheFly.getId());
+            this.update(preparedStatement2);
+         }
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+      // preparedStatement2 sera aussi détruit avec cette commande
+         dbAccess.destroyPreparedStatement(preparedStatement1); 
+      }   
+   }
+   
+   public void deleteDbBudgetOnTheFly(Integer id) throws DatabaseException, DatabaseConstraintViolation {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         sqlString = "BEGIN TRANSACTION" +
+         		      "DELETE FROM Budget " +
+                     "WHERE Bud_Id = ?) " +
+                     "DELETE FROM OnTheFlyBudget " +
+                     "WHERE Bud_Id = ? " +
+                     "COMMIT";
+         preparedStatement = dbAccess.getPreparedStatement(sqlString);
+         preparedStatement.setInt(1, id);
+         preparedStatement.setInt(2, id);
+         this.delete(preparedStatement);
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+   }
+   
 }
