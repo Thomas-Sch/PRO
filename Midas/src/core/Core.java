@@ -12,8 +12,8 @@
  */
 package core;
 
-import core.components.Account;
 import database.dbComponents.DBController;
+import database.utils.DatabaseException;
 import settings.Settings;
 
 /**
@@ -42,8 +42,20 @@ public class Core {
       
    }
    
-   public Category getCategoryID(Integer id) {
-      return new Category(dbController.getCategory(id));
+   public Category getCategoryID(int id) {
+      Category result = null;
+      try {
+         result = new Category(dbController.getDbCategory(id));
+      }
+      catch (DatabaseException e) {
+         
+      }
+      
+      return result; 
+   }
+   
+   public Category createCategory(){
+      return new Category(dbController.createCategory());
    }
    
 }
