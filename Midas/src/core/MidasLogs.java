@@ -38,6 +38,7 @@ public class MidasLogs {
    public static void addLogsToFrame(LogsFrame frame) {
       frame.addLogPanel(messages.createLogPanel());
       frame.addLogPanel(errors.createLogPanel());
+      frame.addLogPanel(sqlErrors.createLogPanel());
    }
 
 }
