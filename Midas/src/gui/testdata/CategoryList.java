@@ -10,10 +10,10 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.data;
+package gui.testdata;
 
 import gui.component.ListTemplate;
-import gui.data.CategoryData;
+import gui.testdata.CategoryData;
 
 import javax.swing.DefaultListModel;
 

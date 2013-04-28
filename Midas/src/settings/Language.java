@@ -46,6 +46,8 @@ public class Language {
       APP_TITLE,
       ACTION_QUIT,
       
+      /* GUI */
+      TAB_HOME,
       VALIDATE_BUTTON,
       CANCEL_BUTTON,
       THRESHOLD_LABEL,

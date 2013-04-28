@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CategoryData.java
+ * Nom du fichier   : Controller.java
  * ============================================================================
- * Date de création : 22 avr. 2013
+ * Date de création : 25 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,10 +10,12 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.data;
+package gui.controller;
+
+import core.Core;
 
 /**
- * TODO
+ * Modèle pour tous les contrôleurs graphiques.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -21,14 +23,15 @@ package gui.data;
  * @author Sinniger Marcel
  *
  */
-public class CategoryData extends Data<String> {
+public abstract class Controller {
    
-   /**
-    * 
-    */
-   public CategoryData() {
-      for(int i = 0; i < 10; i++) {
-         addItem("Caaat" + (i + 1));
-      }
+   @SuppressWarnings("unused") // A suppr dès que possible.
+   private Core core;
+   
+   Controller(Core core) {
+      this.core = core;
+      initActionListeners();
    }
+   
+   protected abstract void initActionListeners();
 }

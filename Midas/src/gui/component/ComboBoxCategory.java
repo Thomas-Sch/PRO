@@ -12,7 +12,7 @@
  */
 package gui.component;
 
-import gui.data.CategoryData;
+import gui.testdata.CategoryData;
 
 import java.util.ArrayList;
 
