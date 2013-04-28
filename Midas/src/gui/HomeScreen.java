@@ -14,6 +14,8 @@ package gui;
 
 import gui.component.ComboBoxAuthor;
 import gui.component.ComboBoxCategory;
+import gui.component.QuickExpense;
+import gui.controller.Controller;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -49,10 +51,14 @@ import com.toedter.calendar.JDateChooser;
  */
 @SuppressWarnings("serial")
 public class HomeScreen extends JPanel {
+   
+   Controller controller;
    /**
     * Constructeur par défaut.
     */
-   public HomeScreen() {
+   public HomeScreen(Controller controller) {
+      this.controller = controller;
+      
       setLayout(new GridBagLayout());
       
       GridBagConstraints gblConstraints = new GridBagConstraints(); 
@@ -88,99 +94,8 @@ public class HomeScreen extends JPanel {
       gblConstraints.anchor = GridBagConstraints.NORTH;
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 2;
-      add(getQuickExpensePanel(),gblConstraints);
+      add(new QuickExpense(controller),gblConstraints);
    }   
-   
-   
-   /**
-    * Créer le panel de dépense rapide.
-    * @return le panel d'ajout de dépense rapide.
-    */
-   private JPanel getQuickExpensePanel() {
-      JPanel pnlQuickExpense = new JPanel();
-      pnlQuickExpense.setLayout(new GridBagLayout());
-      
-      GridBagConstraints gblConstraints = new GridBagConstraints(); 
-      // Options globales de contrainte.
-      gblConstraints.fill = GridBagConstraints.HORIZONTAL;
-      
-      gblConstraints.insets = new Insets(5, 5, 5, 5);
-      gblConstraints.weighty = 0.0;
-      
-      // Paramétrage des contraintes et ajout du panel d'alerte.
-      gblConstraints.weightx = 0.1;
-      gblConstraints.gridx = 0;
-      gblConstraints.gridy = 0;     
-      gblConstraints.anchor = GridBagConstraints.NORTH;
-      pnlQuickExpense.add(new JLabel("Effectuer une dépense rapide..."), gblConstraints);
-      
-      // Ajout de la liste déroulante pour les auteurs.
-      gblConstraints.gridx = 0;
-      gblConstraints.gridy = 1;
-      pnlQuickExpense.add(new ComboBoxAuthor(), gblConstraints);
-      
-      // Ajout de la zone de saisie d'un montant.
-      gblConstraints.gridx = 1;
-      pnlQuickExpense.add(getAmountInputPanel(), gblConstraints);
-      
-      // Saisie de la date.
-      gblConstraints.gridx = 2;
-      pnlQuickExpense.add(getDateInputPanel(), gblConstraints);
-      
-      gblConstraints.gridx = 0;
-      gblConstraints.gridy = 2;
-      JComboBox<String> cmbBudgets = new JComboBox<>();
-      
-      ComboBoxModel<String> cbmBudgetsData = new DefaultComboBoxModel<String>(
-            new String[] { "Selectionner un budget", "Maison", "Tourisme", "Cadeaux", "Nouveau budget..." });
-      
-      cmbBudgets.setModel(cbmBudgetsData);
-      pnlQuickExpense.add(cmbBudgets, gblConstraints);
-     
-      
-      gblConstraints.gridx = 1;
-      pnlQuickExpense.add(new ComboBoxCategory(), gblConstraints);
-      
-      gblConstraints.gridx = 2;
-      pnlQuickExpense.add(new ComboBoxCategory(), gblConstraints);
-      
-      gblConstraints.gridx = 0;
-      gblConstraints.gridy = 3;
-      gblConstraints.gridwidth = 3;
-      pnlQuickExpense.add(getReasonPanel(), gblConstraints);
-      
-      gblConstraints.gridx = 2;
-      gblConstraints.gridy = 4;
-      gblConstraints.gridwidth = 1;
-      
-      JButton btnValidate = new JButton("Valider la dépense");
-      pnlQuickExpense.add(btnValidate, gblConstraints);
-      
-      btnValidate.addActionListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent arg0) {
-            new ManageCategoryFrame();
-         }
-      });
-      
-      return pnlQuickExpense;
-   }
-
-
-   /**
-    * Construit le panel contenant le motif d'une dépense.
-    * @return le panel construit.
-    */
-   private Component getReasonPanel() {
-      JPanel pnlReasons = new JPanel(new BorderLayout(5,5));
-      
-      pnlReasons.add(new JLabel("Motif:"), BorderLayout.WEST);
-      pnlReasons.add(new JTextField("..."), BorderLayout.CENTER);
-      
-      return pnlReasons;
-   }
-
 
    /**
     * Renvoie le panel des derniers mouvements d'argent.
@@ -238,37 +153,4 @@ public class HomeScreen extends JPanel {
       
       return pnlWarning;
    }
-   
-   /**
-    * Construit le panel de saisie du montant d'argent.
-    * @return le panel construit.
-    */
-   private JPanel getAmountInputPanel(){
-      JPanel pnlAmountInput = new JPanel();
-      pnlAmountInput.setLayout(new BorderLayout(5,5));
-      
-      pnlAmountInput.add(new JLabel("Montant:"), BorderLayout.WEST);
-      
-      JTextField txtAmountInput = new JTextField("...");
-      
-      pnlAmountInput.add(txtAmountInput, BorderLayout.CENTER);
-      
-      return pnlAmountInput;
-   }
-   
-   /**
-    * Construit le panel de saisie de la date.
-    * @return le panel construit.
-    */
-   private JPanel getDateInputPanel(){
-      JPanel pnlDateInput = new JPanel();
-      pnlDateInput.setLayout(new BorderLayout(5,5));
-      
-      pnlDateInput.add(new JLabel("Date:"), BorderLayout.WEST);      
-      JDateChooser dchTime = new JDateChooser(new Date());
-      pnlDateInput.add(dchTime, BorderLayout.CENTER);
-      return pnlDateInput;      
-   }
-   
-
 }

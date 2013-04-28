@@ -28,14 +28,25 @@ import javax.swing.JSeparator;
  */
 @SuppressWarnings("serial")
 public class MainMenu extends JMenuBar {
+   
+   public JMenu file;
+   public JMenu edit;
+   public JMenu view;
+   public JMenu interrogation;
+   
    /**
     * Construit le menu avec ses composants.
     */
-   public MainMenu() {      
-      add(getFileMenu());
-      add(getEditMenu());
-      add(getViewMenu());
-      add(getInterrogationMenu());
+   public MainMenu() {  
+      file = getFileMenu();
+      edit = getEditMenu();
+      view = getViewMenu();
+      interrogation = getInterrogationMenu();
+      
+      add(file);
+      add(edit);
+      add(view);
+      add(interrogation);
    }
    
    /**

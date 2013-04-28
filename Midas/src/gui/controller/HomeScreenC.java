@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : Controller.java
+ * Nom du fichier   : HomeScreenC.java
  * ============================================================================
- * Date de création : 25 avr. 2013
+ * Date de création : 28 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -12,10 +12,11 @@
  */
 package gui.controller;
 
+import gui.HomeScreen;
 import core.Core;
 
 /**
- * Modèle pour tous les contrôleurs graphiques.
+ * Contrôleur de l'écran d'accueil.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -23,20 +24,27 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public abstract class Controller {
-   private Core core;
+public class HomeScreenC extends Controller {
    
-   protected Controller(Core core) {
-      this.core = core;
+   HomeScreen homeScreen;
+   
+   public HomeScreenC (Core core) {
+      super(core);
+      homeScreen = new HomeScreen(this);
    }
-   
-   protected abstract void initActionListeners();
-   
-   /**
-    * Renvoie core.
-    * @return La partie logique de l'application.
+
+   /* (non-Javadoc)
+    * @see gui.controller.Controller#initActionListeners()
     */
-   public Core getCore() {
-      return core;
+   @Override
+   protected void initActionListeners() {
+      // TODO Auto-generated method stub
+
    }
+   
+   public HomeScreen getGraphicalComponent() {
+      return homeScreen;
+   }
+
+
 }

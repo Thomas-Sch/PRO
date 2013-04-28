@@ -10,4 +10,9 @@
   <account_description_label>TODO</account_description_label>
   <reset_button>TODO</reset_button>
   <account_name_label>TODO</account_name_label>
+  <home_screen_name>TODO</home_screen_name>
+  <quick_expense_label>TODO</quick_expense_label>
+  <reason_label>TODO</reason_label>
+  <amount_label>TODO</amount_label>
+  <date_label>TODO</date_label>
 </language>

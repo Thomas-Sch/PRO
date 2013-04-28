@@ -12,7 +12,13 @@
  */
 package gui.component;
 
+import java.awt.BorderLayout;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import settings.Language.Text;
 
 /**
  * TODO
@@ -25,5 +31,15 @@ import javax.swing.JPanel;
  */
 public class ReasonInput extends JPanel {
    private static final long serialVersionUID = 1L;
+   
+   /**
+    * 
+    */
+   public ReasonInput() {
+      setLayout(new BorderLayout(5,5));
+      
+      add(new JLabel(Text.REASON_LABEL.toString()), BorderLayout.WEST);
+      add(new JTextField(), BorderLayout.CENTER);
+   }
 
 }

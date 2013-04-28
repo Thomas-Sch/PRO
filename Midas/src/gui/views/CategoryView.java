@@ -39,7 +39,7 @@ import gui.View;
 public class CategoryView extends JFrame implements View {
 
    /**
-    * 
+    * ID de série.
     */
    private static final long serialVersionUID = 9054247667917665007L;
 

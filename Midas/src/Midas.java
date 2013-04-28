@@ -1,17 +1,7 @@
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import settings.Language;
-import settings.Language.Text;
-import settings.Settings;
-import gui.MainFrame;
 import gui.controller.GlobalGUIController;
-import gui.utils.Positions;
-import gui.utils.Positions.ScreenPosition;
+import settings.Settings;
 import core.Core;
 import core.MidasLogs;
-import core.log.Log;
-import core.log.LogsFrame;
 
 /* ============================================================================
  * Nom du fichier   : Midas.java
@@ -27,7 +17,7 @@ import core.log.LogsFrame;
  */
 
 /**
- * TODO
+ * Classe de lancement pour l'application.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -41,12 +31,11 @@ public class Midas {
    
    public static void main(String[] args) {    
       
-      /*
-       * Démarrage de l'application
-       */
       
+      // Lancement de la partie logique du logiciel.
       Core core = new Core();
       
+      // Lancement de la partie graphique du logiciel.
       GlobalGUIController guiController = new GlobalGUIController(core, LOG_FRAME_ON);
       
       MidasLogs.messages.push("Launcher", "Initialization done.");

@@ -12,7 +12,15 @@
  */
 package gui.component;
 
+import java.awt.BorderLayout;
+import java.util.Date;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import settings.Language.Text;
+
+import com.toedter.calendar.JDateChooser;
 
 /**
  * TODO
@@ -25,5 +33,16 @@ import javax.swing.JPanel;
  */
 public class DateInput extends JPanel {
    private static final long serialVersionUID = 1L;
+   
+   /**
+    * 
+    */
+   public DateInput() {
+      setLayout(new BorderLayout(5,5));
+      
+      add(new JLabel(Text.DATE_LABEL.toString()), BorderLayout.WEST);      
+      JDateChooser dchTime = new JDateChooser(new Date());
+      add(dchTime, BorderLayout.CENTER); 
+   }
 
 }

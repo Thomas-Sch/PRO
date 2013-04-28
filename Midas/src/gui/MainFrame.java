@@ -12,11 +12,17 @@
  */
 package gui;
 
+import gui.controller.Controller;
+import gui.controller.HomeScreenC;
+import gui.controller.MainMenuC;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import settings.Language.Text;
 
 /**
  * Fenêtre principale.
@@ -29,24 +35,26 @@ import javax.swing.JTabbedPane;
  */
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame{
-      
+   
+   Controller controller;   
+   
+   // Composants graphiques extérieurs.
+   MainMenuC menu;
+   HomeScreenC home;
+       
    /**
     * Constructeur sans paramètre.
     */
-   public MainFrame(String title)  {
+   public MainFrame(Controller controller, String title)  {
       super(title);
-      init();
-   }
-   
-   /**
-    * Initialisations des différentes éléments présents dans la vue.
-    */
-   private void init() {
-      setDefaultCloseOperation(EXIT_ON_CLOSE);
-      setContentPane(buildContent());
+      this.controller = controller;
       
+      menu = new MainMenuC(controller.getCore());
+      home = new HomeScreenC(controller.getCore());
+      
+      // Composants graphiques.
+      setContentPane(buildContent());
       pack();
-      setVisible(true);
    }
    
    /**
@@ -58,14 +66,14 @@ public class MainFrame extends JFrame{
    private JPanel buildContent() {
       
       // Définission du menu principal.
-      setJMenuBar(new MainMenu());
+      setJMenuBar(menu.getGraphicalComponent());
       
       // Définission du contenur principal.
       JPanel pnlContent = new JPanel();
       pnlContent.setLayout(new BorderLayout());
       
       JTabbedPane tbpMain = new JTabbedPane();
-      tbpMain.addTab("Accueil", new HomeScreen());
+      tbpMain.addTab(Text.HOME_SCREEN_NAME.toString(), home.getGraphicalComponent());
       
       pnlContent.add(tbpMain,BorderLayout.CENTER);
       return pnlContent;

@@ -12,11 +12,13 @@
  */
 package gui.component;
 
+import gui.controller.Controller;
+import gui.testdata.AuthorData;
+
 import java.util.ArrayList;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-
-import gui.testdata.*;
 
 /**
  * Représente les éléments graphiques compris pour la sélection d'un auteur.
@@ -30,14 +32,16 @@ import gui.testdata.*;
  */
 public class ComboBoxAuthor extends JComboBox<Object> {
    private static final long serialVersionUID = 1L;
+   
+   Controller controller;
 
    /**
-    * 
+    * Constructeur de la liste déroulante.
     */
-   public ComboBoxAuthor() {
+   public ComboBoxAuthor(Controller controller) {
+      this.controller = controller;
       
       ArrayList<String> al = new ArrayList<>();
-      
       AuthorData ad = new AuthorData();
       
       al.add("Sélectionner un auteur");
@@ -45,9 +49,7 @@ public class ComboBoxAuthor extends JComboBox<Object> {
          al.add(s);
       }
       
-      al.add("Nouvel auteur...");
-      
-      
+      al.add("Nouvel auteur...");      
       setModel(new DefaultComboBoxModel<Object>(al.toArray()));
    }   
 }

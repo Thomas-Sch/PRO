@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : Controller.java
+ * Nom du fichier   : MainMenuC.java
  * ============================================================================
- * Date de création : 25 avr. 2013
+ * Date de création : 28 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -12,10 +12,11 @@
  */
 package gui.controller;
 
+import gui.MainMenu;
 import core.Core;
 
 /**
- * Modèle pour tous les contrôleurs graphiques.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -23,20 +24,24 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public abstract class Controller {
-   private Core core;
+public class MainMenuC extends Controller {
    
-   protected Controller(Core core) {
-      this.core = core;
+   MainMenu mainMenu;
+   
+   public MainMenuC(Core core) {
+      super(core);
+      mainMenu = new MainMenu();
    }
-   
-   protected abstract void initActionListeners();
-   
-   /**
-    * Renvoie core.
-    * @return La partie logique de l'application.
+
+   /* (non-Javadoc)
+    * @see gui.controller.Controller#initActionListeners()
     */
-   public Core getCore() {
-      return core;
+   @Override
+   protected void initActionListeners() {
    }
+   
+   public MainMenu getGraphicalComponent() {
+      return mainMenu;
+   }
+
 }

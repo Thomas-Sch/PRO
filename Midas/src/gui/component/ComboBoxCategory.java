@@ -46,6 +46,5 @@ public class ComboBoxCategory extends JComboBox<Object> {
       
       
       setModel(new DefaultComboBoxModel<Object>(data.toArray()));
-   }   
-
+   }
 }

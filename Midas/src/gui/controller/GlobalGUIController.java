@@ -15,8 +15,6 @@ package gui.controller;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import settings.Settings;
-import settings.Language.Text;
 import gui.MainFrame;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
@@ -26,8 +24,8 @@ import core.log.LogsFrame;
 
 /**
  * Contrôleur de l'interface graphique. Cette
- * classe sert aussi de passerelle entre interface graphique et le corps de
- * l'application.
+ * classe sert aussi de passerelle entre interface graphique et la partie logique
+ * de l'application.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -36,9 +34,6 @@ import core.log.LogsFrame;
  *
  */
 public class GlobalGUIController extends Controller {
-   
-   private MainFrame mainFrame;
-
    /**
     * @param core
     */
@@ -83,7 +78,7 @@ public class GlobalGUIController extends Controller {
          }
       }
       
-      initGraphicalComponents();
+      MainFrameC mainFrameC = new MainFrameC(getCore());
    }
 
    /* (non-Javadoc)
@@ -93,10 +88,5 @@ public class GlobalGUIController extends Controller {
    protected void initActionListeners() {
       // TODO Auto-generated method stub
 
-   }
-
-   private void initGraphicalComponents() {
-      mainFrame = new MainFrame(Text.APP_TITLE.toString());
-      Positions.setPositionOnScreen(mainFrame,  Settings.mainFrame.anchor);
    }
 }
