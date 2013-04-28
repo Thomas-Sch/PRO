@@ -33,16 +33,8 @@ public class MainFrame extends JFrame{
    /**
     * Constructeur sans paramètre.
     */
-   public MainFrame(String title, int posX, int posY, int width, int height)  {
+   public MainFrame(String title)  {
       super(title);
-      
-      // Aspect des fenêtres.
-      try {
-         javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-      } catch(Exception e) {
-         e.printStackTrace();
-      }
-      setBounds(posX, posY, width, height);
       init();
    }
    
@@ -50,10 +42,7 @@ public class MainFrame extends JFrame{
     * Initialisations des différentes éléments présents dans la vue.
     */
    private void init() {
-      
       setDefaultCloseOperation(EXIT_ON_CLOSE);
-      
-
       setContentPane(buildContent());
       
       pack();

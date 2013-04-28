@@ -2,6 +2,7 @@
 <language>
   <app_title>Midas</app_title>
   <action_quit>Quitter</action_quit>
+  <tab_home>Missing String</tab_home>
   <validate_button>Missing String</validate_button>
   <cancel_button>Missing String</cancel_button>
   <threshold_label>Missing String</threshold_label>

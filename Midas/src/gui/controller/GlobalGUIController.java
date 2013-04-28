@@ -12,11 +12,17 @@
  */
 package gui.controller;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import settings.Settings;
 import settings.Language.Text;
 import gui.MainFrame;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import core.Core;
+import core.MidasLogs;
+import core.log.LogsFrame;
 
 /**
  * Contrôleur de l'interface graphique. Cette
@@ -36,32 +42,45 @@ public class GlobalGUIController extends Controller {
    /**
     * @param core
     */
-   public GlobalGUIController(Core core, String string) {
-      super(core);
-      
-      // Aspect des fenêtres.
-      try {
-         javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-      } catch(Exception e) {
-         e.printStackTrace();
-      }
-      
-      initGraphicalComponents(string);
+   public GlobalGUIController(Core core) {
+      this(core, false);
    }
    
    /**
     * 
     * @param core le centre de l'application
-    * @param logFrame
+    * @param logFrame si la fenêtre de logs est présente ou pas.
     */
    public GlobalGUIController(Core core, boolean logFrame) {
       super(core);
       
-      // Aspect des fenêtres.
+      // Définition du look and feel.
       try {
-         javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-      } catch(Exception e) {
-         e.printStackTrace();
+         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      }
+      catch (ClassNotFoundException ex) {
+         MidasLogs.errors.push("Launcher", "Choosen LookAndFeel does not exists.");
+      }
+      catch (InstantiationException ex) {
+         MidasLogs.errors.push("Launcher", "Unable to create the choosen LookAndFeel.");
+      }
+      catch (IllegalAccessException ex) {
+         MidasLogs.errors.push("Launcher", "LookAndFeel class or initializer is not accessible.");
+      }
+      catch (UnsupportedLookAndFeelException ex) {
+         MidasLogs.errors.push("Launcher", "Choosen LookAndFeel is not supported.");
+      }
+      catch (ClassCastException ex) {
+         MidasLogs.errors.push("Launcher", "Choosen LookAndFeel is not a real LookAndFeel."); 
+      }
+      
+      if(logFrame) {
+         if (logFrame) {
+            LogsFrame logsFrame = new LogsFrame("Midas - logs", 700, 0, 600, 400);
+            Positions.setPositionOnScreen(logsFrame, ScreenPosition.TOP_RIGHT);
+            
+            MidasLogs.addLogsToFrame(logsFrame);
+         }
       }
       
       initGraphicalComponents();
@@ -78,6 +97,6 @@ public class GlobalGUIController extends Controller {
 
    private void initGraphicalComponents() {
       mainFrame = new MainFrame(Text.APP_TITLE.toString());
-      Positions.setPositionOnScreen(mainFrame, ScreenPosition.CENTER);
+      Positions.setPositionOnScreen(mainFrame,  Settings.mainFrame.anchor);
    }
 }

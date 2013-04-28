@@ -12,7 +12,7 @@
  */
 package gui;
 
-import gui.data.CategoryList;
+import gui.testdata.CategoryList;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
