@@ -2,7 +2,7 @@ package database.dbComponents;
 
 import java.util.Date;
 
-public abstract class DBRecurrence extends DBComponent {
+public class DBRecurrence extends DBComponent {
 
    private Date start;
    private Date end;
@@ -23,7 +23,7 @@ public abstract class DBRecurrence extends DBComponent {
    public DBRecurrenceType getType() {
       return type;
    }
-   public void setType(DBRecurrenceType type) {
+   public void set(DBRecurrenceType type) {
       this.type = type;
    }
    @Override

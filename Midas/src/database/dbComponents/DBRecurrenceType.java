@@ -2,19 +2,19 @@ package database.dbComponents;
 
 public class DBRecurrenceType extends DBComponent{
 
-   String type;
+   String name;
 
-   public String getType() {
-      return type;
+   public String getName() {
+      return name;
    }
 
-   public void setType(String type) {
-      this.type = type;
+   public void setName(String type) {
+      this.name = type;
    }
 
    @Override
    public String toString() {
-      return "DBRecurrenceType [type=" + type + ", id=" + id + "]";
+      return "DBRecurrenceType [type=" + name + ", id=" + id + "]";
    }
 
 }

@@ -28,9 +28,8 @@ import database.dbComponents.DBRecurrence;
 public class Recurrence {
    private DBRecurrence dbRecurrence;
    
-   public Recurrence (String name, Date startDate, Date endDate) {
+   public Recurrence (Date startDate, Date endDate) {
       this.dbRecurrence = new DBRecurrence();
-      this.dbRecurrence.setName(name);
       this.dbRecurrence.setStart(startDate);
       this.dbRecurrence.setEnd(endDate);
    }
@@ -39,13 +38,10 @@ public class Recurrence {
       this.dbRecurrence = dbRecurrence;
    }
    
-   public String consultName() {
-      return dbRecurrence.getName();
+   public String consultType() {
+      return dbRecurrence.getType().getName(); // soit "Monthly" soit "Yearly"
    }
-   public void modifyName(String name) {
-      dbRecurrence.setName(name);
-   }
-   
+
    public Date consultStartDate() {
       return dbRecurrence.getStart();
    }
