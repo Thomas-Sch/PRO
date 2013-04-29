@@ -1,13 +1,7 @@
-package core;
-import java.io.File;
-
-import core.log.Log;
-import core.log.LogsFrame;
-
 /* ============================================================================
- * Nom du fichier   : MidasLog.java
+ * Nom du fichier   : CategoryData.java
  * ============================================================================
- * Date de création : 17 avr. 2013
+ * Date de création : 22 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -16,6 +10,7 @@ import core.log.LogsFrame;
  *                    Sinniger Marcel
  * ============================================================================
  */
+package gui.testdata;
 
 /**
  * TODO
@@ -26,19 +21,14 @@ import core.log.LogsFrame;
  * @author Sinniger Marcel
  *
  */
-public class MidasLogs {
+public class CategoryData extends Data<String> {
    
-   public static Log messages = new Log("messages", new File("Midas.log"), 1);
-   
-   public static Log errors = new Log("errors", new File("Errors.log"), 1);
-   
-   public static Log sqlErrors = new Log("sqlErrors", new File("sqlErrors.log"), 1);
-   
-   
-   public static void addLogsToFrame(LogsFrame frame) {
-      frame.addLogPanel(messages.createLogPanel());
-      frame.addLogPanel(errors.createLogPanel());
-      frame.addLogPanel(sqlErrors.createLogPanel());
+   /**
+    * 
+    */
+   public CategoryData() {
+      for(int i = 0; i < 10; i++) {
+         addItem("Caaat" + (i + 1));
+      }
    }
-
 }

@@ -1,13 +1,7 @@
-package core;
-import java.io.File;
-
-import core.log.Log;
-import core.log.LogsFrame;
-
 /* ============================================================================
- * Nom du fichier   : MidasLog.java
+ * Nom du fichier   : DisplayableTest.java
  * ============================================================================
- * Date de création : 17 avr. 2013
+ * Date de création : 22 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -16,9 +10,13 @@ import core.log.LogsFrame;
  *                    Sinniger Marcel
  * ============================================================================
  */
+package core;
+
+import java.util.Observable;
 
 /**
- * TODO
+ * ATTENTION : ne portera plus le même nom, mais aura la même fonction dès
+ * l'update des objets du coeur.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -26,19 +24,16 @@ import core.log.LogsFrame;
  * @author Sinniger Marcel
  *
  */
-public class MidasLogs {
+abstract public class DisplayableComponent extends Observable {
    
-   public static Log messages = new Log("messages", new File("Midas.log"), 1);
-   
-   public static Log errors = new Log("errors", new File("Errors.log"), 1);
-   
-   public static Log sqlErrors = new Log("sqlErrors", new File("sqlErrors.log"), 1);
-   
-   
-   public static void addLogsToFrame(LogsFrame frame) {
-      frame.addLogPanel(messages.createLogPanel());
-      frame.addLogPanel(errors.createLogPanel());
-      frame.addLogPanel(sqlErrors.createLogPanel());
+   public DisplayableComponent() {
+      
    }
+   
+   public void setChangedAndNotifyObservers() {
+      setChanged();
+      notifyObservers();
+   }
+   
 
 }

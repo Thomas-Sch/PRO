@@ -46,13 +46,20 @@ public class Language {
       APP_TITLE,
       ACTION_QUIT,
       
+      /* GUI */
+      TAB_HOME,
       VALIDATE_BUTTON,
       CANCEL_BUTTON,
       THRESHOLD_LABEL,
       ACCOUNT_NUMBER_LABEL,
       ACCOUNT_DESCRIPTION_LABEL,
       RESET_BUTTON,
-      ACCOUNT_NAME_LABEL;
+      ACCOUNT_NAME_LABEL,
+      HOME_SCREEN_NAME,
+      QUICK_EXPENSE_LABEL,
+      REASON_LABEL,
+      AMOUNT_LABEL,
+      DATE_LABEL;
       
       
       /* Fin des déclarations, ne pas modifier ci-dessous

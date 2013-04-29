@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CategoryData.java
+ * Nom du fichier   : MainMenuC.java
  * ============================================================================
- * Date de création : 22 avr. 2013
+ * Date de création : 28 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,7 +10,10 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.data;
+package gui.controller;
+
+import gui.MainMenu;
+import core.Core;
 
 /**
  * TODO
@@ -21,14 +24,24 @@ package gui.data;
  * @author Sinniger Marcel
  *
  */
-public class CategoryData extends Data<String> {
+public class MainMenuC extends Controller {
    
-   /**
-    * 
-    */
-   public CategoryData() {
-      for(int i = 0; i < 10; i++) {
-         addItem("Caaat" + (i + 1));
-      }
+   MainMenu mainMenu;
+   
+   public MainMenuC(Core core) {
+      super(core);
+      mainMenu = new MainMenu();
    }
+
+   /* (non-Javadoc)
+    * @see gui.controller.Controller#initActionListeners()
+    */
+   @Override
+   protected void initActionListeners() {
+   }
+   
+   public MainMenu getGraphicalComponent() {
+      return mainMenu;
+   }
+
 }

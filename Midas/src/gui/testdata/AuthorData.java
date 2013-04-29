@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.data;
+package gui.testdata;
 
 
 /**

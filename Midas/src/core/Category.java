@@ -1,29 +1,31 @@
 /* ============================================================================
  * Nom du fichier   : Categorie.java
  * ============================================================================
- * Date de création : 24 avr. 2013
+ * Date de crï¿½ation : 24 avr. 2013
  * ============================================================================
- * Auteurs          : Biolzi Sébastien
+ * Auteurs          : Biolzi Sï¿½bastien
  *                    Brito Carvalho Bruno
- *                    Decorvet Grégoire
+ *                    Decorvet Grï¿½goire
  *                    Schweizer Thomas
  *                    Sinniger Marcel
  * ============================================================================
  */
 package core;
 
+import java.util.Observable;
+
 import database.dbComponents.DBCategory;
 
 /**
  * TODO
- * @author Biolzi Sébastien
+ * @author Biolzi SÃ©bastien
  * @author Brito Carvalho Bruno
- * @author Decorvet Grégoire
+ * @author Decorvet GrÃ©goire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
  *
  */
-public class Category {
+public class Category extends DisplayableComponent {
 
    private DBCategory dbCategory;
    

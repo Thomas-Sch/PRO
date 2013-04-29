@@ -12,9 +12,7 @@
  */
 package gui;
 
-import gui.data.AuthorData;
-import gui.data.AuthorList;
-import gui.data.CategoryList;
+import gui.testdata.AuthorList;
 
 /**
  * TODO

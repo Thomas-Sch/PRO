@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : ManageCategoryFrame.java
+ * Nom du fichier   : CategoryList.java
  * ============================================================================
  * Date de création : 21 avr. 2013
  * ============================================================================
@@ -10,18 +10,16 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui;
+package gui.testdata;
 
-import gui.testdata.CategoryList;
+import gui.component.ListTemplate;
+import gui.testdata.CategoryData;
 
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import javax.swing.JPanel;
+import javax.swing.DefaultListModel;
 
 
 /**
- * Fenêtre de gestion des catégories.
+ * Liste de catégorie avec les boutons pour modifier les entrées.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -29,25 +27,20 @@ import javax.swing.JPanel;
  * @author Sinniger Marcel
  *
  */
-public class ManageCategoryFrame extends ManageFrame {
-
+public class CategoryList extends ListTemplate {
+   
    /**
     * ID de série.
     */
-   private static final long serialVersionUID = -3350759512131610325L;
-   
-   protected JPanel initContent() {
-      super.initContent();
-      
-      getContent().add(new CategoryList(), getConstraints());
-         
-       getConstraints().gridx = 1;
-       getConstraints().anchor = GridBagConstraints.NORTH;
-       getConstraints().insets = new Insets(5, 50, 5, 5);
-       
-       getContent().add(new CategoryList(), getConstraints());
-      
-      return getContent();
+   private static final long serialVersionUID = -7682417283987969152L;
+
+   /* (non-Javadoc)
+    * @see gui.component.ListTemplate#setData(javax.swing.DefaultListModel)
+    */
+   @Override
+   protected void setData(DefaultListModel<String> dlm) {
+      for(String s : new CategoryData().getList()) {
+         dlm.addElement(s);
+      }        
    }
-   
 }

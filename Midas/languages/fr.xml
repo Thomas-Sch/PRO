@@ -2,10 +2,15 @@
 <language>
   <app_title>Midas</app_title>
   <action_quit>Quitter</action_quit>
-  <validate_button>Missing String</validate_button>
-  <cancel_button>Missing String</cancel_button>
-  <threshold_label>Missing String</threshold_label>
-  <account_description_label>Missing String</account_description_label>
-  <reset_button>Missing String</reset_button>
-  <account_name_label>Missing String</account_name_label>
+  <validate_button>Valider</validate_button>
+  <cancel_button>Annuler</cancel_button>
+  <threshold_label>Seuil</threshold_label>
+  <account_description_label>Description du compte</account_description_label>
+  <reset_button>Initialiser</reset_button>
+  <account_name_label>Nom du compte</account_name_label>
+  <home_screen_name>Accueil</home_screen_name>
+  <quick_expense_label>Effectuer une dépense rapide...</quick_expense_label>
+  <date_label>Date</date_label>
+  <reason_label>Motif</reason_label>
+  <amount_label>Montant</amount_label>
 </language>

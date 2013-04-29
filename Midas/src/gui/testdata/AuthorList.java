@@ -1,13 +1,7 @@
-package core;
-import java.io.File;
-
-import core.log.Log;
-import core.log.LogsFrame;
-
 /* ============================================================================
- * Nom du fichier   : MidasLog.java
+ * Nom du fichier   : AuthorList.java
  * ============================================================================
- * Date de création : 17 avr. 2013
+ * Date de création : 25 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -16,6 +10,11 @@ import core.log.LogsFrame;
  *                    Sinniger Marcel
  * ============================================================================
  */
+package gui.testdata;
+
+import gui.component.ListTemplate;
+
+import javax.swing.DefaultListModel;
 
 /**
  * TODO
@@ -26,19 +25,20 @@ import core.log.LogsFrame;
  * @author Sinniger Marcel
  *
  */
-public class MidasLogs {
+public class AuthorList extends ListTemplate {
    
-   public static Log messages = new Log("messages", new File("Midas.log"), 1);
-   
-   public static Log errors = new Log("errors", new File("Errors.log"), 1);
-   
-   public static Log sqlErrors = new Log("sqlErrors", new File("sqlErrors.log"), 1);
-   
-   
-   public static void addLogsToFrame(LogsFrame frame) {
-      frame.addLogPanel(messages.createLogPanel());
-      frame.addLogPanel(errors.createLogPanel());
-      frame.addLogPanel(sqlErrors.createLogPanel());
-   }
+   /**
+    * ID de série.
+    */
+   private static final long serialVersionUID = -7682417283987969152L;
 
+   /* (non-Javadoc)
+    * @see gui.component.ListTemplate#setData(javax.swing.DefaultListModel)
+    */
+   @Override
+   protected void setData(DefaultListModel<String> dlm) {
+      for(String s : new AuthorData().getList()) {
+         dlm.addElement(s);
+      }        
+   }
 }

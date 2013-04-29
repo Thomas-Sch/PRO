@@ -12,7 +12,7 @@
  */
 package gui.component;
 
-import gui.data.CategoryData;
+import gui.testdata.CategoryData;
 
 import java.util.ArrayList;
 
@@ -46,6 +46,5 @@ public class ComboBoxCategory extends JComboBox<Object> {
       
       
       setModel(new DefaultComboBoxModel<Object>(data.toArray()));
-   }   
-
+   }
 }
