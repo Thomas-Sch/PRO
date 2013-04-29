@@ -12,12 +12,12 @@
  */
 package gui.controller;
 
+import gui.utils.Positions;
+import gui.utils.Positions.ScreenPosition;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import gui.MainFrame;
-import gui.utils.Positions;
-import gui.utils.Positions.ScreenPosition;
 import core.Core;
 import core.MidasLogs;
 import core.log.LogsFrame;

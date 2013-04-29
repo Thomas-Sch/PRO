@@ -12,7 +12,6 @@
  */
 package gui.component;
 
-import gui.actions.AcCreateCategory;
 import gui.controller.ComboBoxAuthorC;
 import gui.controller.Controller;
 
@@ -42,6 +41,10 @@ public class QuickExpense extends JPanel {
    Controller controller;
    
    GridBagLayout layout;
+   
+   //Composants graphiques.
+   JButton btnValidate;
+   
    /**
     * ID de série.
     */
@@ -67,20 +70,23 @@ public class QuickExpense extends JPanel {
       setBudgetList(constraints);   
       setCategoryLists(constraints);
       setReasonInput(constraints);
-      setValidationButton(constraints);
+      setValidateButton(constraints);
+   }
+   
+   public JButton getValidateButton() {
+      return  btnValidate;
    }
    
    /**
     * Configure l'emplacement et ajoute de bouton de validation.
     * @param constraints Contraintes.
     */
-   private void setValidationButton(GridBagConstraints constraints) {
+   private void setValidateButton(GridBagConstraints constraints) {
       constraints.gridx = 2;
       constraints.gridy = 4;
       constraints.gridwidth = 1;
-      JButton btnValidate = new JButton("Valider la dépense");
+      btnValidate = new JButton("Valider la dépense");
       add(btnValidate, constraints);
-      btnValidate.addActionListener(new AcCreateCategory(controller.getCore()));
    }
 
    /**

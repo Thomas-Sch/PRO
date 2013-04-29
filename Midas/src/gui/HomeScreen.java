@@ -12,33 +12,21 @@
  */
 package gui;
 
-import gui.component.ComboBoxAuthor;
-import gui.component.ComboBoxCategory;
-import gui.component.QuickExpense;
 import gui.controller.Controller;
+import gui.controller.QuickExpenseC;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
-
-import com.toedter.calendar.JDateChooser;
 
 /**
  * Contient les éléments du menu d'accueil.
@@ -53,11 +41,15 @@ import com.toedter.calendar.JDateChooser;
 public class HomeScreen extends JPanel {
    
    Controller controller;
+   
+   QuickExpenseC quickExpense;
    /**
     * Constructeur par défaut.
     */
    public HomeScreen(Controller controller) {
       this.controller = controller;
+      
+      quickExpense = new QuickExpenseC(controller.getCore());
       
       setLayout(new GridBagLayout());
       
@@ -94,7 +86,7 @@ public class HomeScreen extends JPanel {
       gblConstraints.anchor = GridBagConstraints.NORTH;
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 2;
-      add(new QuickExpense(controller),gblConstraints);
+      add(quickExpense.getJComponent(),gblConstraints);
    }   
 
    /**
