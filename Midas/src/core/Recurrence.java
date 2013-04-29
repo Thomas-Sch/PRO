@@ -38,8 +38,12 @@ public class Recurrence {
       this.dbRecurrence = dbRecurrence;
    }
    
-   public String consultType() {
-      return dbRecurrence.getType().getName(); // soit "Monthly" soit "Yearly"
+   public Integer consultDays() {
+      return dbRecurrence.getDays();
+   }
+   
+   public void modifyDays(Integer days) {
+      dbRecurrence.setDays(days);
    }
 
    public Date consultStartDate() {

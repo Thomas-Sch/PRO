@@ -6,7 +6,7 @@ public class DBRecurrence extends DBComponent {
 
    private Date start;
    private Date end;
-   private DBRecurrenceType type;
+   private Integer days;
    
    public Date getStart() {
       return start;
@@ -20,16 +20,17 @@ public class DBRecurrence extends DBComponent {
    public void setEnd(Date end) {
       this.end = end;
    }
-   public DBRecurrenceType getType() {
-      return type;
+   public Integer getDays() {
+      return days;
    }
-   public void set(DBRecurrenceType type) {
-      this.type = type;
+   public void setDays(Integer days) {
+      this.days = days;
    }
    @Override
    public String toString() {
-      return "DBRecurrence [start=" + start + ", end=" + end + ", type=" + type
+      return "DBRecurrence [start=" + start + ", end=" + end + ", days=" + days
             + ", id=" + id + "]";
    }
+
 
 }
