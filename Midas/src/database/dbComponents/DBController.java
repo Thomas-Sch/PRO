@@ -208,8 +208,8 @@ public class DBController {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
-         sqlString = "DELETE INTO User " +
-                     "WHERE Use_Id = ?)";
+         sqlString = "DELETE FROM User " +
+                     "WHERE Use_Id = ?";
          preparedStatement = dbAccess.getPreparedStatement(sqlString);
          preparedStatement.setInt(1, id);
          this.delete(preparedStatement);
@@ -326,8 +326,8 @@ public class DBController {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
-         sqlString = "DELETE INTO Account " +
-                     "WHERE Acc_Id = ?)";
+         sqlString = "DELETE FROM Account " +
+                     "WHERE Acc_Id = ?";
          preparedStatement = dbAccess.getPreparedStatement(sqlString);
          preparedStatement.setInt(1, id);
          this.delete(preparedStatement);
@@ -458,8 +458,8 @@ public class DBController {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
-         sqlString = "DELETE INTO FinancialTransaction " +
-                     "WHERE Tra_Id = ?)";
+         sqlString = "DELETE FROM FinancialTransaction " +
+                     "WHERE Tra_Id = ?";
          preparedStatement = dbAccess.getPreparedStatement(sqlString);
          preparedStatement.setInt(1, id);
          this.delete(preparedStatement);
@@ -566,8 +566,8 @@ public class DBController {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
-         sqlString = "DELETE INTO Category " +
-                     "WHERE Cat_ID = ?)";
+         sqlString = "DELETE FROM Category " +
+                     "WHERE Cat_ID = ?";
          preparedStatement = dbAccess.getPreparedStatement(sqlString);
          preparedStatement.setInt(1, id);
          this.delete(preparedStatement);
@@ -677,8 +677,8 @@ public class DBController {
       String sqlString;
       PreparedStatement preparedStatement = null;
       try {
-         sqlString = "DELETE INTO Budget " +
-                     "WHERE Bud_Id = ?)";
+         sqlString = "DELETE FROM Budget " +
+                     "WHERE Bud_Id = ?";
          preparedStatement = dbAccess.getPreparedStatement(sqlString);
          preparedStatement.setInt(1, id);
          this.delete(preparedStatement);
@@ -768,14 +768,15 @@ public class DBController {
       PreparedStatement preparedStatement1 = null;
       PreparedStatement preparedStatement2 = null;
       try {
+         
+         connection = dbAccess.getConnection();
+         connection.setAutoCommit(false);
+         
          if (getDbBudgetOnTheFly.getId() == null) {
             sqlString1 = "INSERT INTO Budget " +
                          "VALUES (null, ?, ?, ?) ";
             sqlString2 = "INSERT INTO OnTheFlyBudget " +
                          "VALUES (?, ?, ?); ";
-            
-            connection = dbAccess.getConnection();
-            connection.setAutoCommit(false);
             
             preparedStatement1 = dbAccess.getPreparedStatement(sqlString1);
             preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
@@ -813,6 +814,8 @@ public class DBController {
             preparedStatement2.setDate(2, new java.sql.Date(getDbBudgetOnTheFly.getEnd().getTime()));
             preparedStatement2.setInt(3, getDbBudgetOnTheFly.getId());
             this.update(preparedStatement2);
+            
+            connection.commit();
          }
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -824,25 +827,39 @@ public class DBController {
    }
    
    public void deleteDbBudgetOnTheFly(Integer id) throws DatabaseException, DatabaseConstraintViolation {
-      String sqlString;
-      PreparedStatement preparedStatement = null;
+      String sqlString1;
+      String sqlString2;
+      java.sql.Connection connection = null;
+      PreparedStatement preparedStatement1 = null;
+      PreparedStatement preparedStatement2 = null;
       try {
-         sqlString = "BEGIN TRANSACTION" +
-         		      "DELETE FROM Budget " +
-                     "WHERE Bud_Id = ?) " +
-                     "DELETE FROM OnTheFlyBudget " +
-                     "WHERE Bud_Id = ? " +
-                     "COMMIT";
-         preparedStatement = dbAccess.getPreparedStatement(sqlString);
-         preparedStatement.setInt(1, id);
-         preparedStatement.setInt(2, id);
-         this.delete(preparedStatement);
+         
+         connection = dbAccess.getConnection();
+         connection.setAutoCommit(false);
+         
+         sqlString1 = "DELETE FROM OnTheFlyBudget " +
+         		       "WHERE Bud_Id = ?";
+         sqlString2 = "DELETE FROM Budget " +
+                      "WHERE Bud_Id = ?";
+         preparedStatement1 = dbAccess.getPreparedStatement(sqlString1);
+         preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
+
+         //Budget
+         preparedStatement1.setInt(1, id);
+         this.update(preparedStatement1);
+         // OnTheFlyBudget
+         preparedStatement2.setInt(1, id);
+         this.update(preparedStatement2);
+         
+         connection.commit();
+
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-         dbAccess.destroyPreparedStatement(preparedStatement);
-      }
+      // preparedStatement2 sera aussi détruit avec cette commande
+         dbAccess.destroyPreparedStatement(preparedStatement1); 
+      }   
    }
    
 }

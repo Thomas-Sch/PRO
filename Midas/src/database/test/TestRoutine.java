@@ -181,8 +181,24 @@ public class TestRoutine {
       //----------------------------------------------------------------------------------------
       // delete-Test
       // ---------------------------------------------------------------------------------------
+      System.out.println("----------------------------------------------------------------------");
+      System.out.println("delete-Test");
+      System.out.println("----------------------------------------------------------------------");
       
+      System.out.println("Avant suppression");
+      System.out.println(user1);
+      System.out.println(account1);
+      System.out.println(budget1);
+      System.out.println(budgetOnTheFly1);
+      System.out.println(cat1);
+      System.out.println(t);
       
+      dbController.deleteDbFinancialTransaction(t.getId());
+      dbController.deleteDbCategory(cat1.getId());
+      dbController.deleteDbBudgetOnTheFly(budgetOnTheFly1.getId());
+      dbController.deleteDbBudget(budget1.getId());
+      dbController.deleteDbAccount(account1.getId());
+      dbController.deleteDbUser(user1.getId());   
       
    }
 
