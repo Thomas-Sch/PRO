@@ -24,19 +24,22 @@ public class DBController {
       String sqlString4;
       String sqlString5;
       String sqlString6;
+      String sqlString7;
       PreparedStatement preparedStatement1 = null;
       PreparedStatement preparedStatement2 = null;
       PreparedStatement preparedStatement3 = null;
       PreparedStatement preparedStatement4 = null;
       PreparedStatement preparedStatement5 = null;
       PreparedStatement preparedStatement6 = null;
+      PreparedStatement preparedStatement7 = null;
       try {
-         sqlString1 = "DELETE FROM FinancialTransaction";
-         sqlString2 = "DELETE FROM OnTheFlyBudget";
-         sqlString3 = "DELETE FROM Budget";
-         sqlString4 = "DELETE FROM User";
-         sqlString5 = "DELETE FROM Account";
-         sqlString6 = "DELETE FROM Category";
+         sqlString1 = "DELETE FROM Recurrence";
+         sqlString2 = "DELETE FROM FinancialTransaction";
+         sqlString3 = "DELETE FROM OnTheFlyBudget";
+         sqlString4 = "DELETE FROM Budget";
+         sqlString5 = "DELETE FROM User";
+         sqlString6 = "DELETE FROM Account";
+         sqlString7 = "DELETE FROM Category";
          
          preparedStatement1 = dbAccess.getPreparedStatement(sqlString1);
          preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
@@ -44,12 +47,14 @@ public class DBController {
          preparedStatement4 = dbAccess.getPreparedStatement(sqlString4);
          preparedStatement5 = dbAccess.getPreparedStatement(sqlString5);
          preparedStatement6 = dbAccess.getPreparedStatement(sqlString6);
+         preparedStatement7 = dbAccess.getPreparedStatement(sqlString7);
          this.delete(preparedStatement1);
          this.delete(preparedStatement2);
          this.delete(preparedStatement3);
          this.delete(preparedStatement4);
          this.delete(preparedStatement5);
          this.delete(preparedStatement6);
+         this.delete(preparedStatement7);
       }
       finally {
          dbAccess.destroyPreparedStatement(preparedStatement1);
@@ -123,7 +128,7 @@ public class DBController {
       return new DBUser();
    }
    
-   public DBUser getUBUser(int id) throws DatabaseException {
+   public DBUser getDbUser(int id) throws DatabaseException {
 
       String sqlString = "SELECT Use_Id, firstName, lastName FROM User WHERE Use_ID = ?";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
@@ -148,7 +153,7 @@ public class DBController {
       return dbUser;
    }
    
-   public LinkedList<DBUser> getAllDBUsers() throws DatabaseException {
+   public LinkedList<DBUser> getAllDbUsers() throws DatabaseException {
 
       String sqlString = "SELECT Use_Id, firstName, lastName FROM User";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
@@ -255,7 +260,7 @@ public class DBController {
       return dbAccount;
    }
    
-   public LinkedList<DBAccount> getAllDBAccounts() throws DatabaseException {
+   public LinkedList<DBAccount> getAllDbAccounts() throws DatabaseException {
 
       String sqlString = "SELECT Acc_Id, Name, BankName, AccountNumber, Amount, AccountLimit FROM Account";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
@@ -346,7 +351,7 @@ public class DBController {
    public DBFinancialTransaction getDbFinancialTransaction(int id) throws DatabaseException {
 
 	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
-      String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
+      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
       
@@ -357,10 +362,11 @@ public class DBController {
          result.next();
          dbFinancialTransaction = new DBFinancialTransaction();
          dbFinancialTransaction.setId((result.getInt(1)));
-         dbFinancialTransaction.setAmount((result.getDouble(2)));
-         dbFinancialTransaction.setDate((result.getDate(3)));
-         dbFinancialTransaction.setReason((result.getString(4)));
-         dbFinancialTransaction.setDbAccount((result.getInt(5)));
+         dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+         dbFinancialTransaction.setAmount((result.getDouble(3)));
+         dbFinancialTransaction.setDate((result.getDate(4)));
+         dbFinancialTransaction.setReason((result.getString(5)));
+         dbFinancialTransaction.setDbAccount((result.getInt(6)));
 
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -371,9 +377,9 @@ public class DBController {
       return dbFinancialTransaction;
    }
    
-   public LinkedList<DBFinancialTransaction> getAllDBFinancialTransactions() throws DatabaseException {
+   public LinkedList<DBFinancialTransaction> getAllDbFinancialTransactions() throws DatabaseException {
 
-	  String sqlString = "SELECT Tra_ID, Amount, Date, Reason, Acc_ID FROM FinancialTransaction"; 
+	  String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID FROM FinancialTransaction"; 
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
       LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
@@ -384,10 +390,11 @@ public class DBController {
          while (result.next()) {
              dbFinancialTransaction = new DBFinancialTransaction();
              dbFinancialTransaction.setId((result.getInt(1)));
-             dbFinancialTransaction.setAmount((result.getDouble(2)));
-             dbFinancialTransaction.setDate((result.getDate(3)));
-             dbFinancialTransaction.setReason((result.getString(4)));
-             dbFinancialTransaction.setDbAccount((result.getInt(5)));
+             dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+             dbFinancialTransaction.setAmount((result.getDouble(3)));
+             dbFinancialTransaction.setDate((result.getDate(4)));
+             dbFinancialTransaction.setReason((result.getString(5)));
+             dbFinancialTransaction.setDbAccount((result.getInt(6)));
              dbFinancialTransactions.add(dbFinancialTransaction);
          }
 
@@ -406,25 +413,26 @@ public class DBController {
       try {
          if (dbFinancialTransaction.getId() == null) {
             sqlString = "INSERT INTO FinancialTransaction " +
-                        "VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
+                        "VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
                         
-            preparedStatement.setDouble(1, dbFinancialTransaction.getAmount());
-            preparedStatement.setDate  (2, new java.sql.Date(dbFinancialTransaction.getDate().getTime()));
-            preparedStatement.setString(3, dbFinancialTransaction.getReason());
+            preparedStatement.setInt(1, dbFinancialTransaction.getDbRecurrence());
+            preparedStatement.setDouble(2, dbFinancialTransaction.getAmount());
+            preparedStatement.setDate  (3, new java.sql.Date(dbFinancialTransaction.getDate().getTime()));
+            preparedStatement.setString(4, dbFinancialTransaction.getReason());
             if (dbFinancialTransaction.getDbCategory() != null) {
-               preparedStatement.setInt(4, dbFinancialTransaction.getDbCategory());
+               preparedStatement.setInt(5, dbFinancialTransaction.getDbCategory());
             }
             if (dbFinancialTransaction.getDbBudget() != null) {
-               preparedStatement.setInt(5, dbFinancialTransaction.getDbBudget());   
+               preparedStatement.setInt(6, dbFinancialTransaction.getDbBudget());   
             }
             if (dbFinancialTransaction.getDbAccount() != null) {
-               preparedStatement.setInt(6, dbFinancialTransaction.getDbAccount());   
+               preparedStatement.setInt(7, dbFinancialTransaction.getDbAccount());   
             } else {
                DBErrorHandler.constraintViolation();
             }
             if (dbFinancialTransaction.getDbUser() != null) {
-               preparedStatement.setInt(7, dbFinancialTransaction.getDbUser());   
+               preparedStatement.setInt(8, dbFinancialTransaction.getDbUser());   
             } else {
                DBErrorHandler.constraintViolation();
             }
@@ -432,18 +440,30 @@ public class DBController {
             this.insert(preparedStatement, dbFinancialTransaction);
          } else {
             sqlString = "UPDATE FinancialTransaction " +
-                        "SET Amount = ?, Date = ?, Reason = ?, Cat_ID = ?, Bud_ID = ?, Acc_ID = ?, Use_ID = ?" +
+                        "SET Rec_Id, Amount = ?, Date = ?, Reason = ?, Cat_ID = ?, Bud_ID = ?, Acc_ID = ?, Use_ID = ?" +
                         "WHERE Tra_ID = ?";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
             
-            preparedStatement.setDouble(1, dbFinancialTransaction.getAmount());
-            preparedStatement.setDate  (2, new java.sql.Date(dbFinancialTransaction.getDate().getTime()));
-            preparedStatement.setString(3, dbFinancialTransaction.getReason());
-            preparedStatement.setInt(4, 0);
-            preparedStatement.setString(5, "B");
-            preparedStatement.setDouble(6, dbFinancialTransaction.getDbAccount());
-            preparedStatement.setInt(7, 0);
-            preparedStatement.setInt(8, dbFinancialTransaction.getId());
+            preparedStatement.setDouble(2, dbFinancialTransaction.getAmount());
+            preparedStatement.setDate  (3, new java.sql.Date(dbFinancialTransaction.getDate().getTime()));
+            preparedStatement.setString(4, dbFinancialTransaction.getReason());
+            if (dbFinancialTransaction.getDbCategory() != null) {
+               preparedStatement.setInt(5, dbFinancialTransaction.getDbCategory());
+            }
+            if (dbFinancialTransaction.getDbBudget() != null) {
+               preparedStatement.setInt(6, dbFinancialTransaction.getDbBudget());   
+            }
+            if (dbFinancialTransaction.getDbAccount() != null) {
+               preparedStatement.setInt(7, dbFinancialTransaction.getDbAccount());   
+            } else {
+               DBErrorHandler.constraintViolation();
+            }
+            if (dbFinancialTransaction.getDbUser() != null) {
+               preparedStatement.setInt(8, dbFinancialTransaction.getDbUser());   
+            } else {
+               DBErrorHandler.constraintViolation();
+            }
+            preparedStatement.setInt(9, dbFinancialTransaction.getId());
             this.update(preparedStatement);
          }
       } catch (SQLException e) {
@@ -500,7 +520,7 @@ public class DBController {
       return dbCategory;
    }
    
-   public LinkedList<DBCategory> getAllDBCategory() throws DatabaseException {
+   public LinkedList<DBCategory> getAllDbCategories() throws DatabaseException {
 
 	  String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category"; 
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
@@ -585,7 +605,7 @@ public class DBController {
    
    public DBBudget getDbBudget(int id) throws DatabaseException {
 
-      String sqlString = "SELECT Budget.Bud_Id, Name, BudgetLimit, Acc_ID " +
+      String sqlString = "SELECT Budget.Bud_Id, Rec_Id, Name, BudgetLimit, Acc_ID " +
       		             "FROM Budget " +
       		             "WHERE Budget.Bud_Id = ?";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
@@ -598,9 +618,10 @@ public class DBController {
          result.next();
          dbBudget = new DBBudget();
          dbBudget.setId(result.getInt(1));
-         dbBudget.setName(result.getString(2));  
-         dbBudget.setLimit(result.getDouble(3));
-         dbBudget.setDbAccount(result.getInt(4));
+         dbBudget.setDbRecurrence(result.getInt(2));
+         dbBudget.setName(result.getString(3));  
+         dbBudget.setLimit(result.getDouble(4));
+         dbBudget.setDbAccount(result.getInt(5));
          
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -613,7 +634,7 @@ public class DBController {
    
    public LinkedList<DBBudget> getAllDbBudgets() throws DatabaseException {
 
-      String sqlString = "SELECT Budget.Bud_Id, Name, BudgetLimit, Acc_ID " +
+      String sqlString = "SELECT Budget.Bud_Id, Rec_Id, Name, BudgetLimit, Acc_ID " +
                          "FROM Budget";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBBudget dbBudget;
@@ -625,9 +646,10 @@ public class DBController {
          while (result.next()) {
             dbBudget = new DBBudget();
             dbBudget.setId(result.getInt(1));
-            dbBudget.setName(result.getString(2));
-            dbBudget.setLimit(result.getDouble(3));
-            dbBudget.setDbAccount(result.getInt(4));
+            dbBudget.setDbRecurrence(result.getInt(2));
+            dbBudget.setName(result.getString(3));  
+            dbBudget.setLimit(result.getDouble(4));
+            dbBudget.setDbAccount(result.getInt(5));
             dbBudgets.add(dbBudget);
          }
 
@@ -646,23 +668,25 @@ public class DBController {
       try {
          if (dbBudget.getId() == null) {
             sqlString = "INSERT INTO Budget " +
-                        "VALUES (null, ?, ?, ?)";
+                        "VALUES (null, ?, ?, ?, ?)";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
                         
-            preparedStatement.setString(1, dbBudget.getName());
-            preparedStatement.setDouble(2, dbBudget.getLimit());
-            preparedStatement.setInt(3, dbBudget.getDbAccount());
+            preparedStatement.setInt(1, dbBudget.getDbRecurrence());
+            preparedStatement.setString(2, dbBudget.getName());
+            preparedStatement.setDouble(3, dbBudget.getLimit());
+            preparedStatement.setInt(4, dbBudget.getDbAccount());
             this.insert(preparedStatement, dbBudget);
          } else {
             sqlString = "UPDATE Budget " +
-                        "SET Name = ?, BudgetLimit = ?, Acc_ID = ? " +
+                        "SET Name = ?, Rec_Id = ?, BudgetLimit = ?, Acc_ID = ? " +
                         "WHERE Bud_Id = ?";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
             
-            preparedStatement.setString(1, dbBudget.getName());
-            preparedStatement.setDouble(2, dbBudget.getLimit());
-            preparedStatement.setInt(3, dbBudget.getDbAccount());
-            preparedStatement.setInt(4, dbBudget.getId());
+            preparedStatement.setInt(1, dbBudget.getDbRecurrence());
+            preparedStatement.setString(2, dbBudget.getName());
+            preparedStatement.setDouble(3, dbBudget.getLimit());
+            preparedStatement.setInt(4, dbBudget.getDbAccount());
+            preparedStatement.setInt(5, dbBudget.getId());
             this.update(preparedStatement);
          }
       } catch (SQLException e) {
@@ -774,7 +798,7 @@ public class DBController {
          
          if (getDbBudgetOnTheFly.getId() == null) {
             sqlString1 = "INSERT INTO Budget " +
-                         "VALUES (null, ?, ?, ?) ";
+                         "VALUES (null, ?, ?, ?, ?)";
             sqlString2 = "INSERT INTO OnTheFlyBudget " +
                          "VALUES (?, ?, ?); ";
             
@@ -782,9 +806,10 @@ public class DBController {
             preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
             
             // Budget
-            preparedStatement1.setString(1, getDbBudgetOnTheFly.getName());
-            preparedStatement1.setDouble(2, getDbBudgetOnTheFly.getLimit());
-            preparedStatement1.setInt(3, getDbBudgetOnTheFly.getDbAccount());
+            preparedStatement1.setInt(1, getDbBudgetOnTheFly.getDbRecurrence());
+            preparedStatement1.setString(2, getDbBudgetOnTheFly.getName());
+            preparedStatement1.setDouble(3, getDbBudgetOnTheFly.getLimit());
+            preparedStatement1.setInt(4, getDbBudgetOnTheFly.getDbAccount());
             this.insert(preparedStatement1, getDbBudgetOnTheFly);
             // OnTheFlyBudget
             preparedStatement2.setInt(1, getDbBudgetOnTheFly.getId());
@@ -795,7 +820,7 @@ public class DBController {
             connection.commit();
          } else {
             sqlString1 = "UPDATE Budget " +
-                         "SET Name = ?, BudgetLimit = ?, Acc_ID = ? " +
+                         "SET Rec_Id = ?, SET Name = ?, BudgetLimit = ?, Acc_ID = ? " +
                          "WHERE Bud_Id = ?";
             sqlString2 = "UPDATE OnTheFlyBudget " +
                          "SET Start = ?, End = ? " +
@@ -804,10 +829,11 @@ public class DBController {
             preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
 
             //Budget
-            preparedStatement1.setString(1, getDbBudgetOnTheFly.getName());
-            preparedStatement1.setDouble(2, getDbBudgetOnTheFly.getLimit());
-            preparedStatement1.setInt(3, getDbBudgetOnTheFly.getDbAccount());
-            preparedStatement1.setInt(4, getDbBudgetOnTheFly.getId());
+            preparedStatement1.setInt(1, getDbBudgetOnTheFly.getDbRecurrence());
+            preparedStatement1.setString(2, getDbBudgetOnTheFly.getName());
+            preparedStatement1.setDouble(3, getDbBudgetOnTheFly.getLimit());
+            preparedStatement1.setInt(4, getDbBudgetOnTheFly.getDbAccount());
+            preparedStatement1.setInt(5, getDbBudgetOnTheFly.getId());
             this.update(preparedStatement1);
             // OnTheFlyBudget
             preparedStatement2.setDate(1, new java.sql.Date(getDbBudgetOnTheFly.getStart().getTime()));
@@ -862,4 +888,109 @@ public class DBController {
       }   
    }
    
+   public DBRecurrence createRecurence() {
+      return new DBRecurrence();
+   }
+   
+   public DBRecurrence getDbRecurrence(int id) throws DatabaseException {
+   
+      String sqlString = "SELECT Rec_Id, Start, End, Days FROM Recurrence WHERE Rec_Id = ?";
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
+      DBRecurrence dbRecurrence = null;
+      
+      try {
+         preparedStatement.setInt(1, id);
+         ResultSet result = this.select(preparedStatement);
+         
+         result.next();
+         dbRecurrence = new DBRecurrence();
+         dbRecurrence.setId((result.getInt(1)));
+         dbRecurrence.setStart(result.getDate(2));
+         dbRecurrence.setEnd(result.getDate(3));
+         dbRecurrence.setDays(result.getInt(4));
+   
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+      return dbRecurrence;
+   }
+   
+   public LinkedList<DBRecurrence> getAllDbRecurrences() throws DatabaseException {
+   
+      String sqlString = "SELECT Rec_Id, Start, End, Days FROM Recurrence";
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
+      DBRecurrence dbRecurrence;
+      LinkedList<DBRecurrence> dbRecurrences = new LinkedList<DBRecurrence>();
+      
+      try {
+         ResultSet result = this.select(preparedStatement);
+         
+         while (result.next()) {
+            dbRecurrence = new DBRecurrence();
+            dbRecurrence.setId((result.getInt(1)));
+            dbRecurrence.setStart(result.getDate(2));
+            dbRecurrence.setEnd(result.getDate(3));
+            dbRecurrence.setDays(result.getInt(4));
+            dbRecurrences.add(dbRecurrence);
+         }
+   
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+      return dbRecurrences;
+   }
+   
+   public void saveToDatabase(DBRecurrence dbRecurrence) throws DatabaseException, DatabaseConstraintViolation {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         if (dbRecurrence.getId() == null) {
+            sqlString = "INSERT INTO Recurrence " +
+                        "VALUES (null, ?, ?, ?)";
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
+            preparedStatement.setDate(1, new java.sql.Date(dbRecurrence.getStart().getTime()));
+            preparedStatement.setDate(2, new java.sql.Date(dbRecurrence.getEnd().getTime()));
+            preparedStatement.setInt(3, dbRecurrence.getDays());
+            this.insert(preparedStatement, dbRecurrence);
+         } else {
+            sqlString = "UPDATE Recurrence " +
+                        "SET Start = ?, End = ? , Days = ? " +
+                        "WHERE Rec_Id = ?";
+            preparedStatement = dbAccess.getPreparedStatement(sqlString);
+            preparedStatement.setDate(1, new java.sql.Date(dbRecurrence.getStart().getTime()));
+            preparedStatement.setDate(2, new java.sql.Date(dbRecurrence.getEnd().getTime()));
+            preparedStatement.setInt(3, dbRecurrence.getDays());
+            preparedStatement.setInt(4, dbRecurrence.getId());
+            this.update(preparedStatement);
+         }
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+   }
+   
+   public void deleteDbRecurrence(Integer id) throws DatabaseException, DatabaseConstraintViolation {
+      String sqlString;
+      PreparedStatement preparedStatement = null;
+      try {
+         sqlString = "DELETE FROM Recurrence " +
+                     "WHERE Rec_Id = ?";
+         preparedStatement = dbAccess.getPreparedStatement(sqlString);
+         preparedStatement.setInt(1, id);
+         this.delete(preparedStatement);
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+   }
 }
