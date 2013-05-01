@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.sqlite.SQLiteConfig;
+
 public class DBAccess {
 
    private final String dbPath;
@@ -27,7 +29,10 @@ public class DBAccess {
       }
       
       try {
-         connection = DriverManager.getConnection(dbPath);
+         SQLiteConfig config = new SQLiteConfig();  
+         config.enforceForeignKeys(true);
+         connection = DriverManager.getConnection(dbPath, config.toProperties());
+         //connection = DriverManager.getConnection(dbPath);
       }
       catch (SQLException e) {
          DBErrorHandler.connectionError(e);

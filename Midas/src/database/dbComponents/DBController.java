@@ -32,33 +32,32 @@ public class DBController {
       PreparedStatement preparedStatement5 = null;
       PreparedStatement preparedStatement6 = null;
       PreparedStatement preparedStatement7 = null;
-      try {
-         sqlString1 = "DELETE FROM Recurrence";
-         sqlString2 = "DELETE FROM FinancialTransaction";
-         sqlString3 = "DELETE FROM OnTheFlyBudget";
-         sqlString4 = "DELETE FROM Budget";
-         sqlString5 = "DELETE FROM User";
-         sqlString6 = "DELETE FROM Account";
-         sqlString7 = "DELETE FROM Category";
-         
-         preparedStatement1 = dbAccess.getPreparedStatement(sqlString1);
-         preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
-         preparedStatement3 = dbAccess.getPreparedStatement(sqlString3);
-         preparedStatement4 = dbAccess.getPreparedStatement(sqlString4);
-         preparedStatement5 = dbAccess.getPreparedStatement(sqlString5);
-         preparedStatement6 = dbAccess.getPreparedStatement(sqlString6);
-         preparedStatement7 = dbAccess.getPreparedStatement(sqlString7);
-         this.delete(preparedStatement1);
-         this.delete(preparedStatement2);
-         this.delete(preparedStatement3);
-         this.delete(preparedStatement4);
-         this.delete(preparedStatement5);
-         this.delete(preparedStatement6);
-         this.delete(preparedStatement7);
-      }
-      finally {
-         dbAccess.destroyPreparedStatement(preparedStatement1);
-      }
+      sqlString1 = "DELETE FROM Recurrence";
+      sqlString2 = "DELETE FROM FinancialTransaction";
+      sqlString3 = "DELETE FROM OnTheFlyBudget";
+      sqlString4 = "DELETE FROM Budget";
+      sqlString5 = "DELETE FROM User";
+      sqlString6 = "DELETE FROM Account";
+      sqlString7 = "DELETE FROM Category";
+ 
+      
+      preparedStatement1 = dbAccess.getPreparedStatement(sqlString1);
+      preparedStatement2 = dbAccess.getPreparedStatement(sqlString2);
+      preparedStatement3 = dbAccess.getPreparedStatement(sqlString3);
+      preparedStatement4 = dbAccess.getPreparedStatement(sqlString4);
+      preparedStatement5 = dbAccess.getPreparedStatement(sqlString5);
+      preparedStatement6 = dbAccess.getPreparedStatement(sqlString6);
+      preparedStatement7 = dbAccess.getPreparedStatement(sqlString7);
+
+      this.delete(preparedStatement2);
+      this.delete(preparedStatement3);
+      this.delete(preparedStatement4);
+      this.delete(preparedStatement5);
+      this.delete(preparedStatement6);
+      this.delete(preparedStatement7);
+      this.delete(preparedStatement1);
+      
+      dbAccess.destroyPreparedStatement(preparedStatement1);
    }
       
    private void insert(PreparedStatement preparedStatement, DBComponent dbComponent) throws DatabaseException, DatabaseConstraintViolation {
@@ -82,7 +81,7 @@ public class DBController {
       try {
          preparedStatement.execute();         
       } catch (SQLException e) {
-         if (e.getErrorCode() == 19 ) { // Violation d'une contrainte de la BDD
+         if (e.getMessage().contains("[SQLITE_CONSTRAINT]") ) { // Violation d'une contrainte de la BDD
             DBErrorHandler.constraintViolation();
          } else {
             DBErrorHandler.executionError(e);
@@ -94,7 +93,7 @@ public class DBController {
       try {
          preparedStatement.execute();      
       } catch (SQLException e) {
-         if (e.getErrorCode() == 19 ) { // Violation d'une contrainte de la BDD
+         if (e.getMessage().contains("[SQLITE_CONSTRAINT]") ) { // Violation d'une contrainte de la BDD
             DBErrorHandler.constraintViolation();
          } else {
             DBErrorHandler.executionError(e);
@@ -106,14 +105,14 @@ public class DBController {
       try {
          preparedStatement.execute();      
       } catch (SQLException e) {
-         if (e.getErrorCode() == 19 ) { // Violation d'une contrainte de la BDD
+         if (e.getMessage().contains("[SQLITE_CONSTRAINT]") ) { // Violation d'une contrainte de la BDD
             DBErrorHandler.constraintViolation();
          } else {
             DBErrorHandler.executionError(e);
          }
       }
    }
-   
+
    private ResultSet select (PreparedStatement preparedStatement) throws DatabaseException {
       ResultSet resultSet = null;
       try {
