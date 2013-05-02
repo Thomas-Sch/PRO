@@ -12,6 +12,8 @@
  */
 package gui.controller;
 
+import java.awt.Component;
+
 import gui.MainFrame;
 import gui.utils.Positions;
 
@@ -46,12 +48,12 @@ public class MainFrameC extends Controller {
       mainFrame.setVisible(true);
       
    }
-
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#initActionListeners()
-    */
    @Override
    protected void initActionListeners() {
       // Nous n'écoutons rien sur cette fenêtre.
+   }
+   @Override
+   public Component getGraphicalComponent() {
+      return null;
    }
 }

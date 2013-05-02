@@ -12,8 +12,11 @@
  */
 package gui.controller;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
 
 import gui.NewAuthorFrame;
 import gui.actions.AcCreateAuthor;
@@ -41,6 +44,7 @@ public class ComboBoxAuthorC extends Controller {
     */
    public ComboBoxAuthorC(Core core) {
       super(core);
+      Component comp = new JFrame();
       
       model = core.getAllUsers();
       view = new ComboBoxUsers(model);
@@ -50,7 +54,6 @@ public class ComboBoxAuthorC extends Controller {
       initActionListeners();
    }
    
-   @Override
    protected void initActionListeners() {
       
       view.addActionListener(new ActionListener() {
@@ -63,9 +66,13 @@ public class ComboBoxAuthorC extends Controller {
          }
       });
    }
+
    
+   @Override
    public ComboBoxUsers getGraphicalComponent() {
       return view;
    }
+   
+   
 
 }

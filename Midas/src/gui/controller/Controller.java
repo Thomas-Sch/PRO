@@ -12,6 +12,9 @@
  */
 package gui.controller;
 
+import java.awt.Component;
+
+import gui.component.ComboBoxUsers;
 import core.Core;
 
 /**
@@ -28,6 +31,7 @@ public abstract class Controller {
    
    protected Controller(Core core) {
       this.core = core;
+      
    }
    
    protected abstract void initActionListeners();
@@ -39,4 +43,6 @@ public abstract class Controller {
    public Core getCore() {
       return core;
    }
+   
+   abstract public Component getGraphicalComponent();
 }

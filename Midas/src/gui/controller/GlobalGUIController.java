@@ -12,6 +12,8 @@
  */
 package gui.controller;
 
+import java.awt.Component;
+
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 
@@ -80,13 +82,14 @@ public class GlobalGUIController extends Controller {
       
       MainFrameC mainFrameC = new MainFrameC(getCore());
    }
-
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#initActionListeners()
-    */
+   
    @Override
    protected void initActionListeners() {
-      // TODO Auto-generated method stub
-
+      
+   }
+   
+   @Override
+   public Component getGraphicalComponent() {
+      return null;
    }
 }

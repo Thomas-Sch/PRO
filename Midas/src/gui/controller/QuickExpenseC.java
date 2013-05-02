@@ -12,6 +12,7 @@
  */
 package gui.controller;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -64,5 +65,10 @@ public class QuickExpenseC extends Controller{
    
    public QuickExpense getJComponent() {
       return quickExpense;
+   }
+
+   @Override
+   public Component getGraphicalComponent() {
+      return null;
    }
 }
