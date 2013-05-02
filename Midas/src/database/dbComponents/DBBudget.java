@@ -1,3 +1,15 @@
+/* ============================================================================
+ * Nom du fichier   : DBBudget.java
+ * ============================================================================
+ * Date de création : 02.05.2013
+ * ============================================================================
+ * Auteurs          : Biolzi Sébastien
+ *                    Brito Carvalho Bruno
+ *                    Decorvet Grégoire
+ *                    Schweizer Thomas
+ *                    Sinniger Marcel
+ * ============================================================================
+ */
 package database.dbComponents;
 
 public class DBBudget extends DBComponent {

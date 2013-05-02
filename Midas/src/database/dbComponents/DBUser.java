@@ -1,26 +1,34 @@
+/* ============================================================================
+ * Nom du fichier   : DBUser.java
+ * ============================================================================
+ * Date de création : 02.05.2013
+ * ============================================================================
+ * Auteurs          : Biolzi Sébastien
+ *                    Brito Carvalho Bruno
+ *                    Decorvet Grégoire
+ *                    Schweizer Thomas
+ *                    Sinniger Marcel
+ * ============================================================================
+ */
 package database.dbComponents;
 
 public class DBUser extends DBComponent {
 
-   String firstName;
-   String lastName;
-   
-   public String getFirstName() {
-      return firstName;
+   String name;
+
+   public String getName() {
+      return name;
    }
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
+
+   public void setName(String name) {
+      this.name = name;
    }
-   public String getLastName() {
-      return lastName;
-   }
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
+
    @Override
    public String toString() {
-      return "DBUser [firstName=" + firstName + ", lastName=" + lastName
-            + ", id=" + id + "]";
+      return "DBUser [name=" + name + ", id=" + id + "]";
    }
+   
+
 
 }

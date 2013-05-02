@@ -1,3 +1,15 @@
+/* ============================================================================
+ * Nom du fichier   : DBController.java
+ * ============================================================================
+ * Date de crÃ©ation : 02.05.2013
+ * ============================================================================
+ * Auteurs          : Biolzi SÃ©bastien
+ *                    Brito Carvalho Bruno
+ *                    Decorvet GrÃ©goire
+ *                    Schweizer Thomas
+ *                    Sinniger Marcel
+ * ============================================================================
+ */
 package database.dbComponents;
 
 import java.sql.PreparedStatement;
@@ -63,7 +75,7 @@ public class DBController {
    private void insert(PreparedStatement preparedStatement, DBComponent dbComponent) throws DatabaseException, DatabaseConstraintViolation {
       try {
          preparedStatement.execute();
-         // récupérer l'identifiant créer par la BDD
+         // rï¿½cupï¿½rer l'identifiant crï¿½er par la BDD
          ResultSet result = preparedStatement.getGeneratedKeys();
          result.next();
          dbComponent.setId(result.getInt(1));
@@ -129,7 +141,7 @@ public class DBController {
    
    public DBUser getDbUser(int id) throws DatabaseException {
 
-      String sqlString = "SELECT Use_Id, firstName, lastName FROM User WHERE Use_ID = ?";
+      String sqlString = "SELECT Use_Id, Name FROM User WHERE Use_ID = ?";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBUser dbUser = null;
       
@@ -140,8 +152,7 @@ public class DBController {
          result.next();
          dbUser = new DBUser();
          dbUser.setId((result.getInt(1)));
-         dbUser.setFirstName(result.getString(2));
-         dbUser.setLastName(result.getString(3));
+         dbUser.setName(result.getString(2));
 
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -154,7 +165,7 @@ public class DBController {
    
    public LinkedList<DBUser> getAllDbUsers() throws DatabaseException {
 
-      String sqlString = "SELECT Use_Id, firstName, lastName FROM User";
+      String sqlString = "SELECT Use_Id, Name FROM User";
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBUser dbUser;
       LinkedList<DBUser> dbUsers = new LinkedList<DBUser>();
@@ -165,8 +176,7 @@ public class DBController {
          while (result.next()) {
             dbUser = new DBUser();
             dbUser.setId((result.getInt(1)));
-            dbUser.setFirstName(result.getString(2));
-            dbUser.setLastName(result.getString(3));
+            dbUser.setName(result.getString(2));
             dbUsers.add(dbUser);
          }
 
@@ -185,18 +195,16 @@ public class DBController {
       try {
          if (dbUser.getId() == null) {
             sqlString = "INSERT INTO User " +
-                        "VALUES (null, ?, ?)";
+                        "VALUES (null, ?)";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
-            preparedStatement.setString(1, dbUser.getFirstName());
-            preparedStatement.setString(2, dbUser.getLastName());
+            preparedStatement.setString(1, dbUser.getName());
             this.insert(preparedStatement, dbUser);
          } else {
             sqlString = "UPDATE User " +
-                        "SET firstName = ?, lastName = ? " +
+                        "SET Name = ? " +
                         "WHERE Use_Id = ?";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
-            preparedStatement.setString(1, dbUser.getFirstName());
-            preparedStatement.setString(2, dbUser.getLastName());
+            preparedStatement.setString(1, dbUser.getName());
             preparedStatement.setInt(3, dbUser.getId());
             this.update(preparedStatement);
          }
@@ -349,7 +357,7 @@ public class DBController {
    
    public DBFinancialTransaction getDbFinancialTransaction(int id) throws DatabaseException {
 
-	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
+	  //Manque certaines infos encore (pas ï¿½ gï¿½rer ï¿½ priori d'ici le 23.04.2013 	
       String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
@@ -495,7 +503,7 @@ public class DBController {
     }
    public DBCategory getDbCategory(int id) throws DatabaseException {
 
-	  //Manque certaines infos encore (pas à gérer à priori d'ici le 23.04.2013 	
+	  //Manque certaines infos encore (pas ï¿½ gï¿½rer ï¿½ priori d'ici le 23.04.2013 	
       String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category WHERE Cat_ID = ?"; 
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBCategory dbCategory = null;
@@ -846,7 +854,7 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-      // preparedStatement2 sera aussi détruit avec cette commande
+      // preparedStatement2 sera aussi dï¿½truit avec cette commande
          dbAccess.destroyPreparedStatement(preparedStatement1); 
       }   
    }
@@ -882,7 +890,7 @@ public class DBController {
          DBErrorHandler.resultSetError(e);
       }
       finally {
-      // preparedStatement2 sera aussi détruit avec cette commande
+      // preparedStatement2 sera aussi dï¿½truit avec cette commande
          dbAccess.destroyPreparedStatement(preparedStatement1); 
       }   
    }

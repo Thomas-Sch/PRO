@@ -1,3 +1,15 @@
+/* ============================================================================
+ * Nom du fichier   : TestRoutine.java
+ * ============================================================================
+ * Date de création : 02.05.2013
+ * ============================================================================
+ * Auteurs          : Biolzi Sébastien
+ *                    Brito Carvalho Bruno
+ *                    Decorvet Grégoire
+ *                    Schweizer Thomas
+ *                    Sinniger Marcel
+ * ============================================================================
+ */
 package database.test;
 
 import java.util.Date;
@@ -48,8 +60,7 @@ public class TestRoutine {
       System.out.println(r3);
       
       DBUser user1 = dbController.createDBUser();
-      user1.setFirstName("Marcel");
-      user1.setLastName("Sinniger");
+      user1.setName("Marcel Sinniger");
       dbController.saveToDatabase(user1);
       System.out.println(user1);
       
@@ -172,7 +183,7 @@ public class TestRoutine {
       System.out.println(tempR3);
       
       System.out.println(user1);
-      user1.setFirstName("Marcel mod");
+      user1.setName("Marcel Sinniger mod");
       System.out.println(user1);
       
       System.out.println(account1);
