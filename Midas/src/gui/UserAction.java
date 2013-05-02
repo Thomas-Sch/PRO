@@ -31,27 +31,32 @@ abstract public class UserAction implements ActionListener {
    
    private Core core;
    
+   private Object[] dependencies = null;
+   
    /**
     * 
     * @param core - le coeur à disposition de l'action.
     */
-   public UserAction(Core core) {
+   public UserAction(Core core, Object ... dependencies) {
       this.core = core;
+      this.dependencies = dependencies;
    }
    
    
    /**
-    * Réalise l'action lors du déclanchement de celle-ci par l'utilisateur.
+    * Réalise l'action lors du déclenchement de celle-ci par l'utilisateur.
     * @param e - l'événement survenu.
     */
    public void actionPerformed(ActionEvent e) {
-     execute(core);
+     execute(core, e, dependencies);
    }
    
    /**
-    * Réalise les opérations à effectuer lors du déclanchement de l'action.
+    * Réalise les opérations à effectuer lors du déclenchement de l'action.
     * @param core - le coeur à disposition de l'action.
+    * @param event - l'événément survenu.
+    * @param dependencies - le tableau des dépendances éventuelles.
     */
-   abstract protected void execute(Core core);
+   abstract protected void execute(Core core, ActionEvent event, Object[] dependencies);
 
 }

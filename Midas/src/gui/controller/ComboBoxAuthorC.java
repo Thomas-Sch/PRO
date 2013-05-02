@@ -16,9 +16,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import gui.NewAuthorFrame;
+import gui.actions.AcCreateAuthor;
 import gui.component.ComboBoxAuthor;
+import gui.component.ComboBoxUsers;
 import core.Core;
 import core.MidasLogs;
+import core.components.UserList;
 
 /**
  * Contrôleur de la liste déroulante d'auteurs.
@@ -30,41 +33,39 @@ import core.MidasLogs;
  *
  */
 public class ComboBoxAuthorC extends Controller {
+   ComboBoxUsers view;
+   UserList model;
    
-   ComboBoxAuthor authors = new ComboBoxAuthor(this);
    /**
     * 
     */
    public ComboBoxAuthorC(Core core) {
       super(core);
+      
+      model = core.getAllUsers();
+      view = new ComboBoxUsers(model);
+      
+      model.addObserver(view);
+      
       initActionListeners();
    }
-
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#initActionListeners()
-    */
+   
    @Override
    protected void initActionListeners() {
-      authors.addActionListener(new ActionListener() {
-         
+      
+      view.addActionListener(new ActionListener() {
          @Override
-         public void actionPerformed(ActionEvent e) {
-            if(authors.getSelectedIndex() == authors.getItemCount() - 1) {
-               MidasLogs.messages.push("J'envoie un nouvel auteur !");
-               new NewAuthorFrame(authors);
-            }
-            else if ( authors.getSelectedIndex() == 0) {
-               MidasLogs.messages.push("Aucun auteur seléctionné !");
-            }
-            else {
-               MidasLogs.messages.push("Auteur seléctionné.");
+         public void actionPerformed(ActionEvent arg0) {
+            if(view.isCreateNewSelected()) {
+               AcCreateAuthor action = new AcCreateAuthor(getCore());
+               action.actionPerformed(arg0);
             }
          }
       });
    }
    
-   public ComboBoxAuthor getGraphicalComponent() {
-      return authors;
+   public ComboBoxUsers getGraphicalComponent() {
+      return view;
    }
 
 }

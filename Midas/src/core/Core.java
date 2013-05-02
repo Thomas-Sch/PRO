@@ -12,7 +12,12 @@
  */
 package core;
 
+import java.util.Comparator;
+import java.util.LinkedList;
+
+import core.components.UserList;
 import database.dbComponents.DBController;
+import database.dbComponents.DBUser;
 import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
 import settings.Settings;
@@ -32,11 +37,38 @@ public class Core {
    
    private DBController dbController;
    
+   private UserList users;
+   
    public Core() {
       settings = new Settings();
       dbController = new DBController();
       
+      users = new UserList();
+      
       settings.loadSettings();
+      
+      loadUsers();
+   }
+   
+   private void loadUsers() {
+      LinkedList<DBUser> dbUsers = null;
+      try {
+         dbUsers = dbController.getAllDbUsers();
+      }
+      catch (DatabaseException e) {
+         
+      }
+      
+      if (dbUsers != null) {
+         LinkedList<User> userTemp = new LinkedList<>();
+         
+         for (DBUser dbUser : dbUsers) {
+            userTemp.add(new User(dbUser));
+         }
+         
+         users.setUsers(userTemp);
+      }
+     
    }
    
    
@@ -236,21 +268,16 @@ public class Core {
    }
    
    /**
-    * TODO Retourne l'utilisateur ayant pour identifiant celui passé en paramètres.
+    * Retourne l'utilisateur ayant pour identifiant celui passé en paramètres.
     * @param id - l'identifiant de l'utilisateur souhaité.
     * @return l'utilisateur correspondant à l'identifiant, null le cas échéant.
     */
-   public User getUserID(int id) {
-      User result = null;
-      
-//      try {
-//         result = new User(dbController.getDBUser(id));
-//      }
-//      catch (DatabaseException e) {
-//         
-//      }
-      
-      return result; 
+   public User getUserID(int id) {      
+      return users.get(id); 
+   }
+   
+   public UserList getAllUsers(){
+      return users;
    }
    
    /**
@@ -260,6 +287,8 @@ public class Core {
    public void saveUser(User user) {
       try {
          dbController.saveToDatabase(user.getDBUser());
+         
+         users.addUser(user);
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the user with id "

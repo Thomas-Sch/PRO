@@ -12,6 +12,8 @@
  */
 package gui.actions;
 
+import java.awt.event.ActionEvent;
+
 import settings.Language.Text;
 
 import core.Category;
@@ -39,7 +41,7 @@ public class AcCreateCategory extends UserAction {
    }
    
    
-   public void execute(Core core) {
+   public void execute(Core core, ActionEvent event, Object[] dependencies) {
       
       // Récupération du modèle
       Category modele = core.createCategory();

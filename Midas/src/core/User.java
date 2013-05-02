@@ -1,11 +1,11 @@
 /* ============================================================================
  * Nom du fichier   : User.java
  * ============================================================================
- * Date de création : 24 avr. 2013
+ * Date de crï¿½ation : 24 avr. 2013
  * ============================================================================
- * Auteurs          : Biolzi Sébastien
+ * Auteurs          : Biolzi Sï¿½bastien
  *                    Brito Carvalho Bruno
- *                    Decorvet Grégoire
+ *                    Decorvet Grï¿½goire
  *                    Schweizer Thomas
  *                    Sinniger Marcel
  * ============================================================================
@@ -16,14 +16,14 @@ import database.dbComponents.DBUser;
 
 /**
  * TODO
- * @author Biolzi Sébastien
+ * @author Biolzi Sï¿½bastien
  * @author Brito Carvalho Bruno
- * @author Decorvet Grégoire
+ * @author Decorvet Grï¿½goire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
  *
  */
-public class User {
+public class User extends DisplayableComponent {
 
    private DBUser dbUser;
    
@@ -31,6 +31,10 @@ public class User {
       dbUser = new DBUser();
       dbUser.setFirstName(firstName);
       dbUser.setLastName(lastName);
+   }
+   
+   public Integer getID() {
+      return dbUser.getId();
    }
    
    public User (DBUser dbUser) {
@@ -53,5 +57,10 @@ public class User {
    
    protected DBUser getDBUser() {
       return dbUser;
+   }
+   
+   @Override
+   public String toString() {
+      return (dbUser.getFirstName() + " " + dbUser.getLastName()).trim();
    }
 }
