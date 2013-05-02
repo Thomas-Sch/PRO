@@ -356,8 +356,7 @@ public class DBController {
     }
    
    public DBFinancialTransaction getDbFinancialTransaction(int id) throws DatabaseException {
-
-	  //Manque certaines infos encore (pas � g�rer � priori d'ici le 23.04.2013 	
+	
       String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;

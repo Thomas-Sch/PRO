@@ -21,6 +21,7 @@ import database.utils.DatabaseException;
 public class TestRoutine {
   
    /**
+    * Routine de test qui teste toutes les méthodes du DBController
     * @param args
     * @throws DatabaseConstraintViolation 
     * @throws DatabaseException 

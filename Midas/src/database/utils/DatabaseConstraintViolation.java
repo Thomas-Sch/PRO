@@ -14,10 +14,16 @@ package database.utils;
 
 public class DatabaseConstraintViolation extends Exception {
 
+   /**
+    * Exception dans le cas d'une violation de contrainte
+    * @param message
+    */
    public DatabaseConstraintViolation(String message) {
       super(message);
    }
-   
+   /**
+    * imposé par le parent pour la séralisation
+    */
    private static final long serialVersionUID = 7724110393758568140L;
 
 }

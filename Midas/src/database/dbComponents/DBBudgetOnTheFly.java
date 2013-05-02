@@ -12,30 +12,42 @@
  */
 package database.dbComponents;
 
-import java.util.Date;
-
 public class DBBudgetOnTheFly extends DBBudget {
 
    java.util.Date start;
    java.util.Date end;
-   
-   public Date getStart() {
+   /**
+    * @return retourne start
+    */
+   public java.util.Date getStart() {
       return start;
    }
-   public void setStart(Date start) {
+   /**
+    * @param start - la nouvelle valeur pour l'attribut start
+    */
+   public void setStart(java.util.Date start) {
       this.start = start;
    }
-   public Date getEnd() {
+   /**
+    * @return retourne end
+    */
+   public java.util.Date getEnd() {
       return end;
    }
-   public void setEnd(Date end) {
+   /**
+    * @param end - la nouvelle valeur pour l'attribut end
+    */
+   public void setEnd(java.util.Date end) {
       this.end = end;
    }
+   /* (non-Javadoc)
+    * @see java.lang.Object#toString()
+    */
    @Override
    public String toString() {
-      return super.toString() + "DBBudetOnTheFly [start=" + start + ", end=" + end + ", limit="
-            + limit + ", dbRecurrence=" + dbRecurrence + ", dbAccount="
-            + dbAccount + ", id=" + id + "]";
+      return "DBBudgetOnTheFly [start=" + start + ", end=" + end
+            + ", getName()=" + getName() + ", getLimit()=" + getLimit()
+            + ", getDbRecurrence()=" + getDbRecurrence() + ", getDbAccount()="
+            + getDbAccount() + ", getId()=" + getId() + "]";
    }
-
 }

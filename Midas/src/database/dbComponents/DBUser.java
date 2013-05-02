@@ -16,19 +16,25 @@ public class DBUser extends DBComponent {
 
    String name;
 
+   /**
+    * @return retourne name
+    */
    public String getName() {
       return name;
    }
 
+   /**
+    * @param name - la nouvelle valeur pour l'attribut name
+    */
    public void setName(String name) {
       this.name = name;
    }
 
+   /* (non-Javadoc)
+    * @see java.lang.Object#toString()
+    */
    @Override
    public String toString() {
-      return "DBUser [name=" + name + ", id=" + id + "]";
+      return "DBUser [name=" + name + ", getId()=" + getId() + "]";
    }
-   
-
-
 }
