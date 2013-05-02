@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import core.Category;
+import core.components.Category;
 
 import settings.Language.Text;
 
@@ -78,7 +78,7 @@ public class CategoryView extends JFrame implements View {
     */
    @Override
    public void update(Observable arg0, Object arg1) {
-      txAccountName.setText(modele.consultName());
+      txAccountName.setText(modele.getName());
       
       repaint();
    }

@@ -43,7 +43,7 @@ import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import core.User;
+import core.components.User;
 
 import settings.Language.Text;
 import gui.View;
@@ -63,8 +63,7 @@ public class AuthorView extends JDialog implements View {
    
    private User user;
    
-   private LabelTextPanel authorFirstName;
-   private LabelTextPanel authorLastName;
+   private LabelTextPanel authorName;
    private MyValidateCancel vlc;
    
    public AuthorView(Component parent, User user) {
@@ -96,29 +95,18 @@ public class AuthorView extends JDialog implements View {
       pnlContent.setLayout(new BorderLayout());
       listPane.setLayout(new BoxLayout(listPane, BoxLayout.PAGE_AXIS));
       
-      authorFirstName = new LabelTextPanel("Prenom :", 20);
-      authorLastName = new LabelTextPanel("Nom :", 20);
+      authorName = new LabelTextPanel("Nom :", 20);
       
       vlc = new MyValidateCancel();
       
-      authorFirstName.addTextChangedListener(new TextChangedListener() {
+      authorName.addTextChangedListener(new TextChangedListener() {
          @Override
          public void textChanged(DocumentEvent event) {
-            user.modifyFirstName(authorFirstName.getText());
+            user.setName(authorName.getText());
          }
       });
       
-      authorLastName.addTextChangedListener(new TextChangedListener() {
-         @Override
-         public void textChanged(DocumentEvent event) {
-            user.modifyLastName(authorLastName.getText());
-         }
-      });
-      
-      
-      
-      listPane.add(authorFirstName);
-      listPane.add(authorLastName);
+      listPane.add(authorName);
       pnlContent.add(listPane, BorderLayout.CENTER);
       pnlContent.add(vlc, BorderLayout.PAGE_END);
       
@@ -127,8 +115,7 @@ public class AuthorView extends JDialog implements View {
    
    @Override
    public void update(Observable arg0, Object arg1) {
-      authorFirstName.setText(user.consultFirstName());
-      authorLastName.setText(user.consultLastName());
+      authorName.setText(user.getName());
    }
    
    private class MyValidateCancel extends JPanel {

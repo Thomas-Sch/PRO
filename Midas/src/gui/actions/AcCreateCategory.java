@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 
 import settings.Language.Text;
 
-import core.Category;
+import core.components.Category;
 import core.Core;
 import gui.UserAction;
 import gui.views.CategoryView;

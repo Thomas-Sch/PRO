@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
-import core.User;
+import core.components.User;
 import gui.NewAuthorFrame;
 import gui.UserAction;
 import gui.views.AuthorView;

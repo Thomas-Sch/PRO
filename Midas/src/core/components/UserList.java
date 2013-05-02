@@ -17,7 +17,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Observable;
 
-import core.User;
+import core.Core;
 
 /**
  * TODO
@@ -27,12 +27,12 @@ import core.User;
  * @author Schweizer Thomas
  *
  */
-public class UserList extends Observable { 
+public class UserList extends CoreComponent { 
    
    private LinkedList<User> users = new LinkedList<>();
    
-   public UserList() {
-      
+   public UserList(Core core) {
+      super(core);
    }
    
    public void addUser(User user) {
@@ -46,9 +46,9 @@ public class UserList extends Observable {
       return users.get(index);
    }
    
-   public User get(int userID) {
+   public User get(int userId) {
       for(User user : users) {
-         if (user.getID() == userID) {
+         if (user.getId() == userId) {
             return user;
          }
       }
@@ -74,8 +74,8 @@ public class UserList extends Observable {
       notifyObservers();
    }
    
-   public User createFalseUser(String firstName, String lastName) {
-      return new User(firstName, lastName);
+   public User createFalseUser(String name) {
+      return new User(core, name);
    }
 
 }

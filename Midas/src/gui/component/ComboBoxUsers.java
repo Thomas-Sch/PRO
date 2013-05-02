@@ -12,10 +12,6 @@
 package gui.component;
 
 import gui.View;
-import gui.controller.Controller;
-import gui.testdata.AuthorData;
-
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -23,7 +19,7 @@ import java.util.Observable;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
-import core.User;
+import core.components.User;
 import core.components.UserList;
 
 /**
@@ -57,14 +53,14 @@ public class ComboBoxUsers extends JComboBox<User> implements View {
       LinkedList<User> list = users.getAll(new SortByName());
       
       if(firstUse) {
-         list.addFirst(users.createFalseUser("", "Sélectionner un auteur")); // TO UPDATE
+         list.addFirst(users.createFalseUser("Sélectionner un auteur")); // TO UPDATE
       }
       
       int index = INDEX_NEW;
       if(firstUse) {
          index = INDEX_NEW_FIRST_USE;
       }
-      list.add(index, users.createFalseUser("", "Nouvel auteur...")); // TO UPDATE
+      list.add(index, users.createFalseUser("Nouvel auteur...")); // TO UPDATE
       
       User[] temp = new User[0];
       setModel(new DefaultComboBoxModel<User>(list.toArray(temp)));
@@ -88,21 +84,9 @@ public class ComboBoxUsers extends JComboBox<User> implements View {
    }
    
    private class SortByName implements Comparator<User> {
-
       @Override
       public int compare(User arg0, User arg1) {
-         
-         int result;
-         result = arg0.consultLastName().compareToIgnoreCase(arg1.consultLastName());
-         
-         // En cas d'égalité, comparaison du prénom
-         if (result == 0) {
-            return arg0.consultFirstName().compareToIgnoreCase(arg1.consultFirstName());
-         }
-         else {
-            return result;
-         }
+         return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
-      
    }
 }

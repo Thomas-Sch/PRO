@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : DisplayableTest.java
+ * Nom du fichier   : CoreComponent.java
  * ============================================================================
- * Date de création : 22 avr. 2013
+ * Date de création : 25 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,13 +10,14 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core;
+package core.components;
 
 import java.util.Observable;
 
+import core.Core;
+
 /**
- * ATTENTION : ne portera plus le même nom, mais aura la même fonction dès
- * l'update des objets du coeur.
+ * Cette classe une classe parente pour les objets du core
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -24,16 +25,23 @@ import java.util.Observable;
  * @author Sinniger Marcel
  *
  */
-abstract public class DisplayableComponent extends Observable {
+public class CoreComponent extends Observable {
    
-   public DisplayableComponent() {
-      
+   /**
+    * coeur logique du programme 
+    */
+   protected Core core;
+   
+   /**
+    * constructeur
+    * @param core - coeur logique du programme 
+    */
+   public CoreComponent(Core core) {
+     this.core = core;
    }
    
    public void setChangedAndNotifyObservers() {
       setChanged();
       notifyObservers();
    }
-   
-
 }

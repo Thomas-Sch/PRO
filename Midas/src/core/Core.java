@@ -15,6 +15,12 @@ package core;
 import java.util.Comparator;
 import java.util.LinkedList;
 
+import core.components.Budget;
+import core.components.BudgetOnTheFly;
+import core.components.Category;
+import core.components.Account;
+import core.components.FinancialTransaction;
+import core.components.User;
 import core.components.UserList;
 import database.dbComponents.DBController;
 import database.dbComponents.DBUser;
@@ -43,7 +49,7 @@ public class Core {
       settings = new Settings();
       dbController = new DBController();
       
-      users = new UserList();
+      users = new UserList(this);
       
       settings.loadSettings();
       
@@ -63,7 +69,7 @@ public class Core {
          LinkedList<User> userTemp = new LinkedList<>();
          
          for (DBUser dbUser : dbUsers) {
-            userTemp.add(new User(dbUser));
+            userTemp.add(new User(this, dbUser));
          }
          
          users.setUsers(userTemp);
@@ -77,9 +83,7 @@ public class Core {
     * @return le nouveau compte.
     */
    public Account createAccount() {
-      
-      return new Account(dbController.createDBAccount());
-      
+      return new Account(this, dbController.createDBAccount());
    }
    
    /**
@@ -91,7 +95,7 @@ public class Core {
       Account result = null;
       
       try {
-         result = new Account(dbController.getDbAccount(id));
+         result = new Account(this, dbController.getDbAccount(id));
       }
       catch (DatabaseException e) {
          MidasLogs.errors.push("Core", "Unable to get the account with id "
@@ -126,7 +130,7 @@ public class Core {
     */
    public Category createCategory(){
       
-      return new Category(dbController.createCategory());
+      return new Category(this, dbController.createCategory());
       
    }
    
@@ -135,11 +139,11 @@ public class Core {
     * @param id - l'identifiant de la catégorie souhaitée.
     * @return la catégorie correspondant à l'identifiant, null le cas échéant.
     */
-   public Category getCategoryID(int id) {
+   public Category getCategory(int id) {
       Category result = null;
       
       try {
-         result = new Category(dbController.getDbCategory(id));
+         result = new Category(this, dbController.getDbCategory(id));
       }
       catch (DatabaseException e) {
          
@@ -171,7 +175,7 @@ public class Core {
     * @return le budget à compléter.
     */
    public Budget createBudget(){
-      return new Budget(dbController.createDbBudget());
+      return new Budget(this, dbController.createDbBudget());
    }
    
    /**
@@ -179,11 +183,11 @@ public class Core {
     * @param id - l'identifiant du budget souhaité.
     * @return le budget correspondant à l'identifiant, null le cas échéant.
     */
-   public Budget getBudgetID(int id) {
+   public Budget getBudget(int id) {
       Budget result = null;
       
       try {
-         result = new Budget(dbController.getDbBudget(id));
+         result = new Budget(this, dbController.getDbBudget(id));
       }
       catch (DatabaseException e) {
          
@@ -215,8 +219,7 @@ public class Core {
     * @return le budget à compléter.
     */
    public BudgetOnTheFly createBudgetOnTheFly(){
-//      return new BudgetOnTheFly(dbController.createDbBudgetOnTheFly());
-      return null;
+      return new BudgetOnTheFly(this, dbController.createDbBudgetOnTheFly());
    }
    
    /**
@@ -264,7 +267,7 @@ public class Core {
     * @return l'utilisateur à compléter.
     */
    public User createUser(){
-      return new User(dbController.createDBUser());
+      return new User(this, dbController.createDBUser());
    }
    
    /**
@@ -272,7 +275,7 @@ public class Core {
     * @param id - l'identifiant de l'utilisateur souhaité.
     * @return l'utilisateur correspondant à l'identifiant, null le cas échéant.
     */
-   public User getUserID(int id) {      
+   public User getUser(int id) {      
       return users.get(id); 
    }
    
@@ -305,7 +308,7 @@ public class Core {
     * @return la transaction à compléter.
     */
    public FinancialTransaction createFinancialTransaction(){
-      return new FinancialTransaction(
+      return new FinancialTransaction(this,
                                     dbController.createFinancialTransaction());
    }
    
@@ -314,11 +317,11 @@ public class Core {
     * @param id - l'identifiant de la transaction souhaitée.
     * @return la transaction correspondant à l'identifiant, null le cas échéant.
     */
-   public FinancialTransaction getFinancialTransactionID(int id) {
+   public FinancialTransaction getFinancialTransaction(int id) {
       FinancialTransaction result = null;
       
       try {
-         result = new FinancialTransaction(
+         result = new FinancialTransaction(this,
                                  dbController.getDbFinancialTransaction(id));
       }
       catch (DatabaseException e) {
