@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : AuthorList.java
+ * Nom du fichier   : ComboBoxBudget.java
  * ============================================================================
- * Date de création : 25 avr. 2013
+ * Date de création : 16 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,11 +10,9 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.testdata;
+package gui.component;
 
-import gui.component.JListTemplate;
-
-import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
 
 /**
  * TODO
@@ -25,20 +23,7 @@ import javax.swing.DefaultListModel;
  * @author Sinniger Marcel
  *
  */
-public class AuthorList extends JListTemplate {
-   
-   /**
-    * ID de série.
-    */
-   private static final long serialVersionUID = -7682417283987969152L;
+public class JComboBoxBudget extends JComboBox<Object> {
+   private static final long serialVersionUID = 1L;
 
-   /* (non-Javadoc)
-    * @see gui.component.ListTemplate#setData(javax.swing.DefaultListModel)
-    */
-   @Override
-   protected void setData(DefaultListModel<String> dlm) {
-      for(String s : new AuthorData().getList()) {
-         dlm.addElement(s);
-      }        
-   }
 }

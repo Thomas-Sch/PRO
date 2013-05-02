@@ -19,9 +19,9 @@ import java.awt.event.ActionListener;
 
 import core.Core;
 import core.components.User;
-import gui.NewAuthorFrame;
+import gui.JNewAuthorFrame;
 import gui.UserAction;
-import gui.views.AuthorView;
+import gui.views.JAuthor;
 
 /**
  * TODO
@@ -35,7 +35,7 @@ import gui.views.AuthorView;
 public class AcCreateAuthor extends UserAction {
    
    private User user;
-   private AuthorView view;
+   private JAuthor view;
    
    public AcCreateAuthor(Core core) {
       super(core);
@@ -46,7 +46,7 @@ public class AcCreateAuthor extends UserAction {
       
       user = core.createUser();
       
-      view = new AuthorView((Component)event.getSource(), user);
+      view = new JAuthor((Component)event.getSource(), user);
       
       view.addValidateListener(new UserAction(core) {
          @Override
@@ -69,6 +69,10 @@ public class AcCreateAuthor extends UserAction {
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
       
+   }
+   
+   public User getCreatedUser() {
+      return user;
    }
 
 }

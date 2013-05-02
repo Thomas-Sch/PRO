@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : CategoryList.java
+ * Nom du fichier   : NewEditDelete.java
  * ============================================================================
  * Date de création : 21 avr. 2013
  * ============================================================================
@@ -10,16 +10,15 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.testdata;
+package gui.component;
 
-import gui.component.JListTemplate;
-import gui.testdata.CategoryData;
+import java.awt.FlowLayout;
 
-import javax.swing.DefaultListModel;
-
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
- * Liste de catégorie avec les boutons pour modifier les entrées.
+ * Contient les bouttons pour modifier une liste de catégorie ou auteurs.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -27,20 +26,26 @@ import javax.swing.DefaultListModel;
  * @author Sinniger Marcel
  *
  */
-public class CategoryList extends JListTemplate {
+public class JNewEditDelete extends JPanel {
    
    /**
     * ID de série.
     */
-   private static final long serialVersionUID = -7682417283987969152L;
+   private static final long serialVersionUID = -2871705858912856162L;
+   
+   private JButton btnNew = new JButton("+");
+   private JButton btnModify = new JButton("*");
+   private JButton btnDelete = new JButton("-");
 
-   /* (non-Javadoc)
-    * @see gui.component.ListTemplate#setData(javax.swing.DefaultListModel)
+   /**
+    * Constructeur par défaut.
     */
-   @Override
-   protected void setData(DefaultListModel<String> dlm) {
-      for(String s : new CategoryData().getList()) {
-         dlm.addElement(s);
-      }        
+   public JNewEditDelete() {
+      setLayout(new FlowLayout(FlowLayout.LEFT));
+      
+      add(btnNew);
+      add(btnModify);
+      add(btnDelete);
    }
+
 }

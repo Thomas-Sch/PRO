@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : CategoryList.java
+ * Nom du fichier   : ValidateCancelReset.java
  * ============================================================================
  * Date de création : 21 avr. 2013
  * ============================================================================
@@ -10,16 +10,14 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.testdata;
+package gui.component;
 
-import gui.component.JListTemplate;
-import gui.testdata.CategoryData;
+import javax.swing.JButton;
 
-import javax.swing.DefaultListModel;
-
+import settings.Language.Text;
 
 /**
- * Liste de catégorie avec les boutons pour modifier les entrées.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -27,20 +25,17 @@ import javax.swing.DefaultListModel;
  * @author Sinniger Marcel
  *
  */
-public class CategoryList extends JListTemplate {
-   
+public class JValidateCancelReset extends JValidateCancel {
+
    /**
     * ID de série.
     */
-   private static final long serialVersionUID = -7682417283987969152L;
-
-   /* (non-Javadoc)
-    * @see gui.component.ListTemplate#setData(javax.swing.DefaultListModel)
-    */
-   @Override
-   protected void setData(DefaultListModel<String> dlm) {
-      for(String s : new CategoryData().getList()) {
-         dlm.addElement(s);
-      }        
+   private static final long serialVersionUID = -3259391489037518871L;
+   
+   private JButton btnReset= new JButton(Text.RESET_BUTTON.toString());
+   
+   public JValidateCancelReset() {
+      add(btnReset);
    }
+
 }

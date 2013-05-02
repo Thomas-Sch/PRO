@@ -12,10 +12,8 @@
  */
 package gui.controller;
 
-import java.awt.Component;
-
-import gui.component.ComboBoxUsers;
 import core.Core;
+import java.awt.Component;
 
 /**
  * Modèle pour tous les contrôleurs graphiques.
@@ -29,20 +27,41 @@ import core.Core;
 public abstract class Controller {
    private Core core;
    
+   /**
+    * Crée un contrôleur.
+    * @param core - le coeur du programme.
+    */
    protected Controller(Core core) {
       this.core = core;
       
+      initComponents();
+      
+      initListeners();
    }
    
-   protected abstract void initActionListeners();
+   /**
+    * Initialise les composants internes du contrôleurs. Cette fonction ne doit
+    * pas être appelée, elle est gérée automatiquement par le constructeur.
+    */
+   protected abstract void initComponents();
    
    /**
-    * Renvoie core.
+    * Initialise les listeners du contrôleur. Cette fonction ne doit
+    * pas être appelée, elle est gérée automatiquement par le constructeur.
+    */
+   protected abstract void initListeners();
+   
+   /**
+    * Renvoie le coeur.
     * @return La partie logique de l'application.
     */
    public Core getCore() {
       return core;
    }
    
-   abstract public Component getGraphicalComponent();
+   /**
+    * Retourne le composant graphique associé au contrôleur.
+    * @return le composant graphique, null s'il n'y en a pas.
+    */
+   public abstract Component getGraphicalComponent();
 }

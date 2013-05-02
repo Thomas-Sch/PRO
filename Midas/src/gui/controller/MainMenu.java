@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CategoryList.java
+ * Nom du fichier   : MainMenuC.java
  * ============================================================================
- * Date de création : 21 avr. 2013
+ * Date de création : 28 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,16 +10,13 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.testdata;
+package gui.controller;
 
-import gui.component.JListTemplate;
-import gui.testdata.CategoryData;
-
-import javax.swing.DefaultListModel;
-
+import gui.JMainMenu;
+import core.Core;
 
 /**
- * Liste de catégorie avec les boutons pour modifier les entrées.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -27,20 +24,27 @@ import javax.swing.DefaultListModel;
  * @author Sinniger Marcel
  *
  */
-public class CategoryList extends JListTemplate {
+public class MainMenu extends Controller {
    
-   /**
-    * ID de série.
-    */
-   private static final long serialVersionUID = -7682417283987969152L;
-
-   /* (non-Javadoc)
-    * @see gui.component.ListTemplate#setData(javax.swing.DefaultListModel)
-    */
-   @Override
-   protected void setData(DefaultListModel<String> dlm) {
-      for(String s : new CategoryData().getList()) {
-         dlm.addElement(s);
-      }        
+   JMainMenu mainMenu;
+   
+   public MainMenu(Core core) {
+      super(core);
    }
+   
+   @Override
+   protected void initComponents() {
+      mainMenu = new JMainMenu();
+   }
+   
+   @Override
+   protected void initListeners() {
+   }
+   
+   public JMainMenu getGraphicalComponent() {
+      return mainMenu;
+   }
+   
+   
+
 }

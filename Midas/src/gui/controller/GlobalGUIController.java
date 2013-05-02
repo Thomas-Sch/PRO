@@ -14,6 +14,7 @@ package gui.controller;
 
 import java.awt.Component;
 
+import gui.component.JComboBoxUsers;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 
@@ -80,11 +81,16 @@ public class GlobalGUIController extends Controller {
          }
       }
       
-      MainFrameC mainFrameC = new MainFrameC(getCore());
+      MainFrame mainFrameC = new MainFrame(getCore());
+   }
+
+   @Override
+   protected void initComponents() {
+      
    }
    
    @Override
-   protected void initActionListeners() {
+   protected void initListeners() {
       
    }
    

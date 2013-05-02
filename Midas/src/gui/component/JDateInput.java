@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CategoryList.java
+ * Nom du fichier   : DateInput.java
  * ============================================================================
- * Date de création : 21 avr. 2013
+ * Date de création : 16 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,16 +10,20 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.testdata;
+package gui.component;
 
-import gui.component.JListTemplate;
-import gui.testdata.CategoryData;
+import java.awt.BorderLayout;
+import java.util.Date;
 
-import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
+import settings.Language.Text;
+
+import com.toedter.calendar.JDateChooser;
 
 /**
- * Liste de catégorie avec les boutons pour modifier les entrées.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -27,20 +31,18 @@ import javax.swing.DefaultListModel;
  * @author Sinniger Marcel
  *
  */
-public class CategoryList extends JListTemplate {
+public class JDateInput extends JPanel {
+   private static final long serialVersionUID = 1L;
    
    /**
-    * ID de série.
+    * 
     */
-   private static final long serialVersionUID = -7682417283987969152L;
-
-   /* (non-Javadoc)
-    * @see gui.component.ListTemplate#setData(javax.swing.DefaultListModel)
-    */
-   @Override
-   protected void setData(DefaultListModel<String> dlm) {
-      for(String s : new CategoryData().getList()) {
-         dlm.addElement(s);
-      }        
+   public JDateInput() {
+      setLayout(new BorderLayout(5,5));
+      
+      add(new JLabel(Text.DATE_LABEL.toString()), BorderLayout.WEST);      
+      JDateChooser dchTime = new JDateChooser(new Date());
+      add(dchTime, BorderLayout.CENTER); 
    }
+
 }

@@ -19,7 +19,7 @@ import settings.Language.Text;
 import core.components.Category;
 import core.Core;
 import gui.UserAction;
-import gui.views.CategoryView;
+import gui.views.JCategory;
 
 /**
  * Exemple d'action utilisateur => A supprimer dans un futur proche.
@@ -47,7 +47,7 @@ public class AcCreateCategory extends UserAction {
       Category modele = core.createCategory();
       
       // Vue
-      CategoryView createCategoryView = new CategoryView(Text.ACCOUNT_NAME_LABEL.toString(), 20, 20, 150, 200, modele);
+      JCategory createCategoryView = new JCategory(Text.ACCOUNT_NAME_LABEL.toString(), 20, 20, 150, 200, modele);
       
       // Enregistrer la vue et le modèle
       modele.addObserver(createCategoryView);
