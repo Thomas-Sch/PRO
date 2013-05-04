@@ -22,8 +22,8 @@ import java.awt.event.ContainerListener;
 import java.util.Observable;
 import java.util.Observer;
 
-import gui.JMainMenu;
 import gui.component.JQuickExpense;
+import gui.menu.JMainMenu;
 import core.Core;
 import core.MidasLogs;
 
