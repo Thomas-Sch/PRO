@@ -15,8 +15,10 @@ package gui.menu;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import settings.Language.Text;
+
 /**
- * TODO
+ * Représente le menu fichier de l'application.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -31,17 +33,28 @@ public class JFileMenu extends JMenu {
     */
    private static final long serialVersionUID = 1583638274791297470L;
    
+   JMenuItem mniFilequit;
+   
    
    /**
     * 
     */
-   protected JFileMenu() {
+   public JFileMenu() {
       this.setText("Fichier");
       
-      // Option Fichier->Quitter.
-      JMenuItem mniFileQuit = new JMenuItem("Quitter");
-      add(mniFileQuit);
+      initComponents();
    }
-
-
+   
+   /**
+    * Initialise les composants graphiques.
+    */
+   private void initComponents() {
+      mniFilequit = new JMenuItem(Text.ACTION_QUIT.toString());
+      
+      add(mniFilequit);
+   }
+   
+   public JMenuItem getQuitOption() {
+      return mniFilequit;
+   }
 }

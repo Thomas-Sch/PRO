@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : JInterrogationMenu.java
+ * Nom du fichier   : AcQuit.java
  * ============================================================================
  * Date de création : 4 mai 2013
  * ============================================================================
@@ -10,13 +10,16 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.menu;
+package gui.actions;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import java.awt.event.ActionEvent;
+
+import core.Core;
+import core.MidasLogs;
+import gui.UserAction;
 
 /**
- * Représente le menu ? de l'application.
+ * Action de quitter l'application.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -24,25 +27,23 @@ import javax.swing.JMenuItem;
  * @author Sinniger Marcel
  *
  */
-public class JInterrogationMenu extends JMenu {
+public class AcQuit extends UserAction {
 
    /**
-    * ID de sérialisation
+    * @param core
+    * @param dependencies
     */
-   private static final long serialVersionUID = 5260470866242311214L;
-   
-   /**
-    * 
-    */
-   protected JInterrogationMenu() {
-      setText("?");
-
-      // Option ?->Aide...
-      JMenuItem mniInterrogationHelp = new JMenuItem("Aide...");
-      add(mniInterrogationHelp);
-
-      // Option ?->A propos...
-      JMenuItem mniInterrogationAbout = new JMenuItem("A propos...");
-      add(mniInterrogationAbout); 
+   public AcQuit(Core core, Object[] dependencies) {
+      super(core, dependencies);
+      // TODO Auto-generated constructor stub
    }
+
+   /* (non-Javadoc)
+    * @see gui.UserAction#execute(core.Core, java.awt.event.ActionEvent, java.lang.Object[])
+    */
+   @Override
+   protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+      MidasLogs.messages.push("Fermeture de l'application");
+   }
+
 }

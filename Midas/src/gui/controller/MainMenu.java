@@ -16,7 +16,7 @@ import gui.menu.JMainMenu;
 import core.Core;
 
 /**
- * TODO
+ * Contrôleur du menu principal.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -34,7 +34,7 @@ public class MainMenu extends Controller {
    
    @Override
    protected void initComponents() {
-      mainMenu = new JMainMenu();
+      mainMenu = new JMainMenu(this);
    }
    
    @Override

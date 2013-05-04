@@ -36,7 +36,6 @@ public abstract class Controller {
       this.core = core;
       
       initComponents();
-      
       initListeners();
    }
    

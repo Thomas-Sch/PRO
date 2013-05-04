@@ -12,7 +12,10 @@
  */
 package gui.menu;
 
-import javax.swing.JMenu;
+import gui.controller.Controller;
+import gui.controller.EditMenu;
+import gui.controller.FileMenu;
+
 import javax.swing.JMenuBar;
 
 /**
@@ -27,22 +30,23 @@ import javax.swing.JMenuBar;
 @SuppressWarnings("serial")
 public class JMainMenu extends JMenuBar {
    
-   public JMenu file;
-   public JMenu edit;
-   public JMenu view;
-   public JMenu interrogation;
+   public FileMenu file;
+   public EditMenu edit;
+   public JViewMenu view;
+   public JInterrogationMenu interrogation;
    
    /**
     * Construit le menu avec ses composants.
     */
-   public JMainMenu() {  
-      file = new JFileMenu();
-      edit = new JEditMenu();
+   public JMainMenu(Controller controller) {  
+      file = new FileMenu(controller.getCore());
+      edit = new EditMenu(controller.getCore());
+      
       view = new JViewMenu();
       interrogation = new JInterrogationMenu();
       
-      add(file);
-      add(edit);
+      add(file.getGraphicalComponent());
+      add(edit.getGraphicalComponent());
       add(view);
       add(interrogation);
    }

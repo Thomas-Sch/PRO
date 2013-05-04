@@ -17,7 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
 /**
- * TODO
+ * Représente le menu d'édition de l'application.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -35,7 +35,7 @@ public class JEditMenu extends JMenu {
    /**
     * 
     */
-   protected JEditMenu() {
+   public JEditMenu() {
       setText("Edition");
       
       // Sous menu Edition->Comptes.
