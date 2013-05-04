@@ -14,7 +14,14 @@ package database.test;
 
 import java.util.Date;
 
-import database.dbComponents.*;
+import database.dbComponents.DBAccount;
+import database.dbComponents.DBBudget;
+import database.dbComponents.DBBudgetOnTheFly;
+import database.dbComponents.DBCategory;
+import database.dbComponents.DBController;
+import database.dbComponents.DBFinancialTransaction;
+import database.dbComponents.DBRecurrence;
+import database.dbComponents.DBUser;
 import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
 

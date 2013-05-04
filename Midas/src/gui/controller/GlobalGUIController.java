@@ -12,11 +12,10 @@
  */
 package gui.controller;
 
-import java.awt.Component;
-
-import gui.component.JComboBoxUsers;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
+
+import java.awt.Component;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;

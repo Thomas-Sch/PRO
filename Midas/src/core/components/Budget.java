@@ -13,9 +13,7 @@
 package core.components;
 
 import core.Core;
-import database.dbComponents.DBAccount;
 import database.dbComponents.DBBudget;
-import database.dbComponents.DBBudgetOnTheFly;
 
 /**
  * Cette classe represente un budget

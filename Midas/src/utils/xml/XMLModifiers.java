@@ -12,10 +12,10 @@
  */
 package utils.xml;
 
-import core.MidasLogs;
-
 import org.jdom2.Attribute;
 import org.jdom2.Element;
+
+import core.MidasLogs;
 
 /**
  * Classe utilitaire regroupant des fonctions générales pour modifier des

@@ -12,9 +12,6 @@
  */
 package settings;
 
-import core.MidasLogs;
-import utils.xml.XMLGetters;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,6 +21,9 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+
+import utils.xml.XMLGetters;
+import core.MidasLogs;
 
 
 /**

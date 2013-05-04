@@ -14,10 +14,11 @@ package core;
 
 import java.util.LinkedList;
 
+import settings.Settings;
+import core.components.Account;
 import core.components.Budget;
 import core.components.BudgetOnTheFly;
 import core.components.Category;
-import core.components.Account;
 import core.components.FinancialTransaction;
 import core.components.User;
 import core.components.UserList;
@@ -25,7 +26,6 @@ import database.dbComponents.DBController;
 import database.dbComponents.DBUser;
 import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
-import settings.Settings;
 
 /**
  * Coeur du programme servant à recenser les fonctionnalités du logiciel.

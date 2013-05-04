@@ -12,43 +12,26 @@
  */
 package gui.views;
 
+import gui.View;
+import gui.utils.TextChangedListener;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Observable;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.Spring;
 import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import core.components.User;
 
 import settings.Language.Text;
-import gui.View;
-import gui.component.JValidateCancel;
-import gui.utils.TextChangedListener;
+import core.components.User;
 
 /**
  * TODO
@@ -61,6 +44,11 @@ import gui.utils.TextChangedListener;
  */
 public class JAuthor extends JDialog implements View {
    
+   /**
+    * ID de sérialisation
+    */
+   private static final long serialVersionUID = -3924649117533563277L;
+
    private User user;
    
    private LabelTextPanel authorName;
@@ -121,6 +109,10 @@ public class JAuthor extends JDialog implements View {
    // A exporter
    private class MyValidateCancel extends JPanel {
       
+      /**
+       * ID de sérialisation.
+       */
+      private static final long serialVersionUID = -1245096748671153657L;
       private JButton btnValidate = new JButton(Text.VALIDATE_BUTTON.toString());
       private JButton btnCancel = new JButton(Text.CANCEL_BUTTON.toString());
       
@@ -147,6 +139,10 @@ public class JAuthor extends JDialog implements View {
    // A exporter
    private class LabelTextPanel extends JPanel {
       
+      /**
+       * ID de sérialisation.
+       */
+      private static final long serialVersionUID = -1297406355333906465L;
       private SpringLayout layout;
       private JLabel label;
       private JTextField textField;

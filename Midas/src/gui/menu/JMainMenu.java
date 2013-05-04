@@ -14,8 +14,6 @@ package gui.menu;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
 
 /**
  * Classe contenant le menu principal de notre application.

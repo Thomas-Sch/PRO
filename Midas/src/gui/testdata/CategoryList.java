@@ -13,7 +13,6 @@
 package gui.testdata;
 
 import gui.component.JListTemplate;
-import gui.testdata.CategoryData;
 
 import javax.swing.DefaultListModel;
 

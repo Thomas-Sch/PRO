@@ -15,11 +15,7 @@ package core.components;
 import java.util.Date;
 
 import core.Core;
-
-import database.dbComponents.DBBudget;
-import database.dbComponents.DBComponent;
 import database.dbComponents.DBFinancialTransaction;
-import database.dbComponents.DBUser;
 
 /**
  * cette classe represente une transaction financiere

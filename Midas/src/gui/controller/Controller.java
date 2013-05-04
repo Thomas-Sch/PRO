@@ -12,8 +12,9 @@
  */
 package gui.controller;
 
-import core.Core;
 import java.awt.Component;
+
+import core.Core;
 
 /**
  * Modèle pour tous les contrôleurs graphiques.

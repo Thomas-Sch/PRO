@@ -12,14 +12,14 @@
  */
 package gui.actions;
 
+import gui.UserAction;
+import gui.views.JCategory;
+
 import java.awt.event.ActionEvent;
 
 import settings.Language.Text;
-
-import core.components.Category;
 import core.Core;
-import gui.UserAction;
-import gui.views.JCategory;
+import core.components.Category;
 
 /**
  * Exemple d'action utilisateur => A supprimer dans un futur proche.

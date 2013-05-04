@@ -14,7 +14,6 @@ package core.components;
 
 import core.Core;
 import database.dbComponents.DBCategory;
-import database.dbComponents.DBUser;
 
 /**
  * Cette classe represente une categorie

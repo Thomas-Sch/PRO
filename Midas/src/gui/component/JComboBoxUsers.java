@@ -12,6 +12,7 @@
 package gui.component;
 
 import gui.View;
+
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -32,6 +33,10 @@ import core.components.UserList;
  */
 public class JComboBoxUsers extends JComboBox<User> implements View {
    
+   /**
+    * ID de sérialisation.
+    */
+   private static final long serialVersionUID = -7152847868675750776L;
    private final static int INDEX_NEW = 0;
    private final static int INDEX_NEW_FIRST_USE = 1;
    

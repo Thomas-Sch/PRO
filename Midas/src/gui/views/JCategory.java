@@ -12,6 +12,8 @@
  */
 package gui.views;
 
+import gui.View;
+
 import java.util.Observable;
 
 import javax.swing.BoxLayout;
@@ -20,11 +22,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import core.components.Category;
-
 import settings.Language.Text;
-
-import gui.View;
+import core.components.Category;
 
 
 /**

@@ -12,11 +12,10 @@
  */
 package gui.controller;
 
-import java.awt.Component;
-
-import gui.JHomeScreen;
 import gui.JMainFrame;
 import gui.utils.Positions;
+
+import java.awt.Component;
 
 import javax.swing.JFrame;
 

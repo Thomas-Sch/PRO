@@ -12,20 +12,11 @@
  */
 package settings;
 
-import core.MidasLogs;
 import gui.utils.Positions.ScreenPosition;
-import settings.Language.Text;
-import settings.elements.FrameSettings;
-import utils.xml.XMLGetters;
-import utils.xml.XMLModifiers;
-import utils.xml.HasXMLName;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.attribute.PosixFilePermission;
-
-import javax.naming.ldap.HasControls;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -34,6 +25,12 @@ import org.jdom2.input.JDOMParseException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+
+import settings.elements.FrameSettings;
+import utils.xml.HasXMLName;
+import utils.xml.XMLGetters;
+import utils.xml.XMLModifiers;
+import core.MidasLogs;
 
 /**
  * TODO

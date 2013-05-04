@@ -12,6 +12,9 @@
  */
 package gui.actions;
 
+import gui.UserAction;
+import gui.views.JAuthor;
+
 import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
@@ -19,9 +22,6 @@ import java.awt.event.ActionListener;
 
 import core.Core;
 import core.components.User;
-import gui.JNewAuthorFrame;
-import gui.UserAction;
-import gui.views.JAuthor;
 
 /**
  * TODO

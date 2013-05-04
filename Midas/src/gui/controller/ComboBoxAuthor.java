@@ -12,10 +12,12 @@
  */
 package gui.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import gui.actions.AcCreateAuthor;
 import gui.component.JComboBoxUsers;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import core.Core;
 import core.components.UserList;
 

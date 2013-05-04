@@ -15,9 +15,7 @@ package core.components;
 import java.util.Date;
 
 import core.Core;
-
 import database.dbComponents.DBRecurrence;
-import database.dbComponents.DBUser;
 
 /**
  * Cette classe représente une récurrence.
