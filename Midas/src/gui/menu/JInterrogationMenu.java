@@ -32,9 +32,9 @@ public class JInterrogationMenu extends JMenu {
    private static final long serialVersionUID = 5260470866242311214L;
    
    /**
-    * 
+    * Contructeur du menu graphique "?".
     */
-   protected JInterrogationMenu() {
+   public JInterrogationMenu() {
       setText("?");
 
       // Option ?->Aide...

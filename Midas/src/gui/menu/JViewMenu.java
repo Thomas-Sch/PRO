@@ -25,7 +25,7 @@ import javax.swing.JMenuItem;
  *
  */
 public class JViewMenu extends JMenu {
-
+   
    /**
     * ID de sérialisation
     */
@@ -34,7 +34,8 @@ public class JViewMenu extends JMenu {
    /**
     * 
     */
-   protected JViewMenu() {
+   public JViewMenu() {
+      
       setText("Afficher");
 
       // Sous menu Afficher->Graphiques.

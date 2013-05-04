@@ -15,6 +15,8 @@ package gui.menu;
 import gui.controller.Controller;
 import gui.controller.EditMenu;
 import gui.controller.FileMenu;
+import gui.controller.InterrogationMenu;
+import gui.controller.ViewMenu;
 
 import javax.swing.JMenuBar;
 
@@ -32,8 +34,8 @@ public class JMainMenu extends JMenuBar {
    
    public FileMenu file;
    public EditMenu edit;
-   public JViewMenu view;
-   public JInterrogationMenu interrogation;
+   public ViewMenu view;
+   public InterrogationMenu interrogation;
    
    /**
     * Construit le menu avec ses composants.
@@ -42,12 +44,12 @@ public class JMainMenu extends JMenuBar {
       file = new FileMenu(controller.getCore());
       edit = new EditMenu(controller.getCore());
       
-      view = new JViewMenu();
-      interrogation = new JInterrogationMenu();
+      view = new ViewMenu(controller.getCore());
+      interrogation = new InterrogationMenu(controller.getCore());
       
       add(file.getGraphicalComponent());
       add(edit.getGraphicalComponent());
-      add(view);
-      add(interrogation);
+      add(view.getGraphicalComponent());
+      add(interrogation.getGraphicalComponent());
    }
 }
