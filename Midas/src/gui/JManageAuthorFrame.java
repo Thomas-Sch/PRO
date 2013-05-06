@@ -34,7 +34,6 @@ public class JManageAuthorFrame extends JManageFrame {
     * 
     */
    public JManageAuthorFrame() {
-      // TODO Auto-generated constructor stub
       getContent().add(new AuthorList(), getConstraints());
    }
    

@@ -12,6 +12,8 @@
  */
 package gui.controller;
 
+import gui.actions.AcManageAuthor;
+import gui.actions.AcManageCategory;
 import gui.menu.JEditMenu;
 
 import java.awt.Component;
@@ -19,7 +21,7 @@ import java.awt.Component;
 import core.Core;
 
 /**
- * TODO
+ * Contrôleur du menu d'édition.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -52,8 +54,8 @@ public class EditMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      // Aucun pour l'instant...
-
+      view.getManageAuthorItem().addActionListener(new AcManageAuthor(getCore(), null));
+      view.getManageCategoryItem().addActionListener(new AcManageCategory(getCore(), null));
    }
 
    /* (non-Javadoc)

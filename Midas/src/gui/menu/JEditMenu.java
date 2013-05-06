@@ -31,6 +31,9 @@ public class JEditMenu extends JMenu {
     * ID de sérialisation.
     */
    private static final long serialVersionUID = -8256836741751163343L;
+   
+   private JMenuItem mniEditManageCategory;
+   private JMenuItem mniEditManageAuthor;
 
    /**
     * 
@@ -79,11 +82,11 @@ public class JEditMenu extends JMenu {
       add(sepEditOne);
 
       // Option Edition->Gérer les catégories.
-      JMenuItem mniEditManageCategory = new JMenuItem("Gérer les catégories");
+      mniEditManageCategory = new JMenuItem("Gérer les catégories");
       add(mniEditManageCategory);
 
       // Option Edition->Gérer les auteurs.
-      JMenuItem mniEditManageAuthor = new JMenuItem("Gérer les auteurs");
+      mniEditManageAuthor = new JMenuItem("Gérer les auteurs");
       add(mniEditManageAuthor);
      
       // Séparateur Edition->Separateur2.
@@ -98,4 +101,15 @@ public class JEditMenu extends JMenu {
       JMenuItem mniEditDoTransaction = new JMenuItem("Faire une transaction...");
       add(mniEditDoTransaction);
    }
+   
+   public JMenuItem getManageCategoryItem() {
+      return mniEditManageCategory;
+   }
+
+   /**
+    * @return
+    */
+   public JMenuItem getManageAuthorItem() {
+      return mniEditManageAuthor;
+   }   
 }

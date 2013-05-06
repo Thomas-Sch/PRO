@@ -24,7 +24,7 @@ import core.Core;
 import core.components.User;
 
 /**
- * TODO
+ * Action de management de la liste des catégories.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
