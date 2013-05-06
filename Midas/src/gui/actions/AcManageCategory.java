@@ -21,7 +21,7 @@ import java.awt.event.ActionEvent;
 import core.Core;
 
 /**
- * TODO
+ * Contrôleur de l'action la gestion des catégories.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -39,7 +39,6 @@ public class AcManageCategory extends UserAction {
     */
    public AcManageCategory(Core core, Object[] dependencies) {
       super(core, dependencies);
-      // TODO Auto-generated constructor stub
    }
 
    /* (non-Javadoc)

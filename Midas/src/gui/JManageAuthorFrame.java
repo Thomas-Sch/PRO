@@ -12,7 +12,13 @@
  */
 package gui;
 
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+
+import javax.swing.JPanel;
+
 import gui.testdata.AuthorList;
+import gui.testdata.CategoryList;
 
 /**
  * TODO
@@ -30,11 +36,10 @@ public class JManageAuthorFrame extends JManageFrame {
     */
    private static final long serialVersionUID = 3252804495254018094L;  
    
-   /**
-    * 
-    */
-   public JManageAuthorFrame() {
-      getContent().add(new AuthorList(), getConstraints());
+   protected JPanel initContent() {
+      super.initContent();
+      getContent().add(new AuthorList(), getConstraints());      
+      return getContent();
    }
    
    

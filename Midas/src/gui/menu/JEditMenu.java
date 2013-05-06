@@ -42,36 +42,36 @@ public class JEditMenu extends JMenu {
       setText("Edition");
       
       // Sous menu Edition->Comptes.
-      JMenu mnuEditAccount = new JMenu("Comptes");
+      JMenuItem mnuEditAccount = new JMenuItem("Comptes...");
       add(mnuEditAccount);
       
-      // Option Edition->Comptes->Ajouter...
-      JMenuItem mniEditAccountAdd = new JMenuItem("Ajouter...");
-      mnuEditAccount.add(mniEditAccountAdd);
-
-      // Option Edition->Comptes->Consulter...
-      JMenuItem mniEditAccountConsult = new JMenuItem("Consulter...");
-      mnuEditAccount.add(mniEditAccountConsult);
-
-      // Option Edition->Comptes->Supprimer...
-      JMenuItem mniEditAccountDelete = new JMenuItem("Supprimer...");
-      mnuEditAccount.add(mniEditAccountDelete);
+//      // Option Edition->Comptes->Ajouter...
+//      JMenuItem mniEditAccountAdd = new JMenuItem("Ajouter...");
+//      mnuEditAccount.add(mniEditAccountAdd);
+//
+//      // Option Edition->Comptes->Consulter...
+//      JMenuItem mniEditAccountConsult = new JMenuItem("Consulter...");
+//      mnuEditAccount.add(mniEditAccountConsult);
+//
+//      // Option Edition->Comptes->Supprimer...
+//      JMenuItem mniEditAccountDelete = new JMenuItem("Supprimer...");
+//      mnuEditAccount.add(mniEditAccountDelete);
 
       // Sous menu Edition->Budgets.
-      JMenu mnuEditBudget = new JMenu("Budgets");
+      JMenuItem mnuEditBudget = new JMenuItem("Budgets...");
       add(mnuEditBudget);
 
-      // Option Edition->Budgets->Ajouter...
-      JMenuItem mniEditBudgetAdd = new JMenuItem("Ajouter...");
-      mnuEditBudget.add(mniEditBudgetAdd);
-
-      // Option Edition->Budgets->Consulter
-      JMenuItem mniEditBudgetConsult = new JMenuItem("Consulter...");
-      mnuEditBudget.add(mniEditBudgetConsult);
-
-      // Option Edition->Budgets->Supprimer...
-      JMenuItem mniEditBudgetDelete = new JMenuItem("Supprimer...");
-      mnuEditBudget.add(mniEditBudgetDelete);
+//      // Option Edition->Budgets->Ajouter...
+//      JMenuItem mniEditBudgetAdd = new JMenuItem("Ajouter...");
+//      mnuEditBudget.add(mniEditBudgetAdd);
+//
+//      // Option Edition->Budgets->Consulter
+//      JMenuItem mniEditBudgetConsult = new JMenuItem("Consulter...");
+//      mnuEditBudget.add(mniEditBudgetConsult);
+//
+//      // Option Edition->Budgets->Supprimer...
+//      JMenuItem mniEditBudgetDelete = new JMenuItem("Supprimer...");
+//      mnuEditBudget.add(mniEditBudgetDelete);
 
       // Option Edition->Budget à la volée.
       JMenuItem mniEditOnTheFlyBudget = new JMenuItem("Créer un budget à la volée");

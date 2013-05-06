@@ -49,7 +49,6 @@ public class MainFrame extends Controller {
       mainFrame.setSize(Settings.mainFrame.width, Settings.mainFrame.height);
       Positions.setPositionOnScreen(mainFrame,  Settings.mainFrame.anchor);
       mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      
       mainFrame.setVisible(true);
    }
    
