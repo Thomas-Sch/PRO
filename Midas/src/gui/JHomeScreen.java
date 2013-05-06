@@ -84,6 +84,7 @@ public class JHomeScreen extends JPanel {
       
       // Paramétrage des contraintes et ajout de la zone d'ajout de dépense rapide.
       gblConstraints.anchor = GridBagConstraints.NORTH;
+      gblConstraints.weighty = 0.02;
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 2;
       add(quickExpense.getJComponent(),gblConstraints);
