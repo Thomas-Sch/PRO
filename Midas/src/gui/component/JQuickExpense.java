@@ -136,7 +136,7 @@ public class JQuickExpense extends JPanel {
     */
    private void setDateInput(GridBagConstraints constraints) {
       constraints.gridx = 2;
-      add(new JDateInput(), constraints);
+      add(new JDateInput("Date de début"), constraints);
    }
 
    /**

@@ -23,7 +23,7 @@ import settings.Language.Text;
 import com.toedter.calendar.JDateChooser;
 
 /**
- * TODO
+ * Elément comportant la saisie d'une date.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -37,10 +37,10 @@ public class JDateInput extends JPanel {
    /**
     * 
     */
-   public JDateInput() {
+   public JDateInput(String labelContent) {
       setLayout(new BorderLayout(5,5));
       
-      add(new JLabel(Text.DATE_LABEL.toString()), BorderLayout.WEST);      
+      add(new JLabel(labelContent), BorderLayout.WEST);      
       JDateChooser dchTime = new JDateChooser(new Date());
       add(dchTime, BorderLayout.CENTER); 
    }

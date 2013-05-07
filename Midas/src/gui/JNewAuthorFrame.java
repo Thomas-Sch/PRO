@@ -15,12 +15,15 @@ package gui;
 import gui.component.JValidateCancel;
 
 import java.awt.Component;
+import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+
+import core.components.User;
 
 import settings.Language.Text;
 
@@ -33,14 +36,17 @@ import settings.Language.Text;
  * @author Sinniger Marcel
  *
  */
-public class JNewAuthorFrame extends JDialog {
+public class JNewAuthorFrame extends JDialog implements View{
 
    /**
-    * 
+    * ID de sérialisation.
     */
    private static final long serialVersionUID = 3040336599330764009L;
    
+   private User user;
    
+   private JLabelTextPanel authorName;
+   private JValidateCancel vlc;
    /**
     * 
     */
@@ -52,6 +58,14 @@ public class JNewAuthorFrame extends JDialog {
       setLocationRelativeTo(parent);
       setResizable(true);
       pack();
+   }
+   
+   public void addValidateListener(ActionListener listener) {
+      vlc.addValidateListener(listener);
+   }
+   
+   public void addCancelListener(ActionListener listener) {
+      vlc.addCancelListener(listener);
    }
    
    private JPanel buildContent() {
