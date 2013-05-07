@@ -12,20 +12,21 @@
  */
 package gui;
 
+import gui.component.JLabelTextPanel;
 import gui.component.JValidateCancel;
+import gui.utils.TextChangedListener;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-
-import core.components.User;
+import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
+import core.components.User;
 
 /**
  * Classe représentant la fenêtre pour ajouter un nouvel auteur.
@@ -44,20 +45,21 @@ public class JNewAuthorFrame extends JDialog implements View{
    private static final long serialVersionUID = 3040336599330764009L;
    
    private User user;
-   
+ 
    private JLabelTextPanel authorName;
    private JValidateCancel vlc;
    /**
     * 
     */
-   public JNewAuthorFrame(Component parent) {
+   public JNewAuthorFrame(Component parent, User user) {
+      this.user = user;
+      
       setTitle(Text.APP_TITLE.toString());
-      setVisible(true);
-      setModal(true);
       setContentPane(buildContent());
       setLocationRelativeTo(parent);
-      setResizable(true);
+      setResizable(false);
       pack();
+      update(null, null);
    }
    
    public void addValidateListener(ActionListener listener) {
@@ -74,32 +76,41 @@ public class JNewAuthorFrame extends JDialog implements View{
       SpringLayout splLayout = new SpringLayout();
       pnlContent.setLayout(splLayout);
       
-      JLabel lblAuthor = new JLabel("Saisissez le nom de l'auteur:");
-      JTextField txtAuthor = new JTextField(20);
-      JValidateCancel vlc = new JValidateCancel();
+      vlc = new JValidateCancel();
+      authorName = new JLabelTextPanel("Nom", 20);
       
-      pnlContent.add(lblAuthor);
-      pnlContent.add(txtAuthor);
+      pnlContent.add(authorName);
       pnlContent.add(vlc);
       
-      
       //Contraintes du label par rapport au contenant.
-      splLayout.putConstraint(SpringLayout.WEST, lblAuthor, 5, SpringLayout.WEST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, lblAuthor,8, SpringLayout.NORTH, pnlContent);
-
-      //Contraintes entre label, text et contenant.
-      splLayout.putConstraint(SpringLayout.WEST, txtAuthor, 5, SpringLayout.EAST, lblAuthor);
-      splLayout.putConstraint(SpringLayout.NORTH, txtAuthor, 5, SpringLayout.NORTH, pnlContent);
+      splLayout.putConstraint(SpringLayout.WEST, authorName, 5, SpringLayout.WEST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, authorName,8, SpringLayout.NORTH, pnlContent);
 
       //Contraintes pour la taille du contenant.
-      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, txtAuthor);
+      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, authorName);
       splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vlc);
       
       // Contraintes pour le bouton de validation.
       splLayout.putConstraint(SpringLayout.EAST, vlc, 0, SpringLayout.EAST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, vlc, 5, SpringLayout.SOUTH, txtAuthor);
+      splLayout.putConstraint(SpringLayout.NORTH, vlc, 5, SpringLayout.SOUTH, authorName);
+      
+       authorName.addTextChangedListener(new TextChangedListener() {
+       @Override
+       public void textChanged(DocumentEvent event) {
+          user.setName(authorName.getText());
+       }
+          });
       
       return pnlContent;
+   }
+
+   /* (non-Javadoc)
+    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+    */
+   @Override
+   public void update(Observable arg0, Object arg1) {
+      authorName.setText(user.getName());
+      
    }
    
 }

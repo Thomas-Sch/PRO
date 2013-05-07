@@ -14,46 +14,35 @@ package gui.component;
 
 import gui.utils.TextChangedListener;
 
+import java.awt.FlowLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 
-class JLabelTextPanel extends JPanel {
+public class JLabelTextPanel extends JPanel {
    
    /**
     * ID de sérialisation.
     */
    private static final long serialVersionUID = -1297406355333906465L;
-   private SpringLayout layout;
+   
+   private FlowLayout layout;
    private JLabel label;
    private JTextField textField;
    
-   JLabelTextPanel(String textForLabel, int textFieldColumns) {
+   public JLabelTextPanel(String textForLabel, int textFieldColumns) {
       
-      layout = new SpringLayout();
-      
+      layout = new FlowLayout();
       label = new JLabel(textForLabel);
+      
       textField = new JTextField();
       textField.setColumns(textFieldColumns);
       
       setLayout(layout);
       
       add(label);
-      add(textField);
-      
-      // Contraintes du label
-      layout.putConstraint(SpringLayout.NORTH, label, 5, SpringLayout.NORTH, this);
-      layout.putConstraint(SpringLayout.EAST, label, 5, SpringLayout.HORIZONTAL_CENTER, this);
-      
-      // Contraintes du textfield
-      layout.putConstraint(SpringLayout.NORTH, textField, 5, SpringLayout.NORTH, this);
-      layout.putConstraint(SpringLayout.WEST, textField, 5, SpringLayout.HORIZONTAL_CENTER, this);
-      
-      // Contraintes du conteneur
-      layout.putConstraint(SpringLayout.SOUTH, this, 5, SpringLayout.SOUTH, textField);
-      layout.putConstraint(SpringLayout.EAST, this, 5, SpringLayout.SOUTH, textField);
-      
+      add(textField);      
    }
    
    public void setText(String text) {

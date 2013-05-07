@@ -18,8 +18,6 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import settings.Language.Text;
-
 import com.toedter.calendar.JDateChooser;
 
 /**

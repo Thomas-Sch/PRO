@@ -12,8 +12,8 @@
  */
 package gui.actions;
 
+import gui.JNewAuthorFrame;
 import gui.UserAction;
-import gui.views.JAuthor;
 
 import java.awt.Component;
 import java.awt.Dialog.ModalityType;
@@ -35,7 +35,7 @@ import core.components.User;
 public class AcCreateAuthor extends UserAction {
    
    private User user;
-   private JAuthor view;
+   private JNewAuthorFrame view;
    
    public AcCreateAuthor(Core core) {
       super(core);
@@ -46,7 +46,7 @@ public class AcCreateAuthor extends UserAction {
       
       user = core.createUser();
       
-      view = new JAuthor((Component)event.getSource(), user);
+      view = new JNewAuthorFrame((Component)event.getSource(), user);
       
       view.addValidateListener(new UserAction(core) {
          @Override
