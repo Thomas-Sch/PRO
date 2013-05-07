@@ -48,8 +48,9 @@ public class JNewAuthorFrame extends JDialog implements View{
  
    private JLabelTextPanel authorName;
    private JValidateCancel vlc;
+   
    /**
-    * 
+    * Construit la vue.
     */
    public JNewAuthorFrame(Component parent, User user) {
       this.user = user;
@@ -110,7 +111,5 @@ public class JNewAuthorFrame extends JDialog implements View{
    @Override
    public void update(Observable arg0, Object arg1) {
       authorName.setText(user.getName());
-      
-   }
-   
+   } 
 }

@@ -12,10 +12,8 @@
  */
 package gui;
 
-import gui.component.JAccountDescriptionTextInput;
-import gui.component.JAccountNameTextInput;
-import gui.component.JAccountNumberTextInput;
-import gui.component.JThresholdTextInput;
+import gui.component.JLabelMoneyPanel;
+import gui.component.JLabelTextPanel;
 import gui.component.JValidateCancelReset;
 
 import java.awt.Component;
@@ -38,9 +36,18 @@ import settings.Language.Text;
 public class JNewAccountFrame extends JDialog {
 
    /**
-    * Serial id
+    * ID de sérialisation.
     */
    private static final long serialVersionUID = -2273955948172856823L;
+   
+   private JLabelTextPanel ltpName;
+   private JLabelMoneyPanel ltpThreshold;
+   private JLabelMoneyPanel ltpInitialAmount;
+   private JLabelTextPanel ltpNumber;
+   private JLabelTextPanel ltpDescription;
+   
+   // Contrôle la longueur des boîtes de texte.
+   private final int textboxLength = 20;
    
    /**
     * Construit une nouvelle fenêtre pour ajouter un compte.
@@ -48,8 +55,7 @@ public class JNewAccountFrame extends JDialog {
    public JNewAccountFrame(Component parent) {
       setTitle(Text.APP_TITLE.toString());
       setLocationRelativeTo(parent);
-      setVisible(true);
-
+      
       getContentPane().setLayout(new GridBagLayout());
       GridBagConstraints constraints = new GridBagConstraints();
       
@@ -60,25 +66,37 @@ public class JNewAccountFrame extends JDialog {
       constraints.weighty = 0.5;
       constraints.insets = new Insets(5, 5, 5, 5);
 
-      JAccountNameTextInput t = new JAccountNameTextInput();
-      add(t, constraints);
+      ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL.toString(), textboxLength);
+      add(ltpName, constraints);
       
       constraints.gridy = 1;
-      
-      add(new JThresholdTextInput(), constraints);
+      ltpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL.toString(), textboxLength);
+      add(ltpThreshold, constraints);
       
       constraints.gridy = 2;
-      add(new JAccountNumberTextInput(), constraints);
+      ltpInitialAmount = new JLabelMoneyPanel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL.toString(), textboxLength);
+      add(ltpInitialAmount, constraints);
       
       constraints.gridy = 3;
-      add(new JAccountDescriptionTextInput(), constraints);
+      ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL.toString(), textboxLength);
+      add(ltpNumber, constraints);
       
       constraints.gridy = 4;
+      ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL.toString(), textboxLength);
+      add(ltpDescription, constraints);
+      
+      constraints.gridy = 5;
       constraints.anchor = GridBagConstraints.EAST;
       constraints.fill = GridBagConstraints.NONE;
       add(new JValidateCancelReset(), constraints);
-    
       pack();
+   }
+
+   /**
+    * @param i
+    */
+   public void setDefaultThreshold(int i) {
+      ltpThreshold.setText("0");
    }
 
 }

@@ -12,6 +12,7 @@
  */
 package gui.controller;
 
+import gui.actions.AcManageAccount;
 import gui.actions.AcManageAuthor;
 import gui.actions.AcManageCategory;
 import gui.menu.JEditMenu;
@@ -37,7 +38,6 @@ public class EditMenu extends Controller {
     */
    public EditMenu(Core core) {
       super(core);
-      // TODO Auto-generated constructor stub
    }
 
    /* (non-Javadoc)
@@ -54,8 +54,9 @@ public class EditMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      view.getManageAuthorItem().addActionListener(new AcManageAuthor(getCore(), null));
-      view.getManageCategoryItem().addActionListener(new AcManageCategory(getCore(), null));
+      view.addManageAuthorListener(new AcManageAuthor(getCore(), null));
+      view.addManageCategoryListener(new AcManageCategory(getCore(), null));
+      view.addManageAccountListener(new AcManageAccount(getCore()));
    }
 
    /* (non-Javadoc)

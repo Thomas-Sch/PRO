@@ -5,11 +5,12 @@
   <tab_home>TODO</tab_home>
   <validate_button>TODO</validate_button>
   <cancel_button>TODO</cancel_button>
-  <threshold_label>TODO</threshold_label>
+  <account_threshold_label>TODO</account_threshold_label>
+  <account_initial_amount_label>TODO</account_initial_amount_label>
   <account_number_label>TODO</account_number_label>
   <account_description_label>TODO</account_description_label>
-  <reset_button>TODO</reset_button>
   <account_name_label>TODO</account_name_label>
+  <reset_button>TODO</reset_button>
   <home_screen_name>TODO</home_screen_name>
   <quick_expense_label>TODO</quick_expense_label>
   <reason_label>TODO</reason_label>

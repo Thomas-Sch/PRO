@@ -14,7 +14,7 @@ package gui.component;
 
 import gui.utils.TextChangedListener;
 
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,13 +27,13 @@ public class JLabelTextPanel extends JPanel {
     */
    private static final long serialVersionUID = -1297406355333906465L;
    
-   private FlowLayout layout;
-   private JLabel label;
-   private JTextField textField;
+   private BorderLayout layout;
+   protected JLabel label;
+   protected JTextField textField;
    
    public JLabelTextPanel(String textForLabel, int textFieldColumns) {
       
-      layout = new FlowLayout();
+      layout = new BorderLayout(5,5);
       label = new JLabel(textForLabel);
       
       textField = new JTextField();
@@ -41,8 +41,8 @@ public class JLabelTextPanel extends JPanel {
       
       setLayout(layout);
       
-      add(label);
-      add(textField);      
+      add(label, BorderLayout.WEST);
+      add(textField, BorderLayout.EAST);      
    }
    
    public void setText(String text) {

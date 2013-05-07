@@ -12,13 +12,9 @@
  */
 package gui;
 
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import gui.testdata.AuthorList;
 
 import javax.swing.JPanel;
-
-import gui.testdata.AuthorList;
-import gui.testdata.CategoryList;
 
 /**
  * TODO

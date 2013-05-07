@@ -80,7 +80,7 @@ public class GlobalGUIController extends Controller {
          }
       }
       
-      MainFrame mainFrameC = new MainFrame(getCore());
+      new MainFrame(getCore());
    }
 
    @Override

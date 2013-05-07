@@ -12,6 +12,8 @@
  */
 package gui.menu;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
@@ -34,6 +36,7 @@ public class JEditMenu extends JMenu {
    
    private JMenuItem mniEditManageCategory;
    private JMenuItem mniEditManageAuthor;
+   private JMenuItem mnuEditAccount;
 
    /**
     * 
@@ -42,7 +45,7 @@ public class JEditMenu extends JMenu {
       setText("Edition");
       
       // Sous menu Edition->Comptes.
-      JMenuItem mnuEditAccount = new JMenuItem("Comptes...");
+      mnuEditAccount = new JMenuItem("Comptes...");
       add(mnuEditAccount);
       
 //      // Option Edition->Comptes->Ajouter...
@@ -102,14 +105,15 @@ public class JEditMenu extends JMenu {
       add(mniEditDoTransaction);
    }
    
-   public JMenuItem getManageCategoryItem() {
-      return mniEditManageCategory;
+   public void addManageCategoryListener(ActionListener listener) {
+      mniEditManageCategory.addActionListener(listener);
    }
-
-   /**
-    * @return
-    */
-   public JMenuItem getManageAuthorItem() {
-      return mniEditManageAuthor;
-   }   
+   
+   public void addManageAuthorListener(ActionListener listener) {
+      mniEditManageAuthor.addActionListener(listener);
+   }
+   
+   public void addManageAccountListener(ActionListener listener) {
+      mnuEditAccount.addActionListener(listener);
+   }
 }

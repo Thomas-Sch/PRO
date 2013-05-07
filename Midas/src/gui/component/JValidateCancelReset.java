@@ -17,7 +17,7 @@ import javax.swing.JButton;
 import settings.Language.Text;
 
 /**
- * TODO
+ * Groupe de contrôle avec un bouton pour réinitialiser les champs.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -34,6 +34,9 @@ public class JValidateCancelReset extends JValidateCancel {
    
    private JButton btnReset= new JButton(Text.RESET_BUTTON.toString());
    
+   /**
+    * Constructeur de l'objet graphique.
+    */
    public JValidateCancelReset() {
       add(btnReset);
    }
