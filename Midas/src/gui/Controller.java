@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui;
 
 import java.awt.Component;
 

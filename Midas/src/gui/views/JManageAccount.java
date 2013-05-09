@@ -12,8 +12,8 @@
  */
 package gui.views;
 
+import gui.Controller;
 import gui.component.JAddEditDelete;
-import gui.controller.Controller;
 import gui.frameContent.JAccountList;
 
 import java.awt.GridBagConstraints;

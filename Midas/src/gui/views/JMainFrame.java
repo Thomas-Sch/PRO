@@ -12,7 +12,7 @@
  */
 package gui.views;
 
-import gui.controller.Controller;
+import gui.Controller;
 import gui.controller.HomeScreen;
 import gui.controller.MainMenu;
 

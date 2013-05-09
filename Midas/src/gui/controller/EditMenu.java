@@ -12,6 +12,7 @@
  */
 package gui.controller;
 
+import gui.Controller;
 import gui.actions.AcManageAccount;
 import gui.actions.AcManageAuthor;
 import gui.actions.AcManageCategory;

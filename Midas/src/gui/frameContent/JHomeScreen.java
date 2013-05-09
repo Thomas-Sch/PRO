@@ -12,7 +12,7 @@
  */
 package gui.frameContent;
 
-import gui.controller.Controller;
+import gui.Controller;
 import gui.controller.QuickExpense;
 
 import java.awt.BorderLayout;

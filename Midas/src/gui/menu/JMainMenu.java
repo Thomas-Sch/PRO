@@ -12,7 +12,7 @@
  */
 package gui.menu;
 
-import gui.controller.Controller;
+import gui.Controller;
 import gui.controller.EditMenu;
 import gui.controller.FileMenu;
 import gui.controller.InterrogationMenu;

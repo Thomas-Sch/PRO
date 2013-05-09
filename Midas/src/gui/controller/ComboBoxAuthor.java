@@ -12,6 +12,7 @@
  */
 package gui.controller;
 
+import gui.Controller;
 import gui.actions.AcCreateAuthor;
 import gui.component.JComboBoxUsers;
 

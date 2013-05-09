@@ -12,6 +12,7 @@
  */
 package gui.controller;
 
+import gui.Controller;
 import gui.actions.AcQuit;
 import gui.menu.JFileMenu;
 

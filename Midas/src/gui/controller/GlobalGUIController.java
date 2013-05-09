@@ -12,6 +12,7 @@
  */
 package gui.controller;
 
+import gui.Controller;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 

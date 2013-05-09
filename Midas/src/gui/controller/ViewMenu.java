@@ -12,6 +12,7 @@
  */
 package gui.controller;
 
+import gui.Controller;
 import gui.menu.JViewMenu;
 
 import java.awt.Component;

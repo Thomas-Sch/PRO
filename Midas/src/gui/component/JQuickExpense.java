@@ -12,8 +12,8 @@
  */
 package gui.component;
 
+import gui.Controller;
 import gui.controller.ComboBoxAuthor;
-import gui.controller.Controller;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
