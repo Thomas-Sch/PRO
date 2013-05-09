@@ -37,6 +37,7 @@ public class JEditMenu extends JMenu {
    private JMenuItem mniEditManageCategory;
    private JMenuItem mniEditManageAuthor;
    private JMenuItem mnuEditAccount;
+   private JMenuItem mnuEditBudget;
 
    /**
     * 
@@ -61,7 +62,7 @@ public class JEditMenu extends JMenu {
 //      mnuEditAccount.add(mniEditAccountDelete);
 
       // Sous menu Edition->Budgets.
-      JMenuItem mnuEditBudget = new JMenuItem("Budgets...");
+      mnuEditBudget = new JMenuItem("Budgets...");
       add(mnuEditBudget);
 
 //      // Option Edition->Budgets->Ajouter...
@@ -115,5 +116,9 @@ public class JEditMenu extends JMenu {
    
    public void addManageAccountListener(ActionListener listener) {
       mnuEditAccount.addActionListener(listener);
+   }
+   
+   public void addManageBudgetListener(ActionListener listener) {
+      mnuEditBudget.addActionListener(listener);
    }
 }

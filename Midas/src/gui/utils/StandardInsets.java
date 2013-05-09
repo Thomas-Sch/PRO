@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : JLabelMoneyPanel.java
+ * Nom du fichier   : StandardInsets.java
  * ============================================================================
- * Date de création : 7 mai 2013
+ * Date de création : 9 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,38 +10,34 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.component;
+package gui.utils;
 
-import javax.swing.JTextField;
+import java.awt.Insets;
 
 /**
- * Classe permettant de saisir un montant d'argent.
+ * TODO
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class JLabelMoneyPanel extends JLabelTextPanel {
+public class StandardInsets extends Insets {
 
    /**
     * ID de sérialisation.
     */
-   private static final long serialVersionUID = -3777685551501181998L;
+   private static final long serialVersionUID = -4316725909012937650L;
 
-   /**
-    * @param textForLabel
-    * @param textFieldColumns
-    */
-   public JLabelMoneyPanel(String textForLabel, int textFieldColumns) {
-      super(textForLabel, textFieldColumns);
-      textField.setHorizontalAlignment(JTextField.RIGHT);
-   }
-   
-   public JLabelMoneyPanel(String textForLabel) {
-      super(textForLabel);
-      textField.setHorizontalAlignment(JTextField.RIGHT);
+   private static final int size = 5;
+
+   public StandardInsets() {
+      super(size, size, size, size);
    }
 
+   public StandardInsets(int size) {
+      super(size, size, size, size);
+   }
 }

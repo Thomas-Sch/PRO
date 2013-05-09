@@ -64,14 +64,6 @@ public class JNewAuthorFrame extends JDialog implements View{
       update(null, null);
    }
    
-   public void addValidateListener(ActionListener listener) {
-      vlc.addValidateListener(listener);
-   }
-   
-   public void addCancelListener(ActionListener listener) {
-      vlc.addCancelListener(listener);
-   }
-   
    private JPanel buildContent() {
       JPanel pnlContent = new JPanel();
       
@@ -105,6 +97,16 @@ public class JNewAuthorFrame extends JDialog implements View{
       
       return pnlContent;
    }
+   
+   public void addValidateListener(ActionListener listener) {
+      vlc.addValidateListener(listener);
+   }
+   
+   public void addCancelListener(ActionListener listener) {
+      vlc.addCancelListener(listener);
+   }
+   
+
 
    /* (non-Javadoc)
     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)

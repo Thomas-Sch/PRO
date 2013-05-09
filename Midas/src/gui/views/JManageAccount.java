@@ -17,6 +17,7 @@ import gui.component.JAddEditDelete;
 import gui.frameContent.JAccountList;
 import gui.frameContent.JEditionAccount;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -53,7 +54,7 @@ public class JManageAccount extends JDialog {
     * Contructeur.
     * @param controller Contrôleur de cet objet.
     */
-   public JManageAccount(Controller controller) {      
+   public JManageAccount(Controller controller) {   
       setContentPane(buildContent());
       pack();
    }
@@ -79,13 +80,13 @@ public class JManageAccount extends JDialog {
       lblDescription = new JLabel("Liste des comptes");
       pnlContent.add(lblDescription, constraints);
       
-      constraints.gridy = 1;
-      constraints.gridwidth = 1;
-      constraints.gridheight = 2;
-      constraints.weighty = 0.5;
-      constraints.weightx = 0.7;
-      altAccount = new JAccountList();
-      pnlContent.add(altAccount,constraints);
+//      constraints.gridy = 1;
+//      constraints.gridwidth = 1;
+//      constraints.gridheight = 2;
+//      constraints.weighty = 0.5;
+//      constraints.weightx = 0.7;
+//      altAccount = new JAccountList();
+//      pnlContent.add(altAccount,constraints);
       
       constraints.gridheight = 1;
       constraints.fill = GridBagConstraints.HORIZONTAL;

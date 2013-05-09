@@ -14,8 +14,8 @@ package gui.actions;
 
 import gui.UserAction;
 import gui.controller.ManageAccount;
-import gui.views.JAddAccountFrame;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import core.Core;
@@ -29,7 +29,8 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class AcManageAccount extends UserAction {   
+public class AcManageAccount extends UserAction { 
+   
    public AcManageAccount(Core core) {
       super(core);
    }
@@ -39,7 +40,7 @@ public class AcManageAccount extends UserAction {
     */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-      new ManageAccount(core);
+      new ManageAccount((Component)event.getSource(), core);
    }
 
 }

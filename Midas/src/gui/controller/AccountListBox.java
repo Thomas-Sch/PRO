@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : ManageAccount.java
+ * Nom du fichier   : AccountList.java
  * ============================================================================
- * Date de création : 8 mai 2013
+ * Date de création : 9 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -14,18 +14,19 @@ package gui.controller;
 
 import gui.Controller;
 import gui.actions.AcCreateAccount;
-import gui.views.JManageAccount;
+import gui.actions.AcCreateAuthor;
+import gui.component.JComboBoxUsers;
+import gui.frameContent.JAccountList;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
-
 import core.Core;
+import core.components.AccountList;
 
 /**
- * Contrôleur de la fenêtre de consultation et d'édition des comptes.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -33,51 +34,41 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class ManageAccount extends Controller {
+public class AccountListBox extends Controller {
+   
+   JAccountList view;
+   AccountList model;
+ 
 
-   private JManageAccount view;
-   private Component parent;
    /**
     * @param core
     */
-   public ManageAccount(Component parent, Core core) {
+   protected AccountListBox(Core core) {
       super(core);
-      this.parent = parent; 
+      model.addObserver(view);
    }
 
    /* (non-Javadoc)
-    * @see gui.controller.Controller#initComponents()
+    * @see gui.Controller#initComponents()
     */
    @Override
    protected void initComponents() {
-      view = new JManageAccount(this);
-      view.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-      view.setLocationRelativeTo(parent);
-     //view.setModalityType(ModalityType.APPLICATION_MODAL); // Empèches les envents de se lancer.
-      //view.setModal(true);
-      view.setVisible(true);
    }
 
    /* (non-Javadoc)
-    * @see gui.controller.Controller#initListeners()
+    * @see gui.Controller#initListeners()
     */
    @Override
    protected void initListeners() {
-      view.addButtonAddListener(new AcCreateAccount(getCore()));
-      view.addButtonModifyListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            view.swapMode();
-         }
-      });
+
    }
 
    /* (non-Javadoc)
-    * @see gui.controller.Controller#getGraphicalComponent()
+    * @see gui.Controller#getGraphicalComponent()
     */
    @Override
    public Component getGraphicalComponent() {
+      // TODO Auto-generated method stub
       return view;
    }
 

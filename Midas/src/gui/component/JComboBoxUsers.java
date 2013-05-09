@@ -49,7 +49,6 @@ public class JComboBoxUsers extends JComboBox<User> implements View {
     */
    public JComboBoxUsers(UserList users) {
       this.users = users;
-      
       update(users, null);
    }
 

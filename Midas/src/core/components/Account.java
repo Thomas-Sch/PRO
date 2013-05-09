@@ -40,6 +40,13 @@ public class Account extends CoreComponent {
       this.dbAccount = dbAcount;
    }
    
+   Account(Core core, String name) {
+      super(core);
+      
+      dbAccount = new DBAccount();
+      dbAccount.setName(name);
+   }
+   
    public DBAccount getDBAccount(){
       return dbAccount;
    }
@@ -58,6 +65,10 @@ public class Account extends CoreComponent {
     */
    public void credit(Double amount) {
       dbAccount.setAmount(dbAccount.getAmount() + amount);
+   }
+   
+   public void setAmount(Double amount) {
+      dbAccount.setAmount(amount);
    }
    
    /**
@@ -102,7 +113,7 @@ public class Account extends CoreComponent {
     * consulter le numero du compte 
     * @return le numero du compte 
     */ 
-   public String getAccounNumber() {
+   public String getAccountNumber() {
       return dbAccount.getAccountNumber();
    }
    
@@ -138,6 +149,10 @@ public class Account extends CoreComponent {
     */
    public int getId() {
       return dbAccount.getId();
+   }
+   
+   public String toString() {
+      return getAccountName();
    }
     
 }

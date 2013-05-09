@@ -27,6 +27,8 @@ public class JLabelTextPanel extends JPanel {
     */
    private static final long serialVersionUID = -1297406355333906465L;
    
+   private static final int defaultColumnsSize = 30;
+   
    private BorderLayout layout;
    protected JLabel label;
    protected JTextField textField;
@@ -43,6 +45,10 @@ public class JLabelTextPanel extends JPanel {
       
       add(label, BorderLayout.WEST);
       add(textField, BorderLayout.EAST);      
+   }
+   
+   public JLabelTextPanel(String textForLabel) {
+      this(textForLabel, defaultColumnsSize);
    }
    
    public void setText(String text) {

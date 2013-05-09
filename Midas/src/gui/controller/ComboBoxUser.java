@@ -31,16 +31,15 @@ import core.components.UserList;
  * @author Sinniger Marcel
  *
  */
-public class ComboBoxAuthor extends Controller {
+public class ComboBoxUser extends Controller {
    JComboBoxUsers view;
    UserList model;
    
    /**
     * Crée le contrôleur d'une ComboBox
     */
-   public ComboBoxAuthor(Core core) {
+   public ComboBoxUser(Core core) {
       super(core);
-      
       model.addObserver(view);
    }
    

@@ -12,6 +12,8 @@
  */
 package gui.component;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 import settings.Language.Text;
@@ -40,5 +42,8 @@ public class JValidateCancelReset extends JValidateCancel {
    public JValidateCancelReset() {
       add(btnReset);
    }
-
+   
+   public void addResetListener(ActionListener listener) {
+      btnReset.addActionListener(listener);
+   }
 }

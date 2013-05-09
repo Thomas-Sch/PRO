@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : QuickExpenseC.java
+ * Nom du fichier   : ComboBoxAccount.java
  * ============================================================================
- * Date de création : 29 avr. 2013
+ * Date de création : 9 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -13,17 +13,17 @@
 package gui.controller;
 
 import gui.Controller;
-import gui.frameContent.JQuickExpense;
+import gui.actions.AcCreateAccount;
+import gui.component.JComboBoxAccounts;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
-import core.MidasLogs;
+import core.components.AccountList;
 
 /**
- * Controleur pour le panel d'ajout de dépenses rapides.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -31,41 +31,43 @@ import core.MidasLogs;
  * @author Sinniger Marcel
  *
  */
-public class QuickExpense extends Controller{
-   
-   JQuickExpense quickExpense;
+public class ComboBoxAccount extends Controller {
+
+   JComboBoxAccounts view;
+   AccountList model;
    
    /**
-    * 
+    * Crée le contrôleur d'une ComboBox
     */
-   public QuickExpense(Core core) {
+   public ComboBoxAccount(Core core) {
       super(core);
-      
+      model.addObserver(view);
    }
    
    @Override
    protected void initComponents() {
-      quickExpense = new JQuickExpense(this);
+      model = getCore().getAllAccounts();
+      view = new JComboBoxAccounts(model);
    }
    
    @Override
    protected void initListeners() {
-      quickExpense.getValidateButton().addActionListener(new ActionListener() {
-         
-         @Override
+      view.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
-            MidasLogs.messages.push("Validation d'un dépense !");
+            if(view.isCreateNewSelected()) {
+               AcCreateAccount action = new AcCreateAccount(getCore());
+               action.actionPerformed(arg0);
+               view.setSelectedItem(action.getCreatedAccount()); 
+            }
          }
       });
    }
    
-   
-   public JQuickExpense getJComponent() {
-      return quickExpense;
-   }
-
    @Override
-   public Component getGraphicalComponent() {
-      return null;
+   public JComboBoxAccounts getGraphicalComponent() {
+      return view;
    }
+   
+
+
 }

@@ -16,12 +16,14 @@ import java.util.LinkedList;
 
 import settings.Settings;
 import core.components.Account;
+import core.components.AccountList;
 import core.components.Budget;
 import core.components.BudgetOnTheFly;
 import core.components.Category;
 import core.components.FinancialTransaction;
 import core.components.User;
 import core.components.UserList;
+import database.dbComponents.DBAccount;
 import database.dbComponents.DBController;
 import database.dbComponents.DBUser;
 import database.utils.DatabaseConstraintViolation;
@@ -43,16 +45,19 @@ public class Core {
    private DBController dbController;
    
    private UserList users;
+   private AccountList accounts;
    
    public Core() {
       settings = new Settings();
       dbController = new DBController();
       
       users = new UserList(this);
+      accounts = new AccountList(this);
       
       settings.loadSettings();
       
       loadUsers();
+      loadAccounts();
    }
    
    private void loadUsers() {
@@ -73,7 +78,26 @@ public class Core {
          
          users.setUsers(userTemp);
       }
-     
+   }
+   
+   private void loadAccounts() {
+      LinkedList<DBAccount> dbAccounts = null;
+      try {
+         dbAccounts = dbController.getAllDbAccounts();
+      }
+      catch (DatabaseException e) {
+         
+      }
+      
+      if (dbAccounts != null) {
+         LinkedList<Account> accountTemp = new LinkedList<>();
+         
+         for (DBAccount dbAccount : dbAccounts) {
+            accountTemp.add(new Account(this, dbAccount));
+         }
+         
+         accounts.setAccounts(accountTemp);
+      }
    }
    
    
@@ -277,6 +301,10 @@ public class Core {
    
    public UserList getAllUsers(){
       return users;
+   }
+   
+   public AccountList getAllAccounts() {
+      return accounts;
    }
    
    /**

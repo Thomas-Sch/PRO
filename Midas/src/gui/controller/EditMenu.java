@@ -13,6 +13,7 @@
 package gui.controller;
 
 import gui.Controller;
+import gui.actions.AcCreateBudget;
 import gui.actions.AcManageAccount;
 import gui.actions.AcManageAuthor;
 import gui.actions.AcManageCategory;
@@ -47,7 +48,6 @@ public class EditMenu extends Controller {
    @Override
    protected void initComponents() {
       view = new JEditMenu();
-
    }
 
    /* (non-Javadoc)
@@ -58,6 +58,7 @@ public class EditMenu extends Controller {
       view.addManageAuthorListener(new AcManageAuthor(getCore(), null));
       view.addManageCategoryListener(new AcManageCategory(getCore(), null));
       view.addManageAccountListener(new AcManageAccount(getCore()));
+      view.addManageBudgetListener(new AcCreateBudget(this, getCore()));
    }
 
    /* (non-Javadoc)
@@ -67,5 +68,4 @@ public class EditMenu extends Controller {
    public Component getGraphicalComponent() {
       return view;
    }
-
 }

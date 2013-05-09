@@ -10,10 +10,14 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.component;
+package gui.frameContent;
 
 import gui.Controller;
-import gui.controller.ComboBoxAuthor;
+import gui.component.JComboBoxCategory;
+import gui.component.JDateInput;
+import gui.component.JLabelMoneyPanel;
+import gui.component.JReasonInput;
+import gui.controller.ComboBoxUser;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -39,8 +43,7 @@ import settings.Language.Text;
  */
 public class JQuickExpense extends JPanel {
    Controller controller;
-   
-   GridBagLayout layout;
+
    
    //Composants graphiques.
    JButton btnValidate;
@@ -153,7 +156,7 @@ public class JQuickExpense extends JPanel {
     * @param constraints Contraintes.
     */
    private void setAuthorList(GridBagConstraints constraints) {
-      ComboBoxAuthor authors = new ComboBoxAuthor(controller.getCore());
+      ComboBoxUser authors = new ComboBoxUser(controller.getCore());
       constraints.gridx = 0;
       constraints.gridy = 1;
       add(authors.getGraphicalComponent(), constraints);

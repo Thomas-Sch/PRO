@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : AcAddAccount.java
+ * Nom du fichier   : AcCreateAccount.java
  * ============================================================================
  * Date de création : 9 mai 2013
  * ============================================================================
@@ -12,13 +12,16 @@
  */
 package gui.actions;
 
+import gui.UserAction;
+import gui.views.JCreateAccountFrame;
+
 import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import core.Core;
-import gui.UserAction;
-import gui.views.JAddAccountFrame;
+import core.components.Account;
 
 /**
  * TODO
@@ -29,16 +32,17 @@ import gui.views.JAddAccountFrame;
  * @author Sinniger Marcel
  *
  */
-public class AcAddAccount extends UserAction {
+public class AcCreateAccount extends UserAction {
    
-   JAddAccountFrame view;
+   private Account account;
+   private JCreateAccountFrame view;
 
    /**
     * @param core
     * @param dependencies
     */
-   public AcAddAccount( Core core, Component parent, Object[] dependencies) {
-      super(core, dependencies);
+   public AcCreateAccount( Core core) {
+      super(core);
    }
 
    /* (non-Javadoc)
@@ -46,9 +50,33 @@ public class AcAddAccount extends UserAction {
     */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-      view = new JAddAccountFrame((Component)event.getSource());
-      view.setDefaultThreshold(0);
+      account = core.createAccount();
+      
+      view = new JCreateAccountFrame((Component)event.getSource(), account);
+      
+      view.addValidateListener(new UserAction(core) {
+         @Override
+         protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+            core.saveAccount(account);
+            view.dispose();
+         }
+      });
+      view.addCancelListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent arg0) {
+            view.dispose();
+         }
+      });
+      
+      account.addObserver(view);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
+   }
+   
+   public Account getCreatedAccount() {
+      return account;
    }
 }
