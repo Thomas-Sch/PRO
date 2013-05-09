@@ -51,7 +51,7 @@ public abstract class JListTemplate extends JPanel {
       add(lstCategory, gblConstraints);
       
       gblConstraints.gridy = 1;
-      add(new JNewEditDelete(), gblConstraints);
+      add(new JAddEditDelete(), gblConstraints);
    }
    
    protected abstract void setData(DefaultListModel<String> dlm);

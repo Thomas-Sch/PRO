@@ -68,7 +68,6 @@ public class AcCreateAuthor extends UserAction {
       // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
-      
    }
    
    public User getCreatedUser() {

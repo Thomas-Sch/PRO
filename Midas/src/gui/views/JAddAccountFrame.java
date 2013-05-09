@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui;
+package gui.views;
 
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
@@ -33,7 +33,7 @@ import settings.Language.Text;
  * @author Sinniger Marcel
  *
  */
-public class JNewAccountFrame extends JDialog {
+public class JAddAccountFrame extends JDialog {
 
    /**
     * ID de sérialisation.
@@ -52,7 +52,7 @@ public class JNewAccountFrame extends JDialog {
    /**
     * Construit une nouvelle fenêtre pour ajouter un compte.
     */
-   public JNewAccountFrame(Component parent) {
+   public JAddAccountFrame(Component parent) {
       setTitle(Text.APP_TITLE.toString());
       setLocationRelativeTo(parent);
       

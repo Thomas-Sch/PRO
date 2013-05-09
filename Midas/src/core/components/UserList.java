@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import core.Core;
 
 /**
- * TODO
+ * Représente la liste des utilisateurs.
  * @author Crescenzio Fabio
  * @author Decorvet Grégoire
  * @author Jaquier Kevin

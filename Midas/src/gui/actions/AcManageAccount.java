@@ -17,8 +17,9 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 
 import core.Core;
-import gui.JNewAccountFrame;
 import gui.UserAction;
+import gui.controller.ManageAccount;
+import gui.views.JAddAccountFrame;
 
 /**
  * Contrôleur pour l'ajout, modification et consultation des comptes.
@@ -31,7 +32,7 @@ import gui.UserAction;
  */
 public class AcManageAccount extends UserAction {
    
-   JNewAccountFrame view;
+   JAddAccountFrame view;
    
    public AcManageAccount(Core core) {
       super(core);
@@ -43,11 +44,13 @@ public class AcManageAccount extends UserAction {
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       
-      // Devra aller dans le contrôleur pour un nouveau compte.
-      view = new JNewAccountFrame((Component)event.getSource());
-      view.setDefaultThreshold(0);
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
+      new ManageAccount(core);
+      
+//      // Devra aller dans le contrôleur pour un nouveau compte.
+//      view = new JAddAccountFrame((Component)event.getSource());
+//      view.setDefaultThreshold(0);
+//      view.setModalityType(ModalityType.APPLICATION_MODAL);
+//      view.setVisible(true);
    }
 
 }

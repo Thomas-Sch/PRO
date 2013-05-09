@@ -50,12 +50,6 @@ public class Settings extends DefaultsSettings {
    private static final String LANGUAGES_FOLDER_PATH = "languages";
    private static final String LANGUAGE_FILE_EXTENSION = "xml";
    
-   
-   
-   public Settings() {
-      
-   }
-   
    public void loadSettings() {
       
       boolean successfullyLoaded = false;

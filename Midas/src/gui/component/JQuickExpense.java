@@ -145,7 +145,7 @@ public class JQuickExpense extends JPanel {
     */
    private void setAmountInput(GridBagConstraints constraints) {
       constraints.gridx = 1;
-      add(new JAmountInput(), constraints);
+      add(new JLabelMoneyPanel("LSADKJAS", 20), constraints);
    }
 
    /**

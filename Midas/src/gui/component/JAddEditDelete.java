@@ -26,21 +26,21 @@ import javax.swing.JPanel;
  * @author Sinniger Marcel
  *
  */
-public class JNewEditDelete extends JPanel {
+public class JAddEditDelete extends JPanel {
    
    /**
     * ID de série.
     */
    private static final long serialVersionUID = -2871705858912856162L;
    
-   private JButton btnNew = new JButton("+");
-   private JButton btnModify = new JButton("*");
-   private JButton btnDelete = new JButton("-");
+   private JButton btnNew = new JButton("Ajouter");
+   private JButton btnModify = new JButton("Modifier");
+   private JButton btnDelete = new JButton("Supprimer");
 
    /**
     * Constructeur par défaut.
     */
-   public JNewEditDelete() {
+   public JAddEditDelete() {
       setLayout(new FlowLayout(FlowLayout.LEFT));
       
       add(btnNew);
