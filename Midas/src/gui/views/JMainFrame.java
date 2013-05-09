@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui;
+package gui.views;
 
 import gui.controller.Controller;
 import gui.controller.HomeScreen;

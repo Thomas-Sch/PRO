@@ -12,9 +12,9 @@
  */
 package gui.views;
 
-import gui.JAccountList;
 import gui.component.JAddEditDelete;
 import gui.controller.Controller;
+import gui.frameContent.JAccountList;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

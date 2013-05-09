@@ -12,8 +12,8 @@
  */
 package gui.actions;
 
-import gui.JNewAuthorFrame;
 import gui.UserAction;
+import gui.views.JNewAuthorFrame;
 
 import java.awt.Component;
 import java.awt.Dialog.ModalityType;

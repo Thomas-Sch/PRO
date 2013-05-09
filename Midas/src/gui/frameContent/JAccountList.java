@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui;
+package gui.frameContent;
 
 import java.awt.BorderLayout;
 

@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : JInfoAccount.java
+ * Nom du fichier   : JEditionAccount.java
  * ============================================================================
- * Date de création : 8 mai 2013
+ * Date de création : 9 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.views;
+package gui.frameContent;
 
 import gui.component.JLabelInfo;
 import gui.component.JLabelMoneyInfo;
@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import settings.Language.Text;
 
 /**
- * TODO
+ * Composant graphique d'édition d'un compte.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -32,21 +32,20 @@ import settings.Language.Text;
  * @author Sinniger Marcel
  *
  */
-public class JInfoAccount extends JPanel {
+public class JEditionAccount extends JPanel {
 
    /**
     * ID de sérialisation.
     */
-   private static final long serialVersionUID = 6175335102596615881L;
+   private static final long serialVersionUID = -1261960648709661937L;
    
-   // Champs de la vue.
+// Champs de la vue.
    private JLabelInfo lbiName;
    private JLabelMoneyInfo lmiThreshold;
-   private JLabelMoneyInfo lmiInitialAmount;
    private JLabelInfo lbiNumber;
    private JLabelInfo lbiDescription;
    
-   public JInfoAccount () {
+   public JEditionAccount() {
       
       setLayout(new GridBagLayout());
       GridBagConstraints constraints = new GridBagConstraints();
@@ -66,15 +65,12 @@ public class JInfoAccount extends JPanel {
       add(lmiThreshold, constraints);
       
       constraints.gridy = 2;
-      lmiInitialAmount = new JLabelMoneyInfo(Text.ACCOUNT_INITIAL_AMOUNT_LABEL.toString());
-      add(lmiInitialAmount, constraints);
-      
-      constraints.gridy = 3;
       lbiNumber = new JLabelInfo(Text.ACCOUNT_NUMBER_LABEL.toString());
       add(lbiNumber, constraints);
       
-      constraints.gridy = 4;
+      constraints.gridy = 3;
       lbiDescription = new JLabelInfo(Text.ACCOUNT_DESCRIPTION_LABEL.toString());
       add(lbiDescription, constraints);
    }
+
 }

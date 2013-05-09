@@ -10,11 +10,10 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.views;
+package gui.component;
 
 import javax.swing.JTextField;
 
-import gui.component.JLabelInfo;
 
 /**
  * TODO

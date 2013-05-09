@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : ManageCategoryFrame.java
+ * Nom du fichier   : ManageAuthorFrame.java
  * ============================================================================
- * Date de création : 21 avr. 2013
+ * Date de création : 22 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,18 +10,15 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui;
+package gui.views;
 
-import gui.testdata.CategoryList;
-
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import gui.JManageFrame;
+import gui.testdata.AuthorList;
 
 import javax.swing.JPanel;
 
-
 /**
- * Fenêtre de gestion des catégories.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -29,25 +26,20 @@ import javax.swing.JPanel;
  * @author Sinniger Marcel
  *
  */
-public class JManageCategoryFrame extends JManageFrame {
+public class JManageAuthorFrame extends JManageFrame {
 
    /**
     * ID de série.
     */
-   private static final long serialVersionUID = -3350759512131610325L;
+   private static final long serialVersionUID = 3252804495254018094L;  
    
    protected JPanel initContent() {
       super.initContent();
-      
-      getContent().add(new CategoryList(), getConstraints());
-         
-       getConstraints().gridx = 1;
-       getConstraints().anchor = GridBagConstraints.NORTH;
-       getConstraints().insets = new Insets(5, 50, 5, 5);
-       
-       getContent().add(new CategoryList(), getConstraints());
-      
+      getContent().add(new AuthorList(), getConstraints());      
       return getContent();
    }
    
+   
+   
+
 }

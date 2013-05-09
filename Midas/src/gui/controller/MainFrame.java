@@ -12,8 +12,8 @@
  */
 package gui.controller;
 
-import gui.JMainFrame;
 import gui.utils.Positions;
+import gui.views.JMainFrame;
 
 import java.awt.Component;
 

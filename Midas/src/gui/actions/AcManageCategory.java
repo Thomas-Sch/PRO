@@ -12,8 +12,8 @@
  */
 package gui.actions;
 
-import gui.JManageCategoryFrame;
 import gui.UserAction;
+import gui.views.JManageCategoryFrame;
 
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;

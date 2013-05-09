@@ -10,8 +10,9 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui;
+package gui.views;
 
+import gui.View;
 import gui.component.JLabelTextPanel;
 import gui.component.JValidateCancel;
 import gui.utils.TextChangedListener;
