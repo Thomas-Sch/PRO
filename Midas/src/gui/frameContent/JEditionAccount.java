@@ -12,8 +12,8 @@
  */
 package gui.frameContent;
 
-import gui.component.JLabelInfo;
-import gui.component.JLabelMoneyInfo;
+import gui.component.JLabelMoneyPanel;
+import gui.component.JLabelTextPanel;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -40,10 +40,10 @@ public class JEditionAccount extends JPanel {
    private static final long serialVersionUID = -1261960648709661937L;
    
 // Champs de la vue.
-   private JLabelInfo lbiName;
-   private JLabelMoneyInfo lmiThreshold;
-   private JLabelInfo lbiNumber;
-   private JLabelInfo lbiDescription;
+   private JLabelTextPanel ltpName;
+   private JLabelMoneyPanel lmpThreshold;
+   private JLabelTextPanel ltpNumber;
+   private JLabelTextPanel ltpDescription;
    
    public JEditionAccount() {
       
@@ -57,20 +57,20 @@ public class JEditionAccount extends JPanel {
       constraints.weighty = 0.5;
       constraints.insets = new Insets(5, 5, 5, 5);
 
-      lbiName = new JLabelInfo(Text.ACCOUNT_NAME_LABEL.toString());
-      add(lbiName, constraints);
+      ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL.toString(), 20);
+      add(ltpName, constraints);
       
       constraints.gridy = 1;
-      lmiThreshold = new JLabelMoneyInfo(Text.ACCOUNT_THRESHOLD_LABEL.toString());
-      add(lmiThreshold, constraints);
+      lmpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL.toString(), 20);
+      add(lmpThreshold, constraints);
       
       constraints.gridy = 2;
-      lbiNumber = new JLabelInfo(Text.ACCOUNT_NUMBER_LABEL.toString());
-      add(lbiNumber, constraints);
+      ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL.toString(), 20);
+      add(ltpNumber, constraints);
       
       constraints.gridy = 3;
-      lbiDescription = new JLabelInfo(Text.ACCOUNT_DESCRIPTION_LABEL.toString());
-      add(lbiDescription, constraints);
+      ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL.toString(), 20);
+      add(ltpDescription, constraints);
    }
 
 }

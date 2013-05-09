@@ -13,10 +13,12 @@
 package gui.controller;
 
 import gui.Controller;
+import gui.actions.AcAddAccount;
 import gui.views.JManageAccount;
 
 import java.awt.Component;
-import java.awt.Dialog.ModalityType;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 
@@ -39,7 +41,6 @@ public class ManageAccount extends Controller {
     */
    public ManageAccount(Core core) {
       super(core);
-      // TODO Auto-generated constructor stub
    }
 
    /* (non-Javadoc)
@@ -49,7 +50,8 @@ public class ManageAccount extends Controller {
    protected void initComponents() {
       view = new JManageAccount(this);
       view.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
+     //view.setModalityType(ModalityType.APPLICATION_MODAL); // Empèches les envents de se lancer.
+      //view.setModal(true);
       view.setVisible(true);
    }
 
@@ -58,7 +60,14 @@ public class ManageAccount extends Controller {
     */
    @Override
    protected void initListeners() {
-      
+      view.addButtonAddListener(new AcAddAccount(getCore(), view, null));
+      view.addButtonModifyListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            view.swapMode();
+         }
+      });
    }
 
    /* (non-Javadoc)
@@ -66,7 +75,6 @@ public class ManageAccount extends Controller {
     */
    @Override
    public Component getGraphicalComponent() {
-      // TODO Auto-generated method stub
       return view;
    }
 
