@@ -12,14 +12,13 @@
  */
 package gui.actions;
 
-import java.awt.Component;
-import java.awt.Dialog.ModalityType;
-import java.awt.event.ActionEvent;
-
-import core.Core;
 import gui.UserAction;
 import gui.controller.ManageAccount;
 import gui.views.JAddAccountFrame;
+
+import java.awt.event.ActionEvent;
+
+import core.Core;
 
 /**
  * Contrôleur pour l'ajout, modification et consultation des comptes.
