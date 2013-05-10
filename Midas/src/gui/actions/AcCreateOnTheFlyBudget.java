@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : AcCreateBudget.java
+ * Nom du fichier   : AcCreateOnTheFlyBudget.java
  * ============================================================================
- * Date de création : 9 mai 2013
+ * Date de création : 10 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -14,7 +14,7 @@ package gui.actions;
 
 import gui.Controller;
 import gui.UserAction;
-import gui.views.JAddBudgetFrame;
+import gui.views.JCreateOnTheFlyBudget;
 
 import java.awt.Component;
 import java.awt.Dialog.ModalityType;
@@ -22,7 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
-import core.components.Budget;
+import core.components.BudgetOnTheFly;
 
 /**
  * TODO
@@ -33,29 +33,34 @@ import core.components.Budget;
  * @author Sinniger Marcel
  *
  */
-public class AcCreateBudget extends UserAction {
-   
-   private Budget budget;
-   private JAddBudgetFrame view;
+public class AcCreateOnTheFlyBudget extends UserAction {
+
+   private BudgetOnTheFly budget;
+   private JCreateOnTheFlyBudget view;
    
    private Controller controller;
-
-   public AcCreateBudget(Controller controller, Core core) {
+   /**
+    * @param core
+    * @param dependencies
+    */
+   public AcCreateOnTheFlyBudget(Core core, Controller controller) {
       super(core);
       this.controller = controller;
    }
 
+   /* (non-Javadoc)
+    * @see gui.UserAction#execute(core.Core, java.awt.event.ActionEvent, java.lang.Object[])
+    */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+      budget = core.createBudgetOnTheFly();
       
-      budget = core.createBudget();
-      
-      view = new JAddBudgetFrame((Component)event.getSource(), controller, budget);
+      view = new JCreateOnTheFlyBudget((Component)event.getSource(), controller, budget);
       
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            core.saveBudget(budget);
+            core.saveBudgetOnTheFly(budget);
             view.dispose();
          }
       });
@@ -75,7 +80,7 @@ public class AcCreateBudget extends UserAction {
       view.setVisible(true);
    }
    
-   public Budget getCreatedBudget() {
+   public BudgetOnTheFly getCreatedBudget() {
       return budget;
    }
 

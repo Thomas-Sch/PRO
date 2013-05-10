@@ -61,6 +61,7 @@ public class AcCreateAccount extends UserAction {
             view.dispose();
          }
       });
+      
       view.addCancelListener(new ActionListener() {
          
          @Override

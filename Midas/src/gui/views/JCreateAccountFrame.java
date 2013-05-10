@@ -30,6 +30,7 @@ import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
+import core.MidasLogs;
 import core.components.Account;
 /**
  * Fenêtre d'ajout de compte.
@@ -116,7 +117,11 @@ public class JCreateAccountFrame extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setOverdraftLimit(Double.valueOf(ltpThreshold.getText()));
+            try {
+               account.setOverdraftLimit(Double.valueOf(ltpThreshold.getText()));
+            } catch(NumberFormatException e) {
+               MidasLogs.errors.push("NOT PARSING");
+            } 
          }
       });
       
@@ -124,7 +129,11 @@ public class JCreateAccountFrame extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setAmount(Double.valueOf(ltpInitialAmount.getText()));
+            try {
+               account.setOverdraftLimit(Double.valueOf(ltpInitialAmount.getText()));
+            } catch(NumberFormatException e) {
+               MidasLogs.errors.push("NOT PARSING");
+            } 
          }
       });
       
@@ -163,6 +172,7 @@ public class JCreateAccountFrame extends JDialog implements View{
    public void update(Observable arg0, Object arg1) {
       ltpName.setText(account.getAccountName());
       ltpThreshold.setText(String.valueOf(account.getOverdraftLimit()));
+      ltpInitialAmount.setText(String.valueOf(account.getAccountBalance()));
       ltpNumber.setText(account.getAccountNumber());
    }
 

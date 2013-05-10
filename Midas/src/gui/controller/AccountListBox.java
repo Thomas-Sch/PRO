@@ -13,14 +13,9 @@
 package gui.controller;
 
 import gui.Controller;
-import gui.actions.AcCreateAccount;
-import gui.actions.AcCreateAuthor;
-import gui.component.JComboBoxUsers;
 import gui.frameContent.JAccountList;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import core.Core;
 import core.components.AccountList;

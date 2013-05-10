@@ -36,7 +36,7 @@ public class Midas {
       Core core = new Core();
       
       // Lancement de la partie graphique du logiciel.
-      GlobalGUIController guiController = new GlobalGUIController(core, LOG_FRAME_ON);
+      new GlobalGUIController(core, LOG_FRAME_ON);
       
       MidasLogs.messages.push("Launcher", "Initialization done.");
       

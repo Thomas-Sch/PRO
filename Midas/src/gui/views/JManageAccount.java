@@ -17,7 +17,6 @@ import gui.component.JAddEditDelete;
 import gui.frameContent.JAccountList;
 import gui.frameContent.JEditionAccount;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;

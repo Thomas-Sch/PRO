@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : JAddBudgetFrame.java
+ * Nom du fichier   : JCreateOnTheFlyBudget.java
  * ============================================================================
- * Date de création : 9 mai 2013
+ * Date de création : 10 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -14,6 +14,7 @@ package gui.views;
 
 import gui.Controller;
 import gui.View;
+import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
 import gui.component.JValidateCancelReset;
@@ -26,18 +27,11 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import settings.Language.Text;
-
-import com.toedter.calendar.JMonthChooser;
-import com.toedter.calendar.JYearChooser;
-
-import core.components.Budget;
+import core.components.BudgetOnTheFly;
 
 /**
  * TODO
@@ -48,34 +42,28 @@ import core.components.Budget;
  * @author Sinniger Marcel
  *
  */
-public class JAddBudgetFrame extends JDialog implements View{
+public class JCreateOnTheFlyBudget extends JDialog implements View{
 
    /**
     * ID de sérialisation.
     */
-   private static final long serialVersionUID = -2619002208500615656L;
+   private static final long serialVersionUID = -4692092965659440366L;
    
    private JLabelTextPanel ltpName;
    private JLabelMoneyPanel ltpAmount;
    private JValidateCancelReset vcrActions;
    private ComboBoxAccount accounts;
-   
-   private JRadioButton rbtMonth;
-   private JRadioButton rbtYear;
-   private ButtonGroup group;
-   
-   private JMonthChooser mcrMonth;
-   private JYearChooser ycrYear;
-   
-   private JCheckBox cbxRecurrence;
+
+   private JDateInput ditStart;
+   private JDateInput ditEnd;
    
    private JLabelTextPanel ltpDescription;
    
    private Controller controller;
    
-   private Budget budget;
-   
-   public JAddBudgetFrame(Component parent, Controller controller, Budget budget) {
+   private BudgetOnTheFly budget;
+
+   public JCreateOnTheFlyBudget(Component parent, Controller controller, BudgetOnTheFly budget) {
       this.controller = controller;
       this.budget = budget;
       
@@ -109,30 +97,17 @@ public class JAddBudgetFrame extends JDialog implements View{
       
       constraints.gridy = 2;
       pnlContent.add(accounts.getGraphicalComponent(), constraints);
-
+      
       constraints.gridy = 3;
-      constraints.weighty = 0.2;
-      pnlContent.add(rbtMonth, constraints);
+      pnlContent.add(ditStart, constraints);
       
       constraints.gridy = 4;
-      pnlContent.add(rbtYear, constraints);
+      pnlContent.add(ditEnd, constraints);     
       
-      constraints.weighty = 0.5;
       constraints.gridy = 5;
-      pnlContent.add(mcrMonth, constraints);
-      
-      constraints.gridy = 6;
-      constraints.fill = GridBagConstraints.NONE;
-      pnlContent.add(ycrYear, constraints);
-      
-      constraints.gridy = 7;
-      constraints.fill = GridBagConstraints.HORIZONTAL;
-      pnlContent.add(cbxRecurrence, constraints);
-      
-      constraints.gridy = 8;
       pnlContent.add(ltpDescription, constraints);
       
-      constraints.gridy = 9;
+      constraints.gridy = 6;
       constraints.fill = GridBagConstraints.NONE;
       constraints.anchor = GridBagConstraints.EAST;
       pnlContent.add(vcrActions, constraints);
@@ -144,17 +119,8 @@ public class JAddBudgetFrame extends JDialog implements View{
       ltpAmount = new JLabelMoneyPanel("Somme");
       accounts = new ComboBoxAccount(controller.getCore());
       
-      rbtMonth = new JRadioButton("Mensuel");
-      rbtYear = new JRadioButton("Annuel");
-      group = new ButtonGroup();
-      
-      group.add(rbtMonth);
-      group.add(rbtYear);
-      
-      mcrMonth = new JMonthChooser();
-      ycrYear = new JYearChooser();
-      
-      cbxRecurrence = new JCheckBox("Récurrence");
+      ditStart = new JDateInput("Date de début");
+      ditEnd = new JDateInput("Date de fin");
       
       ltpDescription = new JLabelTextPanel("Description");      
       
@@ -177,7 +143,5 @@ public class JAddBudgetFrame extends JDialog implements View{
    public void addCancelListener(ActionListener actionListener) {
       vcrActions.addCancelListener(actionListener);
    }
-   
-   
 
 }

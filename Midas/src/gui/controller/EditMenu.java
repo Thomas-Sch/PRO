@@ -14,6 +14,7 @@ package gui.controller;
 
 import gui.Controller;
 import gui.actions.AcCreateBudget;
+import gui.actions.AcCreateOnTheFlyBudget;
 import gui.actions.AcManageAccount;
 import gui.actions.AcManageAuthor;
 import gui.actions.AcManageCategory;
@@ -59,6 +60,7 @@ public class EditMenu extends Controller {
       view.addManageCategoryListener(new AcManageCategory(getCore(), null));
       view.addManageAccountListener(new AcManageAccount(getCore()));
       view.addManageBudgetListener(new AcCreateBudget(this, getCore()));
+      view.addCreateOnTheFlyBudget(new AcCreateOnTheFlyBudget(getCore(), this));
    }
 
    /* (non-Javadoc)

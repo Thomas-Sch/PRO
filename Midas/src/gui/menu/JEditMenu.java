@@ -36,8 +36,9 @@ public class JEditMenu extends JMenu {
    
    private JMenuItem mniEditManageCategory;
    private JMenuItem mniEditManageAuthor;
-   private JMenuItem mnuEditAccount;
-   private JMenuItem mnuEditBudget;
+   private JMenuItem mniEditAccount;
+   private JMenuItem mniEditBudget;
+   private JMenuItem mniEditOnTheFlyBudget;
 
    /**
     * 
@@ -46,39 +47,39 @@ public class JEditMenu extends JMenu {
       setText("Edition");
       
       // Sous menu Edition->Comptes.
-      mnuEditAccount = new JMenuItem("Comptes...");
-      add(mnuEditAccount);
+      mniEditAccount = new JMenuItem("Comptes...");
+      add(mniEditAccount);
       
 //      // Option Edition->Comptes->Ajouter...
 //      JMenuItem mniEditAccountAdd = new JMenuItem("Ajouter...");
-//      mnuEditAccount.add(mniEditAccountAdd);
+//      mniEditAccount.add(mniEditAccountAdd);
 //
 //      // Option Edition->Comptes->Consulter...
 //      JMenuItem mniEditAccountConsult = new JMenuItem("Consulter...");
-//      mnuEditAccount.add(mniEditAccountConsult);
+//      mniEditAccount.add(mniEditAccountConsult);
 //
 //      // Option Edition->Comptes->Supprimer...
 //      JMenuItem mniEditAccountDelete = new JMenuItem("Supprimer...");
-//      mnuEditAccount.add(mniEditAccountDelete);
+//      mniEditAccount.add(mniEditAccountDelete);
 
       // Sous menu Edition->Budgets.
-      mnuEditBudget = new JMenuItem("Budgets...");
-      add(mnuEditBudget);
+      mniEditBudget = new JMenuItem("Budgets...");
+      add(mniEditBudget);
 
 //      // Option Edition->Budgets->Ajouter...
 //      JMenuItem mniEditBudgetAdd = new JMenuItem("Ajouter...");
-//      mnuEditBudget.add(mniEditBudgetAdd);
+//      mniEditBudget.add(mniEditBudgetAdd);
 //
 //      // Option Edition->Budgets->Consulter
 //      JMenuItem mniEditBudgetConsult = new JMenuItem("Consulter...");
-//      mnuEditBudget.add(mniEditBudgetConsult);
+//      mniEditBudget.add(mniEditBudgetConsult);
 //
 //      // Option Edition->Budgets->Supprimer...
 //      JMenuItem mniEditBudgetDelete = new JMenuItem("Supprimer...");
-//      mnuEditBudget.add(mniEditBudgetDelete);
+//      mniEditBudget.add(mniEditBudgetDelete);
 
       // Option Edition->Budget à la volée.
-      JMenuItem mniEditOnTheFlyBudget = new JMenuItem("Créer un budget à la volée");
+      mniEditOnTheFlyBudget = new JMenuItem("Créer un budget à la volée");
       add(mniEditOnTheFlyBudget);
 
       // Séparateur Edition->Separateur1.
@@ -115,10 +116,15 @@ public class JEditMenu extends JMenu {
    }
    
    public void addManageAccountListener(ActionListener listener) {
-      mnuEditAccount.addActionListener(listener);
+      mniEditAccount.addActionListener(listener);
    }
    
    public void addManageBudgetListener(ActionListener listener) {
-      mnuEditBudget.addActionListener(listener);
+      mniEditBudget.addActionListener(listener);
    }
+
+   public void addCreateOnTheFlyBudget(ActionListener listener) {
+      mniEditOnTheFlyBudget.addActionListener(listener);
+   }
+
 }

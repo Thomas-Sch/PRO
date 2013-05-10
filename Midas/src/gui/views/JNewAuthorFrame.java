@@ -105,8 +105,6 @@ public class JNewAuthorFrame extends JDialog implements View{
    public void addCancelListener(ActionListener listener) {
       vlc.addCancelListener(listener);
    }
-   
-
 
    /* (non-Javadoc)
     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
