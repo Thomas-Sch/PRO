@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : AcCreateBudget.java
+ * Nom du fichier   : AcNewExpense.java
  * ============================================================================
- * Date de création : 9 mai 2013
+ * Date de création : 10 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -12,17 +12,14 @@
  */
 package gui.actions;
 
-import gui.Controller;
-import gui.UserAction;
-import gui.views.JAddBudgetFrame;
-
-import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
-import core.components.Budget;
+import gui.Controller;
+import gui.UserAction;
+import gui.views.JNewExpense;
 
 /**
  * TODO
@@ -33,29 +30,31 @@ import core.components.Budget;
  * @author Sinniger Marcel
  *
  */
-public class AcCreateBudget extends UserAction {
-   
-   private Budget budget;
-   private JAddBudgetFrame view;
+public class AcNewExpense extends UserAction {
    
    private Controller controller;
+   private JNewExpense view;
+   
 
-   public AcCreateBudget(Core core, Controller controller) {
-      super(core);
+   /**
+    * @param core
+    * @param dependencies
+    */
+   public AcNewExpense(Core core, Controller controller, Object[] dependencies) {
+      super(core, dependencies);
       this.controller = controller;
    }
 
+   /* (non-Javadoc)
+    * @see gui.UserAction#execute(core.Core, java.awt.event.ActionEvent, java.lang.Object[])
+    */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-      
-      budget = core.createBudget();
-      
-      view = new JAddBudgetFrame((Component)event.getSource(), controller, budget);
+      view = new JNewExpense(controller);
       
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            core.saveBudget(budget);
             view.dispose();
          }
       });
@@ -63,20 +62,13 @@ public class AcCreateBudget extends UserAction {
       view.addCancelListener(new ActionListener() {
          
          @Override
-         public void actionPerformed(ActionEvent e) {
+         public void actionPerformed(ActionEvent arg0) {
             view.dispose();
          }
       });
       
-      budget.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
-   }
-   
-   public Budget getCreatedBudget() {
-      return budget;
    }
 
 }

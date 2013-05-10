@@ -139,7 +139,7 @@ public class JQuickExpense extends JPanel {
     */
    private void setDateInput(GridBagConstraints constraints) {
       constraints.gridx = 2;
-      add(new JDateInput("Date de début"), constraints);
+      add(new JDateInput(Text.DATE_LABEL.toString()), constraints);
    }
 
    /**
@@ -148,7 +148,7 @@ public class JQuickExpense extends JPanel {
     */
    private void setAmountInput(GridBagConstraints constraints) {
       constraints.gridx = 1;
-      add(new JLabelMoneyPanel("LSADKJAS", 20), constraints);
+      add(new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString()), constraints);
    }
 
    /**

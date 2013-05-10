@@ -39,6 +39,9 @@ public class JEditMenu extends JMenu {
    private JMenuItem mniEditAccount;
    private JMenuItem mniEditBudget;
    private JMenuItem mniEditOnTheFlyBudget;
+   
+   private JMenuItem mniEditNewExpense;
+   private JMenuItem mniEditNewTransaction;
 
    /**
     * 
@@ -46,40 +49,15 @@ public class JEditMenu extends JMenu {
    public JEditMenu() {
       setText("Edition");
       
-      // Sous menu Edition->Comptes.
-      mniEditAccount = new JMenuItem("Comptes...");
-      add(mniEditAccount);
+      initContent();
       
-//      // Option Edition->Comptes->Ajouter...
-//      JMenuItem mniEditAccountAdd = new JMenuItem("Ajouter...");
-//      mniEditAccount.add(mniEditAccountAdd);
-//
-//      // Option Edition->Comptes->Consulter...
-//      JMenuItem mniEditAccountConsult = new JMenuItem("Consulter...");
-//      mniEditAccount.add(mniEditAccountConsult);
-//
-//      // Option Edition->Comptes->Supprimer...
-//      JMenuItem mniEditAccountDelete = new JMenuItem("Supprimer...");
-//      mniEditAccount.add(mniEditAccountDelete);
-
+      // Sous menu Edition->Comptes.
+      add(mniEditAccount);
+     
       // Sous menu Edition->Budgets.
-      mniEditBudget = new JMenuItem("Budgets...");
       add(mniEditBudget);
 
-//      // Option Edition->Budgets->Ajouter...
-//      JMenuItem mniEditBudgetAdd = new JMenuItem("Ajouter...");
-//      mniEditBudget.add(mniEditBudgetAdd);
-//
-//      // Option Edition->Budgets->Consulter
-//      JMenuItem mniEditBudgetConsult = new JMenuItem("Consulter...");
-//      mniEditBudget.add(mniEditBudgetConsult);
-//
-//      // Option Edition->Budgets->Supprimer...
-//      JMenuItem mniEditBudgetDelete = new JMenuItem("Supprimer...");
-//      mniEditBudget.add(mniEditBudgetDelete);
-
-      // Option Edition->Budget à la volée.
-      mniEditOnTheFlyBudget = new JMenuItem("Créer un budget à la volée");
+      // Option Edition->Budget à la volée. 
       add(mniEditOnTheFlyBudget);
 
       // Séparateur Edition->Separateur1.
@@ -87,11 +65,9 @@ public class JEditMenu extends JMenu {
       add(sepEditOne);
 
       // Option Edition->Gérer les catégories.
-      mniEditManageCategory = new JMenuItem("Gérer les catégories");
       add(mniEditManageCategory);
 
       // Option Edition->Gérer les auteurs.
-      mniEditManageAuthor = new JMenuItem("Gérer les auteurs");
       add(mniEditManageAuthor);
      
       // Séparateur Edition->Separateur2.
@@ -99,12 +75,24 @@ public class JEditMenu extends JMenu {
       add(sepEditTwo);
    
       // Option Edition->Dépenser.
-      JMenuItem mniEditDoExpense = new JMenuItem("Effectuer une dépense");
-      add(mniEditDoExpense);
+      add(mniEditNewExpense);
    
       // Option Edition->Transaction.
-      JMenuItem mniEditDoTransaction = new JMenuItem("Faire une transaction...");
-      add(mniEditDoTransaction);
+      add(mniEditNewTransaction);
+   }
+   
+   /**
+    * Initialise les composants du menu d'édition.
+    */
+   public void initContent() {
+      mniEditAccount = new JMenuItem("Comptes...");
+      mniEditBudget = new JMenuItem("Budgets...");
+      mniEditOnTheFlyBudget = new JMenuItem("Créer un budget à la volée");
+      mniEditManageCategory = new JMenuItem("Gérer les catégories");
+      mniEditManageAuthor = new JMenuItem("Gérer les auteurs");
+      
+      mniEditNewExpense = new JMenuItem("Effectuer une dépense");
+      mniEditNewTransaction = new JMenuItem("Faire une transaction...");
    }
    
    public void addManageCategoryListener(ActionListener listener) {
@@ -123,8 +111,15 @@ public class JEditMenu extends JMenu {
       mniEditBudget.addActionListener(listener);
    }
 
-   public void addCreateOnTheFlyBudget(ActionListener listener) {
+   public void addCreateOnTheFlyBudgetListener(ActionListener listener) {
       mniEditOnTheFlyBudget.addActionListener(listener);
    }
 
+   public void addNewExpenseListener(ActionListener listener) {
+      mniEditNewExpense.addActionListener(listener);
+   }
+   
+   public void addNewTransactionListener(ActionListener listener) {
+      mniEditNewTransaction.addActionListener(listener);
+   }
 }

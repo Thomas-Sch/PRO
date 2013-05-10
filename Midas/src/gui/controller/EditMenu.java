@@ -18,6 +18,8 @@ import gui.actions.AcCreateOnTheFlyBudget;
 import gui.actions.AcManageAccount;
 import gui.actions.AcManageAuthor;
 import gui.actions.AcManageCategory;
+import gui.actions.AcNewExpense;
+import gui.actions.AcNewTransaction;
 import gui.menu.JEditMenu;
 
 import java.awt.Component;
@@ -59,8 +61,10 @@ public class EditMenu extends Controller {
       view.addManageAuthorListener(new AcManageAuthor(getCore(), null));
       view.addManageCategoryListener(new AcManageCategory(getCore(), null));
       view.addManageAccountListener(new AcManageAccount(getCore()));
-      view.addManageBudgetListener(new AcCreateBudget(this, getCore()));
-      view.addCreateOnTheFlyBudget(new AcCreateOnTheFlyBudget(getCore(), this));
+      view.addManageBudgetListener(new AcCreateBudget(getCore(), this));
+      view.addCreateOnTheFlyBudgetListener(new AcCreateOnTheFlyBudget(getCore(), this));
+      view.addNewExpenseListener(new AcNewExpense(getCore(), this, null));
+      view.addNewTransactionListener(new AcNewTransaction(getCore(), this, null));
    }
 
    /* (non-Javadoc)

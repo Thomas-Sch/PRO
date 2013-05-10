@@ -47,20 +47,36 @@ public class Language {
       ACTION_QUIT,
       
       /* GUI */
-      TAB_HOME,
+      
       VALIDATE_BUTTON,
       CANCEL_BUTTON,
+      RESET_BUTTON,
+      
       ACCOUNT_THRESHOLD_LABEL,
       ACCOUNT_INITIAL_AMOUNT_LABEL,
       ACCOUNT_NUMBER_LABEL,
       ACCOUNT_DESCRIPTION_LABEL,
       ACCOUNT_NAME_LABEL,
-      RESET_BUTTON,
+      
+     
       HOME_SCREEN_NAME,
       QUICK_EXPENSE_LABEL,
       REASON_LABEL,
       AMOUNT_LABEL,
-      DATE_LABEL;
+      DATE_LABEL,
+      
+      
+      DAILY_LABEL,
+      WEEKLY_LABEL,
+      MONTHLY_LABEL,
+      ANNUAL_LABEL, 
+      
+      RECURRENCE_LABEL,
+      
+      TRANSACTION_TYPE_LABEL,
+      TRANSACTION_TYPE_CREDIT,
+      TRANSACTION_TYPE_DEBIT;
+      
       
       
       /* Fin des déclarations, ne pas modifier ci-dessous
