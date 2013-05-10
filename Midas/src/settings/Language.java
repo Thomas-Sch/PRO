@@ -72,6 +72,7 @@ public class Language {
       ANNUAL_LABEL, 
       
       RECURRENCE_LABEL,
+      RECURRENCE_SETTINGS,
       
       TRANSACTION_TYPE_LABEL,
       TRANSACTION_TYPE_CREDIT,

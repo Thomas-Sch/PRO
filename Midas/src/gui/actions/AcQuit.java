@@ -12,11 +12,12 @@
  */
 package gui.actions;
 
+import gui.UserAction;
+
 import java.awt.event.ActionEvent;
 
 import core.Core;
 import core.MidasLogs;
-import gui.UserAction;
 
 /**
  * Action de quitter l'application.

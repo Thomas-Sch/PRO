@@ -52,7 +52,7 @@ public class FileMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      view.getQuitOption().addActionListener(new AcQuit(getCore(), null));
+      view.addActionListener(new AcQuit(getCore(), null));
    }
 
    /* (non-Javadoc)

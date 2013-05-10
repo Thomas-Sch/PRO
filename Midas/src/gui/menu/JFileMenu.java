@@ -12,6 +12,8 @@
  */
 package gui.menu;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
@@ -54,7 +56,7 @@ public class JFileMenu extends JMenu {
       add(mniFilequit);
    }
    
-   public JMenuItem getQuitOption() {
-      return mniFilequit;
+   public void addQuitListener(ActionListener listener) {
+      mniFilequit.addActionListener(listener);
    }
 }
