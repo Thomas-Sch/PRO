@@ -21,7 +21,7 @@ public class DBAccount extends DBComponent {
    Double overdraftLimit;
    
    /**
-    * @return retourne name
+    * @return le/la/les name
     */
    public String getName() {
       return name;
@@ -33,7 +33,7 @@ public class DBAccount extends DBComponent {
       this.name = name;
    }
    /**
-    * @return retourne nameBank
+    * @return le/la/les nameBank
     */
    public String getNameBank() {
       return nameBank;
@@ -45,7 +45,7 @@ public class DBAccount extends DBComponent {
       this.nameBank = nameBank;
    }
    /**
-    * @return retourne accountNumber
+    * @return le/la/les accountNumber
     */
    public String getAccountNumber() {
       return accountNumber;
@@ -57,7 +57,7 @@ public class DBAccount extends DBComponent {
       this.accountNumber = accountNumber;
    }
    /**
-    * @return retourne amount
+    * @return le/la/les amount
     */
    public Double getAmount() {
       return amount;
@@ -69,7 +69,7 @@ public class DBAccount extends DBComponent {
       this.amount = amount;
    }
    /**
-    * @return retourne overdraftLimit
+    * @return le/la/les overdraftLimit
     */
    public Double getOverdraftLimit() {
       return overdraftLimit;

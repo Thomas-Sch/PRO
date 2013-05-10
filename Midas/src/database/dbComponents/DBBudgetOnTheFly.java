@@ -17,7 +17,7 @@ public class DBBudgetOnTheFly extends DBBudget {
    java.util.Date start;
    java.util.Date end;
    /**
-    * @return retourne start
+    * @return le/la/les start
     */
    public java.util.Date getStart() {
       return start;
@@ -29,7 +29,7 @@ public class DBBudgetOnTheFly extends DBBudget {
       this.start = start;
    }
    /**
-    * @return retourne end
+    * @return le/la/les end
     */
    public java.util.Date getEnd() {
       return end;

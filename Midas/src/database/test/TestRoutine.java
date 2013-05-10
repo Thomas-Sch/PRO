@@ -25,6 +25,17 @@ import database.dbComponents.DBUser;
 import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
 
+/**
+ * 
+ * Cette herberger une routine de test qui teste toutes les fonctionnalités
+ * du paquet "database" et ses sous-paquets
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ *
+ */
 public class TestRoutine {
   
    /**

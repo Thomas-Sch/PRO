@@ -20,7 +20,7 @@ public class DBBudget extends DBComponent {
    private Integer dbAccount;
    
    /**
-    * @return retourne name
+    * @return le/la/les name
     */
    public String getName() {
       return name;
@@ -32,7 +32,7 @@ public class DBBudget extends DBComponent {
       this.name = name;
    }
    /**
-    * @return retourne limit
+    * @return le/la/les limit
     */
    public Double getLimit() {
       return limit;
@@ -44,7 +44,7 @@ public class DBBudget extends DBComponent {
       this.limit = limit;
    }
    /**
-    * @return retourne dbRecurrence
+    * @return le/la/les dbRecurrence
     */
    public Integer getDbRecurrence() {
       return dbRecurrence;
@@ -56,7 +56,7 @@ public class DBBudget extends DBComponent {
       this.dbRecurrence = dbRecurrence;
    }
    /**
-    * @return retourne dbAccount
+    * @return le/la/les dbAccount
     */
    public Integer getDbAccount() {
       return dbAccount;

@@ -12,6 +12,16 @@
  */
 package database.utils;
 
+/**
+ * Classe qui représente une violation de contrainte
+ * TODO
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ *
+ */
 public class DatabaseConstraintViolation extends Exception {
 
    /**
@@ -21,6 +31,7 @@ public class DatabaseConstraintViolation extends Exception {
    public DatabaseConstraintViolation(String message) {
       super(message);
    }
+   
    /**
     * imposé par le parent pour la séralisation
     */

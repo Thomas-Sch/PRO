@@ -19,32 +19,51 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.sqlite.SQLiteConfig;
-
+/**
+ * 
+ * Cette classe permet de se connecter à une base de données SQLite
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ *
+ */
 public class DBAccess {
 
    private final String dbPath;
    
+   /**
+    * 
+    * @param dbPath - le lien sur la base de données
+    */
    public DBAccess(String dbPath) {
       
       this.dbPath = dbPath;
       
    }
    
+   /**
+    * Cette méthode permet de récupérer une connection à la base de données.
+    * Ceci permet de créer un "Statement" contenant la requête.
+    * @return une connection ouverte à la base de données
+    * @throws DatabaseException
+    */
    public Connection getConnection() throws DatabaseException {
       
       Connection connection = null;
       
       try {
-         Class.forName("org.sqlite.JDBC");
-      } catch (ClassNotFoundException e) {
-         System.err.println(e);
+         Class.forName("org.sqlite.JDBC"); // charger le driver pour SQLite
+      }
+      catch (ClassNotFoundException e) {
+         DBErrorHandler.connectionError(e);
       }
       
       try {
          SQLiteConfig config = new SQLiteConfig();  
-         config.enforceForeignKeys(true);
+         config.enforceForeignKeys(true); // appliquer les contraintes issues des clés étrangères
          connection = DriverManager.getConnection(dbPath, config.toProperties());
-         //connection = DriverManager.getConnection(dbPath);
       }
       catch (SQLException e) {
          DBErrorHandler.connectionError(e);
@@ -54,6 +73,15 @@ public class DBAccess {
       
    }
 
+   /**
+    * Cette procédure retourne directement un PreparedStatement
+    * qui permet d'envoyer des requêtes SQL à la base de données.
+    * Les PreparedStatement préservent la base de données des attaques
+    * d'injection SQL 
+    * @param sqlString
+    * @return un PreparedStatement
+    * @throws DatabaseException
+    */
    public PreparedStatement getPreparedStatement(String sqlString) throws DatabaseException {
       Connection connection = this.getConnection();
       PreparedStatement preparedStatement = null;
@@ -67,6 +95,12 @@ public class DBAccess {
       return preparedStatement;
    }
    
+   /**
+    * termine la connection qui a été ouverte pendant la création
+    * d'un PreparedStatement
+    * @param preparedStatement
+    * @throws DatabaseException
+    */
    public void destroyPreparedStatement(PreparedStatement preparedStatement) throws DatabaseException {
       try {
          if (preparedStatement.getConnection() != null) {
@@ -76,5 +110,4 @@ public class DBAccess {
          DBErrorHandler.preparedStatementError(e);
       }
    }
-
 }

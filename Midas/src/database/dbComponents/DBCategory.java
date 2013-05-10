@@ -17,7 +17,7 @@ public class DBCategory extends DBComponent {
    String name;
    Integer parentDBCategory;
    /**
-    * @return retourne name
+    * @return le/la/les name
     */
    public String getName() {
       return name;
@@ -29,7 +29,7 @@ public class DBCategory extends DBComponent {
       this.name = name;
    }
    /**
-    * @return retourne parentDBCategory
+    * @return le/la/les parentDBCategory
     */
    public Integer getParentDBCategory() {
       return parentDBCategory;

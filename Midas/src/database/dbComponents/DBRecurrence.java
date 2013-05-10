@@ -20,7 +20,7 @@ public class DBRecurrence extends DBComponent {
    private Date end;
    private Integer days;
    /**
-    * @return retourne start
+    * @return le/la/les start
     */
    public Date getStart() {
       return start;
@@ -32,7 +32,7 @@ public class DBRecurrence extends DBComponent {
       this.start = start;
    }
    /**
-    * @return retourne end
+    * @return le/la/les end
     */
    public Date getEnd() {
       return end;
@@ -44,7 +44,7 @@ public class DBRecurrence extends DBComponent {
       this.end = end;
    }
    /**
-    * @return retourne days
+    * @return le/la/les days
     */
    public Integer getDays() {
       return days;

@@ -17,7 +17,7 @@ public class DBUser extends DBComponent {
    String name;
 
    /**
-    * @return retourne name
+    * @return le/la/les name
     */
    public String getName() {
       return name;

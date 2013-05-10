@@ -27,7 +27,7 @@ public class DBFinancialTransaction extends DBComponent {
    Integer dbRecurrence;
    
    /**
-    * @return retourne amount
+    * @return le/la/les amount
     */
    public Double getAmount() {
       return amount;
@@ -41,7 +41,7 @@ public class DBFinancialTransaction extends DBComponent {
    }
 
    /**
-    * @return retourne date
+    * @return le/la/les date
     */
    public Date getDate() {
       return date;
@@ -55,7 +55,7 @@ public class DBFinancialTransaction extends DBComponent {
    }
 
    /**
-    * @return retourne reason
+    * @return le/la/les reason
     */
    public String getReason() {
       return reason;
@@ -69,7 +69,7 @@ public class DBFinancialTransaction extends DBComponent {
    }
 
    /**
-    * @return retourne dbUser
+    * @return le/la/les dbUser
     */
    public Integer getDbUser() {
       return dbUser;
@@ -83,7 +83,7 @@ public class DBFinancialTransaction extends DBComponent {
    }
 
    /**
-    * @return retourne dbBudget
+    * @return le/la/les dbBudget
     */
    public Integer getDbBudget() {
       return dbBudget;
@@ -97,7 +97,7 @@ public class DBFinancialTransaction extends DBComponent {
    }
 
    /**
-    * @return retourne dbAccount
+    * @return le/la/les dbAccount
     */
    public Integer getDbAccount() {
       return dbAccount;
@@ -111,7 +111,7 @@ public class DBFinancialTransaction extends DBComponent {
    }
 
    /**
-    * @return retourne dbCategory
+    * @return le/la/les dbCategory
     */
    public Integer getDbCategory() {
       return dbCategory;
@@ -125,7 +125,7 @@ public class DBFinancialTransaction extends DBComponent {
    }
 
    /**
-    * @return retourne dbRecurrence
+    * @return le/la/les dbRecurrence
     */
    public Integer getDbRecurrence() {
       return dbRecurrence;

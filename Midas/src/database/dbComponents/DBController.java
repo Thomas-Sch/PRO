@@ -22,6 +22,18 @@ import database.utils.DBErrorHandler;
 import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
 
+/**
+ * 
+ * Cette classe représente le contrôleur de la base de données.
+ * Le contrôleur permet au coeur d'accèder à la base de données.
+ * Toute la communication de l'application à la base de données s'effecue à travers de cette classe.
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ *
+ */
 public class DBController {
    
    private DBAccess dbAccess;

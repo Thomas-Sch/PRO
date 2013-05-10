@@ -17,7 +17,7 @@ public abstract class DBComponent {
    private Integer id;
 
    /**
-    * @return retourne id
+    * @return le/la/les id
     */
    public Integer getId() {
       return id;
