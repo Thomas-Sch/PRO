@@ -19,6 +19,7 @@ import gui.component.JComboBoxCategory;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
+import gui.component.JRecursionChooser;
 import gui.component.JValidateCancel;
 import gui.controller.ComboBoxUser;
 import gui.utils.StandardInsets;
@@ -28,10 +29,7 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import settings.Language.Text;
 
@@ -60,13 +58,8 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    private JLabelTextPanel ltpReason;
    private JLabelMoneyPanel lmpAmount;
    private JDateInput ditDate;
-   private JCheckBox cbxRecurrence;
-   
-   private ButtonGroup radioGroup;
-   private JRadioButton rbtDaily;
-   private JRadioButton rbtWeekly;
-   private JRadioButton rbtMonthly;
-   private JRadioButton rbtAnnual;
+
+   private JRecursionChooser rcrRecurrenceOptions;
    
    private JValidateCancel vclActions;
    
@@ -95,40 +88,26 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       constraints.gridy = 0;
       pnlContent.add(cbbBudgets, constraints);
       
-      constraints.gridx = 1;
+      constraints.gridy = 1;
       pnlContent.add(cbcCategories, constraints);
       
       constraints.gridx = 0;
-      constraints.gridy = 1;
+      constraints.gridy = 2;
       pnlContent.add(users.getGraphicalComponent(), constraints);
       
-      constraints.gridx = 1;
+      constraints.gridy = 3;
       pnlContent.add(ltpReason, constraints);
       
-      constraints.gridx = 2;
+      constraints.gridy = 4;
       pnlContent.add(lmpAmount, constraints);
       
-      constraints.gridx = 0;
-      constraints.gridy = 2;
+      constraints.gridy = 5;
       pnlContent.add(ditDate, constraints);
       
-      constraints.gridy = 3;
-      pnlContent.add(cbxRecurrence, constraints);
-      
-      constraints.gridy = 4;
-      pnlContent.add(rbtDaily, constraints);
-      
-      constraints.gridy = 5;
-      pnlContent.add(rbtWeekly, constraints);
-      
       constraints.gridy = 6;
-      pnlContent.add(rbtMonthly, constraints);
+      pnlContent.add(rcrRecurrenceOptions, constraints);
       
       constraints.gridy = 7;
-      pnlContent.add(rbtAnnual, constraints);
-      
-      constraints.gridy = 8;
-      constraints.gridx = 2;
       constraints.anchor = GridBagConstraints.EAST;
       constraints.fill = GridBagConstraints.NONE;
       pnlContent.add(vclActions, constraints);
@@ -143,17 +122,8 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       ltpReason = new JLabelTextPanel(Text.REASON_LABEL.toString());
       lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString());
       ditDate = new JDateInput(Text.DATE_LABEL.toString());
-      cbxRecurrence = new JCheckBox(Text.RECURRENCE_LABEL.toString());
       
-      radioGroup = new ButtonGroup();
-      rbtDaily = new JRadioButton(Text.DAILY_LABEL.toString());
-      rbtWeekly = new JRadioButton(Text.WEEKLY_LABEL.toString());
-      rbtMonthly = new JRadioButton(Text.MONTHLY_LABEL.toString());
-      rbtAnnual = new JRadioButton(Text.ANNUAL_LABEL.toString());
-      radioGroup.add(rbtDaily);
-      radioGroup.add(rbtWeekly);
-      radioGroup.add(rbtMonthly);
-      radioGroup.add(rbtAnnual);  
+      rcrRecurrenceOptions = new JRecursionChooser();
       
       vclActions = new JValidateCancel();
    }

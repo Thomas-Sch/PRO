@@ -20,6 +20,7 @@
   <monthly_label>Mensuel</monthly_label>
   <annual_label>Annuel</annual_label>
   <recurrence_label>Récurrence</recurrence_label>
+  <recurrence_settings>Paramètres de récurrence</recurrence_settings>
   <transaction_type_label>Type</transaction_type_label>
   <transaction_type_credit>Créditer</transaction_type_credit>
   <transaction_type_debit>Débiter</transaction_type_debit>

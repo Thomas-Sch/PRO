@@ -12,8 +12,6 @@
  */
 package gui.component;
 
-import gui.utils.StandardInsets;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -73,7 +71,6 @@ public class JRecursionChooser extends JPanel {
       setLayout(new GridBagLayout());
       
       GridBagConstraints constraints = new GridBagConstraints();
-      constraints.insets = new StandardInsets();
       constraints.fill = GridBagConstraints.HORIZONTAL;
       constraints.weightx = 0.5;
       constraints.weighty = 0.5;
