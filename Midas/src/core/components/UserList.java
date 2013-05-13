@@ -25,54 +25,27 @@ import core.Core;
  * @author Schweizer Thomas
  *
  */
-public class UserList extends CoreComponent { 
-   
-   private LinkedList<User> users = new LinkedList<>();
+public class UserList extends ListTemplate<User> { 
    
    public UserList(Core core) {
       super(core);
    }
    
-   public void addUser(User user) {
-      users.add(user);
-      
-      setChanged();
-      notifyObservers();
-   }
-   
-   public User getAt(int index) {
-      return users.get(index);
-   }
-   
    public User get(int userId) {
-      for(User user : users) {
+      for(User user : getList()) {
          if (user.getId() == userId) {
             return user;
          }
       }
       return null;
    }
-   
-   public LinkedList<User> getAll(Comparator<User> comp) {
-      
-      LinkedList<User> result = new LinkedList<>();
-      
-      result.addAll(users);
-      
-      Collections.sort(result, comp);
 
-      return result;
-   }
-   
-   public void setUsers(LinkedList<User> users) {
-      this.users.clear();
-      this.users.addAll(users);
-      
-      setChanged();
-      notifyObservers();
-   }
-   
-   public User createFalseUser(String name) {
+   /* (non-Javadoc)
+    * @see core.components.ListTemplate#createFalseEntry(java.lang.String)
+    */
+   @Override
+   public User createFalseEntry(String name) {
+      // TODO Auto-generated method stub
       return new User(core, name);
    }
 

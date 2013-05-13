@@ -12,11 +12,8 @@
  */
 package core.components;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-
 import core.Core;
+import core.MidasLogs;
 
 /**
  * TODO
@@ -27,57 +24,25 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class AccountList extends CoreComponent {
+public class AccountList extends ListTemplate<Account> {
    
-   private LinkedList<Account> accounts = new LinkedList<>();
-
    /**
-    * @param core
+    * @param core Coeur de l'application.
     */
    public AccountList(Core core) {
       super(core);
    }
    
-   public void addAccount(Account account) {
-      accounts.add(account);
-      
-      setChanged();
-      notifyObservers();
-   }
-   
-   public Account getAt(int index) {
-      return accounts.get(index);
-   }
-   
-   public Account get(int userId) {
-      for(Account account : accounts) {
-         if (account.getId() == userId) {
-            return account;
-         }
-      }
-      return null;
-   }
-   
-   public LinkedList<Account> getAll(Comparator<Account> comp) {
-      
-      LinkedList<Account> result = new LinkedList<>();
-      
-      result.addAll(accounts);
-      
-      Collections.sort(result, comp);
-
-      return result;
-   }
-   
-   public void setAccounts(LinkedList<Account> users) {
-      this.accounts.clear();
-      this.accounts.addAll(users);
-      
-      setChanged();
-      notifyObservers();
-   }
-   
-   public Account createFalseAccount(String name) {
+   public Account createFalseEntry(String name) {
       return new Account(core, name);
+   }
+
+   public Account get(int userId) {
+    for(Account account : getList()) {
+       if (account.getId() == userId) {
+          return account;
+       }
+    }
+    return null;
    }
 }
