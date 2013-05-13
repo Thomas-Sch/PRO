@@ -70,6 +70,5 @@ public class JComboBoxTransactionType extends JPanel {
          addElement(Text.TRANSACTION_TYPE_CREDIT.toString());
          addElement(Text.TRANSACTION_TYPE_DEBIT.toString());
       }
-      
    }
 }
