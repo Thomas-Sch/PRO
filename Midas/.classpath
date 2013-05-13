@@ -5,5 +5,7 @@
 	<classpathentry kind="lib" path="libs/jdom-2.0.4.jar"/>
 	<classpathentry kind="lib" path="libs/jcalendar-1.4.jar"/>
 	<classpathentry kind="lib" path="libs/sqlite-jdbc-3.7.2.jar"/>
+	<classpathentry kind="lib" path="libs/jcommon-1.0.17.jar"/>
+	<classpathentry kind="lib" path="libs/jfreechart-1.0.14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
