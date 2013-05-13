@@ -24,7 +24,7 @@ import core.components.User;
 import core.components.UserList;
 
 /**
- * TODO
+ * Liste déroulante d'utilisateurs du programme.
  * @author Crescenzio Fabio
  * @author Decorvet Grégoire
  * @author Jaquier Kevin

@@ -73,11 +73,11 @@ public class JAddBudgetFrame extends JDialog implements View{
    
    private Controller controller;
    
-   private Budget budget;
+//   private Budget budget; PAS utile pour l'instant car pas de rétro écoute.
    
    public JAddBudgetFrame(Component parent, Controller controller, Budget budget) {
       this.controller = controller;
-      this.budget = budget;
+  //    this.budget = budget;
       
       setTitle(Text.APP_TITLE.toString());
       setContentPane(buildContent());

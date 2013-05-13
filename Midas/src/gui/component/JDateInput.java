@@ -40,7 +40,7 @@ public class JDateInput extends JPanel {
       
       add(new JLabel(labelContent), BorderLayout.WEST);      
       JDateChooser dchTime = new JDateChooser(new Date());
-      add(dchTime, BorderLayout.CENTER); 
+      add(dchTime, BorderLayout.EAST);
    }
 
 }

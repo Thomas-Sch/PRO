@@ -23,19 +23,21 @@ import core.Core;
 import core.components.AccountList;
 
 /**
- * TODO
+ * Contrôleur de la classe de liste déroulante pour les utilisateurs du
+ * programme
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class ComboBoxAccount extends Controller {
 
    JComboBoxAccounts view;
    AccountList model;
-   
+
    /**
     * Crée le contrôleur d'une ComboBox
     */
@@ -43,31 +45,29 @@ public class ComboBoxAccount extends Controller {
       super(core);
       model.addObserver(view);
    }
-   
+
    @Override
    protected void initComponents() {
       model = getCore().getAllAccounts();
       view = new JComboBoxAccounts(model);
    }
-   
+
    @Override
    protected void initListeners() {
       view.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
-            if(view.isCreateNewSelected()) {
+            if (view.isCreateNewSelected()) {
                AcCreateAccount action = new AcCreateAccount(getCore());
                action.actionPerformed(arg0);
-               view.setSelectedItem(action.getCreatedAccount()); 
+               view.setSelectedItem(action.getCreatedAccount());
             }
          }
       });
    }
-   
+
    @Override
    public JComboBoxAccounts getGraphicalComponent() {
       return view;
    }
-   
-
 
 }

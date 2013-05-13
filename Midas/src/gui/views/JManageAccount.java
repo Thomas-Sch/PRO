@@ -14,7 +14,7 @@ package gui.views;
 
 import gui.Controller;
 import gui.component.JAddEditDelete;
-import gui.frameContent.JAccountList;
+import gui.controller.AccountListBox;
 import gui.frameContent.JEditionAccount;
 
 import java.awt.GridBagConstraints;
@@ -42,9 +42,11 @@ public class JManageAccount extends JDialog {
     */
    private static final long serialVersionUID = 6474851721091887221L;
    
+   private Controller controller;
+   
    private JLabel lblDescription;
    
-   private JAccountList altAccount;
+   private AccountListBox accounts;
    private JInfoAccount ifaAccount;
    private JEditionAccount edaAccount;
    private JAddEditDelete aedActions;
@@ -53,7 +55,8 @@ public class JManageAccount extends JDialog {
     * Contructeur.
     * @param controller Contrôleur de cet objet.
     */
-   public JManageAccount(Controller controller) {   
+   public JManageAccount(Controller controller) {  
+      this.controller = controller;
       setContentPane(buildContent());
       pack();
    }
@@ -79,13 +82,13 @@ public class JManageAccount extends JDialog {
       lblDescription = new JLabel("Liste des comptes");
       pnlContent.add(lblDescription, constraints);
       
-//      constraints.gridy = 1;
-//      constraints.gridwidth = 1;
-//      constraints.gridheight = 2;
-//      constraints.weighty = 0.5;
-//      constraints.weightx = 0.7;
-//      altAccount = new JAccountList();
-//      pnlContent.add(altAccount,constraints);
+      constraints.gridy = 1;
+      constraints.gridwidth = 1;
+      constraints.gridheight = 2;
+      constraints.weighty = 0.5;
+      constraints.weightx = 0.7;
+      accounts = new AccountListBox(controller.getCore());
+      pnlContent.add(accounts.getGraphicalComponent(),constraints);
       
       constraints.gridheight = 1;
       constraints.fill = GridBagConstraints.HORIZONTAL;
