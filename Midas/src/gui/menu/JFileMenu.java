@@ -52,7 +52,6 @@ public class JFileMenu extends JMenu {
     */
    private void initComponents() {
       mniFilequit = new JMenuItem(Text.ACTION_QUIT.toString());
-      
       add(mniFilequit);
    }
    

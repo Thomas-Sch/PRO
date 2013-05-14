@@ -43,7 +43,7 @@ public class AcCreateAccount extends UserAction {
     * @param core
     * @param dependencies
     */
-   public AcCreateAccount( Core core) {
+   public AcCreateAccount(Core core) {
       super(core);
    }
 
@@ -52,8 +52,6 @@ public class AcCreateAccount extends UserAction {
     */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-
-      MidasLogs.messages.push("Heyo"); 
       account = core.createAccount();
             
       view = new JCreateAccountFrame((Component)event.getSource(), account);

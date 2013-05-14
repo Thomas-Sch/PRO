@@ -72,6 +72,8 @@ public class ManageAccount extends Controller {
             view.swapMode();
          }
       });
+      
+      
    }
 
    /* (non-Javadoc)

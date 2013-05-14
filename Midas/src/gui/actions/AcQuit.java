@@ -36,7 +36,6 @@ public class AcQuit extends UserAction {
     */
    public AcQuit(Core core, Object[] dependencies) {
       super(core, dependencies);
-      // TODO Auto-generated constructor stub
    }
 
    /* (non-Javadoc)
@@ -45,6 +44,7 @@ public class AcQuit extends UserAction {
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       MidasLogs.messages.push("Fermeture de l'application");
+      System.exit(0);
    }
 
 }

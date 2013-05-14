@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : JAddBudgetFrame.java
+ * Nom du fichier   : JCreateBudgetFrame.java
  * ============================================================================
  * Date de création : 9 mai 2013
  * ============================================================================
@@ -48,7 +48,7 @@ import core.components.Budget;
  * @author Sinniger Marcel
  *
  */
-public class JAddBudgetFrame extends JDialog implements View{
+public class JCreateBudgetFrame extends JDialog implements View{
 
    /**
     * ID de sérialisation.
@@ -75,7 +75,7 @@ public class JAddBudgetFrame extends JDialog implements View{
    
 //   private Budget budget; PAS utile pour l'instant car pas de rétro écoute.
    
-   public JAddBudgetFrame(Component parent, Controller controller, Budget budget) {
+   public JCreateBudgetFrame(Component parent, Controller controller, Budget budget) {
       this.controller = controller;
   //    this.budget = budget;
       

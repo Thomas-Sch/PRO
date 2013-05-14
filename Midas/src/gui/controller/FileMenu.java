@@ -21,7 +21,7 @@ import java.awt.Component;
 import core.Core;
 
 /**
- * TODO
+ * Contrôleur du menu fichier.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -52,7 +52,7 @@ public class FileMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      view.addActionListener(new AcQuit(getCore(), null));
+      view.addQuitListener(new AcQuit(getCore(), null));
    }
 
    /* (non-Javadoc)

@@ -14,7 +14,7 @@ package gui.actions;
 
 import gui.Controller;
 import gui.UserAction;
-import gui.views.JAddBudgetFrame;
+import gui.views.JCreateBudgetFrame;
 
 import java.awt.Component;
 import java.awt.Dialog.ModalityType;
@@ -36,7 +36,7 @@ import core.components.Budget;
 public class AcCreateBudget extends UserAction {
    
    private Budget budget;
-   private JAddBudgetFrame view;
+   private JCreateBudgetFrame view;
    
    private Controller controller;
 
@@ -50,7 +50,7 @@ public class AcCreateBudget extends UserAction {
       
       budget = core.createBudget();
       
-      view = new JAddBudgetFrame((Component)event.getSource(), controller, budget);
+      view = new JCreateBudgetFrame((Component)event.getSource(), controller, budget);
       
       view.addValidateListener(new UserAction(core) {
          @Override

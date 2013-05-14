@@ -25,7 +25,7 @@ import core.components.Account;
 import core.components.AccountList;
 
 /**
- * TODO
+ * Composant graphique pour l'affichage des listes.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire

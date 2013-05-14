@@ -109,7 +109,6 @@ public class JCreateAccountFrame extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
-            
             account.setAccountName(ltpName.getText());      
             System.out.println("Valeur de name: " + ltpName.getText());
          }
@@ -143,7 +142,7 @@ public class JCreateAccountFrame extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setAccountName(ltpNumber.getText());
+            account.setAccountNumber(ltpNumber.getText());
          }
       });
       

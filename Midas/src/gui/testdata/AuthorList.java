@@ -12,7 +12,7 @@
  */
 package gui.testdata;
 
-import gui.component.JListTemplate;
+import gui.JListTemplate;
 
 import javax.swing.DefaultListModel;
 

@@ -40,7 +40,6 @@ public class AccountListBox extends Controller {
     */
    public AccountListBox(Core core) {
       super(core);
-      model.addObserver(view);
    }
 
    /*
@@ -52,6 +51,7 @@ public class AccountListBox extends Controller {
    protected void initComponents() {
       model = getCore().getAllAccounts();
       view = new JAccountList(model);
+      model.addObserver(view);
    }
 
    /*

@@ -10,7 +10,9 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.component;
+package gui;
+
+import gui.component.JAddEditDelete;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
