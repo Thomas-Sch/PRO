@@ -52,11 +52,11 @@ public class JComboBoxUsers extends JComboBoxTemplate<User> {
       LinkedList<User> list = users.getAll(new SortByName());
       
       if(isFirstUse()) {
-         list.addFirst(users.createFalseUser("Sélectionner un auteur")); // TO UPDATE
+         list.addFirst(users.createFalseEntry("Sélectionner un auteur")); // TO UPDATE
       }
       
       int index = updateIndex();
-      list.add(index, users.createFalseUser("Nouvel auteur...")); // TO UPDATE
+      list.add(index, users.createFalseEntry("Nouvel auteur...")); // TO UPDATE
       
       User[] temp = new User[0];
       setModel(new DefaultComboBoxModel<User>(list.toArray(temp)));

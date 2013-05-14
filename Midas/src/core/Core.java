@@ -76,7 +76,7 @@ public class Core {
             userTemp.add(new User(this, dbUser));
          }
          
-         users.setUsers(userTemp);
+         users.setItems(userTemp);
       }
    }
    
@@ -96,7 +96,7 @@ public class Core {
             accountTemp.add(new Account(this, dbAccount));
          }
          
-         accounts.setAccounts(accountTemp);
+         accounts.setItems(accountTemp);
       }
    }
    
@@ -315,7 +315,7 @@ public class Core {
       try {
          dbController.saveToDatabase(user.getDBUser());
          
-         users.addUser(user);
+         users.addItem(user);
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the user with id "

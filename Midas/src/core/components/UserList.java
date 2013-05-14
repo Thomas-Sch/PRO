@@ -11,10 +11,6 @@
  */
 package core.components;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-
 import core.Core;
 
 /**

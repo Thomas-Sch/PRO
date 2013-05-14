@@ -53,11 +53,11 @@ public class JComboBoxAccounts extends JComboBoxTemplate<Account>{
       LinkedList<Account> list = accounts.getAll(new SortByName());
       
       if(isFirstUse()) {
-         list.addFirst(accounts.createFalseAccount("Sélectionner un compte")); // TO UPDATE
+         list.addFirst(accounts.createFalseEntry("Sélectionner un compte")); // TO UPDATE
       }
       
       int index = updateIndex();
-      list.add(index, accounts.createFalseAccount("Nouveau compte...")); // TO UPDATE
+      list.add(index, accounts.createFalseEntry("Nouveau compte...")); // TO UPDATE
       
       Account[] temp = new Account[0];
       setModel(new DefaultComboBoxModel<Account>(list.toArray(temp)));

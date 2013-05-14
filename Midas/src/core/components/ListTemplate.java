@@ -62,7 +62,7 @@ public abstract class ListTemplate<E> extends CoreComponent {
       return result;
    }
    
-   public void setAccounts(LinkedList<E> items) {
+   public void setItems(LinkedList<E> items) {
       list.clear();
       list.addAll(items);
       
