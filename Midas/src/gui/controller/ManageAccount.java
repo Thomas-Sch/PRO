@@ -63,6 +63,7 @@ public class ManageAccount extends Controller {
     */
    @Override
    protected void initListeners() {
+      
       view.addButtonAddListener(new AcCreateAccount(getCore()));
       view.addButtonModifyListener(new ActionListener() {
          

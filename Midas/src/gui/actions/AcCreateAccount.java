@@ -21,10 +21,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
+import core.MidasLogs;
 import core.components.Account;
 
 /**
- * TODO
+ * Action de création de compte. Contrôle également la fenêtre d'ajout
+ * de compte.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -50,8 +52,10 @@ public class AcCreateAccount extends UserAction {
     */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+
+      MidasLogs.messages.push("Heyo"); 
       account = core.createAccount();
-      
+            
       view = new JCreateAccountFrame((Component)event.getSource(), account);
       
       view.addValidateListener(new UserAction(core) {
