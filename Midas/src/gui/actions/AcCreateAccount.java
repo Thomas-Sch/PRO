@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
-import core.MidasLogs;
 import core.components.Account;
 
 /**

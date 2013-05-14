@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : AccountList.java
+ * Nom du fichier   : CategoryList.java
  * ============================================================================
- * Date de création : 9 mai 2013
+ * Date de création : 14 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -15,7 +15,7 @@ package core.components;
 import core.Core;
 
 /**
- * Liste de comptes.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -23,25 +23,34 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class AccountList extends ListTemplate<Account> {
-   
+public class CategoryList extends ListTemplate<Category> {
+
    /**
-    * @param core Coeur de l'application.
+    * @param core
     */
-   public AccountList(Core core) {
+   public CategoryList(Core core) {
       super(core);
    }
-   
-   public Account createFalseEntry(String name) {
-      return new Account(core, name);
+
+   /* (non-Javadoc)
+    * @see core.components.ListTemplate#createFalseEntry(java.lang.String)
+    */
+   @Override
+   public Category createFalseEntry(String name) {
+      return new Category(core, name);
    }
 
-   public Account get(int userId) {
-    for(Account account : getList()) {
-       if (account.getId() == userId) {
-          return account;
-       }
-    }
-    return null;
+   /* (non-Javadoc)
+    * @see core.components.ListTemplate#get(int)
+    */
+   @Override
+   public Category get(int id) {
+      for(Category category : getList()) {
+         if (category.getId() == id) {
+            return category;
+         }
+      }
+      return null;
    }
+
 }

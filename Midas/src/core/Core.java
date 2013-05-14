@@ -20,10 +20,12 @@ import core.components.AccountList;
 import core.components.Budget;
 import core.components.BudgetOnTheFly;
 import core.components.Category;
+import core.components.CategoryList;
 import core.components.FinancialTransaction;
 import core.components.User;
 import core.components.UserList;
 import database.dbComponents.DBAccount;
+import database.dbComponents.DBCategory;
 import database.dbComponents.DBController;
 import database.dbComponents.DBUser;
 import database.utils.DatabaseConstraintViolation;
@@ -46,6 +48,7 @@ public class Core {
    
    private UserList users;
    private AccountList accounts;
+   private CategoryList categories;
    
    public Core() {
       settings = new Settings();
@@ -53,11 +56,13 @@ public class Core {
       
       users = new UserList(this);
       accounts = new AccountList(this);
+      categories = new CategoryList(this);
       
       settings.loadSettings();
       
       loadUsers();
       loadAccounts();
+      loadCategories();
    }
    
    private void loadUsers() {
@@ -97,6 +102,25 @@ public class Core {
          }
          
          accounts.setItems(accountTemp);
+      }
+   }
+   
+   private void loadCategories() {
+      LinkedList<DBCategory> dbCategories = null;
+      try {
+         dbCategories = dbController.getAllDbCategories();
+      }
+      catch (DatabaseException e) {
+         
+      }
+      
+      if (dbCategories != null) {
+         LinkedList<Category> categoryTemp = new LinkedList<>();
+         
+         for (DBCategory dbCategory : dbCategories) {
+            categoryTemp.add(new Category(this, dbCategory));
+         }
+         categories.setItems(categoryTemp);
       }
    }
    
@@ -306,6 +330,10 @@ public class Core {
    
    public AccountList getAllAccounts() {
       return accounts;
+   }
+   
+   public CategoryList getAllCategories() {
+      return categories;
    }
    
    /**

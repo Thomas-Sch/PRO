@@ -13,12 +13,13 @@
 package gui.views;
 
 import gui.JManageFrame;
-import gui.testdata.CategoryList;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
 import javax.swing.JPanel;
+
+import core.components.CategoryList;
 
 
 /**
@@ -38,17 +39,17 @@ public class JManageCategoryFrame extends JManageFrame {
    private static final long serialVersionUID = -3350759512131610325L;
    
    protected JPanel initContent() {
-      super.initContent();
+      return super.initContent();
       
-      getContent().add(new CategoryList(), getConstraints());
-         
-       getConstraints().gridx = 1;
-       getConstraints().anchor = GridBagConstraints.NORTH;
-       getConstraints().insets = new Insets(5, 50, 5, 5);
-       
-       getContent().add(new CategoryList(), getConstraints());
-      
-      return getContent();
+//      getContent().add(new CategoryList(), getConstraints());
+//         
+//       getConstraints().gridx = 1;
+//       getConstraints().anchor = GridBagConstraints.NORTH;
+//       getConstraints().insets = new Insets(5, 50, 5, 5);
+//       
+//       getContent().add(new CategoryList(), getConstraints());
+//      
+//      return getContent();
    }
    
 }

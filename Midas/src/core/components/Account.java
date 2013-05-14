@@ -40,7 +40,7 @@ public class Account extends CoreComponent {
       this.dbAccount = dbAcount;
    }
    
-   Account(Core core, String name) {
+   public Account(Core core, String name) {
       super(core);
       
       dbAccount = new DBAccount();

@@ -38,7 +38,7 @@ import core.components.User;
  * @author Sinniger Marcel
  *
  */
-public class JNewAuthorFrame extends JDialog implements View{
+public class JCreateAuthorFrame extends JDialog implements View{
 
    /**
     * ID de sérialisation.
@@ -53,7 +53,7 @@ public class JNewAuthorFrame extends JDialog implements View{
    /**
     * Construit la vue.
     */
-   public JNewAuthorFrame(Component parent, User user) {
+   public JCreateAuthorFrame(Component parent, User user) {
       this.user = user;
       
       setTitle(Text.APP_TITLE.toString());

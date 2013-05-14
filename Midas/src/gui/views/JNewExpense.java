@@ -22,6 +22,7 @@ import gui.component.JLabelTextPanel;
 import gui.component.JRecursionChooser;
 import gui.component.JValidateCancel;
 import gui.controller.ComboBoxUser;
+import gui.controller.ComboBoxesCategory;
 import gui.utils.StandardInsets;
 
 import java.awt.GridBagConstraints;
@@ -53,7 +54,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    
    //Composants
    private JComboBoxBudget cbbBudgets;
-   private JComboBoxCategory cbcCategories;
+   private ComboBoxesCategory categories;
    private ComboBoxUser users;
    private JLabelTextPanel ltpReason;
    private JLabelMoneyPanel lmpAmount;
@@ -89,7 +90,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       pnlContent.add(cbbBudgets, constraints);
       
       constraints.gridy = 1;
-      pnlContent.add(cbcCategories, constraints);
+      pnlContent.add(categories.getGraphicalComponent(), constraints);
       
       constraints.gridx = 0;
       constraints.gridy = 2;
@@ -117,7 +118,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
 
    private void initContent() {
       cbbBudgets = new JComboBoxBudget();
-      cbcCategories = new JComboBoxCategory();
+      categories = new ComboBoxesCategory(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
       ltpReason = new JLabelTextPanel(Text.REASON_LABEL.toString());
       lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString());

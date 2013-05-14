@@ -13,11 +13,13 @@
 package gui.actions;
 
 import gui.UserAction;
-import gui.views.JCategory;
+import gui.views.JCreateCategory;
 
+import java.awt.Component;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import settings.Language.Text;
 import core.Core;
 import core.components.Category;
 
@@ -32,6 +34,9 @@ import core.components.Category;
  */
 public class AcCreateCategory extends UserAction {
    
+   private Category category;
+   private JCreateCategory view;
+   
    /**
     * Instancie l'action souhaitée.
     * @param core - le coeur pouvant être utilisé pour réaliser l'action.
@@ -44,17 +49,40 @@ public class AcCreateCategory extends UserAction {
    public void execute(Core core, ActionEvent event, Object[] dependencies) {
       
       // Récupération du modèle
-      Category modele = core.createCategory();
+      category = core.createCategory();
       
       // Vue
-      JCategory createCategoryView = new JCategory(Text.ACCOUNT_NAME_LABEL.toString(), 20, 20, 150, 200, modele);
+      view = new JCreateCategory((Component)event.getSource(), category);
       
-      // Enregistrer la vue et le modèle
-      modele.addObserver(createCategoryView);
+      view.addValidateListener(new UserAction(core) {
+         @Override
+         protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+            core.saveCategory(category);
+            view.dispose();
+         }
+      });
       
-      modele.setChangedAndNotifyObservers(); // Force l'actualisation au lancement
+      view.addCancelListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent arg0) {
+            view.dispose();
+         }
+      });
       
-      createCategoryView.setVisible(true);
+      category.addObserver(view);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+
+
+   /**
+    * @return
+    */
+   public Category getCreatedCategory() {
+      return category;
    }
 
 }

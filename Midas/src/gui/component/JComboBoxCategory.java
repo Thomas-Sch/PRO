@@ -12,15 +12,19 @@
  */
 package gui.component;
 
-import gui.testdata.CategoryData;
+import gui.JComboBoxTemplate;
 
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Observable;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
+
+import core.components.Category;
+import core.components.CategoryList;
 
 /**
- * TODO
+ * Liste déroulante de catégorie.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -28,23 +32,38 @@ import javax.swing.JComboBox;
  * @author Sinniger Marcel
  *
  */
-public class JComboBoxCategory extends JComboBox<Object> {
-   private static final long serialVersionUID = 1L;
+public class JComboBoxCategory extends JComboBoxTemplate<Category> {
    
-   public JComboBoxCategory() {
+   /**
+    * ID de sérialisation.
+    */
+   private static final long serialVersionUID = 9189481079308834687L;
+   
+   private CategoryList categories;
+   
+   public JComboBoxCategory(CategoryList categories) {
+      this.categories = categories;
+      update(categories, null);
+   }
+
+   public void update(Observable o, Object arg) {
+      LinkedList<Category> list = categories.getAll(new SortByName());
       
-      ArrayList<String> data = new ArrayList<>();
-      
-      CategoryData dataModel = new CategoryData();
-      
-      data.add("Sélectionner une catégorie");
-      for (String s : dataModel.getList()) {
-         data.add(s);
+      if(isFirstUse()) {
+         list.addFirst(categories.createFalseEntry("Sélectionner une catégorie")); // TO UPDATE
       }
       
-      data.add("Nouvelle catégorie...");
+      int index = updateIndex();
+      list.add(index, categories.createFalseEntry("Nouvelle catégorie...")); // TO UPDATE
       
-      
-      setModel(new DefaultComboBoxModel<Object>(data.toArray()));
+      Category[] temp = new Category[0];
+      setModel(new DefaultComboBoxModel<Category>(list.toArray(temp)));
    }
+   
+   private class SortByName implements Comparator<Category> {
+      @Override
+      public int compare(Category arg0, Category arg1) {
+         return arg0.getName().compareToIgnoreCase(arg1.getName());
+      }
+   }  
 }

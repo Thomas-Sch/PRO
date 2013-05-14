@@ -13,11 +13,11 @@
 package gui.frameContent;
 
 import gui.Controller;
-import gui.component.JComboBoxCategory;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JReasonInput;
 import gui.controller.ComboBoxUser;
+import gui.controller.ComboBoxesCategory;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -45,8 +45,10 @@ public class JQuickExpense extends JPanel {
    Controller controller;
 
    
-   //Composants graphiques.
+   //Composants de l'interface.
    JButton btnValidate;
+   
+   ComboBoxesCategory categories;
    
    /**
     * ID de série.
@@ -59,6 +61,15 @@ public class JQuickExpense extends JPanel {
    public JQuickExpense(Controller controller) {
       this.controller = controller;
       
+      initContent();
+      buildContent();
+   }
+   
+   public void initContent() {
+      categories = new ComboBoxesCategory(controller.getCore());
+   }
+   
+   public void buildContent() {
       GridBagLayout layout = new GridBagLayout();
       setLayout(layout);
       
@@ -74,6 +85,7 @@ public class JQuickExpense extends JPanel {
       setCategoryLists(constraints);
       setReasonInput(constraints);
       setValidateButton(constraints);
+      
    }
    
    public JButton getValidateButton() {
@@ -111,10 +123,10 @@ public class JQuickExpense extends JPanel {
     */
    private void setCategoryLists(GridBagConstraints constraints) {
       constraints.gridx = 1;
-      add(new JComboBoxCategory(), constraints);
+      add(categories.getGraphicalComponent(), constraints);
       
       constraints.gridx = 2;
-      add(new JComboBoxCategory(), constraints);
+      //add(new JComboBoxCategory(), constraints);
    }
 
    /**

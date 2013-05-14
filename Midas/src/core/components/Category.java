@@ -41,6 +41,12 @@ public class Category extends CoreComponent {
      this.dbCategory = dbCategory;
    }
    
+   public Category(Core core, String name) {
+      super(core);
+      dbCategory = new DBCategory();
+      setName(name);
+   }
+   
    public DBCategory getDBCategory() {
       return dbCategory;
    }
@@ -84,6 +90,10 @@ public class Category extends CoreComponent {
     */
    public int getId() {
       return dbCategory.getId();
+   }
+   
+   public String toString() {
+      return dbCategory.getName();
    }
 }
 
