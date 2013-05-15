@@ -232,6 +232,7 @@ public class Core {
    public void saveCategory(Category category) {
       try {
          dbController.saveToDatabase(category.getDBCategory());
+         categories.addItem(category);
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the category with id "
