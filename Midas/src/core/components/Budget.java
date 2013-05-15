@@ -41,16 +41,35 @@ public class Budget extends CoreComponent {
       this.dbBudget = dbBudget;
    }
    
+   /**
+    * @param core Contrôleur logique du programme.
+    * @param name Nom du budget.
+    */
+   public Budget(Core core, String name) {
+      super(core);
+      
+      dbBudget = new DBBudget();
+      dbBudget.setName(name);
+   }
+
    public DBBudget getDBBudget() {
       return dbBudget;
    }
    
    /**
-    * consulte la le montant limite du budget
+    * Consulte la le montant limite du budget.
     * @return un double representant le montant alloue au budget
     */
    public double getLimit() {
       return dbBudget.getLimit();
+   }
+   
+   /**
+    * Renvoie le nom du budget courant.
+    * @return Le nom du budget.
+    */
+   public String getBudgetName() {
+      return dbBudget.getName();
    }
    
    /**
@@ -106,5 +125,9 @@ public class Budget extends CoreComponent {
     */
    public int getId() {
       return dbBudget.getId();
+   }
+   
+   public String toString() {
+      return getBudgetName();
    }
 }

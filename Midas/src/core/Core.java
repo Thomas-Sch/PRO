@@ -18,6 +18,7 @@ import settings.Settings;
 import core.components.Account;
 import core.components.AccountList;
 import core.components.Budget;
+import core.components.BudgetList;
 import core.components.BudgetOnTheFly;
 import core.components.Category;
 import core.components.CategoryList;
@@ -25,6 +26,7 @@ import core.components.FinancialTransaction;
 import core.components.User;
 import core.components.UserList;
 import database.dbComponents.DBAccount;
+import database.dbComponents.DBBudget;
 import database.dbComponents.DBCategory;
 import database.dbComponents.DBController;
 import database.dbComponents.DBUser;
@@ -49,6 +51,7 @@ public class Core {
    private UserList users;
    private AccountList accounts;
    private CategoryList categories;
+   private BudgetList budgets;
    
    public Core() {
       settings = new Settings();
@@ -57,12 +60,34 @@ public class Core {
       users = new UserList(this);
       accounts = new AccountList(this);
       categories = new CategoryList(this);
+      budgets = new BudgetList(this);
       
       settings.loadSettings();
       
       loadUsers();
       loadAccounts();
       loadCategories();
+      loadBudgets();
+   }
+   
+   private void loadBudgets() {
+      LinkedList<DBBudget> dbBudgets = null;
+      try {
+         dbBudgets = dbController.getAllDbBudgets();
+      }
+      catch (DatabaseException e) {
+         
+      }
+      
+      if (dbBudgets != null) {
+         LinkedList<Budget> budgetTemp = new LinkedList<>();
+         
+         for (DBBudget dbBudget : dbBudgets) {
+            budgetTemp.add(new Budget(this, dbBudget));
+         }
+         
+         budgets.setItems(budgetTemp);
+      }
    }
    
    private void loadUsers() {
@@ -334,6 +359,10 @@ public class Core {
    
    public CategoryList getAllCategories() {
       return categories;
+   }
+   
+   public BudgetList getAllBudgets() {
+      return budgets;
    }
    
    /**

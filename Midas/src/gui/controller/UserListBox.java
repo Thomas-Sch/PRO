@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : ViewMenu.java
+ * Nom du fichier   : UserListBox.java
  * ============================================================================
- * Date de création : 4 mai 2013
+ * Date de création : 15 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -13,14 +13,15 @@
 package gui.controller;
 
 import gui.Controller;
-import gui.menu.JViewMenu;
+import gui.component.JUserList;
 
 import java.awt.Component;
 
 import core.Core;
+import core.components.UserList;
 
 /**
- * Contrôleur du menu d'édition.
+ * Contrôleur pour la liste graphique d'auteurs.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -28,41 +29,42 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class ViewMenu extends Controller {
+public class UserListBox extends Controller {
    
-   JViewMenu view;
+   private UserList model;
+   private JUserList view;
 
    /**
     * @param core
     */
-   public ViewMenu(Core core) {
+   public UserListBox(Core core) {
       super(core);
    }
 
    /* (non-Javadoc)
-    * @see gui.controller.Controller#initComponents()
+    * @see gui.Controller#initComponents()
     */
    @Override
    protected void initComponents() {
-      view = new JViewMenu();
+      model = getCore().getAllUsers();
+      view = new JUserList(model);
+      model.addObserver(view);
    }
 
    /* (non-Javadoc)
-    * @see gui.controller.Controller#initListeners()
+    * @see gui.Controller#initListeners()
     */
    @Override
    protected void initListeners() {
-      // Aucun pour l'instant.
-
    }
 
    /* (non-Javadoc)
-    * @see gui.controller.Controller#getGraphicalComponent()
+    * @see gui.Controller#getGraphicalComponent()
     */
    @Override
    public Component getGraphicalComponent() {
       // TODO Auto-generated method stub
-      return view;
+      return null;
    }
 
 }

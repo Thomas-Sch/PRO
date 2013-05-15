@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : ViewMenu.java
+ * Nom du fichier   : BudgetList.java
  * ============================================================================
- * Date de création : 4 mai 2013
+ * Date de création : 15 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,17 +10,12 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
-
-import gui.Controller;
-import gui.menu.JViewMenu;
-
-import java.awt.Component;
+package core.components;
 
 import core.Core;
 
 /**
- * Contrôleur du menu d'édition.
+ * Représente une list de budgets.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -28,41 +23,34 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class ViewMenu extends Controller {
-   
-   JViewMenu view;
+public class BudgetList extends ListTemplate<Budget> {
 
    /**
     * @param core
     */
-   public ViewMenu(Core core) {
+   public BudgetList(Core core) {
       super(core);
    }
 
    /* (non-Javadoc)
-    * @see gui.controller.Controller#initComponents()
+    * @see core.components.ListTemplate#createFalseEntry(java.lang.String)
     */
    @Override
-   protected void initComponents() {
-      view = new JViewMenu();
+   public Budget createFalseEntry(String name) {
+      return new Budget(core, name);
    }
 
    /* (non-Javadoc)
-    * @see gui.controller.Controller#initListeners()
+    * @see core.components.ListTemplate#get(int)
     */
    @Override
-   protected void initListeners() {
-      // Aucun pour l'instant.
-
-   }
-
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#getGraphicalComponent()
-    */
-   @Override
-   public Component getGraphicalComponent() {
-      // TODO Auto-generated method stub
-      return view;
+   public Budget get(int id) {
+      for(Budget budget : getList()) {
+         if (budget.getId() == id) {
+            return budget;
+         }
+      }
+      return null;
    }
 
 }

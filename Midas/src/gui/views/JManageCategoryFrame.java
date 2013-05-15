@@ -12,14 +12,10 @@
  */
 package gui.views;
 
+import gui.Controller;
 import gui.JManageFrame;
 
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
 import javax.swing.JPanel;
-
-import core.components.CategoryList;
 
 
 /**
@@ -32,6 +28,13 @@ import core.components.CategoryList;
  *
  */
 public class JManageCategoryFrame extends JManageFrame {
+
+   /**
+    * @param controller
+    */
+   public JManageCategoryFrame(Controller controller) {
+      super(controller);
+   }
 
    /**
     * ID de série.

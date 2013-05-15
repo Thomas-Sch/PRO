@@ -126,7 +126,7 @@ public class Account extends CoreComponent {
    }
    
    /**
-    * consulter le mon du compte
+    * consulter le nom du compte
     * @return le numero du compte 
     */ 
    public String getAccountName() {

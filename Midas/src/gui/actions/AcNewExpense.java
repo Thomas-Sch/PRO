@@ -12,6 +12,7 @@
  */
 package gui.actions;
 
+import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,7 @@ import gui.UserAction;
 import gui.views.JNewExpense;
 
 /**
- * TODO
+ * Contrôleur et action de l'ajout d'une dépense.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -51,6 +52,7 @@ public class AcNewExpense extends UserAction {
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       view = new JNewExpense(controller);
+      view.setLocationRelativeTo((Component)event.getSource());
       
       view.addValidateListener(new UserAction(core) {
          @Override

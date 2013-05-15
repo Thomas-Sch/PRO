@@ -36,9 +36,9 @@ public class AccountList extends ListTemplate<Account> {
       return new Account(core, name);
    }
 
-   public Account get(int userId) {
+   public Account get(int id) {
     for(Account account : getList()) {
-       if (account.getId() == userId) {
+       if (account.getId() == id) {
           return account;
        }
     }
