@@ -34,10 +34,8 @@ public class PieChartTestRoutine {
     * @param args
     */
    public static void main(String[] args) {
-      
-      PieValue[] pieValues = new PieValue[2];
-      pieValues[0] = new PieValue(4.0, "cat1");
-      pieValues[1] = new PieValue(1.0, "cat2");
+           
+      PieValue[] pieValues = {new PieValue(4.0, "cat1"), new PieValue(1.0, "cat2")};
       
       PieChart pieChart = new PieChart("title", pieValues);   
       
