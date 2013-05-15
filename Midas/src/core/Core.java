@@ -22,6 +22,7 @@ import core.components.BudgetOnTheFly;
 import core.components.Category;
 import core.components.CategoryList;
 import core.components.FinancialTransaction;
+import core.components.Recurrence;
 import core.components.User;
 import core.components.UserList;
 import database.dbComponents.DBAccount;
@@ -400,6 +401,24 @@ public class Core {
          MidasLogs.errors.push("Core", "Unable to save the budget with id "
                + /* id + */ " to database.");
       }
+   }
+
+   /**
+    * Retourne la recurence ayant pour identifiant celui passé en paramètres.
+    * @param id - l'identifiant de la recurence souhaitée.
+    * @return la recurence correspondante à l'identifiant, null le cas échéant.
+    */
+   public Recurrence getRecurrence(int id) {
+      Recurrence result = null;
+      
+      try {
+         result = new Recurrence(this, dbController.getDbRecurrence(id));
+      }
+      catch (DatabaseException e) {
+         
+      }
+      
+      return result; 
    }
    
    

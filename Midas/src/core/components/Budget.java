@@ -68,13 +68,13 @@ public class Budget extends CoreComponent {
       }
    }
    
-//   /**
-//    * consulte la recurence du budget
-//    * @return la recurence du budget
-//    */
-//   public Recurrence getRecurrence() { //---------------------TEST ERROR ???
-//      return core.getRecurrence(dbBudget.getDbRecurrence());
-//   }
+   /**
+   * consulte la recurence du budget
+   * @return la recurence du budget
+   */
+   public Recurrence getRecurrence() {
+      return core.getRecurrence(dbBudget.getDbRecurrence());
+   }
    
    /**
     * modifie la recurence du budget

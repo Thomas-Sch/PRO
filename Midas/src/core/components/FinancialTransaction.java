@@ -144,13 +144,13 @@ public class FinancialTransaction extends CoreComponent {
       dbFinancialTransaction.setDbAccount(account.getId());
    }
    
-//  /**
-//   * consulte la recurence de la transaction
-//   * @return la recurrence
-//   */
-//  public Recurrence getRecurrence() {
-//      return core.getRecurrence(dbFinancialTransaction.getDbRecurrence());
-//   }
+  /**
+   * consulte la recurence de la transaction
+   * @return la recurrence
+   */
+  public Recurrence getRecurrence() {
+      return core.getRecurrence(dbFinancialTransaction.getDbRecurrence());
+  }
   
   /**
    * modifie la recurence de la transaction
