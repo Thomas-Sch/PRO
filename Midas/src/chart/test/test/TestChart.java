@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart;
+package chart.test.test;
 
 /**
  * TODO
