@@ -276,7 +276,7 @@ public class Core {
     * @param id - l'identifiant du budget souhaité.
     * @return la catégorie correspondant à l'identifiant, null le cas échéant.
     */
-   public BudgetOnTheFly getBudgetOnTheFlyID(int id) {
+   public BudgetOnTheFly getBudgetOnTheFly(int id) {
       BudgetOnTheFly result = null;
       
       try {
