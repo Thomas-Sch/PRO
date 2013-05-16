@@ -13,6 +13,8 @@
 package core.components;
 
 import core.Core;
+import core.CoreComponent;
+import core.IdentifiedComponent;
 import database.dbComponents.DBCategory;
 
 /**
@@ -24,7 +26,7 @@ import database.dbComponents.DBCategory;
  * @author Sinniger Marcel
  *
  */
-public class Category extends CoreComponent {
+public class Category extends CoreComponent implements IdentifiedComponent {
 
    /**
     * variables d'une categorie
@@ -84,10 +86,6 @@ public class Category extends CoreComponent {
        dbCategory.setParentDBCategory(parentCategory.getId());
    }
    
-   /**
-    * Obtenir le numero d'identification de la categorie dans la base de donnee
-    * @return l'ID de la categorie
-    */
    public int getId() {
       return dbCategory.getId();
    }

@@ -19,6 +19,8 @@ import java.awt.Insets;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import core.Core;
+
 import settings.Language.Text;
 
 /**
@@ -37,14 +39,16 @@ public abstract class JManageFrame extends JDialog {
     * ID de série.
     */
    private static final long serialVersionUID = 3532238860718872672L;
-   
+
    private GridBagConstraints constraints = new GridBagConstraints();
    private JPanel content = new JPanel();
+   private Controller controller;
    
    /**
     * 
     */
-   public JManageFrame() {
+   public JManageFrame(Controller controller) {
+      this.controller = controller;
       setTitle(Text.APP_TITLE.toString());
       setVisible(true);
       setLocationRelativeTo(null);
@@ -77,5 +81,10 @@ public abstract class JManageFrame extends JDialog {
    protected JPanel getContent() {
       return content;
    }
+   
+   public Core getCore() {
+      return controller.getCore();
+   }
+
 
 }

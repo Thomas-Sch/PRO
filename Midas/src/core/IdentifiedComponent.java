@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CategoryList.java
+ * Nom du fichier   : IdentifiedComponent.java
  * ============================================================================
- * Date de création : 14 mai 2013
+ * Date de création : 16 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,12 +10,10 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core.components;
-
-import core.Core;
+package core;
 
 /**
- * TODO
+ * Indique que la classe possède un identifiant de type int récupérable.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -23,28 +21,12 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class CategoryList extends ListTemplate<Category> {
-
+public interface IdentifiedComponent {
+   
    /**
-    * @param core
+    * Retourne l'identifiant unique et de valeur entière de l'objet.
+    * @return l'identifiant unique entier.
     */
-   public CategoryList(Core core) {
-      super(core);
-   }
-   
-   @Override
-   public Category createFalseEntry(String name) {
-      return new Category(core, name);
-   }
-   
-   @Override
-   public Category get(int id) {
-      for(Category category : getList()) {
-         if (category.getId() == id) {
-            return category;
-         }
-      }
-      return null;
-   }
+   public int getId();
 
 }

@@ -12,10 +12,19 @@
  */
 package gui.component;
 
-import javax.swing.JComboBox;
+import gui.JComboBoxTemplate;
+
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Observable;
+
+import javax.swing.DefaultComboBoxModel;
+
+import core.components.Budget;
+import core.components.BudgetList;
 
 /**
- * TODO
+ * Liste déroulante graphique de budgets.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -23,7 +32,38 @@ import javax.swing.JComboBox;
  * @author Sinniger Marcel
  *
  */
-public class JComboBoxBudget extends JComboBox<Object> {
+public class JComboBoxBudget extends JComboBoxTemplate<Budget> {
    private static final long serialVersionUID = 1L;
+   
+   private BudgetList budgets;
+
+   /**
+    * @param model
+    */
+   public JComboBoxBudget(BudgetList budgets) {
+      this.budgets = budgets;
+      update(budgets,null);
+   }
+
+   public void update(Observable o, Object arg) {
+      LinkedList<Budget> list = budgets.getAll(new SortByName());
+      
+      if(isFirstUse()) {
+         list.addFirst(budgets.createFalseEntry("Sélectionner un budget")); // TO UPDATE
+      }
+      
+      int index = updateIndex();
+      list.add(index, budgets.createFalseEntry("Nouveau budget...")); // TO UPDATE
+      
+      Budget[] temp = new Budget[0];
+      setModel(new DefaultComboBoxModel<Budget>(list.toArray(temp)));
+   }
+   
+   private class SortByName implements Comparator<Budget> {
+      @Override
+      public int compare(Budget arg0, Budget arg1) {
+         return arg0.getBudgetName().compareToIgnoreCase(arg1.getBudgetName());
+      }
+   }
 
 }

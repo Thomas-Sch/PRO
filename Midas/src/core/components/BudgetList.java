@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CoreComponent.java
+ * Nom du fichier   : BudgetList.java
  * ============================================================================
- * Date de création : 25 avr. 2013
+ * Date de création : 15 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -12,12 +12,10 @@
  */
 package core.components;
 
-import java.util.Observable;
-
 import core.Core;
 
 /**
- * Cette classe une classe parente pour les objets du core
+ * Représente une list de budgets.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -25,23 +23,34 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class CoreComponent extends Observable {
-   
+public class BudgetList extends ListTemplate<Budget> {
+
    /**
-    * coeur logique du programme 
+    * @param core
     */
-   protected Core core;
-   
-   /**
-    * constructeur
-    * @param core - coeur logique du programme 
+   public BudgetList(Core core) {
+      super(core);
+   }
+
+   /* (non-Javadoc)
+    * @see core.components.ListTemplate#createFalseEntry(java.lang.String)
     */
-   public CoreComponent(Core core) {
-     this.core = core;
+   @Override
+   public Budget createFalseEntry(String name) {
+      return new Budget(core, name);
    }
-   
-   public void setChangedAndNotifyObservers() {
-      setChanged();
-      notifyObservers();
+
+   /* (non-Javadoc)
+    * @see core.components.ListTemplate#get(int)
+    */
+   @Override
+   public Budget get(int id) {
+      for(Budget budget : getList()) {
+         if (budget.getId() == id) {
+            return budget;
+         }
+      }
+      return null;
    }
+
 }

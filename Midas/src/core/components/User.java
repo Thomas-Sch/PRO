@@ -3,9 +3,9 @@
  * ============================================================================
  * Date de cr�ation : 24 avr. 2013
  * ============================================================================
- * Auteurs          : Biolzi S�bastien
+ * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
- *                    Decorvet Gr�goire
+ *                    Decorvet Grégoire
  *                    Schweizer Thomas
  *                    Sinniger Marcel
  * ============================================================================
@@ -13,10 +13,12 @@
 package core.components;
 
 import core.Core;
+import core.CoreComponent;
+import core.IdentifiedComponent;
 import database.dbComponents.DBUser;
 
 /**
- * cette classe represente un utilisateur
+ * Cette classe représente un utilisateur.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -24,7 +26,7 @@ import database.dbComponents.DBUser;
  * @author Sinniger Marcel
  *
  */
-public class User extends CoreComponent {
+public class User extends CoreComponent implements IdentifiedComponent {
 
    /**
     * variables d'un utilisateur
@@ -68,10 +70,6 @@ public class User extends CoreComponent {
       dbUser.setName(name);
    }
    
-   /**
-    * Obtenir le numéro d'identification de l'utilisateur dans la base de donnee
-    * @return l'ID de l'utilisateur
-    */
    public int getId() {
       return dbUser.getId();
    }

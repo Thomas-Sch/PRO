@@ -15,6 +15,8 @@ package core.components;
 import java.util.Date;
 
 import core.Core;
+import core.CoreComponent;
+import core.IdentifiedComponent;
 import database.dbComponents.DBRecurrence;
 
 /**
@@ -26,7 +28,7 @@ import database.dbComponents.DBRecurrence;
  * @author Sinniger Marcel
  */
 
-public class Recurrence extends CoreComponent {
+public class Recurrence extends CoreComponent implements IdentifiedComponent {
    
    /**
     * variables d'une recurrence
@@ -87,10 +89,6 @@ public class Recurrence extends CoreComponent {
       dbRecurrence.setEnd(date);
    }
    
-   /**
-    * Obtenir le numero d'identification de la recurrence dans la base de donnee
-    * @return l'ID de la recurrence
-    */
    public int getId() {
       return dbRecurrence.getId();
    }

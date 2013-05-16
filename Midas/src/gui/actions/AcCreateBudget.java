@@ -25,7 +25,7 @@ import core.Core;
 import core.components.Budget;
 
 /**
- * TODO
+ * Contrôleur et action d'ajout d'un budget.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire

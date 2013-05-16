@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : AuthorExempleData.java
+ * Nom du fichier   : CoreComponent.java
  * ============================================================================
- * Date de création : 16 avr. 2013
+ * Date de création : 25 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,11 +10,13 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.testdata;
+package core;
+
+import java.util.Observable;
 
 
 /**
- * Contient les données de test pour les auteurs.
+ * Cette classe une classe parente pour les objets du core
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -22,16 +24,23 @@ package gui.testdata;
  * @author Sinniger Marcel
  *
  */
-public class AuthorData extends Data<String>{
+public class CoreComponent extends Observable {
    
    /**
-    * Crée un modèle de donnée de test.
+    * coeur logique du programme 
     */
-   public AuthorData() {
-      addItem("Thomas");
-      addItem("Dieu");
-      addItem("Jo");
-      addItem("Platon");
-      addItem("Bob l'éponge");
+   protected Core core;
+   
+   /**
+    * constructeur
+    * @param core - coeur logique du programme 
+    */
+   public CoreComponent(Core core) {
+     this.core = core;
+   }
+   
+   public void setChangedAndNotifyObservers() {
+      setChanged();
+      notifyObservers();
    }
 }

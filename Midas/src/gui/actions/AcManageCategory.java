@@ -12,6 +12,7 @@
  */
 package gui.actions;
 
+import gui.Controller;
 import gui.UserAction;
 import gui.views.JManageCategoryFrame;
 
@@ -31,14 +32,16 @@ import core.Core;
  */
 public class AcManageCategory extends UserAction {
    
-   JManageCategoryFrame view;
+   private JManageCategoryFrame view;
+   private Controller controller;
 
    /**
     * @param core
     * @param dependencies
     */
-   public AcManageCategory(Core core, Object[] dependencies) {
+   public AcManageCategory(Core core,Controller controller, Object[] dependencies) {
       super(core, dependencies);
+      this.controller = controller;
    }
 
    /* (non-Javadoc)
@@ -46,7 +49,7 @@ public class AcManageCategory extends UserAction {
     */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-      view = new JManageCategoryFrame();
+      view = new JManageCategoryFrame(controller);
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
    }

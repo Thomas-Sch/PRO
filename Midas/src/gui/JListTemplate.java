@@ -21,6 +21,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import core.Core;
+
 /**
  * TODO
  * @author Biolzi Sébastien
@@ -37,10 +39,13 @@ public abstract class JListTemplate extends JPanel {
     */
    private static final long serialVersionUID = -6145500497570831757L;
    
+   private Controller controller;
+   
    private DefaultListModel<String> dlmModel = new DefaultListModel<>();
    private JList<String> lstCategory = new JList<>(dlmModel);
    
-   public JListTemplate() {
+   public JListTemplate(Controller controller) {
+      this.controller = controller;
       
       setData(dlmModel);
       
@@ -54,6 +59,10 @@ public abstract class JListTemplate extends JPanel {
       
       gblConstraints.gridy = 1;
       add(new JAddEditDelete(), gblConstraints);
+   }
+   
+   protected Core getCore() {
+      return controller.getCore();
    }
    
    protected abstract void setData(DefaultListModel<String> dlm);

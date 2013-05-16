@@ -12,6 +12,7 @@
  */
 package gui.actions;
 
+import gui.Controller;
 import gui.UserAction;
 import gui.views.JManageAuthorFrame;
 
@@ -31,13 +32,15 @@ import core.Core;
  */
 public class AcManageAuthor extends UserAction {
 
-   JManageAuthorFrame view;
+   private JManageAuthorFrame view;
+   private Controller controller;
    /**
     * @param core
     * @param dependencies
     */
-   public AcManageAuthor(Core core, Object[] dependencies) {
+   public AcManageAuthor(Core core, Controller controller, Object[] dependencies) {
       super(core, dependencies);
+      this.controller = controller;
    }
 
    /* (non-Javadoc)
@@ -45,7 +48,7 @@ public class AcManageAuthor extends UserAction {
     */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-      view = new JManageAuthorFrame();
+      view = new JManageAuthorFrame(controller);
 
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);

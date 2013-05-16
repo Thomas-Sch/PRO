@@ -14,13 +14,12 @@ package gui.views;
 
 import gui.Controller;
 import gui.View;
-import gui.component.JComboBoxBudget;
-import gui.component.JComboBoxCategory;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
 import gui.component.JRecursionChooser;
 import gui.component.JValidateCancel;
+import gui.controller.ComboBoxBudget;
 import gui.controller.ComboBoxUser;
 import gui.controller.ComboBoxesCategory;
 import gui.utils.StandardInsets;
@@ -35,7 +34,7 @@ import javax.swing.JPanel;
 import settings.Language.Text;
 
 /**
- * TODO
+ * Fenêtre graphique pour ajouter une dépense.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -53,7 +52,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    private Controller controller;
    
    //Composants
-   private JComboBoxBudget cbbBudgets;
+   private ComboBoxBudget budgets;
    private ComboBoxesCategory categories;
    private ComboBoxUser users;
    private JLabelTextPanel ltpReason;
@@ -87,7 +86,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       
       constraints.gridx = 0;
       constraints.gridy = 0;
-      pnlContent.add(cbbBudgets, constraints);
+      pnlContent.add(budgets.getGraphicalComponent(), constraints);
       
       constraints.gridy = 1;
       pnlContent.add(categories.getGraphicalComponent(), constraints);
@@ -117,7 +116,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    }
 
    private void initContent() {
-      cbbBudgets = new JComboBoxBudget();
+      budgets = new ComboBoxBudget(controller.getCore());
       categories = new ComboBoxesCategory(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
       ltpReason = new JLabelTextPanel(Text.REASON_LABEL.toString());

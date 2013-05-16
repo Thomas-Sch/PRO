@@ -12,8 +12,9 @@
  */
 package gui.views;
 
+import gui.Controller;
 import gui.JManageFrame;
-import gui.testdata.AuthorList;
+import gui.controller.UserListBox;
 
 import javax.swing.JPanel;
 
@@ -29,13 +30,23 @@ import javax.swing.JPanel;
 public class JManageAuthorFrame extends JManageFrame {
 
    /**
+    * @param controller
+    */
+   public JManageAuthorFrame(Controller controller) {
+      super(controller);
+   }
+
+   /**
     * ID de série.
     */
    private static final long serialVersionUID = 3252804495254018094L;  
    
+   private UserListBox users;
+   
    protected JPanel initContent() {
       super.initContent();
-      getContent().add(new AuthorList(), getConstraints());      
+      users = new UserListBox(getCore());
+      getContent().add(users.getGraphicalComponent(), getConstraints());      
       return getContent();
    }
    

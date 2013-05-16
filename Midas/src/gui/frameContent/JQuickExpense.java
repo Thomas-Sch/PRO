@@ -16,6 +16,7 @@ import gui.Controller;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JReasonInput;
+import gui.controller.ComboBoxBudget;
 import gui.controller.ComboBoxUser;
 import gui.controller.ComboBoxesCategory;
 
@@ -23,10 +24,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -49,6 +47,7 @@ public class JQuickExpense extends JPanel {
    JButton btnValidate;
    
    ComboBoxesCategory categories;
+   ComboBoxBudget budgets;
    
    /**
     * ID de série.
@@ -67,6 +66,7 @@ public class JQuickExpense extends JPanel {
    
    public void initContent() {
       categories = new ComboBoxesCategory(controller.getCore());
+      budgets = new ComboBoxBudget(controller.getCore());
    }
    
    public void buildContent() {
@@ -136,13 +136,9 @@ public class JQuickExpense extends JPanel {
    private void setBudgetList(GridBagConstraints constraints) {
       constraints.gridx = 0;
       constraints.gridy = 2;
-      JComboBox<String> cmbBudgets = new JComboBox<>();
+
       
-      ComboBoxModel<String> cbmBudgetsData = new DefaultComboBoxModel<String>(
-            new String[] { "Selectionner un budget", "Maison", "Tourisme", "Cadeaux", "Nouveau budget..." });
-      
-      cmbBudgets.setModel(cbmBudgetsData);
-      add(cmbBudgets, constraints);
+      add(budgets.getGraphicalComponent(), constraints);
    }
 
    /**
