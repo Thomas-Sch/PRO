@@ -36,6 +36,7 @@ public class ComboBoxesCategory extends Controller {
    
    JComboBoxCategory view;
    CategoryList model;
+   CategoryList children;
 
    /**
     * @param core
@@ -50,7 +51,8 @@ public class ComboBoxesCategory extends Controller {
     */
    @Override
    protected void initComponents() {
-      model = getCore().getAllCategories();
+      model = getCore().getAllPrimaryCategories();
+      children = new CategoryList(getCore());
       view = new JComboBoxCategory(model);
    }
 

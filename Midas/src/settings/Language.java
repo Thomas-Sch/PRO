@@ -76,6 +76,10 @@ public class Language {
       AMOUNT_LABEL,
       DATE_LABEL,
       
+      SELECT_CATEGORY_LABEL,
+      NEW_CATEGORY_LABEL,
+      SELECT_SUBCATEGORY_LABEL,
+      NEW_SUBCATEGORY_LABEL,
       
       DAILY_LABEL,
       WEEKLY_LABEL,

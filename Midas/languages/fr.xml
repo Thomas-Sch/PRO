@@ -24,6 +24,11 @@
   <account_description_label>Description du compte</account_description_label>
   <account_name_label>Nom du compte</account_name_label>
   
+  <select_category_label>Sélectionner une catégorie</select_category_label>
+  <new_category_label>Nouvelle catégorie...</new_category_label>
+  <select_subcategory_label>Sélectionner une sous catégorie</select_subcategory_label>
+  <new_subcategory_label>Nouvelle sous catégorie...</new_subcategory_label>
+  
   <home_screen_name>Accueil</home_screen_name>
   <quick_expense_label>Effectuer une dépense rapide...</quick_expense_label>
   <date_label>Date</date_label>
