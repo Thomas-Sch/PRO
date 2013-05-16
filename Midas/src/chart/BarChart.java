@@ -56,6 +56,7 @@ public class BarChart extends ChartWithAxes {
       
       for (BarValue value : pieValues) {
          data.setValue(value.getValue(), "Row", value.getColumn()); // "Row" is not used
+         data.
       }
       
       return data;

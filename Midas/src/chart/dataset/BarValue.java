@@ -37,7 +37,5 @@ public class BarValue extends DatasetValue{
    public String getColumn() {
       return column;
    }
-   
-   
 
 }
