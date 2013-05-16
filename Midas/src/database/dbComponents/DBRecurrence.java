@@ -18,7 +18,7 @@ public class DBRecurrence extends DBComponent {
 
    private Date start;
    private Date end;
-   private Integer days;
+   private Integer intervalRecurrence;
    /**
     * @return le/la/les start
     */
@@ -44,23 +44,23 @@ public class DBRecurrence extends DBComponent {
       this.end = end;
    }
    /**
-    * @return le/la/les days
+    * @return le/la/les intervalRecurrence
     */
-   public Integer getDays() {
-      return days;
+   public Integer getintervalRecurrence() {
+      return intervalRecurrence;
    }
    /**
-    * @param days - la nouvelle valeur pour l'attribut days
+    * @param days - la nouvelle valeur pour l'attribut intervalRecurrence
     */
-   public void setDays(Integer days) {
-      this.days = days;
+   public void setIntervalRecurrence(Integer intervalRecurrence) {
+      this.intervalRecurrence = intervalRecurrence;
    }
    /* (non-Javadoc)
     * @see java.lang.Object#toString()
     */
    @Override
    public String toString() {
-      return "DBRecurrence [start=" + start + ", end=" + end + ", days=" + days
+      return "DBRecurrence [start=" + start + ", end=" + end + ", intervalRecurrence=" + intervalRecurrence
             + ", getId()=" + getId() + "]";
    }
    

@@ -992,7 +992,7 @@ public class DBController {
          dbRecurrence.setId((result.getInt(1)));
          dbRecurrence.setStart(result.getDate(2));
          dbRecurrence.setEnd(result.getDate(3));
-         dbRecurrence.setDays(result.getInt(4));
+         dbRecurrence.setIntervalRecurrence(result.getInt(4));
    
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -1018,7 +1018,7 @@ public class DBController {
             dbRecurrence.setId((result.getInt(1)));
             dbRecurrence.setStart(result.getDate(2));
             dbRecurrence.setEnd(result.getDate(3));
-            dbRecurrence.setDays(result.getInt(4));
+            dbRecurrence.setIntervalRecurrence(result.getInt(4));
             dbRecurrences.add(dbRecurrence);
          }
    
@@ -1041,7 +1041,7 @@ public class DBController {
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
             preparedStatement.setDate(1, new java.sql.Date(dbRecurrence.getStart().getTime()));
             preparedStatement.setDate(2, new java.sql.Date(dbRecurrence.getEnd().getTime()));
-            preparedStatement.setInt(3, dbRecurrence.getDays());
+            preparedStatement.setInt(3, dbRecurrence.getintervalRecurrence());
             this.insert(preparedStatement, dbRecurrence);
          } else {
             sqlString = "UPDATE Recurrence " +
@@ -1050,7 +1050,7 @@ public class DBController {
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
             preparedStatement.setDate(1, new java.sql.Date(dbRecurrence.getStart().getTime()));
             preparedStatement.setDate(2, new java.sql.Date(dbRecurrence.getEnd().getTime()));
-            preparedStatement.setInt(3, dbRecurrence.getDays());
+            preparedStatement.setInt(3, dbRecurrence.getintervalRecurrence());
             preparedStatement.setInt(4, dbRecurrence.getId());
             this.update(preparedStatement);
          }
