@@ -14,8 +14,16 @@ package database.dbComponents;
 
 public class DBCategory extends DBComponent {
 
-   String name;
-   Integer parentDBCategory;
+   private String name;
+   private Integer parentDBCategory;
+   
+   /**
+    * Initialise les champs qui ne representent pas une référence
+    */
+   public DBCategory() {
+      name = "";
+   }
+   
    /**
     * @return le/la/les name
     */

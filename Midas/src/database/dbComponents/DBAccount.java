@@ -14,11 +14,22 @@ package database.dbComponents;
 
 public class DBAccount extends DBComponent {
 
-   String name;
-   String nameBank;
-   String accountNumber;
-   Double amount;
-   Double overdraftLimit;
+   private String name;
+   private String nameBank;
+   private String accountNumber;
+   private Double amount;
+   private Double overdraftLimit;
+   
+  /**
+   * Initialise les champs qui ne representent pas une référence
+   */
+   public DBAccount() {
+      name = "";
+      nameBank = "";
+      accountNumber = "";
+      amount = 0.0;
+      overdraftLimit = 0.0;
+   }
    
    /**
     * @return le/la/les name

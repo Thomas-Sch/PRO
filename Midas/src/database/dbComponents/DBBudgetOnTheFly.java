@@ -14,8 +14,17 @@ package database.dbComponents;
 
 public class DBBudgetOnTheFly extends DBBudget {
 
-   java.util.Date start;
-   java.util.Date end;
+   private java.util.Date start;
+   private java.util.Date end;
+   
+   /**
+    * Initialise les champs qui ne representent pas une référence
+    */
+   public DBBudgetOnTheFly() {
+      start = new java.util.Date(1900, 1, 1);
+      end = new java.util.Date(1900, 1, 1);
+   }
+   
    /**
     * @return le/la/les start
     */

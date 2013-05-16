@@ -15,10 +15,21 @@ package database.dbComponents;
 import java.util.Date;
 
 public class DBRecurrence extends DBComponent {
-
+   
    private Date start;
    private Date end;
    private Integer intervalRecurrence;
+   
+   
+   /**
+    * Initialise les champs qui ne representent pas une référence
+    */
+   public DBRecurrence() {
+      start = new java.util.Date(1900, 1, 1);
+      end = new java.util.Date(1900, 1, 1);
+      intervalRecurrence = 0;
+   }
+   
    /**
     * @return le/la/les start
     */
