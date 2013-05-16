@@ -19,6 +19,8 @@ import gui.views.JManageCategoryFrame;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 
+import settings.Language.Text;
+
 import core.Core;
 
 /**
@@ -50,6 +52,7 @@ public class AcManageCategory extends UserAction {
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       view = new JManageCategoryFrame(controller);
+      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.CATEGORY_MANAGEMENT_TITLE);
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
    }

@@ -13,12 +13,16 @@
 package gui.actions;
 
 import gui.UserAction;
+import gui.utils.Positions;
+import gui.utils.Positions.ScreenPosition;
 import gui.views.JCreateCategory;
 
 import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import settings.Language.Text;
 
 import core.Core;
 import core.components.Category;
@@ -53,6 +57,8 @@ public class AcCreateCategory extends UserAction {
       
       // Vue
       view = new JCreateCategory((Component)event.getSource(), category);
+      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.CATEGORY_CREATION_TITLE.toString());
+      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       
       view.addValidateListener(new UserAction(core) {
          @Override
@@ -63,7 +69,6 @@ public class AcCreateCategory extends UserAction {
       });
       
       view.addCancelListener(new ActionListener() {
-         
          @Override
          public void actionPerformed(ActionEvent arg0) {
             view.dispose();
@@ -77,12 +82,10 @@ public class AcCreateCategory extends UserAction {
       view.setVisible(true);
    }
 
-
    /**
     * @return
     */
    public Category getCreatedCategory() {
       return category;
    }
-
 }

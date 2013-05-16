@@ -64,7 +64,7 @@ public class UserListBox extends Controller {
    @Override
    public Component getGraphicalComponent() {
       // TODO Auto-generated method stub
-      return null;
+      return view;
    }
 
 }

@@ -79,7 +79,6 @@ public class JCreateBudgetFrame extends JDialog implements View{
       this.controller = controller;
   //    this.budget = budget;
       
-      setTitle(Text.APP_TITLE.toString());
       setContentPane(buildContent());
       setLocationRelativeTo(parent);
       setResizable(false);

@@ -20,6 +20,8 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import settings.Language.Text;
+
 import core.Core;
 import core.components.User;
 
@@ -47,6 +49,7 @@ public class AcCreateAuthor extends UserAction {
       user = core.createUser();
       
       view = new JCreateAuthorFrame((Component)event.getSource(), user);
+      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.AUTHOR_CREATION_TITLE.toString());
       
       view.addValidateListener(new UserAction(core) {
          @Override
@@ -55,8 +58,8 @@ public class AcCreateAuthor extends UserAction {
             view.dispose();
          }
       });
+      
       view.addCancelListener(new ActionListener() {
-         
          @Override
          public void actionPerformed(ActionEvent arg0) {
             view.dispose();

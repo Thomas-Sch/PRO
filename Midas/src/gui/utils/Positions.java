@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 /**
@@ -38,7 +39,15 @@ public class Positions {
             screenDimensions.height, frame.getWidth(), frame.getHeight(), position);
       
       frame.setLocation(location.x, location.y);
+   }
+   
+   public static void setPositionOnScreen(JDialog dialog, ScreenPosition position) {
+      Dimension screenDimensions = Toolkit.getDefaultToolkit().getScreenSize();
       
+      Point location = computeRelativePosition(screenDimensions.width,
+            screenDimensions.height, dialog.getWidth(), dialog.getHeight(), position);
+      
+      dialog.setLocation(location.x, location.y);
    }
    
    public static Point computeRelativePosition(
@@ -75,9 +84,5 @@ public class Positions {
       }
       
       return result;
-      
    }
-   
-   
-
 }

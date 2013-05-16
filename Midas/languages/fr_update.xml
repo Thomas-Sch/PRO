@@ -2,6 +2,16 @@
 <language>
   <app_title>Midas</app_title>
   <action_quit>Quitter</action_quit>
+  <account_management_title>Gestion des comptes</account_management_title>
+  <category_creation_title>Ajout d'une catégorie</category_creation_title>
+  <category_management_title>Gestion des catégories</category_management_title>
+  <subcategory_creation_title>Ajout d'une sous catégorie</subcategory_creation_title>
+  <author_creation_title>Ajout d'un auteur</author_creation_title>
+  <author_management_title>Gestion des auteurs</author_management_title>
+  <budget_creation_title>Ajout d'un budget</budget_creation_title>
+  <budget_fly_creation_title>Ajout d'un budget à la volée</budget_fly_creation_title>
+  <expense_creation_title>Nouvelle dépense</expense_creation_title>
+  <transaction_creation_title>Nouvelle transaction</transaction_creation_title>
   <validate_button>Valider</validate_button>
   <cancel_button>Annuler</cancel_button>
   <reset_button>Initialiser</reset_button>

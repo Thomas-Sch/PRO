@@ -26,7 +26,6 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
 
-import settings.Language.Text;
 import core.components.Category;
 
 /**
@@ -55,8 +54,6 @@ public class JCreateCategory extends JDialog implements View{
     */
    public JCreateCategory(Component parent, Category category) {
       this.category = category;
-      
-      setTitle(Text.APP_TITLE.toString());
       setContentPane(buildContent());
       setLocationRelativeTo(parent);
       setResizable(false);

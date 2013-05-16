@@ -26,7 +26,6 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
 
-import settings.Language.Text;
 import core.components.User;
 
 /**
@@ -56,7 +55,6 @@ public class JCreateAuthorFrame extends JDialog implements View{
    public JCreateAuthorFrame(Component parent, User user) {
       this.user = user;
       
-      setTitle(Text.APP_TITLE.toString());
       setContentPane(buildContent());
       setLocationRelativeTo(parent);
       setResizable(false);

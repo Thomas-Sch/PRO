@@ -21,6 +21,8 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import settings.Language.Text;
+
 import core.Core;
 import core.components.BudgetOnTheFly;
 
@@ -76,6 +78,7 @@ public class AcCreateOnTheFlyBudget extends UserAction {
       budget.addObserver(view);
       
       // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.BUDGET_FLY_CREATION_TITLE.toString());
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
    }

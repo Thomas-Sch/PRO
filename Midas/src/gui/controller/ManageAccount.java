@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 
+import settings.Language.Text;
+
 import core.Core;
 
 /**
@@ -51,10 +53,9 @@ public class ManageAccount extends Controller {
    @Override
    protected void initComponents() {
       view = new JManageAccount(this);
+      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.ACCOUNT_MANAGEMENT_TITLE);
       view.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
       view.setLocationRelativeTo(parent);
-     //view.setModalityType(ModalityType.APPLICATION_MODAL); // Empèches les envents de se lancer.
-      //view.setModal(true);
       view.setVisible(true);
    }
 
@@ -72,8 +73,6 @@ public class ManageAccount extends Controller {
             view.swapMode();
          }
       });
-      
-      
    }
 
    /* (non-Javadoc)

@@ -2,6 +2,16 @@
 <language>
   <app_title>TODO</app_title>
   <action_quit>TODO</action_quit>
+  <account_management_title>TODO</account_management_title>
+  <category_creation_title>TODO</category_creation_title>
+  <category_management_title>TODO</category_management_title>
+  <subcategory_creation_title>TODO</subcategory_creation_title>
+  <author_creation_title>TODO</author_creation_title>
+  <author_management_title>TODO</author_management_title>
+  <budget_creation_title>TODO</budget_creation_title>
+  <budget_fly_creation_title>TODO</budget_fly_creation_title>
+  <expense_creation_title>TODO</expense_creation_title>
+  <transaction_creation_title>TODO</transaction_creation_title>
   <validate_button>TODO</validate_button>
   <cancel_button>TODO</cancel_button>
   <reset_button>TODO</reset_button>
