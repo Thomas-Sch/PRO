@@ -18,7 +18,7 @@ import core.IdentifiedComponent;
 import database.dbComponents.DBBudget;
 
 /**
- * Cette classe represente un budget
+ * Cette classe represente un budget.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -29,12 +29,12 @@ import database.dbComponents.DBBudget;
 public class Budget extends CoreComponent implements IdentifiedComponent {
 
    /**
-    * variables du budget
+    * Variables du budget.
     */
    private DBBudget dbBudget;
    
    /**
-    * Construit l'object Budget
+    * Construit l'object Budget.
     * @param core - coeur logique du programme 
     * @param dbBudget - variable de la classe Budget
     */
@@ -44,6 +44,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
+    * Construit l'object Budget avec un nom uniquement.
     * @param core Contrôleur logique du programme.
     * @param name Nom du budget.
     */
@@ -54,6 +55,10 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
       dbBudget.setName(name);
    }
 
+   /**
+    * Retourne les variables du budget
+    * @return un object contenant les variables utilisees par le budget
+    */
    public DBBudget getDBBudget() {
       return dbBudget;
    }
@@ -75,7 +80,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-    * modifie le montant limite du budget
+    * Modifie le montant limite du budget.
     * @param limit - le montant limite du budget
     * 
     * @throws erreur de saisie : si une limite negative est passee en parametre 
@@ -90,7 +95,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-   * consulte la recurence du budget
+   * Consulte la recurence du budget.
    * @return la recurence du budget
    */
    public Recurrence getRecurrence() {
@@ -98,7 +103,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-    * modifie la recurence du budget
+    * Modifie la recurence du budget.
     * @param recurrence - la nouvelle recurence
     */
    public void setRecurrence(Recurrence recurrence) {
@@ -106,7 +111,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-    * consulte le compte avec le budget est liee
+    * Consulte le compte avec le budget est liee.
     * @return le compte lie au budget
     */
    public Account getBindAccount() {
@@ -114,7 +119,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-    * lie le budget a un compte
+    * Lie le budget a un compte.
     * @param account - un compte
     */
    public void setBindAccount(Account account) {
@@ -122,13 +127,17 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-    * Obtenir le numero d'identification du budget dans la base de donnee
+    * Obtenir le numero d'identification du budget dans la base de donnee.
     * @return l'ID du budget
     */
    public int getId() {
       return dbBudget.getId();
    }
    
+   /**
+    * Retourne le nom du budget.
+    * @return un chaine de caractere representant le nom du compte
+    */
    public String toString() {
       return getBudgetName();
    }
