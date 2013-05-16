@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : BarValue.java
+ * Nom du fichier   : TimeSeriesChartTestRoutine.java
  * ============================================================================
- * Date de création : 15.05.2013
+ * Date de création : 16.05.2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,7 +10,11 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart.dataset;
+package chart.test;
+
+import javax.swing.JFrame;
+
+import org.jfree.data.xy.XYDataset;
 
 /**
  * TODO
@@ -21,23 +25,20 @@ package chart.dataset;
  * @author Sinniger Marcel
  *
  */
-public class BarValue extends DatasetValue{
-
-   private String column;
-   //private String row;
-   
-   public BarValue(Double value, String column) {
-      super(value);
-      this.column = column;
-   }
+public class TimeSeriesChartTestRoutine {
 
    /**
-    * @return the column
+    * @param args
     */
-   public String getColumn() {
-      return column;
+   public static void main(String[] args) {
+      XYDataset dataset
+      
+      
+      JFrame frame = new JFrame("Time Series Chart");
+      frame.getContentPane().add(barChart.getChartPanel());
+      frame.pack();
+      frame.setVisible(true);
+
    }
-   
-   
 
 }

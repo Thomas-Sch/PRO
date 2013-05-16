@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : BarValue.java
+ * Nom du fichier   : ChartWithAxes.java
  * ============================================================================
- * Date de création : 15.05.2013
+ * Date de création : 16.05.2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart.dataset;
+package chart;
 
 /**
  * TODO
@@ -21,23 +21,28 @@ package chart.dataset;
  * @author Sinniger Marcel
  *
  */
-public class BarValue extends DatasetValue{
+public class ChartWithAxes extends Chart {
 
-   private String column;
-   //private String row;
+   private String x;
+   private String y;
    
-   public BarValue(Double value, String column) {
-      super(value);
-      this.column = column;
+   public ChartWithAxes(String title) {
+      super(title);
    }
-
+   
    /**
-    * @return the column
+    * @return the x
     */
-   public String getColumn() {
-      return column;
+   protected String getX() {
+      return x;
    }
-   
+   /**
+    * @return the y
+    */
+   protected String getY() {
+      return y;
+   }
+
    
 
 }

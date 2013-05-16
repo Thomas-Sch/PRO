@@ -39,7 +39,7 @@ public class PieChartTestRoutine {
       
       PieChart pieChart = new PieChart("title", pieValues);   
       
-      JFrame frame = new JFrame("First");
+      JFrame frame = new JFrame("Pie Chart");
       frame.getContentPane().add(pieChart.getChartPanel());
       frame.pack();
       frame.setVisible(true);
