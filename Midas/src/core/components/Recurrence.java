@@ -47,22 +47,6 @@ public class Recurrence extends CoreComponent {
       return dbRecurrence;
    }
    
-//   /**
-//    * consulte le nom de la recurence
-//    * @return le nom de la recurrence
-//    */
-//   public String getName() {
-//      return dbRecurrence.getName();
-//   }
-//   
-//   /**
-//    * modifie le nom de la recurrence
-//    * @param name
-//    */
-//   public void setName(String name) {
-//      dbRecurrence.setName(name);
-//   }
-   
    /**
     * consult la date de debut du budget a la volee
     * @return la date de debut
