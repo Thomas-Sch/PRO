@@ -12,9 +12,10 @@
  */
 package database.dbComponents;
 
-public class DBBudget extends DBComponent {
+public class DBBudget extends DBComponentEnableable {
 
    private String name; 
+   private String description;
    private Double limit;
    private Integer dbRecurrence;
    private Integer dbAccount;
@@ -24,6 +25,7 @@ public class DBBudget extends DBComponent {
     */
    public DBBudget() {
       name = "";
+      description = "";
       limit = 0.0;
    }
    
@@ -38,6 +40,19 @@ public class DBBudget extends DBComponent {
     */
    public void setName(String name) {
       this.name = name;
+   }
+   /**
+    * @return the description
+    */
+   public String getDescription() {
+      return description;
+   }
+
+   /**
+    * @param description the description to set
+    */
+   public void setDescription(String description) {
+      this.description = description;
    }
    /**
     * @return le/la/les limit
@@ -75,14 +90,9 @@ public class DBBudget extends DBComponent {
    public void setDbAccount(Integer dbAccount) {
       this.dbAccount = dbAccount;
    }
-   /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
-   @Override
-   public String toString() {
-      return "DBBudget [name=" + name + ", limit=" + limit + ", dbRecurrence="
-            + dbRecurrence + ", dbAccount=" + dbAccount + ", getId()="
-            + getId() + "]";
-   }
+
+
+
+ 
 
 }

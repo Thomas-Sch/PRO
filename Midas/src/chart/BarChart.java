@@ -60,5 +60,9 @@ public class BarChart extends ChartWithAxes {
       
       return data;
    }
+   
+   public DefaultCategoryDataset getDataset() {
+      return dataset;
+   }
 
 }

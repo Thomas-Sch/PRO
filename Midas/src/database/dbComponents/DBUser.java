@@ -12,9 +12,9 @@
  */
 package database.dbComponents;
 
-public class DBUser extends DBComponent {
+public class DBUser extends DBComponentEnableable {
 
-   String name;
+   private String name;   
 
    /**
     * Initialise les champs qui ne representent pas une référence
@@ -37,11 +37,4 @@ public class DBUser extends DBComponent {
       this.name = name;
    }
 
-   /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
-   @Override
-   public String toString() {
-      return "DBUser [name=" + name + ", getId()=" + getId() + "]";
-   }
 }

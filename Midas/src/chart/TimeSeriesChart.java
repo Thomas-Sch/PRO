@@ -16,6 +16,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.xy.XYDataset;
 
 import chart.dataset.TimeSeriesValue;
 
@@ -53,11 +55,11 @@ public class TimeSeriesChart extends ChartWithAxes {
       super.setChart(chart);
    }
 
-   private DefaultCategoryDataset createDataset(TimeSeriesValue[] pieValues) {
-      DefaultCategoryDataset data = new DefaultCategoryDataset();
+   private TimeSeriesCollection createDataset(TimeSeriesValue[] pieValues) {
+      TimeSeriesCollection data = new TimeSeriesCollection();
       
       for (TimeSeriesValue value : pieValues) {
-         data.setValue(value.getValue(), "Row", value.getColumn()); // "Row" is not used
+         data.setSeries(value.getValue(), "Row", value.getColumn()); // "Row" is not used
       }
       
       return data;

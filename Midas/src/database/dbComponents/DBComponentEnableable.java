@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : BarChartTestRoutine.java
+ * Nom du fichier   : DBComponentEnableable.java
  * ============================================================================
  * Date de création : 16.05.2013
  * ============================================================================
@@ -10,12 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart.test;
-
-import javax.swing.JFrame;
-
-import chart.BarChart;
-import chart.dataset.BarValue;
+package database.dbComponents;
 
 /**
  * TODO
@@ -26,31 +21,26 @@ import chart.dataset.BarValue;
  * @author Sinniger Marcel
  *
  */
-public class BarChartTestRoutine {
+public abstract class DBComponentEnableable  extends DBComponent {
 
+   private Boolean enabled;
+   
+   DBComponentEnableable() {
+      enabled = true;
+   }
+   
    /**
-    * @param args
+    * @return le/la/les enabled
     */
-   public static void main(String[] args) {
-           
-      BarValue[] BarValues = {new BarValue(0.5, "cat1"), new BarValue(1.0, "cat2")};
-      
-      BarChart barChart = new BarChart("title", BarValues);   
-      
-      JFrame frame = new JFrame("Bar Chart");
-      frame.getContentPane().add(barChart.getChartPanel());
-      frame.pack();
-      frame.setVisible(true);
-      
-      try {
-         Thread.sleep(5000);
-      }
-      catch (InterruptedException e ){
-         
-      }
-      barChart.getDataset().removeColumn(0);
-
+   public Boolean getEnabled() {
+      return enabled;
    }
 
+   /**
+    * @param name - la nouvelle valeur pour l'attribut enabled
+    */
+   public void setEnabled(Boolean enabled) {
+      this.enabled = enabled;
+   }
 
 }
