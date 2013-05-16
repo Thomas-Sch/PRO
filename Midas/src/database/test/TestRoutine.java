@@ -275,13 +275,13 @@ public class TestRoutine {
       System.out.println(t);
       System.out.println(r1);
       
-      dbController.deleteDbFinancialTransaction(t.getId());
-      dbController.deleteDbBudgetOnTheFly(budgetOnTheFly1.getId());
-      dbController.deleteDbBudget(budget1.getId());
-      dbController.deleteDbAccount(account1.getId());
+      //dbController.deleteDbFinancialTransaction(t.getId());
+      //dbController.deleteDbBudgetOnTheFly(budgetOnTheFly1.getId());
+      //dbController.deleteDbBudget(budget1.getId());
+      //dbController.deleteDbAccount(account1.getId());
       //dbController.deleteDbCategory(cat1.getId());
-      dbController.deleteDbUser(user1.getId());   
-      dbController.deleteDbRecurrence(r1.getId());
+      //dbController.deleteDbUser(user1.getId());   
+      //dbController.deleteDbRecurrence(r1.getId());
       
       
       //----------------------------------------------------------------------------------------

@@ -20,6 +20,14 @@ public class DBBudget extends DBComponent {
    private Integer dbAccount;
    
    /**
+    * Initialise les champs qui ne representent pas une référence
+    */
+   public DBBudget() {
+      name = "";
+      limit = 0.0;
+   }
+   
+   /**
     * @return le/la/les name
     */
    public String getName() {

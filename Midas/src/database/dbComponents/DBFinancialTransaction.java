@@ -14,17 +14,25 @@ package database.dbComponents;
 
 import java.util.Date;
 
-
 public class DBFinancialTransaction extends DBComponent {
 
-   Double amount;
-   Date date;
-   String reason;
-   Integer dbUser;
-   Integer dbBudget;
-   Integer dbAccount;
-   Integer dbCategory;
-   Integer dbRecurrence;
+   private Double amount;
+   private Date date;
+   private String reason;
+   private Integer dbUser;
+   private Integer dbBudget;
+   private Integer dbAccount;
+   private Integer dbCategory;
+   private Integer dbRecurrence;
+   
+   /**
+    * Initialise les champs qui ne representent pas une référence
+    */
+   public DBFinancialTransaction() {
+      amount = 0.0;
+      date = new java.util.Date(1900, 1, 1);
+      reason = "";
+   }
    
    /**
     * @return le/la/les amount

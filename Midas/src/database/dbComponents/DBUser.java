@@ -17,6 +17,13 @@ public class DBUser extends DBComponent {
    String name;
 
    /**
+    * Initialise les champs qui ne representent pas une référence
+    */
+   public DBUser() {
+      name = "";
+   }
+   
+   /**
     * @return le/la/les name
     */
    public String getName() {
