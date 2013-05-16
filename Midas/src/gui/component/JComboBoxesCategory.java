@@ -88,8 +88,8 @@ public class JComboBoxesCategory extends JPanel implements View {
     */
    @Override
    public void update(Observable arg0, Object arg1) {
-      // TODO Auto-generated method stub
-
+      cbcPrimary.update(arg0, arg1);
+      cbcChildren.update(arg0, arg1);
    }
 
 }
