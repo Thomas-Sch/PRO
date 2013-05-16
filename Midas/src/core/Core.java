@@ -345,7 +345,7 @@ public class Core {
     */
    public void saveBudgetOnTheFly(BudgetOnTheFly budget) {
       try {
-         dbController.saveToDatabase(budget.getDBBudget());
+         dbController.saveToDatabase(budget.getDBBudgetOnTheFly());
          
          cache.putToCache(budget);
       }
