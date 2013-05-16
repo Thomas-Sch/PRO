@@ -282,6 +282,21 @@ public class TestRoutine {
       //dbController.deleteDbCategory(cat1.getId());
       dbController.deleteDbUser(user1.getId());   
       dbController.deleteDbRecurrence(r1.getId());
+      
+      
+      //----------------------------------------------------------------------------------------
+      // Category Special
+      // ---------------------------------------------------------------------------------------
+      for (Object line : dbController.getAllParentCategories()) {
+         System.out.println(line);
+      }
+      for (Object line : dbController.getAllChildCategories(1)) { // Cat 11 attendu
+         System.out.println(line);
+      }
+      for (Object line : dbController.getAllChildCategories(2)) { // rien attendu
+         System.out.println(line);
+      }
+      
 
    }
 
