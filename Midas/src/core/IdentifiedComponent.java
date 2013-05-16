@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CoreComponent.java
+ * Nom du fichier   : IdentifiedComponent.java
  * ============================================================================
- * Date de création : 25 avr. 2013
+ * Date de création : 16 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,14 +10,10 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core.components;
-
-import java.util.Observable;
-
-import core.Core;
+package core;
 
 /**
- * Cette classe une classe parente pour les objets du core
+ * Indique que la classe possède un identifiant de type int récupérable.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -25,23 +21,12 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class CoreComponent extends Observable {
+public interface IdentifiedComponent {
    
    /**
-    * coeur logique du programme 
+    * Retourne l'identifiant unique et de valeur entière de l'objet.
+    * @return l'identifiant unique entier.
     */
-   protected Core core;
-   
-   /**
-    * constructeur
-    * @param core - coeur logique du programme 
-    */
-   public CoreComponent(Core core) {
-     this.core = core;
-   }
-   
-   public void setChangedAndNotifyObservers() {
-      setChanged();
-      notifyObservers();
-   }
+   public int getId();
+
 }

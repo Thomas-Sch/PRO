@@ -31,18 +31,12 @@ public class CategoryList extends ListTemplate<Category> {
    public CategoryList(Core core) {
       super(core);
    }
-
-   /* (non-Javadoc)
-    * @see core.components.ListTemplate#createFalseEntry(java.lang.String)
-    */
+   
    @Override
    public Category createFalseEntry(String name) {
       return new Category(core, name);
    }
-
-   /* (non-Javadoc)
-    * @see core.components.ListTemplate#get(int)
-    */
+   
    @Override
    public Category get(int id) {
       for(Category category : getList()) {

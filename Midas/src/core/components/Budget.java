@@ -13,6 +13,8 @@
 package core.components;
 
 import core.Core;
+import core.CoreComponent;
+import core.IdentifiedComponent;
 import database.dbComponents.DBBudget;
 
 /**
@@ -24,7 +26,7 @@ import database.dbComponents.DBBudget;
  * @author Sinniger Marcel
  *
  */
-public class Budget extends CoreComponent {
+public class Budget extends CoreComponent implements IdentifiedComponent {
 
    /**
     * variables du budget

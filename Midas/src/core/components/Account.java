@@ -13,6 +13,8 @@
 package core.components;
 
 import core.Core;
+import core.CoreComponent;
+import core.IdentifiedComponent;
 import database.dbComponents.DBAccount;
 
 /**
@@ -23,7 +25,7 @@ import database.dbComponents.DBAccount;
  * @author Schweizer Thomas
  * @author Sinniger Marcel
  */
-public class Account extends CoreComponent {
+public class Account extends CoreComponent implements IdentifiedComponent {
 
    /**
     * variables du compte
@@ -142,11 +144,6 @@ public class Account extends CoreComponent {
       dbAccount.setName(accountName);
    }
    
-   
-   /**
-    * Obtenir le numero d'identification du compte dans la base de donnee
-    * @return l'ID du compte
-    */
    public int getId() {
       return dbAccount.getId();
    }

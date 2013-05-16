@@ -13,8 +13,8 @@
 package core;
 
 import java.util.LinkedList;
-
 import settings.Settings;
+import core.cache.Cache;
 import core.components.Account;
 import core.components.AccountList;
 import core.components.Budget;
@@ -49,6 +49,8 @@ public class Core {
    
    private DBController dbController;
    
+   private Cache cache;
+   
    private UserList users;
    private AccountList accounts;
    private CategoryList categories;
@@ -57,6 +59,7 @@ public class Core {
    public Core() {
       settings = new Settings();
       dbController = new DBController();
+      cache = new Cache();
       
       users = new UserList(this);
       accounts = new AccountList(this);
@@ -165,14 +168,22 @@ public class Core {
     * @return le compte correspondant à l'identifiant, null le cas échéant.
     */
    public Account getAccount(int id) {
-      Account result = null;
+      Account result = accounts.get(id);
       
-      try {
-         result = new Account(this, dbController.getDbAccount(id));
-      }
-      catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to get the account with id "
-                               + id + " from the database.");
+      // Si pas présent dans le coeur, demander à la base de données pour vérifier
+      if (result == null) {
+         try {
+            result = new Account(this, dbController.getDbAccount(id));
+            
+            // Mise à jour de la liste si présent dans la base de données
+            if (result != null) {
+               accounts.addItem(result);
+            }
+         }
+         catch (DatabaseException e) {
+            MidasLogs.errors.push("Core", "Unable to get the account with id "
+                                  + id + " from the database.");
+         }
       }
       
       return result;
