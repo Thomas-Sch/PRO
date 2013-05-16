@@ -1,7 +1,7 @@
 /* ============================================================================
  * Nom du fichier   : Account.java
  * ============================================================================
- * Date de cr�ation : 15 avr. 2013
+ * Date de creation : 15 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -74,11 +74,15 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     * Créditer un montant sur le compte : ajouter de l'argent sur le compte.
     * @param amount - représentant le montant que l'on veut rajouter sur le compte.
     */
-   public void credit(Double amount) {
+   public void credit(double amount) {
       dbAccount.setAmount(dbAccount.getAmount() + amount);
    }
    
-   public void setAmount(Double amount) {
+   /**
+    * Fixe le montant sur le compte.
+    * @param amount - représentant le montant que l'on veut rajouter sur le compte
+    */
+   public void setAmount(double amount) {
       dbAccount.setAmount(amount);
    }
    
