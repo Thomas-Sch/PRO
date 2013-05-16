@@ -14,13 +14,14 @@ package gui.controller;
 
 import gui.Controller;
 import gui.actions.AcCreateCategory;
-import gui.component.JComboBoxCategory;
+import gui.component.JComboBoxesCategory;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
+import core.components.Category;
 import core.components.CategoryList;
 
 /**
@@ -34,7 +35,7 @@ import core.components.CategoryList;
  */
 public class ComboBoxesCategory extends Controller {
    
-   JComboBoxCategory view;
+   JComboBoxesCategory view;
    CategoryList model;
    CategoryList children;
 
@@ -53,7 +54,7 @@ public class ComboBoxesCategory extends Controller {
    protected void initComponents() {
       model = getCore().getAllPrimaryCategories();
       children = new CategoryList(getCore());
-      view = new JComboBoxCategory(model);
+      view = new JComboBoxesCategory(this);
    }
 
    /* (non-Javadoc)
@@ -61,12 +62,12 @@ public class ComboBoxesCategory extends Controller {
     */
    @Override
    protected void initListeners() {
-      view.addActionListener(new ActionListener() {
+      view.addSelectChangedPrimaryListener(new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
-            if (view.isCreateNewSelected()) {
+            if (view.isCreateNewCategorySelected()) {
                AcCreateCategory action = new AcCreateCategory(getCore());
                action.actionPerformed(arg0);
-               view.setSelectedItem(action.getCreatedCategory());
+               view.setSelectedCategory(action.getCreatedCategory());
             }
          }
       });
@@ -78,6 +79,14 @@ public class ComboBoxesCategory extends Controller {
    @Override
    public Component getGraphicalComponent() {
       return view;
+   }
+   
+   public CategoryList getPrimaryCategories() {
+      return model;
+   }
+   
+   public CategoryList getChildren(Category category) {
+      return getCore().getChildren(category);
    }
 
 }

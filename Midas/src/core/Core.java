@@ -487,4 +487,25 @@ public class Core {
       
       return result; 
    }  
+   
+   public CategoryList getChildren(Category category) {
+      CategoryList result = new CategoryList(this);
+      LinkedList<DBCategory> dbChildren = null;
+      try {
+         dbChildren = dbController.getAllChildCategories(category.getId());
+      }
+      catch (DatabaseException e) {
+         
+      }
+      
+      if (dbChildren != null) {
+         LinkedList<Category> categoryTemp = new LinkedList<>();
+         
+         for (DBCategory dbCategory : dbChildren) {
+            categoryTemp.add(new Category(this, dbCategory));
+         }
+         result.setItems(categoryTemp);
+      }
+      return result;
+   }
 }

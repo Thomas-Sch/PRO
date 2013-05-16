@@ -74,123 +74,53 @@ public class JQuickExpense extends JPanel {
       setLayout(layout);
       
       GridBagConstraints constraints = new GridBagConstraints();
-      initConstraints(constraints);
-     
       
-      setTitle(constraints);
-      setAuthorList(constraints);
-      setAmountInput(constraints);
-      setDateInput(constraints);
-      setBudgetList(constraints);   
-      setCategoryLists(constraints);
-      setReasonInput(constraints);
-      setValidateButton(constraints);
-      
-   }
-   
-   public JButton getValidateButton() {
-      return  btnValidate;
-   }
-   
-   /**
-    * Configure l'emplacement et ajoute de bouton de validation.
-    * @param constraints Contraintes.
-    */
-   private void setValidateButton(GridBagConstraints constraints) {
-      constraints.gridx = 2;
-      constraints.gridy = 4;
-      constraints.gridwidth = 1;
-      btnValidate = new JButton("Valider la dépense");
-      add(btnValidate, constraints);
-   }
-
-   /**
-    * Configure l'emplacement et ajoute les champs de saisie du motif de 
-    * la dépense.
-    * @param constraints Contraintes.
-    */
-   private void setReasonInput(GridBagConstraints constraints) {
-      constraints.gridx = 0;
-      constraints.gridy = 3;
-      constraints.gridwidth = 3;
-      add(new JReasonInput(), constraints);
-   }
-
-   /**
-    * Configure l'emplacement et ajoute les listes de sélection des catégories 
-    * et sous catégories correspondantes.
-    * @param constraints Contraintes.
-    */
-   private void setCategoryLists(GridBagConstraints constraints) {
-      constraints.gridx = 1;
-      add(categories.getGraphicalComponent(), constraints);
-      
-      constraints.gridx = 2;
-      //add(new JComboBoxCategory(), constraints);
-   }
-
-   /**
-    * Configure l'emplacement et ajoute la liste des budgets.
-    * @param constraints Contraintes.
-    */
-   private void setBudgetList(GridBagConstraints constraints) {
-      constraints.gridx = 0;
-      constraints.gridy = 2;
-
-      
-      add(budgets.getGraphicalComponent(), constraints);
-   }
-
-   /**
-    * Configure l'emplacement et ajoute les champs de saisie de date.
-    * @param constraints Contrainte.
-    */
-   private void setDateInput(GridBagConstraints constraints) {
-      constraints.gridx = 2;
-      add(new JDateInput(Text.DATE_LABEL.toString()), constraints);
-   }
-
-   /**
-    * Configure l'emplacement et ajoute la zone de saisie d'un montant.
-    * @param constraints Contraintes.
-    */
-   private void setAmountInput(GridBagConstraints constraints) {
-      constraints.gridx = 1;
-      add(new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString()), constraints);
-   }
-
-   /**
-    * Configure l'emplacement et ajoute la liste déroulante d'auteurs.
-    * @param constraints Contraintes.
-    */
-   private void setAuthorList(GridBagConstraints constraints) {
-      ComboBoxUser authors = new ComboBoxUser(controller.getCore());
-      constraints.gridx = 0;
-      constraints.gridy = 1;
-      add(authors.getGraphicalComponent(), constraints);
-   }
-
-   /**
-    * Initialisation des contraintes initiales d'affichage.
-    * @param constraints Contraintes à initialiser.
-    */
-   private void initConstraints(GridBagConstraints constraints) {
       constraints.fill = GridBagConstraints.HORIZONTAL;
       
       constraints.insets = new Insets(5, 5, 5, 5);
       constraints.weighty = 0.0;
-   }
-   
-   /**
-    * Placement du titre dans le panel.
-    * @param constraints Contraintes.
-    */
-   private void setTitle(GridBagConstraints constraints) {
+      
       // Paramétrage des contraintes et ajout du panel d'alerte.
       constraints.weightx = 0.1;
       constraints.gridx = 0;
       constraints.gridy = 0;     
       constraints.anchor = GridBagConstraints.NORTH;
       add(new JLabel(Text.QUICK_EXPENSE_LABEL.toString()), constraints);
+      
+      ComboBoxUser authors = new ComboBoxUser(controller.getCore());
+      constraints.gridx = 0;
+      constraints.gridy = 1;
+      add(authors.getGraphicalComponent(), constraints);
+      
+      constraints.gridx = 1;
+      add(new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString()), constraints);
+      
+      constraints.gridx = 2;
+      add(new JDateInput(Text.DATE_LABEL.toString()), constraints);
+      
+      constraints.gridx = 0;
+      constraints.gridy = 2;
+
+      
+      add(budgets.getGraphicalComponent(), constraints);
+      
+      constraints.gridx = 1;
+      add(categories.getGraphicalComponent(), constraints);
+
+      constraints.gridx = 0;
+      constraints.gridy = 3;
+      constraints.gridwidth = 3;
+      add(new JReasonInput(), constraints);
+      
+      constraints.gridx = 2;
+      constraints.gridy = 4;
+      constraints.gridwidth = 1;
+      btnValidate = new JButton("Valider la dépense");
+      add(btnValidate, constraints);
+      
+   }
+   
+   public JButton getValidateButton() {
+      return  btnValidate;
    }
 }

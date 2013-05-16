@@ -51,7 +51,7 @@ public class JComboBoxCategory extends JComboBoxTemplate<Category> {
    
    public JComboBoxCategory(CategoryList children, boolean isChildren) {
       this.categories = children;
-      update(categories, null);
+      
       
       if(isChildren) {
          select = new String(Text.SELECT_SUBCATEGORY_LABEL.toString());
@@ -61,7 +61,7 @@ public class JComboBoxCategory extends JComboBoxTemplate<Category> {
          select = new String(Text.SELECT_CATEGORY_LABEL.toString());
          newEntry = new String(Text.NEW_CATEGORY_LABEL.toString());
       }
-      
+      update(categories, null);      
    }
 
    public void update(Observable o, Object arg) {

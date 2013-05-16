@@ -12,12 +12,17 @@
  */
 package gui.component;
 
+import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 
 import gui.View;
+import gui.controller.ComboBoxesCategory;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import core.components.Category;
 import core.components.CategoryList;
 
 /**
@@ -38,10 +43,44 @@ public class JComboBoxesCategory extends JPanel implements View {
    
    private JComboBoxCategory cbcPrimary;
    private JComboBoxCategory cbcChildren;
+   private ComboBoxesCategory controller;
    
-   public JComboBoxCategory(CategoryList categories) {
-      this.categories = categories;
-      update(categories, null);
+   public JComboBoxesCategory(ComboBoxesCategory controller) {
+      setBackground(Color.BLACK);
+      this.controller = controller;
+      initContent();
+      buildContent();
+   }
+   
+   public void initContent() {
+      cbcPrimary = new JComboBoxCategory(controller.getPrimaryCategories());
+      cbcChildren = new JComboBoxCategory(new CategoryList(controller.getCore()), true);
+   }
+   public void buildContent() {
+      setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+      add(cbcPrimary);
+      add(cbcChildren);
+   }
+   
+   public boolean isCreateNewCategorySelected() {
+      return cbcPrimary.isCreateNewSelected();      
+   }
+   
+   public boolean isCreateNewSubCategorySelected() {
+      return cbcChildren.isCreateNewSelected();
+   }
+   
+   public void setSelectedCategory(Category category) {
+      cbcPrimary.setSelectedItem(category);
+      
+   }
+   
+   public void addSelectChangedPrimaryListener(ActionListener listener) {
+      cbcPrimary.addActionListener(listener);
+   }
+   
+   public void addSelectChangedChildrenListener(ActionListener listener) {
+      cbcChildren.addActionListener(listener);
    }
 
    /* (non-Javadoc)
