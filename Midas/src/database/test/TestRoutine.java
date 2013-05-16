@@ -58,21 +58,21 @@ public class TestRoutine {
       System.out.println("----------------------------------------------------------------------");
       
       DBRecurrence r1 = dbController.createRecurence();
-      r1.setDays(30);
+      r1.setIntervalRecurrence(30);
       r1.setStart(new Date(2012, 04, 1));
       r1.setEnd(new Date(2012, 04, 1));
       dbController.saveToDatabase(r1);
       System.out.println(r1);
       
       DBRecurrence r2 = dbController.createRecurence();
-      r2.setDays(30);
+      r2.setIntervalRecurrence(30);
       r2.setStart(new Date(2012, 04, 1));
       r2.setEnd(new Date(2012, 04, 1));
       dbController.saveToDatabase(r2);
       System.out.println(r2);
       
       DBRecurrence r3 = dbController.createRecurence();
-      r3.setDays(30);
+      r3.setIntervalRecurrence(30);
       r3.setStart(new Date(2012, 04, 1));
       r3.setEnd(new Date(2012, 04, 1));
       dbController.saveToDatabase(r3);
@@ -190,15 +190,15 @@ public class TestRoutine {
       System.out.println("----------------------------------------------------------------------");
 
       System.out.println(tempR1);
-      tempR1.setDays(365);
+      tempR1.setIntervalRecurrence(365);
       System.out.println(tempR1);
 
       System.out.println(tempR2);
-      tempR2.setDays(365);
+      tempR2.setIntervalRecurrence(365);
       System.out.println(tempR2);
       
       System.out.println(tempR3);
-      tempR3.setDays(365);
+      tempR3.setIntervalRecurrence(365);
       System.out.println(tempR3);
       
       System.out.println(user1);
@@ -282,6 +282,21 @@ public class TestRoutine {
       //dbController.deleteDbCategory(cat1.getId());
       dbController.deleteDbUser(user1.getId());   
       dbController.deleteDbRecurrence(r1.getId());
+      
+      
+      //----------------------------------------------------------------------------------------
+      // Category Special
+      // ---------------------------------------------------------------------------------------
+      for (Object line : dbController.getAllParentCategories()) {
+         System.out.println(line);
+      }
+      for (Object line : dbController.getAllChildCategories(1)) { // Cat 11 attendu
+         System.out.println(line);
+      }
+      for (Object line : dbController.getAllChildCategories(2)) { // rien attendu
+         System.out.println(line);
+      }
+      
 
    }
 

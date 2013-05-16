@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CategoryList.java
+ * Nom du fichier   : TimeSeriesChartTestRoutine.java
  * ============================================================================
- * Date de création : 14 mai 2013
+ * Date de création : 16.05.2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,9 +10,11 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core.components;
+package chart.test;
 
-import core.Core;
+import javax.swing.JFrame;
+
+import org.jfree.data.xy.XYDataset;
 
 /**
  * TODO
@@ -23,28 +25,20 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class CategoryList extends ListTemplate<Category> {
+public class TimeSeriesChartTestRoutine {
 
    /**
-    * @param core
+    * @param args
     */
-   public CategoryList(Core core) {
-      super(core);
-   }
-   
-   @Override
-   public Category createFalseEntry(String name) {
-      return new Category(core, name);
-   }
-   
-   @Override
-   public Category get(int id) {
-      for(Category category : getList()) {
-         if (category.getId() == id) {
-            return category;
-         }
-      }
-      return null;
+   public static void main(String[] args) {
+      XYDataset dataset
+      
+      
+      JFrame frame = new JFrame("Time Series Chart");
+      frame.getContentPane().add(barChart.getChartPanel());
+      frame.pack();
+      frame.setVisible(true);
+
    }
 
 }

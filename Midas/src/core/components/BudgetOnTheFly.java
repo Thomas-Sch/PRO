@@ -15,10 +15,11 @@ package core.components;
 import java.util.Date;
 
 import core.Core;
+import core.IdentifiedComponent;
 import database.dbComponents.DBBudgetOnTheFly;
 
 /**
- * Cette classe represente un budet a la volee
+ * Cette classe represente un budet a la volee.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -26,15 +27,15 @@ import database.dbComponents.DBBudgetOnTheFly;
  * @author Sinniger Marcel
  *
  */
-public class BudgetOnTheFly extends Budget {
+public class BudgetOnTheFly extends Budget implements IdentifiedComponent {
 
    /**
-    * variables du budget a la volee
+    * Variables du budget a la volee.
     */
    private DBBudgetOnTheFly dbBudetOnTheFly;
    
    /**
-    * Construit l'object Budget
+    * Construit l'object Budget.
     * @param core - coeur logique du programme 
     * @param dbBudget - les caracteristiques du budget
     * @param dbBudetOnTheFly - les caracteristiques du budget 
@@ -88,10 +89,6 @@ public class BudgetOnTheFly extends Budget {
       dbBudetOnTheFly.setEnd(date);
    }
    
-   /**
-    * Obtenir le numero d'identification du budget a la volee dans la base de donnee
-    * @return l'ID du budget a la volee
-    */
    public int getId() {
       return dbBudetOnTheFly.getId();
    }

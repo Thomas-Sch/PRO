@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CoreComponent.java
+ * Nom du fichier   : BarChartTestRoutine.java
  * ============================================================================
- * Date de création : 25 avr. 2013
+ * Date de création : 16.05.2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,14 +10,15 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core.components;
+package chart.test;
 
-import java.util.Observable;
+import javax.swing.JFrame;
 
-import core.Core;
+import chart.BarChart;
+import chart.dataset.BarValue;
 
 /**
- * Cette classe une classe parente pour les objets du core
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -25,23 +26,23 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class CoreComponent extends Observable {
-   
+public class BarChartTestRoutine {
+
    /**
-    * coeur logique du programme 
+    * @param args
     */
-   protected Core core;
-   
-   /**
-    * constructeur
-    * @param core - coeur logique du programme 
-    */
-   public CoreComponent(Core core) {
-     this.core = core;
+   public static void main(String[] args) {
+           
+      BarValue[] BarValues = {new BarValue(0.5, "cat1"), new BarValue(1.0, "cat2")};
+      
+      BarChart barChart = new BarChart("title", BarValues);   
+      
+      JFrame frame = new JFrame("Bar Chart");
+      frame.getContentPane().add(barChart.getChartPanel());
+      frame.pack();
+      frame.setVisible(true);
+
    }
-   
-   public void setChangedAndNotifyObservers() {
-      setChanged();
-      notifyObservers();
-   }
+
+
 }

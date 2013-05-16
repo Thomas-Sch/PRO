@@ -31,4 +31,11 @@ public class BarValue extends DatasetValue{
       this.column = column;
    }
 
+   /**
+    * @return the column
+    */
+   public String getColumn() {
+      return column;
+   }
+
 }

@@ -1,11 +1,11 @@
 /* ============================================================================
  * Nom du fichier   : Account.java
  * ============================================================================
- * Date de cr�ation : 15 avr. 2013
+ * Date de creation : 15 avr. 2013
  * ============================================================================
- * Auteurs          : Biolzi S�bastien
+ * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
- *                    Decorvet Gr�goire
+ *                    Decorvet Grégoire
  *                    Schweizer Thomas
  *                    Sinniger Marcel
  * ============================================================================
@@ -13,6 +13,8 @@
 package core.components;
 
 import core.Core;
+import core.CoreComponent;
+import core.IdentifiedComponent;
 import database.dbComponents.DBAccount;
 
 /**
@@ -23,23 +25,28 @@ import database.dbComponents.DBAccount;
  * @author Schweizer Thomas
  * @author Sinniger Marcel
  */
-public class Account extends CoreComponent {
+public class Account extends CoreComponent implements IdentifiedComponent {
 
    /**
-    * variables du compte
+    * Variables du compte.
     */
    private DBAccount dbAccount;
    
    /**
-    * Construit l'object Account
-    * @param core - coeur logique du programme 
-    * @param dbAcount - variable de la classe account
+    * Construit l'object Account.
+    * @param core - coeur logique du programme .
+    * @param dbAcount - variable de la classe account.
     */
    public Account(Core core, DBAccount dbAcount) {
       super(core);
       this.dbAccount = dbAcount;
    }
    
+   /**
+    * Construit l'object Account avec un nom uniquement.
+    * @param core - coeur logique du programme.
+    * @param name - le nom du compte.
+    */
    public Account(Core core, String name) {
       super(core);
       
@@ -47,32 +54,40 @@ public class Account extends CoreComponent {
       dbAccount.setName(name);
    }
    
+   /**
+    * Retourne les variables du compte.
+    * @return un objet contenant les variables utilisées par le compte.
+    */
    public DBAccount getDBAccount(){
       return dbAccount;
    }
    
    /**
-    * consulter le solde actuel du compte 
-    * @return un double representant le solde actuel du compte  
+    * Consulter le solde actuel du compte.
+    * @return un double représentant le solde actuel du compte.
     */
-   public Double getAccountBalance() {
+   public double getAccountBalance() {
       return dbAccount.getAmount();
    }
    
    /**
-    * Crediter un montant sur le compte : ajouter de l'argent sur le compte
-    * @param amount - representant le montant que l'on veut rajouter sur le compte  
+    * Créditer un montant sur le compte : ajouter de l'argent sur le compte.
+    * @param amount - représentant le montant que l'on veut rajouter sur le compte.
     */
-   public void credit(Double amount) {
+   public void credit(double amount) {
       dbAccount.setAmount(dbAccount.getAmount() + amount);
    }
    
-   public void setAmount(Double amount) {
+   /**
+    * Fixe le montant sur le compte.
+    * @param amount - représentant le montant que l'on veut rajouter sur le compte
+    */
+   public void setAmount(double amount) {
       dbAccount.setAmount(amount);
    }
    
    /**
-    * Debiter un montant sur le compte : prelever de l'argent sur le compte
+    * Debiter un montant sur le compte : prelever de l'argent sur le compte.
     * @param amount - representant le montant que l'on veut enlever sur le compte
     * 
     * @throws montant indisponible sur le compte : lors que l'on veut prelever 
@@ -86,7 +101,7 @@ public class Account extends CoreComponent {
    }
    
    /**
-    * consulter la limite de decouvert possible sur le compte 
+    * Consulter la limite de decouvert possible sur le compte.
     * @return un double representant la limite de decouvert 
     */
    public double getOverdraftLimit() {
@@ -94,7 +109,7 @@ public class Account extends CoreComponent {
    }
    
    /**
-    * modifier la limite de decouvert possible sur le compte le solde actuel du compte 
+    * Modifier la limite de decouvert possible sur le compte le solde actuel du compte.
     * @param overdraftLimit - un double represantant la nouvelle limite de decouvert 
     * 
     * @throws nouvelle limite impossible : si le montant est deja en decouvert et si la 
@@ -110,7 +125,7 @@ public class Account extends CoreComponent {
    }
    
    /**
-    * consulter le numero du compte 
+    * Consulter le numero du compte.
     * @return le numero du compte 
     */ 
    public String getAccountNumber() {
@@ -118,7 +133,7 @@ public class Account extends CoreComponent {
    }
    
    /**
-    * modifie le numero du compte 
+    * Modifie le numero du compte.
     * @param  accountNumber - le numero du compte 
     */
    public void setAccountNumber(String accountNumber) {
@@ -126,7 +141,7 @@ public class Account extends CoreComponent {
    }
    
    /**
-    * consulter le nom du compte
+    * Consulter le nom du compte.
     * @return le numero du compte 
     */ 
    public String getAccountName() {
@@ -134,7 +149,7 @@ public class Account extends CoreComponent {
    }
    
    /**
-    * modifie le nom du compte 
+    * Modifie le nom du compte.
     * @param accountName - le nom du compte 
     */
    public void setAccountName(String accountName)
@@ -142,15 +157,18 @@ public class Account extends CoreComponent {
       dbAccount.setName(accountName);
    }
    
-   
    /**
-    * Obtenir le numero d'identification du compte dans la base de donnee
+    * Obtenir le numéro d'identification du compte dans la base de donnée.
     * @return l'ID du compte
     */
    public int getId() {
       return dbAccount.getId();
    }
    
+   /**
+    * Retourne le nom du compte.
+    * @return une chaîne de caractere representant le nom du compte.w
+    */
    public String toString() {
       return getAccountName();
    }

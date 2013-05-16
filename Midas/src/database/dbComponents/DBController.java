@@ -150,6 +150,8 @@ public class DBController {
       return resultSet;
    }
    
+   
+   // DBUser ------------------------------------------------------------------------------------
    public DBUser createDBUser() {
       return new DBUser();
    }
@@ -248,6 +250,7 @@ public class DBController {
       }
    }
    
+   // DBAccount ------------------------------------------------------------------------------------
    public DBAccount createDBAccount() {
       return new DBAccount();
    }
@@ -370,6 +373,7 @@ public class DBController {
        return new DBFinancialTransaction();
     }
    
+   // DBFinancialTransaction ------------------------------------------------------------------------------------
    public DBFinancialTransaction getDbFinancialTransaction(int id) throws DatabaseException {
 	
       String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID FROM FinancialTransaction WHERE Tra_ID = ?"; 
@@ -512,12 +516,13 @@ public class DBController {
       }
    }
    
+   
+   // DBCategory ------------------------------------------------------------------------------------
    public DBCategory createCategory() {
        return new DBCategory();
     }
    public DBCategory getDbCategory(int id) throws DatabaseException {
-
-	  //Manque certaines infos encore (pas � g�rer � priori d'ici le 23.04.2013 	
+ 	
       String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category WHERE Cat_ID = ?"; 
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBCategory dbCategory = null;
@@ -620,6 +625,62 @@ public class DBController {
       }
    }
    
+   public LinkedList<DBCategory> getAllParentCategories() throws DatabaseException {
+
+      String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category WHERE Par_Cat_Id is NULL"; 
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
+      DBCategory dbCategory = null;
+      LinkedList<DBCategory> dbCategories = new LinkedList<DBCategory>();
+        
+      try {
+         ResultSet result = this.select(preparedStatement);
+           
+            while (result.next()) {
+               dbCategory = new DBCategory();
+               dbCategory.setId((result.getInt(1)));
+               dbCategory.setName((result.getString(2)));
+               dbCategory.setParentDBCategory((result.getInt(3)));
+               dbCategories.add(dbCategory);
+            }
+
+         } catch (SQLException e) {
+            DBErrorHandler.resultSetError(e);
+         }
+         finally {
+            dbAccess.destroyPreparedStatement(preparedStatement);
+         }
+         return dbCategories;
+    }
+    
+    public LinkedList<DBCategory> getAllChildCategories(int id) throws DatabaseException {
+
+       String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID FROM Category WHERE Par_Cat_Id = ?"; 
+        PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
+        DBCategory dbCategory = null;
+        LinkedList<DBCategory> dbCategories = new LinkedList<DBCategory>();
+        
+        try {
+           preparedStatement.setInt(1, id);
+           ResultSet result = this.select(preparedStatement);
+           
+           while (result.next()) {
+            dbCategory = new DBCategory();
+               dbCategory.setId((result.getInt(1)));
+               dbCategory.setName((result.getString(2)));
+               dbCategory.setParentDBCategory((result.getInt(3)));
+               dbCategories.add(dbCategory);
+           }
+
+        } catch (SQLException e) {
+           DBErrorHandler.resultSetError(e);
+        }
+        finally {
+           dbAccess.destroyPreparedStatement(preparedStatement);
+        }
+        return dbCategories;
+    }  
+   
+   // DBBudget ------------------------------------------------------------------------------------
    public DBBudget createDbBudget() {
       return new DBBudget();
    }
@@ -735,6 +796,8 @@ public class DBController {
       }
    }
    
+   
+   // DBBudgetOnTheFly ------------------------------------------------------------------------------------
    public DBBudgetOnTheFly createDbBudgetOnTheFly() {
       return new DBBudgetOnTheFly();
    }
@@ -909,6 +972,7 @@ public class DBController {
       }   
    }
    
+   // DBRecurrence ------------------------------------------------------------------------------------
    public DBRecurrence createRecurence() {
       return new DBRecurrence();
    }
@@ -928,7 +992,7 @@ public class DBController {
          dbRecurrence.setId((result.getInt(1)));
          dbRecurrence.setStart(result.getDate(2));
          dbRecurrence.setEnd(result.getDate(3));
-         dbRecurrence.setDays(result.getInt(4));
+         dbRecurrence.setIntervalRecurrence(result.getInt(4));
    
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -954,7 +1018,7 @@ public class DBController {
             dbRecurrence.setId((result.getInt(1)));
             dbRecurrence.setStart(result.getDate(2));
             dbRecurrence.setEnd(result.getDate(3));
-            dbRecurrence.setDays(result.getInt(4));
+            dbRecurrence.setIntervalRecurrence(result.getInt(4));
             dbRecurrences.add(dbRecurrence);
          }
    
@@ -977,7 +1041,7 @@ public class DBController {
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
             preparedStatement.setDate(1, new java.sql.Date(dbRecurrence.getStart().getTime()));
             preparedStatement.setDate(2, new java.sql.Date(dbRecurrence.getEnd().getTime()));
-            preparedStatement.setInt(3, dbRecurrence.getDays());
+            preparedStatement.setInt(3, dbRecurrence.getintervalRecurrence());
             this.insert(preparedStatement, dbRecurrence);
          } else {
             sqlString = "UPDATE Recurrence " +
@@ -986,7 +1050,7 @@ public class DBController {
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
             preparedStatement.setDate(1, new java.sql.Date(dbRecurrence.getStart().getTime()));
             preparedStatement.setDate(2, new java.sql.Date(dbRecurrence.getEnd().getTime()));
-            preparedStatement.setInt(3, dbRecurrence.getDays());
+            preparedStatement.setInt(3, dbRecurrence.getintervalRecurrence());
             preparedStatement.setInt(4, dbRecurrence.getId());
             this.update(preparedStatement);
          }

@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CategoryList.java
+ * Nom du fichier   : ChartWithAxes.java
  * ============================================================================
- * Date de création : 14 mai 2013
+ * Date de création : 16.05.2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,9 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core.components;
-
-import core.Core;
+package chart;
 
 /**
  * TODO
@@ -23,28 +21,28 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class CategoryList extends ListTemplate<Category> {
+public class ChartWithAxes extends Chart {
 
+   private String x;
+   private String y;
+   
+   public ChartWithAxes(String title) {
+      super(title);
+   }
+   
    /**
-    * @param core
+    * @return the x
     */
-   public CategoryList(Core core) {
-      super(core);
+   protected String getX() {
+      return x;
    }
+   /**
+    * @return the y
+    */
+   protected String getY() {
+      return y;
+   }
+
    
-   @Override
-   public Category createFalseEntry(String name) {
-      return new Category(core, name);
-   }
-   
-   @Override
-   public Category get(int id) {
-      for(Category category : getList()) {
-         if (category.getId() == id) {
-            return category;
-         }
-      }
-      return null;
-   }
 
 }

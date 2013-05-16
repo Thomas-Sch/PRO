@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 import core.Core;
+import core.CoreComponent;
 
 /**
  * Modèle pour une liste d'éléments du coeur de l'application.

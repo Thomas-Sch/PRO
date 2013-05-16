@@ -35,13 +35,9 @@ public class UserList extends ListTemplate<User> {
       }
       return null;
    }
-
-   /* (non-Javadoc)
-    * @see core.components.ListTemplate#createFalseEntry(java.lang.String)
-    */
+   
    @Override
    public User createFalseEntry(String name) {
-      // TODO Auto-generated method stub
       return new User(core, name);
    }
 
