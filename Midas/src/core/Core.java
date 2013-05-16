@@ -176,9 +176,7 @@ public class Core {
             result = new Account(this, dbController.getDbAccount(id));
             
             // Mise à jour de la liste si présent dans la base de données
-            if (result != null) {
-               accounts.addItem(result);
-            }
+            accounts.addItem(result);
          }
          catch (DatabaseException e) {
             MidasLogs.errors.push("Core", "Unable to get the account with id "
@@ -225,13 +223,18 @@ public class Core {
     * @return la catégorie correspondant à l'identifiant, null le cas échéant.
     */
    public Category getCategory(int id) {
-      Category result = null;
+      Category result = categories.get(id);
       
-      try {
-         result = new Category(this, dbController.getDbCategory(id));
-      }
-      catch (DatabaseException e) {
-         
+      if (result == null) {
+         try {
+            result = new Category(this, dbController.getDbCategory(id));
+            
+            //
+            categories.addItem(result);
+         }
+         catch (DatabaseException e) {
+            
+         }
       }
       
       return result; 
@@ -270,10 +273,12 @@ public class Core {
     * @return le budget correspondant à l'identifiant, null le cas échéant.
     */
    public Budget getBudget(int id) {
-      Budget result = null;
+      Budget result = budgets.get(id);
       
       try {
          result = new Budget(this, dbController.getDbBudget(id));
+         
+         budgets.addItem(result);
       }
       catch (DatabaseException e) {
          
@@ -289,6 +294,7 @@ public class Core {
    public void saveBudget(Budget budget) {
       try {
          dbController.saveToDatabase(budget.getDBBudget());
+         budgets.addItem(budget);
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the budget with id "
@@ -314,13 +320,19 @@ public class Core {
     * @return la catégorie correspondant à l'identifiant, null le cas échéant.
     */
    public BudgetOnTheFly getBudgetOnTheFly(int id) {
-      BudgetOnTheFly result = null;
+      BudgetOnTheFly result = cache.getReference(BudgetOnTheFly.class, id);
       
-      try {
-         result = new BudgetOnTheFly(this, dbController.getDbBudgetOnTheFly(id));
-      }
-      catch (DatabaseException e) {
-         
+      // Si pas présent dans le cache, demander à la base de données
+      if (result == null) {
+         try {
+            result = new BudgetOnTheFly(this, dbController.getDbBudgetOnTheFly(id));
+            
+            // Mise à jour du cache
+            cache.putToCache(result);
+         }
+         catch (DatabaseException e) {
+            
+         }
       }
       
       return result; 
@@ -334,6 +346,8 @@ public class Core {
    public void saveBudgetOnTheFly(BudgetOnTheFly budget) {
       try {
          dbController.saveToDatabase(budget.getDBBudget());
+         
+         cache.putToCache(budget);
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the budget with id "
@@ -413,16 +427,21 @@ public class Core {
     * @return la transaction correspondant à l'identifiant, null le cas échéant.
     */
    public FinancialTransaction getFinancialTransaction(int id) {
-      FinancialTransaction result = null;
+      FinancialTransaction result = cache.getReference(FinancialTransaction.class, id);
       
-      try {
-         result = new FinancialTransaction(this,
-                                 dbController.getDbFinancialTransaction(id));
+      // Si pas présent dans le cache, demander à la base de données
+      if (result == null) {
+         try {
+            result = new FinancialTransaction(this,
+                                    dbController.getDbFinancialTransaction(id));
+            
+            // Mise à jour du cache
+            cache.putToCache(result);
+         }
+         catch (DatabaseException e) {
+            
+         }
       }
-      catch (DatabaseException e) {
-         
-      }
-      
       return result; 
    }
    
@@ -433,6 +452,8 @@ public class Core {
    public void saveFinancialTransaction(FinancialTransaction transaction) {
       try {
          dbController.saveToDatabase(transaction.getDBFinancialTransaction());
+         
+         cache.putToCache(transaction);
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the budget with id "
@@ -450,13 +471,19 @@ public class Core {
     * @return la recurence correspondante à l'identifiant, null le cas échéant.
     */
    public Recurrence getRecurrence(int id) {
-      Recurrence result = null;
+      Recurrence result = cache.getReference(Recurrence.class, id);
       
-      try {
-         result = new Recurrence(this, dbController.getDbRecurrence(id));
-      }
-      catch (DatabaseException e) {
-         
+      // Si pas présent dans le cache, demander à la base de données
+      if (result == null) {
+         try {
+            result = new Recurrence(this, dbController.getDbRecurrence(id));
+            
+            // Mise à jour du cache
+            cache.putToCache(result);
+         }
+         catch (DatabaseException e) {
+            
+         }
       }
       
       return result; 
