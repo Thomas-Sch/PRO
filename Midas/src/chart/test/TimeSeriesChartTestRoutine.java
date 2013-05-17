@@ -12,9 +12,15 @@
  */
 package chart.test;
 
+import java.util.Date;
+
 import javax.swing.JFrame;
 
 import org.jfree.data.xy.XYDataset;
+
+
+import chart.dataset.TimeSeriesValue;
+import chart.types.TimeSeriesChart;
 
 /**
  * TODO
@@ -31,11 +37,16 @@ public class TimeSeriesChartTestRoutine {
     * @param args
     */
    public static void main(String[] args) {
-      XYDataset dataset
       
+
+      TimeSeriesValue[] dataset = {new TimeSeriesValue(5.0, new Date(2012, 05, 20)),
+                                   new TimeSeriesValue(1.0, new Date(2012, 06, 21)),
+                                   new TimeSeriesValue(15.0, new Date(2012, 10, 22))}; 
+      
+      TimeSeriesChart chart = new TimeSeriesChart("titre", dataset);
       
       JFrame frame = new JFrame("Time Series Chart");
-      frame.getContentPane().add(barChart.getChartPanel());
+      frame.getContentPane().add(chart.getChartPanel());
       frame.pack();
       frame.setVisible(true);
 

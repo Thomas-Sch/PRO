@@ -14,8 +14,9 @@ package chart.test;
 
 import javax.swing.JFrame;
 
-import chart.BarChart;
+
 import chart.dataset.BarValue;
+import chart.types.BarChart;
 
 /**
  * TODO

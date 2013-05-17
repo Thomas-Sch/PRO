@@ -10,12 +10,14 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart;
+package chart.types;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.time.Month;
+import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
@@ -32,17 +34,17 @@ import chart.dataset.TimeSeriesValue;
  */
 public class TimeSeriesChart extends ChartWithAxes {
 
-   
+   TimeSeriesCollection dataset;
    
    /**
     * @param title
     */
-   public TimeSeriesChart(String title, TimeSeriesValue[] varValue) {
+   public TimeSeriesChart(String title, TimeSeriesValue[] varValues) {
       super(title);
       
-      this.dataset = createDataset(varValue);
+      this.dataset = createDataset(varValues);
       
-      JFreeChart chart = ChartFactory.createBarChart(
+      JFreeChart chart = ChartFactory.createTimeSeriesChart(
             super.getTitle(),
             super.getX(),
             super.getY(),
@@ -57,10 +59,13 @@ public class TimeSeriesChart extends ChartWithAxes {
 
    private TimeSeriesCollection createDataset(TimeSeriesValue[] pieValues) {
       TimeSeriesCollection data = new TimeSeriesCollection();
+      TimeSeries serie = new TimeSeries("titre-----");
       
       for (TimeSeriesValue value : pieValues) {
-         data.setSeries(value.getValue(), "Row", value.getColumn()); // "Row" is not used
+         serie.add(new Month(value.getDate().getMonth(), value.getDate().getYear()), value.getValue());
       }
+      
+      data.addSeries(serie);
       
       return data;
    }

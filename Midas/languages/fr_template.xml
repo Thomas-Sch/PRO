@@ -25,6 +25,10 @@
   <reason_label>TODO</reason_label>
   <amount_label>TODO</amount_label>
   <date_label>TODO</date_label>
+  <select_category_label>TODO</select_category_label>
+  <new_category_label>TODO</new_category_label>
+  <select_subcategory_label>TODO</select_subcategory_label>
+  <new_subcategory_label>TODO</new_subcategory_label>
   <daily_label>TODO</daily_label>
   <weekly_label>TODO</weekly_label>
   <monthly_label>TODO</monthly_label>

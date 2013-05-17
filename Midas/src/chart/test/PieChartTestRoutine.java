@@ -16,8 +16,9 @@ import java.awt.Component;
 
 import javax.swing.JFrame;
 
-import chart.PieChart;
+
 import chart.dataset.PieValue;
+import chart.types.PieChart;
 
 /**
  * TODO

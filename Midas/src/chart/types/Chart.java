@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart;
+package chart.types;
 
 import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;

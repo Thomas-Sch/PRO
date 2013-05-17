@@ -20,6 +20,8 @@ import java.util.Observable;
 
 import javax.swing.DefaultComboBoxModel;
 
+import settings.Language.Text;
+
 import core.components.Category;
 import core.components.CategoryList;
 
@@ -40,21 +42,37 @@ public class JComboBoxCategory extends JComboBoxTemplate<Category> {
    private static final long serialVersionUID = 9189481079308834687L;
    
    private CategoryList categories;
+   private String select;
+   private String newEntry;
    
    public JComboBoxCategory(CategoryList categories) {
-      this.categories = categories;
-      update(categories, null);
+      this(categories, false);
+   }
+   
+   public JComboBoxCategory(CategoryList children, boolean isChildren) {
+      this.categories = children;
+      
+      
+      if(isChildren) {
+         select = new String(Text.SELECT_SUBCATEGORY_LABEL.toString());
+         newEntry = new String(Text.NEW_SUBCATEGORY_LABEL.toString());
+      }
+      else {
+         select = new String(Text.SELECT_CATEGORY_LABEL.toString());
+         newEntry = new String(Text.NEW_CATEGORY_LABEL.toString());
+      }
+      update(categories, null);      
    }
 
    public void update(Observable o, Object arg) {
       LinkedList<Category> list = categories.getAll(new SortByName());
       
       if(isFirstUse()) {
-         list.addFirst(categories.createFalseEntry("Sélectionner une catégorie")); // TO UPDATE
+         list.addFirst(categories.createFalseEntry(select)); // TO UPDATE
       }
       
       int index = updateIndex();
-      list.add(index, categories.createFalseEntry("Nouvelle catégorie...")); // TO UPDATE
+      list.add(index, categories.createFalseEntry(newEntry)); // TO UPDATE
       
       Category[] temp = new Category[0];
       setModel(new DefaultComboBoxModel<Category>(list.toArray(temp)));
@@ -65,5 +83,5 @@ public class JComboBoxCategory extends JComboBoxTemplate<Category> {
       public int compare(Category arg0, Category arg1) {
          return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
-   }  
+   } 
 }

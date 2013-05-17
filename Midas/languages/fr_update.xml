@@ -25,6 +25,10 @@
   <reason_label>Motif</reason_label>
   <amount_label>Montant</amount_label>
   <date_label>Date</date_label>
+  <select_category_label>Sélectionner une catégorie</select_category_label>
+  <new_category_label>Nouvelle catégorie...</new_category_label>
+  <select_subcategory_label>Sélectionner une sous catégorie</select_subcategory_label>
+  <new_subcategory_label>Nouvelle sous catégorie...</new_subcategory_label>
   <daily_label>Journalier</daily_label>
   <weekly_label>Hebdomadaire</weekly_label>
   <monthly_label>Mensuel</monthly_label>

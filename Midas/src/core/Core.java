@@ -53,7 +53,7 @@ public class Core {
    
    private UserList users;
    private AccountList accounts;
-   private CategoryList categories;
+   private CategoryList primaryCategories;
    private BudgetList budgets;
    
    public Core() {
@@ -63,14 +63,14 @@ public class Core {
       
       users = new UserList(this);
       accounts = new AccountList(this);
-      categories = new CategoryList(this);
+      primaryCategories = new CategoryList(this);
       budgets = new BudgetList(this);
       
       settings.loadSettings();
       
       loadUsers();
       loadAccounts();
-      loadCategories();
+      loadPrimaryCategories();
       loadBudgets();
    }
    
@@ -134,10 +134,10 @@ public class Core {
       }
    }
    
-   private void loadCategories() {
+   private void loadPrimaryCategories() {
       LinkedList<DBCategory> dbCategories = null;
       try {
-         dbCategories = dbController.getAllDbCategories();
+         dbCategories = dbController.getAllParentCategories();
       }
       catch (DatabaseException e) {
          
@@ -149,7 +149,7 @@ public class Core {
          for (DBCategory dbCategory : dbCategories) {
             categoryTemp.add(new Category(this, dbCategory));
          }
-         categories.setItems(categoryTemp);
+         primaryCategories.setItems(categoryTemp);
       }
    }
    
@@ -223,14 +223,13 @@ public class Core {
     * @return la catégorie correspondant à l'identifiant, null le cas échéant.
     */
    public Category getCategory(int id) {
-      Category result = categories.get(id);
+      Category result = primaryCategories.get(id);
       
       if (result == null) {
          try {
             result = new Category(this, dbController.getDbCategory(id));
             
-            //
-            categories.addItem(result);
+            primaryCategories.addItem(result);
          }
          catch (DatabaseException e) {
             
@@ -247,7 +246,7 @@ public class Core {
    public void saveCategory(Category category) {
       try {
          dbController.saveToDatabase(category.getDBCategory());
-         categories.addItem(category);
+         primaryCategories.addItem(category);
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the category with id "
@@ -384,8 +383,8 @@ public class Core {
       return accounts;
    }
    
-   public CategoryList getAllCategories() {
-      return categories;
+   public CategoryList getAllPrimaryCategories() {
+      return primaryCategories;
    }
    
    public BudgetList getAllBudgets() {
@@ -487,7 +486,26 @@ public class Core {
       }
       
       return result; 
+   }  
+   
+   public CategoryList getChildren(Category category) {
+      CategoryList result = new CategoryList(this);
+      LinkedList<DBCategory> dbChildren = null;
+      try {
+         dbChildren = dbController.getAllChildCategories(category.getId());
+      }
+      catch (DatabaseException e) {
+         
+      }
+      
+      if (dbChildren != null) {
+         LinkedList<Category> categoryTemp = new LinkedList<>();
+         
+         for (DBCategory dbCategory : dbChildren) {
+            categoryTemp.add(new Category(this, dbCategory));
+         }
+         result.setItems(categoryTemp);
+      }
+      return result;
    }
-   
-   
 }
