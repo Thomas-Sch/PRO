@@ -95,6 +95,7 @@ public class TestRoutine {
       DBBudget budget1 = dbController.createDbBudget();
       budget1.setDbRecurrence(r1.getId());
       budget1.setName("Voiture");
+      budget1.setDescription("description");
       budget1.setLimit(100.0);
       budget1.setDbAccount(account1.getId());
       dbController.saveToDatabase(budget1);
@@ -105,6 +106,7 @@ public class TestRoutine {
       DBBudgetOnTheFly budgetOnTheFly1 = dbController.createDbBudgetOnTheFly();
       budgetOnTheFly1.setDbRecurrence(r2.getId());
       budgetOnTheFly1.setName("V");
+      budgetOnTheFly1.setDescription("description");
       budgetOnTheFly1.setLimit(100.0);
       budgetOnTheFly1.setDbAccount(account1.getId());
       budgetOnTheFly1.setStart(new Date(2012, 04, 1));
@@ -275,13 +277,13 @@ public class TestRoutine {
       System.out.println(t);
       System.out.println(r1);
       
-      //dbController.deleteDbFinancialTransaction(t.getId());
-      //dbController.deleteDbBudgetOnTheFly(budgetOnTheFly1.getId());
-      //dbController.deleteDbBudget(budget1.getId());
-      //dbController.deleteDbAccount(account1.getId());
+      dbController.deleteDbFinancialTransaction(t.getId());
+      dbController.deleteDbBudgetOnTheFly(budgetOnTheFly1.getId());
+      dbController.deleteDbBudget(budget1.getId());
+      dbController.deleteDbAccount(account1.getId());
       //dbController.deleteDbCategory(cat1.getId());
-      //dbController.deleteDbUser(user1.getId());   
-      //dbController.deleteDbRecurrence(r1.getId());
+      dbController.deleteDbUser(user1.getId());   
+      dbController.deleteDbRecurrence(r1.getId());
       
       
       //----------------------------------------------------------------------------------------

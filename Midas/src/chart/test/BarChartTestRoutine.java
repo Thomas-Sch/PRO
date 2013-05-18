@@ -14,8 +14,9 @@ package chart.test;
 
 import javax.swing.JFrame;
 
-import chart.BarChart;
+
 import chart.dataset.BarValue;
+import chart.types.BarChart;
 
 /**
  * TODO
@@ -41,6 +42,14 @@ public class BarChartTestRoutine {
       frame.getContentPane().add(barChart.getChartPanel());
       frame.pack();
       frame.setVisible(true);
+      
+      try {
+         Thread.sleep(5000);
+      }
+      catch (InterruptedException e ){
+         
+      }
+      barChart.getDataset().removeColumn(0);
 
    }
 

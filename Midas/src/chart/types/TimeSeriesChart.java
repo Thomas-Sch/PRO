@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : BarChart.java
+ * Nom du fichier   : TimeSeriesChart.java
  * ============================================================================
  * Date de création : 16.05.2013
  * ============================================================================
@@ -10,14 +10,18 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart;
+package chart.types;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.time.Month;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.xy.XYDataset;
 
-import chart.dataset.BarValue;
+import chart.dataset.TimeSeriesValue;
 
 /**
  * TODO
@@ -28,21 +32,23 @@ import chart.dataset.BarValue;
  * @author Sinniger Marcel
  *
  */
-public class BarChart extends ChartWithAxes {
+public class TimeSeriesChart extends ChartWithAxes {
 
-   private DefaultCategoryDataset dataset;
+   TimeSeriesCollection dataset;
    
-   public BarChart(String title, BarValue[] varValue) {
+   /**
+    * @param title
+    */
+   public TimeSeriesChart(String title, TimeSeriesValue[] varValues) {
       super(title);
       
-      this.dataset = createDataset(varValue);
+      this.dataset = createDataset(varValues);
       
-      JFreeChart chart = ChartFactory.createBarChart(
+      JFreeChart chart = ChartFactory.createTimeSeriesChart(
             super.getTitle(),
             super.getX(),
             super.getY(),
             dataset,
-            PlotOrientation.VERTICAL,
             super.getLegend(),
             super.getTooltip(),
             super.getUrl()
@@ -51,12 +57,15 @@ public class BarChart extends ChartWithAxes {
       super.setChart(chart);
    }
 
-   private DefaultCategoryDataset createDataset(BarValue[] pieValues) {
-      DefaultCategoryDataset data = new DefaultCategoryDataset();
+   private TimeSeriesCollection createDataset(TimeSeriesValue[] pieValues) {
+      TimeSeriesCollection data = new TimeSeriesCollection();
+      TimeSeries serie = new TimeSeries("titre-----");
       
-      for (BarValue value : pieValues) {
-         data.setValue(value.getValue(), "Row", value.getColumn()); // "Row" is not used
+      for (TimeSeriesValue value : pieValues) {
+         serie.add(new Month(value.getDate().getMonth(), value.getDate().getYear()), value.getValue());
       }
+      
+      data.addSeries(serie);
       
       return data;
    }

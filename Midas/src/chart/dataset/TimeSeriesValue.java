@@ -32,4 +32,12 @@ public class TimeSeriesValue extends DatasetValue {
       this.date = date;
    }
 
+   /**
+    * @return the date
+    */
+   public Date getDate() {
+      return date;
+   }
+
+   
 }

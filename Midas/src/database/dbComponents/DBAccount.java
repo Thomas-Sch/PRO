@@ -12,7 +12,7 @@
  */
 package database.dbComponents;
 
-public class DBAccount extends DBComponent {
+public class DBAccount extends DBComponentEnableable {
 
    private String name;
    private String nameBank;
@@ -91,15 +91,7 @@ public class DBAccount extends DBComponent {
    public void setOverdraftLimit(Double overdraftLimit) {
       this.overdraftLimit = overdraftLimit;
    }
-   /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
-   @Override
-   public String toString() {
-      return "DBAccount [name=" + name + ", nameBank=" + nameBank
-            + ", accountNumber=" + accountNumber + ", amount=" + amount
-            + ", overdraftLimit=" + overdraftLimit + ", getId()=" + getId()
-            + "]";
-   }
+   
+   
 
 }

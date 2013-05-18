@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : PieChart.java
+ * Nom du fichier   : BarChart.java
  * ============================================================================
- * Date de création : 15.05.2013
+ * Date de création : 16.05.2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,13 +10,14 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart;
+package chart.types;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
-import chart.dataset.PieValue;
+import chart.dataset.BarValue;
 
 /**
  * TODO
@@ -27,18 +28,21 @@ import chart.dataset.PieValue;
  * @author Sinniger Marcel
  *
  */
-public class PieChart extends Chart {
+public class BarChart extends ChartWithAxes {
+
+   private DefaultCategoryDataset dataset;
    
-   private DefaultPieDataset dataset;
-   
-   public PieChart(String title, PieValue[] pieValues) {
+   public BarChart(String title, BarValue[] varValue) {
       super(title);
       
-      this.dataset = createDataset(pieValues);
+      this.dataset = createDataset(varValue);
       
-      JFreeChart chart = ChartFactory.createPieChart(
+      JFreeChart chart = ChartFactory.createBarChart(
             super.getTitle(),
+            super.getX(),
+            super.getY(),
             dataset,
+            PlotOrientation.VERTICAL,
             super.getLegend(),
             super.getTooltip(),
             super.getUrl()
@@ -47,14 +51,18 @@ public class PieChart extends Chart {
       super.setChart(chart);
    }
 
-   private DefaultPieDataset createDataset(PieValue[] pieValues) {
-      DefaultPieDataset data = new DefaultPieDataset();
+   private DefaultCategoryDataset createDataset(BarValue[] pieValues) {
+      DefaultCategoryDataset data = new DefaultCategoryDataset();
       
-      for (PieValue value : pieValues) {
-         data.setValue(value.getCategory(), value.getValue());
+      for (BarValue value : pieValues) {
+         data.setValue(value.getValue(), "Row", value.getColumn()); // "Row" is not used
       }
       
       return data;
    }
    
+   public DefaultCategoryDataset getDataset() {
+      return dataset;
+   }
+
 }

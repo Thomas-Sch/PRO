@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : TimeSeriesChart.java
+ * Nom du fichier   : PieChart.java
  * ============================================================================
- * Date de création : 16.05.2013
+ * Date de création : 15.05.2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,14 +10,13 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart;
+package chart.types;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
-import chart.dataset.TimeSeriesValue;
+import chart.dataset.PieValue;
 
 /**
  * TODO
@@ -28,22 +27,17 @@ import chart.dataset.TimeSeriesValue;
  * @author Sinniger Marcel
  *
  */
-public class TimeSeriesChart extends ChartWithAxes {
-
+public class PieChart extends Chart {
    
+   private DefaultPieDataset dataset;
    
-   /**
-    * @param title
-    */
-   public TimeSeriesChart(String title, TimeSeriesValue[] varValue) {
+   public PieChart(String title, PieValue[] pieValues) {
       super(title);
       
-      this.dataset = createDataset(varValue);
+      this.dataset = createDataset(pieValues);
       
-      JFreeChart chart = ChartFactory.createBarChart(
+      JFreeChart chart = ChartFactory.createPieChart(
             super.getTitle(),
-            super.getX(),
-            super.getY(),
             dataset,
             super.getLegend(),
             super.getTooltip(),
@@ -53,14 +47,14 @@ public class TimeSeriesChart extends ChartWithAxes {
       super.setChart(chart);
    }
 
-   private DefaultCategoryDataset createDataset(TimeSeriesValue[] pieValues) {
-      DefaultCategoryDataset data = new DefaultCategoryDataset();
+   private DefaultPieDataset createDataset(PieValue[] pieValues) {
+      DefaultPieDataset data = new DefaultPieDataset();
       
-      for (TimeSeriesValue value : pieValues) {
-         data.setValue(value.getValue(), "Row", value.getColumn()); // "Row" is not used
+      for (PieValue value : pieValues) {
+         data.setValue(value.getCategory(), value.getValue());
       }
       
       return data;
    }
-
+   
 }

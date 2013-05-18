@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : PieChartTestRoutine.java
+ * Nom du fichier   : DBComponentEnableable.java
  * ============================================================================
- * Date de création : 15.05.2013
+ * Date de création : 16.05.2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,15 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package chart.test;
-
-import java.awt.Component;
-
-import javax.swing.JFrame;
-
-
-import chart.dataset.PieValue;
-import chart.types.PieChart;
+package database.dbComponents;
 
 /**
  * TODO
@@ -29,22 +21,26 @@ import chart.types.PieChart;
  * @author Sinniger Marcel
  *
  */
-public class PieChartTestRoutine {
+public abstract class DBComponentEnableable  extends DBComponent {
+
+   private Boolean enabled;
+   
+   DBComponentEnableable() {
+      enabled = true;
+   }
+   
+   /**
+    * @return le/la/les enabled
+    */
+   public Boolean getEnabled() {
+      return enabled;
+   }
 
    /**
-    * @param args
+    * @param name - la nouvelle valeur pour l'attribut enabled
     */
-   public static void main(String[] args) {
-           
-      PieValue[] pieValues = {new PieValue(4.0, "cat1"), new PieValue(1.0, "cat2")};
-      
-      PieChart pieChart = new PieChart("title", pieValues);   
-      
-      JFrame frame = new JFrame("Pie Chart");
-      frame.getContentPane().add(pieChart.getChartPanel());
-      frame.pack();
-      frame.setVisible(true);
-
+   public void setEnabled(Boolean enabled) {
+      this.enabled = enabled;
    }
 
 }

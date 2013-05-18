@@ -12,7 +12,7 @@
  */
 package database.dbComponents;
 
-public class DBCategory extends DBComponent {
+public class DBCategory extends DBComponentEnableable {
 
    private String name;
    private Integer parentDBCategory;
@@ -48,12 +48,6 @@ public class DBCategory extends DBComponent {
    public void setParentDBCategory(Integer parentDBCategory) {
       this.parentDBCategory = parentDBCategory;
    }
-   /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
-   @Override
-   public String toString() {
-      return "DBCategory [name=" + name + ", parentDBCategory="
-            + parentDBCategory + ", getId()=" + getId() + "]";
-   }
+
+   
 }
