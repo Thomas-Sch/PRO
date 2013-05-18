@@ -19,9 +19,9 @@ import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
 import gui.component.JRecursionChooser;
 import gui.component.JValidateCancel;
-import gui.controller.ComboBoxBudget;
-import gui.controller.ComboBoxUser;
-import gui.controller.ComboBoxesCategory;
+import gui.controller.combobox.ComboBoxBudget;
+import gui.controller.combobox.ComboBoxUser;
+import gui.controller.combobox.ComboBoxesCategory;
 import gui.utils.StandardInsets;
 
 import java.awt.GridBagConstraints;

@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : ComboBoxBudget.java
+ * Nom du fichier   : ComboBoxAccount.java
  * ============================================================================
- * Date de création : 15 mai 2013
+ * Date de création : 9 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,69 +10,63 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui.controller.combobox;
 
 import gui.Controller;
-import gui.actions.AcCreateBudget;
-import gui.component.JComboBoxBudget;
+import gui.actions.AcCreateAccount;
+import gui.component.combobox.JComboBoxAccounts;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
-import core.components.BudgetList;
+import core.components.AccountList;
 
 /**
- * Contrôleur de la liste déroulante de budget.
+ * Contrôleur de la classe de liste déroulante pour les utilisateurs du
+ * programme
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class ComboBoxBudget extends Controller {
-   
-   JComboBoxBudget view;
-   BudgetList model;
-   
-   public ComboBoxBudget(Core core) {
+public class ComboBoxAccount extends Controller {
+
+   JComboBoxAccounts view;
+   AccountList model;
+
+   /**
+    * Crée le contrôleur d'une ComboBox
+    */
+   public ComboBoxAccount(Core core) {
       super(core);
       model.addObserver(view);
    }
-   
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
-      model = getCore().getAllBudgets();
-      view = new JComboBoxBudget(model);
+      model = getCore().getAllAccounts();
+      view = new JComboBoxAccounts(model);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
       view.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
             if (view.isCreateNewSelected()) {
-               AcCreateBudget action = new AcCreateBudget(getCore(), ComboBoxBudget.this);
+               AcCreateAccount action = new AcCreateAccount(getCore());
                action.actionPerformed(arg0);
-               view.setSelectedItem(action.getCreatedBudget());
+               view.setSelectedItem(action.getCreatedAccount());
             }
          }
       });
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#getGraphicalComponent()
-    */
    @Override
-   public Component getGraphicalComponent() {
+   public JComboBoxAccounts getGraphicalComponent() {
       return view;
    }
 

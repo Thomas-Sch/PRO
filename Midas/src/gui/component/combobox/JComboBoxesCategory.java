@@ -10,15 +10,16 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.component;
+package gui.component.combobox;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
 import gui.View;
-import gui.controller.ComboBoxesCategory;
+import gui.controller.combobox.ComboBoxesCategory;
 
+import javax.lang.model.type.PrimitiveType;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
@@ -26,7 +27,7 @@ import core.components.Category;
 import core.components.CategoryList;
 
 /**
- * Conteneur pour les listes box de catégories.
+ * Conteneur pour les combobox de catégories.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -60,6 +61,10 @@ public class JComboBoxesCategory extends JPanel implements View {
       setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
       add(cbcPrimary);
       add(cbcChildren);
+   }
+   
+   public Category getSelectedPrimaryCategory() {
+      return (Category)cbcPrimary.getSelectedItem();
    }
    
    public boolean isCreateNewCategorySelected() {

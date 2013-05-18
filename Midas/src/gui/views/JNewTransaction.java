@@ -14,14 +14,14 @@ package gui.views;
 
 import gui.Controller;
 import gui.View;
-import gui.component.JComboBoxTransactionType;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
 import gui.component.JRecursionChooser;
 import gui.component.JValidateCancel;
-import gui.controller.ComboBoxAccount;
-import gui.controller.ComboBoxUser;
+import gui.component.combobox.JComboBoxTransactionType;
+import gui.controller.combobox.ComboBoxAccount;
+import gui.controller.combobox.ComboBoxUser;
 import gui.utils.StandardInsets;
 
 import java.awt.GridBagConstraints;

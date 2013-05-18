@@ -18,7 +18,7 @@ import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
 import gui.component.JValidateCancelReset;
-import gui.controller.ComboBoxAccount;
+import gui.controller.combobox.ComboBoxAccount;
 import gui.utils.StandardInsets;
 
 import java.awt.Component;
@@ -33,7 +33,7 @@ import javax.swing.JPanel;
 import core.components.BudgetOnTheFly;
 
 /**
- * TODO
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire

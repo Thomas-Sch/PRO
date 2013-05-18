@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.component;
+package gui.component.list;
 
 import gui.View;
 

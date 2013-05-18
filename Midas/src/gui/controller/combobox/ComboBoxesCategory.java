@@ -10,11 +10,11 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui.controller.combobox;
 
 import gui.Controller;
 import gui.actions.AcCreateCategory;
-import gui.component.JComboBoxesCategory;
+import gui.component.combobox.JComboBoxesCategory;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;

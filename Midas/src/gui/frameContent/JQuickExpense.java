@@ -16,9 +16,9 @@ import gui.Controller;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JReasonInput;
-import gui.controller.ComboBoxBudget;
-import gui.controller.ComboBoxUser;
-import gui.controller.ComboBoxesCategory;
+import gui.controller.combobox.ComboBoxBudget;
+import gui.controller.combobox.ComboBoxUser;
+import gui.controller.combobox.ComboBoxesCategory;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
