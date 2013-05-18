@@ -14,6 +14,7 @@ package gui.controller.combobox;
 
 import gui.Controller;
 import gui.actions.AcCreateCategory;
+import gui.actions.AcCreateSubCategory;
 import gui.component.combobox.JComboBoxesCategory;
 
 import java.awt.Component;
@@ -45,6 +46,7 @@ public class ComboBoxesCategory extends Controller {
    public ComboBoxesCategory(Core core) {
       super(core);
       model.addObserver(view);
+      children.addObserver(view);
    }
 
    /* (non-Javadoc)
@@ -63,11 +65,39 @@ public class ComboBoxesCategory extends Controller {
    @Override
    protected void initListeners() {
       view.addSelectChangedPrimaryListener(new ActionListener() {
-         public void actionPerformed(ActionEvent arg0) {
+         public void actionPerformed(ActionEvent e) {
             if (view.isCreateNewCategorySelected()) {
                AcCreateCategory action = new AcCreateCategory(getCore());
-               action.actionPerformed(arg0);
+               action.actionPerformed(e);
                view.setSelectedCategory(action.getCreatedCategory());
+            }else if(view.isPrimaryInviteSelected()) {
+               view.setChildrenVisible(false);
+            }else {
+               Category parent = view.getSelectedPrimaryCategory();
+               CategoryList p = getCore().getChildren(parent);
+               children.setItems(p.getList());
+               view.setSelectedCategory(parent);
+               view.setChildrenVisible(true);
+            }
+         }
+      });
+      
+      view.addSelectChangedChildrenListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            if (view.isCreateNewSubCategorySelected()) {
+               Category temp = view.getSelectedPrimaryCategory();
+              
+               AcCreateSubCategory action = new AcCreateSubCategory(getCore(), temp, children);
+               action.actionPerformed(e);
+               
+               Category ret = action.getCreatedCategory();
+               
+               System.out.println(ret.getName());
+               
+               view.setSelectedSubCategory(ret);
+               view.setSelectedCategory(temp);
+               
             }
          }
       });
@@ -85,8 +115,7 @@ public class ComboBoxesCategory extends Controller {
       return model;
    }
    
-   public CategoryList getChildren(Category category) {
-      return getCore().getChildren(category);
+   public CategoryList getChildrenCategories() {
+      return children;
    }
-
 }

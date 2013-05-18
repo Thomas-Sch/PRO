@@ -258,6 +258,21 @@ public class Core {
       }
    }
    
+   public void saveSubCategory(Category category, CategoryList list) {
+      try {
+         dbController.saveToDatabase(category.getDBCategory());
+         list.addItem(category);
+      }
+      catch (DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core", "Unable to save the category with id "
+               + /* id + */ " to database, because of constraint violation.");
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core", "Unable to save the category with id "
+               + /* id + */ " to database.");
+      }
+   }
+   
    /**
     * Créer un nouveau budget dont les champs sont à compléter.
     * @return le budget à compléter.

@@ -38,7 +38,6 @@ public class JLabelMoneyInfo extends JLabelInfo {
    public JLabelMoneyInfo(String metaInfo) {
       super(metaInfo);
       setDataAlignement(JTextField.RIGHT);
-      // TODO Auto-generated constructor stub
    }
 
 
