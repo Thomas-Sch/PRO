@@ -56,7 +56,7 @@ public class JComboBoxesCategory extends JPanel implements View {
       cbcChildren.setVisible(false);
    }
    public void buildContent() {
-      setLayout(new FlowLayout(FlowLayout.LEFT, 5,5));
+      setLayout(new FlowLayout(FlowLayout.LEFT, 5,0));
       add(cbcPrimary);
       add(cbcChildren);
    }

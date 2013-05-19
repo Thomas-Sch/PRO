@@ -25,6 +25,8 @@ import settings.Language.Text;
 
 import core.Core;
 import core.components.Budget;
+import core.components.Recurrence;
+import database.dbComponents.DBRecurrence;
 
 /**
  * Contrôleur et action d'ajout d'un budget.
@@ -58,7 +60,9 @@ public class AcCreateBudget extends UserAction {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+            budget.setRecurrence(new Recurrence(controller.getCore(), new DBRecurrence()));
             core.saveBudget(budget);
+            System.out.println("LKJLKJ");
             view.dispose();
          }
       });

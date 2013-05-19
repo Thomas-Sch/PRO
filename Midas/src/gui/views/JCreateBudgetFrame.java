@@ -19,10 +19,12 @@ import gui.component.JLabelTextPanel;
 import gui.component.JValidateCancelReset;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.utils.StandardInsets;
+import gui.utils.TextChangedListener;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
@@ -31,8 +33,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-
-import settings.Language.Text;
+import javax.swing.event.DocumentEvent;
 
 import com.toedter.calendar.JMonthChooser;
 import com.toedter.calendar.JYearChooser;
@@ -56,7 +57,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
    private static final long serialVersionUID = -2619002208500615656L;
    
    private JLabelTextPanel ltpName;
-   private JLabelMoneyPanel ltpAmount;
+   private JLabelMoneyPanel lmpAmount;
    private JValidateCancelReset vcrActions;
    private ComboBoxAccount accounts;
    
@@ -73,12 +74,13 @@ public class JCreateBudgetFrame extends JDialog implements View{
    
    private Controller controller;
    
-//   private Budget budget; PAS utile pour l'instant car pas de rétro écoute.
+   private Budget budget;
    
    public JCreateBudgetFrame(Component parent, Controller controller, Budget budget) {
       this.controller = controller;
-  //    this.budget = budget;
-      
+      this.budget = budget;
+      initContent();
+      initListeners();
       setContentPane(buildContent());
       setLocationRelativeTo(parent);
       setResizable(false);
@@ -86,11 +88,47 @@ public class JCreateBudgetFrame extends JDialog implements View{
       update(null, null);
    }
    
+   /**
+    * 
+    */
+   private void initListeners() {
+      ltpName.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            budget.setName(ltpName.getText());
+         }
+      });
+      
+      ltpDescription.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            budget.setDescription(ltpDescription.getText()); 
+         }
+      });
+      
+      lmpAmount.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            budget.setLimit(Double.valueOf(lmpAmount.getText()));
+         }
+      });
+      
+      accounts.addSelectedChangedListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            budget.setBindAccount(accounts.getSelectedAccount());
+         }
+      });
+      
+   }
+
    private JPanel buildContent() {
       JPanel pnlContent = new JPanel();
       pnlContent.setLayout(new GridBagLayout());
-      
-      initComponents();
       
       GridBagConstraints constraints = new GridBagConstraints();
       constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -104,7 +142,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
       pnlContent.add(ltpName, constraints);
       
       constraints.gridy = 1;
-      pnlContent.add(ltpAmount, constraints);
+      pnlContent.add(lmpAmount, constraints);
       
       constraints.gridy = 2;
       pnlContent.add(accounts.getGraphicalComponent(), constraints);
@@ -138,9 +176,9 @@ public class JCreateBudgetFrame extends JDialog implements View{
       return pnlContent;
    }
    
-   private void initComponents() {
+   private void initContent() {
       ltpName = new JLabelTextPanel("Nom du budget");
-      ltpAmount = new JLabelMoneyPanel("Somme");
+      lmpAmount = new JLabelMoneyPanel("Somme");
       accounts = new ComboBoxAccount(controller.getCore());
       
       rbtMonth = new JRadioButton("Mensuel");
@@ -176,7 +214,4 @@ public class JCreateBudgetFrame extends JDialog implements View{
    public void addCancelListener(ActionListener actionListener) {
       vcrActions.addCancelListener(actionListener);
    }
-   
-   
-
 }

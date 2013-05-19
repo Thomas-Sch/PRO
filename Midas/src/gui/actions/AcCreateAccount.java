@@ -13,6 +13,8 @@
 package gui.actions;
 
 import gui.UserAction;
+import gui.utils.Positions;
+import gui.utils.Positions.ScreenPosition;
 import gui.views.JCreateAccountFrame;
 
 import java.awt.Component;
@@ -20,6 +22,7 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import settings.Language.Text;
 import core.Core;
 import core.components.Account;
 
@@ -53,8 +56,24 @@ public class AcCreateAccount extends UserAction {
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       account = core.createAccount();
             
+      // Réglages de la fenêtre.
       view = new JCreateAccountFrame((Component)event.getSource(), account);
+      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
+      view.setTitle(Text.APP_TITLE + " - " + Text.ACCOUNT_CREATION_TITLE);
       
+      initListeners(core);
+      account.addObserver(view);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+   
+   /**
+    * Initialise les listeners pour ce contrôleur/action.
+    * @param core
+    */
+   public void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
@@ -70,12 +89,6 @@ public class AcCreateAccount extends UserAction {
             view.dispose();
          }
       });
-      
-      account.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
    }
    
    public Account getCreatedAccount() {

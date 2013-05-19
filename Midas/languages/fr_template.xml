@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
   <app_title>TODO</app_title>
+  <account_creation_title>TODO</account_creation_title>
   <action_quit>TODO</action_quit>
   <account_management_title>TODO</account_management_title>
   <category_creation_title>TODO</category_creation_title>
@@ -20,6 +21,7 @@
   <account_number_label>TODO</account_number_label>
   <account_description_label>TODO</account_description_label>
   <account_name_label>TODO</account_name_label>
+  <account_bank_name_label>TODO</account_bank_name_label>
   <home_screen_name>TODO</home_screen_name>
   <quick_expense_label>TODO</quick_expense_label>
   <reason_label>TODO</reason_label>

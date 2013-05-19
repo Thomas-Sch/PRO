@@ -44,6 +44,7 @@ public class Language {
        * nécessaires.
        */
       APP_TITLE,
+      ACCOUNT_CREATION_TITLE,
       ACTION_QUIT,
       
       ACCOUNT_MANAGEMENT_TITLE,
@@ -68,6 +69,7 @@ public class Language {
       ACCOUNT_NUMBER_LABEL,
       ACCOUNT_DESCRIPTION_LABEL,
       ACCOUNT_NAME_LABEL,
+      ACCOUNT_BANK_NAME_LABEL,
       
      
       HOME_SCREEN_NAME,

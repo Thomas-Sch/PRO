@@ -51,6 +51,7 @@ public class JCreateAccountFrame extends JDialog implements View{
    private Account account;
    
    private JLabelTextPanel ltpName;
+   private JLabelTextPanel ltpBankName;
    private JLabelMoneyPanel ltpThreshold;
    private JLabelMoneyPanel ltpInitialAmount;
    private JLabelTextPanel ltpNumber;
@@ -63,54 +64,31 @@ public class JCreateAccountFrame extends JDialog implements View{
    public JCreateAccountFrame(Component parent, Account account) {
       this.account = account;
       
-      setTitle(Text.APP_TITLE.toString());
+      initComponent();
       setContentPane(buildContent());
+      initListeners();
       setLocationRelativeTo(parent);
       setResizable(false);
       pack();
       update(null, null);
    }
    
-   private JPanel buildContent() {
-      JPanel pnlContent = new JPanel();
-      initComponent();
-      
-      pnlContent.setLayout(new GridBagLayout());
-      GridBagConstraints constraints = new GridBagConstraints();
-      
-      constraints.fill = GridBagConstraints.HORIZONTAL;
-      constraints.gridx = 0;
-      constraints.gridy = 0;
-      constraints.weightx = 0.5;
-      constraints.weighty = 0.5;
-      constraints.insets = new StandardInsets();
-      pnlContent.add(ltpName, constraints);
-      
-      constraints.gridy = 1;
-      pnlContent.add(ltpThreshold, constraints);
-      
-      constraints.gridy = 2;
-      pnlContent.add(ltpInitialAmount, constraints);
-      
-      constraints.gridy = 3;
-      pnlContent.add(ltpNumber, constraints);
-      
-      constraints.gridy = 4;
-      pnlContent.add(ltpDescription, constraints);
-      
-      constraints.gridy = 5;
-      constraints.anchor = GridBagConstraints.EAST;
-      constraints.fill = GridBagConstraints.NONE;
-      pnlContent.add(vcrActions, constraints);
-      
-      
-      // A changer c'est moche.
+   /**
+    * Initialise les écouteurs sur les composants de la vue.
+    */
+   private void initListeners() {
       ltpName.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setAccountName(ltpName.getText());      
-            System.out.println("Valeur de name: " + ltpName.getText());
+            account.setAccountName(ltpName.getText());
+         }
+      });
+      
+      ltpName.addTextChangedListener(new TextChangedListener() {
+         @Override
+         public void textChanged(DocumentEvent event) {
+            account.setBankName(ltpName.getText());
          }
       });
       
@@ -134,7 +112,7 @@ public class JCreateAccountFrame extends JDialog implements View{
                account.setAmount(Double.valueOf(ltpInitialAmount.getText()));
             } catch(NumberFormatException e) {
                MidasLogs.errors.push("NOT PARSING");
-            } 
+            }
          }
       });
       
@@ -145,17 +123,55 @@ public class JCreateAccountFrame extends JDialog implements View{
             account.setAccountNumber(ltpNumber.getText());
          }
       });
+   }
+   
+   private JPanel buildContent() {
+      JPanel pnlContent = new JPanel();
       
+      pnlContent.setLayout(new GridBagLayout());
+      GridBagConstraints constraints = new GridBagConstraints();
+      
+      constraints.fill = GridBagConstraints.HORIZONTAL;
+      constraints.gridx = 0;
+      constraints.gridy = 0;
+      constraints.weightx = 0.5;
+      constraints.weighty = 0.5;
+      constraints.insets = new StandardInsets();
+      pnlContent.add(ltpName, constraints);
+      
+      constraints.gridy = 1;
+      pnlContent.add(ltpBankName, constraints);
+      
+      constraints.gridy = 2;
+      pnlContent.add(ltpThreshold, constraints);
+      
+      constraints.gridy = 3;
+      pnlContent.add(ltpInitialAmount, constraints);
+      
+      constraints.gridy = 4;
+      pnlContent.add(ltpNumber, constraints);
+      
+      constraints.gridy = 5;
+      pnlContent.add(ltpDescription, constraints);
+      
+      constraints.gridy = 6;
+      constraints.anchor = GridBagConstraints.EAST;
+      constraints.fill = GridBagConstraints.NONE;
+      pnlContent.add(vcrActions, constraints);      
       return pnlContent;
    }
    
    private void initComponent() {
       ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL.toString());
+      ltpBankName = new JLabelTextPanel(Text.ACCOUNT_BANK_NAME_LABEL.toString());
       ltpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL.toString());
+      ltpThreshold.setText("0");
       ltpInitialAmount = new JLabelMoneyPanel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL.toString());
+      ltpInitialAmount.setText("0");
       ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL.toString());
       ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL.toString());
       vcrActions = new JValidateCancelReset();
+      vcrActions.setEnableValidateButton(true);
    }
    
    public void addValidateListener(ActionListener listener) {
@@ -175,12 +191,5 @@ public class JCreateAccountFrame extends JDialog implements View{
 //      ltpThreshold.setText(String.valueOf(account.getOverdraftLimit()));
 //      ltpInitialAmount.setText(String.valueOf(account.getAccountBalance()));
 //      ltpNumber.setText(account.getAccountNumber());
-   }
-
-   /**
-    * @param i
-    */
-   public void setDefaultThreshold(int i) {
-      ltpThreshold.setText("0");
    }
 }

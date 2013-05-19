@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
+import core.components.Account;
 import core.components.AccountList;
 
 /**
@@ -64,10 +65,21 @@ public class ComboBoxAccount extends Controller {
          }
       });
    }
+   
+   public void addSelectedChangedListener(ActionListener listener) {
+      view.addSelectedChangedListener(listener);
+   }
 
    @Override
    public JComboBoxAccounts getGraphicalComponent() {
       return view;
+   }
+
+   /**
+    * @return
+    */
+   public Account getSelectedAccount() {
+      return (Account) view.getSelectedItem();
    }
 
 }

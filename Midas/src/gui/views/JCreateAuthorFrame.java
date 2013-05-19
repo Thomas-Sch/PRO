@@ -47,7 +47,7 @@ public class JCreateAuthorFrame extends JDialog implements View{
    private User user;
  
    private JLabelTextPanel authorName;
-   private JValidateCancel vlc;
+   private JValidateCancel vclActions;
    
    /**
     * Construit la vue.
@@ -68,11 +68,11 @@ public class JCreateAuthorFrame extends JDialog implements View{
       SpringLayout splLayout = new SpringLayout();
       pnlContent.setLayout(splLayout);
       
-      vlc = new JValidateCancel();
+      vclActions = new JValidateCancel();
       authorName = new JLabelTextPanel("Nom", 20);
       
       pnlContent.add(authorName);
-      pnlContent.add(vlc);
+      pnlContent.add(vclActions);
       
       //Contraintes du label par rapport au contenant.
       splLayout.putConstraint(SpringLayout.WEST, authorName, 5, SpringLayout.WEST, pnlContent);
@@ -80,28 +80,33 @@ public class JCreateAuthorFrame extends JDialog implements View{
 
       //Contraintes pour la taille du contenant.
       splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, authorName);
-      splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vlc);
+      splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vclActions);
       
       // Contraintes pour le bouton de validation.
-      splLayout.putConstraint(SpringLayout.EAST, vlc, 0, SpringLayout.EAST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, vlc, 5, SpringLayout.SOUTH, authorName);
+      splLayout.putConstraint(SpringLayout.EAST, vclActions, 0, SpringLayout.EAST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, vclActions, 5, SpringLayout.SOUTH, authorName);
       
        authorName.addTextChangedListener(new TextChangedListener() {
-       @Override
-       public void textChanged(DocumentEvent event) {
-          user.setName(authorName.getText());
-       }
-          });
+          @Override
+          public void textChanged(DocumentEvent event) {
+             if(authorName.getText().length() == 0) {
+                vclActions.setEnableValidateButton(false);
+             } else {
+                user.setName(authorName.getText());
+                vclActions.setEnableValidateButton(true);
+             }
+          }
+       });
       
       return pnlContent;
    }
    
    public void addValidateListener(ActionListener listener) {
-      vlc.addValidateListener(listener);
+      vclActions.addValidateListener(listener);
    }
    
    public void addCancelListener(ActionListener listener) {
-      vlc.addCancelListener(listener);
+      vclActions.addCancelListener(listener);
    }
 
    /* (non-Javadoc)

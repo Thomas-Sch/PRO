@@ -79,6 +79,13 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
       return dbBudget.getName();
    }
    
+   public void setName(String name) {
+      dbBudget.setName(name);
+   }
+   
+   public void setDescription(String description) {
+      dbBudget.setDescription(description);
+   }
    /**
     * Modifie le montant limite du budget.
     * @param limit - le montant limite du budget

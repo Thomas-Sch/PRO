@@ -91,13 +91,7 @@ public class ComboBoxesCategory extends Controller {
                AcCreateSubCategory action = new AcCreateSubCategory(getCore(), temp, children);
                action.actionPerformed(e);
                
-               Category ret = action.getCreatedCategory();
-               
-               System.out.println(ret.getName());
-               
-               view.setSelectedSubCategory(ret);
-               view.setSelectedCategory(temp);
-               
+               view.setSelectedSubCategory(action.getCreatedCategory());
             }
          }
       });

@@ -14,6 +14,7 @@ package gui.component.combobox;
 
 import gui.JComboBoxTemplate;
 
+import java.awt.event.ActionListener;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -61,6 +62,10 @@ public class JComboBoxAccounts extends JComboBoxTemplate<Account>{
       
       Account[] temp = new Account[0];
       setModel(new DefaultComboBoxModel<Account>(list.toArray(temp)));
+   }
+   
+   public void addSelectedChangedListener(ActionListener listener) {
+      addActionListener(listener);
    }
    
    private class SortByName implements Comparator<Account> {
