@@ -133,6 +133,4 @@ public class JRecursionChooser extends JPanel {
    public void addEnabledChangedListener(ActionListener listener) {
       cbxRecurrence.addActionListener(listener);
    }
-   
-   
 }

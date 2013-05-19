@@ -70,6 +70,21 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
+    * Fixe la valeur de l'intervalle de récurrence.
+    * @param i valeur de l'intervalle.
+    */
+   public void setIntervalRecurrence(int i) {
+      dbRecurrence.setIntervalRecurrence(i);
+   }
+   
+   /**
+    * Retoure la valeur de l'intervalle de récurrence.
+    * @return la valeur de l'intervalle de récurrence.
+    */
+   public int getIntervalRecurrence() {
+      return dbRecurrence.getintervalRecurrence();
+   }
+   /**
     * consult la date de debut de la recurrence
     * @return la date de debut
     */
