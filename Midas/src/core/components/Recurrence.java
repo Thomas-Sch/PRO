@@ -85,7 +85,7 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
       return dbRecurrence.getintervalRecurrence();
    }
    /**
-    * consult la date de debut de la recurrence
+    * Consulte la date de debut de la recurrence
     * @return la date de debut
     */
    public Date getEndDate() {
@@ -93,9 +93,9 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-    * modifie la date de debut de la recurrence
+    * Modifie la date de debut de la recurrence.
     * @param date - la date de debut
-    * @throws date impossible, si la date de fin est placee avant la date de debut
+    * @throws date impossible, si la date de fin est placee avant la date de debut.
     */
    public void setEndtDate(Date date) {
       if(date.after(dbRecurrence.getEnd())) {
@@ -104,6 +104,9 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
       dbRecurrence.setEnd(date);
    }
    
+   /**
+    * Retourne l'id de la récurrence.
+    */
    public int getId() {
       return dbRecurrence.getId();
    }
