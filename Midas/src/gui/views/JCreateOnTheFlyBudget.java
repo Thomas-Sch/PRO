@@ -30,6 +30,7 @@ import java.util.Observable;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import settings.Language.Text;
 import core.components.BudgetOnTheFly;
 
 /**
@@ -113,14 +114,14 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
    }
    
    private void initComponents() {
-      ltpName = new JLabelTextPanel("Nom du budget");
-      ltpAmount = new JLabelMoneyPanel("Somme");
+      ltpName = new JLabelTextPanel(Text.BUDGET_NAME_LABEL);
+      ltpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(controller.getCore());
       
       ditStart = new JDateInput("Date de début");
       ditEnd = new JDateInput("Date de fin");
       
-      ltpDescription = new JLabelTextPanel("Description");      
+      ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
       
       vcrActions = new JValidateCancelReset();
    }

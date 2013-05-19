@@ -93,7 +93,7 @@ public class JQuickExpense extends JPanel {
       add(authors.getGraphicalComponent(), constraints);
       
       constraints.gridx = 1;
-      add(new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString()), constraints);
+      add(new JLabelMoneyPanel(Text.AMOUNT_LABEL), constraints);
       
       constraints.gridx = 2;
       add(new JDateInput(Text.DATE_LABEL.toString()), constraints);

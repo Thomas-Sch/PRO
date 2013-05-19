@@ -16,6 +16,10 @@
   <validate_button>TODO</validate_button>
   <cancel_button>TODO</cancel_button>
   <reset_button>TODO</reset_button>
+  <category_name_label>TODO</category_name_label>
+  <author_name_label>TODO</author_name_label>
+  <budget_description_label>TODO</budget_description_label>
+  <budget_name_label>TODO</budget_name_label>
   <account_threshold_label>TODO</account_threshold_label>
   <account_initial_amount_label>TODO</account_initial_amount_label>
   <account_number_label>TODO</account_number_label>

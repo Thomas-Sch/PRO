@@ -19,6 +19,13 @@
   <cancel_button>Annuler</cancel_button>
   <reset_button>Initialiser</reset_button>
   
+  <category_name_label>Nom</category_name_label>
+  
+  <author_name_label>Nom</author_name_label>
+  
+  <budget_name_label>Nom du budget</budget_name_label>
+  <budget_description_label>Description</budget_description_label>
+  
   <account_threshold_label>Seuil</account_threshold_label>
   <account_initial_amount_label>Montant initial</account_initial_amount_label>
   <account_number_label>Numéro de compte</account_number_label>

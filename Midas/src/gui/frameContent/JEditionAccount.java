@@ -57,19 +57,19 @@ public class JEditionAccount extends JPanel {
       constraints.weighty = 0.5;
       constraints.insets = new Insets(5, 5, 5, 5);
 
-      ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL.toString(), 20);
+      ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL);
       add(ltpName, constraints);
       
       constraints.gridy = 1;
-      lmpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL.toString(), 20);
+      lmpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL);
       add(lmpThreshold, constraints);
       
       constraints.gridy = 2;
-      ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL.toString(), 20);
+      ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL);
       add(ltpNumber, constraints);
       
       constraints.gridy = 3;
-      ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL.toString(), 20);
+      ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL);
       add(ltpDescription, constraints);
    }
 

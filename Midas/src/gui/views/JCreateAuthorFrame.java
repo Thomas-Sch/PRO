@@ -26,6 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
 
+import settings.Language.Text;
+
 import core.components.User;
 
 /**
@@ -69,7 +71,7 @@ public class JCreateAuthorFrame extends JDialog implements View{
       pnlContent.setLayout(splLayout);
       
       vclActions = new JValidateCancel();
-      authorName = new JLabelTextPanel("Nom", 20);
+      authorName = new JLabelTextPanel(Text.AUTHOR_NAME_LABEL);
       
       pnlContent.add(authorName);
       pnlContent.add(vclActions);

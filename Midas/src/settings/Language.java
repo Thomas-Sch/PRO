@@ -64,6 +64,13 @@ public class Language {
       CANCEL_BUTTON,
       RESET_BUTTON,
       
+      CATEGORY_NAME_LABEL,
+      
+      AUTHOR_NAME_LABEL,
+      
+      BUDGET_DESCRIPTION_LABEL,
+      BUDGET_NAME_LABEL,
+      
       ACCOUNT_THRESHOLD_LABEL,
       ACCOUNT_INITIAL_AMOUNT_LABEL,
       ACCOUNT_NUMBER_LABEL,

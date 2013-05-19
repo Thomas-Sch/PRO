@@ -14,6 +14,8 @@ package gui.component;
 
 import javax.swing.JTextField;
 
+import settings.Language.Text;
+
 /**
  * Classe permettant de saisir un montant d'argent.
  * @author Biolzi Sébastien
@@ -34,12 +36,12 @@ public class JLabelMoneyPanel extends JLabelTextPanel {
     * @param textForLabel
     * @param textFieldColumns
     */
-   public JLabelMoneyPanel(String textForLabel, int textFieldColumns) {
+   public JLabelMoneyPanel(Text textForLabel, int textFieldColumns) {
       super(textForLabel, textFieldColumns);
       textField.setHorizontalAlignment(JTextField.RIGHT);
    }
    
-   public JLabelMoneyPanel(String textForLabel) {
+   public JLabelMoneyPanel(Text textForLabel) {
       super(textForLabel);
       textField.setHorizontalAlignment(JTextField.RIGHT);
    }

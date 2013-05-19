@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import settings.Language.Text;
+
 public class JLabelTextPanel extends JPanel {
    
    /**
@@ -33,10 +35,10 @@ public class JLabelTextPanel extends JPanel {
    protected JLabel label;
    protected JTextField textField;
    
-   public JLabelTextPanel(String textForLabel, int textFieldColumns) {
+   public JLabelTextPanel(Text textForLabel, int textFieldColumns) {
       
       layout = new BorderLayout(5,5);
-      label = new JLabel(textForLabel);
+      label = new JLabel(textForLabel.toString());
       
       textField = new JTextField();
       textField.setColumns(textFieldColumns);
@@ -47,7 +49,7 @@ public class JLabelTextPanel extends JPanel {
       add(textField, BorderLayout.EAST);      
    }
    
-   public JLabelTextPanel(String textForLabel) {
+   public JLabelTextPanel(Text textForLabel) {
       this(textForLabel, defaultColumnsSize);
    }
    

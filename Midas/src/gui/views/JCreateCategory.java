@@ -26,10 +26,12 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
 
+import settings.Language.Text;
+
 import core.components.Category;
 
 /**
- * TODO
+ * Fenêtre de création de catégorie.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -68,7 +70,7 @@ public class JCreateCategory extends JDialog implements View{
       pnlContent.setLayout(splLayout);
       
       vlc = new JValidateCancel();
-      categoryName = new JLabelTextPanel("Nom", 20);
+      categoryName = new JLabelTextPanel(Text.CATEGORY_NAME_LABEL);
       
       pnlContent.add(categoryName);
       pnlContent.add(vlc);

@@ -163,6 +163,14 @@ public class Core {
    }
    
    /**
+    * Créer une nouvelle récurrnce.
+    * @return la nouvelle récurrence.
+    */
+   public Recurrence createReccurence() {
+      return new Recurrence(this, dbController.createRecurence());
+   }
+   
+   /**
     * Retourne le compte ayant pour identifiant celui passé en paramètres.
     * @param id - l'identifiant du compte souhaité.
     * @return le compte correspondant à l'identifiant, null le cas échéant.

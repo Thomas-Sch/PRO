@@ -119,8 +119,8 @@ public class JNewTransaction extends JDialog implements View {
       accounts = new ComboBoxAccount(controller.getCore());
       cttType = new JComboBoxTransactionType();
       users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JLabelTextPanel(Text.REASON_LABEL.toString());
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString());
+      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
+      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL.toString());
       
       rcrRecurrenceOptions = new JRecursionChooser();

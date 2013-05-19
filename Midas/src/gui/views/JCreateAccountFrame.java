@@ -162,14 +162,14 @@ public class JCreateAccountFrame extends JDialog implements View{
    }
    
    private void initComponent() {
-      ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL.toString());
-      ltpBankName = new JLabelTextPanel(Text.ACCOUNT_BANK_NAME_LABEL.toString());
-      ltpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL.toString());
+      ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL);
+      ltpBankName = new JLabelTextPanel(Text.ACCOUNT_BANK_NAME_LABEL);
+      ltpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL);
       ltpThreshold.setText("0");
-      ltpInitialAmount = new JLabelMoneyPanel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL.toString());
+      ltpInitialAmount = new JLabelMoneyPanel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL);
       ltpInitialAmount.setText("0");
-      ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL.toString());
-      ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL.toString());
+      ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL);
+      ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL);
       vcrActions = new JValidateCancelReset();
       vcrActions.setEnableValidateButton(true);
    }

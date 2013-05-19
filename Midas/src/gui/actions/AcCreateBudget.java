@@ -14,15 +14,15 @@ package gui.actions;
 
 import gui.Controller;
 import gui.UserAction;
+import gui.utils.Positions;
+import gui.utils.Positions.ScreenPosition;
 import gui.views.JCreateBudgetFrame;
 
-import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import settings.Language.Text;
-
 import core.Core;
 import core.components.Budget;
 import core.components.Recurrence;
@@ -40,6 +40,7 @@ import database.dbComponents.DBRecurrence;
 public class AcCreateBudget extends UserAction {
    
    private Budget budget;
+   private Recurrence recurrence;
    private JCreateBudgetFrame view;
    
    private Controller controller;
@@ -52,10 +53,12 @@ public class AcCreateBudget extends UserAction {
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       
+      recurrence = core.createReccurence();
       budget = core.createBudget();
       
-      view = new JCreateBudgetFrame((Component)event.getSource(), controller, budget);
+      view = new JCreateBudgetFrame(controller, budget, recurrence);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.BUDGET_CREATION_TITLE);
+      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       
       view.addValidateListener(new UserAction(core) {
          @Override

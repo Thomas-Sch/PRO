@@ -14,31 +14,28 @@ package gui.views;
 
 import gui.Controller;
 import gui.View;
+import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
+import gui.component.JRecursionChooser;
 import gui.component.JValidateCancelReset;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.utils.StandardInsets;
 import gui.utils.TextChangedListener;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.event.DocumentEvent;
 
-import com.toedter.calendar.JMonthChooser;
-import com.toedter.calendar.JYearChooser;
-
+import settings.Language.Text;
 import core.components.Budget;
+import core.components.Recurrence;
 
 /**
  * TODO
@@ -61,28 +58,24 @@ public class JCreateBudgetFrame extends JDialog implements View{
    private JValidateCancelReset vcrActions;
    private ComboBoxAccount accounts;
    
-   private JRadioButton rbtMonth;
-   private JRadioButton rbtYear;
-   private ButtonGroup group;
-   
-   private JMonthChooser mcrMonth;
-   private JYearChooser ycrYear;
-   
-   private JCheckBox cbxRecurrence;
+   private JDateInput ditDate;
+   private JRecursionChooser rcrRecurrence;
    
    private JLabelTextPanel ltpDescription;
    
    private Controller controller;
    
    private Budget budget;
+   private Recurrence recurrence; // Récurrence associée au budget.
    
-   public JCreateBudgetFrame(Component parent, Controller controller, Budget budget) {
+   public JCreateBudgetFrame(Controller controller, Budget budget, Recurrence recurrence) {
       this.controller = controller;
       this.budget = budget;
+      this.recurrence = recurrence;
+      
       initContent();
       initListeners();
       setContentPane(buildContent());
-      setLocationRelativeTo(parent);
       setResizable(false);
       pack();
       update(null, null);
@@ -124,6 +117,14 @@ public class JCreateBudgetFrame extends JDialog implements View{
          }
       });
       
+      rcrRecurrence.addEnabledChangedListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent arg0) {
+            
+         }
+      });
+      
    }
 
    private JPanel buildContent() {
@@ -146,30 +147,17 @@ public class JCreateBudgetFrame extends JDialog implements View{
       
       constraints.gridy = 2;
       pnlContent.add(accounts.getGraphicalComponent(), constraints);
-
+      
       constraints.gridy = 3;
-      constraints.weighty = 0.2;
-      pnlContent.add(rbtMonth, constraints);
-      
+      pnlContent.add(ditDate, constraints);
+
       constraints.gridy = 4;
-      pnlContent.add(rbtYear, constraints);
+      pnlContent.add(rcrRecurrence, constraints);
       
-      constraints.weighty = 0.5;
       constraints.gridy = 5;
-      pnlContent.add(mcrMonth, constraints);
-      
-      constraints.gridy = 6;
-      constraints.fill = GridBagConstraints.NONE;
-      pnlContent.add(ycrYear, constraints);
-      
-      constraints.gridy = 7;
-      constraints.fill = GridBagConstraints.HORIZONTAL;
-      pnlContent.add(cbxRecurrence, constraints);
-      
-      constraints.gridy = 8;
       pnlContent.add(ltpDescription, constraints);
       
-      constraints.gridy = 9;
+      constraints.gridy = 6;
       constraints.fill = GridBagConstraints.NONE;
       constraints.anchor = GridBagConstraints.EAST;
       pnlContent.add(vcrActions, constraints);
@@ -177,23 +165,15 @@ public class JCreateBudgetFrame extends JDialog implements View{
    }
    
    private void initContent() {
-      ltpName = new JLabelTextPanel("Nom du budget");
-      lmpAmount = new JLabelMoneyPanel("Somme");
+      ltpName = new JLabelTextPanel(Text.BUDGET_NAME_LABEL);
+      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(controller.getCore());
       
-      rbtMonth = new JRadioButton("Mensuel");
-      rbtYear = new JRadioButton("Annuel");
-      group = new ButtonGroup();
+      ditDate = new JDateInput(Text.DATE_LABEL.toString());
       
-      group.add(rbtMonth);
-      group.add(rbtYear);
+      rcrRecurrence = new JRecursionChooser();
       
-      mcrMonth = new JMonthChooser();
-      ycrYear = new JYearChooser();
-      
-      cbxRecurrence = new JCheckBox("Récurrence");
-      
-      ltpDescription = new JLabelTextPanel("Description");      
+      ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
       
       vcrActions = new JValidateCancelReset();
    }
@@ -203,8 +183,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
     */
    @Override
    public void update(Observable arg0, Object arg1) {
-      // TODO Auto-generated method stub
-      
+
    }
    
    public void addValidateListener(ActionListener listener) {
