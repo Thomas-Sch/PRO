@@ -212,7 +212,6 @@ public class Core {
          MidasLogs.errors.push("Core", "Unable to save the account with id "
                + /* id + */ " to database.");
       }
-      
    }
    
    /**
@@ -220,9 +219,7 @@ public class Core {
     * @return la catégorie à compléter.
     */
    public Category createCategory(){
-      
-      return new Category(this, dbController.createCategory());
-      
+      return new Category(this, dbController.createCategory());   
    }
    
    /**
