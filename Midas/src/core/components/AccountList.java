@@ -32,10 +32,16 @@ public class AccountList extends ListTemplate<Account> {
       super(core);
    }
    
+   /**
+    * Créer un faux compte afin de donner des indications à l'utilisateurs.
+    */
    public Account createFalseEntry(String name) {
       return new Account(core, name);
    }
 
+   /**
+    * Récupère l'Account possédant l'id id.
+    */
    public Account get(int id) {
     for(Account account : getList()) {
        if (account.getId() == id) {

@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import settings.Language.Text;
 
 /**
- * Classe permettant de saisir un montant d'argent.
+ * Classe permettant de saisir une somme d'argent
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -33,17 +33,20 @@ public class JLabelMoneyPanel extends JLabelTextPanel {
    private static final long serialVersionUID = -3777685551501181998L;
 
    /**
-    * @param textForLabel
-    * @param textFieldColumns
+    * Constructeur principal
+    * @param textForLabel Somme d'argent.
+    * @param textFieldColumns Taille du champ de saisie.
     */
    public JLabelMoneyPanel(Text textForLabel, int textFieldColumns) {
       super(textForLabel, textFieldColumns);
-      textField.setHorizontalAlignment(JTextField.RIGHT);
+      txtData.setHorizontalAlignment(JTextField.RIGHT);
    }
    
+   /**
+    * Constructeur secondaire
+    * @param textForLabel Somme d'argent.
+    */
    public JLabelMoneyPanel(Text textForLabel) {
-      super(textForLabel);
-      textField.setHorizontalAlignment(JTextField.RIGHT);
+      this(textForLabel, defaultColumnsSize);
    }
-
 }

@@ -48,7 +48,8 @@ public class JEditionAccount extends JPanel {
    
 // Champs de la vue.
    private JLabelTextPanel ltpName;
-   private JLabelMoneyPanel lmpThreshold;
+   private JLabelTextPanel ltpBankName;
+   private JLabelMoneyPanel lmpOverdraftLimit;
    private JLabelMoneyPanel lmpBalance;
    private JLabelTextPanel ltpNumber;
    private JLabelTextPanel ltpDescription;
@@ -61,7 +62,8 @@ public class JEditionAccount extends JPanel {
    
    public void initContent() {
       ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL);
-      lmpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL);
+      ltpBankName = new JLabelTextPanel(Text.ACCOUNT_BANK_NAME_LABEL);
+      lmpOverdraftLimit = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL);
       lmpBalance = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL);
       ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL);
@@ -80,19 +82,61 @@ public class JEditionAccount extends JPanel {
       add(ltpName, constraints);
       
       constraints.gridy = 1;
-      add(lmpBalance, constraints);
+      add(ltpBankName, constraints);
       
       constraints.gridy = 2;
-      add(lmpThreshold, constraints);
+      add(lmpBalance, constraints);
       
       constraints.gridy = 3;
-      add(ltpNumber, constraints);
+      add(lmpOverdraftLimit, constraints);
       
       constraints.gridy = 4;
+      add(ltpNumber, constraints);
+      
+      constraints.gridy = 5;
       add(ltpDescription, constraints);
    }
    
    public void initListeners() {
+      ltpName.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            current.setAccountName(ltpName.getText());
+         }
+      });
+      
+      ltpBankName.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            current.setBankName(ltpBankName.getText());
+         }
+      });
+      
+      lmpBalance.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            try {
+               current.setAmount(Double.valueOf(lmpBalance.getText()));
+            }
+            catch (Exception e) {}
+            
+         }
+      });
+      
+      lmpOverdraftLimit.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            try {
+               current.setOverdraftLimit(Double.valueOf(lmpOverdraftLimit.getText()));
+            }
+            catch (Exception e) {}
+         }
+      });
+      
       ltpNumber.addTextChangedListener(new TextChangedListener() {
          
          @Override
@@ -107,7 +151,7 @@ public class JEditionAccount extends JPanel {
       ltpName.setText(account.getAccountName());
       ltpNumber.setText(account.getAccountNumber());
       lmpBalance.setText(String.valueOf(account.getAccountBalance()));
-      lmpThreshold.setText(String.valueOf(account.getOverdraftLimit()));
+      lmpOverdraftLimit.setText(String.valueOf(account.getOverdraftLimit()));
    }
    
    public void saveModifications(Controller controller) {

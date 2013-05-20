@@ -124,7 +124,7 @@ public class JManageAccount extends JDialog {
     * @return Le panel contenant les éléments graphiques.
     */
    private JPanel buildContent() {
-      JPanel pnlContent = new JPanel(new BorderLayout());
+      JPanel pnlContent = new JPanel(new BorderLayout(10,10));
       pnlContent.add(lblDescription, BorderLayout.NORTH);
       
       pnlContent.add(accounts.getGraphicalComponent(),BorderLayout.WEST);

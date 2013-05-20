@@ -207,7 +207,10 @@ public class Core {
    public void saveAccount(Account account) {
       try {
          dbController.saveToDatabase(account.getDBAccount());
-         accounts.addItem(account);
+         
+         if(!accounts.contains(account)) {
+            accounts.addItem(account);
+         }
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the account with id "

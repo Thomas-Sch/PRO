@@ -72,6 +72,7 @@ public class ManageAccount extends Controller {
          public void actionPerformed(ActionEvent e) {
             if(view.isModifyingAccount()) {
                getCore().saveAccount(view.getSelectedAccount());
+               view.updateFields(view.getSelectedAccount());
             }
             view.swapMode();
          }
