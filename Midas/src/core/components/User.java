@@ -74,10 +74,6 @@ public class User extends CoreComponent implements IdentifiedComponent {
       return dbUser.getId();
    }
    
-   public boolean equals(IdentifiedComponent obj) {
-      return getId() == obj.getId();
-   }
-   
    @Override
    public String toString() {
       return getName();

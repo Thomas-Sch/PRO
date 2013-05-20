@@ -113,7 +113,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            budget.setBindAccount(accounts.getSelectedAccount());
+            budget.setBindedAccount(accounts.getSelectedAccount());
          }
       });
       

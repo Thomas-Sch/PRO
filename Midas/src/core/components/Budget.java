@@ -54,6 +54,8 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
       dbBudget = new DBBudget();
       dbBudget.setName(name);
    }
+   
+   
 
    /**
     * Retourne les variables du budget
@@ -64,18 +66,10 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-    * Consulte la le montant limite du budget.
-    * @return un double representant le montant alloue au budget
-    */
-   public double getLimit() {
-      return dbBudget.getLimit();
-   }
-   
-   /**
     * Renvoie le nom du budget courant.
     * @return Le nom du budget.
     */
-   public String getBudgetName() {
+   public String getName() {
       return dbBudget.getName();
    }
    
@@ -86,6 +80,15 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    public void setDescription(String description) {
       dbBudget.setDescription(description);
    }
+   
+   /**
+    * Consulte la le montant limite du budget.
+    * @return un double representant le montant alloue au budget
+    */
+   public double getLimit() {
+      return dbBudget.getLimit();
+   }
+   
    /**
     * Modifie le montant limite du budget.
     * @param limit - le montant limite du budget
@@ -121,7 +124,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     * Consulte le compte avec le budget est liee.
     * @return le compte lie au budget
     */
-   public Account getBindAccount() {
+   public Account getBindedAccount() {
       return core.getAccount(dbBudget.getDbAccount());
    }
    
@@ -129,7 +132,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     * Lie le budget a un compte.
     * @param account - un compte
     */
-   public void setBindAccount(Account account) {
+   public void setBindedAccount(Account account) {
       this.dbBudget.setDbAccount(account.getId());
    }
    
@@ -141,15 +144,11 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
       return dbBudget.getId();
    }
    
-   public boolean equals(IdentifiedComponent obj) {
-      return getId() == obj.getId();
-   }
-   
    /**
     * Retourne le nom du budget.
     * @return un chaine de caractere representant le nom du compte
     */
    public String toString() {
-      return getBudgetName();
+      return getName();
    }
 }

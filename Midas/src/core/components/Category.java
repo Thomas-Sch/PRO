@@ -90,10 +90,6 @@ public class Category extends CoreComponent implements IdentifiedComponent {
       return dbCategory.getId();
    }
    
-   public boolean equals(IdentifiedComponent obj) {
-      return getId() == obj.getId();
-   }
-   
    public String toString() {
       return dbCategory.getName();
    }

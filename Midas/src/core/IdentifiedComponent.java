@@ -28,7 +28,5 @@ public interface IdentifiedComponent {
     * @return l'identifiant unique entier.
     */
    public int getId();
-   
-   public boolean equals(IdentifiedComponent obj);
 
 }

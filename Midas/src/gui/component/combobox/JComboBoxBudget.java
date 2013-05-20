@@ -62,7 +62,7 @@ public class JComboBoxBudget extends JComboBoxTemplate<Budget> {
    private class SortByName implements Comparator<Budget> {
       @Override
       public int compare(Budget arg0, Budget arg1) {
-         return arg0.getBudgetName().compareToIgnoreCase(arg1.getBudgetName());
+         return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
    }
 
