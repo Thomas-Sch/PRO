@@ -12,6 +12,7 @@
  */
 package chart.test;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -38,6 +39,8 @@ public class TimeSeriesChartTestRoutine {
     */
    public static void main(String[] args) {
       
+      Calendar date = Calendar.getInstance();
+      date.setTime(new Date(0));
 
       TimeSeriesValue[] dataset = {new TimeSeriesValue(5.0, new Date(2012, 05, 20)),
                                    new TimeSeriesValue(1.0, new Date(2012, 06, 21)),
