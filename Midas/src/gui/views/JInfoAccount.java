@@ -21,6 +21,8 @@ import java.awt.Insets;
 
 import javax.swing.JPanel;
 
+import core.components.Account;
+
 import settings.Language.Text;
 
 /**
@@ -47,7 +49,11 @@ public class JInfoAccount extends JPanel {
    private JLabelInfo lbiDescription;
    
    public JInfoAccount () {
-      
+      initContent();
+      buildContent();
+   }
+   
+   public void buildContent() {
       setLayout(new GridBagLayout());
       GridBagConstraints constraints = new GridBagConstraints();
       
@@ -57,24 +63,33 @@ public class JInfoAccount extends JPanel {
       constraints.weightx = 0.5;
       constraints.weighty = 0.5;
       constraints.insets = new Insets(5, 5, 5, 5);
-
-      lbiName = new JLabelInfo(Text.ACCOUNT_NAME_LABEL.toString());
       add(lbiName, constraints);
       
       constraints.gridy = 1;
-      lmiThreshold = new JLabelMoneyInfo(Text.ACCOUNT_THRESHOLD_LABEL.toString());
       add(lmiThreshold, constraints);
       
       constraints.gridy = 2;
-      lmiInitialAmount = new JLabelMoneyInfo(Text.ACCOUNT_INITIAL_AMOUNT_LABEL.toString());
       add(lmiInitialAmount, constraints);
       
       constraints.gridy = 3;
-      lbiNumber = new JLabelInfo(Text.ACCOUNT_NUMBER_LABEL.toString());
       add(lbiNumber, constraints);
       
       constraints.gridy = 4;
-      lbiDescription = new JLabelInfo(Text.ACCOUNT_DESCRIPTION_LABEL.toString());
       add(lbiDescription, constraints);
+   }
+   
+   public void initContent() {
+      lbiName = new JLabelInfo(Text.ACCOUNT_NAME_LABEL.toString());
+      lmiThreshold = new JLabelMoneyInfo(Text.ACCOUNT_THRESHOLD_LABEL.toString());
+      lmiInitialAmount = new JLabelMoneyInfo(Text.ACCOUNT_INITIAL_AMOUNT_LABEL.toString());
+      lbiNumber = new JLabelInfo(Text.ACCOUNT_NUMBER_LABEL.toString());
+      lbiDescription = new JLabelInfo(Text.ACCOUNT_DESCRIPTION_LABEL.toString());
+   }
+   
+   public void updateFields(Account account) {
+      lbiName.setText(account.getAccountName());
+      lbiNumber.setText(account.getAccountNumber());
+      lmiInitialAmount.setText(String.valueOf(account.getAccountBalance()));
+      lmiThreshold.setText(String.valueOf(account.getOverdraftLimit()));
    }
 }

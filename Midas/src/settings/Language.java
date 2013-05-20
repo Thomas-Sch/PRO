@@ -63,6 +63,9 @@ public class Language {
       VALIDATE_BUTTON,
       CANCEL_BUTTON,
       RESET_BUTTON,
+      ADD_BUTTON,
+      MODIFY_BUTTON,
+      DELETE_BUTTON,
       
       CATEGORY_NAME_LABEL,
       

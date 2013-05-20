@@ -40,11 +40,7 @@ public class AcCreateAccount extends UserAction {
    
    private Account account;
    private JCreateAccountFrame view;
-
-   /**
-    * @param core
-    * @param dependencies
-    */
+   
    public AcCreateAccount(Core core) {
       super(core);
    }

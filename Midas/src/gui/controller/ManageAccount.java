@@ -23,8 +23,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 
 import settings.Language.Text;
-
 import core.Core;
+import database.utils.DatabaseConstraintViolation;
+import database.utils.DatabaseException;
 
 /**
  * Contrôleur de la fenêtre de consultation et d'édition des comptes.
@@ -64,13 +65,33 @@ public class ManageAccount extends Controller {
     */
    @Override
    protected void initListeners() {
-      
       view.addButtonAddListener(new AcCreateAccount(getCore()));
       view.addButtonModifyListener(new ActionListener() {
          
          @Override
          public void actionPerformed(ActionEvent e) {
+            if(view.isModifyingAccount()) {
+               getCore().saveAccount(view.getSelectedAccount());
+            }
             view.swapMode();
+         }
+      });
+      
+      view.addButtonDeleteListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            try {
+               getCore().deleteAccount(view.getSelectedAccount());
+            }
+            catch (DatabaseException e1) {
+               e1.printStackTrace();
+            }
+            catch (DatabaseConstraintViolation e1) {
+               e1.printStackTrace();
+            }
+            
+            view.updateModel();
          }
       });
    }
@@ -82,5 +103,4 @@ public class ManageAccount extends Controller {
    public Component getGraphicalComponent() {
       return view;
    }
-
 }

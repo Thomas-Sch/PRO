@@ -16,6 +16,9 @@
   <validate_button>TODO</validate_button>
   <cancel_button>TODO</cancel_button>
   <reset_button>TODO</reset_button>
+  <add_button>TODO</add_button>
+  <modify_button>TODO</modify_button>
+  <delete_button>TODO</delete_button>
   <category_name_label>TODO</category_name_label>
   <author_name_label>TODO</author_name_label>
   <budget_description_label>TODO</budget_description_label>

@@ -16,8 +16,12 @@ import gui.Controller;
 import gui.component.list.JAccountList;
 
 import java.awt.Component;
+import java.awt.event.ActionListener;
+
+import javax.swing.event.ListSelectionListener;
 
 import core.Core;
+import core.components.Account;
 import core.components.AccountList;
 
 /**
@@ -61,7 +65,6 @@ public class AccountListBox extends Controller {
     */
    @Override
    protected void initListeners() {
-
    }
 
    /*
@@ -73,5 +76,20 @@ public class AccountListBox extends Controller {
    public Component getGraphicalComponent() {
       return view;
    }
+   
+   /**
+    * Retourne le compte selectionné dans la liste.
+    * @return Le compte selectionné.
+    */
+   public Account getSelectedAccount() {
+      return view.getSelectedValue();
+   }
 
+   public void updateModel() {
+      model.setChangedAndNotifyObservers();
+   }
+   
+   public void addSelectionChangedListener(ListSelectionListener listener) {
+      view.addListSelectionListener(listener);
+   }
 }

@@ -45,6 +45,10 @@ public abstract class ListTemplate<E> extends CoreComponent {
       notifyObservers();
    }
    
+   public void removeItem(E item) {
+      list.remove(item);
+   }
+   
    public E getAt(int index) {
       return list.get(index);
    }

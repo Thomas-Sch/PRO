@@ -13,6 +13,7 @@
 package gui.component;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -55,6 +56,14 @@ public class JLabelInfo extends JPanel {
 
    protected void setDataAlignement(int alignement) {
       lblData.setHorizontalAlignment(alignement);
+   }
+   
+   public void setText(String s) {
+      lblData.setText(s);
+   }
+   
+   public Dimension getPreferredSize() {
+      return new Dimension(300, 20);
    }
 
 }

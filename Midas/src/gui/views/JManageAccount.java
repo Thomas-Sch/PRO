@@ -17,14 +17,16 @@ import gui.component.JAddEditDelete;
 import gui.controller.AccountListBox;
 import gui.frameContent.JEditionAccount;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import core.components.Account;
 
 /**
  * Fenêtre de gestion de comptes.
@@ -42,6 +44,10 @@ public class JManageAccount extends JDialog {
     */
    private static final long serialVersionUID = 6474851721091887221L;
    
+   // Etat de l'interface (contrôlé internement).
+   private enum State { EDITION, VIEW };
+   private State state;
+   
    private Controller controller;
    
    private JLabel lblDescription;
@@ -51,14 +57,66 @@ public class JManageAccount extends JDialog {
    private JEditionAccount edaAccount;
    private JAddEditDelete aedActions;
    
+   private JPanel pnlInfosActions;
+   
    /**
     * Contructeur.
     * @param controller Contrôleur de cet objet.
     */
    public JManageAccount(Controller controller) {  
       this.controller = controller;
+      state = State.VIEW;
+      initContent();
+      initListeners();
       setContentPane(buildContent());
       pack();
+   }
+   
+   /**
+    * Initialise les composants graphiques.
+    */
+   public void initContent() {
+      lblDescription = new JLabel("Liste des comptes");
+      accounts = new AccountListBox(controller.getCore());
+      ifaAccount = new JInfoAccount();
+      edaAccount = new JEditionAccount();
+      aedActions = new JAddEditDelete();
+      
+      // On désactive les boutons qui utilise un compte car aucun n'est
+      // séléctionné de base lorsque l'on lance l'interface.
+      setEnabledAccountDependantButtons(false);
+      pnlInfosActions = new JPanel();
+   }
+   
+   /**
+    * Active ou désactive les boutons qui dépendent d'un compte cible.
+    * @param b Nouvel état d'activation des bouttons.
+    */
+   private void setEnabledAccountDependantButtons(boolean b) {
+      aedActions.setButtonDeleteEnabled(b);
+      aedActions.setButtonModifyEnabled(b);
+   }
+   
+   /**
+    * Initialise les listeners internes au composant graphique.
+    */
+   public void initListeners() {
+      accounts.addSelectionChangedListener(new ListSelectionListener() {
+         
+         @Override
+         public void valueChanged(ListSelectionEvent e) {
+            if(accounts.getSelectedAccount() != null) {
+               setEnabledAccountDependantButtons(true);
+
+               updateFields(accounts.getSelectedAccount());
+            }
+            else {
+               setEnabledAccountDependantButtons(false);
+               edaAccount.setVisible(false);
+               ifaAccount.setVisible(false);
+            }
+         }
+      });
    }
    
    /**
@@ -66,44 +124,17 @@ public class JManageAccount extends JDialog {
     * @return Le panel contenant les éléments graphiques.
     */
    private JPanel buildContent() {
-      JPanel pnlContent = new JPanel(new GridBagLayout());
+      JPanel pnlContent = new JPanel(new BorderLayout());
+      pnlContent.add(lblDescription, BorderLayout.NORTH);
       
-      GridBagConstraints constraints = new GridBagConstraints();
-      constraints.fill = GridBagConstraints.BOTH;
-      constraints.anchor = GridBagConstraints.CENTER;
+      pnlContent.add(accounts.getGraphicalComponent(),BorderLayout.WEST);
       
-      constraints.weightx = 0.5;
-      constraints.insets = new Insets(5, 5, 5, 5);
       
-      constraints.gridx = 0;
-      constraints.gridy = 0;
-      constraints.gridwidth = 2;
-      constraints.weighty = 0.1;
-      lblDescription = new JLabel("Liste des comptes");
-      pnlContent.add(lblDescription, constraints);
+      pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
+      pnlInfosActions.setLayout(new BorderLayout());
       
-      constraints.gridy = 1;
-      constraints.gridwidth = 1;
-      constraints.gridheight = 2;
-      constraints.weighty = 0.5;
-      constraints.weightx = 0.7;
-      accounts = new AccountListBox(controller.getCore());
-      pnlContent.add(accounts.getGraphicalComponent(),constraints);
-      
-      constraints.gridheight = 1;
-      constraints.fill = GridBagConstraints.HORIZONTAL;
-      constraints.gridx = 1;
-      constraints.weightx = 0.4;
-      
-      ifaAccount = new JInfoAccount();
-      edaAccount = new JEditionAccount();
-      edaAccount.setVisible(false);
-      pnlContent.add(ifaAccount, constraints);
-      pnlContent.add(edaAccount, constraints);
-      
-      constraints.gridy = 2;
-      aedActions = new JAddEditDelete();
-      pnlContent.add(aedActions, constraints);
+      pnlInfosActions.add(ifaAccount, BorderLayout.CENTER);
+      pnlInfosActions.add(aedActions, BorderLayout.SOUTH);
       return pnlContent;
    }
    
@@ -132,8 +163,60 @@ public class JManageAccount extends JDialog {
       aedActions.addDeleteActionListener(listener);
    }
    
+
+   /**
+    * Change l'état de l'interface et s'occupe de faire les changements
+    * graphiques nécéssaires.
+    */
    public void swapMode() {
-      ifaAccount.setVisible(!ifaAccount.isVisible());
-      edaAccount.setVisible(!edaAccount.isVisible());
+      
+      switch (state) {
+         case VIEW:
+            state = State.EDITION;
+            pnlInfosActions.remove(ifaAccount);
+            pnlInfosActions.add(edaAccount, BorderLayout.CENTER);
+            break;
+            
+         case EDITION:
+            state = State.VIEW;
+            pnlInfosActions.remove(edaAccount);
+            pnlInfosActions.add(ifaAccount, BorderLayout.CENTER);
+            break;
+      }
+      pack();
+   }
+   
+   /**
+    * Récupère le compte seléctionné dans l'interface.
+    * @return le compte seléctionné.
+    */
+   public Account getSelectedAccount() {
+      return accounts.getSelectedAccount();
+   }
+   
+   /**
+    * Force la mise à jour la liste des comptes.
+    */
+   public void updateModel() {
+      accounts.updateModel();
+      pack();
+   }
+   
+   /**
+    * Met à jour les champs que peut voir l'utlisateur en fonction du compte
+    * qu'il sélectionne.
+    * @param account Compte dont on veut afficher ou éditer les informations.
+    */
+   public void updateFields(Account account) {
+      ifaAccount.updateFields(account);
+      edaAccount.updateFields(account);
+   }
+   
+   /**
+    * Renvoie true si l'interface est en mode d'édition de données.
+    * @return true si l'interface est en mode édition.
+    */
+   public boolean isModifyingAccount() {
+      return state == State.EDITION;
    }
 }

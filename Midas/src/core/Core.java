@@ -94,6 +94,11 @@ public class Core {
       }
    }
    
+   public void deleteAccount(Account account) throws DatabaseException, DatabaseConstraintViolation {
+      dbController.deleteDbAccount(account.getId());
+      accounts.removeItem(account);
+   }
+   
    private void loadUsers() {
       LinkedList<DBUser> dbUsers = null;
       try {

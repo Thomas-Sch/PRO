@@ -16,6 +16,9 @@
   <validate_button>Valider</validate_button>
   <cancel_button>Annuler</cancel_button>
   <reset_button>Initialiser</reset_button>
+  <add_button>Ajouter</add_button>
+  <modify_button>Modifier</modify_button>
+  <delete_button>Supprimer</delete_button>
   <category_name_label>Nom</category_name_label>
   <author_name_label>Nom</author_name_label>
   <budget_description_label>Description</budget_description_label>

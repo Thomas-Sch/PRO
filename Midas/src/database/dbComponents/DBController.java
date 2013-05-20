@@ -363,7 +363,7 @@ public class DBController {
             this.insert(preparedStatement, dbAccount);
          } else {
             sqlString = "UPDATE Account " +
-                        "SET Name = ?, BankName = ?, AccountNumber = ?, Amount = ?, AccountLimit = ?, Enablec = ? " +
+                        "SET Name = ?, BankName = ?, AccountNumber = ?, Amount = ?, AccountLimit = ?, Enabled = ? " +
                         "WHERE Acc_Id = ?";
             
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
