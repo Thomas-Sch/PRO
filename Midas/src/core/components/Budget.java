@@ -141,6 +141,10 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
       return dbBudget.getId();
    }
    
+   public boolean equals(IdentifiedComponent obj) {
+      return getId() == obj.getId();
+   }
+   
    /**
     * Retourne le nom du budget.
     * @return un chaine de caractere representant le nom du compte

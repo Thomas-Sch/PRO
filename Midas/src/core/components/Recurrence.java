@@ -110,4 +110,8 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
    public int getId() {
       return dbRecurrence.getId();
    }
+   
+   public boolean equals(IdentifiedComponent obj) {
+      return getId() == obj.getId();
+   }
 }

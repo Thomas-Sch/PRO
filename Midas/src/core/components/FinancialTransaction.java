@@ -211,4 +211,8 @@ public class FinancialTransaction extends CoreComponent implements
    public int getId() {
       return dbFinancialTransaction.getId();
    }
+   
+   public boolean equals(IdentifiedComponent obj) {
+      return getId() == obj.getId();
+   }
 }

@@ -30,6 +30,7 @@ import database.dbComponents.DBAccount;
 import database.dbComponents.DBBudget;
 import database.dbComponents.DBCategory;
 import database.dbComponents.DBController;
+import database.dbComponents.DBFinancialTransaction;
 import database.dbComponents.DBUser;
 import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
@@ -92,11 +93,6 @@ public class Core {
          
          budgets.setItems(budgetTemp);
       }
-   }
-   
-   public void deleteAccount(Account account) throws DatabaseException, DatabaseConstraintViolation {
-      dbController.deleteDbAccount(account.getId());
-      accounts.removeItem(account);
    }
    
    private void loadUsers() {
@@ -168,11 +164,52 @@ public class Core {
    }
    
    /**
+    * Créer un nouveau budget dont les champs sont à compléter.
+    * @return le budget à compléter.
+    */
+   public Budget createBudget(){
+      return new Budget(this, dbController.createDbBudget());
+   }
+   
+   /**
+    * Créer un nouveau budget à la volée dont les champs sont à compléter.
+    * @return le budget à compléter.
+    */
+   public BudgetOnTheFly createBudgetOnTheFly(){
+      return new BudgetOnTheFly(this, dbController.createDbBudgetOnTheFly());
+   }
+   
+   /**
+    * Créer un nouvel utilisateur dont les champs sont à compléter.
+    * @return l'utilisateur à compléter.
+    */
+   public User createUser(){
+      return new User(this, dbController.createDBUser());
+   }
+   
+   /**
     * Créer une nouvelle récurrnce.
     * @return la nouvelle récurrence.
     */
    public Recurrence createReccurence() {
       return new Recurrence(this, dbController.createRecurence());
+   }
+
+   /**
+    * Créer une nouvelle transaction dont les champs sont à compléter.
+    * @return la transaction à compléter.
+    */
+   public FinancialTransaction createFinancialTransaction(){
+      return new FinancialTransaction(this,
+                                    dbController.createFinancialTransaction());
+   }
+   
+   /**
+    * Créer une nouvelle catégorie dont les champs sont à compléter.
+    * @return la catégorie à compléter.
+    */
+   public Category createCategory(){
+      return new Category(this, dbController.createCategory());   
    }
    
    /**
@@ -201,33 +238,12 @@ public class Core {
    }
    
    /**
-    * Sauvegarde ou met à jour le compte donné dans la base de donnée.
-    * @param account - le compte à sauver.
+    * Retourne l'utilisateur ayant pour identifiant celui passé en paramètres.
+    * @param id - l'identifiant de l'utilisateur souhaité.
+    * @return l'utilisateur correspondant à l'identifiant, null le cas échéant.
     */
-   public void saveAccount(Account account) {
-      try {
-         dbController.saveToDatabase(account.getDBAccount());
-         
-         if(!accounts.contains(account)) {
-            accounts.addItem(account);
-         }
-      }
-      catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the account with id "
-               + /* id + */ " to database, because of constraint violation.");
-      }
-      catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the account with id "
-               + /* id + */ " to database.");
-      }
-   }
-   
-   /**
-    * Créer une nouvelle catégorie dont les champs sont à compléter.
-    * @return la catégorie à compléter.
-    */
-   public Category createCategory(){
-      return new Category(this, dbController.createCategory());   
+   public User getUser(int id) {      
+      return users.get(id); 
    }
    
    /**
@@ -250,202 +266,6 @@ public class Core {
       }
       
       return result; 
-   }
-   
-   /**
-    * Sauvegarde ou met à jour la catégorie donnée dans la base de donnée.
-    * @param category - la catégorie à sauver.
-    */
-   public void saveCategory(Category category) {
-      try {
-         dbController.saveToDatabase(category.getDBCategory());
-         primaryCategories.addItem(category);
-      }
-      catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the category with id "
-               + /* id + */ " to database, because of constraint violation.");
-      }
-      catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the category with id "
-               + /* id + */ " to database.");
-      }
-   }
-   
-   public void saveSubCategory(Category category, CategoryList list) {
-      try {
-         dbController.saveToDatabase(category.getDBCategory());
-         list.addItem(category);
-      }
-      catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the category with id "
-               + /* id + */ " to database, because of constraint violation.");
-      }
-      catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the category with id "
-               + /* id + */ " to database.");
-      }
-   }
-   
-   /**
-    * Créer un nouveau budget dont les champs sont à compléter.
-    * @return le budget à compléter.
-    */
-   public Budget createBudget(){
-      return new Budget(this, dbController.createDbBudget());
-   }
-   
-   /**
-    * Retourne le budget ayant pour identifiant celui passé en paramètres.
-    * @param id - l'identifiant du budget souhaité.
-    * @return le budget correspondant à l'identifiant, null le cas échéant.
-    */
-   public Budget getBudget(int id) {
-      Budget result = budgets.get(id);
-      
-      try {
-         result = new Budget(this, dbController.getDbBudget(id));
-         
-         budgets.addItem(result);
-      }
-      catch (DatabaseException e) {
-         
-      }
-      
-      return result; 
-   }
-   
-   /**
-    * Sauvegarde ou met à jour le budget donné dans la base de donnée.
-    * @param budget - le budget à sauver.
-    */
-   public void saveBudget(Budget budget) {
-      try {
-         dbController.saveToDatabase(budget.getDBBudget());
-         budgets.addItem(budget);
-      }
-      catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */ " to database, because of constraint violation.");
-      }
-      catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */ " to database.");
-      }
-   }
-   
-   /**
-    * Créer un nouveau budget à la volée dont les champs sont à compléter.
-    * @return le budget à compléter.
-    */
-   public BudgetOnTheFly createBudgetOnTheFly(){
-      return new BudgetOnTheFly(this, dbController.createDbBudgetOnTheFly());
-   }
-   
-   /**
-    * Retourne le budget ayant pour identifiant celui passé en paramètres.
-    * @param id - l'identifiant du budget souhaité.
-    * @return la catégorie correspondant à l'identifiant, null le cas échéant.
-    */
-   public BudgetOnTheFly getBudgetOnTheFly(int id) {
-      BudgetOnTheFly result = cache.getReference(BudgetOnTheFly.class, id);
-      
-      // Si pas présent dans le cache, demander à la base de données
-      if (result == null) {
-         try {
-            result = new BudgetOnTheFly(this, dbController.getDbBudgetOnTheFly(id));
-            
-            // Mise à jour du cache
-            cache.putToCache(result);
-         }
-         catch (DatabaseException e) {
-            
-         }
-      }
-      
-      return result; 
-   }
-   
-   /**
-    * Sauvegarde ou met à jour le budget à la volée donné dans la base de
-    * donnée.
-    * @param budget - le budget à sauver.
-    */
-   public void saveBudgetOnTheFly(BudgetOnTheFly budget) {
-      try {
-         dbController.saveToDatabase(budget.getDBBudgetOnTheFly());
-         
-         cache.putToCache(budget);
-      }
-      catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */ " to database, because of constraint violation.");
-      }
-      catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */ " to database.");
-      }
-   }
-   
-   /**
-    * Créer un nouvel utilisateur dont les champs sont à compléter.
-    * @return l'utilisateur à compléter.
-    */
-   public User createUser(){
-      return new User(this, dbController.createDBUser());
-   }
-   
-   /**
-    * Retourne l'utilisateur ayant pour identifiant celui passé en paramètres.
-    * @param id - l'identifiant de l'utilisateur souhaité.
-    * @return l'utilisateur correspondant à l'identifiant, null le cas échéant.
-    */
-   public User getUser(int id) {      
-      return users.get(id); 
-   }
-   
-   public UserList getAllUsers(){
-      return users;
-   }
-   
-   public AccountList getAllAccounts() {
-      return accounts;
-   }
-   
-   public CategoryList getAllPrimaryCategories() {
-      return primaryCategories;
-   }
-   
-   public BudgetList getAllBudgets() {
-      return budgets;
-   }
-   
-   /**
-    * Sauvegarde ou met à jour l'utilisateur donné dans la base de donnée.
-    * @param user - l'utilisateur à sauver.
-    */
-   public void saveUser(User user) {
-      try {
-         dbController.saveToDatabase(user.getDBUser());
-         
-         users.addItem(user);
-      }
-      catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the user with id "
-               + /* id + */ " to database, because of constraint violation.");
-      }
-      catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the user with id "
-               + /* id + */ " to database.");
-      }
-   }
-   
-   /**
-    * Créer une nouvelle transaction dont les champs sont à compléter.
-    * @return la transaction à compléter.
-    */
-   public FinancialTransaction createFinancialTransaction(){
-      return new FinancialTransaction(this,
-                                    dbController.createFinancialTransaction());
    }
    
    /**
@@ -473,25 +293,29 @@ public class Core {
    }
    
    /**
-    * Sauvegarde ou met à jour la transaction donnée dans la base de donnée.
-    * @param transaction - la transaction à sauver.
+    * Retourne le budget ayant pour identifiant celui passé en paramètres.
+    * @param id - l'identifiant du budget souhaité.
+    * @return la catégorie correspondant à l'identifiant, null le cas échéant.
     */
-   public void saveFinancialTransaction(FinancialTransaction transaction) {
-      try {
-         dbController.saveToDatabase(transaction.getDBFinancialTransaction());
-         
-         cache.putToCache(transaction);
+   public BudgetOnTheFly getBudgetOnTheFly(int id) {
+      BudgetOnTheFly result = cache.getReference(BudgetOnTheFly.class, id);
+      
+      // Si pas présent dans le cache, demander à la base de données
+      if (result == null) {
+         try {
+            result = new BudgetOnTheFly(this, dbController.getDbBudgetOnTheFly(id));
+            
+            // Mise à jour du cache
+            cache.putToCache(result);
+         }
+         catch (DatabaseException e) {
+            
+         }
       }
-      catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */ " to database, because of constraint violation.");
-      }
-      catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */ " to database.");
-      }
+      
+      return result; 
    }
-
+   
    /**
     * Retourne la recurence ayant pour identifiant celui passé en paramètres.
     * @param id - l'identifiant de la recurence souhaitée.
@@ -536,4 +360,224 @@ public class Core {
       }
       return result;
    }
+   
+   /**
+    * Retourne le budget ayant pour identifiant celui passé en paramètres.
+    * @param id - l'identifiant du budget souhaité.
+    * @return le budget correspondant à l'identifiant, null le cas échéant.
+    */
+   public Budget getBudget(int id) {
+      Budget result = budgets.get(id);
+      
+      try {
+         result = new Budget(this, dbController.getDbBudget(id));
+         
+         budgets.addItem(result);
+      }
+      catch (DatabaseException e) {
+         
+      }
+      
+      return result; 
+   }
+   
+   public UserList getAllUsers(){
+      return users;
+   }
+   
+   public AccountList getAllAccounts() {
+      return accounts;
+   }
+   
+   public CategoryList getAllPrimaryCategories() {
+      return primaryCategories;
+   }
+   
+   public BudgetList getAllBudgets() {
+      return budgets;
+   }
+   
+   public LinkedList<FinancialTransaction> getAllFinancialTransaction() {
+      LinkedList<DBFinancialTransaction> list;
+      LinkedList<FinancialTransaction> result;
+      result = cache.getAll(FinancialTransaction.class);
+      
+      try {
+         list = dbController.getAllDbFinancialTransactions();
+         
+         boolean alreadyExist = false;
+         
+         for (DBFinancialTransaction dbItem : list) {
+            
+            alreadyExist = false;
+            for (FinancialTransaction financialTransaction : result) {
+               
+               if(dbItem.getId() == financialTransaction.getId()) {
+                  alreadyExist = true;
+                  break;
+               }
+            }
+            
+            if (!alreadyExist) {
+               result.add(new FinancialTransaction(this, dbItem));
+            }
+            
+         }
+      }
+      catch (DatabaseException e) {
+         
+      }
+      return result;
+   }
+   
+   /**
+    * Sauvegarde ou met à jour le compte donné dans la base de donnée.
+    * @param account - le compte à sauver.
+    */
+   public void saveAccount(Account account) {
+      try {
+         dbController.saveToDatabase(account.getDBAccount());
+         
+         if(!accounts.contains(account)) {
+            accounts.addItem(account);
+         }
+      }
+      catch (DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core", "Unable to save the account with id "
+               + /* id + */ " to database, because of constraint violation.");
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core", "Unable to save the account with id "
+               + /* id + */ " to database.");
+      }
+   }
+   
+   
+   
+   /**
+    * Sauvegarde ou met à jour la catégorie donnée dans la base de donnée.
+    * @param category - la catégorie à sauver.
+    */
+   public void saveCategory(Category category) {
+      try {
+         dbController.saveToDatabase(category.getDBCategory());
+         primaryCategories.addItem(category);
+      }
+      catch (DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core", "Unable to save the category with id "
+               + /* id + */ " to database, because of constraint violation.");
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core", "Unable to save the category with id "
+               + /* id + */ " to database.");
+      }
+   }
+   
+   public void saveSubCategory(Category category, CategoryList list) {
+      try {
+         dbController.saveToDatabase(category.getDBCategory());
+         list.addItem(category);
+      }
+      catch (DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core", "Unable to save the category with id "
+               + /* id + */ " to database, because of constraint violation.");
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core", "Unable to save the category with id "
+               + /* id + */ " to database.");
+      }
+   }
+   
+   
+   
+   
+   
+   /**
+    * Sauvegarde ou met à jour le budget donné dans la base de donnée.
+    * @param budget - le budget à sauver.
+    */
+   public void saveBudget(Budget budget) {
+      try {
+         dbController.saveToDatabase(budget.getDBBudget());
+         budgets.addItem(budget);
+      }
+      catch (DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core", "Unable to save the budget with id "
+               + /* id + */ " to database, because of constraint violation.");
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core", "Unable to save the budget with id "
+               + /* id + */ " to database.");
+      }
+   }
+   
+   /**
+    * Sauvegarde ou met à jour le budget à la volée donné dans la base de
+    * donnée.
+    * @param budget - le budget à sauver.
+    */
+   public void saveBudgetOnTheFly(BudgetOnTheFly budget) {
+      try {
+         dbController.saveToDatabase(budget.getDBBudgetOnTheFly());
+         
+         cache.putToCache(budget);
+      }
+      catch (DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core", "Unable to save the budget with id "
+               + /* id + */ " to database, because of constraint violation.");
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core", "Unable to save the budget with id "
+               + /* id + */ " to database.");
+      }
+   }
+   
+   /**
+    * Sauvegarde ou met à jour l'utilisateur donné dans la base de donnée.
+    * @param user - l'utilisateur à sauver.
+    */
+   public void saveUser(User user) {
+      try {
+         dbController.saveToDatabase(user.getDBUser());
+         
+         users.addItem(user);
+      }
+      catch (DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core", "Unable to save the user with id "
+               + /* id + */ " to database, because of constraint violation.");
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core", "Unable to save the user with id "
+               + /* id + */ " to database.");
+      }
+   }
+   
+   
+   
+   /**
+    * Sauvegarde ou met à jour la transaction donnée dans la base de donnée.
+    * @param transaction - la transaction à sauver.
+    */
+   public void saveFinancialTransaction(FinancialTransaction transaction) {
+      try {
+         dbController.saveToDatabase(transaction.getDBFinancialTransaction());
+         
+         cache.putToCache(transaction);
+      }
+      catch (DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core", "Unable to save the budget with id "
+               + /* id + */ " to database, because of constraint violation.");
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core", "Unable to save the budget with id "
+               + /* id + */ " to database.");
+      }
+   }
+   
+   public void deleteAccount(Account account) throws DatabaseException, DatabaseConstraintViolation {
+      dbController.deleteDbAccount(account.getId());
+      accounts.removeItem(account);
+   }
+
+   
 }

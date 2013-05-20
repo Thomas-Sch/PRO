@@ -12,7 +12,9 @@
  */
 package core.cache;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.lang.ref.SoftReference;
 import core.IdentifiedComponent;
 
@@ -110,6 +112,36 @@ public class Cache {
       }
       
       return ref;
+   }
+   
+   /**
+    * Retourne les composants identifiables de la classe donnée présents dans
+    * le cache.
+    * @param type - le type des composants voulus.
+    * @return la liste des composants du type donné présents dans le cache.
+    */
+   public <T extends IdentifiedComponent> LinkedList<T> getAll(Class<T> type) {
+      LinkedList<T> result = new LinkedList<>();
+      
+      // Récupère la bonne table
+      HashMap<Integer, SoftReference<? extends IdentifiedComponent>> map =
+                                                               cache.get(type);
+      
+      // Récupère toute les valeurs de la table
+      Collection<SoftReference<? extends IdentifiedComponent>> values =
+                                                                  map.values();
+      
+      // Ajoute les références encore existantes
+      T ref;
+      for (SoftReference<? extends IdentifiedComponent> softRef : values) {
+         ref = (T)softRef.get();
+         
+         if (ref != null) {
+            result.add(ref);
+         }
+      }
+      
+      return result;
    }
 
 }

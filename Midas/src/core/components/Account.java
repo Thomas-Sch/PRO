@@ -172,6 +172,10 @@ public class Account extends CoreComponent implements IdentifiedComponent {
       return dbAccount.getId();
    }
    
+   public boolean equals(IdentifiedComponent obj) {
+      return getId() == obj.getId();
+   }
+   
    /**
     * Retourne le nom du compte.
     * @return une chaîne de caractere representant le nom du compte.w
