@@ -87,6 +87,13 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
+    * Définit le nom de la banque.
+    * @param s Nom de la banque
+    */
+   public void setBankName(String s) {
+      dbAccount.setNameBank(s);
+   }
+   /**
     * Debiter un montant sur le compte : prelever de l'argent sur le compte.
     * @param amount - representant le montant que l'on veut enlever sur le compte
     * 

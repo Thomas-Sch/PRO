@@ -14,14 +14,14 @@ package gui.views;
 
 import gui.Controller;
 import gui.View;
-import gui.component.JComboBoxTransactionType;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
 import gui.component.JRecursionChooser;
 import gui.component.JValidateCancel;
-import gui.controller.ComboBoxAccount;
-import gui.controller.ComboBoxUser;
+import gui.component.combobox.JComboBoxTransactionType;
+import gui.controller.combobox.ComboBoxAccount;
+import gui.controller.combobox.ComboBoxUser;
 import gui.utils.StandardInsets;
 
 import java.awt.GridBagConstraints;
@@ -119,8 +119,8 @@ public class JNewTransaction extends JDialog implements View {
       accounts = new ComboBoxAccount(controller.getCore());
       cttType = new JComboBoxTransactionType();
       users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JLabelTextPanel(Text.REASON_LABEL.toString());
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString());
+      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
+      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL.toString());
       
       rcrRecurrenceOptions = new JRecursionChooser();

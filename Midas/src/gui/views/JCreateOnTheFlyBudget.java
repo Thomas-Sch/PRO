@@ -18,7 +18,7 @@ import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
 import gui.component.JValidateCancelReset;
-import gui.controller.ComboBoxAccount;
+import gui.controller.combobox.ComboBoxAccount;
 import gui.utils.StandardInsets;
 
 import java.awt.Component;
@@ -30,10 +30,11 @@ import java.util.Observable;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import settings.Language.Text;
 import core.components.BudgetOnTheFly;
 
 /**
- * TODO
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -113,14 +114,14 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
    }
    
    private void initComponents() {
-      ltpName = new JLabelTextPanel("Nom du budget");
-      ltpAmount = new JLabelMoneyPanel("Somme");
+      ltpName = new JLabelTextPanel(Text.BUDGET_NAME_LABEL);
+      ltpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(controller.getCore());
       
       ditStart = new JDateInput("Date de début");
       ditEnd = new JDateInput("Date de fin");
       
-      ltpDescription = new JLabelTextPanel("Description");      
+      ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
       
       vcrActions = new JValidateCancelReset();
    }

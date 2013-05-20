@@ -19,9 +19,9 @@ import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
 import gui.component.JRecursionChooser;
 import gui.component.JValidateCancel;
-import gui.controller.ComboBoxBudget;
-import gui.controller.ComboBoxUser;
-import gui.controller.ComboBoxesCategory;
+import gui.controller.combobox.ComboBoxBudget;
+import gui.controller.combobox.ComboBoxUser;
+import gui.controller.combobox.ComboBoxesCategory;
 import gui.utils.StandardInsets;
 
 import java.awt.GridBagConstraints;
@@ -119,8 +119,8 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       budgets = new ComboBoxBudget(controller.getCore());
       categories = new ComboBoxesCategory(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JLabelTextPanel(Text.REASON_LABEL.toString());
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString());
+      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
+      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL.toString());
       
       rcrRecurrenceOptions = new JRecursionChooser();

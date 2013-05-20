@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.component;
+package gui.component.combobox;
 
 import gui.JComboBoxTemplate;
 
@@ -52,7 +52,6 @@ public class JComboBoxCategory extends JComboBoxTemplate<Category> {
    public JComboBoxCategory(CategoryList children, boolean isChildren) {
       this.categories = children;
       
-      
       if(isChildren) {
          select = new String(Text.SELECT_SUBCATEGORY_LABEL.toString());
          newEntry = new String(Text.NEW_SUBCATEGORY_LABEL.toString());
@@ -77,7 +76,10 @@ public class JComboBoxCategory extends JComboBoxTemplate<Category> {
       Category[] temp = new Category[0];
       setModel(new DefaultComboBoxModel<Category>(list.toArray(temp)));
    }
-   
+   public void setData(CategoryList categories) {
+      categories.setItems(categories.getList());
+      update(null, null);
+   }
    private class SortByName implements Comparator<Category> {
       @Override
       public int compare(Category arg0, Category arg1) {

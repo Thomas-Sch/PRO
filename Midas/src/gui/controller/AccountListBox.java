@@ -13,7 +13,7 @@
 package gui.controller;
 
 import gui.Controller;
-import gui.component.JAccountList;
+import gui.component.list.JAccountList;
 
 import java.awt.Component;
 

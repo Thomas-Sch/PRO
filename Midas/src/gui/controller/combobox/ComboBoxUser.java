@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : ComboBoxAccount.java
+ * Nom du fichier   : ComboBoxAuthorC.java
  * ============================================================================
- * Date de création : 9 mai 2013
+ * Date de création : 28 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,64 +10,62 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui.controller.combobox;
 
 import gui.Controller;
-import gui.actions.AcCreateAccount;
-import gui.component.JComboBoxAccounts;
+import gui.actions.AcCreateAuthor;
+import gui.component.combobox.JComboBoxUsers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
-import core.components.AccountList;
+import core.components.UserList;
 
 /**
- * Contrôleur de la classe de liste déroulante pour les utilisateurs du
- * programme
- * 
+ * Contrôleur de la liste déroulante d'auteurs.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- * 
+ *
  */
-public class ComboBoxAccount extends Controller {
-
-   JComboBoxAccounts view;
-   AccountList model;
-
+public class ComboBoxUser extends Controller {
+   JComboBoxUsers view;
+   UserList model;
+   
    /**
     * Crée le contrôleur d'une ComboBox
     */
-   public ComboBoxAccount(Core core) {
+   public ComboBoxUser(Core core) {
       super(core);
       model.addObserver(view);
    }
-
+   
    @Override
    protected void initComponents() {
-      model = getCore().getAllAccounts();
-      view = new JComboBoxAccounts(model);
+      model = getCore().getAllUsers();
+      view = new JComboBoxUsers(model);
    }
-
+   
    @Override
    protected void initListeners() {
       view.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
-            if (view.isCreateNewSelected()) {
-               AcCreateAccount action = new AcCreateAccount(getCore());
+            if(view.isCreateNewSelected()) {
+               AcCreateAuthor action = new AcCreateAuthor(getCore());
                action.actionPerformed(arg0);
-               view.setSelectedItem(action.getCreatedAccount());
+               view.setSelectedItem(action.getCreatedUser()); 
             }
          }
       });
    }
-
+   
    @Override
-   public JComboBoxAccounts getGraphicalComponent() {
+   public JComboBoxUsers getGraphicalComponent() {
       return view;
    }
+   
 
 }

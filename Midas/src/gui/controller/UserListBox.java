@@ -13,7 +13,7 @@
 package gui.controller;
 
 import gui.Controller;
-import gui.component.JUserList;
+import gui.component.list.JUserList;
 
 import java.awt.Component;
 

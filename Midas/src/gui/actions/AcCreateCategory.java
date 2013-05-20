@@ -40,7 +40,7 @@ public class AcCreateCategory extends UserAction {
    
    private Category category;
    private JCreateCategory view;
-   
+
    /**
     * Instancie l'action souhaitée.
     * @param core - le coeur pouvant être utilisé pour réaliser l'action.
@@ -49,12 +49,10 @@ public class AcCreateCategory extends UserAction {
       super(core);
    }
    
-   
    public void execute(Core core, ActionEvent event, Object[] dependencies) {
       
       // Récupération du modèle
-      category = core.createCategory();
-      
+      category = core.createCategory();      
       // Vue
       view = new JCreateCategory((Component)event.getSource(), category);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.CATEGORY_CREATION_TITLE.toString());

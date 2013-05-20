@@ -15,7 +15,11 @@ package gui.component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
@@ -54,7 +58,30 @@ public class JRecursionChooser extends JPanel {
     */
    public JRecursionChooser() { 
       initContent();
+      initListeners();
       buildContent();
+      // On désactive les contrôle de récurrence par défaut.
+      udpateButtonsState();
+   }
+   
+   /**
+    * Initialisation des listeners internes.
+    */
+   private void initListeners() {
+      cbxRecurrence.addActionListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent arg0) {
+            udpateButtonsState();
+         }
+      });
+   }
+   
+   private void udpateButtonsState() {
+      Enumeration<AbstractButton> e = radioGroup.getElements();
+      for (int i = 0; i < radioGroup.getButtonCount(); i++) {
+         e.nextElement().setEnabled(cbxRecurrence.isSelected());
+      }
    }
     
    private void initContent() {
@@ -64,7 +91,7 @@ public class JRecursionChooser extends JPanel {
       rbtDaily = new JRadioButton(Text.DAILY_LABEL.toString());
       rbtWeekly = new JRadioButton(Text.WEEKLY_LABEL.toString());
       rbtMonthly = new JRadioButton(Text.MONTHLY_LABEL.toString());
-      rbtAnnual = new JRadioButton(Text.ANNUAL_LABEL.toString());     
+      rbtAnnual = new JRadioButton(Text.ANNUAL_LABEL.toString()); 
    }
    
    private void buildContent() {
@@ -103,5 +130,7 @@ public class JRecursionChooser extends JPanel {
       return pnlContent;
    }
    
-   
+   public void addEnabledChangedListener(ActionListener listener) {
+      cbxRecurrence.addActionListener(listener);
+   }
 }

@@ -16,9 +16,9 @@ import gui.Controller;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JReasonInput;
-import gui.controller.ComboBoxBudget;
-import gui.controller.ComboBoxUser;
-import gui.controller.ComboBoxesCategory;
+import gui.controller.combobox.ComboBoxBudget;
+import gui.controller.combobox.ComboBoxUser;
+import gui.controller.combobox.ComboBoxesCategory;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -93,7 +93,7 @@ public class JQuickExpense extends JPanel {
       add(authors.getGraphicalComponent(), constraints);
       
       constraints.gridx = 1;
-      add(new JLabelMoneyPanel(Text.AMOUNT_LABEL.toString()), constraints);
+      add(new JLabelMoneyPanel(Text.AMOUNT_LABEL), constraints);
       
       constraints.gridx = 2;
       add(new JDateInput(Text.DATE_LABEL.toString()), constraints);

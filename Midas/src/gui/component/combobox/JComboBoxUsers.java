@@ -9,7 +9,7 @@
  *                    Schweizer Thomas
  * ============================================================================
  */
-package gui.component;
+package gui.component.combobox;
 
 import gui.JComboBoxTemplate;
 

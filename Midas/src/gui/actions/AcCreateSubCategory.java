@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : AcCreateAccount.java
+ * Nom du fichier   : AcCreateSubCategory.java
  * ============================================================================
- * Date de création : 9 mai 2013
+ * Date de création : 18 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -12,23 +12,23 @@
  */
 package gui.actions;
 
-import gui.UserAction;
-import gui.utils.Positions;
-import gui.utils.Positions.ScreenPosition;
-import gui.views.JCreateAccountFrame;
-
 import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import settings.Language.Text;
+
 import core.Core;
-import core.components.Account;
+import core.components.Category;
+import core.components.CategoryList;
+import gui.UserAction;
+import gui.utils.Positions;
+import gui.utils.Positions.ScreenPosition;
+import gui.views.JCreateCategory;
 
 /**
- * Action de création de compte. Contrôle également la fenêtre d'ajout
- * de compte.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -36,17 +36,21 @@ import core.components.Account;
  * @author Sinniger Marcel
  *
  */
-public class AcCreateAccount extends UserAction {
+public class AcCreateSubCategory extends UserAction {
    
-   private Account account;
-   private JCreateAccountFrame view;
+   private Category parent;
+   private Category category;
+   private CategoryList list;
+   private JCreateCategory view;
 
    /**
     * @param core
     * @param dependencies
     */
-   public AcCreateAccount(Core core) {
-      super(core);
+   public AcCreateSubCategory(Core core, Category parent, CategoryList list) {
+      super(core, parent);
+      this.parent = parent;
+      this.list = list;
    }
 
    /* (non-Javadoc)
@@ -54,44 +58,38 @@ public class AcCreateAccount extends UserAction {
     */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-      account = core.createAccount();
-            
-      // Réglages de la fenêtre.
-      view = new JCreateAccountFrame((Component)event.getSource(), account);
+      // Récupération du modèle
+      category = core.createCategory();      
+      // Vue
+      view = new JCreateCategory((Component)event.getSource(), category);
+      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.SUBCATEGORY_CREATION_TITLE.toString());
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
-      view.setTitle(Text.APP_TITLE + " - " + Text.ACCOUNT_CREATION_TITLE);
       
-      initListeners(core);
-      account.addObserver(view);
+      view.addValidateListener(new UserAction(core) {
+         @Override
+         protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+            category.setParentCategory(parent);
+            core.saveSubCategory(category, list);
+            view.dispose();
+         }
+      });
+      
+      view.addCancelListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent arg0) {
+            view.dispose();
+         }
+      });
+      
+      category.addObserver(view);
       
       // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
    }
    
-   /**
-    * Initialise les listeners pour ce contrôleur/action.
-    * @param core
-    */
-   public void initListeners(Core core) {
-      view.addValidateListener(new UserAction(core) {
-         @Override
-         protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            core.saveAccount(account);
-            view.dispose();
-         }
-      });
-      
-      view.addCancelListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent arg0) {
-            view.dispose();
-         }
-      });
+   public Category getCreatedCategory() {
+      return category;
    }
-   
-   public Account getCreatedAccount() {
-      return account;
-   }
+
 }

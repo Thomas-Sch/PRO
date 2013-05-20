@@ -44,6 +44,7 @@ public class Language {
        * nécessaires.
        */
       APP_TITLE,
+      ACCOUNT_CREATION_TITLE,
       ACTION_QUIT,
       
       ACCOUNT_MANAGEMENT_TITLE,
@@ -63,11 +64,19 @@ public class Language {
       CANCEL_BUTTON,
       RESET_BUTTON,
       
+      CATEGORY_NAME_LABEL,
+      
+      AUTHOR_NAME_LABEL,
+      
+      BUDGET_DESCRIPTION_LABEL,
+      BUDGET_NAME_LABEL,
+      
       ACCOUNT_THRESHOLD_LABEL,
       ACCOUNT_INITIAL_AMOUNT_LABEL,
       ACCOUNT_NUMBER_LABEL,
       ACCOUNT_DESCRIPTION_LABEL,
       ACCOUNT_NAME_LABEL,
+      ACCOUNT_BANK_NAME_LABEL,
       
      
       HOME_SCREEN_NAME,

@@ -36,6 +36,8 @@ public class JValidateCancel extends JPanel {
       setLayout(fltLayout);
       add(btnValidate);
       add(btnCancel);
+      
+      setEnableValidateButton(false);
    }
    
    public void addValidateListener(ActionListener listener) {
@@ -44,5 +46,9 @@ public class JValidateCancel extends JPanel {
    
    public void addCancelListener(ActionListener listener) {
       btnCancel.addActionListener(listener);
+   }
+   
+   public void setEnableValidateButton(boolean enable) {
+      btnValidate.setEnabled(enable);
    }
 }

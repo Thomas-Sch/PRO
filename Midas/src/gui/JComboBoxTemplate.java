@@ -46,6 +46,10 @@ public abstract class JComboBoxTemplate<E> extends JComboBox<E> implements View{
       }
    }
    
+   public boolean isInviteSelected() {
+      return getSelectedIndex() == 0;
+   }
+   
    public void setFirstUse(boolean firstUse) {
       this.firstUse = firstUse;
    }
