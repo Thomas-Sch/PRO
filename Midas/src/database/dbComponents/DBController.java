@@ -444,6 +444,46 @@ public class DBController {
       return dbFinancialTransaction;
    }
    
+   public LinkedList<DBFinancialTransaction>
+      getAllDbFinancialTransactionsRelatedToBudget(int budgetId)
+      throws DatabaseException {
+     
+      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID "
+                       + "FROM FinancialTransaction "
+                       + "WHERE Bud_ID = ?";
+      
+      PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
+      DBFinancialTransaction dbFinancialTransaction = null;
+      LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
+      
+      try {
+         preparedStatement.setInt(1, budgetId);
+         
+         ResultSet result = this.select(preparedStatement);
+         
+         while (result.next()) {
+             dbFinancialTransaction = new DBFinancialTransaction();
+             
+             dbFinancialTransaction.setId((result.getInt(1)));
+             dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+             dbFinancialTransaction.setAmount((result.getDouble(3)));
+             dbFinancialTransaction.setDate((result.getDate(4)));
+             dbFinancialTransaction.setReason((result.getString(5)));
+             dbFinancialTransaction.setDbAccount((result.getInt(6)));
+             
+             dbFinancialTransactions.add(dbFinancialTransaction);
+         }
+
+      } catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+      
+      return dbFinancialTransactions;
+   }
+   
    public LinkedList<DBFinancialTransaction> getAllDbFinancialTransactions() throws DatabaseException {
 
       String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID " +

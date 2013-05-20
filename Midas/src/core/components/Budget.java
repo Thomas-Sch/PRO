@@ -1,11 +1,11 @@
 /* ============================================================================
  * Nom du fichier   : Budget.java
  * ============================================================================
- * Date de cr�ation : 24 avr. 2013
+ * Date de création : 24 avr. 2013
  * ============================================================================
- * Auteurs          : Biolzi S�bastien
+ * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
- *                    Decorvet Gr�goire
+ *                    Decorvet Grégoire
  *                    Schweizer Thomas
  *                    Sinniger Marcel
  * ============================================================================
@@ -16,9 +16,12 @@ import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
 import database.dbComponents.DBBudget;
+import java.util.LinkedList;
 
 /**
- * Cette classe represente un budget.
+ * Cette classe représente un budget et met à disposition un moyen d'obtenir
+ * certaines informations associées audit budget.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -28,15 +31,12 @@ import database.dbComponents.DBBudget;
  */
 public class Budget extends CoreComponent implements IdentifiedComponent {
 
-   /**
-    * Variables du budget.
-    */
    private DBBudget dbBudget;
    
    /**
     * Construit l'object Budget.
-    * @param core - coeur logique du programme 
-    * @param dbBudget - variable de la classe Budget
+    * @param core - coeur logique du programme.
+    * @param dbBudget - le budget en provenance de la base de donnée.
     */
    public Budget(Core core, DBBudget dbBudget) {
       super(core);
@@ -44,9 +44,12 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-    * Construit l'object Budget avec un nom uniquement.
-    * @param core Contrôleur logique du programme.
-    * @param name Nom du budget.
+    * Construit un budget fictif avec un nom uniquement.
+    * 
+    * <p><b>Attention : </b> ce constructeur ne doit être appelé que pour
+    * créer un budget fictif qui ne sera jamais envoyé à la base de données.
+    * @param core - coeur logique du programme.
+    * @param name - nom du budget fictif.
     */
    public Budget(Core core, String name) {
       super(core);
@@ -54,12 +57,10 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
       dbBudget = new DBBudget();
       dbBudget.setName(name);
    }
-   
-   
 
    /**
-    * Retourne les variables du budget
-    * @return un object contenant les variables utilisees par le budget
+    * Retourne l'objet représentant ce budget pour la base de données 
+    * @return le budget sous une forme compatible avec la base de données.
     */
    public DBBudget getDBBudget() {
       return dbBudget;
@@ -73,17 +74,25 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
       return dbBudget.getName();
    }
    
+   /**
+    * Définis le nom du budget.
+    * @param name - le nom du budget
+    */
    public void setName(String name) {
       dbBudget.setName(name);
    }
    
+   /**
+    * Définis la description associée au budget.
+    * @param description - la description du budget.
+    */
    public void setDescription(String description) {
       dbBudget.setDescription(description);
    }
    
    /**
-    * Consulte la le montant limite du budget.
-    * @return un double representant le montant alloue au budget
+    * Consulte le montant limite du budget.
+    * @return le montant limite alloué au budget.
     */
    public double getLimit() {
       return dbBudget.getLimit();
@@ -97,7 +106,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     */
    public void setLimit(double limit) {
       if (limit < 0) {
-         // erreur
+         // erreur TODO
       }
       else {
          dbBudget.setLimit(limit);
@@ -105,39 +114,48 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-   * Consulte la recurence du budget.
-   * @return la recurence du budget
+   * Retourne la récurrence du budget.
+   * @return la récurrence du budget si elle existe, null le cas échéant.
    */
    public Recurrence getRecurrence() {
       return core.getRecurrence(dbBudget.getDbRecurrence());
    }
    
    /**
-    * Modifie la recurence du budget.
-    * @param recurrence - la nouvelle recurence
+    * Défini la récurrence du budget.
+    * @param recurrence - la nouvelle récurrence
     */
    public void setRecurrence(Recurrence recurrence) {
       dbBudget.setDbRecurrence(recurrence.getId());
    }
    
    /**
-    * Consulte le compte avec le budget est liee.
-    * @return le compte lie au budget
+    * Retourne le compte auquel est relié le budget.
+    * @return le compte lié au budget.
     */
    public Account getBindedAccount() {
       return core.getAccount(dbBudget.getDbAccount());
    }
    
    /**
-    * Lie le budget a un compte.
-    * @param account - un compte
+    * Lie le budget au compte spécifié.
+    * @param account - le compte auquel se réfère le budget.
     */
    public void setBindedAccount(Account account) {
       this.dbBudget.setDbAccount(account.getId());
    }
    
    /**
-    * Obtenir le numero d'identification du budget dans la base de donnee.
+    * Retourne la liste de toutes les transactions financières liées à ce
+    * budget.
+    * @return la liste des transactions financières associées.
+    */
+   public LinkedList<FinancialTransaction> getRelatedFinancialTransaction() {
+      return core.getAllFinancialTransactionRelatedToBudget(getId());
+   }
+   
+   /**
+    * Retourne l'identifiant du budget dans la base de données.
     * @return l'ID du budget
     */
    public int getId() {
@@ -145,8 +163,8 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
    
    /**
-    * Retourne le nom du budget.
-    * @return un chaine de caractere representant le nom du compte
+    * Retourne une représentation du budget sous forme de chaîne de caractères.
+    * @return une chaîne de caractères représentant le nom du budget.
     */
    public String toString() {
       return getName();

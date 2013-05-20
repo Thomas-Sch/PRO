@@ -121,6 +121,10 @@ public class FinancialTransaction extends CoreComponent implements
    public Budget getBudget() {
       return core.getBudget(dbFinancialTransaction.getDbBudget());
    }
+   
+   public Integer getBudgetId() {
+      return dbFinancialTransaction.getDbBudget();
+   }
 
    /**
     * Ajoute la transaction dans un budget

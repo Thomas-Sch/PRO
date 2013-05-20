@@ -12,6 +12,7 @@
  */
 package core;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import settings.Settings;
 import core.cache.Cache;
@@ -31,6 +32,7 @@ import database.dbComponents.DBBudget;
 import database.dbComponents.DBCategory;
 import database.dbComponents.DBController;
 import database.dbComponents.DBFinancialTransaction;
+import database.dbComponents.DBRecurrence;
 import database.dbComponents.DBUser;
 import database.utils.DatabaseConstraintViolation;
 import database.utils.DatabaseException;
@@ -317,9 +319,9 @@ public class Core {
    }
    
    /**
-    * Retourne la recurence ayant pour identifiant celui passé en paramètres.
-    * @param id - l'identifiant de la recurence souhaitée.
-    * @return la recurence correspondante à l'identifiant, null le cas échéant.
+    * Retourne la récurrence ayant pour identifiant celui passé en paramètres.
+    * @param id - l'identifiant de la récurrence souhaitée.
+    * @return la récurrence correspondante à l'identifiant, null le cas échéant.
     */
    public Recurrence getRecurrence(int id) {
       Recurrence result = cache.getReference(Recurrence.class, id);
@@ -327,10 +329,15 @@ public class Core {
       // Si pas présent dans le cache, demander à la base de données
       if (result == null) {
          try {
-            result = new Recurrence(this, dbController.getDbRecurrence(id));
+            DBRecurrence dbRec = dbController.getDbRecurrence(id);
             
-            // Mise à jour du cache
-            cache.putToCache(result);
+            if (dbRec != null) {
+               result = new Recurrence(this, dbRec);
+               
+               // Mise à jour du cache
+               cache.putToCache(result);
+            }
+            
          }
          catch (DatabaseException e) {
             
@@ -423,6 +430,51 @@ public class Core {
             }
             
          }
+      }
+      catch (DatabaseException e) {
+         
+      }
+      return result;
+   }
+   
+   public LinkedList<FinancialTransaction>
+                     getAllFinancialTransactionRelatedToBudget(int budgetId) {
+      LinkedList<DBFinancialTransaction> list;
+      LinkedList<FinancialTransaction> result;
+      result = cache.getAll(FinancialTransaction.class);
+      
+      Iterator<FinancialTransaction> iterator = result.iterator();
+      FinancialTransaction temp;
+      while (iterator.hasNext()) {
+         temp = iterator.next();
+         // Suppression si le budget ne correspond pas
+         if (temp.getBudgetId() == null || temp.getBudgetId() == budgetId) {
+            iterator.remove();
+         }
+      }
+      
+      try {
+         list = dbController.getAllDbFinancialTransactionsRelatedToBudget(budgetId);
+         
+         boolean alreadyExist = false;
+         
+         for (DBFinancialTransaction dbItem : list) {
+            
+            alreadyExist = false;
+            for (FinancialTransaction financialTransaction : result) {
+               
+               if(dbItem.getId() == financialTransaction.getId()) {
+                  alreadyExist = true;
+                  break;
+               }
+            }
+            
+            if (!alreadyExist) {
+               result.add(new FinancialTransaction(this, dbItem));
+            }
+            
+         }
+         
       }
       catch (DatabaseException e) {
          
