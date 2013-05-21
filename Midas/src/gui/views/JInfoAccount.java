@@ -87,9 +87,9 @@ public class JInfoAccount extends JPanel {
    }
    
    public void updateFields(Account account) {
-      lbiName.setText(account.getAccountName());
+      lbiName.setText(account.getName());
       lbiNumber.setText(account.getAccountNumber());
-      lmiInitialAmount.setText(String.valueOf(account.getAccountBalance()));
+      lmiInitialAmount.setText(String.valueOf(account.getAmount()));
       lmiThreshold.setText(String.valueOf(account.getOverdraftLimit()));
    }
 }

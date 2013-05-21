@@ -102,7 +102,7 @@ public class JEditionAccount extends JPanel {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            current.setAccountName(ltpName.getText());
+            current.setName(ltpName.getText());
          }
       });
       
@@ -148,9 +148,9 @@ public class JEditionAccount extends JPanel {
    
    public void updateFields(Account account) {
       current = account;
-      ltpName.setText(account.getAccountName());
+      ltpName.setText(account.getName());
       ltpNumber.setText(account.getAccountNumber());
-      lmpBalance.setText(String.valueOf(account.getAccountBalance()));
+      lmpBalance.setText(String.valueOf(account.getAmount()));
       lmpOverdraftLimit.setText(String.valueOf(account.getOverdraftLimit()));
    }
    

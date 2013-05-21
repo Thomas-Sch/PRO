@@ -78,7 +78,7 @@ public class Account extends CoreComponent implements
     * 
     * @return le solde actuel du compte.
     */
-   public double getAccountBalance() {
+   public double getAmount() {
       return dbAccount.getAmount();
    }
 

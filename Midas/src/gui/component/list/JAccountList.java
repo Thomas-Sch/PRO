@@ -64,7 +64,7 @@ public class JAccountList extends JList<Account> implements View{
    private class SortByName implements Comparator<Account> {
       @Override
       public int compare(Account arg0, Account arg1) {
-         return arg0.getAccountName().compareToIgnoreCase(arg1.getAccountName());
+         return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
    }
    

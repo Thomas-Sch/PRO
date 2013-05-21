@@ -81,7 +81,7 @@ public class JCreateAccountFrame extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setAccountName(ltpName.getText());
+            account.setName(ltpName.getText());
          }
       });
       
