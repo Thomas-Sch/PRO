@@ -247,6 +247,14 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    public int getId() {
       return dbBudget.getId();
    }
+   
+   /**
+    * Retourne l'identifiant du compte associé.
+    * @return l'identifiant du compte associé.
+    */
+   public int getBindedAccountId() {
+      return dbBudget.getDbAccount();
+   }
 
    /**
     * Retourne un affichage sous forme de chaînes de caractères.

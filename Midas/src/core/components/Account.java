@@ -12,6 +12,8 @@
  */
 package core.components;
 
+import java.util.LinkedList;
+
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
@@ -27,8 +29,7 @@ import database.dbComponents.DBAccount;
  * @author Schweizer Thomas
  * @author Sinniger Marcel
  */
-public class Account extends CoreComponent implements
-      IdentifiedComponent {
+public class Account extends CoreComponent implements IdentifiedComponent {
 
    private DBAccount dbAccount;
 
@@ -193,6 +194,15 @@ public class Account extends CoreComponent implements
     */
    public void setName(String accountName) {
       dbAccount.setName(accountName);
+   }
+
+   /**
+    * Retourne la liste des budgets associés à ce compte.
+    * 
+    * @return la liste des budgets associés.
+    */
+   public LinkedList<Budget> getBindedBudgets() {
+      return core.getAllBudgtesRelatedToAccount(getId());
    }
 
    /**
