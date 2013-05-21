@@ -18,109 +18,135 @@ import core.IdentifiedComponent;
 import database.dbComponents.DBAccount;
 
 /**
- * Cette classe represente le compte d'un utilisateur
+ * Cette classe représente le compte d'un utilisateur et les méthodes relatives
+ * à sa gestion.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
  */
-public class Account extends CoreComponent implements IdentifiedComponent {
+public class Account extends CoreComponent implements
+      IdentifiedComponent {
+
+   private DBAccount dbAccount;
 
    /**
-    * Variables du compte.
-    */
-   private DBAccount dbAccount;
-   
-   /**
     * Construit l'object Account.
-    * @param core - coeur logique du programme .
-    * @param dbAcount - variable de la classe account.
+    * 
+    * @param core
+    *           - coeur logique du programme.
+    * @param dbAcount
+    *           - le compte en provenance de la base de données.
     */
    public Account(Core core, DBAccount dbAcount) {
       super(core);
       this.dbAccount = dbAcount;
    }
-   
+
    /**
-    * Construit l'object Account avec un nom uniquement.
-    * @param core - coeur logique du programme.
-    * @param name - le nom du compte.
+    * Construit un compte fictif avec un nom uniquement.
+    * 
+    * <p>
+    * <b>Attention : </b> ce constructeur ne doit être appelé que pour créer un
+    * compte fictif qui ne sera jamais envoyé à la base de données.
+    * 
+    * @param core
+    *           - coeur logique du programme.
+    * @param name
+    *           - le nom du compte.
     */
-   public Account(Core core, String name) {
+   Account(Core core, String name) {
       super(core);
-      
+
       dbAccount = new DBAccount();
       dbAccount.setName(name);
    }
-   
+
    /**
-    * Retourne les variables du compte.
-    * @return un objet contenant les variables utilisées par le compte.
+    * Retourne l'objet représentant ce compte pour la base de données
+    * 
+    * @return le compte sous une forme compatible avec la base de données.
     */
-   public DBAccount getDBAccount(){
+   public DBAccount getDBAccount() {
       return dbAccount;
    }
-   
+
    /**
-    * Consulter le solde actuel du compte.
-    * @return un double représentant le solde actuel du compte.
+    * Retourne le solde actuel du compte.
+    * 
+    * @return le solde actuel du compte.
     */
    public double getAccountBalance() {
       return dbAccount.getAmount();
    }
-   
+
    /**
     * Créditer un montant sur le compte : ajouter de l'argent sur le compte.
-    * @param amount - représentant le montant que l'on veut rajouter sur le compte.
+    * 
+    * @param amount
+    *           - le montant à rajouter sur le compte.
     */
    public void credit(double amount) {
       dbAccount.setAmount(dbAccount.getAmount() + amount);
    }
-   
+
    /**
-    * Fixe le montant sur le compte.
-    * @param amount - représentant le montant que l'on veut rajouter sur le compte
+    * Définit le montant sur le compte.
+    * 
+    * @param amount
+    *           - représente le montant du compte.
     */
    public void setAmount(double amount) {
       dbAccount.setAmount(amount);
    }
-   
+
    /**
-    * Définit le nom de la banque.
-    * @param s Nom de la banque
-    */
-   public void setBankName(String s) {
-      dbAccount.setNameBank(s);
-   }
-   /**
-    * Debiter un montant sur le compte : prelever de l'argent sur le compte.
-    * @param amount - representant le montant que l'on veut enlever sur le compte
+    * Définit le nom de la banque associée à ce compte.
     * 
-    * @throws montant indisponible sur le compte : lors que l'on veut prelever 
-    * plus d'argent que ce qui est disponnible
+    * @param name
+    *           - le nom de la banque.
+    */
+   public void setBankName(String name) {
+      dbAccount.setNameBank(name);
+   }
+
+   /**
+    * Débite un certain montant donné depuis le compte.
+    * 
+    * @param amount
+    *           - le montant à débiter.
+    * @throws montant
+    *            indisponible sur le compte : lors que l'on veut prelever plus
+    *            d'argent que ce qui est disponnible
     */
    public void debit(double amount) {
       if (dbAccount.getAmount() + dbAccount.getOverdraftLimit() - amount < 0) {
-         // erreur 
+         // erreur
       }
       dbAccount.setAmount(dbAccount.getAmount() - amount);
    }
-   
+
    /**
-    * Consulter la limite de decouvert possible sur le compte.
-    * @return un double representant la limite de decouvert 
+    * Retourne la limite de découvert possible sur le compte.
+    * 
+    * @return la limite de découvert.
     */
    public double getOverdraftLimit() {
       return dbAccount.getOverdraftLimit();
    }
-   
+
    /**
-    * Modifier la limite de decouvert possible sur le compte le solde actuel du compte.
-    * @param overdraftLimit - un double represantant la nouvelle limite de decouvert 
+    * Définit la limite de découvert possible sur le compte.
     * 
-    * @throws nouvelle limite impossible : si le montant est deja en decouvert et si la 
-    * nouvelle limite de decouvert est plus petite que le decouvert actuel
+    * @param overdraftLimit
+    *           - la nouvelle limite de découvert.
+    * 
+    * @throws nouvelle
+    *            limite impossible : si le montant est déjà en découvert et si
+    *            la nouvelle limite de découvert est plus petite que le
+    *            découvert actuel.
     */
    public void setOverdraftLimit(double overdraftLimit) {
       if (overdraftLimit < 0) {
@@ -130,54 +156,64 @@ public class Account extends CoreComponent implements IdentifiedComponent {
          dbAccount.setOverdraftLimit(overdraftLimit);
       }
    }
-   
+
    /**
-    * Consulter le numero du compte.
-    * @return le numero du compte 
-    */ 
+    * Retourne le numéro du compte.
+    * 
+    * @return le numéro du compte.
+    */
    public String getAccountNumber() {
       return dbAccount.getAccountNumber();
    }
-   
+
    /**
-    * Modifie le numero du compte.
-    * @param  accountNumber - le numero du compte 
+    * Définit le numéro du compte.
+    * 
+    * @param accountNumber
+    *           - le numéro du compte.
     */
    public void setAccountNumber(String accountNumber) {
-         dbAccount.setAccountNumber(accountNumber);
+      dbAccount.setAccountNumber(accountNumber);
    }
-   
+
    /**
-    * Consulter le nom du compte.
-    * @return le numero du compte 
-    */ 
-   public String getAccountName() {
+    * Retourne le nom du compte.
+    * 
+    * @return le nom du compte.
+    */
+   public String getName() {
       return dbAccount.getName();
    }
-   
+
    /**
-    * Modifie le nom du compte.
-    * @param accountName - le nom du compte 
+    * Définit le nom du compte.
+    * 
+    * @param accountName
+    *           - le nom du compte-
     */
-   public void setAccountName(String accountName)
-   {
+   public void setName(String accountName) {
       dbAccount.setName(accountName);
    }
-   
+
    /**
     * Obtenir le numéro d'identification du compte dans la base de donnée.
+    * 
     * @return l'ID du compte
     */
    public int getId() {
       return dbAccount.getId();
    }
-   
+
    /**
-    * Retourne le nom du compte.
-    * @return une chaîne de caractere representant le nom du compte.w
+    * Retourne un affichage sous forme de chaînes de caractères.
+    * <p>
+    * La chaîne retournée correspond au nom afin de pouvoir profiter de cette
+    * méthode dans les parties graphiques.
+    * 
+    * @return une chaîne de caractères représentant le compte.
     */
    public String toString() {
-      return getAccountName();
+      return getName();
    }
-    
+
 }

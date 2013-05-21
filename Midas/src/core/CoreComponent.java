@@ -14,6 +14,8 @@ package core;
 
 import java.util.Observable;
 
+import database.dbComponents.DBComponent;
+
 
 /**
  * Cette classe une classe parente pour les objets du core
@@ -24,7 +26,7 @@ import java.util.Observable;
  * @author Sinniger Marcel
  *
  */
-public class CoreComponent extends Observable {
+abstract public class CoreComponent extends Observable {
    
    /**
     * coeur logique du programme 
