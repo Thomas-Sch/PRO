@@ -177,6 +177,67 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    public LinkedList<FinancialTransaction> getRelatedFinancialTransaction() {
       return core.getAllFinancialTransactionRelatedToBudget(getId());
    }
+   
+   /**
+    * Retourne la montant total actuellement dépensé pour ce budget. 
+    * @return le montant total dépensé.
+    */
+   public double getTotalOutgoings() {
+      
+      LinkedList<FinancialTransaction> financialTransactions =
+                                             getRelatedFinancialTransaction();
+      
+      double outgoing = 0.0;
+      
+      for (FinancialTransaction financialTrans : financialTransactions) {
+         outgoing += financialTrans.getAmount();
+      }
+      
+      return outgoing;
+   }
+   
+   /**
+    * Retourne le montant encore utilisable pour tenir ce budget.
+    * @return le montant utilisable.
+    */
+   public double getRemainingAmount() {
+      return getLimit() - getTotalOutgoings();
+   }
+   
+   /**
+    * Retourne la plus grande dépense de ce budget.
+    * @return la plus grande dépense.
+    */
+   public double getGreatestOutgoing() {
+      
+      LinkedList<FinancialTransaction> financialTransactions =
+            getRelatedFinancialTransaction();
+
+      double greatest = 0.0;
+      
+      for (FinancialTransaction financialTrans : financialTransactions) {
+         greatest = Math.max(financialTrans.getAmount(), greatest);
+      }
+      
+      return greatest;
+   }
+   
+   /**
+    * Retourne le montant moyen des transactions associées à ce budget.
+    * @return le montant moyen des transactions.
+    */
+   public double getAverageOutgoing() {
+      LinkedList<FinancialTransaction> financialTransactions =
+            getRelatedFinancialTransaction();
+
+      double outgoing = 0.0;
+      
+      for (FinancialTransaction financialTrans : financialTransactions) {
+         outgoing += financialTrans.getAmount();
+      }
+      
+      return outgoing / financialTransactions.size();
+   }
 
    /**
     * Retourne l'identifiant du budget dans la base de données.
@@ -198,4 +259,5 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    public String toString() {
       return getName();
    }
+   
 }
