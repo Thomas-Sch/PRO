@@ -39,7 +39,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     * @param core
     *           - coeur logique du programme.
     * @param dbBudget
-    *           - le budget en provenance de la base de donnée.
+    *           - le budget en provenance de la base de données.
     */
    public Budget(Core core, DBBudget dbBudget) {
       super(core);
@@ -66,9 +66,9 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Retourne l'objet représentant ce budget pour la base de données
+    * Retourne l'objet représentant ce budget pour la base de données.
     * 
-    * @return le budget sous une forme compatible avec la base de données.
+    * @return Le budget sous une forme compatible avec la base de données.
     */
    public DBBudget getDBBudget() {
       return dbBudget;
@@ -106,7 +106,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    /**
     * Consulte le montant limite du budget.
     * 
-    * @return le montant limite alloué au budget.
+    * @return Le montant limite alloué au budget.
     */
    public double getLimit() {
       return dbBudget.getLimit();
@@ -133,7 +133,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    /**
     * Retourne la récurrence du budget.
     * 
-    * @return la récurrence du budget si elle existe, null le cas échéant.
+    * @return La récurrence du budget si elle existe, null le cas échéant.
     */
    public Recurrence getRecurrence() {
       return core.getRecurrence(dbBudget.getDbRecurrence());
@@ -152,7 +152,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    /**
     * Retourne le compte auquel est relié le budget.
     * 
-    * @return le compte lié au budget.
+    * @return Le compte lié au budget.
     */
    public Account getBindedAccount() {
       return core.getAccount(dbBudget.getDbAccount());
@@ -172,7 +172,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     * Retourne la liste de toutes les transactions financières liées à ce
     * budget.
     * 
-    * @return la liste des transactions financières associées.
+    * @return La liste des transactions financières associées.
     */
    public LinkedList<FinancialTransaction> getRelatedFinancialTransaction() {
       return core.getAllFinancialTransactionRelatedToBudget(getId());
@@ -180,7 +180,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    
    /**
     * Retourne la montant total actuellement dépensé pour ce budget. 
-    * @return le montant total dépensé.
+    * @return Le montant total dépensé.
     */
    public double getTotalOutgoings() {
       
@@ -198,7 +198,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    
    /**
     * Retourne le montant encore utilisable pour tenir ce budget.
-    * @return le montant utilisable.
+    * @return Le montant utilisable.
     */
    public double getRemainingAmount() {
       return getLimit() - getTotalOutgoings();
@@ -206,7 +206,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    
    /**
     * Retourne la plus grande dépense de ce budget.
-    * @return la plus grande dépense.
+    * @return La plus grande dépense.
     */
    public double getGreatestOutgoing() {
       
@@ -224,7 +224,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    
    /**
     * Retourne le montant moyen des transactions associées à ce budget.
-    * @return le montant moyen des transactions.
+    * @return Le montant moyen des transactions.
     */
    public double getAverageOutgoing() {
       LinkedList<FinancialTransaction> financialTransactions =
@@ -242,10 +242,18 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    /**
     * Retourne l'identifiant du budget dans la base de données.
     * 
-    * @return l'ID du budget
+    * @return L'identifiant du budget.
     */
    public int getId() {
       return dbBudget.getId();
+   }
+   
+   /**
+    * Retourne l'identifiant du compte associé.
+    * @return L'identifiant du compte associé.
+    */
+   public int getBindedAccountId() {
+      return dbBudget.getDbAccount();
    }
 
    /**
@@ -254,7 +262,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     * La chaîne retournée correspond au nom afin de pouvoir profiter de cette
     * méthode dans les parties graphiques.
     * 
-    * @return une chaîne de caractères représentant le budget.
+    * @return Une chaîne de caractères représentant le budget.
     */
    public String toString() {
       return getName();

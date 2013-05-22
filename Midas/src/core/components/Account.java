@@ -1,7 +1,7 @@
 /* ============================================================================
  * Nom du fichier   : Account.java
  * ============================================================================
- * Date de creation : 15 avr. 2013
+ * Date de création : 15 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -11,6 +11,8 @@
  * ============================================================================
  */
 package core.components;
+
+import java.util.LinkedList;
 
 import core.Core;
 import core.CoreComponent;
@@ -27,8 +29,7 @@ import database.dbComponents.DBAccount;
  * @author Schweizer Thomas
  * @author Sinniger Marcel
  */
-public class Account extends CoreComponent implements
-      IdentifiedComponent {
+public class Account extends CoreComponent implements IdentifiedComponent {
 
    private DBAccount dbAccount;
 
@@ -67,7 +68,7 @@ public class Account extends CoreComponent implements
    /**
     * Retourne l'objet représentant ce compte pour la base de données
     * 
-    * @return le compte sous une forme compatible avec la base de données.
+    * @return Le compte sous une forme compatible avec la base de données.
     */
    public DBAccount getDBAccount() {
       return dbAccount;
@@ -76,7 +77,7 @@ public class Account extends CoreComponent implements
    /**
     * Retourne le solde actuel du compte.
     * 
-    * @return le solde actuel du compte.
+    * @return Le solde actuel du compte.
     */
    public double getAmount() {
       return dbAccount.getAmount();
@@ -131,7 +132,7 @@ public class Account extends CoreComponent implements
    /**
     * Retourne la limite de découvert possible sur le compte.
     * 
-    * @return la limite de découvert.
+    * @return La limite de découvert.
     */
    public double getOverdraftLimit() {
       return dbAccount.getOverdraftLimit();
@@ -160,7 +161,7 @@ public class Account extends CoreComponent implements
    /**
     * Retourne le numéro du compte.
     * 
-    * @return le numéro du compte.
+    * @return Le numéro du compte.
     */
    public String getAccountNumber() {
       return dbAccount.getAccountNumber();
@@ -179,7 +180,7 @@ public class Account extends CoreComponent implements
    /**
     * Retourne le nom du compte.
     * 
-    * @return le nom du compte.
+    * @return Le nom du compte.
     */
    public String getName() {
       return dbAccount.getName();
@@ -196,9 +197,18 @@ public class Account extends CoreComponent implements
    }
 
    /**
+    * Retourne la liste des budgets associés à ce compte.
+    * 
+    * @return La liste des budgets associés.
+    */
+   public LinkedList<Budget> getBindedBudgets() {
+      return core.getAllBudgtesRelatedToAccount(getId());
+   }
+
+   /**
     * Obtenir le numéro d'identification du compte dans la base de donnée.
     * 
-    * @return l'ID du compte
+    * @return L'identifiant du compte
     */
    public int getId() {
       return dbAccount.getId();
@@ -210,7 +220,7 @@ public class Account extends CoreComponent implements
     * La chaîne retournée correspond au nom afin de pouvoir profiter de cette
     * méthode dans les parties graphiques.
     * 
-    * @return une chaîne de caractères représentant le compte.
+    * @return Une chaîne de caractères représentant le compte.
     */
    public String toString() {
       return getName();

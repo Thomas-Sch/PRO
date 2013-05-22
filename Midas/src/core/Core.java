@@ -482,6 +482,54 @@ public class Core {
       return result;
    }
    
+   public LinkedList<Budget> getAllBudgtesRelatedToAccount(int accountId) {
+      LinkedList<DBBudget> list;
+      LinkedList<Budget> result;
+      
+      result = cache.getAll(Budget.class);
+
+      Iterator<Budget> iterator = result.iterator();
+      Budget temp;
+      while (iterator.hasNext()) {
+         temp = iterator.next();
+         // Suppression si le compte ne correspond pas
+         if (temp.getBindedAccountId() == accountId) {
+            iterator.remove();
+         }
+      }
+
+      try {
+         list = dbController
+               .getAllDbBudgetsRelatedToAccount(accountId);
+
+         boolean alreadyExist = false;
+
+         for (DBBudget dbItem : list) {
+
+            alreadyExist = false;
+            for (Budget budget : result) {
+
+               if (dbItem.getId() == budget.getId()) {
+                  alreadyExist = true;
+                  break;
+               }
+            }
+
+            if (!alreadyExist) {
+               result.add(new Budget(this, dbItem));
+            }
+
+         }
+
+      }
+      catch (DatabaseException e) {
+
+      }
+      return result;
+   }
+   
+   
+   
    /**
     * Sauvegarde ou met à jour le compte donné dans la base de donnée.
     * @param account - le compte à sauver.
@@ -528,6 +576,7 @@ public class Core {
    public void saveSubCategory(Category category, CategoryList list) {
       try {
          dbController.saveToDatabase(category.getDBCategory());
+         
          list.addItem(category);
       }
       catch (DatabaseConstraintViolation e) {

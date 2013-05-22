@@ -484,6 +484,47 @@ public class DBController {
       return dbFinancialTransactions;
    }
    
+   public LinkedList<DBBudget> getAllDbBudgetsRelatedToAccount(int accountId)
+      throws DatabaseException {
+      
+      String sqlString = "SELECT Budget.Bud_Id, Rec_Id, Name, Description, BudgetLimit, Enabled, Acc_ID "
+            + "FROM Budget"
+            + "WHERE Acc_ID = ?";
+
+      PreparedStatement preparedStatement = dbAccess
+            .getPreparedStatement(sqlString);
+      DBBudget dbBudget;
+      LinkedList<DBBudget> dbBudgets = new LinkedList<DBBudget>();
+
+      try {
+         preparedStatement.setInt(1, accountId);
+         
+         ResultSet result = this.select(preparedStatement);
+
+         while (result.next()) {
+            dbBudget = new DBBudget();
+
+            dbBudget.setId(result.getInt(1));
+            dbBudget.setDbRecurrence(result.getInt(2));
+            dbBudget.setName(result.getString(3));
+            dbBudget.setDescription(result.getString(4));
+            dbBudget.setLimit(result.getDouble(5));
+            dbBudget.setEnabled(result.getBoolean(6));
+            dbBudget.setDbAccount(result.getInt(7));
+
+            dbBudgets.add(dbBudget);
+         }
+
+      }
+      catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+      return dbBudgets;
+   }
+   
    public LinkedList<DBFinancialTransaction> getAllDbFinancialTransactions() throws DatabaseException {
 
       String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID " +
