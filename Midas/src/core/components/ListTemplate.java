@@ -12,118 +12,139 @@
  */
 package core.components;
 
+import core.Core;
+import core.CoreComponent;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 
-import core.Core;
-import core.CoreComponent;
-
 /**
  * Modèle pour une liste d'éléments du coeur de l'application.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- * @param <E> Type d'objet dans la liste.
+ * @param <E>
+ *           Type d'objet dans la liste.
  */
 public abstract class ListTemplate<E> extends CoreComponent {
-   
+
    private LinkedList<E> list = new LinkedList<>();
 
    /**
     * Constructeur.
-    * @param core Référence sur le coeur logique de l'application.
+    * 
+    * @param core
+    *           - le coeur logique de l'application.
     */
    public ListTemplate(Core core) {
       super(core);
    }
 
    /**
-    * Ajout un item à la liste.
-    * @param item Item ajouté.
+    * Ajout un élément à la liste.
+    * 
+    * @param item
+    *           - l'élément ajouté.
     */
    public void addItem(E item) {
       list.add(item);
       setChanged();
       notifyObservers();
    }
-   
+
    /**
-    * Enlève un item de la liste.
-    * @param item Elément que l'on veut enlever de la liste.
+    * Enlève un élément de la liste.
+    * 
+    * @param item
+    *           - l'élément que l'on veut enlever de la liste.
     */
    public void removeItem(E item) {
       list.remove(item);
    }
-   
+
    /**
-    * Récupère l'élément situé à l'index index.
-    * @param index emplacement de l'élément cherché.
-    * @return l'élément situé à l'index index.
+    * Retourne l'élément situé à l'indice donné.
+    * 
+    * @param index
+    *           - l'indice de l'élément voulu.
+    * @return L'élément situé à l'indice donné.
     */
    public E getAt(int index) {
       return list.get(index);
    }
-   
+
    /**
-    * Renvoie la linkedlist des données internes (sans tri).
-    * @return
+    * Renvoie une liste chaînée des données internes (sans tri).
+    * 
+    * @return La liste des éléments.
     */
    public LinkedList<E> getList() {
       return list;
    }
-   
+
    /**
-    * Récuère la totalité des enregistrements sous forme de linkedlist triée
-    * @param comp défini l'ordre des éléments rendus.
-    * @return La linkedlist de E.
+    * Retourne la totalité des enregistrements sous forme d'une liste triée
+    * selon le comparateur donné.
+    * 
+    * @param comp
+    *           - défini l'ordre des éléments rendus.
+    * @return La liste triée des éléments.
     */
    public LinkedList<E> getAll(Comparator<E> comp) {
-      
+
       LinkedList<E> result = new LinkedList<>();
-      
+
       result.addAll(list);
-      
+
       Collections.sort(result, comp);
 
       return result;
    }
-   
+
    /**
-    * Affecte un nouveau contenu à la liste.
-    * @param items Nouveau contenu de la liste.
+    * Définit un nouveau contenu pour la liste, l'ancien sera effacé.
+    * 
+    * @param items
+    *           - le nouveau contenu de la liste.
     */
    public void setItems(LinkedList<E> items) {
       list.clear();
       list.addAll(items);
-      
+
       setChanged();
       notifyObservers();
    }
-   
+
    /**
-    * Regarde si nous avons déjà item dans la liste.
-    * @param item L'item dont on veut savoir s'il est déjà ajouté à la liste.
+    * Test si l'élément donné est déjà présent dans la liste.
+    * 
+    * @param item
+    *           - l'élément dont la présence doit être vérifiée.
     * @return True si la liste contient déjà cet item.
     */
    public boolean contains(E item) {
       return list.contains(item);
    }
-   
+
    /**
     * Crée une fausse entrée dans la liste. Il s'agit des invites d'actions
     * relative à la liste.
-    * @param name Nom du message d'invite.
-    * @return Un "faux" élement de type E.
+    * 
+    * @param name
+    *           - le nom du message d'invite.
+    * @return Un "faux" élément de type E.
     */
    public abstract E createFalseEntry(String name);
-   
+
    /**
-    * Retourne l'élément de la liste avec l'id id.
-    * @param id identifiant de l'élément.
-    * @return l'élément avec l'identifiant id.
+    * Retourne l'élément de la liste avec l'identifiant donné.
+    * 
+    * @param id
+    *           - l'identifiant de l'élément.
+    * @return L'élément correspondant à l'identifiant.
     */
    public abstract E get(int id);
 }

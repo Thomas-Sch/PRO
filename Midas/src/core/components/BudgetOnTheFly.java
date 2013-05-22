@@ -1,94 +1,116 @@
 /* ============================================================================
  * Nom du fichier   : BudgetOnTheFly.java
  * ============================================================================
- * Date de cr�ation : 24 avr. 2013
+ * Date de création : 24 avr. 2013
  * ============================================================================
- * Auteurs          : Biolzi S�bastien
+ * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
- *                    Decorvet Gr�goire
+ *                    Decorvet Grégoire
  *                    Schweizer Thomas
  *                    Sinniger Marcel
  * ============================================================================
  */
 package core.components;
 
-import java.util.Date;
-
 import core.Core;
 import core.IdentifiedComponent;
 import database.dbComponents.DBBudgetOnTheFly;
+import java.util.Date;
 
 /**
- * Cette classe represente un budet a la volee.
+ * Cette classe représente un budget à la volée et met à disposition un moyen
+ * d'obtenir certaines informations associées audit budget.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class BudgetOnTheFly extends Budget implements IdentifiedComponent {
 
-   /**
-    * Variables du budget a la volee.
-    */
    private DBBudgetOnTheFly dbBudetOnTheFly;
-   
+
    /**
-    * Construit l'object Budget.
-    * @param core - coeur logique du programme 
-    * @param dbBudget - les caracteristiques du budget
-    * @param dbBudetOnTheFly - les caracteristiques du budget 
+    * Construit le budget à la volée à partir de sa représentation de la base de
+    * données.
+    * 
+    * @param core
+    *           - coeur logique du programme.
+    * @param dbBudgetOnTheFly
+    *           - le budget à la volée en provenance de la base de données.
     */
    public BudgetOnTheFly(Core core, DBBudgetOnTheFly dbBudetOnTheFly) {
       super(core, dbBudetOnTheFly);
       this.dbBudetOnTheFly = dbBudetOnTheFly;
    }
-   
+
+   /**
+    * Retourne l'objet représentant ce budget à la volée pour la base de
+    * données.
+    * 
+    * @return Le budget sous une forme compatible avec la base de données.
+    */
    public DBBudgetOnTheFly getDBBudgetOnTheFly() {
       return dbBudetOnTheFly;
    }
 
    /**
-    * consult la date de debut du budget a la volee
-    * @return la date de debut
+    * Retourne la date de début de ce budget à la volée.
+    * 
+    * @return La date de début.
     */
    public Date getStartDate() {
       return dbBudetOnTheFly.getStart();
    }
-   
+
    /**
-    * modifie la date de debut du budget à la volee
-    * @param date - la date de debut
-    * @throws date impossible, si la date de debut est placee apres la date de fin
+    * Définit la date de début du budget à la volée.
+    * 
+    * @param date
+    *           - la nouvelle date de début
+    * @throws IllegalArgumentException
+    *            si la date de début survient après celle de fin.
     */
    public void setStartDate(Date date) {
-      if(date.after(dbBudetOnTheFly.getEnd())) {
-         //error
+      if (date.after(dbBudetOnTheFly.getEnd())) {
+         throw new IllegalArgumentException(
+               "The starting date has to be before the ending date");
       }
       dbBudetOnTheFly.setStart(date);
    }
-   
+
    /**
-    * consult la date de debut du budget a la volee
-    * @return la date de debut
+    * Retourne la date de fin du budget a la volée.
+    * 
+    * @return La date de fin.
     */
    public Date getEndDate() {
       return dbBudetOnTheFly.getEnd();
    }
-   
+
    /**
-    * modifie la date de debut du budget à la volee
-    * @param date - la date de debut
-    * @throws date impossible, si la date de fin est placee avant la date de debut
+    * Définit la date de fin du budget à la volée.
+    * 
+    * @param date
+    *           - la nouvelle date de fin
+    * @throws IllegalArgumentException
+    *            si la date de fin survient avant celle du début.
     */
    public void setEndtDate(Date date) {
-      if(date.after(dbBudetOnTheFly.getEnd())) {
-         //error
+      if (date.before(dbBudetOnTheFly.getStart())) {
+         throw new IllegalArgumentException(
+               "The ending date has to be after the starting date");
       }
       dbBudetOnTheFly.setEnd(date);
    }
-   
+
+   /**
+    * Retourne l'identifiant du budget à la volée dans la base de données.
+    * 
+    * @return L'identifiant du budget à la volée.
+    */
    public int getId() {
       return dbBudetOnTheFly.getId();
    }

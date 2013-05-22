@@ -576,6 +576,7 @@ public class Core {
    public void saveSubCategory(Category category, CategoryList list) {
       try {
          dbController.saveToDatabase(category.getDBCategory());
+         
          list.addItem(category);
       }
       catch (DatabaseConstraintViolation e) {
