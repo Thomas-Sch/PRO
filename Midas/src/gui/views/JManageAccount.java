@@ -13,20 +13,16 @@
 package gui.views;
 
 import gui.Controller;
-import gui.JInfoEditionPane;
 import gui.component.JAddEditDelete;
 import gui.component.infoedition.JAccountIE;
 import gui.controller.AccountListBox;
-import gui.frameContent.JEditionAccount;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -188,6 +184,7 @@ public class JManageAccount extends JDialog {
             state = State.VIEW;
             break;
       }
+      aieInfos.setEditable(state == State.EDITION);
       pack();
    }
    
@@ -205,16 +202,6 @@ public class JManageAccount extends JDialog {
    public void updateModel() {
       accounts.updateModel();
       pack();
-   }
-   
-   /**
-    * Met à jour les champs que peut voir l'utlisateur en fonction du compte
-    * qu'il sélectionne.
-    * @param account Compte dont on veut afficher ou éditer les informations.
-    */
-   public void updateFields(Account account) {
-//      ifaAccount.updateFields(account);
-//      edaAccount.updateFields(account);
    }
    
    /**

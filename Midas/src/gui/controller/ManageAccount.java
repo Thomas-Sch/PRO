@@ -72,7 +72,6 @@ public class ManageAccount extends Controller {
          public void actionPerformed(ActionEvent e) {
             if(view.isModifyingAccount()) {
                getCore().saveAccount(view.getSelectedAccount());
-               view.updateFields(view.getSelectedAccount());
             }
             view.swapMode();
          }
@@ -91,8 +90,6 @@ public class ManageAccount extends Controller {
             catch (DatabaseConstraintViolation e1) {
                e1.printStackTrace();
             }
-            
-            view.swapMode();
             view.updateModel();
             
          }

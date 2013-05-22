@@ -14,6 +14,7 @@ package gui.component.infoedition;
 
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.util.LinkedList;
 
 import javax.swing.JDialog;
 
@@ -77,12 +78,22 @@ public class JAccountIE extends JInfoEditionPane<Account> {
     * @see gui.JInfoEditionPane#initContent()
     */
    @Override
-   public void initContent(Account data) {
+   public LinkedList<JInfoEditionLabel> initContent(Account data) {
+      LinkedList<JInfoEditionLabel> result = new LinkedList<>();
+      
+      // Définition des champs.
       ielName = new JInfoEditionLabel(Text.ACCOUNT_NAME_LABEL, data.getName());
       //ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL, data.getBankName());
       ielAccountNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL, data.getAccountNumber());
       ielAmount = new JInfoEditionLabel(Text.AMOUNT_LABEL,String.valueOf(data.getAmount()));
       ielOverdraftLimit = new JInfoEditionLabel(Text.ACCOUNT_OVERDRAFTLIMIT_LABEL, String.valueOf(data.getOverdraftLimit()));
+      
+      // Ajout des champs à la liste.
+      result.add(ielName);
+      result.add(ielAccountNumber);
+      result.add(ielAmount);
+      result.add(ielOverdraftLimit);
+      return result;
    }
 
    /* (non-Javadoc)
