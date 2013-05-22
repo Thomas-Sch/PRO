@@ -17,6 +17,7 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Classe représentant une pair de deux label adjacent horizontalement.
@@ -35,13 +36,13 @@ public class JLabelInfo extends JPanel {
    private static final long serialVersionUID = -4049279064044227122L;
    
    private JLabel lblMetaInfo;
-   private JLabel lblData;
+   private JTextField lblData;
    
    public JLabelInfo (String metaInfo, String data) {
       setLayout(new BorderLayout(5,5));
       
       lblMetaInfo = new JLabel(metaInfo);
-      lblData = new JLabel(data);
+      lblData = new JTextField(data);
       
       add(lblMetaInfo, BorderLayout.WEST);
       add(lblData, BorderLayout.EAST);

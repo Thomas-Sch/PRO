@@ -83,8 +83,7 @@ public class JQuickExpense extends JPanel {
       // Paramétrage des contraintes et ajout du panel d'alerte.
       constraints.weightx = 0.1;
       constraints.gridx = 0;
-      constraints.gridy = 0;     
-      constraints.anchor = GridBagConstraints.NORTH;
+      constraints.gridy = 0;
       add(new JLabel(Text.QUICK_EXPENSE_LABEL.toString()), constraints);
       
       ComboBoxUser authors = new ComboBoxUser(controller.getCore());
@@ -93,15 +92,15 @@ public class JQuickExpense extends JPanel {
       add(authors.getGraphicalComponent(), constraints);
       
       constraints.gridx = 1;
+      constraints.gridwidth = 1;
       add(new JLabelMoneyPanel(Text.AMOUNT_LABEL), constraints);
       
       constraints.gridx = 2;
+      constraints.gridwidth = 1;
       add(new JDateInput(Text.DATE_LABEL.toString()), constraints);
       
       constraints.gridx = 0;
       constraints.gridy = 2;
-
-      
       add(budgets.getGraphicalComponent(), constraints);
       
       constraints.gridx = 1;

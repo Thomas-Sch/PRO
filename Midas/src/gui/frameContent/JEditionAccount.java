@@ -63,7 +63,7 @@ public class JEditionAccount extends JPanel {
    public void initContent() {
       ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL);
       ltpBankName = new JLabelTextPanel(Text.ACCOUNT_BANK_NAME_LABEL);
-      lmpOverdraftLimit = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL);
+      lmpOverdraftLimit = new JLabelMoneyPanel(Text.ACCOUNT_OVERDRAFTLIMIT_LABEL);
       lmpBalance = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL);
       ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL);

@@ -13,16 +13,20 @@
 package gui.views;
 
 import gui.Controller;
+import gui.JInfoEditionPane;
 import gui.component.JAddEditDelete;
+import gui.component.infoedition.JAccountIE;
 import gui.controller.AccountListBox;
 import gui.frameContent.JEditionAccount;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -53,9 +57,9 @@ public class JManageAccount extends JDialog {
    private JLabel lblDescription;
    
    private AccountListBox accounts;
-   private JInfoAccount ifaAccount;
-   private JEditionAccount edaAccount;
    private JAddEditDelete aedActions;
+
+   private JAccountIE aieInfos;
    
    private JPanel pnlInfosActions;
    
@@ -78,8 +82,7 @@ public class JManageAccount extends JDialog {
    public void initContent() {
       lblDescription = new JLabel("Liste des comptes");
       accounts = new AccountListBox(controller.getCore());
-      ifaAccount = new JInfoAccount();
-      edaAccount = new JEditionAccount();
+      aieInfos = new JAccountIE();
       aedActions = new JAddEditDelete();
       
       // On désactive les boutons qui utilise un compte car aucun n'est
@@ -108,12 +111,18 @@ public class JManageAccount extends JDialog {
             if(accounts.getSelectedAccount() != null) {
                setEnabledAccountDependantButtons(true);
 
-               updateFields(accounts.getSelectedAccount());
+               switch (state) {
+                  case EDITION:
+                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedAccount());
+                     break;
+                  case VIEW:
+                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedAccount());
+                     break;
+               }
+               
             }
             else {
                setEnabledAccountDependantButtons(false);
-               edaAccount.setVisible(false);
-               ifaAccount.setVisible(false);
             }
          }
       });
@@ -133,7 +142,7 @@ public class JManageAccount extends JDialog {
       pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
       pnlInfosActions.setLayout(new BorderLayout());
       
-      pnlInfosActions.add(ifaAccount, BorderLayout.CENTER);
+      pnlInfosActions.add(aieInfos, BorderLayout.CENTER);
       pnlInfosActions.add(aedActions, BorderLayout.SOUTH);
       return pnlContent;
    }
@@ -173,14 +182,10 @@ public class JManageAccount extends JDialog {
       switch (state) {
          case VIEW:
             state = State.EDITION;
-            pnlInfosActions.remove(ifaAccount);
-            pnlInfosActions.add(edaAccount, BorderLayout.CENTER);
             break;
             
          case EDITION:
             state = State.VIEW;
-            pnlInfosActions.remove(edaAccount);
-            pnlInfosActions.add(ifaAccount, BorderLayout.CENTER);
             break;
       }
       pack();
@@ -208,8 +213,8 @@ public class JManageAccount extends JDialog {
     * @param account Compte dont on veut afficher ou éditer les informations.
     */
    public void updateFields(Account account) {
-      ifaAccount.updateFields(account);
-      edaAccount.updateFields(account);
+//      ifaAccount.updateFields(account);
+//      edaAccount.updateFields(account);
    }
    
    /**

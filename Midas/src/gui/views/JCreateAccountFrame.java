@@ -164,7 +164,7 @@ public class JCreateAccountFrame extends JDialog implements View{
    private void initComponent() {
       ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL);
       ltpBankName = new JLabelTextPanel(Text.ACCOUNT_BANK_NAME_LABEL);
-      ltpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL);
+      ltpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_OVERDRAFTLIMIT_LABEL);
       ltpThreshold.setText("0");
       ltpInitialAmount = new JLabelMoneyPanel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL);
       ltpInitialAmount.setText("0");

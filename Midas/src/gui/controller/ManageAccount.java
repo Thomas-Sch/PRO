@@ -92,7 +92,9 @@ public class ManageAccount extends Controller {
                e1.printStackTrace();
             }
             
+            view.swapMode();
             view.updateModel();
+            
          }
       });
    }

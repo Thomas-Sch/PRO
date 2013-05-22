@@ -80,7 +80,7 @@ public class JInfoAccount extends JPanel {
    
    public void initContent() {
       lbiName = new JLabelInfo(Text.ACCOUNT_NAME_LABEL.toString());
-      lmiThreshold = new JLabelMoneyInfo(Text.ACCOUNT_THRESHOLD_LABEL.toString());
+      lmiThreshold = new JLabelMoneyInfo(Text.ACCOUNT_OVERDRAFTLIMIT_LABEL.toString());
       lmiInitialAmount = new JLabelMoneyInfo(Text.ACCOUNT_INITIAL_AMOUNT_LABEL.toString());
       lbiNumber = new JLabelInfo(Text.ACCOUNT_NUMBER_LABEL.toString());
       lbiDescription = new JLabelInfo(Text.ACCOUNT_DESCRIPTION_LABEL.toString());
