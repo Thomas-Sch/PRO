@@ -19,7 +19,7 @@ public class DBAccount extends DBComponentEnableable {
    private String nameBank;
    private String accountNumber;
    private Double amount;
-   private Double overdraftLimit;
+   private Double Threshold;
    
   /**
    * Initialise les champs qui ne representent pas une référence
@@ -29,7 +29,7 @@ public class DBAccount extends DBComponentEnableable {
       nameBank = "";
       accountNumber = "";
       amount = 0.0;
-      overdraftLimit = 0.0;
+      Threshold = 0.0;
    }
    
    /**
@@ -81,16 +81,16 @@ public class DBAccount extends DBComponentEnableable {
       this.amount = amount;
    }
    /**
-    * @return le/la/les overdraftLimit
+    * @return le/la/les Threshold
     */
-   public Double getOverdraftLimit() {
-      return overdraftLimit;
+   public Double getThreshold() {
+      return Threshold;
    }
    /**
-    * @param overdraftLimit - la nouvelle valeur pour l'attribut overdraftLimit
+    * @param overdraftLimit - la nouvelle valeur pour l'attribut Threshold
     */
-   public void setOverdraftLimit(Double overdraftLimit) {
-      this.overdraftLimit = overdraftLimit;
+   public void setThreshold(Double overdraftLimit) {
+      this.Threshold = overdraftLimit;
    }
 
    /**
@@ -114,7 +114,7 @@ public class DBAccount extends DBComponentEnableable {
    public String toString() {
       return "DBAccount [name=" + name + ", description=" + description
             + ", nameBank=" + nameBank + ", accountNumber=" + accountNumber
-            + ", amount=" + amount + ", overdraftLimit=" + overdraftLimit
+            + ", amount=" + amount + ", Threshold=" + Threshold
             + ", getEnabled()=" + getEnabled() + ", getId()=" + getId() + "]";
    }
 

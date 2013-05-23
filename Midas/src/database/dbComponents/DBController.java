@@ -297,7 +297,7 @@ public class DBController {
          dbAccount.setNameBank((result.getString(4)));
          dbAccount.setAccountNumber((result.getString(5)));
          dbAccount.setAmount((result.getDouble(6)));
-         dbAccount.setOverdraftLimit((result.getDouble(7)));    
+         dbAccount.setThreshold((result.getDouble(7)));    
          dbAccount.setEnabled(result.getBoolean(8));
 
       } catch (SQLException e) {
@@ -330,7 +330,7 @@ public class DBController {
             dbAccount.setNameBank((result.getString(4)));
             dbAccount.setAccountNumber((result.getString(5)));
             dbAccount.setAmount((result.getDouble(6)));
-            dbAccount.setOverdraftLimit((result.getDouble(7)));    
+            dbAccount.setThreshold((result.getDouble(7)));    
             dbAccount.setEnabled(result.getBoolean(8));
             
             dbAccounts.add(dbAccount);
@@ -360,7 +360,7 @@ public class DBController {
             preparedStatement.setString(3, dbAccount.getNameBank());
             preparedStatement.setString(4, dbAccount.getAccountNumber());
             preparedStatement.setDouble(5, dbAccount.getAmount());
-            preparedStatement.setDouble(6, dbAccount.getOverdraftLimit());
+            preparedStatement.setDouble(6, dbAccount.getThreshold());
             preparedStatement.setBoolean(7,  dbAccount.getEnabled());
             
             this.insert(preparedStatement, dbAccount);
@@ -376,7 +376,7 @@ public class DBController {
             preparedStatement.setString(3, dbAccount.getNameBank());
             preparedStatement.setString(4, dbAccount.getAccountNumber());
             preparedStatement.setDouble(5, dbAccount.getAmount());
-            preparedStatement.setDouble(6, dbAccount.getOverdraftLimit());
+            preparedStatement.setDouble(6, dbAccount.getThreshold());
             preparedStatement.setBoolean(7,  dbAccount.getEnabled());
             preparedStatement.setInt(8, dbAccount.getId());
             
