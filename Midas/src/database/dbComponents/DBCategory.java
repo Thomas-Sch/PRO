@@ -49,5 +49,14 @@ public class DBCategory extends DBComponentEnableable {
       this.parentDBCategory = parentDBCategory;
    }
 
+   /* 
+    * Un simple toString pour afficher le contenu
+    */
+   @Override
+   public String toString() {
+      return "DBCategory [name=" + name + ", parentDBCategory="
+            + parentDBCategory + ", getEnabled()=" + getEnabled()
+            + ", getId()=" + getId() + "]";
+   }
    
 }

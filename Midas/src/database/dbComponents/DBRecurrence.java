@@ -66,13 +66,17 @@ public class DBRecurrence extends DBComponent {
    public void setIntervalRecurrence(Integer intervalRecurrence) {
       this.intervalRecurrence = intervalRecurrence;
    }
+
    /* (non-Javadoc)
     * @see java.lang.Object#toString()
     */
    @Override
    public String toString() {
-      return "DBRecurrence [start=" + start + ", end=" + end + ", intervalRecurrence=" + intervalRecurrence
-            + ", getId()=" + getId() + "]";
+      return "DBRecurrence [start=" + start + ", end=" + end
+            + ", intervalRecurrence=" + intervalRecurrence + ", getId()="
+            + getId() + "]";
    }
+
+   
    
 }

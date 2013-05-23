@@ -87,6 +87,7 @@ public class TestRoutine {
       account1.setAccountNumber("accountNumber");
       account1.setAmount(100.6);
       account1.setName("Compte 1");
+      account1.setDescription("desc2");
       account1.setNameBank("BEKB");
       account1.setThreshold(1.0);
       dbController.saveToDatabase(account1);

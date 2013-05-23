@@ -276,7 +276,7 @@ public class DBController {
    
    public DBAccount getDbAccount(int id) throws DatabaseException {
 
-      String sqlString = "SELECT Acc_ID, Name, BankName, AccountNumber, Amount, AccountLimit, Enabled " +
+      String sqlString = "SELECT Acc_ID, Name, Description, BankName, AccountNumber, Amount, AccountLimit, Enabled " +
                          "FROM Account " +
                          "WHERE Acc_ID = ?";
       
@@ -293,11 +293,12 @@ public class DBController {
          
          dbAccount.setId((result.getInt(1)));
          dbAccount.setName((result.getString(2)));
-         dbAccount.setNameBank((result.getString(3)));
-         dbAccount.setAccountNumber((result.getString(4)));
-         dbAccount.setAmount((result.getDouble(5)));
-         dbAccount.setThreshold((result.getDouble(6)));    
-         dbAccount.setEnabled(result.getBoolean(7));
+         dbAccount.setDescription((result.getString(3)));
+         dbAccount.setNameBank((result.getString(4)));
+         dbAccount.setAccountNumber((result.getString(5)));
+         dbAccount.setAmount((result.getDouble(6)));
+         dbAccount.setThreshold((result.getDouble(7)));    
+         dbAccount.setEnabled(result.getBoolean(8));
 
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -310,7 +311,7 @@ public class DBController {
    
    public LinkedList<DBAccount> getAllDbAccounts() throws DatabaseException {
 
-      String sqlString = "SELECT Acc_Id, Name, BankName, AccountNumber, Amount, AccountLimit, Enabled " +
+      String sqlString = "SELECT Acc_Id, Name, Description, BankName, AccountNumber, Amount, AccountLimit, Enabled " +
                          "FROM Account";
       
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
@@ -325,11 +326,12 @@ public class DBController {
             
             dbAccount.setId((result.getInt(1)));
             dbAccount.setName((result.getString(2)));
-            dbAccount.setNameBank((result.getString(3)));
-            dbAccount.setAccountNumber((result.getString(4)));
-            dbAccount.setAmount((result.getDouble(5)));
-            dbAccount.setThreshold((result.getDouble(6)));
-            dbAccount.setEnabled(result.getBoolean(7));
+            dbAccount.setDescription((result.getString(3)));
+            dbAccount.setNameBank((result.getString(4)));
+            dbAccount.setAccountNumber((result.getString(5)));
+            dbAccount.setAmount((result.getDouble(6)));
+            dbAccount.setThreshold((result.getDouble(7)));    
+            dbAccount.setEnabled(result.getBoolean(8));
             
             dbAccounts.add(dbAccount);
          }
@@ -349,32 +351,34 @@ public class DBController {
       try {
          if (dbAccount.getId() == null) {
             sqlString = "INSERT INTO Account " +
-                        "VALUES (null, ?, ?, ?, ?, ?, ?)";
+                        "VALUES (null, ?, ?, ?, ?, ?, ?, ?)";
             
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
                         
             preparedStatement.setString(1, dbAccount.getName());
-            preparedStatement.setString(2, dbAccount.getNameBank());
-            preparedStatement.setString(3, dbAccount.getAccountNumber());
-            preparedStatement.setDouble(4, dbAccount.getAmount());
-            preparedStatement.setDouble(5, dbAccount.getThreshold());
-            preparedStatement.setBoolean(6,  dbAccount.getEnabled());
+            preparedStatement.setString(2, dbAccount.getDescription());
+            preparedStatement.setString(3, dbAccount.getNameBank());
+            preparedStatement.setString(4, dbAccount.getAccountNumber());
+            preparedStatement.setDouble(5, dbAccount.getAmount());
+            preparedStatement.setDouble(6, dbAccount.getThreshold());
+            preparedStatement.setBoolean(7,  dbAccount.getEnabled());
             
             this.insert(preparedStatement, dbAccount);
          } else {
             sqlString = "UPDATE Account " +
-                        "SET Name = ?, BankName = ?, AccountNumber = ?, Amount = ?, AccountLimit = ?, Enabled = ? " +
+                        "SET Name = ?, Description = ?, BankName = ?, AccountNumber = ?, Amount = ?, AccountLimit = ?, Enabled = ? " +
                         "WHERE Acc_Id = ?";
             
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
             
             preparedStatement.setString(1, dbAccount.getName());
-            preparedStatement.setString(2, dbAccount.getNameBank());
-            preparedStatement.setString(3, dbAccount.getAccountNumber());
-            preparedStatement.setDouble(4, dbAccount.getAmount());
-            preparedStatement.setDouble(5, dbAccount.getThreshold());
-            preparedStatement.setBoolean(6,  dbAccount.getEnabled());
-            preparedStatement.setInt(7, dbAccount.getId());
+            preparedStatement.setString(2, dbAccount.getDescription());
+            preparedStatement.setString(3, dbAccount.getNameBank());
+            preparedStatement.setString(4, dbAccount.getAccountNumber());
+            preparedStatement.setDouble(5, dbAccount.getAmount());
+            preparedStatement.setDouble(6, dbAccount.getThreshold());
+            preparedStatement.setBoolean(7,  dbAccount.getEnabled());
+            preparedStatement.setInt(8, dbAccount.getId());
             
             this.update(preparedStatement);
          }
@@ -408,7 +412,7 @@ public class DBController {
    
    public DBFinancialTransaction createFinancialTransaction() {
        return new DBFinancialTransaction();
-    }
+   }
    
    // DBFinancialTransaction ------------------------------------------------------------------------------------
    public DBFinancialTransaction getDbFinancialTransaction(int id) throws DatabaseException {

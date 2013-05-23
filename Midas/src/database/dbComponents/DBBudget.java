@@ -91,8 +91,15 @@ public class DBBudget extends DBComponentEnableable {
       this.dbAccount = dbAccount;
    }
 
-
-
- 
+   /* (non-Javadoc)
+    * @see java.lang.Object#toString()
+    */
+   @Override
+   public String toString() {
+      return "DBBudget [name=" + name + ", description=" + description
+            + ", limit=" + limit + ", dbRecurrence=" + dbRecurrence
+            + ", dbAccount=" + dbAccount + ", getEnabled()=" + getEnabled()
+            + ", getId()=" + getId() + "]";
+   } 
 
 }

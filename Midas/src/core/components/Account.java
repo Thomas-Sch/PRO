@@ -121,16 +121,20 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     * @throws montant
     *            indisponible sur le compte : lors que l'on veut prelever plus
     *            d'argent que ce qui est disponnible
+    * @throws AmountUnavailable : lors que l'on veut prelever plus
+    *            d'argent que ce qui est disponnible
+    * @throws AmountUnavailable : lors que l'on veut prelever plus
+    *            d'argent que ce qui est disponnible
     */
-   public void debit(double amount) {
-      if (dbAccount.getAmount() + dbAccount.getThreshold() - amount < 0) {
-         // erreur
+   public void debit(double amount) throws AmountUnavailable {
+      if (dbAccount.getAmount() - dbAccount.getThreshold() < amount) {
+         throw new AmountUnavailable();
       }
       dbAccount.setAmount(dbAccount.getAmount() - amount);
    }
 
    /**
-    * Définit la limite de découvert possible sur le compte.
+    * Retourne le plafond du compte.
     * 
     * @param threshold
     *           - le nouveau plafond.
@@ -138,7 +142,12 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    public void setThreshold(double threshold) {
       dbAccount.setThreshold(threshold);
    }
-   
+
+   /**
+    * Retourne le plafond du compte.
+    * 
+    * @return Le plafond du compte.
+    */
    public double getThreshold() {
       return dbAccount.getThreshold();
    }

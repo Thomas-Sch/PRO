@@ -15,10 +15,11 @@ package database.dbComponents;
 public class DBAccount extends DBComponentEnableable {
 
    private String name;
+   private String description;
    private String nameBank;
    private String accountNumber;
    private Double amount;
-   private Double threshold;
+   private Double Threshold;
    
   /**
    * Initialise les champs qui ne representent pas une référence
@@ -28,7 +29,7 @@ public class DBAccount extends DBComponentEnableable {
       nameBank = "";
       accountNumber = "";
       amount = 0.0;
-      threshold = 0.0;
+      Threshold = 0.0;
    }
    
    /**
@@ -80,18 +81,41 @@ public class DBAccount extends DBComponentEnableable {
       this.amount = amount;
    }
    /**
-    * @return le/la/les overdraftLimit
+    * @return le/la/les Threshold
     */
    public Double getThreshold() {
-      return threshold;
+      return Threshold;
    }
    /**
-    * @param overdraftLimit - la nouvelle valeur pour l'attribut overdraftLimit
+    * @param overdraftLimit - la nouvelle valeur pour l'attribut Threshold
     */
-   public void setThreshold(Double threshold) {
-      this.threshold = threshold;
+   public void setThreshold(Double overdraftLimit) {
+      this.Threshold = overdraftLimit;
    }
-   
-   
+
+   /**
+    * @return le/la/les description
+    */
+   public String getDescription() {
+      return description;
+   }
+
+   /**
+    * @param description - la nouvelle valeur pour la description
+    */
+   public void setDescription(String description) {
+      this.description = description;
+   }
+
+   /* (non-Javadoc)
+    * @see java.lang.Object#toString()
+    */
+   @Override
+   public String toString() {
+      return "DBAccount [name=" + name + ", description=" + description
+            + ", nameBank=" + nameBank + ", accountNumber=" + accountNumber
+            + ", amount=" + amount + ", Threshold=" + Threshold
+            + ", getEnabled()=" + getEnabled() + ", getId()=" + getId() + "]";
+   }
 
 }
