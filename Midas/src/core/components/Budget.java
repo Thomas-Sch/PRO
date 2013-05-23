@@ -127,13 +127,12 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     * @param limit
     *           - le montant limite du budget.
     * 
-    * @throws IllegalArgumentException
-    *            si une limite négative est passée en paramètre.
+    * @throws BudgetLimitNegative : 
+    *             si une limite negative est passée en paramètre
     */
    public void setLimit(double limit) {
       if (limit < 0) {
-         throw new IllegalArgumentException(
-                                 "The limit has to be a non negative value.");
+         //erre
       }
       else {
          dbBudget.setLimit(limit);
