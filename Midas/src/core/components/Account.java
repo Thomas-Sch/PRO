@@ -117,14 +117,12 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     * 
     * @param amount
     *           - le montant à débiter.
-    * @throws IllegalArgumentException
-    *            lors que l'on veut prélever plus d'argent que ce qui est
-    *            disponible.
+    * @throws AmountUnavailable : lors que l'on veut prelever plus
+    *            d'argent que ce qui est disponnible
     */
-   public void debit(double amount) {
+   public void debit(double amount) throws AmountUnavailable {
       if (dbAccount.getAmount() - dbAccount.getThreshold() < amount) {
-         throw new IllegalArgumentException(
-               "Can not debit under the overdraft limit.");
+         throw new AmountUnavailable();
       }
       dbAccount.setAmount(dbAccount.getAmount() - amount);
    }
