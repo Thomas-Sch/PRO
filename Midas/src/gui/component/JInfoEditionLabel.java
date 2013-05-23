@@ -12,6 +12,8 @@
  */
 package gui.component;
 
+import gui.utils.TextChangedListener;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
@@ -77,5 +79,21 @@ public class JInfoEditionLabel extends JPanel {
     */
    public void setEditable(boolean b) {
       tfdData.setEditable(b);
+   }
+   
+   /**
+    * Ajout un écouteur sur l'action de taper du texte dans le champ de saisie.
+    * @param listener Action à effectuer lorsque cela se produit.
+    */
+   public void addTextChangedListener(TextChangedListener listener) {
+      TextChangedListener.addListener(tfdData, listener);
+   }
+   
+   /**
+    * Renovie le contenu de la zone de texte.
+    * @return Le contenu de la zone de texte.
+    */
+   public String getText() {
+      return tfdData.getText();
    }
 }

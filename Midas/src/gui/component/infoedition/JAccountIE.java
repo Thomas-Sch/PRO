@@ -17,13 +17,16 @@ import java.awt.GridLayout;
 import java.util.LinkedList;
 
 import javax.swing.JDialog;
+import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
 
+import core.MidasLogs;
 import core.components.Account;
 
 import gui.JInfoEditionPane;
 import gui.component.JInfoEditionLabel;
+import gui.utils.TextChangedListener;
 
 /**
  * Représente les informations d'un compte.
@@ -41,6 +44,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
     */
    private static final long serialVersionUID = -4003398565236786611L;
    
+   // Composants graphiques.
    private JInfoEditionLabel ielName;
    private JInfoEditionLabel ielBankName;
    private JInfoEditionLabel ielAccountNumber;
@@ -72,6 +76,48 @@ public class JAccountIE extends JInfoEditionPane<Account> {
     */
    @Override
    public void initListeners() {
+      ielName.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            data.setName(ielName.getText());
+         }
+      });
+      
+      ielAccountNumber.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            data.setAccountNumber(ielAccountNumber.getText());
+            
+         }
+      });
+      
+      ielAmount.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            try {
+               data.setAmount(Double.valueOf(ielAmount.getText()));
+            }
+            catch(NumberFormatException e) {
+               MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
+            }
+         }
+      });
+      
+      ielOverdraftLimit.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            try {
+               data.setOverdraftLimit(Double.valueOf(ielOverdraftLimit.getText()));
+            }
+            catch(NumberFormatException e) {
+               MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
+            }
+         }
+      });
    }
 
    /* (non-Javadoc)

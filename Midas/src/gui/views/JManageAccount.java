@@ -115,7 +115,6 @@ public class JManageAccount extends JDialog {
                      aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedAccount());
                      break;
                }
-               
             }
             else {
                setEnabledAccountDependantButtons(false);
@@ -133,7 +132,6 @@ public class JManageAccount extends JDialog {
       pnlContent.add(lblDescription, BorderLayout.NORTH);
       
       pnlContent.add(accounts.getGraphicalComponent(),BorderLayout.WEST);
-      
       
       pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
       pnlInfosActions.setLayout(new BorderLayout());
