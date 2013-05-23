@@ -185,25 +185,22 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * TODO Retourne la description du compte sous forme de chaîne de caractères.
+    * Retourne la description du compte sous forme de chaîne de caractères.
     * 
     * @return La description du compte.
     */
    public String getDescription() {
-      // TODO
-      // return dbAccount.getDescription();
-      return "";
+      return dbAccount.getDescription();
    }
 
    /**
-    * TODO Définit la description du compte.
+    * Définit la description du compte.
     * 
     * @param description
     *           - La nouvelle description.
     */
    public void setDescription(String description) {
-      // TODO
-      // dbAccount.setDescription(description);
+      dbAccount.setDescription(description);
    }
 
    /**
@@ -211,8 +208,11 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     * 
     * @return La liste des budgets associés.
     */
-   public LinkedList<Budget> getBindedBudgets() {
-      return core.getAllBudgtesRelatedToAccount(getId());
+   public BudgetList getBindedBudgets() {
+      BudgetList budgets = new BudgetList(core);
+      budgets.setItems(core.getAllBudgtesRelatedToAccount(getId()));
+      
+      return budgets;
    }
 
    /**
