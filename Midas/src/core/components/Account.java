@@ -13,6 +13,7 @@
 package core.components;
 
 import java.util.LinkedList;
+
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
@@ -117,6 +118,11 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     * 
     * @param amount
     *           - le montant à débiter.
+    * @throws montant
+    *            indisponible sur le compte : lors que l'on veut prelever plus
+    *            d'argent que ce qui est disponnible
+    * @throws AmountUnavailable : lors que l'on veut prelever plus
+    *            d'argent que ce qui est disponnible
     * @throws AmountUnavailable : lors que l'on veut prelever plus
     *            d'argent que ce qui est disponnible
     */
@@ -130,20 +136,20 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    /**
     * Retourne le plafond du compte.
     * 
-    * @return Le plafond du compte.
-    */
-   public double getThreshold() {
-      return dbAccount.getThreshold();
-   }
-
-   /**
-    * Définit le plafond possible sur le compte.
-    * 
     * @param threshold
     *           - le nouveau plafond.
     */
    public void setThreshold(double threshold) {
       dbAccount.setThreshold(threshold);
+   }
+
+   /**
+    * Retourne le plafond du compte.
+    * 
+    * @return Le plafond du compte.
+    */
+   public double getThreshold() {
+      return dbAccount.getThreshold();
    }
 
    /**

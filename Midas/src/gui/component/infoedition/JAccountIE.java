@@ -17,13 +17,17 @@ import java.awt.GridLayout;
 import java.util.LinkedList;
 
 import javax.swing.JDialog;
+import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
 
+import core.MidasLogs;
 import core.components.Account;
 
 import gui.JInfoEditionPane;
 import gui.component.JInfoEditionLabel;
+import gui.component.JMoneyInfoEditionLabel;
+import gui.utils.TextChangedListener;
 
 /**
  * Représente les informations d'un compte.
@@ -41,11 +45,12 @@ public class JAccountIE extends JInfoEditionPane<Account> {
     */
    private static final long serialVersionUID = -4003398565236786611L;
    
+   // Composants graphiques.
    private JInfoEditionLabel ielName;
    private JInfoEditionLabel ielBankName;
    private JInfoEditionLabel ielAccountNumber;
-   private JInfoEditionLabel ielAmount;
-   private JInfoEditionLabel ielOverdraftLimit;
+   private JMoneyInfoEditionLabel mielAmount;
+   private JMoneyInfoEditionLabel mielOverdraftLimit;
 
    /**
     * @param parent Fenêtre contenant le label.
@@ -72,6 +77,50 @@ public class JAccountIE extends JInfoEditionPane<Account> {
     */
    @Override
    public void initListeners() {
+      ielName.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            data.setName(ielName.getText());
+         }
+      });
+      
+      ielAccountNumber.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            data.setAccountNumber(ielAccountNumber.getText());
+            
+         }
+      });
+      
+      mielAmount.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            try {
+               System.out.println("a");
+               data.setAmount(Double.valueOf(mielAmount.getText()));
+            }
+            catch(NumberFormatException e) {
+               MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
+            }
+         }
+      });
+      
+      mielOverdraftLimit.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            try {
+               System.out.println("b");
+               data.setThreshold(Double.valueOf(mielOverdraftLimit.getText()));
+            }
+            catch(NumberFormatException e) {
+               MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
+            }
+         }
+      });
    }
 
    /* (non-Javadoc)
@@ -85,14 +134,14 @@ public class JAccountIE extends JInfoEditionPane<Account> {
       ielName = new JInfoEditionLabel(Text.ACCOUNT_NAME_LABEL, data.getName());
       //ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL, data.getBankName());
       ielAccountNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL, data.getAccountNumber());
-      ielAmount = new JInfoEditionLabel(Text.AMOUNT_LABEL,String.valueOf(data.getAmount()));
-      ielOverdraftLimit = new JInfoEditionLabel(Text.ACCOUNT_OVERDRAFTLIMIT_LABEL, String.valueOf(data.getThreshold()));
+      mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL,String.valueOf(data.getAmount()));
+      mielOverdraftLimit = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL, String.valueOf(data.getThreshold()));
       
       // Ajout des champs à la liste.
       result.add(ielName);
       result.add(ielAccountNumber);
-      result.add(ielAmount);
-      result.add(ielOverdraftLimit);
+      result.add(mielAmount);
+      result.add(mielOverdraftLimit);
       return result;
    }
 
@@ -101,11 +150,11 @@ public class JAccountIE extends JInfoEditionPane<Account> {
     */
    @Override
    public void buildContent() {
-      setLayout(new GridLayout(5, 0));
+      setLayout(new GridLayout(5, 5));
       add(ielName);
       add(ielAccountNumber);
-      add(ielAmount);
-      add(ielOverdraftLimit);
+      add(mielAmount);
+      add(mielOverdraftLimit);
    }
 
 }
