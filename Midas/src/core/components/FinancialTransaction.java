@@ -1,7 +1,7 @@
 /* ============================================================================
  * Nom du fichier   : FinancialTransaction.java
  * ============================================================================
- * Date de cr�ation : 24 avr. 2013
+ * Date de création : 24 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -12,15 +12,14 @@
  */
 package core.components;
 
-import java.util.Date;
-
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
 import database.dbComponents.DBFinancialTransaction;
+import java.util.Date;
 
 /**
- * Cette classe représente une transaction financière
+ * Cette classe représente une transaction financière.
  * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
@@ -33,97 +32,111 @@ import database.dbComponents.DBFinancialTransaction;
 public class FinancialTransaction extends CoreComponent implements
       IdentifiedComponent {
 
-   /**
-    * Variables d'une transaction financière.
-    */
    private DBFinancialTransaction dbFinancialTransaction;
 
    /**
-    * Construit l'object FinancialTransaction
+    * Crée une transaction financière à partir de sa représentation dans la base
+    * de données.
     * 
     * @param core
-    *           - coeur logique du programme
-    * @param dbAcount
-    *           - variable de la classe account
+    *           - coeur logique du programme.
+    * @param dbFinancialTransaction
+    *           - la transaction financière en provenance de la base de données.
     */
    public FinancialTransaction(Core core,
          DBFinancialTransaction dbFinancialTransaction) {
       super(core);
       this.dbFinancialTransaction = dbFinancialTransaction;
    }
-
+   
+   /**
+    * Retourne l'objet représentant cette transaction pour la base de données.
+    * 
+    * @return La transaction sous une forme compatible avec la base de données.
+    */
    public DBFinancialTransaction getDBFinancialTransaction() {
       return dbFinancialTransaction;
    }
 
    /**
-    * consulter le montant de la transaction
+    * Retourne le montant de la transaction.
     * 
-    * @return un double representant le montant
+    * @return Le montant de la transaction.
     */
    public double getAmount() {
       return dbFinancialTransaction.getAmount();
    }
 
    /**
-    * modifier le montant de la transaction
+    * Définit le montant de la transaction.
     * 
     * @param amount
-    *           - le montant de la transaction
+    *           - le montant de la transaction.
     */
    public void setAmount(double amount) {
       dbFinancialTransaction.setAmount(amount);
    }
 
    /**
-    * consulter la date de la transaction
+    * Retourne la date de la transaction.
     * 
-    * @return la date de la transaction
+    * @return La date de la transaction
     */
    public Date getDate() {
       return dbFinancialTransaction.getDate();
    }
 
    /**
-    * modifie la date de la transaction
+    * Définit la date de la transaction.
     * 
     * @param date
-    *           - la date de la transaction
+    *           - la date de la transaction.
     */
    public void setDate(Date date) {
       dbFinancialTransaction.setDate(date);
    }
 
    /**
-    * consulter la raison de la transaction
+    * Retourne le texte décrivant la raison de la transaction.
     * 
-    * @return la raison de la transaction
+    * @return La raison de la transaction.
     */
    public String getReason() {
       return dbFinancialTransaction.getReason();
    }
 
    /**
-    * modifier la raison de la transaction
+    * Définit le texte décrivant la raison de la transaction.
     * 
-    * @param la
-    *           raison de la transaction
+    * @param reason - la raison de la transaction.
     */
    public void setReason(String reason) {
       dbFinancialTransaction.setReason(reason);
    }
 
    /**
-    * consulte le budget auquel la transaction est liee
+    * Retourne le budget auquel la transaction est rattachée.
     * 
-    * @return le budget
+    * @return Le budget concerné par la transaction.
     */
    public Budget getBudget() {
       return core.getBudget(dbFinancialTransaction.getDbBudget());
    }
    
-   public Integer getBudgetId() {
+   /**
+    * Retourne l'identifiant, par rapport à la base de données, du budget auquel est associé cette transaction.
+    * @return L'identifant du budget.
+    */
+   public int getBudgetId() {
       return dbFinancialTransaction.getDbBudget();
+   }
+   
+   /**
+    * Retourne l'identifiant, par rapport à la base de données, 
+    * @return
+    */
+   public int getAccountId() {
+      return dbFinancialTransaction.getDbAccount();
    }
 
    /**

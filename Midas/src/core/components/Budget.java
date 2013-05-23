@@ -34,7 +34,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    private DBBudget dbBudget;
 
    /**
-    * Construit l'object Budget.
+    * Crée un budget à partir de sa représentation dans la base de données.
     * 
     * @param core
     *           - coeur logique du programme.
@@ -84,7 +84,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Définis le nom du budget.
+    * Définit le nom du budget.
     * 
     * @param name
     *           - le nom du budget
@@ -94,7 +94,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Définis la description associée au budget.
+    * Définit la description associée au budget.
     * 
     * @param description
     *           - la description du budget.
@@ -113,17 +113,18 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Modifie le montant limite du budget.
+    * Définit le montant limite du budget.
     * 
     * @param limit
-    *           - le montant limite du budget
+    *           - le montant limite du budget.
     * 
-    * @throws erreur
-    *            de saisie : si une limite negative est passée en paramètre
+    * @throws IllegalArgumentException
+    *            si une limite négative est passée en paramètre.
     */
    public void setLimit(double limit) {
       if (limit < 0) {
-         // erreur TODO
+         throw new IllegalArgumentException(
+                                 "The limit has to be a non negative value.");
       }
       else {
          dbBudget.setLimit(limit);
@@ -140,7 +141,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Défini la récurrence du budget.
+    * Définit la récurrence du budget.
     * 
     * @param recurrence
     *           - la nouvelle récurrence
@@ -177,65 +178,68 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    public LinkedList<FinancialTransaction> getRelatedFinancialTransaction() {
       return core.getAllFinancialTransactionRelatedToBudget(getId());
    }
-   
+
    /**
-    * Retourne la montant total actuellement dépensé pour ce budget. 
+    * Retourne la montant total actuellement dépensé pour ce budget.
+    * 
     * @return Le montant total dépensé.
     */
    public double getTotalOutgoings() {
-      
+
       LinkedList<FinancialTransaction> financialTransactions =
                                              getRelatedFinancialTransaction();
-      
+
       double outgoing = 0.0;
-      
+
       for (FinancialTransaction financialTrans : financialTransactions) {
          outgoing += financialTrans.getAmount();
       }
-      
+
       return outgoing;
    }
-   
+
    /**
     * Retourne le montant encore utilisable pour tenir ce budget.
+    * 
     * @return Le montant utilisable.
     */
    public double getRemainingAmount() {
       return getLimit() - getTotalOutgoings();
    }
-   
+
    /**
     * Retourne la plus grande dépense de ce budget.
+    * 
     * @return La plus grande dépense.
     */
    public double getGreatestOutgoing() {
-      
-      LinkedList<FinancialTransaction> financialTransactions =
-            getRelatedFinancialTransaction();
+
+      LinkedList<FinancialTransaction> financialTransactions = getRelatedFinancialTransaction();
 
       double greatest = 0.0;
-      
+
       for (FinancialTransaction financialTrans : financialTransactions) {
          greatest = Math.max(financialTrans.getAmount(), greatest);
       }
-      
+
       return greatest;
    }
-   
+
    /**
     * Retourne le montant moyen des transactions associées à ce budget.
+    * 
     * @return Le montant moyen des transactions.
     */
    public double getAverageOutgoing() {
       LinkedList<FinancialTransaction> financialTransactions =
-            getRelatedFinancialTransaction();
+                                             getRelatedFinancialTransaction();
 
       double outgoing = 0.0;
-      
+
       for (FinancialTransaction financialTrans : financialTransactions) {
          outgoing += financialTrans.getAmount();
       }
-      
+
       return outgoing / financialTransactions.size();
    }
 
@@ -247,9 +251,10 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    public int getId() {
       return dbBudget.getId();
    }
-   
+
    /**
     * Retourne l'identifiant du compte associé.
+    * 
     * @return L'identifiant du compte associé.
     */
    public int getBindedAccountId() {
@@ -267,5 +272,5 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    public String toString() {
       return getName();
    }
-   
+
 }

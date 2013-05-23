@@ -448,7 +448,7 @@ public class Core {
       while (iterator.hasNext()) {
          temp = iterator.next();
          // Suppression si le budget ne correspond pas
-         if (temp.getBudgetId() == null || temp.getBudgetId() == budgetId) {
+         if (temp.getBudgetId() == budgetId) {
             iterator.remove();
          }
       }
@@ -478,6 +478,52 @@ public class Core {
       }
       catch (DatabaseException e) {
          
+      }
+      return result;
+   }
+   
+   public LinkedList<FinancialTransaction>
+                     getAllFinancialTransactionRelatedToAccount(int accountId) {
+      LinkedList<DBFinancialTransaction> list;
+      LinkedList<FinancialTransaction> result;
+      result = cache.getAll(FinancialTransaction.class);
+
+      Iterator<FinancialTransaction> iterator = result.iterator();
+      FinancialTransaction temp;
+      while (iterator.hasNext()) {
+         temp = iterator.next();
+         // Suppression si le budget ne correspond pas
+         if (temp.getAccountId() == accountId) {
+            iterator.remove();
+         }
+      }
+
+      try {
+         list = dbController
+               .getAllDbFinancialTransactionsRelatedToAccount(accountId);
+
+         boolean alreadyExist = false;
+
+         for (DBFinancialTransaction dbItem : list) {
+
+            alreadyExist = false;
+            for (FinancialTransaction financialTransaction : result) {
+
+               if (dbItem.getId() == financialTransaction.getId()) {
+                  alreadyExist = true;
+                  break;
+               }
+            }
+
+            if (!alreadyExist) {
+               result.add(new FinancialTransaction(this, dbItem));
+            }
+
+         }
+
+      }
+      catch (DatabaseException e) {
+
       }
       return result;
    }
