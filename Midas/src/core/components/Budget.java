@@ -94,6 +94,15 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
+    * Retourne la description du budget.
+    * 
+    * @return La description du budget.
+    */
+   public String getDescription() {
+      return dbBudget.getDescription();
+   }
+
+   /**
     * Définit la description associée au budget.
     * 
     * @param description
