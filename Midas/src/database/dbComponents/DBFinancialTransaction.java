@@ -154,6 +154,8 @@ public class DBFinancialTransaction extends DBComponent {
       return "DBFinancialTransaction [amount=" + amount + ", date=" + date
             + ", reason=" + reason + ", dbUser=" + dbUser + ", dbBudget="
             + dbBudget + ", dbAccount=" + dbAccount + ", dbCategory="
-            + dbCategory + ", dbRecurrence=" + dbRecurrence + "]";
+            + dbCategory + ", dbRecurrence=" + dbRecurrence + ", getId()="
+            + getId() + "]";
    }
+
 }

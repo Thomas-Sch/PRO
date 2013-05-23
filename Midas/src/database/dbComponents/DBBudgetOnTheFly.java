@@ -49,14 +49,18 @@ public class DBBudgetOnTheFly extends DBBudget {
    public void setEnd(java.util.Date end) {
       this.end = end;
    }
+
    /* (non-Javadoc)
     * @see java.lang.Object#toString()
     */
    @Override
    public String toString() {
       return "DBBudgetOnTheFly [start=" + start + ", end=" + end
-            + ", getName()=" + getName() + ", getLimit()=" + getLimit()
+            + ", getName()=" + getName() + ", getDescription()="
+            + getDescription() + ", getLimit()=" + getLimit()
             + ", getDbRecurrence()=" + getDbRecurrence() + ", getDbAccount()="
-            + getDbAccount() + ", getId()=" + getId() + "]";
+            + getDbAccount() + ", getEnabled()=" + getEnabled() + ", getId()="
+            + getId() + "]";
    }
+
 }

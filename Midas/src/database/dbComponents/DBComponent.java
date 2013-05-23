@@ -25,7 +25,7 @@ public abstract class DBComponent {
    /**
     * @param id - la nouvelle valeur pour l'attribut id
     */
-   public void setId(Integer id) {
+   protected void setId(Integer id) {
       this.id = id;
    }
    /* (non-Javadoc)
