@@ -123,40 +123,24 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     *            d'argent que ce qui est disponnible
     */
    public void debit(double amount) {
-      if (dbAccount.getAmount() + dbAccount.getOverdraftLimit() - amount < 0) {
+      if (dbAccount.getAmount() + dbAccount.getThreshold() - amount < 0) {
          // erreur
       }
       dbAccount.setAmount(dbAccount.getAmount() - amount);
    }
 
    /**
-    * Retourne la limite de découvert possible sur le compte.
-    * 
-    * @return La limite de découvert.
-    */
-   public double getOverdraftLimit() {
-      return dbAccount.getOverdraftLimit();
-   }
-
-   /**
     * Définit la limite de découvert possible sur le compte.
     * 
-    * @param overdraftLimit
-    *           - la nouvelle limite de découvert.
-    * 
-    * @throws nouvelle
-    *            limite impossible : si le montant est déjà en découvert et si
-    *            la nouvelle limite de découvert est plus petite que le
-    *            découvert actuel.
+    * @param threshold
+    *           - le nouveau plafond.
     */
-   public void setOverdraftLimit(double overdraftLimit) {
-      System.out.println("Salut" + overdraftLimit);
-      if (overdraftLimit < 0) {
-         // erreur
-      }
-      else {
-         dbAccount.setOverdraftLimit(overdraftLimit);
-      }
+   public void setThreshold(double threshold) {
+      dbAccount.setThreshold(threshold);
+   }
+   
+   public double getThreshold() {
+      return dbAccount.getThreshold();
    }
 
    /**
@@ -198,6 +182,28 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
+    * TODO Retourne la description du compte sous forme de chaîne de caractères.
+    * 
+    * @return La description du compte.
+    */
+   public String getDescription() {
+      // TODO
+      // return dbAccount.getDescription();
+      return "";
+   }
+
+   /**
+    * TODO Définit la description du compte.
+    * 
+    * @param description
+    *           - La nouvelle description.
+    */
+   public void setDescription(String description) {
+      // TODO
+      // dbAccount.setDescription(description);
+   }
+
+   /**
     * Retourne la liste des budgets associés à ce compte.
     * 
     * @return La liste des budgets associés.
@@ -207,7 +213,62 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Obtenir le numéro d'identification du compte dans la base de donnée.
+    * Retourne la liste des transactions financières liées à ce compte.
+    * 
+    * @return La liste des transactions liées.
+    */
+   public LinkedList<FinancialTransaction> getRelatedFinancialTransaction() {
+      return core.getAllFinancialTransactionRelatedToAccount(getId());
+   }
+
+   /**
+    * Retourne la montant total de toute les transactions liées à ce compte.
+    * 
+    * @return Le montant total des transactions pour ce compte.
+    */
+   public double getOutgoingsAmount() {
+      LinkedList<FinancialTransaction> list = getRelatedFinancialTransaction();
+      double amount = 0.0;
+
+      for (FinancialTransaction transaction : list) {
+         amount += transaction.getAmount();
+      }
+
+      return amount;
+   }
+
+   /**
+    * Retourne la différence entre le solde du compte et le montant total des
+    * transactions financières. Une valeur positive indique qu'il reste de
+    * l'argent, tandis qu'une valeur négative indique un dépassement de
+    * capacités du compte.
+    * 
+    * @return La différence entre le solde et le montant total des transactions.
+    */
+   public double getCurrentBalance() {
+      return getAmount() - getOutgoingsAmount();
+   }
+
+   /**
+    * Test si l'état du compte est positif.
+    * 
+    * @return Vrai si l'état du compte est positif, faux le cas échéant.
+    */
+   public boolean isPositive() {
+      return getCurrentBalance() >= 0;
+   }
+
+   /**
+    * Test si l'état du compte est négatif.
+    * 
+    * @return Vrai si l'état du compte est négatif, faux le cas échéant.
+    */
+   public boolean isNegative() {
+      return !isPositive();
+   }
+
+   /**
+    * Retourne le numéro d'identification du compte dans la base de données.
     * 
     * @return L'identifiant du compte
     */

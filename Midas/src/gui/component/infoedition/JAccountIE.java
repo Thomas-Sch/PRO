@@ -114,7 +114,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          public void textChanged(DocumentEvent event) {
             try {
                System.out.println("b");
-               data.setOverdraftLimit(Double.valueOf(mielOverdraftLimit.getText()));
+               data.setThreshold(Double.valueOf(mielOverdraftLimit.getText()));
             }
             catch(NumberFormatException e) {
                MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
@@ -135,7 +135,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
       //ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL, data.getBankName());
       ielAccountNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL, data.getAccountNumber());
       mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL,String.valueOf(data.getAmount()));
-      mielOverdraftLimit = new JMoneyInfoEditionLabel(Text.ACCOUNT_OVERDRAFTLIMIT_LABEL, String.valueOf(data.getOverdraftLimit()));
+      mielOverdraftLimit = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL, String.valueOf(data.getThreshold()));
       
       // Ajout des champs à la liste.
       result.add(ielName);

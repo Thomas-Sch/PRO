@@ -296,7 +296,7 @@ public class DBController {
          dbAccount.setNameBank((result.getString(3)));
          dbAccount.setAccountNumber((result.getString(4)));
          dbAccount.setAmount((result.getDouble(5)));
-         dbAccount.setOverdraftLimit((result.getDouble(6)));    
+         dbAccount.setThreshold((result.getDouble(6)));    
          dbAccount.setEnabled(result.getBoolean(7));
 
       } catch (SQLException e) {
@@ -328,7 +328,7 @@ public class DBController {
             dbAccount.setNameBank((result.getString(3)));
             dbAccount.setAccountNumber((result.getString(4)));
             dbAccount.setAmount((result.getDouble(5)));
-            dbAccount.setOverdraftLimit((result.getDouble(6)));
+            dbAccount.setThreshold((result.getDouble(6)));
             dbAccount.setEnabled(result.getBoolean(7));
             
             dbAccounts.add(dbAccount);
@@ -357,7 +357,7 @@ public class DBController {
             preparedStatement.setString(2, dbAccount.getNameBank());
             preparedStatement.setString(3, dbAccount.getAccountNumber());
             preparedStatement.setDouble(4, dbAccount.getAmount());
-            preparedStatement.setDouble(5, dbAccount.getOverdraftLimit());
+            preparedStatement.setDouble(5, dbAccount.getThreshold());
             preparedStatement.setBoolean(6,  dbAccount.getEnabled());
             
             this.insert(preparedStatement, dbAccount);
@@ -372,7 +372,7 @@ public class DBController {
             preparedStatement.setString(2, dbAccount.getNameBank());
             preparedStatement.setString(3, dbAccount.getAccountNumber());
             preparedStatement.setDouble(4, dbAccount.getAmount());
-            preparedStatement.setDouble(5, dbAccount.getOverdraftLimit());
+            preparedStatement.setDouble(5, dbAccount.getThreshold());
             preparedStatement.setBoolean(6,  dbAccount.getEnabled());
             preparedStatement.setInt(7, dbAccount.getId());
             
@@ -481,6 +481,47 @@ public class DBController {
          dbAccess.destroyPreparedStatement(preparedStatement);
       }
       
+      return dbFinancialTransactions;
+   }
+   
+   public LinkedList<DBFinancialTransaction>
+            getAllDbFinancialTransactionsRelatedToAccount(
+                                       int accountId) throws DatabaseException {
+
+      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID "
+            + "FROM FinancialTransaction " + "WHERE Acc_ID = ?";
+
+      PreparedStatement preparedStatement = dbAccess
+            .getPreparedStatement(sqlString);
+      DBFinancialTransaction dbFinancialTransaction = null;
+      LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
+
+      try {
+         preparedStatement.setInt(1, accountId);
+
+         ResultSet result = this.select(preparedStatement);
+
+         while (result.next()) {
+            dbFinancialTransaction = new DBFinancialTransaction();
+
+            dbFinancialTransaction.setId((result.getInt(1)));
+            dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+            dbFinancialTransaction.setAmount((result.getDouble(3)));
+            dbFinancialTransaction.setDate((result.getDate(4)));
+            dbFinancialTransaction.setReason((result.getString(5)));
+            dbFinancialTransaction.setDbAccount((result.getInt(6)));
+
+            dbFinancialTransactions.add(dbFinancialTransaction);
+         }
+
+      }
+      catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+
       return dbFinancialTransactions;
    }
    

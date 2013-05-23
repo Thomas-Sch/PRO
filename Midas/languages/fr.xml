@@ -29,7 +29,7 @@
   <budget_name_label>Nom du budget</budget_name_label>
   <budget_description_label>Description</budget_description_label>
   
-  <account_overdraftlimit_label>Seuil</account_overdraftlimit_label>
+  <account_threshold_label>Seuil</account_threshold_label>
   <account_initial_amount_label>Montant initial</account_initial_amount_label>
   <account_number_label>Numéro de compte</account_number_label>
   <account_description_label>Description du compte</account_description_label>
