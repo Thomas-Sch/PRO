@@ -86,7 +86,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
       //ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL, data.getBankName());
       ielAccountNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL, data.getAccountNumber());
       ielAmount = new JInfoEditionLabel(Text.AMOUNT_LABEL,String.valueOf(data.getAmount()));
-      ielOverdraftLimit = new JInfoEditionLabel(Text.ACCOUNT_OVERDRAFTLIMIT_LABEL, String.valueOf(data.getOverdraftLimit()));
+      ielOverdraftLimit = new JInfoEditionLabel(Text.ACCOUNT_OVERDRAFTLIMIT_LABEL, String.valueOf(data.getThreshold()));
       
       // Ajout des champs à la liste.
       result.add(ielName);

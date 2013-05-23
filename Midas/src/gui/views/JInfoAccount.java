@@ -90,6 +90,6 @@ public class JInfoAccount extends JPanel {
       lbiName.setText(account.getName());
       lbiNumber.setText(account.getAccountNumber());
       lmiInitialAmount.setText(String.valueOf(account.getAmount()));
-      lmiThreshold.setText(String.valueOf(account.getOverdraftLimit()));
+      lmiThreshold.setText(String.valueOf(account.getThreshold()));
    }
 }

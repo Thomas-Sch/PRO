@@ -97,7 +97,7 @@ public class JCreateAccountFrame extends JDialog implements View{
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               account.setOverdraftLimit(Double.valueOf(ltpThreshold.getText()));
+               account.setThreshold(Double.valueOf(ltpThreshold.getText()));
             } catch(NumberFormatException e) {
                MidasLogs.errors.push("NOT PARSING");
             }

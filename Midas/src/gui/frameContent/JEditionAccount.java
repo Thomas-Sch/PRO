@@ -131,7 +131,7 @@ public class JEditionAccount extends JPanel {
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               current.setOverdraftLimit(Double.valueOf(lmpOverdraftLimit.getText()));
+               current.setThreshold(Double.valueOf(lmpOverdraftLimit.getText()));
             }
             catch (Exception e) {}
          }
@@ -151,7 +151,7 @@ public class JEditionAccount extends JPanel {
       ltpName.setText(account.getName());
       ltpNumber.setText(account.getAccountNumber());
       lmpBalance.setText(String.valueOf(account.getAmount()));
-      lmpOverdraftLimit.setText(String.valueOf(account.getOverdraftLimit()));
+      lmpOverdraftLimit.setText(String.valueOf(account.getThreshold()));
    }
    
    public void saveModifications(Controller controller) {

@@ -122,7 +122,7 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     *            disponible.
     */
    public void debit(double amount) {
-      if (dbAccount.getAmount() + dbAccount.getOverdraftLimit() - amount < 0) {
+      if (dbAccount.getAmount() - dbAccount.getThreshold() < amount) {
          throw new IllegalArgumentException(
                "Can not debit under the overdraft limit.");
       }
@@ -130,32 +130,22 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Retourne la limite de découvert possible sur le compte.
+    * Retourne le plafond du compte.
     * 
-    * @return La limite de découvert.
+    * @return Le plafond du compte.
     */
-   public double getOverdraftLimit() {
-      return dbAccount.getOverdraftLimit();
+   public double getThreshold() {
+      return dbAccount.getThreshold();
    }
 
    /**
-    * Définit la limite de découvert possible sur le compte.
+    * Définit le plafond possible sur le compte.
     * 
-    * @param overdraftLimit
-    *           - la nouvelle limite de découvert.
-    * 
-    * @throws nouvelle
-    *            limite impossible : si le montant est déjà en découvert et si
-    *            la nouvelle limite de découvert est plus petite que le
-    *            découvert actuel.
+    * @param threshold
+    *           - le nouveau plafond.
     */
-   public void setOverdraftLimit(double overdraftLimit) {
-      if (overdraftLimit < 0) {
-         // erreur
-      }
-      else {
-         dbAccount.setOverdraftLimit(overdraftLimit);
-      }
+   public void setThreshold(double threshold) {
+      dbAccount.setThreshold(threshold);
    }
 
    /**
