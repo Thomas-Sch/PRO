@@ -56,4 +56,6 @@
   <transaction_type_label>Type</transaction_type_label>
   <transaction_type_credit>Créditer</transaction_type_credit>
   <transaction_type_debit>Débiter</transaction_type_debit>
+  
+  <swiss_franc_acronym>CHF</swiss_franc_acronym>
 </language>

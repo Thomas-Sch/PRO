@@ -150,6 +150,7 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     *            découvert actuel.
     */
    public void setOverdraftLimit(double overdraftLimit) {
+      System.out.println("Salut" + overdraftLimit);
       if (overdraftLimit < 0) {
          // erreur
       }

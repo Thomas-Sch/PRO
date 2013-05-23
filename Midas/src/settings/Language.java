@@ -103,7 +103,9 @@ public class Language {
       
       TRANSACTION_TYPE_LABEL,
       TRANSACTION_TYPE_CREDIT,
-      TRANSACTION_TYPE_DEBIT;
+      TRANSACTION_TYPE_DEBIT,
+      
+      SWISS_FRANC_ACRONYM;
       
       
       

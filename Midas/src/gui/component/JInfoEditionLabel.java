@@ -14,7 +14,7 @@ package gui.component;
 
 import gui.utils.TextChangedListener;
 
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -40,8 +40,8 @@ public class JInfoEditionLabel extends JPanel {
    
    private final int nbRows = 20;
    
-   private JLabel lblMetaInfo;
-   private JTextField tfdData;
+   protected JLabel lblMetaInfo;
+   protected JTextField tfdData;
    
    /**
     * Contructeur de la classe.
@@ -58,7 +58,7 @@ public class JInfoEditionLabel extends JPanel {
     * @param metainfo Contenu du label de présentation de la donnée.
     * @param data Donnée présentée.
     */
-   public void initContent(Text metainfo, String data) {
+   private void initContent(Text metainfo, String data) {
       lblMetaInfo = new JLabel(metainfo.toString());
       tfdData = new JTextField(data, nbRows);
       tfdData.setEditable(false); // On ne peut pas éditer par défaut.
@@ -67,10 +67,10 @@ public class JInfoEditionLabel extends JPanel {
    /**
     * Place les composants du panel.
     */
-   public void buildContent() {
-      setLayout(new BorderLayout(5,5));
-      add(lblMetaInfo, BorderLayout.WEST);
-      add(tfdData, BorderLayout.EAST); 
+   protected void buildContent() {
+      setLayout(new GridLayout(1, 2));
+      add(lblMetaInfo);
+      add(tfdData); 
    }
    
    /**
@@ -95,5 +95,13 @@ public class JInfoEditionLabel extends JPanel {
     */
    public String getText() {
       return tfdData.getText();
+   }
+   
+   /**
+    * Modifie l'alignement des données présentées ou éditées.
+    * @param alignment Alignement des données dans leur composant d'affichage.
+    */
+   public void setDataAlignement(int alignment) {
+      tfdData.setHorizontalAlignment(alignment);
    }
 }

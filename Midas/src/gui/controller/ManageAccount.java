@@ -40,8 +40,11 @@ public class ManageAccount extends Controller {
 
    private JManageAccount view;
    private Component parent;
+   
    /**
-    * @param core
+    * Constructeur principale de la classe
+    * @param parent Composant qui appelle ce contrôleur.
+    * @param core Coeur de l'application.
     */
    public ManageAccount(Component parent, Core core) {
       super(core);
@@ -91,7 +94,6 @@ public class ManageAccount extends Controller {
                e1.printStackTrace();
             }
             view.updateModel();
-            
          }
       });
    }
