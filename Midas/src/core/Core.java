@@ -721,6 +721,94 @@ public class Core {
       }
    }
    
+   /**
+    * Supprime une recurrence dans la base de donnee.
+    * @param account - la recurrence a supprimer
+    */
+   public void deleteRecurrence(Recurrence recurrence) {
+      try {
+         dbController.deleteDbRecurrence(recurrence.getId());
+      }
+      catch (DatabaseException | DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core " + "error when deleting a recurrence");
+      }
+   }
+   
+   /**
+    * Supprime la recurrence d'un budget dans la base de donnee.
+    * @param account - la recurrence a supprimer
+    */
+   public void deleteRecurrenceBudget(Budget budget) {
+      try {
+         int tmpId = budget.getRecurrence().getId();
+         budget.getDBBudget().setDbRecurrence(null);
+         saveBudget(budget);
+         dbController.deleteDbRecurrence(tmpId);
+      }
+      catch (DatabaseException | DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core " + "error when deleting a recurrence of budget");
+      }
+   }
+   
+   /**
+    * Supprime la recurrence d'une transaction fianaciere dans la base de donnee.
+    * @param account - la recurrence d'une transaction financiere a supprimer
+    */
+   public void deleteRecurrenceFinancialTransaction(FinancialTransaction transaction) {
+      try {
+         int tmpId = transaction.getRecurrence().getId();
+         transaction.getDBFinancialTransaction().setDbRecurrence(null);
+         saveFinancialTransaction(transaction);
+         dbController.deleteDbRecurrence(tmpId);
+      }
+      catch (DatabaseException | DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core " + "error when deleting a recurrence of fianancial transaction");
+      }
+   }
+   
+   /**
+    * Desactive un compte, le compte est archive dans la base de donnee 
+    * et n'est plus disponible dans les operations comptables.
+    * @param account - le compte a desactiver
+    */
+   public void DesactivateAccount(Account account) {
+      //account.setEnabled(false);
+      saveAccount(account);
+      accounts.removeItem(account);
+   }
+   
+   /**
+    * Desactive un budget, le budget est archive dans la base de donnee 
+    * et n'est plus disponible dans les operations comptables.
+    * @param budget - le budget a desactiver
+    */
+   public void DesactivateBudget(Budget budget) {
+      //budget.setEnabled(false);
+      saveBudget(budget);
+      budgets.removeItem(budget);
+   }
+   
+   /**
+    * Desactive un utilisateur, l'utilisateur est archive dans la base de donnee 
+    * et n'est plus disponible dans les operations comptables.
+    * @param user - l'utilisateur a desactiver
+    */
+   public void DesactivateUser(User user) {
+      //user.setEnabled(false);
+      saveUser(user);
+      users.removeItem(user);
+   }
+   
+   /**
+    * Desactive une categorie, la categorie est archive dans la base de donnee 
+    * et n'est plus disponible dans les operations comptables.
+    * @param category - la categorie a desactiver
+    */
+   public void DesactivateCategory(Category category) {
+      //category.setEnabled(false);
+      saveCategory(category);
+   }
+   
    public void deleteAccount(Account account) throws DatabaseException, DatabaseConstraintViolation {
       dbController.deleteDbAccount(account.getId());
       accounts.removeItem(account);
