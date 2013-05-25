@@ -69,6 +69,7 @@ public class ManageAccount extends Controller {
    @Override
    protected void initListeners() {
       view.addButtonAddListener(new AcCreateAccount(getCore()));
+      
       view.addButtonModifyListener(new ActionListener() {
          
          @Override
@@ -84,15 +85,7 @@ public class ManageAccount extends Controller {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            try {
-               getCore().deleteAccount(view.getSelectedAccount());
-            }
-            catch (DatabaseException e1) {
-               e1.printStackTrace();
-            }
-            catch (DatabaseConstraintViolation e1) {
-               e1.printStackTrace();
-            }
+            getCore().desactivateAccount(view.getSelectedAccount());
             view.updateModel();
          }
       });

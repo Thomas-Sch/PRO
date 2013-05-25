@@ -18,6 +18,7 @@ import gui.component.infoedition.JAccountIE;
 import gui.controller.AccountListBox;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
@@ -121,6 +122,17 @@ public class JManageAccount extends JDialog {
             }
          }
       });
+      
+      aedActions.addModifyActionListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent arg0) {
+            if(state == State.EDITION) {
+               System.out.println("Salut");
+               accounts.getGraphicalComponent().setEnabled(true);
+            }
+         }
+      });
    }
    
    /**
@@ -179,6 +191,7 @@ public class JManageAccount extends JDialog {
             break;
             
          case EDITION:
+            accounts.getGraphicalComponent().setEnabled(false);
             state = State.VIEW;
             break;
       }

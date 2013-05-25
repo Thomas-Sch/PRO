@@ -312,7 +312,7 @@ public class DBController {
    public LinkedList<DBAccount> getAllDbAccounts() throws DatabaseException {
 
       String sqlString = "SELECT Acc_Id, Name, Description, BankName, AccountNumber, Amount, AccountLimit, Enabled " +
-                         "FROM Account";
+                         "FROM Account WHERE Enabled = 1";
       
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBAccount dbAccount;

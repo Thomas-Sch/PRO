@@ -771,8 +771,8 @@ public class Core {
     * et n'est plus disponible dans les operations comptables.
     * @param account - le compte a desactiver
     */
-   public void DesactivateAccount(Account account) {
-      //account.setEnabled(false);
+   public void desactivateAccount(Account account) {
+      account.getDBAccount().setEnabled(false);
       saveAccount(account);
       accounts.removeItem(account);
    }
