@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
   <app_title>Midas</app_title>
-  <account_creation_title>Ajout d'un compte</account_creation_title>
   <action_quit>Quitter</action_quit>
+  <account_creation_title>Ajout d'un compte</account_creation_title>
   <account_management_title>Gestion des comptes</account_management_title>
   <category_creation_title>Ajout d'une catégorie</category_creation_title>
   <category_management_title>Gestion des catégories</category_management_title>
@@ -19,6 +19,7 @@
   <add_button>Ajouter</add_button>
   <modify_button>Modifier</modify_button>
   <delete_button>Supprimer</delete_button>
+  <account_list_label>Liste des comptes</account_list_label>
   <category_name_label>Nom</category_name_label>
   <author_name_label>Nom</author_name_label>
   <budget_description_label>Description</budget_description_label>

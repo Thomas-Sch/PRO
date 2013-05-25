@@ -50,11 +50,11 @@ public class AcManageAuthor extends UserAction {
     */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-      view = new JManageAuthorFrame(controller);
-      
-      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.AUTHOR_MANAGEMENT_TITLE.toString());
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
+//      view = new JManageAuthorFrame(controller);
+//      
+//      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.AUTHOR_MANAGEMENT_TITLE.toString());
+//      view.setModalityType(ModalityType.APPLICATION_MODAL);
+//      view.setVisible(true);
 
    }
 

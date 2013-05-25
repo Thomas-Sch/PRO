@@ -29,30 +29,30 @@ import javax.swing.JPanel;
  */
 public class JManageCategoryFrame extends JManageFrame {
 
-   /**
-    * @param controller
-    */
-   public JManageCategoryFrame(Controller controller) {
-      super(controller);
-   }
-
-   /**
-    * ID de série.
-    */
-   private static final long serialVersionUID = -3350759512131610325L;
-   
-   protected JPanel initContent() {
-      return super.initContent();
-      
-//      getContent().add(new CategoryList(), getConstraints());
-//         
-//       getConstraints().gridx = 1;
-//       getConstraints().anchor = GridBagConstraints.NORTH;
-//       getConstraints().insets = new Insets(5, 50, 5, 5);
-//       
-//       getContent().add(new CategoryList(), getConstraints());
+//   /**
+//    * @param controller
+//    */
+//   public JManageCategoryFrame(Controller controller) {
+//      super(controller);
+//   }
+//
+//   /**
+//    * ID de série.
+//    */
+//   private static final long serialVersionUID = -3350759512131610325L;
+//   
+//   protected JPanel initContent() {
+//      return super.initContent();
 //      
-//      return getContent();
-   }
-   
+////      getContent().add(new CategoryList(), getConstraints());
+////         
+////       getConstraints().gridx = 1;
+////       getConstraints().anchor = GridBagConstraints.NORTH;
+////       getConstraints().insets = new Insets(5, 50, 5, 5);
+////       
+////       getContent().add(new CategoryList(), getConstraints());
+////      
+////      return getContent();
+//   }
+//   
 }

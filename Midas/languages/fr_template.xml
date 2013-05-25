@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
   <app_title>TODO</app_title>
-  <account_creation_title>TODO</account_creation_title>
   <action_quit>TODO</action_quit>
+  <account_creation_title>TODO</account_creation_title>
   <account_management_title>TODO</account_management_title>
   <category_creation_title>TODO</category_creation_title>
   <category_management_title>TODO</category_management_title>
@@ -19,6 +19,7 @@
   <add_button>TODO</add_button>
   <modify_button>TODO</modify_button>
   <delete_button>TODO</delete_button>
+  <account_list_label>TODO</account_list_label>
   <category_name_label>TODO</category_name_label>
   <author_name_label>TODO</author_name_label>
   <budget_description_label>TODO</budget_description_label>

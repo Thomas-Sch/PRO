@@ -29,28 +29,28 @@ import javax.swing.JPanel;
  */
 public class JManageAuthorFrame extends JManageFrame {
 
-   /**
-    * @param controller
-    */
-   public JManageAuthorFrame(Controller controller) {
-      super(controller);
-   }
-
-   /**
-    * ID de série.
-    */
-   private static final long serialVersionUID = 3252804495254018094L;  
-   
-   private UserListBox users;
-   
-   protected JPanel initContent() {
-      super.initContent();
-      users = new UserListBox(getCore());
-      getContent().add(users.getGraphicalComponent(), getConstraints());      
-      return getContent();
-   }
-   
-   
-   
+//   /**
+//    * @param controller
+//    */
+//   public JManageAuthorFrame(Controller controller) {
+//      super(controller);
+//   }
+//
+//   /**
+//    * ID de série.
+//    */
+//   private static final long serialVersionUID = 3252804495254018094L;  
+//   
+//   private UserListBox users;
+//   
+//   protected JPanel initContent() {
+//      super.initContent();
+//      users = new UserListBox(getCore());
+//      getContent().add(users.getGraphicalComponent(), getConstraints());      
+//      return getContent();
+//   }
+//   
+//   
+//   
 
 }

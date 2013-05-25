@@ -16,7 +16,6 @@ import gui.Controller;
 import gui.component.list.JAccountList;
 
 import java.awt.Component;
-import java.awt.event.ActionListener;
 
 import javax.swing.event.ListSelectionListener;
 

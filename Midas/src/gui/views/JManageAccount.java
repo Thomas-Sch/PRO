@@ -13,22 +13,18 @@
 package gui.views;
 
 import gui.Controller;
-import gui.component.JAddEditDelete;
+import gui.JManageFrame;
 import gui.component.infoedition.JAccountIE;
 import gui.controller.AccountListBox;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import settings.Language.Text;
-
 import core.components.Account;
 
 /**
@@ -40,69 +36,42 @@ import core.components.Account;
  * @author Sinniger Marcel
  *
  */
-public class JManageAccount extends JDialog {
+public class JManageAccount extends JManageFrame {
 
    /**
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 6474851721091887221L;
    
-   // Etat de l'interface (contrôlé internement).
-   private enum State { EDITION, VIEW };
-   private State state;
-   
-   private Controller controller;
-   
-   private JLabel lblDescription;
+   private JLabel lblListDescription;
    
    private AccountListBox accounts;
-   private JAddEditDelete aedActions;
 
    private JAccountIE aieInfos;
-   
-   private JPanel pnlInfosActions;
    
    /**
     * Contructeur.
     * @param controller Contrôleur de cet objet.
     */
    public JManageAccount(Controller controller) {  
-      this.controller = controller;
-      state = State.VIEW;
-      initContent();
-      initListeners();
-      setContentPane(buildContent());
-      pack();
+      super(controller);
    }
    
    /**
     * Initialise les composants graphiques.
     */
-   public void initContent() {
-      lblDescription = new JLabel(Text.ACCOUNT_LIST_LABEL.toString());
+   protected void initContent() {
+      super.initContent();
+      lblListDescription = new JLabel(Text.ACCOUNT_LIST_LABEL.toString());
       accounts = new AccountListBox(controller.getCore());
       aieInfos = new JAccountIE();
-      aedActions = new JAddEditDelete();
-      
-      // On désactive les boutons qui utilise un compte car aucun n'est
-      // séléctionné de base lorsque l'on lance l'interface.
-      setEnabledAccountDependantButtons(false);
-      pnlInfosActions = new JPanel();
-   }
-   
-   /**
-    * Active ou désactive les boutons qui dépendent d'un compte cible.
-    * @param b Nouvel état d'activation des bouttons.
-    */
-   private void setEnabledAccountDependantButtons(boolean b) {
-      aedActions.setButtonDeleteEnabled(b);
-      aedActions.setButtonModifyEnabled(b);
    }
    
    /**
     * Initialise les listeners internes au composant graphique.
     */
-   public void initListeners() {
+   protected void initListeners() {
+      super.initListeners();
       accounts.addSelectionChangedListener(new ListSelectionListener() {
          
          @Override
@@ -124,71 +93,27 @@ public class JManageAccount extends JDialog {
             }
          }
       });
-    
-      aedActions.addModifyActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent arg0) {
-            switch (state) {
-               case VIEW:
-                  state = State.EDITION;
-                  break;
-                  
-               case EDITION:
-                  state = State.VIEW;
-                  break;
-            }
-            accounts.getGraphicalComponent().setEnabled(state == State.VIEW);
-            aedActions.setButtonAddEnabled(state == State.VIEW);
-            aedActions.setButtonDeleteEnabled(state == State.VIEW);
-            aieInfos.setEditable(state == State.EDITION);
-            pack();
-         }
-      });
    }
    
    /**
     * Construction des éléments de la vue.
     * @return Le panel contenant les éléments graphiques.
     */
-   private JPanel buildContent() {
+   protected JPanel buildContent() {
       JPanel pnlContent = new JPanel(new BorderLayout(5,5));
-      pnlContent.add(lblDescription, BorderLayout.NORTH);
       
+      pnlContent.add(lblListDescription, BorderLayout.NORTH);
       pnlContent.add(accounts.getGraphicalComponent(),BorderLayout.WEST);
       
       pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
       pnlInfosActions.setLayout(new BorderLayout());
       
-      pnlInfosActions.add(aieInfos, BorderLayout.CENTER);
       pnlInfosActions.add(aedActions, BorderLayout.SOUTH);
+      pnlInfosActions.add(aieInfos, BorderLayout.CENTER);
       return pnlContent;
    }
    
-   /**
-    * Ajout de l'action à effectuer lors du clique sur le bouton d'ajout.
-    * @param listener Action à effectuer.
-    */
-   public void addButtonAddListener(ActionListener listener) {
-      aedActions.addAddActionListener(listener);
-   }
-   
-   /**
-    * Ajout de l'action à effectuer lors du clique sur le bouton de 
-    * modification.
-    * @param listener Action à effectuer.
-    */
-   public void addButtonModifyListener(ActionListener listener) {
-      aedActions.addModifyActionListener(listener);
-   }
-   
-   /**
-    * Ajout de l'action à effectuer lors du clique sur le bouton de suppression
-    * @param listener Action à effectuer.
-    */
-   public void addButtonDeleteListener(ActionListener listener) {
-      aedActions.addDeleteActionListener(listener);
-   }
-   
+
    /**
     * Récupère le compte seléctionné dans l'interface.
     * @return le compte seléctionné.
@@ -203,5 +128,21 @@ public class JManageAccount extends JDialog {
    public void updateModel() {
       accounts.updateModel();
       pack();
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#setEnabledOnEdition(boolean)
+    */
+   @Override
+   protected void setEnabledOnEdition(boolean b) {
+      aieInfos.setEditable(b);      
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#setEnabledOnView(boolean)
+    */
+   @Override
+   protected void setEnabledOnView(boolean b) {
+      accounts.getGraphicalComponent().setEnabled(b);
    }
 }
