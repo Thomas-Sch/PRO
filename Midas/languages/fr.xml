@@ -35,6 +35,7 @@
   <account_description_label>Description du compte</account_description_label>
   <account_name_label>Nom du compte</account_name_label>
   <account_bank_name_label>Nom de la banque</account_bank_name_label>
+  <account_balance_label>Solde</account_balance_label>
   
   <select_category_label>Sélectionner une catégorie</select_category_label>
   <new_category_label>Nouvelle catégorie...</new_category_label>

@@ -47,10 +47,10 @@ public class JAccountIE extends JInfoEditionPane<Account> {
    
    // Composants graphiques.
    private JInfoEditionLabel ielName;
-   private JInfoEditionLabel ielBankName;
    private JInfoEditionLabel ielAccountNumber;
    private JMoneyInfoEditionLabel mielAmount;
    private JMoneyInfoEditionLabel mielOverdraftLimit;
+   private JInfoEditionLabel ielDescription;
 
    /**
     * @param parent Fenêtre contenant le label.
@@ -94,13 +94,12 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          }
       });
       
-      mielAmount.addTextChangedListener(new TextChangedListener() {
+      mielOverdraftLimit.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               System.out.println("a");
-               data.setAmount(Double.valueOf(mielAmount.getText()));
+               data.setThreshold(Double.valueOf(mielOverdraftLimit.getText()));
             }
             catch(NumberFormatException e) {
                MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
@@ -108,17 +107,11 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          }
       });
       
-      mielOverdraftLimit.addTextChangedListener(new TextChangedListener() {
+      ielDescription.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            try {
-               System.out.println("b");
-               data.setThreshold(Double.valueOf(mielOverdraftLimit.getText()));
-            }
-            catch(NumberFormatException e) {
-               MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
-            }
+            data.setDescription(ielDescription.getText());
          }
       });
    }
@@ -132,16 +125,16 @@ public class JAccountIE extends JInfoEditionPane<Account> {
       
       // Définition des champs.
       ielName = new JInfoEditionLabel(Text.ACCOUNT_NAME_LABEL, data.getName());
-      //ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL, data.getBankName());
       ielAccountNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL, data.getAccountNumber());
-      mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL,String.valueOf(data.getAmount()));
+      mielAmount = new JMoneyInfoEditionLabel(Text.ACCOUNT_BALANCE_LABEL,String.valueOf(data.getAmount()));
       mielOverdraftLimit = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL, String.valueOf(data.getThreshold()));
+      ielDescription = new JInfoEditionLabel(Text.ACCOUNT_DESCRIPTION_LABEL, data.getDescription());
       
       // Ajout des champs à la liste.
       result.add(ielName);
       result.add(ielAccountNumber);
-      result.add(mielAmount);
       result.add(mielOverdraftLimit);
+      result.add(ielDescription);
       return result;
    }
 
@@ -155,6 +148,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
       add(ielAccountNumber);
       add(mielAmount);
       add(mielOverdraftLimit);
+      add(ielDescription);
    }
 
 }

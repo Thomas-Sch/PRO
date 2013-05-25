@@ -29,6 +29,7 @@
   <account_description_label>Description du compte</account_description_label>
   <account_name_label>Nom du compte</account_name_label>
   <account_bank_name_label>Nom de la banque</account_bank_name_label>
+  <account_balance_label>Solde</account_balance_label>
   <home_screen_name>Accueil</home_screen_name>
   <quick_expense_label>Effectuer une dépense rapide...</quick_expense_label>
   <reason_label>Motif</reason_label>

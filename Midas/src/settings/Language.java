@@ -80,6 +80,7 @@ public class Language {
       ACCOUNT_DESCRIPTION_LABEL,
       ACCOUNT_NAME_LABEL,
       ACCOUNT_BANK_NAME_LABEL,
+      ACCOUNT_BALANCE_LABEL,
       
      
       HOME_SCREEN_NAME,
