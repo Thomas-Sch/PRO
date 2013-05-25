@@ -122,9 +122,8 @@ public class JManageAccount extends JDialog {
             }
          }
       });
-      
+    
       aedActions.addModifyActionListener(new ActionListener() {
-         
          @Override
          public void actionPerformed(ActionEvent arg0) {
             switch (state) {
