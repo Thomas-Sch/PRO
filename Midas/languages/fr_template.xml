@@ -23,7 +23,7 @@
   <author_name_label>TODO</author_name_label>
   <budget_description_label>TODO</budget_description_label>
   <budget_name_label>TODO</budget_name_label>
-  <account_overdraftlimit_label>TODO</account_overdraftlimit_label>
+  <account_threshold_label>TODO</account_threshold_label>
   <account_initial_amount_label>TODO</account_initial_amount_label>
   <account_number_label>TODO</account_number_label>
   <account_description_label>TODO</account_description_label>

@@ -33,7 +33,7 @@ import utils.xml.XMLModifiers;
 import core.MidasLogs;
 
 /**
- * TODO
+ * Permet de charger la configuration du programme.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -280,24 +280,7 @@ public class Settings extends DefaultsSettings {
       @Override
       public String getXMLName() {
          return name().toLowerCase();
-      }
-      
-      
-      
-   }
-   
-   private enum XMLAttributes implements HasXMLName {
-      NAME;
-      
-      /* (non-Javadoc)
-       * @see settings.XmlFriendlySetting#getXMLName()
-       */
-      @Override
-      public String getXMLName() {
-         return name().toLowerCase();
-      }
-      
-   }
-   
+      }  
+   }   
 }
 
