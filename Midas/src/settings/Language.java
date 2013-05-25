@@ -52,8 +52,8 @@ public class Language {
       CATEGORY_CREATION_TITLE,
       CATEGORY_MANAGEMENT_TITLE,
       SUBCATEGORY_CREATION_TITLE,
-      AUTHOR_CREATION_TITLE,
-      AUTHOR_MANAGEMENT_TITLE,
+      USER_CREATION_TITLE,
+      USER_MANAGEMENT_TITLE,
       BUDGET_CREATION_TITLE,
       BUDGET_FLY_CREATION_TITLE,
       EXPENSE_CREATION_TITLE,
@@ -69,11 +69,11 @@ public class Language {
       
       // Dévrivent une zone de l'application
       ACCOUNT_LIST_LABEL,
+      USER_LIST_LABEL,
       
       // Descripteurs.
       CATEGORY_NAME_LABEL,
-      
-      AUTHOR_NAME_LABEL,
+      USER_NAME_LABEL,
       
       BUDGET_DESCRIPTION_LABEL,
       BUDGET_NAME_LABEL,

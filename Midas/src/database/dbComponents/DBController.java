@@ -188,7 +188,7 @@ public class DBController {
    public LinkedList<DBUser> getAllDbUsers() throws DatabaseException {
 
       String sqlString = "SELECT Use_Id, Name, Enabled " +
-                         "FROM User";
+                         "FROM User WHERE Enabled = 1";
       
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBUser dbUser;

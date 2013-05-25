@@ -13,7 +13,7 @@
 package gui.controller.combobox;
 
 import gui.Controller;
-import gui.actions.AcCreateAuthor;
+import gui.actions.AcCreateUser;
 import gui.component.combobox.JComboBoxUsers;
 
 import java.awt.event.ActionEvent;
@@ -54,7 +54,7 @@ public class ComboBoxUser extends Controller {
       view.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
             if(view.isCreateNewSelected()) {
-               AcCreateAuthor action = new AcCreateAuthor(getCore());
+               AcCreateUser action = new AcCreateUser(getCore());
                action.actionPerformed(arg0);
                view.setSelectedItem(action.getCreatedUser()); 
             }

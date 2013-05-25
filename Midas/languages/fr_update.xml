@@ -7,8 +7,8 @@
   <category_creation_title>Ajout d'une catégorie</category_creation_title>
   <category_management_title>Gestion des catégories</category_management_title>
   <subcategory_creation_title>Ajout d'une sous catégorie</subcategory_creation_title>
-  <author_creation_title>Ajout d'un auteur</author_creation_title>
-  <author_management_title>Gestion des auteurs</author_management_title>
+  <user_creation_title>Ajout d'un auteur</user_creation_title>
+  <user_management_title>Gestion des auteurs</user_management_title>
   <budget_creation_title>Ajout d'un budget</budget_creation_title>
   <budget_fly_creation_title>Ajout d'un budget à la volée</budget_fly_creation_title>
   <expense_creation_title>Nouvelle dépense</expense_creation_title>
@@ -20,8 +20,9 @@
   <modify_button>Modifier</modify_button>
   <delete_button>Supprimer</delete_button>
   <account_list_label>Liste des comptes</account_list_label>
+  <user_list_label>Liste des utilisateurs</user_list_label>
   <category_name_label>Nom</category_name_label>
-  <author_name_label>Nom</author_name_label>
+  <user_name_label>Nom d'utilisateur</user_name_label>
   <budget_description_label>Description</budget_description_label>
   <budget_name_label>Nom du budget</budget_name_label>
   <account_threshold_label>Seuil</account_threshold_label>

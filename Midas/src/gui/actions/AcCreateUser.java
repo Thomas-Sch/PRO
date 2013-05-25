@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : AcCreateAuthor.java
+ * Nom du fichier   : AcCreateUser.java
  * ============================================================================
  * Date de création : 30 avr. 2013
  * ============================================================================
@@ -34,12 +34,12 @@ import core.components.User;
  * @author Sinniger Marcel
  *
  */
-public class AcCreateAuthor extends UserAction {
+public class AcCreateUser extends UserAction {
    
    private User user;
    private JCreateAuthorFrame view;
    
-   public AcCreateAuthor(Core core) {
+   public AcCreateUser(Core core) {
       super(core);
    }
 
@@ -49,7 +49,7 @@ public class AcCreateAuthor extends UserAction {
       user = core.createUser();
       
       view = new JCreateAuthorFrame((Component)event.getSource(), user);
-      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.AUTHOR_CREATION_TITLE.toString());
+      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.USER_CREATION_TITLE.toString());
       
       view.addValidateListener(new UserAction(core) {
          @Override

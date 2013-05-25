@@ -687,7 +687,9 @@ public class Core {
       try {
          dbController.saveToDatabase(user.getDBUser());
          
-         users.addItem(user);
+         if(!users.contains(user)) {
+            users.addItem(user);
+         }
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the user with id "
@@ -793,8 +795,8 @@ public class Core {
     * et n'est plus disponible dans les operations comptables.
     * @param user - l'utilisateur a desactiver
     */
-   public void DesactivateUser(User user) {
-      //user.setEnabled(false);
+   public void desactivateUser(User user) {
+      user.getDBUser().setEnabled(false);
       saveUser(user);
       users.removeItem(user);
    }

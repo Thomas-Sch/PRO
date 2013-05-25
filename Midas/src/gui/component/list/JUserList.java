@@ -14,6 +14,7 @@ package gui.component.list;
 
 import gui.View;
 
+import java.awt.Dimension;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -65,6 +66,10 @@ public class JUserList extends JList<User> implements View {
       public int compare(User arg0, User arg1) {
          return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
+   }
+   
+   public Dimension getPreferredSize() {
+      return new Dimension(200, 100);
    }
    
 }

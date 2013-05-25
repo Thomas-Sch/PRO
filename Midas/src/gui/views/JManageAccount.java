@@ -12,7 +12,6 @@
  */
 package gui.views;
 
-import gui.Controller;
 import gui.JManageFrame;
 import gui.component.infoedition.JAccountIE;
 import gui.controller.AccountListBox;
@@ -25,6 +24,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import settings.Language.Text;
+import core.Core;
 import core.components.Account;
 
 /**
@@ -53,8 +53,8 @@ public class JManageAccount extends JManageFrame {
     * Contructeur.
     * @param controller Contrôleur de cet objet.
     */
-   public JManageAccount(Controller controller) {  
-      super(controller);
+   public JManageAccount(Core core) {  
+      super(core);
    }
    
    /**
@@ -63,7 +63,7 @@ public class JManageAccount extends JManageFrame {
    protected void initContent() {
       super.initContent();
       lblListDescription = new JLabel(Text.ACCOUNT_LIST_LABEL.toString());
-      accounts = new AccountListBox(controller.getCore());
+      accounts = new AccountListBox(core);
       aieInfos = new JAccountIE();
    }
    
@@ -76,15 +76,15 @@ public class JManageAccount extends JManageFrame {
          
          @Override
          public void valueChanged(ListSelectionEvent e) {
-            if(accounts.getSelectedAccount() != null) {
+            if(accounts.getSelectedValue() != null) {
                setEnabledAccountDependantButtons(true);
 
                switch (state) {
                   case EDITION:
-                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedAccount());
+                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedValue());
                      break;
                   case VIEW:
-                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedAccount());
+                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedValue());
                      break;
                }
             }
@@ -119,7 +119,7 @@ public class JManageAccount extends JManageFrame {
     * @return le compte seléctionné.
     */
    public Account getSelectedAccount() {
-      return accounts.getSelectedAccount();
+      return accounts.getSelectedValue();
    }
    
    /**

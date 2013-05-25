@@ -20,6 +20,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import core.Core;
+
 /**
  * Classe parente pour les interfaces qui ont besoin des options de base:
  * - Ajouter, Modifier, Supprimer.
@@ -40,7 +42,7 @@ public abstract class JManageFrame extends JDialog {
    protected enum State { EDITION, VIEW };
    
    protected State state;
-   protected Controller controller;
+   protected Core core;
 
    protected JAddEditDelete aedActions;   
    protected JPanel pnlInfosActions; 
@@ -49,8 +51,8 @@ public abstract class JManageFrame extends JDialog {
     * Contructeur.
     * @param controller Contrôleur de cet objet.
     */
-   public JManageFrame(Controller controller) {  
-      this.controller = controller;
+   public JManageFrame(Core core) {  
+      this.core = core;
       state = State.VIEW;
       initContent();
       initListeners();

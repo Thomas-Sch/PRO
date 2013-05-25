@@ -71,7 +71,7 @@ public class JCreateAuthorFrame extends JDialog implements View{
       pnlContent.setLayout(splLayout);
       
       vclActions = new JValidateCancel();
-      authorName = new JLabelTextPanel(Text.AUTHOR_NAME_LABEL);
+      authorName = new JLabelTextPanel(Text.USER_NAME_LABEL);
       
       pnlContent.add(authorName);
       pnlContent.add(vclActions);

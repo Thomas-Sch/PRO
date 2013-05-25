@@ -80,7 +80,7 @@ public class AccountListBox extends Controller {
     * Retourne le compte selectionné dans la liste.
     * @return Le compte selectionné.
     */
-   public Account getSelectedAccount() {
+   public Account getSelectedValue() {
       return view.getSelectedValue();
    }
 

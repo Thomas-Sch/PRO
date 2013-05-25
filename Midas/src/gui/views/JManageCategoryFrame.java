@@ -12,10 +12,11 @@
  */
 package gui.views;
 
-import gui.Controller;
 import gui.JManageFrame;
 
 import javax.swing.JPanel;
+
+import core.Core;
 
 
 /**
@@ -28,6 +29,46 @@ import javax.swing.JPanel;
  *
  */
 public class JManageCategoryFrame extends JManageFrame {
+
+   /**
+    * ID de sérialisation.
+    */
+   private static final long serialVersionUID = 6725916764187235442L;
+
+   /**
+    * @param core
+    */
+   public JManageCategoryFrame(Core core) {
+      super(core);
+      // TODO Auto-generated constructor stub
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#setEnabledOnEdition(boolean)
+    */
+   @Override
+   protected void setEnabledOnEdition(boolean b) {
+      // TODO Auto-generated method stub
+      
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#setEnabledOnView(boolean)
+    */
+   @Override
+   protected void setEnabledOnView(boolean b) {
+      // TODO Auto-generated method stub
+      
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#buildContent()
+    */
+   @Override
+   protected JPanel buildContent() {
+      // TODO Auto-generated method stub
+      return null;
+   }
 
 //   /**
 //    * @param controller

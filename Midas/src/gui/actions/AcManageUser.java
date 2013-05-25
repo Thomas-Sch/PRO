@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : AcManageAccount.java
+ * Nom du fichier   : AcManageUser.java
  * ============================================================================
- * Date de création : 7 mai 2013
+ * Date de création : 6 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -12,10 +12,11 @@
  */
 package gui.actions;
 
+import gui.Controller;
 import gui.UserAction;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
-import gui.views.JManageAccount;
+import gui.views.JManageUser;
 
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
@@ -27,7 +28,7 @@ import settings.Language.Text;
 import core.Core;
 
 /**
- * Contrôleur pour l'ajout, modification et consultation des comptes.
+ * Action de management de la liste des auteurs.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -35,13 +36,15 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class AcManageAccount extends UserAction { 
+public class AcManageUser extends UserAction {
    
-   private JManageAccount view;
-   
-   
-   public AcManageAccount(Core core) {
-      super(core);
+   private JManageUser view;
+   /**
+    * @param core
+    * @param dependencies
+    */
+   public AcManageUser(Core core, Controller controller, Object[] dependencies) {
+      super(core, dependencies);
    }
 
    /* (non-Javadoc)
@@ -49,18 +52,18 @@ public class AcManageAccount extends UserAction {
     */
    @Override
    protected void execute(final Core core, ActionEvent event, Object[] dependencies) {
-      view = new JManageAccount(core);
-      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.ACCOUNT_MANAGEMENT_TITLE);
+      view = new JManageUser(core);
+      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.USER_MANAGEMENT_TITLE);
       view.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       
-      view.addButtonAddListener(new AcCreateAccount(core));
+      view.addButtonAddListener(new AcCreateUser(core));
       
       view.addButtonModifyListener(new ActionListener() {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            core.saveAccount(view.getSelectedAccount());
+            core.saveUser(view.getSelectedUser());
          }
       });
       
@@ -68,7 +71,7 @@ public class AcManageAccount extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            core.desactivateAccount(view.getSelectedAccount());
+            core.desactivateUser(view.getSelectedUser());
             view.updateModel();
          }
       });
