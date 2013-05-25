@@ -22,6 +22,8 @@
   <modify_button>Modifier</modify_button>
   <delete_button>Supprimer</delete_button>
   
+  <account_list_label>Liste des comptes</account_list_label>
+  
   <category_name_label>Nom</category_name_label>
   
   <author_name_label>Nom</author_name_label>

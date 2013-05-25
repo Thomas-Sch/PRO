@@ -40,13 +40,14 @@ public class Language {
    private static final String xmlRootName = "language";
    
    public enum Text {
-      /* Déclarations des textes, ajouter les noms des champs de texte
-       * nécessaires.
-       */
+      /* Déclarations des champs de texte. */
       APP_TITLE,
-      ACCOUNT_CREATION_TITLE,
+     
+      // Menus
       ACTION_QUIT,
       
+      // Titres de fenêtres.
+      ACCOUNT_CREATION_TITLE,
       ACCOUNT_MANAGEMENT_TITLE,
       CATEGORY_CREATION_TITLE,
       CATEGORY_MANAGEMENT_TITLE,
@@ -58,8 +59,7 @@ public class Language {
       EXPENSE_CREATION_TITLE,
       TRANSACTION_CREATION_TITLE,
       
-      /* GUI */
-      
+      // Boutons.
       VALIDATE_BUTTON,
       CANCEL_BUTTON,
       RESET_BUTTON,
@@ -67,6 +67,10 @@ public class Language {
       MODIFY_BUTTON,
       DELETE_BUTTON,
       
+      // Dévrivent une zone de l'application
+      ACCOUNT_LIST_LABEL,
+      
+      // Descripteurs.
       CATEGORY_NAME_LABEL,
       
       AUTHOR_NAME_LABEL,

@@ -27,6 +27,8 @@ import javax.swing.JPanel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import settings.Language.Text;
+
 import core.components.Account;
 
 /**
@@ -77,7 +79,7 @@ public class JManageAccount extends JDialog {
     * Initialise les composants graphiques.
     */
    public void initContent() {
-      lblDescription = new JLabel("Liste des comptes");
+      lblDescription = new JLabel(Text.ACCOUNT_LIST_LABEL.toString());
       accounts = new AccountListBox(controller.getCore());
       aieInfos = new JAccountIE();
       aedActions = new JAddEditDelete();
