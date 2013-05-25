@@ -15,7 +15,7 @@ package gui.views;
 import gui.View;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
-import gui.component.JValidateCancelReset;
+import gui.component.JValidateCancel;
 import gui.utils.StandardInsets;
 import gui.utils.TextChangedListener;
 
@@ -56,7 +56,7 @@ public class JCreateAccountFrame extends JDialog implements View{
    private JLabelMoneyPanel ltpInitialAmount;
    private JLabelTextPanel ltpNumber;
    private JLabelTextPanel ltpDescription;
-   private JValidateCancelReset vcrActions;
+   private JValidateCancel vcrActions;
    
    /**
     * Construit une nouvelle fenêtre pour ajouter un compte.
@@ -69,8 +69,8 @@ public class JCreateAccountFrame extends JDialog implements View{
       initListeners();
       setLocationRelativeTo(parent);
       setResizable(false);
-      pack();
       update(null, null);
+      pack();
    }
    
    /**
@@ -123,6 +123,14 @@ public class JCreateAccountFrame extends JDialog implements View{
             account.setAccountNumber(ltpNumber.getText());
          }
       });
+      
+      ltpDescription.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            account.setDescription(ltpDescription.getText());
+         }
+      });
    }
    
    private JPanel buildContent() {
@@ -170,7 +178,7 @@ public class JCreateAccountFrame extends JDialog implements View{
       ltpInitialAmount.setText("0");
       ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL);
       ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL);
-      vcrActions = new JValidateCancelReset();
+      vcrActions = new JValidateCancel();
       vcrActions.setEnableValidateButton(true);
    }
    

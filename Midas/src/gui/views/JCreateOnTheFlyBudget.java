@@ -17,7 +17,7 @@ import gui.View;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
-import gui.component.JValidateCancelReset;
+import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.utils.StandardInsets;
 
@@ -51,7 +51,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
    
    private JLabelTextPanel ltpName;
    private JLabelMoneyPanel ltpAmount;
-   private JValidateCancelReset vcrActions;
+   private JValidateCancel vclActions;
    private ComboBoxAccount accounts;
 
    private JDateInput ditStart;
@@ -109,7 +109,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       constraints.gridy = 6;
       constraints.fill = GridBagConstraints.NONE;
       constraints.anchor = GridBagConstraints.EAST;
-      pnlContent.add(vcrActions, constraints);
+      pnlContent.add(vclActions, constraints);
       return pnlContent;
    }
    
@@ -123,7 +123,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       
       ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
       
-      vcrActions = new JValidateCancelReset();
+      vclActions = new JValidateCancel();
    }
 
    /* (non-Javadoc)
@@ -136,11 +136,11 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
    }
    
    public void addValidateListener(ActionListener listener) {
-      vcrActions.addValidateListener(listener);
+      vclActions.addValidateListener(listener);
    }
    
    public void addCancelListener(ActionListener actionListener) {
-      vcrActions.addCancelListener(actionListener);
+      vclActions.addCancelListener(actionListener);
    }
 
 }
