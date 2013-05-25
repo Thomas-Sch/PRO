@@ -17,6 +17,7 @@ import gui.actions.AcCreateAccount;
 import gui.views.JManageAccount;
 
 import java.awt.Component;
+import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,8 +25,6 @@ import javax.swing.JDialog;
 
 import settings.Language.Text;
 import core.Core;
-import database.utils.DatabaseConstraintViolation;
-import database.utils.DatabaseException;
 
 /**
  * Contrôleur de la fenêtre de consultation et d'édition des comptes.
@@ -48,7 +47,11 @@ public class ManageAccount extends Controller {
     */
    public ManageAccount(Component parent, Core core) {
       super(core);
-      this.parent = parent; 
+      this.parent = parent;
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
    }
 
    /* (non-Javadoc)
@@ -60,7 +63,6 @@ public class ManageAccount extends Controller {
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.ACCOUNT_MANAGEMENT_TITLE);
       view.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
       view.setLocationRelativeTo(parent);
-      view.setVisible(true);
    }
 
    /* (non-Javadoc)
@@ -74,10 +76,7 @@ public class ManageAccount extends Controller {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            if(view.isModifyingAccount()) {
-               getCore().saveAccount(view.getSelectedAccount());
-            }
-            view.swapMode();
+            getCore().saveAccount(view.getSelectedAccount());
          }
       });
       

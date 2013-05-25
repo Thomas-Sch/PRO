@@ -127,10 +127,20 @@ public class JManageAccount extends JDialog {
          
          @Override
          public void actionPerformed(ActionEvent arg0) {
-            if(state == State.EDITION) {
-               System.out.println("Salut");
-               accounts.getGraphicalComponent().setEnabled(true);
+            switch (state) {
+               case VIEW:
+                  state = State.EDITION;
+                  break;
+                  
+               case EDITION:
+                  state = State.VIEW;
+                  break;
             }
+            accounts.getGraphicalComponent().setEnabled(state == State.VIEW);
+            aedActions.setButtonAddEnabled(state == State.VIEW);
+            aedActions.setButtonDeleteEnabled(state == State.VIEW);
+            aieInfos.setEditable(state == State.EDITION);
+            pack();
          }
       });
    }
@@ -178,27 +188,6 @@ public class JManageAccount extends JDialog {
       aedActions.addDeleteActionListener(listener);
    }
    
-
-   /**
-    * Change l'état de l'interface et s'occupe de faire les changements
-    * graphiques nécéssaires.
-    */
-   public void swapMode() {
-      
-      switch (state) {
-         case VIEW:
-            state = State.EDITION;
-            break;
-            
-         case EDITION:
-            accounts.getGraphicalComponent().setEnabled(false);
-            state = State.VIEW;
-            break;
-      }
-      aieInfos.setEditable(state == State.EDITION);
-      pack();
-   }
-   
    /**
     * Récupère le compte seléctionné dans l'interface.
     * @return le compte seléctionné.
@@ -213,13 +202,5 @@ public class JManageAccount extends JDialog {
    public void updateModel() {
       accounts.updateModel();
       pack();
-   }
-   
-   /**
-    * Renvoie true si l'interface est en mode d'édition de données.
-    * @return true si l'interface est en mode édition.
-    */
-   public boolean isModifyingAccount() {
-      return state == State.EDITION;
    }
 }
