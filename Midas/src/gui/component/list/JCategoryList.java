@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : JAccountList.java
+ * Nom du fichier   : JCategoryList.java
  * ============================================================================
- * Date de création : 8 mai 2013
+ * Date de création : 26 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -22,11 +22,11 @@ import java.util.Observable;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JList;
 
-import core.components.Account;
-import core.components.AccountList;
+import core.components.Category;
+import core.components.CategoryList;
 
 /**
- * Composant graphique pour l'affichage des listes.
+ * Classe représentant une liste de catégories.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -34,21 +34,20 @@ import core.components.AccountList;
  * @author Sinniger Marcel
  *
  */
-public class JAccountList extends JList<Account> implements View{
+public class JCategoryList extends JList<Category> implements View{
 
    /**
     * ID de sérialisation.
     */
-   private static final long serialVersionUID = -8808271053870485590L;
+   private static final long serialVersionUID = -8841502612212684097L;
    
-   private AccountList accounts;
-   
+   private CategoryList categories;
    /**
     * Constructeur par défaut.
     */
-   public JAccountList(AccountList accounts) {
-      this.accounts = accounts;
-      update(accounts, null);  
+   public JCategoryList(CategoryList categories) {
+      this.categories = categories;
+      update(categories, null);  
    }
 
    /* (non-Javadoc)
@@ -56,15 +55,15 @@ public class JAccountList extends JList<Account> implements View{
     */
    @Override
    public void update(Observable arg0, Object arg1) {
-      LinkedList<Account> list = accounts.getAll(new SortByName());
+      LinkedList<Category> list = categories.getAll(new SortByName());
       
-      Account[] temp = new Account[0];
-      setModel(new DefaultComboBoxModel<Account>(list.toArray(temp)));
+      Category[] temp = new Category[0];
+      setModel(new DefaultComboBoxModel<Category>(list.toArray(temp)));
    }
    
-   private class SortByName implements Comparator<Account> {
+   private class SortByName implements Comparator<Category> {
       @Override
-      public int compare(Account arg0, Account arg1) {
+      public int compare(Category arg0, Category arg1) {
          return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
    }
@@ -75,4 +74,5 @@ public class JAccountList extends JList<Account> implements View{
    public Dimension getPreferredSize() {
       return new Dimension(200, 100);
    }
+
 }

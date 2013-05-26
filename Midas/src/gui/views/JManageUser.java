@@ -77,7 +77,7 @@ public class JManageUser extends JManageFrame {
          @Override
          public void valueChanged(ListSelectionEvent e) {
             if(users.getSelectedValue() != null) {
-               setEnabledAccountDependantButtons(true);
+               setEnabledItemDependantButtons(true);
 
                switch (state) {
                   case EDITION:
@@ -89,7 +89,7 @@ public class JManageUser extends JManageFrame {
                }
             }
             else {
-               setEnabledAccountDependantButtons(false);
+               setEnabledItemDependantButtons(false);
             }
          }
       });

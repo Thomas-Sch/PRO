@@ -70,7 +70,7 @@ public abstract class JManageFrame extends JDialog {
       
       // On désactive les boutons qui utilise une séléction de la liste car
       // aucun compte n'est séléctionné par défaut.
-      setEnabledAccountDependantButtons(false);
+      setEnabledItemDependantButtons(false);
    }
    
    /**
@@ -113,7 +113,7 @@ public abstract class JManageFrame extends JDialog {
     * Active ou désactive les boutons qui dépendent d'un compte cible.
     * @param b Nouvel état d'activation des bouttons.
     */
-   protected void setEnabledAccountDependantButtons(boolean b) {
+   protected void setEnabledItemDependantButtons(boolean b) {
       aedActions.setButtonDeleteEnabled(b);
       aedActions.setButtonModifyEnabled(b);
    }

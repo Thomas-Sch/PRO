@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : JManageAccount.java
+ * Nom du fichier   : JManageCategory.java
  * ============================================================================
- * Date de création : 8 mai 2013
+ * Date de création : 26 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -13,8 +13,8 @@
 package gui.views;
 
 import gui.JManageFrame;
-import gui.component.infoedition.JAccountIE;
-import gui.controller.AccountListBox;
+import gui.component.infoedition.JCategoryIE;
+import gui.controller.CategoryListBox;
 
 import java.awt.BorderLayout;
 
@@ -25,10 +25,10 @@ import javax.swing.event.ListSelectionListener;
 
 import settings.Language.Text;
 import core.Core;
-import core.components.Account;
+import core.components.Category;
 
 /**
- * Fenêtre de gestion de comptes.
+ * Fenêtre de gestion des catégories.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -36,24 +36,23 @@ import core.components.Account;
  * @author Sinniger Marcel
  *
  */
-public class JManageAccount extends JManageFrame {
+public class JManageCategory extends JManageFrame {
 
    /**
     * ID de sérialisation.
     */
-   private static final long serialVersionUID = 6474851721091887221L;
+   private static final long serialVersionUID = -6896069068105397629L;
    
    private JLabel lblListDescription;
    
-   private AccountListBox accounts;
+   private CategoryListBox categories;
 
-   private JAccountIE aieInfos;
-   
+   private JCategoryIE cieInfos;
+
    /**
-    * Contructeur.
-    * @param controller Contrôleur de cet objet.
+    * @param core
     */
-   public JManageAccount(Core core) {  
+   public JManageCategory(Core core) {
       super(core);
    }
    
@@ -62,9 +61,9 @@ public class JManageAccount extends JManageFrame {
     */
    protected void initContent() {
       super.initContent();
-      lblListDescription = new JLabel(Text.ACCOUNT_LIST_LABEL.toString());
-      accounts = new AccountListBox(core);
-      aieInfos = new JAccountIE();
+      lblListDescription = new JLabel(Text.CATEGORY_LIST_LABEL.toString());
+      categories = new CategoryListBox(core);
+      cieInfos = new JCategoryIE();
    }
    
    /**
@@ -72,19 +71,19 @@ public class JManageAccount extends JManageFrame {
     */
    protected void initListeners() {
       super.initListeners();
-      accounts.addSelectionChangedListener(new ListSelectionListener() {
+      categories.addSelectionChangedListener(new ListSelectionListener() {
          
          @Override
          public void valueChanged(ListSelectionEvent e) {
-            if(accounts.getSelectedValue() != null) {
+            if(categories.getSelectedValue() != null) {
                setEnabledItemDependantButtons(true);
 
                switch (state) {
                   case EDITION:
-                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedValue());
+                     cieInfos = new JCategoryIE(JManageCategory.this, pnlInfosActions, cieInfos, categories.getSelectedValue());
                      break;
                   case VIEW:
-                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedValue());
+                     cieInfos = new JCategoryIE(JManageCategory.this, pnlInfosActions, cieInfos, categories.getSelectedValue());
                      break;
                }
             }
@@ -95,47 +94,13 @@ public class JManageAccount extends JManageFrame {
       });
    }
    
-   /**
-    * Construction des éléments de la vue.
-    * @return Le panel contenant les éléments graphiques.
-    */
-   protected JPanel buildContent() {
-      JPanel pnlContent = new JPanel(new BorderLayout(5,5));
-      
-      pnlContent.add(lblListDescription, BorderLayout.NORTH);
-      pnlContent.add(accounts.getGraphicalComponent(),BorderLayout.WEST);
-      
-      pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
-      pnlInfosActions.setLayout(new BorderLayout());
-      
-      pnlInfosActions.add(aedActions, BorderLayout.SOUTH);
-      pnlInfosActions.add(aieInfos, BorderLayout.CENTER);
-      return pnlContent;
-   }
-   
-
-   /**
-    * Récupère le compte seléctionné dans l'interface.
-    * @return le compte seléctionné.
-    */
-   public Account getSelectedValue() {
-      return accounts.getSelectedValue();
-   }
-   
-   /**
-    * Force la mise à jour la liste des comptes.
-    */
-   public void updateModel() {
-      accounts.updateModel();
-      pack();
-   }
 
    /* (non-Javadoc)
     * @see gui.JManageFrame#setEnabledOnEdition(boolean)
     */
    @Override
    protected void setEnabledOnEdition(boolean b) {
-      aieInfos.setEditable(b);      
+      cieInfos.setEditable(b);  
    }
 
    /* (non-Javadoc)
@@ -143,6 +108,40 @@ public class JManageAccount extends JManageFrame {
     */
    @Override
    protected void setEnabledOnView(boolean b) {
-      accounts.getGraphicalComponent().setEnabled(b);
+      categories.getGraphicalComponent().setEnabled(b);
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#buildContent()
+    */
+   @Override
+   protected JPanel buildContent() {
+      JPanel pnlContent = new JPanel(new BorderLayout(5,5));
+      
+      pnlContent.add(lblListDescription, BorderLayout.NORTH);
+      pnlContent.add(categories.getGraphicalComponent(),BorderLayout.WEST);
+      
+      pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
+      pnlInfosActions.setLayout(new BorderLayout());
+      
+      pnlInfosActions.add(aedActions, BorderLayout.SOUTH);
+      pnlInfosActions.add(cieInfos, BorderLayout.CENTER);
+      return pnlContent;
+   }
+   
+   /**
+    * Récupère la catégorie seléctionnée dans l'interface.
+    * @return la catégorie seléctionnée.
+    */
+   public Category getSelectedValue() {
+      return categories.getSelectedValue();
+   }
+   
+   /**
+    * Force la mise à jour la liste des catégories.
+    */
+   public void updateModel() {
+      categories.updateModel();
+      pack();
    }
 }

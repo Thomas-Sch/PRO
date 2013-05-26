@@ -70,6 +70,7 @@ public class Language {
       // Dévrivent une zone de l'application
       ACCOUNT_LIST_LABEL,
       USER_LIST_LABEL,
+      CATEGORY_LIST_LABEL,
       
       // Descripteurs.
       CATEGORY_NAME_LABEL,

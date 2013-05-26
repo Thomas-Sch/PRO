@@ -806,7 +806,7 @@ public class Core {
     * et n'est plus disponible dans les operations comptables.
     * @param category - la categorie a desactiver
     */
-   public void DesactivateCategory(Category category) {
+   public void desactivateCategory(Category category) {
       category.getDBCategory().setEnabled(false);
       saveCategory(category);
    }

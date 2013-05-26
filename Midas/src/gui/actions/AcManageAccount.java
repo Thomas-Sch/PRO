@@ -60,7 +60,7 @@ public class AcManageAccount extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            core.saveAccount(view.getSelectedAccount());
+            core.saveAccount(view.getSelectedValue());
          }
       });
       
@@ -68,7 +68,7 @@ public class AcManageAccount extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            core.desactivateAccount(view.getSelectedAccount());
+            core.desactivateAccount(view.getSelectedValue());
             view.updateModel();
          }
       });
