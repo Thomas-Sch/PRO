@@ -120,6 +120,7 @@ public class DBController {
       try {
          preparedStatement.execute();      
       } catch (SQLException e) {
+         e.printStackTrace();
          if (e.getMessage().contains("[SQLITE_CONSTRAINT]") ) { // Violation d'une contrainte de la BDD
             DBErrorHandler.constraintViolation();
          } else {
@@ -640,7 +641,7 @@ public class DBController {
             this.insert(preparedStatement, dbFinancialTransaction);
          } else {
             sqlString = "UPDATE FinancialTransaction " +
-                        "SET Rec_Id, Amount = ?, Date = ?, Reason = ?, Cat_ID = ?, Bud_ID = ?, Acc_ID = ?, Use_ID = ?" +
+                        "SET Rec_Id = ?, Amount = ?, Date = ?, Reason = ?, Cat_ID = ?, Bud_ID = ?, Acc_ID = ?, Use_ID = ? " +
                         "WHERE Tra_ID = ?";
             
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
@@ -982,17 +983,17 @@ public class DBController {
             preparedStatement.setString(2, dbBudget.getName());
             preparedStatement.setString(3, dbBudget.getDescription());
             preparedStatement.setDouble(4, dbBudget.getLimit());
-            if (dbBudget.getDbRecurrence() != null) {
-               preparedStatement.setInt(5, dbBudget.getDbAccount());   
+            preparedStatement.setBoolean(5, dbBudget.getEnabled());
+            if (dbBudget.getDbAccount() != null) {
+               preparedStatement.setInt(6, dbBudget.getDbAccount());   
             } else {
                DBErrorHandler.constraintViolation();
             }
-            preparedStatement.setBoolean(6, dbBudget.getEnabled());
             
             this.insert(preparedStatement, dbBudget);
          } else {
             sqlString = "UPDATE Budget " +
-                        "SET Name = ?, Description = ?, Rec_Id = ?, BudgetLimit = ?, Enabled = ?, Acc_ID = ? " +
+                        "SET Rec_Id = ?, Name = ?, Description = ?, BudgetLimit = ?, Enabled = ?, Acc_ID = ? " +
                         "WHERE Bud_Id = ?";
             preparedStatement = dbAccess.getPreparedStatement(sqlString);
             
@@ -1002,14 +1003,14 @@ public class DBController {
             preparedStatement.setString(2, dbBudget.getName());
             preparedStatement.setString(3, dbBudget.getDescription());
             preparedStatement.setDouble(4, dbBudget.getLimit());
-            if (dbBudget.getDbRecurrence() != null) {
-               preparedStatement.setInt(5, dbBudget.getDbAccount());   
+            preparedStatement.setBoolean(5, dbBudget.getEnabled());
+            if (dbBudget.getDbAccount() != null) {
+               preparedStatement.setInt(6, dbBudget.getDbAccount());   
             } else {
                DBErrorHandler.constraintViolation();
             }
-            
             preparedStatement.setInt(7, dbBudget.getId());
-            
+           
             this.update(preparedStatement);
          }
       } catch (SQLException e) {

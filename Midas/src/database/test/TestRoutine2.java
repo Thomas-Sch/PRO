@@ -28,7 +28,7 @@ import database.utils.DatabaseException;
 /**
  * 
  * Cette herberger une routine de test qui teste toutes les fonctionnalités
- * du paquet "database" et ses sous-paquets
+ * du paquet "database" et ses sous-paquets 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire

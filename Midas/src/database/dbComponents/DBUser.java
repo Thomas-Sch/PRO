@@ -37,4 +37,14 @@ public class DBUser extends DBComponentEnableable {
       this.name = name;
    }
 
+   /* (non-Javadoc)
+    * @see java.lang.Object#toString()
+    */
+   @Override
+   public String toString() {
+      return "DBUser [name=" + name + ", getEnabled()=" + getEnabled()
+            + ", getId()=" + getId() + "]";
+   }
+
+   
 }

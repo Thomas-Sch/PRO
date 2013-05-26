@@ -194,39 +194,58 @@ public class TestRoutine {
 
       System.out.println(tempR1);
       tempR1.setIntervalRecurrence(365);
-      System.out.println(tempR1);
+      dbController.saveToDatabase(tempR1);
+      System.out.println(dbController.getDbRecurrence(tempR1.getId()));
 
       System.out.println(tempR2);
       tempR2.setIntervalRecurrence(365);
-      System.out.println(tempR2);
+      dbController.saveToDatabase(tempR2);
+      System.out.println(dbController.getDbRecurrence(tempR2.getId()));
       
       System.out.println(tempR3);
       tempR3.setIntervalRecurrence(365);
-      System.out.println(tempR3);
+      dbController.saveToDatabase(tempR3);
+      System.out.println(dbController.getDbRecurrence(tempR3.getId()));
       
       System.out.println(user1);
       user1.setName("Marcel Sinniger mod");
-      System.out.println(user1);
+      dbController.saveToDatabase(user1);
+      System.out.println(dbController.getDbUser(user1.getId()));
       
       System.out.println(account1);
       account1.setName("Compte1 mod");
-      System.out.println(account1);
+      dbController.saveToDatabase(account1);
+      System.out.println(dbController.getDbAccount(account1.getId()));
       
       System.out.println(budget1);
       budget1.setName("Voiture mod");
-      System.out.println(budget1);
+      dbController.saveToDatabase(budget1);
+      System.out.println(dbController.getDbBudget(budget1.getId()));
       
       System.out.println(budgetOnTheFly1);
       budgetOnTheFly1.setName("V mod");
-      System.out.println(budgetOnTheFly1);
+      dbController.saveToDatabase(budgetOnTheFly1);
+      System.out.println(dbController.getDbBudgetOnTheFly(budgetOnTheFly1.getId()));
       
       System.out.println(cat1);
       cat1.setName("cat1 mod");
-      System.out.println(cat1);
+      dbController.saveToDatabase(cat1);
+      System.out.println(dbController.getDbCategory(cat1.getId()));
+      
+      System.out.println(cat11);
+      cat11.setName("cat11 mod");
+      dbController.saveToDatabase(cat11);
+      System.out.println(dbController.getDbCategory(cat11.getId()));
+      
+      System.out.println(cat2);
+      cat2.setName("cat2 mod");
+      dbController.saveToDatabase(cat2);
+      System.out.println(dbController.getDbCategory(cat2.getId()));
       
       System.out.println(t);
       t.setReason("That's why mod");
-      System.out.println(t);
+      dbController.saveToDatabase(t);
+      System.out.println(dbController.getDbFinancialTransaction(t.getId()));
       
       //----------------------------------------------------------------------------------------
       // getAll-Test
