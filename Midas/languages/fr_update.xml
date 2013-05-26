@@ -21,6 +21,7 @@
   <delete_button>Supprimer</delete_button>
   <account_list_label>Liste des comptes</account_list_label>
   <user_list_label>Liste des utilisateurs</user_list_label>
+  <category_list_label>Liste des catégories</category_list_label>
   <category_name_label>Nom</category_name_label>
   <user_name_label>Nom d'utilisateur</user_name_label>
   <budget_description_label>Description</budget_description_label>

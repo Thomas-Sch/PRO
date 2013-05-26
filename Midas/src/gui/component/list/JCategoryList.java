@@ -72,7 +72,7 @@ public class JCategoryList extends JList<Category> implements View{
     * Retourne les dimensions préférées de la liste.
     */
    public Dimension getPreferredSize() {
-      return new Dimension(200, 100);
+      return new Dimension(200, 50);
    }
 
 }

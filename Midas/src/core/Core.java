@@ -596,9 +596,7 @@ public class Core {
          MidasLogs.errors.push("Core", "Unable to save the account with id "
                + /* id + */ " to database.");
       }
-   }
-   
-   
+   }  
    
    /**
     * Sauvegarde ou met à jour la catégorie donnée dans la base de donnée.
@@ -607,7 +605,10 @@ public class Core {
    public void saveCategory(Category category) {
       try {
          dbController.saveToDatabase(category.getDBCategory());
-         primaryCategories.addItem(category);
+         
+         if(!primaryCategories.contains(category)) {
+            primaryCategories.addItem(category);
+         }
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the category with id "
@@ -623,7 +624,9 @@ public class Core {
       try {
          dbController.saveToDatabase(category.getDBCategory());
          
-         list.addItem(category);
+         if(!list.contains(category)) {
+            list.addItem(category);
+         }
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the category with id "
@@ -634,10 +637,6 @@ public class Core {
                + /* id + */ " to database.");
       }
    }
-   
-   
-   
-   
    
    /**
     * Sauvegarde ou met à jour le budget donné dans la base de donnée.

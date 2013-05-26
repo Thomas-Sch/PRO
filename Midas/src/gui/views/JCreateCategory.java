@@ -48,8 +48,8 @@ public class JCreateCategory extends JDialog implements View{
 
    private Category category;
    
-   private JLabelTextPanel categoryName;
-   private JValidateCancel vlc;
+   private JLabelTextPanel ltpName;
+   private JValidateCancel vlcActions;
    
    /**
     * Construit la vue.
@@ -69,46 +69,55 @@ public class JCreateCategory extends JDialog implements View{
       SpringLayout splLayout = new SpringLayout();
       pnlContent.setLayout(splLayout);
       
-      vlc = new JValidateCancel();
-      categoryName = new JLabelTextPanel(Text.CATEGORY_NAME_LABEL);
+      vlcActions = new JValidateCancel();
+      ltpName = new JLabelTextPanel(Text.CATEGORY_NAME_LABEL);
       
-      pnlContent.add(categoryName);
-      pnlContent.add(vlc);
+      pnlContent.add(ltpName);
+      pnlContent.add(vlcActions);
       
       //Contraintes du label par rapport au contenant.
-      splLayout.putConstraint(SpringLayout.WEST, categoryName, 5, SpringLayout.WEST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, categoryName,8, SpringLayout.NORTH, pnlContent);
+      splLayout.putConstraint(SpringLayout.WEST, ltpName, 5, SpringLayout.WEST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, ltpName,8, SpringLayout.NORTH, pnlContent);
 
       //Contraintes pour la taille du contenant.
-      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, categoryName);
-      splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vlc);
+      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, ltpName);
+      splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vlcActions);
       
       // Contraintes pour le bouton de validation.
-      splLayout.putConstraint(SpringLayout.EAST, vlc, 0, SpringLayout.EAST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, vlc, 5, SpringLayout.SOUTH, categoryName);
+      splLayout.putConstraint(SpringLayout.EAST, vlcActions, 0, SpringLayout.EAST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, vlcActions, 5, SpringLayout.SOUTH, ltpName);
       
-      categoryName.addTextChangedListener(new TextChangedListener() {
-       @Override
-       public void textChanged(DocumentEvent event) {
-          category.setName(categoryName.getText());
-       }
-          });
+      ltpName.addTextChangedListener(new TextChangedListener() {
+          @Override
+          public void textChanged(DocumentEvent event) {
+             vlcActions.setEnableValidateButton(ltpName.getText().length() != 0);
+             category.setName(ltpName.getText());
+          }
+       });
       
       return pnlContent;
    }
    
+   /**
+    * Ajoute un listener sur le bouton de validation.
+    * @param listener
+    */
    public void addValidateListener(ActionListener listener) {
-      vlc.addValidateListener(listener);
+      vlcActions.addValidateListener(listener);
    }
    
+   /**
+    * Ajout un listener sur le bouton d'annulation.
+    * @param listener
+    */
    public void addCancelListener(ActionListener listener) {
-      vlc.addCancelListener(listener);
+      vlcActions.addCancelListener(listener);
    }
 
    /* (non-Javadoc)
     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
     */
    public void update(Observable arg0, Object arg1) {
-      categoryName.setText(category.getName());
+      ltpName.setText(category.getName());
    } 
 }
