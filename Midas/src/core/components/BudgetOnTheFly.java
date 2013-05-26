@@ -70,13 +70,13 @@ public class BudgetOnTheFly extends Budget implements IdentifiedComponent {
     * 
     * @param date
     *           - la nouvelle date de début
-    * @throws IllegalArgumentException
+    * @throws InconsistencyDate
     *            si la date de début survient après celle de fin.
     */
-   public void setStartDate(Date date) {
+   public void setStartDate(Date date) throws InconsistencyDate {
       if (date.after(dbBudetOnTheFly.getEnd())) {
-         throw new IllegalArgumentException(
-               "The starting date has to be before the ending date");
+         throw new InconsistencyDate("BudgetOnTheFly : " +
+         		"The starting date has to be before the ending date");
       }
       dbBudetOnTheFly.setStart(date);
    }
@@ -95,12 +95,12 @@ public class BudgetOnTheFly extends Budget implements IdentifiedComponent {
     * 
     * @param date
     *           - la nouvelle date de fin
-    * @throws IllegalArgumentException
+    * @throws InconsistencyDate
     *            si la date de fin survient avant celle du début.
     */
-   public void setEndtDate(Date date) {
+   public void setEndtDate(Date date) throws InconsistencyDate {
       if (date.before(dbBudetOnTheFly.getStart())) {
-         throw new IllegalArgumentException(
+         throw new InconsistencyDate("BudgetOnTheFly : " +
                "The ending date has to be after the starting date");
       }
       dbBudetOnTheFly.setEnd(date);

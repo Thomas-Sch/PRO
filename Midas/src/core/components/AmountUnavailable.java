@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CoreComponentException.java
+ * Nom du fichier   : AmountUnavailable.java
  * ============================================================================
- * Date de création : 22 mai 2013
+ * Date de création : 26 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -13,19 +13,23 @@
 package core.components;
 
 /**
- * La classe d'exception principale pour les objects du core
+ * Exeption lors d'un montant invalide
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
+ *
  */
-public class CoreComponentException extends Exception {
+public class AmountUnavailable extends CoreComponentException {
 
-   private static final long serialVersionUID = 30000L;
+   private static final long serialVersionUID = 30001L;
+   
+   /**
+    * @param msgError - message d'erreur
+    */
+   public AmountUnavailable(String msgError) {
+      super(msgError);
+   }
 
-   public CoreComponentException(String msgError) {
-	     super("Core.Component : " +  msgError);
-	   }
 }
-

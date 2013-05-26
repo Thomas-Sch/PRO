@@ -127,7 +127,7 @@ public class Category extends CoreComponent implements IdentifiedComponent {
 
    /**
     * Retourne un affichage sous forme de chaînes de caractères.
-    * <p>
+    * 
     * La chaîne retournée correspond au nom afin de pouvoir profiter de cette
     * méthode dans les parties graphiques.
     * 
