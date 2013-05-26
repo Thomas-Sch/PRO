@@ -54,6 +54,7 @@ public class AcCreateBudget extends UserAction {
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       
       recurrence = core.createReccurence();
+      System.out.println(recurrence.getDBRecurrence());
       budget = core.createBudget();
       
       view = new JCreateBudgetFrame(controller, budget, recurrence);
@@ -65,7 +66,6 @@ public class AcCreateBudget extends UserAction {
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
             budget.setRecurrence(new Recurrence(controller.getCore(), new DBRecurrence()));
             core.saveBudget(budget);
-            System.out.println("LKJLKJ");
             view.dispose();
          }
       });

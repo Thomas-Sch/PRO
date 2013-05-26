@@ -89,6 +89,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
+            vclActions.setEnableValidateButton(ltpName.getText().length() != 0);
             budget.setName(ltpName.getText());
          }
       });
@@ -124,6 +125,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
             
          }
       });
+      
       
    }
 
