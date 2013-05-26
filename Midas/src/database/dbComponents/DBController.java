@@ -830,7 +830,7 @@ public class DBController {
 
       String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID, Enabled " +
                          "FROM Category " +
-                         "WHERE Par_Cat_Id is NULL";
+                         "WHERE Par_Cat_Id is NULL AND Enabled = 1";
       
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBCategory dbCategory = null;

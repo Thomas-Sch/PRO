@@ -808,6 +808,7 @@ public class Core {
    public void desactivateCategory(Category category) {
       category.getDBCategory().setEnabled(false);
       saveCategory(category);
+      primaryCategories.removeItem(category);
    }
    
    public void deleteAccount(Account account) throws DatabaseException, DatabaseConstraintViolation {
