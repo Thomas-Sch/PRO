@@ -76,10 +76,14 @@ public class ComboBoxAccount extends Controller {
    }
 
    /**
-    * @return
+    * @return le compte séléctionné.
     */
    public Account getSelectedAccount() {
       return (Account) view.getSelectedItem();
+   }
+   
+   public boolean isValidAccountSelected() {
+      return !(view.isCreateNewSelected() || view.isInviteSelected());
    }
 
 }

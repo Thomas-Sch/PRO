@@ -30,17 +30,48 @@ import com.toedter.calendar.JDateChooser;
  *
  */
 public class JDateInput extends JPanel {
+   /**
+    * ID de sérialisation.
+    */
    private static final long serialVersionUID = 1L;
    
+   private JDateChooser dchTime;
+   private JLabel lblMetaInfo;
+   
    /**
-    * 
+    * Initialise le panel avec le dateChooser et un label indiquant ce que
+    * c'est.
     */
    public JDateInput(String labelContent) {
+      initContent(labelContent);
+      buildContent();
+   }
+   
+   /**
+    * Initialiser les éléments du panel.
+    * @param labelContent Contenu du label de metainformation du composant
+    * graphique
+    */
+   public void initContent(String labelContent) {
+      dchTime = new JDateChooser(new Date());
+      lblMetaInfo = new JLabel(labelContent);
+   }
+   
+   /**
+    * Posistionne les éléments dans le panel
+    */
+   public void buildContent() {
       setLayout(new BorderLayout(5,5));
-      
-      add(new JLabel(labelContent), BorderLayout.WEST);      
-      JDateChooser dchTime = new JDateChooser(new Date());
+      add(lblMetaInfo, BorderLayout.WEST);
       add(dchTime, BorderLayout.EAST);
+   }
+   
+   /**
+    * Renvoie la date sélectionnée.
+    * @return la date sélectionnée.
+    */
+   public Date getDate() {
+      return dchTime.getDate();
    }
 
 }

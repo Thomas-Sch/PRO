@@ -21,12 +21,12 @@ import gui.views.JCreateBudgetFrame;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import settings.Language.Text;
 import core.Core;
 import core.components.Budget;
 import core.components.Recurrence;
-import database.dbComponents.DBRecurrence;
 
 /**
  * Contrôleur et action d'ajout d'un budget.
@@ -51,20 +51,35 @@ public class AcCreateBudget extends UserAction {
    }
 
    @Override
-   protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+   protected void execute(final Core core, ActionEvent event, Object[] dependencies) {
       
+      // Initialisation de la récurrence du budget.
       recurrence = core.createReccurence();
-      System.out.println(recurrence.getDBRecurrence());
+      core.saveRecurrence(recurrence);
+      
       budget = core.createBudget();
       
-      view = new JCreateBudgetFrame(controller, budget, recurrence);
+      view = new JCreateBudgetFrame(controller, budget);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.BUDGET_CREATION_TITLE);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            budget.setRecurrence(new Recurrence(controller.getCore(), new DBRecurrence()));
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(view.getDate());
+            cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
+            cal.clear(Calendar.MINUTE);
+            cal.clear(Calendar.SECOND);
+            cal.clear(Calendar.MILLISECOND);
+
+            // get start of the month
+            cal.set(Calendar.DAY_OF_MONTH, 1);
+            System.out.println("Start of the month:       " + cal.getTime());
+            System.out.println("... in milliseconds:      " + cal.getTimeInMillis());
+            
+            recurrence.setIntervalRecurrence(0);
+            budget.setRecurrence(recurrence);
             core.saveBudget(budget);
             view.dispose();
          }
@@ -74,6 +89,7 @@ public class AcCreateBudget extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
+            core.deleteRecurrence(recurrence); // Pas besoin de garder cette récurrence.
             view.dispose();
          }
       });

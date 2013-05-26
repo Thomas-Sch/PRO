@@ -27,6 +27,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.Observable;
 
 import javax.swing.JDialog;
@@ -36,7 +37,6 @@ import javax.swing.event.DocumentEvent;
 import settings.Language.Text;
 import core.components.Budget;
 import core.components.LimitNegative;
-import core.components.Recurrence;
 
 /**
  * Fenêtre de création d'un budget.
@@ -67,12 +67,10 @@ public class JCreateBudgetFrame extends JDialog implements View{
    private Controller controller;
    
    private Budget budget;
-   private Recurrence recurrence; // Récurrence associée au budget.
    
-   public JCreateBudgetFrame(Controller controller, Budget budget, Recurrence recurrence) {
+   public JCreateBudgetFrame(Controller controller, Budget budget) {
       this.controller = controller;
       this.budget = budget;
-      this.recurrence = recurrence;
       
       initContent();
       initListeners();
@@ -90,7 +88,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
-            vclActions.setEnableValidateButton(ltpName.getText().length() != 0);
+            vclActions.setEnableValidateButton(isValid());
             budget.setName(ltpName.getText());
          }
       });
@@ -125,7 +123,10 @@ public class JCreateBudgetFrame extends JDialog implements View{
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            budget.setBindedAccount(accounts.getSelectedAccount());
+            vclActions.setEnableValidateButton(isValid());
+            if(accounts.isValidAccountSelected()) {
+               budget.setBindedAccount(accounts.getSelectedAccount());
+            }
          }
       });
       
@@ -199,11 +200,35 @@ public class JCreateBudgetFrame extends JDialog implements View{
 
    }
    
+   /**
+    * Ajoute le listener lors de l'appui sur le bouton de validation.
+    * @param listener
+    */
    public void addValidateListener(ActionListener listener) {
       vclActions.addValidateListener(listener);
    }
    
+   /**
+    * Ajoute le listener lors de l'appui sur le bouton d'annulation.
+    * @param actionListener
+    */
    public void addCancelListener(ActionListener actionListener) {
       vclActions.addCancelListener(actionListener);
+   }
+   
+   /**
+    * Renvoie la date sélectionnée.
+    * @return la date sélectionnée.
+    */
+   public Date getDate() {
+      return ditDate.getDate();
+   }
+   
+   public boolean isValid() {
+      if(ltpName == null || accounts == null) {
+         return false;
+      } else {
+         return ltpName.getText().length() != 0 && accounts.isValidAccountSelected();
+      }
    }
 }

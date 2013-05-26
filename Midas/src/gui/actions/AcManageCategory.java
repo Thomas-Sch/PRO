@@ -40,8 +40,7 @@ public class AcManageCategory extends UserAction {
    private JManageCategory view;
 
    /**
-    * @param core
-    * @param dependencies
+    * @param core Coeur de l'application.
     */
    public AcManageCategory(Core core) {
       super(core);

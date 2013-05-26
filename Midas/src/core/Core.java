@@ -638,6 +638,20 @@ public class Core {
       }
    }
    
+   public void saveRecurrence(Recurrence recurrence) {
+      try {
+         dbController.saveToDatabase(recurrence.getDBRecurrence());
+      }
+      catch (DatabaseConstraintViolation e) {
+         MidasLogs.errors.push("Core", "Unable to save the budget with id "
+               + /* id + */ " to database, because of constraint violation.");
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core", "Unable to save the budget with id "
+               + /* id + */ " to database.");
+      }
+   }
+   
    /**
     * Sauvegarde ou met à jour le budget donné dans la base de donnée.
     * @param budget - le budget à sauver.
@@ -645,7 +659,11 @@ public class Core {
    public void saveBudget(Budget budget) {
       try {
          dbController.saveToDatabase(budget.getDBBudget());
-         budgets.addItem(budget);
+         
+         if(!budgets.contains(budget)) {
+            budgets.addItem(budget);
+         }
+         
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the budget with id "
