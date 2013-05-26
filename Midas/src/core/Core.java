@@ -783,7 +783,7 @@ public class Core {
     * et n'est plus disponible dans les operations comptables.
     * @param budget - le budget a desactiver
     */
-   public void DesactivateBudget(Budget budget) {
+   public void desactivateBudget(Budget budget) {
       budget.getDBBudget().setEnabled(false);
       saveBudget(budget);
       budgets.removeItem(budget);
