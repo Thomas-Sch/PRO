@@ -785,7 +785,7 @@ public class Core {
     * @param budget - le budget a desactiver
     */
    public void DesactivateBudget(Budget budget) {
-      //budget.setEnabled(false);
+      budget.getDBBudget().setEnabled(false);
       saveBudget(budget);
       budgets.removeItem(budget);
    }
@@ -807,7 +807,7 @@ public class Core {
     * @param category - la categorie a desactiver
     */
    public void DesactivateCategory(Category category) {
-      //category.setEnabled(false);
+      category.getDBCategory().setEnabled(false);
       saveCategory(category);
    }
    
