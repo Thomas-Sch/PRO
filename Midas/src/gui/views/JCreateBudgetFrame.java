@@ -35,6 +35,7 @@ import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
 import core.components.Budget;
+import core.components.LimitNegative;
 import core.components.Recurrence;
 
 /**
@@ -106,7 +107,17 @@ public class JCreateBudgetFrame extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
-            budget.setLimit(Double.valueOf(lmpAmount.getText()));
+            try {
+               budget.setLimit(Double.valueOf(lmpAmount.getText()));
+            }
+            catch (NumberFormatException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+            }
+            catch (LimitNegative e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+            }
          }
       });
       

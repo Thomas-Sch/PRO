@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CoreComponentException.java
+ * Nom du fichier   : InconsistencyDate.java
  * ============================================================================
- * Date de création : 22 mai 2013
+ * Date de création : 26 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -13,19 +13,23 @@
 package core.components;
 
 /**
- * La classe d'exception principale pour les objects du core
+ *  Exeption d'une incoherence entre deux date d'un point vue temporelle
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
+ *
  */
-public class CoreComponentException extends Exception {
+public class InconsistencyDate extends CoreComponentException {
 
-   private static final long serialVersionUID = 30000L;
+   private static final long serialVersionUID = 30003L;
+   
+   /**
+    * @param msgError - message d'erreur
+    */
+   public InconsistencyDate(String msgError) {
+      super(msgError);
+   }
 
-   public CoreComponentException(String msgError) {
-	     super("Core.Component : " +  msgError);
-	   }
 }
-

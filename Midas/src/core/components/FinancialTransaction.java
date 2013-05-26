@@ -225,6 +225,12 @@ public class FinancialTransaction extends CoreComponent implements
       dbFinancialTransaction.setDbUser(user.getId());
    }
 
+   /**
+    * Retourne le numéro d'identification de la transaction financiere 
+    *    dans la base de données.
+    * 
+    * @return L'identifiant de la transaction financiere
+    */
    public int getId() {
       return dbFinancialTransaction.getId();
    }

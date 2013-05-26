@@ -70,11 +70,21 @@ public class User extends CoreComponent implements IdentifiedComponent {
       dbUser.setName(name);
    }
    
+   /**
+    * Retourne le numéro d'identification de l'utilisateur 
+    *    dans la base de données.
+    * 
+    * @return L'identifiant de l'utilisateur
+    */
    public int getId() {
       return dbUser.getId();
    }
    
-   @Override
+   /**
+    * Retourne le nom de l'utilisateur
+    * 
+    * @returnle le nom de l'utilisateur
+    */
    public String toString() {
       return getName();
    }

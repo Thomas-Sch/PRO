@@ -118,17 +118,14 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     * 
     * @param amount
     *           - le montant à débiter.
-    * @throws montant
-    *            indisponible sur le compte : lors que l'on veut prelever plus
-    *            d'argent que ce qui est disponnible
-    * @throws AmountUnavailable : lors que l'on veut prelever plus
-    *            d'argent que ce qui est disponnible
-    * @throws AmountUnavailable : lors que l'on veut prelever plus
-    *            d'argent que ce qui est disponnible
+    *           
+    * @throws AmountUnavailable 
+    *           - lors que l'on veut prelever plus
+    *             d'argent que ce qui est disponnible
     */
    public void debit(double amount) throws AmountUnavailable {
       if (dbAccount.getAmount() - dbAccount.getThreshold() < amount) {
-         throw new AmountUnavailable();
+         throw new AmountUnavailable("Account : amount available on the account to make the debit");
       }
       dbAccount.setAmount(dbAccount.getAmount() - amount);
    }
