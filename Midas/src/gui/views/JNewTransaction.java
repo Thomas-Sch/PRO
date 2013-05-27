@@ -17,7 +17,7 @@ import gui.View;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
-import gui.component.JRecursionChooser;
+import gui.component.JTimeSliceChooser;
 import gui.component.JValidateCancel;
 import gui.component.combobox.JComboBoxTransactionType;
 import gui.controller.combobox.ComboBoxAccount;
@@ -35,7 +35,7 @@ import javax.swing.JPanel;
 import settings.Language.Text;
 
 /**
- * TODO
+ * Nouvelle transaction sur un compte.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -60,7 +60,7 @@ public class JNewTransaction extends JDialog implements View {
    private JLabelMoneyPanel lmpAmount;
    private JDateInput ditDate;
 
-   private JRecursionChooser rcrRecurrenceOptions;
+   private JTimeSliceChooser rcrRecurrenceOptions;
    
    private JValidateCancel vclActions;
    
@@ -121,9 +121,9 @@ public class JNewTransaction extends JDialog implements View {
       users = new ComboBoxUser(controller.getCore());
       ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
       lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
-      ditDate = new JDateInput(Text.DATE_LABEL.toString());
+      ditDate = new JDateInput(Text.DATE_LABEL);
       
-      rcrRecurrenceOptions = new JRecursionChooser();
+      rcrRecurrenceOptions = new JTimeSliceChooser();
 
       vclActions = new JValidateCancel();
    }

@@ -118,8 +118,8 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       ltpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(controller.getCore());
       
-      ditStart = new JDateInput("Date de début");
-      ditEnd = new JDateInput("Date de fin");
+      ditStart = new JDateInput(Text.BEGIN_DATE_LABEL);
+      ditEnd = new JDateInput(Text.END_DATE_LABEL);
       
       ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
       

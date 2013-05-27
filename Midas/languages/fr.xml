@@ -49,6 +49,8 @@
   <home_screen_name>Accueil</home_screen_name>
   <quick_expense_label>Effectuer une dépense rapide...</quick_expense_label>
   <date_label>Date</date_label>
+  <begin_date_label>Date de début</begin_date_label>
+  <end_date_label>Date de fin</end_date_label>
   <reason_label>Motif</reason_label>
   <amount_label>Montant</amount_label>
   <daily_label>Journalier</daily_label>
@@ -56,7 +58,7 @@
   <monthly_label>Mensuel</monthly_label>
   <annual_label>Annuel</annual_label>
   <recurrence_label>Récurrence</recurrence_label>
-  <recurrence_settings>Paramètres de récurrence</recurrence_settings>
+  <time_slice_settings>Durée</time_slice_settings>
   
   <transaction_type_label>Type</transaction_type_label>
   <transaction_type_credit>Créditer</transaction_type_credit>

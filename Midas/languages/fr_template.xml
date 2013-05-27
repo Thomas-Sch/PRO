@@ -47,7 +47,7 @@
   <monthly_label>TODO</monthly_label>
   <annual_label>TODO</annual_label>
   <recurrence_label>TODO</recurrence_label>
-  <recurrence_settings>TODO</recurrence_settings>
+  <time_slice_settings>TODO</time_slice_settings>
   <transaction_type_label>TODO</transaction_type_label>
   <transaction_type_credit>TODO</transaction_type_credit>
   <transaction_type_debit>TODO</transaction_type_debit>

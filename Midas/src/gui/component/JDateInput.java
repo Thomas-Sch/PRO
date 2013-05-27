@@ -18,6 +18,8 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import settings.Language.Text;
+
 import com.toedter.calendar.JDateChooser;
 
 /**
@@ -42,7 +44,7 @@ public class JDateInput extends JPanel {
     * Initialise le panel avec le dateChooser et un label indiquant ce que
     * c'est.
     */
-   public JDateInput(String labelContent) {
+   public JDateInput(Text labelContent) {
       initContent(labelContent);
       buildContent();
    }
@@ -52,9 +54,9 @@ public class JDateInput extends JPanel {
     * @param labelContent Contenu du label de metainformation du composant
     * graphique
     */
-   public void initContent(String labelContent) {
+   public void initContent(Text labelContent) {
       dchTime = new JDateChooser(new Date());
-      lblMetaInfo = new JLabel(labelContent);
+      lblMetaInfo = new JLabel(labelContent.toString());
    }
    
    /**

@@ -17,7 +17,7 @@ import gui.View;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
-import gui.component.JRecursionChooser;
+import gui.component.JTimeSliceChooser;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxBudget;
 import gui.controller.combobox.ComboBoxUser;
@@ -59,7 +59,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    private JLabelMoneyPanel lmpAmount;
    private JDateInput ditDate;
 
-   private JRecursionChooser rcrRecurrenceOptions;
+   private JTimeSliceChooser rcrRecurrenceOptions;
    
    private JValidateCancel vclActions;
    
@@ -121,9 +121,9 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       users = new ComboBoxUser(controller.getCore());
       ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
       lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
-      ditDate = new JDateInput(Text.DATE_LABEL.toString());
+      ditDate = new JDateInput(Text.DATE_LABEL);
       
-      rcrRecurrenceOptions = new JRecursionChooser();
+      rcrRecurrenceOptions = new JTimeSliceChooser();
       
       vclActions = new JValidateCancel();
    }

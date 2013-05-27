@@ -93,6 +93,8 @@ public class Language {
       REASON_LABEL,
       AMOUNT_LABEL,
       DATE_LABEL,
+      BEGIN_DATE_LABEL,
+      END_DATE_LABEL,
       
       SELECT_CATEGORY_LABEL,
       NEW_CATEGORY_LABEL,
@@ -105,7 +107,7 @@ public class Language {
       ANNUAL_LABEL, 
       
       RECURRENCE_LABEL,
-      RECURRENCE_SETTINGS,
+      TIME_SLICE_SETTINGS,
       
       TRANSACTION_TYPE_LABEL,
       TRANSACTION_TYPE_CREDIT,

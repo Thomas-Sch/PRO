@@ -17,7 +17,8 @@ import gui.View;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
-import gui.component.JRecursionChooser;
+import gui.component.JTimeSliceChooser;
+import gui.component.JTimeSliceChooser.TimeSlice;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.utils.StandardInsets;
@@ -60,7 +61,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
    private ComboBoxAccount accounts;
    
    private JDateInput ditDate;
-   private JRecursionChooser rcrRecurrence;
+   private JTimeSliceChooser tscBudgetLength;
    
    private JLabelTextPanel ltpDescription;
    
@@ -109,11 +110,9 @@ public class JCreateBudgetFrame extends JDialog implements View{
                budget.setLimit(Double.valueOf(lmpAmount.getText()));
             }
             catch (NumberFormatException e) {
-               // TODO Auto-generated catch block
                e.printStackTrace();
             }
             catch (LimitNegative e) {
-               // TODO Auto-generated catch block
                e.printStackTrace();
             }
          }
@@ -128,17 +127,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
                budget.setBindedAccount(accounts.getSelectedAccount());
             }
          }
-      });
-      
-      rcrRecurrence.addEnabledChangedListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent arg0) {
-            
-         }
-      });
-      
-      
+      });      
    }
 
    private JPanel buildContent() {
@@ -166,7 +155,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
       pnlContent.add(ditDate, constraints);
 
       constraints.gridy = 4;
-      pnlContent.add(rcrRecurrence, constraints);
+      pnlContent.add(tscBudgetLength, constraints);
       
       constraints.gridy = 5;
       pnlContent.add(ltpDescription, constraints);
@@ -183,9 +172,9 @@ public class JCreateBudgetFrame extends JDialog implements View{
       lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(controller.getCore());
       
-      ditDate = new JDateInput(Text.DATE_LABEL.toString());
+      ditDate = new JDateInput(Text.DATE_LABEL);
       
-      rcrRecurrence = new JRecursionChooser();
+      tscBudgetLength = new JTimeSliceChooser(TimeSlice.MONTHLY, TimeSlice.ANNUAL);
       
       ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
       
