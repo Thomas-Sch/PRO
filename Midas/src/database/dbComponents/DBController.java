@@ -38,12 +38,21 @@ public class DBController {
    
    private DBAccess dbAccess;
    
+   // dépend du SGBD et du driver JDBC
+   private String constrationViolationDatabaseErrorMessage = "[SQLITE_CONSTRAINT]"; 
+         
    public DBController() {
       
       this.dbAccess = new DBAccess("jdbc:sqlite:Midas.sqlite3");
       
    }
    
+   /**
+    * Cette méthode (uniquement utiliée par les routine de test)
+    * permet de vider la base de données.
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void clearDatabase() throws DatabaseException, DatabaseConstraintViolation {
       String sqlString1;
       String sqlString2;
@@ -87,6 +96,14 @@ public class DBController {
       dbAccess.destroyPreparedStatement(preparedStatement1);
    }
       
+   /**
+    * Cette méthode gère les insertion de données dans la base de données.
+    * La clé primaire est automatiquement générée par le SGBD
+    * @param preparedStatement
+    * @param dbComponent
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    private void insert(PreparedStatement preparedStatement, DBComponent dbComponent) throws DatabaseException, DatabaseConstraintViolation {
       try {
          preparedStatement.execute();
@@ -96,7 +113,7 @@ public class DBController {
          dbComponent.setId(result.getInt(1));
          
       } catch (SQLException e) {
-         if (e.getMessage().contains("[SQLITE_CONSTRAINT]")) { // Violation d'une contrainte de la BDD
+         if (e.getMessage().contains(constrationViolationDatabaseErrorMessage)) { // Violation d'une contrainte de la BDD
             DBErrorHandler.constraintViolation();
          } else {
             DBErrorHandler.executionError(e);
@@ -104,11 +121,20 @@ public class DBController {
       }
    }
    
+   /**
+    * Cette méthode gère les insertion de données dans la base de données
+    * dans le cas où une table herite d'une autre table. Autrement dit,
+    * cette méthode permi de préciser la clé primaire pendant l'insertion
+    * @param preparedStatement
+    * @param dbComponent
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    private void insertWithoutSettingID(PreparedStatement preparedStatement, DBComponent dbComponent) throws DatabaseException, DatabaseConstraintViolation {
       try {
          preparedStatement.execute();         
       } catch (SQLException e) {
-         if (e.getMessage().contains("[SQLITE_CONSTRAINT]") ) { // Violation d'une contrainte de la BDD
+         if (e.getMessage().contains(constrationViolationDatabaseErrorMessage) ) { // Violation d'une contrainte de la BDD
             DBErrorHandler.constraintViolation();
          } else {
             DBErrorHandler.executionError(e);
@@ -116,12 +142,18 @@ public class DBController {
       }
    }
    
+   /**
+    * Cette méthode gère les mis à jours d'une table
+    * @param preparedStatement
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    private void update (PreparedStatement preparedStatement) throws DatabaseException, DatabaseConstraintViolation {
       try {
          preparedStatement.execute();      
       } catch (SQLException e) {
          e.printStackTrace();
-         if (e.getMessage().contains("[SQLITE_CONSTRAINT]") ) { // Violation d'une contrainte de la BDD
+         if (e.getMessage().contains(constrationViolationDatabaseErrorMessage) ) { // Violation d'une contrainte de la BDD
             DBErrorHandler.constraintViolation();
          } else {
             DBErrorHandler.executionError(e);
@@ -129,11 +161,17 @@ public class DBController {
       }
    }
    
+   /**
+    * Cette méthode gère la suppression d'un enregistrement d'une table
+    * @param preparedStatement
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    private void delete (PreparedStatement preparedStatement) throws DatabaseException, DatabaseConstraintViolation {
       try {
          preparedStatement.execute();      
       } catch (SQLException e) {
-         if (e.getMessage().contains("[SQLITE_CONSTRAINT]") ) { // Violation d'une contrainte de la BDD
+         if (e.getMessage().contains(constrationViolationDatabaseErrorMessage) ) { // Violation d'une contrainte de la BDD
             DBErrorHandler.constraintViolation();
          } else {
             DBErrorHandler.executionError(e);
@@ -141,6 +179,13 @@ public class DBController {
       }
    }
 
+   /**
+    * 
+    * @param preparedStatement
+    * @return un ResultSet, les données (la réponse à la requête SQL)
+    * routournées par la base de données
+    * @throws DatabaseException
+    */
    private ResultSet select (PreparedStatement preparedStatement) throws DatabaseException {
       ResultSet resultSet = null;
       try {
@@ -153,10 +198,20 @@ public class DBController {
    
    
    // DBUser ------------------------------------------------------------------------------------
+   /**
+    * Méthode qui crée et retourne une nouvelle instance de DBUser
+    * @return le/la/les DBUser
+    */
    public DBUser createDBUser() {
       return new DBUser();
    }
    
+   /**
+    * Cette méthode permet de récupérer un DBUser de la base de données
+    * @param id
+    * @return
+    * @throws DatabaseException
+    */
    public DBUser getDbUser(int id) throws DatabaseException {
 
       String sqlString = "SELECT Use_Id, Name, Enabled " +
@@ -186,6 +241,11 @@ public class DBController {
       return dbUser;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBUsers de la base de données   
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBUser> getAllDbUsers() throws DatabaseException {
 
       String sqlString = "SELECT Use_Id, Name, Enabled " +
@@ -215,6 +275,12 @@ public class DBController {
       return dbUsers;
    }
    
+   /**
+    * Cette méthode permet de savegarder (insertion ou mis à jour) un DBUser dans la base de données
+    * @param dbUser
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void saveToDatabase(DBUser dbUser) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -250,6 +316,12 @@ public class DBController {
       }
    }
    
+   /**
+    * Cette méthode permet de supprimer un DBUser dans la base de données
+    * @param id
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void deleteDbUser(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -271,10 +343,20 @@ public class DBController {
    }
    
    // DBAccount ------------------------------------------------------------------------------------
+   /**
+    * Méthode qui crée et retourne une nouvelle instance de DBAccount
+    * @return le/la/les DBAccount
+    */
    public DBAccount createDBAccount() {
       return new DBAccount();
    }
    
+   /**
+    * Cette méthode permet de récupérer un DBAccount de la base de données
+    * @param id
+    * @return
+    * @throws DatabaseException
+    */
    public DBAccount getDbAccount(int id) throws DatabaseException {
 
       String sqlString = "SELECT Acc_ID, Name, Description, BankName, AccountNumber, Amount, AccountLimit, Enabled " +
@@ -310,6 +392,11 @@ public class DBController {
       return dbAccount;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBAccounts de la base de données
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBAccount> getAllDbAccounts() throws DatabaseException {
 
       String sqlString = "SELECT Acc_Id, Name, Description, BankName, AccountNumber, Amount, AccountLimit, Enabled " +
@@ -346,6 +433,12 @@ public class DBController {
       return dbAccounts;
    }
    
+   /**
+    * Cette méthode permet de savegarder (insertion ou mis à jour) un DBAccount dans la base de données
+    * @param dbAccount
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void saveToDatabase(DBAccount dbAccount) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -391,6 +484,12 @@ public class DBController {
       }   
    }
    
+   /**
+    * Cette méthode permet de supprimer un DBAccount dans la base de données
+    * @param id
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void deleteDbAccount(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -410,12 +509,23 @@ public class DBController {
          dbAccess.destroyPreparedStatement(preparedStatement);
       }
    }
+
    
+   // DBFinancialTransaction ------------------------------------------------------------------------------------
+   /**
+    * Méthode qui crée et retourne une nouvelle instance de DBFinancialTransaction
+    * @return le/la/les DBFinancialTransaction
+    */
    public DBFinancialTransaction createFinancialTransaction() {
        return new DBFinancialTransaction();
    }
    
-   // DBFinancialTransaction ------------------------------------------------------------------------------------
+   /**
+    * Cette méthode permet de récupérer un DBFinancialTransaction de la base de données
+    * @param id
+    * @return
+    * @throws DatabaseException
+    */
    public DBFinancialTransaction getDbFinancialTransaction(int id) throws DatabaseException {
    
       String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID " +
@@ -449,6 +559,13 @@ public class DBController {
       return dbFinancialTransaction;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBFinancialTransaction de la base de données
+    * qui sont reliés au budget avec l'id passe par paramètre
+    * @param budgetId
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBFinancialTransaction>
       getAllDbFinancialTransactionsRelatedToBudget(int budgetId)
       throws DatabaseException {
@@ -489,6 +606,13 @@ public class DBController {
       return dbFinancialTransactions;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBFinancialTransaction de la base de données
+    * qui sont reliés au compte avec l'id passe par paramètre
+    * @param accountId
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBFinancialTransaction>
             getAllDbFinancialTransactionsRelatedToAccount(
                                        int accountId) throws DatabaseException {
@@ -530,6 +654,12 @@ public class DBController {
       return dbFinancialTransactions;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBBudgets de la base de données
+    * @param accountId
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBBudget> getAllDbBudgetsRelatedToAccount(int accountId)
       throws DatabaseException {
       
@@ -571,6 +701,11 @@ public class DBController {
       return dbBudgets;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBFinancialTransactions de la base de données
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBFinancialTransaction> getAllDbFinancialTransactions() throws DatabaseException {
 
       String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID " +
@@ -605,6 +740,12 @@ public class DBController {
       return dbFinancialTransactions;
    }
    
+   /**
+    * Cette méthode permet de savegarder (insertion ou mis à jour) un DBFinancialTransaction dans la base de données
+    * @param dbFinancialTransaction
+    * @throws DatabaseConstraintViolation
+    * @throws DatabaseException
+    */
    public void saveToDatabase(DBFinancialTransaction dbFinancialTransaction) throws DatabaseConstraintViolation, DatabaseException {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -680,6 +821,12 @@ public class DBController {
       }   
    }
    
+   /**
+    * Cette méthode permet de supprimer un DBFinancialTransaction dans la base de données
+    * @param id
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void deleteDbFinancialTransaction(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -702,9 +849,20 @@ public class DBController {
    
    
    // DBCategory ------------------------------------------------------------------------------------
+   /**
+    * Méthode qui crée et retourne une nouvelle instance de DBCategory
+    * @return le/la/les DBCategory
+    */
    public DBCategory createCategory() {
        return new DBCategory();
     }
+   
+   /**
+    * Cette méthode permet de récupérer un DBCategory de la base de données
+    * @param id
+    * @return
+    * @throws DatabaseException
+    */
    public DBCategory getDbCategory(int id) throws DatabaseException {
     
       String sqlString = "SELECT Cat_ID, Name, Enabled, Par_Cat_ID " +
@@ -735,6 +893,11 @@ public class DBController {
       return dbCategory;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBCategories de la base de données
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBCategory> getAllDbCategories() throws DatabaseException {
 
       String sqlString = "SELECT Cat_ID, Name, Enabled, Par_Cat_ID " +
@@ -766,6 +929,12 @@ public class DBController {
       return dbCategories;
    }  
 
+   /**
+    * Cette méthode permet de savegarder (insertion ou mis à jour) un DBCategory dans la base de données
+    * @param dbCategory
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void saveToDatabase(DBCategory dbCategory) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -807,6 +976,12 @@ public class DBController {
       }   
    }
    
+   /**
+    * Cette méthode permet de supprimer un DBCategory dans la base de données
+    * @param id
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void deleteDbCategory(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -827,6 +1002,12 @@ public class DBController {
       }
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBCategories de la base de données
+    * qui sont des parents
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBCategory> getAllParentCategories() throws DatabaseException {
 
       String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID, Enabled " +
@@ -859,6 +1040,13 @@ public class DBController {
          return dbCategories;
     }
     
+   /**
+    * Cette méthode permet de récupérer tous les DBCategories de la base de données
+    * qui sont des enfants
+    * @param id
+    * @return
+    * @throws DatabaseException
+    */
     public LinkedList<DBCategory> getAllChildCategories(int id) throws DatabaseException {
 
        String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID, Enabled " +
@@ -895,10 +1083,20 @@ public class DBController {
     }  
    
    // DBBudget ------------------------------------------------------------------------------------
-   public DBBudget createDbBudget() {
+   /**
+    * Méthode qui crée et retourne une nouvelle instance de DBBudget
+    * @return le/la/les DBBudget
+    */
+    public DBBudget createDbBudget() {
       return new DBBudget();
    }
    
+    /**
+     * Cette méthode permet de récupérer un DBBudget de la base de données
+     * @param id
+     * @return
+     * @throws DatabaseException
+     */
    public DBBudget getDbBudget(int id) throws DatabaseException {
 
       String sqlString = "SELECT Budget.Bud_Id, Rec_Id, Name, Description, BudgetLimit, Enabled, Acc_ID " +
@@ -932,6 +1130,11 @@ public class DBController {
       return dbBudget;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBBudgets de la base de données
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBBudget> getAllDbBudgets() throws DatabaseException {
 
       String sqlString = "SELECT Budget.Bud_Id, Rec_Id, Name, Description, BudgetLimit, Enabled, Acc_ID " +
@@ -967,6 +1170,12 @@ public class DBController {
       return dbBudgets;
    }
    
+   /**
+    * Cette méthode permet de savegarder (insertion ou mis à jour) un DBBudgetf dans la base de données
+    * @param dbBudget
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void saveToDatabase(DBBudget dbBudget) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -1021,6 +1230,12 @@ public class DBController {
       }   
    }
    
+   /**
+    * Cette méthode permet de supprimer un DBBudget dans la base de données
+    * @param id
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void deleteDbBudget(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -1042,10 +1257,20 @@ public class DBController {
    
    
    // DBBudgetOnTheFly ------------------------------------------------------------------------------------
+   /**
+    * Méthode qui crée et retourne une nouvelle instance de DBBudgetOnTheFly
+    * @return le/la/les DBBudgetOnTheFly
+    */
    public DBBudgetOnTheFly createDbBudgetOnTheFly() {
       return new DBBudgetOnTheFly();
    }
    
+   /**
+    * Cette méthode permet de récupérer un DBBudgetOnTheFly de la base de données
+    * @param id
+    * @return
+    * @throws DatabaseException
+    */
    public DBBudgetOnTheFly getDbBudgetOnTheFly(int id) throws DatabaseException {
 
       String sqlString = "SELECT BudgetOnTheFly.Bud_Id, Rec_Id, Name, Description, BudgetLimit, Enabled, Acc_ID, Start, End " +
@@ -1084,6 +1309,11 @@ public class DBController {
       return dbBudgetOnTheFly;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBBudgetsOnTheFly de la base de données
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBBudgetOnTheFly> getAllDbBudgetOnTheFly() throws DatabaseException {
 
       String sqlString = "SELECT BudgetOnTheFly.Bud_Id, Rec_Id, Name, Description, BudgetLimit, Enabled, Acc_ID, Start, End " +
@@ -1124,6 +1354,12 @@ public class DBController {
       return dbBudgetsOnTheFly;
    }
    
+   /**
+    * Cette méthode permet de savegarder (insertion ou mis à jour) un DBBudgetOnTheFly dans la base de données
+    * @param dbBudgetOnTheFly
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void saveToDatabase(DBBudgetOnTheFly dbBudgetOnTheFly) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString1;
       String sqlString2;
@@ -1213,6 +1449,12 @@ public class DBController {
       }   
    }
    
+   /**
+    * Cette méthode permet de supprimer un DBBudgetOnTheFly dans la base de données
+    * @param id
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void deleteDbBudgetOnTheFly(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString1;
       String sqlString2;
@@ -1252,10 +1494,20 @@ public class DBController {
    }
    
    // DBRecurrence ------------------------------------------------------------------------------------
+   /**
+    * Méthode qui crée et retourne une nouvelle instance de DBRecurrence
+    * @return le/la/les DBRecurrence
+    */
    public DBRecurrence createRecurence() {
       return new DBRecurrence();
    }
    
+   /**
+    * Cette méthode permet de récupérer un DBRecurrence de la base de données
+    * @param id
+    * @return
+    * @throws DatabaseException
+    */
    public DBRecurrence getDbRecurrence(int id) throws DatabaseException {
    
       String sqlString = "SELECT Rec_Id, Start, End, IntervalRecurrence " +
@@ -1287,6 +1539,11 @@ public class DBController {
       return dbRecurrence;
    }
    
+   /**
+    * Cette méthode permet de récupérer tous les DBRecurrences de la base de données
+    * @return
+    * @throws DatabaseException
+    */
    public LinkedList<DBRecurrence> getAllDbRecurrences() throws DatabaseException {
    
       String sqlString = "SELECT Rec_Id, Start, End, IntervalRecurrence " +
@@ -1319,6 +1576,12 @@ public class DBController {
       return dbRecurrences;
    }
    
+   /**
+    * Cette méthode permet de savegarder (insertion ou mis à jour) un DBRecurrence dans la base de données
+    * @param dbRecurrence
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void saveToDatabase(DBRecurrence dbRecurrence) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
@@ -1356,6 +1619,12 @@ public class DBController {
       }
    }
    
+   /**
+    * Cette méthode permet de supprimer un DBRecurrence dans la base de données
+    * @param id
+    * @throws DatabaseException
+    * @throws DatabaseConstraintViolation
+    */
    public void deleteDbRecurrence(Integer id) throws DatabaseException, DatabaseConstraintViolation {
       String sqlString;
       PreparedStatement preparedStatement = null;
