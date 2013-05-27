@@ -60,21 +60,21 @@ public class TestRoutine {
       DBRecurrence r1 = dbController.createRecurence();
       r1.setIntervalRecurrence(30);
       //r1.setStart(new Date(2012, 04, 1));
-      r1.setEnd(new Date(2012, 04, 1));
+      r1.setEnd(new Date(0));
       dbController.saveToDatabase(r1);
       System.out.println(r1);
       
       DBRecurrence r2 = dbController.createRecurence();
       r2.setIntervalRecurrence(30);
-      r2.setStart(new Date(2012, 04, 1));
-      r2.setEnd(new Date(2012, 04, 1));
+      r2.setStart(new Date(0));
+      r2.setEnd(new Date(0));
       dbController.saveToDatabase(r2);
       System.out.println(r2);
       
       DBRecurrence r3 = dbController.createRecurence();
       r3.setIntervalRecurrence(30);
-      r3.setStart(new Date(2012, 04, 1));
-      r3.setEnd(new Date(2012, 04, 1));
+      r3.setStart(new Date(0));
+      r3.setEnd(new Date(0));
       dbController.saveToDatabase(r3);
       System.out.println(r3);
       
@@ -110,8 +110,8 @@ public class TestRoutine {
       budgetOnTheFly1.setDescription("description");
       budgetOnTheFly1.setLimit(100.0);
       budgetOnTheFly1.setDbAccount(account1.getId());
-      budgetOnTheFly1.setStart(new Date(2012, 04, 1));
-      budgetOnTheFly1.setEnd(new Date(2010, 03, 1));
+      budgetOnTheFly1.setStart(new Date(0));
+      budgetOnTheFly1.setEnd(new Date(0));
       dbController.saveToDatabase(budgetOnTheFly1);
       System.out.println(budgetOnTheFly1);
       
@@ -133,7 +133,7 @@ public class TestRoutine {
       DBFinancialTransaction t = dbController.createFinancialTransaction();
       t.setDbRecurrence(r3.getId());
       t.setAmount(100.0);
-      t.setDate(new Date(2012, 04, 1));
+      t.setDate(new Date(0));
       t.setDbAccount(account1.getId());
       t.setDbBudget(budget1.getId());
       t.setDbCategory(cat1.getId());
