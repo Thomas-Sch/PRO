@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import settings.Language.Text;
+import utils.TimeSlice;
 
 /**
  * Panel de sélection d'intervalle de temps (Journalier, Mois, etc...).
@@ -40,33 +41,6 @@ public class JTimeSliceChooser extends JPanel {
     */
    private static final long serialVersionUID = 2161876509341301904L;
    
-   public static enum TimeSlice { 
-      DAILY(1, Text.DAILY_LABEL.toString()), 
-      WEEKLY(7, Text.WEEKLY_LABEL.toString() ),
-      MONTHLY(31, Text.MONTHLY_LABEL.toString()), 
-      ANNUAL(365, Text.ANNUAL_LABEL.toString());
-      
-      int lengthIdentifier;
-      String name;
-      
-      /**
-       * Constructeur d'une intervalle de temps.
-       * @param id Nombre identifiant la longueur de temps.
-       * @param name Nom de l'intervalle.
-       */
-      private TimeSlice(int id, String name) {
-         lengthIdentifier = id;
-         this.name = name;
-      }
-      
-      /**
-       * @return Le nom de l'intervalle de temps.
-       */
-      public String getName () {
-         return name;
-      }
-   }
-   
    // Composants. 
    private ButtonGroup radioGroup;
    private LinkedList<JRadioButton> list;
@@ -81,6 +55,7 @@ public class JTimeSliceChooser extends JPanel {
     
    private void initContent(TimeSlice ... slices) {
       radioGroup = new ButtonGroup();
+      list = new LinkedList<>();
       
       for(TimeSlice slice : slices) {
          list.add(new JRadioButton(slice.getName()));
@@ -112,5 +87,15 @@ public class JTimeSliceChooser extends JPanel {
       }
       
       return pnlContent;
+   }
+   
+   /**
+    * Renvoie l'identifiant de l'intervalle de temps sélectionnée dans le composant.
+    * @return
+    */
+   public TimeSlice getTimeSlice() {
+      JRadioButton selected = (JRadioButton) radioGroup.getSelection();
+      
+      return TimeSlice.getTimeSlice(selected.getText());
    }
 }

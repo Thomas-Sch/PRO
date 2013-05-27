@@ -97,7 +97,7 @@ public class JQuickExpense extends JPanel {
       
       constraints.gridx = 2;
       constraints.gridwidth = 1;
-      add(new JDateInput(Text.DATE_LABEL.toString()), constraints);
+      add(new JDateInput(Text.DATE_LABEL), constraints);
       
       constraints.gridx = 0;
       constraints.gridy = 2;

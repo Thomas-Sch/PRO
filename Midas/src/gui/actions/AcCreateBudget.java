@@ -81,6 +81,7 @@ public class AcCreateBudget extends UserAction {
             cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
             System.out.println("End of the month: " + cal.getTime());
             
+            // Ici l'intervalle de récurrence est toujours à 0 car on ne fait pas de récurrence.
             recurrence.setIntervalRecurrence(0);
             budget.setRecurrence(recurrence);
             core.saveBudget(budget);

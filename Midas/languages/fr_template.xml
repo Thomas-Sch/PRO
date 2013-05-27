@@ -38,6 +38,8 @@
   <reason_label>TODO</reason_label>
   <amount_label>TODO</amount_label>
   <date_label>TODO</date_label>
+  <begin_date_label>TODO</begin_date_label>
+  <end_date_label>TODO</end_date_label>
   <select_category_label>TODO</select_category_label>
   <new_category_label>TODO</new_category_label>
   <select_subcategory_label>TODO</select_subcategory_label>

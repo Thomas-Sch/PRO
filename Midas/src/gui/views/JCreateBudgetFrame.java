@@ -18,7 +18,6 @@ import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
 import gui.component.JTimeSliceChooser;
-import gui.component.JTimeSliceChooser.TimeSlice;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.utils.StandardInsets;
@@ -36,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
+import utils.TimeSlice;
 import core.components.Budget;
 import core.components.LimitNegative;
 

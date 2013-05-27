@@ -38,6 +38,8 @@
   <reason_label>Motif</reason_label>
   <amount_label>Montant</amount_label>
   <date_label>Date</date_label>
+  <begin_date_label>Date de début</begin_date_label>
+  <end_date_label>Date de fin</end_date_label>
   <select_category_label>Sélectionner une catégorie</select_category_label>
   <new_category_label>Nouvelle catégorie...</new_category_label>
   <select_subcategory_label>Sélectionner une sous catégorie</select_subcategory_label>
