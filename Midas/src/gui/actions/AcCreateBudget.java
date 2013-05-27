@@ -75,8 +75,11 @@ public class AcCreateBudget extends UserAction {
 
             // get start of the month
             cal.set(Calendar.DAY_OF_MONTH, 1);
-            System.out.println("Start of the month:       " + cal.getTime());
-            System.out.println("... in milliseconds:      " + cal.getTimeInMillis());
+            System.out.println("Start of the month: " + cal.getTime());
+            
+            // end of the month.
+            cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+            System.out.println("End of the month: " + cal.getTime());
             
             recurrence.setIntervalRecurrence(0);
             budget.setRecurrence(recurrence);
