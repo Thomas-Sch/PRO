@@ -31,18 +31,16 @@ public class ChartWithAxes extends Chart {
    }
    
    /**
-    * @return the x
+    * @return le/la/les x
     */
    protected String getX() {
       return x;
    }
    /**
-    * @return the y
+    * @return le/la/les y
     */
    protected String getY() {
       return y;
    }
-
-   
 
 }

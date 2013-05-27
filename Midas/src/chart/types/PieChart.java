@@ -47,6 +47,11 @@ public class PieChart extends Chart {
       super.setChart(chart);
    }
 
+   /**
+    * 
+    * @param pieValues - un tableau de PieValue qui est utilisé pour dessiner le diagramme
+    * @return un DefaultPieDataset le dataset utilisé dans JFreeChart
+    */
    private DefaultPieDataset createDataset(PieValue[] pieValues) {
       DefaultPieDataset data = new DefaultPieDataset();
       

@@ -57,11 +57,16 @@ public class TimeSeriesChart extends ChartWithAxes {
       super.setChart(chart);
    }
 
-   private TimeSeriesCollection createDataset(TimeSeriesValue[] pieValues) {
+   /**
+    * 
+    * @param timeSeriesValue - un tableau de TimeSeriesValue qui est utilisé pour dessiner le diagramme
+    * @return un TimeSeriesCollection le dataset utilisé dans JFreeChart
+    */
+   private TimeSeriesCollection createDataset(TimeSeriesValue[] timeSeriesValue) {
       TimeSeriesCollection data = new TimeSeriesCollection();
       TimeSeries serie = new TimeSeries("titre-----");
       
-      for (TimeSeriesValue value : pieValues) {
+      for (TimeSeriesValue value : timeSeriesValue) {
          serie.add(new Month(value.getDate().getMonth(), value.getDate().getYear()), value.getValue());
       }
       
