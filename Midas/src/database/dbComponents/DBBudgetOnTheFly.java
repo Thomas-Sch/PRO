@@ -21,8 +21,8 @@ public class DBBudgetOnTheFly extends DBBudget {
     * Initialise les champs qui ne representent pas une référence
     */
    public DBBudgetOnTheFly() {
-      start = new java.util.Date(1900, 1, 1);
-      end = new java.util.Date(1900, 1, 1);
+      start = new java.util.Date(0);
+      end = new java.util.Date(0);
    }
    
    /**

@@ -31,14 +31,14 @@ public class PieValue extends DatasetValue{
    }
 
    /**
-    * @return the category
+    * @return le/la/les category
     */
    public String getCategory() {
       return category;
    }
 
    /**
-    * @param category the category to set
+    * @param category - la nouvelle valeur pour l'attribut category
     */
    public void setCategory(String category) {
       this.category = category;

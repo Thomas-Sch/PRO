@@ -30,7 +30,7 @@ public class DBFinancialTransaction extends DBComponent {
     */
    public DBFinancialTransaction() {
       amount = 0.0;
-      date = new java.util.Date(1900, 1, 1);
+      date = new java.util.Date(0);
       reason = "";
    }
    

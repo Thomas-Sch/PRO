@@ -32,7 +32,7 @@ public class BarValue extends DatasetValue{
    }
 
    /**
-    * @return the column
+    * @return le/la/les column
     */
    public String getColumn() {
       return column;

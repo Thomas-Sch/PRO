@@ -25,7 +25,7 @@ import java.util.Date;
  */
 public class TimeSeriesValue extends DatasetValue {
 
-   Date date;
+   private Date date;
    
    public TimeSeriesValue(Double value, Date date) {
       super(value);
@@ -33,11 +33,10 @@ public class TimeSeriesValue extends DatasetValue {
    }
 
    /**
-    * @return the date
+    * @return le/la/les date
     */
    public Date getDate() {
       return date;
    }
-
-   
+  
 }

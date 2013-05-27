@@ -49,8 +49,8 @@ public class DBCategory extends DBComponentEnableable {
       this.parentDBCategory = parentDBCategory;
    }
 
-   /* 
-    * Un simple toString pour afficher le contenu
+   /* (non-Javadoc)
+    * @see java.lang.Object#toString()
     */
    @Override
    public String toString() {

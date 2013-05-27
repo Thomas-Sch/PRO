@@ -51,16 +51,25 @@ public class BarChart extends ChartWithAxes {
       super.setChart(chart);
    }
 
-   private DefaultCategoryDataset createDataset(BarValue[] pieValues) {
+   /**
+    * 
+    * @param piebarValuesValues - un tableau de BarValue qui est utilisé pour dessiner le diagramme
+    * @return un DefaultCategoryDataset le dataset utilisé dans JFreeChart
+    */
+   private DefaultCategoryDataset createDataset(BarValue[] barValues) {
       DefaultCategoryDataset data = new DefaultCategoryDataset();
       
-      for (BarValue value : pieValues) {
+      for (BarValue value : barValues) {
          data.setValue(value.getValue(), "Row", value.getColumn()); // "Row" is not used
       }
       
       return data;
    }
    
+   /**
+    * 
+    * @return le/la/les dataset
+    */
    public DefaultCategoryDataset getDataset() {
       return dataset;
    }

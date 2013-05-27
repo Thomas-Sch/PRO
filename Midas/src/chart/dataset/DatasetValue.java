@@ -30,14 +30,14 @@ public class DatasetValue {
    }
 
    /**
-    * @return the value
+    * @return le/la/les value
     */
    public Double getValue() {
       return value;
    }
 
    /**
-    * @param value the value to set
+    * @param value - la nouvelle valeur pour l'attribut value
     */
    public void setValue(Double value) {
       this.value = value;

@@ -12,8 +12,6 @@
  */
 package chart.test;
 
-import java.awt.Component;
-
 import javax.swing.JFrame;
 
 

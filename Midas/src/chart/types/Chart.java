@@ -40,6 +40,10 @@ abstract public class Chart {
       this.url = false;      
    }
    
+   /**
+    * 
+    * @return le diagramme sous la forme d'un JPanel
+    */
    public JPanel getChartPanel() {
       return new ChartPanel(chart);
    }
@@ -52,35 +56,35 @@ abstract public class Chart {
    }
 
    /**
-    * @param chart the chart to set
+    * @param chart - la nouvelle valeur pour l'attribut chart
     */
    protected void setChart(JFreeChart chart) {
       this.chart = chart;
    }
 
    /**
-    * @return the title
+    * @return le/la/les title
     */
    protected String getTitle() {
       return title;
    }
 
    /**
-    * @return the legend
+    * @return le/la/les legend
     */
    protected Boolean getLegend() {
       return legend;
    }
 
    /**
-    * @return the tooltip
+    * @return le/la/les tooltip
     */
    protected Boolean getTooltip() {
       return tooltip;
    }
 
    /**
-    * @return the url
+    * @return le/la/les url
     */
    protected Boolean getUrl() {
       return url;
