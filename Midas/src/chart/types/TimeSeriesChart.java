@@ -12,14 +12,13 @@
  */
 package chart.types;
 
+import java.util.Calendar;
+
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.time.Month;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
-import org.jfree.data.xy.XYDataset;
 
 import chart.dataset.TimeSeriesValue;
 
@@ -67,7 +66,10 @@ public class TimeSeriesChart extends ChartWithAxes {
       TimeSeries serie = new TimeSeries("titre-----");
       
       for (TimeSeriesValue value : timeSeriesValue) {
-         serie.add(new Month(value.getDate().getMonth(), value.getDate().getYear()), value.getValue());
+         Calendar date = Calendar.getInstance();
+         date.setTimeInMillis(value.getDate().getTime());
+         //serie.add(new Month(value.getDate().getMonth(), value.getDate().getYear()), value.getValue());
+         serie.add(new Month(date.get(Calendar.MONTH), date.get(Calendar.YEAR)), value.getValue());
       }
       
       data.addSeries(serie);
