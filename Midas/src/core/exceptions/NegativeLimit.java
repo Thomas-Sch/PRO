@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : CoreComponentException.java
+ * Nom du fichier   : NegativeLimit.java
  * ============================================================================
- * Date de création : 22 mai 2013
+ * Date de création : 26 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -13,54 +13,55 @@
 package core.exceptions;
 
 /**
- * La classe d'exception principale pour les objets du coeur.
- * 
+ * Exception indiquant un mauvais choix de limite.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
+ *
  */
-public class CoreComponentException extends Exception {
+public class NegativeLimit extends CoreComponentException {
 
-   private static final long serialVersionUID = 30000L;
-
+   private static final long serialVersionUID = 30002L;
+   
    /**
-    * Crée une exception portant sur un composant du coeur.
+    * Crée une exception indiquant un mauvais choix de limite.
     */
-   public CoreComponentException() {
+   public NegativeLimit() {
       super();
    }
 
    /**
-    * Crée une exception portant sur un composant du coeur.
+    * Crée une exception indiquant un mauvais choix de limite.
     * 
     * @param message
     *           - le message à joindre à l'exception.
     */
-   public CoreComponentException(String message) {
+   public NegativeLimit(String message) {
       super(message);
    }
 
    /**
-    * Crée une exception portant sur un composant du coeur.
+    * Crée une exception indiquant un mauvais choix de limite.
     * 
     * @param cause
     *           - la cause de l'exception.
     */
-   public CoreComponentException(Throwable cause) {
+   public NegativeLimit(Throwable cause) {
       super(cause);
    }
 
    /**
-    * Crée une exception portant sur un composant du coeur.
+    * Crée une exception indiquant un mauvais choix de limite.
     * 
     * @param message
     *           - le message à joindre à l'exception.
     * @param cause
     *           - la cause de l'exception.
     */
-   public CoreComponentException(String message, Throwable cause) {
+   public NegativeLimit(String message, Throwable cause) {
       super(message, cause);
    }
+
 }
