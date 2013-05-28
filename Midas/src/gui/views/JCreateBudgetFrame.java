@@ -37,7 +37,7 @@ import javax.swing.event.DocumentEvent;
 import settings.Language.Text;
 import utils.TimeSlice;
 import core.components.Budget;
-import core.components.LimitNegative;
+import core.exceptions.LimitNegative;
 
 /**
  * Fenêtre de création d'un budget.

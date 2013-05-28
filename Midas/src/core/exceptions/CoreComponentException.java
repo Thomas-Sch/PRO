@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core.components;
+package core.exceptions;
 
 /**
  * La classe d'exception principale pour les objects du core

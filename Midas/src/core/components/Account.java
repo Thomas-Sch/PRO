@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
+import core.exceptions.AmountUnavailable;
 import database.dbComponents.DBAccount;
 
 /**
@@ -228,40 +229,12 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Retourne la montant total de toute les transactions liées à ce compte.
-    * 
-    * @return Le montant total des transactions pour ce compte.
-    */
-   public double getOutgoingsAmount() {
-      LinkedList<FinancialTransaction> list = getRelatedFinancialTransaction();
-      double amount = 0.0;
-
-      for (FinancialTransaction transaction : list) {
-         amount += transaction.getAmount();
-      }
-
-      return amount;
-   }
-
-   /**
-    * Retourne la différence entre le solde du compte et le montant total des
-    * transactions financières. Une valeur positive indique qu'il reste de
-    * l'argent, tandis qu'une valeur négative indique un dépassement de
-    * capacités du compte.
-    * 
-    * @return La différence entre le solde et le montant total des transactions.
-    */
-   public double getCurrentBalance() {
-      return getAmount() - getOutgoingsAmount();
-   }
-
-   /**
     * Test si l'état du compte est positif.
     * 
     * @return Vrai si l'état du compte est positif, faux le cas échéant.
     */
    public boolean isPositive() {
-      return getCurrentBalance() >= 0;
+      return getAmount() >= getThreshold();
    }
 
    /**
@@ -283,7 +256,7 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Retourne un affichage sous forme de chaînes de caractères.
+    * Retourne un affichage sous forme de chaîne de caractères.
     * <p>
     * La chaîne retournée correspond au nom afin de pouvoir profiter de cette
     * méthode dans les parties graphiques.

@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : InconsistencyDate.java
+ * Nom du fichier   : LimitNegative.java
  * ============================================================================
  * Date de création : 26 mai 2013
  * ============================================================================
@@ -10,10 +10,11 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core.components;
+package core.exceptions;
+
 
 /**
- *  Exeption d'une incoherence entre deux date d'un point vue temporelle
+ * Exeption en cas d'un mauvais argument de limite
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -21,14 +22,14 @@ package core.components;
  * @author Sinniger Marcel
  *
  */
-public class InconsistencyDate extends CoreComponentException {
+public class LimitNegative extends CoreComponentException {
 
-   private static final long serialVersionUID = 30003L;
+   private static final long serialVersionUID = 30002L;
    
    /**
-    * @param msgError - message d'erreur
+    * @param msgError - le message d'erreur
     */
-   public InconsistencyDate(String msgError) {
+   public LimitNegative(String msgError) {
       super(msgError);
    }
 

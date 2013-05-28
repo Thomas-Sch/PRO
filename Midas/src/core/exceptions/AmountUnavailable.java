@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : LimitNegative.java
+ * Nom du fichier   : AmountUnavailable.java
  * ============================================================================
  * Date de création : 26 mai 2013
  * ============================================================================
@@ -10,10 +10,11 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core.components;
+package core.exceptions;
+
 
 /**
- * Exeption en cas d'un mauvais argument de limite
+ * Exeption lors d'un montant invalide
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -21,14 +22,14 @@ package core.components;
  * @author Sinniger Marcel
  *
  */
-public class LimitNegative extends CoreComponentException {
+public class AmountUnavailable extends CoreComponentException {
 
-   private static final long serialVersionUID = 30002L;
+   private static final long serialVersionUID = 30001L;
    
    /**
-    * @param msgError - le message d'erreur
+    * @param msgError - message d'erreur
     */
-   public LimitNegative(String msgError) {
+   public AmountUnavailable(String msgError) {
       super(msgError);
    }
 

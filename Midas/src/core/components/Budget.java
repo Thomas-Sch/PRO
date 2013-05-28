@@ -15,6 +15,7 @@ package core.components;
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
+import core.exceptions.LimitNegative;
 import database.dbComponents.DBBudget;
 import java.util.LinkedList;
 
@@ -270,7 +271,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Retourne un affichage sous forme de chaînes de caractères.
+    * Retourne un affichage sous forme de chaîne de caractères.
     * <p>
     * La chaîne retournée correspond au nom afin de pouvoir profiter de cette
     * méthode dans les parties graphiques.
