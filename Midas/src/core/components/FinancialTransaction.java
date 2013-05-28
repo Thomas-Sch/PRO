@@ -19,7 +19,8 @@ import database.dbComponents.DBFinancialTransaction;
 import java.util.Date;
 
 /**
- * Cette classe représente une transaction financière.
+ * Cette classe représente une transaction financière et met à disposition un
+ * moyen d'obtenir certaines informations associées à ladite transaction.
  * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
@@ -48,7 +49,7 @@ public class FinancialTransaction extends CoreComponent implements
       super(core);
       this.dbFinancialTransaction = dbFinancialTransaction;
    }
-   
+
    /**
     * Retourne l'objet représentant cette transaction pour la base de données.
     * 
@@ -108,7 +109,8 @@ public class FinancialTransaction extends CoreComponent implements
    /**
     * Définit le texte décrivant la raison de la transaction.
     * 
-    * @param reason - la raison de la transaction.
+    * @param reason
+    *           - la raison de la transaction.
     */
    public void setReason(String reason) {
       dbFinancialTransaction.setReason(reason);
@@ -122,114 +124,118 @@ public class FinancialTransaction extends CoreComponent implements
    public Budget getBudget() {
       return core.getBudget(dbFinancialTransaction.getDbBudget());
    }
-   
+
    /**
-    * Retourne l'identifiant, par rapport à la base de données, du budget auquel est associé cette transaction.
-    * @return L'identifant du budget.
+    * Retourne l'identifiant, par rapport à la base de données, du budget auquel
+    * est associé cette transaction.
+    * 
+    * @return L'identifant du budget associé.
     */
    public int getBudgetId() {
       return dbFinancialTransaction.getDbBudget();
    }
-   
+
    /**
-    * Retourne l'identifiant, par rapport à la base de données, 
-    * @return
+    * Retourne l'identifiant, par rapport à la base de données, du compte auquel
+    * est associé cette transaction.
+    * 
+    * @return L'identifiant du compte associé.
     */
    public int getAccountId() {
       return dbFinancialTransaction.getDbAccount();
    }
 
    /**
-    * Ajoute la transaction dans un budget
+    * Définit le budget associé à cette transaction.
     * 
     * @param budget
-    *           - un budget
+    *           - le budget auquel rattacher cette transaction.
     */
-   public void addToBudget(Budget budget) {
+   public void setBudget(Budget budget) {
       dbFinancialTransaction.setDbBudget(budget.getId());
    }
 
    /**
-    * consulte la categorie auquelle la transaction est liee
+    * Retourne la catégorie à laquelle appartient cette transaction.
     * 
-    * @return la categorie
+    * @return La catégorie de la transaction.
     */
    public Category getCategory() {
       return core.getCategory(dbFinancialTransaction.getDbCategory());
    }
 
    /**
-    * Ajoute la transaction dans une categorie
+    * Définit la catégorie de la transaction.
     * 
     * @param category
-    *           - une categorie
+    *           - la catégorie à laquelle appartient la transaction.
     */
-   public void addToCategory(Category category) {
+   public void setCategory(Category category) {
       dbFinancialTransaction.setDbCategory(category.getId());
    }
 
    /**
-    * consulte le compte source de la transaction
+    * Retourne le compte associé à la transaction financière.
     * 
-    * @return le compte
+    * @return Le compte auquel est rattaché la transaction.
     */
    public Account getAccount() {
       return core.getAccount(dbFinancialTransaction.getDbAccount());
    }
 
    /**
-    * modifie le compte source de la transaction
+    * Définit le compte associé à la transaction financière.
     * 
     * @param account
-    *           - le compte source
+    *           - le compte rattaché à la transaction.
     */
    public void setAccount(Account account) {
       dbFinancialTransaction.setDbAccount(account.getId());
    }
 
    /**
-    * consulte la recurence de la transaction
+    * Retourne la récurrence de la transaction financière.
     * 
-    * @return la recurrence
+    * @return La recurrence de la transaction.
     */
    public Recurrence getRecurrence() {
       return core.getRecurrence(dbFinancialTransaction.getDbRecurrence());
    }
 
    /**
-    * modifie la recurence de la transaction
+    * Définit la récurrence de la transaction financière.
     * 
     * @param recurrence
-    *           - la recurrence
+    *           - la recurrence de la transaction.
     */
    public void setRecurrence(Recurrence recurrence) {
       dbFinancialTransaction.setDbRecurrence(recurrence.getId());
    }
 
    /**
-    * consult la personne ayant effectuer la transaction
+    * Retourne l'utilisateur ayant effectué la transaction.
     * 
-    * @return la personne ayant effectuer la transaction
+    * @return L'utilisateur à l'origine de la transaction.
     */
    public User getUser() {
       return core.getUser(dbFinancialTransaction.getDbUser());
    }
 
    /**
-    * modifie l'utilisateur ayant effectuer la transaction
+    * Définit l'utilisateur ayant effectué la transaction.
     * 
     * @param user
-    *           - l'utilisateur
+    *           - l'utilisateur à l'origine de la transaction.
     */
    public void setUser(User user) {
       dbFinancialTransaction.setDbUser(user.getId());
    }
 
    /**
-    * Retourne le numéro d'identification de la transaction financiere 
-    *    dans la base de données.
+    * Retourne l'identifiant de la transaction financière dans la base de
+    * données.
     * 
-    * @return L'identifiant de la transaction financiere
+    * @return L'identifiant de la transaction financière.
     */
    public int getId() {
       return dbFinancialTransaction.getId();
