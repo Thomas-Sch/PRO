@@ -1,11 +1,11 @@
 /* ============================================================================
  * Nom du fichier   : Recurrence.java
  * ============================================================================
- * Date de cr�ation : 24 avr. 2013
+ * Date de création : 24 avr. 2013
  * ============================================================================
- * Auteurs          : Biolzi S�bastien
+ * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
- *                    Decorvet Gr�goire
+ *                    Decorvet Grégoire
  *                    Schweizer Thomas
  *                    Sinniger Marcel
  * ============================================================================
@@ -17,10 +17,13 @@ import java.util.Date;
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
+import core.exceptions.InconsistencyDate;
 import database.dbComponents.DBRecurrence;
 
 /**
- * Cette classe représente une récurrence.
+ * Cette classe représente une récurrence et met à disposition un moyen
+ * d'obtenir certaines informations associées à ladite récurrence.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -29,83 +32,105 @@ import database.dbComponents.DBRecurrence;
  */
 
 public class Recurrence extends CoreComponent implements IdentifiedComponent {
-   
-   /**
-    * variables d'une recurrence
-    */
+
    private DBRecurrence dbRecurrence;
-   
+
    /**
-    * Construit l'object Recurrence
-    * @param core - coeur logique du programme 
-    * @param dbRecurrence - variable de la classe recurrence
+    * Crée une récurrence à partir de sa représentation dans la base de données.
+    * 
+    * @param core
+    *           - coeur logique du programme.
+    * @param dbRecurrence
+    *           - la récurrence en provenance de la base de données.
     */
    public Recurrence(Core core, DBRecurrence dbRecurrence) {
       super(core);
       this.dbRecurrence = dbRecurrence;
    }
-   
+
+   /**
+    * Retourne l'objet représentant cette récurrence pour la base de données.
+    * 
+    * @return La récurrence sous une forme compatible avec la base de données.
+    */
    public DBRecurrence getDBRecurrence() {
       return dbRecurrence;
    }
-   
+
    /**
-    * consult la date de debut du budget a la volee
-    * @return la date de debut
+    * Retourne la date de début de la récurrence.
+    * 
+    * @return La date de début.
     */
    public Date getStartDate() {
       return dbRecurrence.getStart();
    }
-   
+
    /**
-    * modifie la date de debut de la recurrence
-    * @param date - la date de debut
-    * @throws date impossible, si la date de debut est placee apres la date de fin
+    * Définit la date de début de la recurrence.
+    * 
+    * @param date
+    *           - la date de début.
+    * @throws InconsistencyDate
+    *            si la date de début est ultérieure à la date de fin.
     */
-   public void setStartDate(Date date) {
-      if(date.after(dbRecurrence.getEnd())) {
-         //error
+   public void setStartDate(Date date) throws InconsistencyDate {
+      Date endDate = dbRecurrence.getEnd();
+      if (endDate != null && date.after(endDate)) {
+         throw new InconsistencyDate(
+               "Starting date was not before ending date.");
       }
       dbRecurrence.setStart(date);
    }
-   
+
    /**
-    * Fixe la valeur de l'intervalle de récurrence.
-    * @param i valeur de l'intervalle.
+    * Définit la valeur de l'intervalle de récurrence.
+    * 
+    * @param i
+    *           - la valeur de l'intervalle.
     */
    public void setIntervalRecurrence(int i) {
       dbRecurrence.setIntervalRecurrence(i);
    }
-   
+
    /**
-    * Retoure la valeur de l'intervalle de récurrence.
-    * @return la valeur de l'intervalle de récurrence.
+    * Retourne la valeur de l'intervalle de récurrence.
+    * 
+    * @return La valeur de l'intervalle de récurrence.
     */
    public int getIntervalRecurrence() {
       return dbRecurrence.getintervalRecurrence();
    }
+
    /**
-    * Consulte la date de debut de la recurrence
-    * @return la date de debut
+    * Retourne la date de fin de la récurrence
+    * 
+    * @return La date de fin de la récurrence.
     */
    public Date getEndDate() {
       return dbRecurrence.getEnd();
    }
-   
+
    /**
-    * Modifie la date de debut de la recurrence.
-    * @param date - la date de debut
-    * @throws date impossible, si la date de fin est placee avant la date de debut.
+    * Définit la date de fin de la recurrence.
+    * 
+    * @param date
+    *           - la date de fin.
+    * @throws InconsistencyDate
+    *            si la date de fin est antérieure à la date de début.
     */
-   public void setEndtDate(Date date) {
-      if(date.after(dbRecurrence.getEnd())) {
-         //error
+   public void setEndtDate(Date date) throws InconsistencyDate {
+      Date startDate = dbRecurrence.getStart();
+      if (startDate != null && date.before(startDate)) {
+         throw new InconsistencyDate("Ending date was not after starting date.");
       }
       dbRecurrence.setEnd(date);
    }
-   
+
    /**
-    * Retourne l'id de la récurrence.
+    * Retourne l'identifiant de la récurrence dans la base de données.
+    * 
+    * @return L'identifiant de la récurrence.
     */
    public int getId() {
       return dbRecurrence.getId();
