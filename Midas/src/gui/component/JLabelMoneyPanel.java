@@ -12,7 +12,13 @@
  */
 package gui.component;
 
+import java.awt.Color;
+
+import gui.utils.TextChangedListener;
+
+import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
 
@@ -31,6 +37,8 @@ public class JLabelMoneyPanel extends JLabelTextPanel {
     * ID de sérialisation.
     */
    private static final long serialVersionUID = -3777685551501181998L;
+   
+   boolean isNumber;
 
    /**
     * Constructeur principal
@@ -39,7 +47,58 @@ public class JLabelMoneyPanel extends JLabelTextPanel {
     */
    public JLabelMoneyPanel(Text textForLabel, int textFieldColumns) {
       super(textForLabel, textFieldColumns);
+      initListeners();
+   }
+   
+   /** 
+    * Initialise les composants graphiques.
+    */
+   public void initContent(Text textForLabel, int textFieldColumns) {
+      super.initContent(textForLabel, textFieldColumns);
       txtData.setHorizontalAlignment(JTextField.RIGHT);
+      txtData.setText("0");
+      setValid();
+   }
+   
+   public void initListeners() {
+      addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            try {
+               Double.parseDouble(txtData.getText());
+               setValid();
+            }
+            catch (Exception e) {
+               setInvalid();
+            }
+            
+         }
+      });
+   }
+   
+   /**
+    * Indique que le nombre contenu dans le champ texte est invalide.
+    */
+   public void setInvalid() {
+      isNumber = false;
+      txtData.setForeground(Color.RED);
+   }
+   
+   /**
+    * Indique que le nombre contenu dans le champ texte est valide.
+    */
+   public void setValid() {
+      isNumber = true;
+      txtData.setForeground(Color.GREEN);
+   }
+   
+   /**
+    * Est-ce que le contenu du champ text contient un nombre ?
+    * @return true si le contenu du champs text est valide.
+    */
+   public boolean isValide() {
+      return isNumber;
    }
    
    /**

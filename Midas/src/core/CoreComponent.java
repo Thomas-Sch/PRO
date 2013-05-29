@@ -14,8 +14,6 @@ package core;
 
 import java.util.Observable;
 
-import database.dbComponents.DBComponent;
-
 
 /**
  * Cette classe une classe parente pour les objets du core

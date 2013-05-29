@@ -21,14 +21,15 @@ import gui.views.JCreateBudgetFrame;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import java.util.Date;
 
 import settings.Language.Text;
 import utils.TimeSlice;
 import core.Core;
+import core.MidasLogs;
 import core.components.Budget;
 import core.components.Recurrence;
+import core.exceptions.InconsistencyDate;
 
 /**
  * Contrôleur et action d'ajout d'un budget.
@@ -68,13 +69,23 @@ public class AcCreateBudget extends UserAction {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            // Ici l'intervalle de récurrence est toujours à 0 car on ne fait pas de récurrence.
-            recurrence.setIntervalRecurrence(0);
             Date[] result = TimeSlice.getFirstAndLastDay(view.getTimeSlice(), view.getDate());
+            
             System.out.println(result[0] + "\n" + result[1]);
             
+            try {
+               recurrence.setEndtDate(result[1]);
+               recurrence.setStartDate(result[0]);
+            }
+            catch (InconsistencyDate e) {
+               MidasLogs.errors.push(e.getMessage());
+            }
+            // Ici l'intervalle de récurrence est toujours à 0 car on ne fait pas de récurrence.
+            // dans cette version-ci du logiciel.
+            recurrence.setIntervalRecurrence(0);
+            
             budget.setRecurrence(recurrence);
-            //core.saveBudget(budget);
+            core.saveBudget(budget);
             view.dispose();
          }
       });
@@ -83,7 +94,8 @@ public class AcCreateBudget extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            core.deleteRecurrence(recurrence); // Pas besoin de garder cette récurrence.
+            // Pas besoin de garder cette récurrence.
+            core.deleteRecurrence(recurrence); 
             view.dispose();
          }
       });

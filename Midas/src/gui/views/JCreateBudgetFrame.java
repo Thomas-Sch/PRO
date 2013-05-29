@@ -36,6 +36,7 @@ import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
 import utils.TimeSlice;
+import core.MidasLogs;
 import core.components.Budget;
 import core.exceptions.NegativeLimit;
 
@@ -69,6 +70,11 @@ public class JCreateBudgetFrame extends JDialog implements View{
    
    private Budget budget;
    
+   /**
+    * Crée la fenêtre d'ajout de budget.
+    * @param controller Contrôleur de la fenêtre.
+    * @param budget Budget actuellement ajouté.
+    */
    public JCreateBudgetFrame(Controller controller, Budget budget) {
       this.controller = controller;
       this.budget = budget;
@@ -82,7 +88,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
    }
    
    /**
-    * 
+    * Initialise les listeners à usage interne dans l'interface.
     */
    private void initListeners() {
       ltpName.addTextChangedListener(new TextChangedListener() {
@@ -110,10 +116,10 @@ public class JCreateBudgetFrame extends JDialog implements View{
                budget.setLimit(Double.valueOf(lmpAmount.getText()));
             }
             catch (NumberFormatException e) {
-               e.printStackTrace();
+               MidasLogs.errors.push(e.getMessage());
             }
             catch (NegativeLimit e) {
-               e.printStackTrace();
+               MidasLogs.errors.push(e.getMessage());
             }
          }
       });
@@ -130,6 +136,10 @@ public class JCreateBudgetFrame extends JDialog implements View{
       });      
    }
 
+   /**
+    * Construit le contenu de la fenêtre.
+    * @return Le contenu de la fenêtre.
+    */
    private JPanel buildContent() {
       JPanel pnlContent = new JPanel();
       pnlContent.setLayout(new GridBagLayout());
@@ -167,6 +177,9 @@ public class JCreateBudgetFrame extends JDialog implements View{
       return pnlContent;
    }
    
+   /**
+    * Initialise les composants de la fenêtre.
+    */
    private void initContent() {
       ltpName = new JLabelTextPanel(Text.BUDGET_NAME_LABEL);
       lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
