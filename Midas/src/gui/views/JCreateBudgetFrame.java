@@ -37,7 +37,7 @@ import javax.swing.event.DocumentEvent;
 import settings.Language.Text;
 import utils.TimeSlice;
 import core.components.Budget;
-import core.components.LimitNegative;
+import core.exceptions.NegativeLimit;
 
 /**
  * Fenêtre de création d'un budget.
@@ -112,7 +112,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
             catch (NumberFormatException e) {
                e.printStackTrace();
             }
-            catch (LimitNegative e) {
+            catch (NegativeLimit e) {
                e.printStackTrace();
             }
          }

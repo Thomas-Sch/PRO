@@ -14,6 +14,7 @@ package core.components;
 
 import core.Core;
 import core.IdentifiedComponent;
+import core.exceptions.InconsistencyDate;
 import database.dbComponents.DBBudgetOnTheFly;
 import java.util.Date;
 

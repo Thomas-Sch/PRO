@@ -1,7 +1,7 @@
 /* ============================================================================
  * Nom du fichier   : Categorie.java
  * ============================================================================
- * Date de cr�ation : 24 avr. 2013
+ * Date de création : 24 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -126,7 +126,7 @@ public class Category extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Retourne un affichage sous forme de chaînes de caractères.
+    * Retourne un affichage sous forme de chaîne de caractères.
     * 
     * La chaîne retournée correspond au nom afin de pouvoir profiter de cette
     * méthode dans les parties graphiques.
