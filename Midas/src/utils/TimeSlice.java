@@ -12,6 +12,9 @@
  */
 package utils;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import settings.Language.Text;
 
 public enum TimeSlice { 
@@ -59,6 +62,59 @@ public enum TimeSlice {
          }
       }
       return null;
+   }
+   
+   /**
+    * Retourne la date de début et de fin d'une date en fonction de l'intervalle
+    * de temps choisie. Par exemple, si l'on choisi la date du 29.05.2013 et
+    * une intervalle mensuelle, la fonction va retourner [0] => 01.05.2013 et
+    * [1] => 31.05.2013 avec les jours et heures correctes.
+    * @param slice Intervalle de temps souhaitée.
+    * @param date Date contenue dans l'intervalle.
+    * @return  Un tableau de deux cases de date. La première case [0] contient
+    *          la date de début de l'intervalle et la deuxième case [1] contient
+    *          la date de fin de l'intervalle.
+    */
+   public static Date[] getFirstAndLastDay(TimeSlice slice, Date date) {
+      Date begin = null, end = null;
+      
+      Calendar cal = Calendar.getInstance();
+      cal.setTime(date);
+      cal.set(Calendar.HOUR_OF_DAY, cal.getActualMinimum(Calendar.HOUR_OF_DAY));
+      cal.clear(Calendar.MINUTE);
+      cal.clear(Calendar.SECOND);
+      cal.clear(Calendar.MILLISECOND);
+      
+      switch (slice) {
+         case ANNUAL:
+            cal.set(Calendar.DAY_OF_YEAR, cal.getActualMinimum(Calendar.DAY_OF_YEAR));
+            begin = cal.getTime();
+            cal.set(Calendar.DAY_OF_YEAR, cal.getActualMaximum(Calendar.DAY_OF_YEAR));
+            break;
+         case DAILY:
+            // Rien à faire de particulier dans ce cas.
+            begin = cal.getTime();
+            break;
+         case MONTHLY:
+            cal.set(Calendar.DAY_OF_MONTH, cal.getActualMinimum(Calendar.DAY_OF_MONTH));
+            begin = cal.getTime();
+            
+            cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
+            break;
+         case WEEKLY:
+            cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+            begin = cal.getTime();
+            
+            cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+            break;
+      }
+      // Paramétrage de l'heure et envoi des résultats.
+      cal.set(Calendar.HOUR, cal.getActualMaximum(Calendar.HOUR));
+      cal.set(Calendar.MINUTE, cal.getActualMaximum(Calendar.MINUTE));
+      cal.set(Calendar.SECOND, cal.getActualMaximum(Calendar.SECOND));
+      cal.set(Calendar.MILLISECOND, cal.getActualMaximum(Calendar.MILLISECOND));
+      end = cal.getTime();
+      return new Date[] {begin, end};
    }
    
 }

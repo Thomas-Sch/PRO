@@ -22,8 +22,10 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import java.util.Date;
 
 import settings.Language.Text;
+import utils.TimeSlice;
 import core.Core;
 import core.components.Budget;
 import core.components.Recurrence;
@@ -66,25 +68,13 @@ public class AcCreateBudget extends UserAction {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(view.getDate());
-            cal.set(Calendar.HOUR_OF_DAY, 0); // ! clear would not reset the hour of day !
-            cal.clear(Calendar.MINUTE);
-            cal.clear(Calendar.SECOND);
-            cal.clear(Calendar.MILLISECOND);
-
-            // get start of the month
-            cal.set(Calendar.DAY_OF_MONTH, 1);
-            System.out.println("Start of the month: " + cal.getTime());
-            
-            // end of the month.
-            cal.set(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_MONTH));
-            System.out.println("End of the month: " + cal.getTime());
-            
             // Ici l'intervalle de récurrence est toujours à 0 car on ne fait pas de récurrence.
             recurrence.setIntervalRecurrence(0);
+            Date[] result = TimeSlice.getFirstAndLastDay(view.getTimeSlice(), view.getDate());
+            System.out.println(result[0] + "\n" + result[1]);
+            
             budget.setRecurrence(recurrence);
-            core.saveBudget(budget);
+            //core.saveBudget(budget);
             view.dispose();
          }
       });

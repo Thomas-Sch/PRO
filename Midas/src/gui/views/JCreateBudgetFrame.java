@@ -174,7 +174,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
       
       ditDate = new JDateInput(Text.DATE_LABEL);
       
-      tscBudgetLength = new JTimeSliceChooser(TimeSlice.MONTHLY, TimeSlice.ANNUAL);
+      tscBudgetLength = new JTimeSliceChooser(TimeSlice.DAILY, TimeSlice.WEEKLY, TimeSlice.MONTHLY, TimeSlice.ANNUAL);
       
       ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
       
@@ -213,6 +213,18 @@ public class JCreateBudgetFrame extends JDialog implements View{
       return ditDate.getDate();
    }
    
+   /**
+    * Renvoie l'intervalle de temps choisie par l'utilisateur.
+    * @return l'intervalle de temps choisie par l'utilisateur.
+    */
+   public TimeSlice getTimeSlice() {
+      return tscBudgetLength.getTimeSlice();
+   }
+   
+   /**
+    * Définit si les informations entrées dans l'interface
+    * sont suffisantes pour être enregistrées.
+    */
    public boolean isValid() {
       if(ltpName == null || accounts == null) {
          return false;

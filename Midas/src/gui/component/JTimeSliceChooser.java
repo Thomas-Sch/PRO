@@ -44,15 +44,22 @@ public class JTimeSliceChooser extends JPanel {
    // Composants. 
    private ButtonGroup radioGroup;
    private LinkedList<JRadioButton> list;
-   
+
    /**
     * 
+    * @param slices Les différentes intervalles de temps
+    *               à afficher.
     */
    public JTimeSliceChooser(TimeSlice ... slices) {
       initContent(slices);
       buildContent(slices);
    }
     
+   /**
+    * Initialise le contenur de la fenêtre.
+    * @param slices Les différentes intervalles de temps
+    *               à afficher.
+    */
    private void initContent(TimeSlice ... slices) {
       radioGroup = new ButtonGroup();
       list = new LinkedList<>();
@@ -63,6 +70,11 @@ public class JTimeSliceChooser extends JPanel {
       }
    }
    
+   /**
+    * Construit le composant graphique.
+    * @param slices Les différentes intervalles de temps
+    *               à afficher.
+    */
    private void buildContent(TimeSlice ... slices) {
       setLayout(new GridBagLayout());
       
@@ -76,16 +88,19 @@ public class JTimeSliceChooser extends JPanel {
       add(buildRadioButtonGroup(), constraints);    
    }
    
+   /**
+    * Construit le groupe de radio boutons sur le panel.
+    * @return Les boutons radios.
+    */
    private JPanel buildRadioButtonGroup() {
       JPanel pnlContent = new JPanel();
       
-      pnlContent.setLayout(new GridLayout(2, 2));
+      pnlContent.setLayout(new GridLayout(radioGroup.getButtonCount()/2, 2));
       pnlContent.setBorder(BorderFactory.createTitledBorder(Text.TIME_SLICE_SETTINGS.toString()));
       
       for (JRadioButton button : list) {
          pnlContent.add(button);
       }
-      
       return pnlContent;
    }
    
@@ -94,8 +109,11 @@ public class JTimeSliceChooser extends JPanel {
     * @return
     */
    public TimeSlice getTimeSlice() {
-      JRadioButton selected = (JRadioButton) radioGroup.getSelection();
-      
-      return TimeSlice.getTimeSlice(selected.getText());
+      for(JRadioButton button : list) {
+         if(button.isSelected()) {
+            return TimeSlice.getTimeSlice(button.getText());
+         }
+      }
+      return null;
    }
 }
