@@ -12,11 +12,10 @@
  */
 package gui.component;
 
-import java.awt.Color;
-
 import gui.utils.TextChangedListener;
 
-import javax.swing.JLabel;
+import java.awt.Color;
+
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 
@@ -97,7 +96,7 @@ public class JLabelMoneyPanel extends JLabelTextPanel {
     * Est-ce que le contenu du champ text contient un nombre ?
     * @return true si le contenu du champs text est valide.
     */
-   public boolean isValide() {
+   public boolean isNumber() {
       return isNumber;
    }
    

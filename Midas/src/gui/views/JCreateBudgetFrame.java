@@ -114,13 +114,18 @@ public class JCreateBudgetFrame extends JDialog implements View{
          public void textChanged(DocumentEvent event) {
             try {
                budget.setLimit(Double.valueOf(lmpAmount.getText()));
+               lmpAmount.setValid();
             }
             catch (NumberFormatException e) {
                MidasLogs.errors.push(e.getMessage());
+               lmpAmount.setInvalid();
             }
             catch (NegativeLimit e) {
+               lmpAmount.setInvalid();
                MidasLogs.errors.push(e.getMessage());
             }
+            
+            vclActions.setEnableValidateButton(isValid());
          }
       });
       
@@ -242,7 +247,9 @@ public class JCreateBudgetFrame extends JDialog implements View{
       if(ltpName == null || accounts == null) {
          return false;
       } else {
-         return ltpName.getText().length() != 0 && accounts.isValidAccountSelected();
+         return ltpName.getText().length() != 0 
+                && accounts.isValidAccountSelected()
+                && lmpAmount.isNumber();
       }
    }
 }
