@@ -38,7 +38,7 @@ abstract public class CoreComponent extends Observable {
    }
    
    /**
-    * Force une notification des observateurs.
+    * Force une signalisation de changement aux observateurs.
     */
    public void setChangedAndNotifyObservers() {
       setChanged();
