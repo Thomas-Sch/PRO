@@ -113,7 +113,6 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     */
    public void setBankName(String name) {
       dbAccount.setNameBank(name);
-      setChangedAndNotifyObservers();
    }
 
    /**
@@ -131,7 +130,6 @@ public class Account extends CoreComponent implements IdentifiedComponent {
          throw new AmountUnavailable("Account : amount available on the account to make the debit");
       }
       dbAccount.setAmount(dbAccount.getAmount() - amount);
-      setChangedAndNotifyObservers();
    }
 
    /**
@@ -142,7 +140,6 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     */
    public void setThreshold(double threshold) {
       dbAccount.setThreshold(threshold);
-      setChangedAndNotifyObservers();
    }
 
    /**
@@ -171,7 +168,6 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     */
    public void setAccountNumber(String accountNumber) {
       dbAccount.setAccountNumber(accountNumber);
-      setChangedAndNotifyObservers();
    }
 
    /**
@@ -191,7 +187,6 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     */
    public void setName(String accountName) {
       dbAccount.setName(accountName);
-      setChangedAndNotifyObservers();
    }
 
    /**
@@ -211,7 +206,6 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     */
    public void setDescription(String description) {
       dbAccount.setDescription(description);
-      setChangedAndNotifyObservers();
    }
 
    /**

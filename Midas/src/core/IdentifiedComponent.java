@@ -13,19 +13,21 @@
 package core;
 
 /**
- * Indique que la classe possède un identifiant de type int récupérable.
+ * Indique que la classe possède un identifiant de type entier récupérable.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public interface IdentifiedComponent {
-   
+
    /**
     * Retourne l'identifiant unique et de valeur entière de l'objet.
-    * @return l'identifiant unique entier.
+    * 
+    * @return L'identifiant unique entier.
     */
    public int getId();
 
