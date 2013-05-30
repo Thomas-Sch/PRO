@@ -71,11 +71,10 @@ public class AcCreateBudget extends UserAction {
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
             Date[] result = TimeSlice.getFirstAndLastDay(view.getTimeSlice(), view.getDate());
             
-            System.out.println(result[0] + "\n" + result[1]);
-            
             try {
                recurrence.setEndtDate(result[1]);
                recurrence.setStartDate(result[0]);
+               core.saveRecurrence(recurrence);
             }
             catch (InconsistencyDate e) {
                MidasLogs.errors.push(e.getMessage());
