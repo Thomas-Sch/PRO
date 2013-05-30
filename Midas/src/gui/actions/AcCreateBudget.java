@@ -55,7 +55,6 @@ public class AcCreateBudget extends UserAction {
 
    @Override
    protected void execute(final Core core, ActionEvent event, Object[] dependencies) {
-      
       // Initialisation de la récurrence du budget.
       recurrence = core.createReccurence();
       core.saveRecurrence(recurrence);
@@ -72,19 +71,21 @@ public class AcCreateBudget extends UserAction {
             Date[] result = TimeSlice.getFirstAndLastDay(view.getTimeSlice(), view.getDate());
             
             try {
-               recurrence.setEndtDate(result[1]);
                recurrence.setStartDate(result[0]);
+               recurrence.setEndtDate(result[1]);
+               
                core.saveRecurrence(recurrence);
+               
+               // Ici l'intervalle de récurrence est toujours à 0 car on ne fait pas de récurrence.
+               // dans cette version-ci du logiciel.
+               recurrence.setIntervalRecurrence(0);
+               
+               budget.setRecurrence(recurrence);
+               core.saveBudget(budget);
             }
             catch (InconsistencyDate e) {
                MidasLogs.errors.push(e.getMessage());
             }
-            // Ici l'intervalle de récurrence est toujours à 0 car on ne fait pas de récurrence.
-            // dans cette version-ci du logiciel.
-            recurrence.setIntervalRecurrence(0);
-            
-            budget.setRecurrence(recurrence);
-            core.saveBudget(budget);
             view.dispose();
          }
       });

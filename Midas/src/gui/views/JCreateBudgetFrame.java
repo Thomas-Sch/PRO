@@ -60,14 +60,11 @@ public class JCreateBudgetFrame extends JDialog implements View{
    private JLabelMoneyPanel lmpAmount;
    private JValidateCancel vclActions;
    private ComboBoxAccount accounts;
-   
    private JDateInput ditDate;
    private JTimeSliceChooser tscBudgetLength;
-   
    private JLabelTextPanel ltpDescription;
    
    private Controller controller;
-   
    private Budget budget;
    
    /**
@@ -82,9 +79,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
       initContent();
       initListeners();
       setContentPane(buildContent());
-      setResizable(false);
       pack();
-      update(null, null);
    }
    
    /**

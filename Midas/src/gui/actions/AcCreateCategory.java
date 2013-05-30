@@ -28,7 +28,7 @@ import core.Core;
 import core.components.Category;
 
 /**
- * Exemple d'action utilisateur => A supprimer dans un futur proche.
+ * Action qui gère la création d'une catégorie.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire

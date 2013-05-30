@@ -75,11 +75,6 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
     *            si la date de début est ultérieure à la date de fin.
     */
    public void setStartDate(Date date) throws InconsistencyDate {
-      Date endDate = dbRecurrence.getEnd();
-      if (endDate != null && date.after(endDate)) {
-         throw new InconsistencyDate(
-               "Starting date was not before ending date.");
-      }
       dbRecurrence.setStart(date);
       setChangedAndNotifyObservers();
    }
@@ -122,10 +117,6 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
     *            si la date de fin est antérieure à la date de début.
     */
    public void setEndtDate(Date date) throws InconsistencyDate {
-      Date startDate = dbRecurrence.getStart();
-      if (startDate != null && date.before(startDate)) {
-         throw new InconsistencyDate("Ending date was not after starting date.");
-      }
       dbRecurrence.setEnd(date);
       setChangedAndNotifyObservers();
    }
