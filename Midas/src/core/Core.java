@@ -77,6 +77,9 @@ public class Core {
       loadBudgets();
    }
    
+   /**
+    * Charge et établis la liste de tous les budgets depuis la base de donnée.
+    */
    private void loadBudgets() {
       LinkedList<DBBudget> dbBudgets = null;
       try {
@@ -97,6 +100,9 @@ public class Core {
       }
    }
    
+   /**
+    * Charge et établis la liste de tous les utilisateurs depuis la base de donnée.
+    */
    private void loadUsers() {
       LinkedList<DBUser> dbUsers = null;
       try {
@@ -117,6 +123,9 @@ public class Core {
       }
    }
    
+   /**
+    * Charge et établis la liste de tous les comptes depuis la base de donnée.
+    */
    private void loadAccounts() {
       LinkedList<DBAccount> dbAccounts = null;
       try {
@@ -137,6 +146,10 @@ public class Core {
       }
    }
    
+   /**
+    * Charge et établis la liste de tous les catégories primaires (celle n'ayant
+    * pas de catégorie parente).
+    */
    private void loadPrimaryCategories() {
       LinkedList<DBCategory> dbCategories = null;
       try {
@@ -158,48 +171,48 @@ public class Core {
    
    
    /**
-    * Créer un nouveau compte, à compléter par l'utilisateur.
-    * @return le nouveau compte.
+    * Crée un nouveau compte, à compléter par l'utilisateur.
+    * @return Le nouveau compte.
     */
    public Account createAccount() {
       return new Account(this, dbController.createDBAccount());
    }
    
    /**
-    * Créer un nouveau budget dont les champs sont à compléter.
-    * @return le budget à compléter.
+    * Crée un nouveau budget dont les champs sont à compléter.
+    * @return Le budget à compléter.
     */
    public Budget createBudget(){
       return new Budget(this, dbController.createDbBudget());
    }
    
    /**
-    * Créer un nouveau budget à la volée dont les champs sont à compléter.
-    * @return le budget à compléter.
+    * Crée un nouveau budget à la volée dont les champs sont à compléter.
+    * @return Le budget à compléter.
     */
    public BudgetOnTheFly createBudgetOnTheFly(){
       return new BudgetOnTheFly(this, dbController.createDbBudgetOnTheFly());
    }
    
    /**
-    * Créer un nouvel utilisateur dont les champs sont à compléter.
-    * @return l'utilisateur à compléter.
+    * Crée un nouvel utilisateur dont les champs sont à compléter.
+    * @return L'utilisateur à compléter.
     */
    public User createUser(){
       return new User(this, dbController.createDBUser());
    }
    
    /**
-    * Créer une nouvelle récurrnce.
-    * @return la nouvelle récurrence.
+    * Crée une nouvelle récurrence.
+    * @return La nouvelle récurrence.
     */
    public Recurrence createReccurence() {
       return new Recurrence(this, dbController.createRecurence());
    }
 
    /**
-    * Créer une nouvelle transaction dont les champs sont à compléter.
-    * @return la transaction à compléter.
+    * Crée une nouvelle transaction dont les champs sont à compléter.
+    * @return La transaction à compléter.
     */
    public FinancialTransaction createFinancialTransaction(){
       return new FinancialTransaction(this,
@@ -208,7 +221,7 @@ public class Core {
    
    /**
     * Créer une nouvelle catégorie dont les champs sont à compléter.
-    * @return la catégorie à compléter.
+    * @return La catégorie à compléter.
     */
    public Category createCategory(){
       return new Category(this, dbController.createCategory());   
@@ -217,7 +230,7 @@ public class Core {
    /**
     * Retourne le compte ayant pour identifiant celui passé en paramètres.
     * @param id - l'identifiant du compte souhaité.
-    * @return le compte correspondant à l'identifiant, null le cas échéant.
+    * @return Le compte correspondant à l'identifiant, null le cas échéant.
     */
    public Account getAccount(int id) {
       Account result = accounts.get(id);
@@ -242,7 +255,7 @@ public class Core {
    /**
     * Retourne l'utilisateur ayant pour identifiant celui passé en paramètres.
     * @param id - l'identifiant de l'utilisateur souhaité.
-    * @return l'utilisateur correspondant à l'identifiant, null le cas échéant.
+    * @return L'utilisateur correspondant à l'identifiant, null le cas échéant.
     */
    public User getUser(int id) {      
       return users.get(id); 
@@ -251,7 +264,7 @@ public class Core {
    /**
     * Retourne la catégorie ayant pour identifiant celui passé en paramètres.
     * @param id - l'identifiant de la catégorie souhaitée.
-    * @return la catégorie correspondant à l'identifiant, null le cas échéant.
+    * @return La catégorie correspondant à l'identifiant, null le cas échéant.
     */
    public Category getCategory(int id) {
       Category result = primaryCategories.get(id);
@@ -273,7 +286,7 @@ public class Core {
    /**
     * Retourne la transaction ayant pour identifiant celui passé en paramètres.
     * @param id - l'identifiant de la transaction souhaitée.
-    * @return la transaction correspondant à l'identifiant, null le cas échéant.
+    * @return La transaction correspondant à l'identifiant, null le cas échéant.
     */
    public FinancialTransaction getFinancialTransaction(int id) {
       FinancialTransaction result = cache.getReference(FinancialTransaction.class, id);
@@ -297,7 +310,7 @@ public class Core {
    /**
     * Retourne le budget ayant pour identifiant celui passé en paramètres.
     * @param id - l'identifiant du budget souhaité.
-    * @return la catégorie correspondant à l'identifiant, null le cas échéant.
+    * @return La catégorie correspondant à l'identifiant, null le cas échéant.
     */
    public BudgetOnTheFly getBudgetOnTheFly(int id) {
       BudgetOnTheFly result = cache.getReference(BudgetOnTheFly.class, id);
@@ -321,7 +334,7 @@ public class Core {
    /**
     * Retourne la récurrence ayant pour identifiant celui passé en paramètres.
     * @param id - l'identifiant de la récurrence souhaitée.
-    * @return la récurrence correspondante à l'identifiant, null le cas échéant.
+    * @return La récurrence correspondante à l'identifiant, null le cas échéant.
     */
    public Recurrence getRecurrence(int id) {
       Recurrence result = cache.getReference(Recurrence.class, id);
@@ -347,6 +360,11 @@ public class Core {
       return result; 
    }  
    
+   /**
+    * Retourne la liste des catégories étant des sous-catégories de cette donnée en paramètre.
+    * @param category - la catégorie parente.
+    * @return La liste des sous-catégories de celle donnée.
+    */
    public CategoryList getChildren(Category category) {
       CategoryList result = new CategoryList(this);
       LinkedList<DBCategory> dbChildren = null;
@@ -369,9 +387,9 @@ public class Core {
    }
    
    /**
-    * Retourne le budget ayant pour identifiant celui passé en paramètres.
+    * Retourne le budget ayant pour identifiant celui passé en paramètre.
     * @param id - l'identifiant du budget souhaité.
-    * @return le budget correspondant à l'identifiant, null le cas échéant.
+    * @return Le budget correspondant à l'identifiant, null le cas échéant.
     */
    public Budget getBudget(int id) {
       Budget result = budgets.get(id);
@@ -388,22 +406,42 @@ public class Core {
       return result; 
    }
    
+   /**
+    * Retourne la liste de tous les utilisateurs.
+    * @return La liste des utilisateurs.
+    */
    public UserList getAllUsers(){
       return users;
    }
    
+   /**
+    * Retourne la liste de tous les comptes.
+    * @return La liste des comptes.
+    */
    public AccountList getAllAccounts() {
       return accounts;
    }
    
+   /**
+    * Retourne la liste de toutes les catégories principales.
+    * @return La liste des catégories principales.
+    */
    public CategoryList getAllPrimaryCategories() {
       return primaryCategories;
    }
    
+   /**
+    * Retourne la liste de tous les budgets.
+    * @return La liste des budgets.
+    */
    public BudgetList getAllBudgets() {
       return budgets;
    }
    
+   /**
+    * Retourne la liste de toutes les transactions financières;
+    * @return La liste de toutes les transactions.
+    */
    public LinkedList<FinancialTransaction> getAllFinancialTransaction() {
       LinkedList<DBFinancialTransaction> list;
       LinkedList<FinancialTransaction> result;
@@ -437,6 +475,12 @@ public class Core {
       return result;
    }
    
+   /**
+    * Retourne la liste de toutes les transactions financières liées au budget
+    * dont l'identifiant est donné en paramètre.
+    * @param budgetId - l'identifiant du budget associé.
+    * @return La liste des transactions liées au budget donné.
+    */
    public LinkedList<FinancialTransaction>
                      getAllFinancialTransactionRelatedToBudget(int budgetId) {
       LinkedList<DBFinancialTransaction> list;
@@ -482,6 +526,12 @@ public class Core {
       return result;
    }
    
+   /**
+    * Retourne la liste de toutes les transactions financières liées au compte
+    * dont l'identifiant est donné en paramètre.
+    * @param accountId - l'identifiant du compte associé.
+    * @return La liste des transactions liées au compte donné.
+    */
    public LinkedList<FinancialTransaction>
                      getAllFinancialTransactionRelatedToAccount(int accountId) {
       LinkedList<DBFinancialTransaction> list;
@@ -528,6 +578,12 @@ public class Core {
       return result;
    }
    
+   /**
+    * Retourne la liste de tous les budgets liés au compte
+    * dont l'identifiant est donné en paramètre.
+    * @param accountId - l'identifiant du compte associé.
+    * @return La liste des budgets liés au compte donné.
+    */
    public LinkedList<Budget> getAllBudgtesRelatedToAccount(int accountId) {
       LinkedList<DBBudget> list;
       LinkedList<Budget> result;
@@ -574,10 +630,8 @@ public class Core {
       return result;
    }
    
-   
-   
    /**
-    * Sauvegarde ou met à jour le compte donné dans la base de donnée.
+    * Sauvegarde ou met à jour le compte donné dans la base de données.
     * @param account - le compte à sauver.
     */
    public void saveAccount(Account account) {
@@ -599,7 +653,7 @@ public class Core {
    }  
    
    /**
-    * Sauvegarde ou met à jour la catégorie donnée dans la base de donnée.
+    * Sauvegarde ou met à jour la catégorie donnée dans la base de données.
     * @param category - la catégorie à sauver.
     */
    public void saveCategory(Category category) {
@@ -620,6 +674,12 @@ public class Core {
       }
    }
    
+   /**
+    * Sauvegarde ou met à jour la sous-catégorie donnée dans la base de données,
+    * ainsi que dans la liste donnée.
+    * @param category - la sous-catégorie à sauver.
+    * @param list - la liste de sous-catégories à modifier.
+    */
    public void saveSubCategory(Category category, CategoryList list) {
       try {
          dbController.saveToDatabase(category.getDBCategory());
@@ -638,6 +698,10 @@ public class Core {
       }
    }
    
+   /**
+    * Sauvegarde ou met à jour la récurrence donnée dans la base de données.
+    * @param recurrence - la récurrence à sauver.
+    */
    public void saveRecurrence(Recurrence recurrence) {
       try {
          dbController.saveToDatabase(recurrence.getDBRecurrence());
@@ -653,7 +717,7 @@ public class Core {
    }
    
    /**
-    * Sauvegarde ou met à jour le budget donné dans la base de donnée.
+    * Sauvegarde ou met à jour le budget donné dans la base de données.
     * @param budget - le budget à sauver.
     */
    public void saveBudget(Budget budget) {
@@ -677,7 +741,7 @@ public class Core {
    
    /**
     * Sauvegarde ou met à jour le budget à la volée donné dans la base de
-    * donnée.
+    * données.
     * @param budget - le budget à sauver.
     */
    public void saveBudgetOnTheFly(BudgetOnTheFly budget) {
@@ -697,7 +761,7 @@ public class Core {
    }
    
    /**
-    * Sauvegarde ou met à jour l'utilisateur donné dans la base de donnée.
+    * Sauvegarde ou met à jour l'utilisateur donné dans la base de données.
     * @param user - l'utilisateur à sauver.
     */
    public void saveUser(User user) {
@@ -721,7 +785,7 @@ public class Core {
    
    
    /**
-    * Sauvegarde ou met à jour la transaction donnée dans la base de donnée.
+    * Sauvegarde ou met à jour la transaction donnée dans la base de données.
     * @param transaction - la transaction à sauver.
     */
    public void saveFinancialTransaction(FinancialTransaction transaction) {
@@ -741,21 +805,30 @@ public class Core {
    }
    
    /**
-    * Supprime une recurrence dans la base de donnee.
-    * @param account - la recurrence a supprimer
+    * Supprime un compte de la base de données.
+    * @param account - le compte à supprimer
+    */
+   public void deleteAccount(Account account) throws DatabaseException, DatabaseConstraintViolation {
+      dbController.deleteDbAccount(account.getId());
+      accounts.removeItem(account);
+   }
+   
+   /**
+    * Supprime une récurrence de la base de données.
+    * @param recurrence - la récurrence à supprimer
     */
    public void deleteRecurrence(Recurrence recurrence) {
       try {
          dbController.deleteDbRecurrence(recurrence.getId());
       }
       catch (DatabaseException | DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core " + "error when deleting a recurrence");
+         MidasLogs.errors.push("Core", "Error while deleting a recurrence");
       }
    }
    
    /**
-    * Supprime la recurrence d'un budget dans la base de donnee.
-    * @param account - la recurrence a supprimer
+    * Supprime la récurrence d'un budget de la base de données.
+    * @param budget - la récurrence à supprimer.
     */
    public void deleteRecurrenceBudget(Budget budget) {
       try {
@@ -765,13 +838,13 @@ public class Core {
          dbController.deleteDbRecurrence(tmpId);
       }
       catch (DatabaseException | DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core " + "error when deleting a recurrence of budget");
+         MidasLogs.errors.push("Core", "Error while deleting a recurrence of budget");
       }
    }
    
    /**
-    * Supprime la recurrence d'une transaction fianaciere dans la base de donnee.
-    * @param account - la recurrence d'une transaction financiere a supprimer
+    * Supprime la récurrence d'une transaction financière de la base de données.
+    * @param account - la récurrence d'une transaction financière a supprimer.
     */
    public void deleteRecurrenceFinancialTransaction(FinancialTransaction transaction) {
       try {
@@ -781,58 +854,52 @@ public class Core {
          dbController.deleteDbRecurrence(tmpId);
       }
       catch (DatabaseException | DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core " + "error when deleting a recurrence of fianancial transaction");
+         MidasLogs.errors.push("Core", "Error while deleting a recurrence of fianancial transaction");
       }
-   }
+   }   
    
    /**
-    * Desactive un compte, le compte est archive dans la base de donnee 
+    * Désactive un compte, le compte est archivé dans la base de données
     * et n'est plus disponible dans les operations comptables.
-    * @param account - le compte a desactiver
+    * @param account - le compte à désactiver.
     */
-   public void desactivateAccount(Account account) {
+   public void deactivateAccount(Account account) {
       account.getDBAccount().setEnabled(false);
       saveAccount(account);
       accounts.removeItem(account);
    }
    
    /**
-    * Desactive un budget, le budget est archive dans la base de donnee 
+    * Désactive un budget, le budget est archivé dans la base de données
     * et n'est plus disponible dans les operations comptables.
-    * @param budget - le budget a desactiver
+    * @param budget - le budget à désactiver.
     */
-   public void desactivateBudget(Budget budget) {
+   public void deactivateBudget(Budget budget) {
       budget.getDBBudget().setEnabled(false);
       saveBudget(budget);
       budgets.removeItem(budget);
    }
    
    /**
-    * Desactive un utilisateur, l'utilisateur est archive dans la base de donnee 
+    * Désactive un utilisateur, l'utilisateur est archivé dans la base de données 
     * et n'est plus disponible dans les operations comptables.
-    * @param user - l'utilisateur a desactiver
+    * @param user - l'utilisateur à désactiver.
     */
-   public void desactivateUser(User user) {
+   public void deactivateUser(User user) {
       user.getDBUser().setEnabled(false);
       saveUser(user);
       users.removeItem(user);
    }
    
    /**
-    * Desactive une categorie, la categorie est archive dans la base de donnee 
+    * Désactive une catégorie, la catégorie est archivée dans la base de données
     * et n'est plus disponible dans les operations comptables.
-    * @param category - la categorie a desactiver
+    * @param category - la catégorie à désactiver.
     */
-   public void desactivateCategory(Category category) {
+   public void deactivateCategory(Category category) {
       category.getDBCategory().setEnabled(false);
       saveCategory(category);
       primaryCategories.removeItem(category);
    }
-   
-   public void deleteAccount(Account account) throws DatabaseException, DatabaseConstraintViolation {
-      dbController.deleteDbAccount(account.getId());
-      accounts.removeItem(account);
-   }
-
    
 }

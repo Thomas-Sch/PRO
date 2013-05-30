@@ -71,7 +71,7 @@ public class AcManageUser extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            core.desactivateUser(view.getSelectedUser());
+            core.deactivateUser(view.getSelectedUser());
             view.updateModel();
          }
       });
