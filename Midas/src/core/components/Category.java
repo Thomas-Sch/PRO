@@ -90,6 +90,7 @@ public class Category extends CoreComponent implements IdentifiedComponent {
     */
    public void setName(String name) {
       dbCategory.setName(name);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -114,6 +115,7 @@ public class Category extends CoreComponent implements IdentifiedComponent {
     */
    public void setParentCategory(Category parentCategory) {
       dbCategory.setParentDBCategory(parentCategory.getId());
+      setChangedAndNotifyObservers();
    }
 
    /**

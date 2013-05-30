@@ -91,6 +91,7 @@ public class User extends CoreComponent implements IdentifiedComponent {
     */
    public void setName(String name) {
       dbUser.setName(name);
+      setChangedAndNotifyObservers();
    }
 
    /**
