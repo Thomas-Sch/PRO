@@ -76,6 +76,7 @@ public class FinancialTransaction extends CoreComponent implements
     */
    public void setAmount(double amount) {
       dbFinancialTransaction.setAmount(amount);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -95,6 +96,7 @@ public class FinancialTransaction extends CoreComponent implements
     */
    public void setDate(Date date) {
       dbFinancialTransaction.setDate(date);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -114,6 +116,7 @@ public class FinancialTransaction extends CoreComponent implements
     */
    public void setReason(String reason) {
       dbFinancialTransaction.setReason(reason);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -153,6 +156,7 @@ public class FinancialTransaction extends CoreComponent implements
     */
    public void setBudget(Budget budget) {
       dbFinancialTransaction.setDbBudget(budget.getId());
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -172,6 +176,7 @@ public class FinancialTransaction extends CoreComponent implements
     */
    public void setCategory(Category category) {
       dbFinancialTransaction.setDbCategory(category.getId());
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -191,6 +196,7 @@ public class FinancialTransaction extends CoreComponent implements
     */
    public void setAccount(Account account) {
       dbFinancialTransaction.setDbAccount(account.getId());
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -210,6 +216,7 @@ public class FinancialTransaction extends CoreComponent implements
     */
    public void setRecurrence(Recurrence recurrence) {
       dbFinancialTransaction.setDbRecurrence(recurrence.getId());
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -229,6 +236,7 @@ public class FinancialTransaction extends CoreComponent implements
     */
    public void setUser(User user) {
       dbFinancialTransaction.setDbUser(user.getId());
+      setChangedAndNotifyObservers();
    }
 
    /**

@@ -80,6 +80,7 @@ public class BudgetOnTheFly extends Budget implements IdentifiedComponent {
          		"The starting date has to be before the ending date");
       }
       dbBudetOnTheFly.setStart(date);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -105,6 +106,7 @@ public class BudgetOnTheFly extends Budget implements IdentifiedComponent {
                "The ending date has to be after the starting date");
       }
       dbBudetOnTheFly.setEnd(date);
+      setChangedAndNotifyObservers();
    }
 
    /**

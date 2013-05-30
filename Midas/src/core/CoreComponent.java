@@ -16,7 +16,8 @@ import java.util.Observable;
 
 
 /**
- * Cette classe une classe parente pour les objets du core
+ * Représente un composant du coeur, observable de l'extérieur.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -26,19 +27,19 @@ import java.util.Observable;
  */
 abstract public class CoreComponent extends Observable {
    
-   /**
-    * coeur logique du programme 
-    */
    protected Core core;
    
    /**
-    * constructeur
-    * @param core - coeur logique du programme 
+    * Crée un composant du coeur.
+    * @param core - coeur logique du programme.
     */
    public CoreComponent(Core core) {
      this.core = core;
    }
    
+   /**
+    * Force une notification des observateurs.
+    */
    public void setChangedAndNotifyObservers() {
       setChanged();
       notifyObservers();

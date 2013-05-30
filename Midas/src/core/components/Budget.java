@@ -92,6 +92,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     */
    public void setName(String name) {
       dbBudget.setName(name);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -111,6 +112,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     */
    public void setDescription(String description) {
       dbBudget.setDescription(description);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -137,6 +139,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
       }
       else {
          dbBudget.setLimit(limit);
+         setChangedAndNotifyObservers();
       }
    }
 
@@ -157,6 +160,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     */
    public void setRecurrence(Recurrence recurrence) {
       dbBudget.setDbRecurrence(recurrence.getId());
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -176,6 +180,7 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     */
    public void setBindedAccount(Account account) {
       this.dbBudget.setDbAccount(account.getId());
+      setChangedAndNotifyObservers();
    }
 
    /**

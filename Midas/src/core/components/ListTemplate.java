@@ -51,8 +51,7 @@ public abstract class ListTemplate<E> extends CoreComponent {
     */
    public void addItem(E item) {
       list.add(item);
-      setChanged();
-      notifyObservers();
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -114,8 +113,7 @@ public abstract class ListTemplate<E> extends CoreComponent {
       list.clear();
       list.addAll(items);
 
-      setChanged();
-      notifyObservers();
+      setChangedAndNotifyObservers();
    }
 
    /**

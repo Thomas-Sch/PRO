@@ -81,6 +81,7 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
                "Starting date was not before ending date.");
       }
       dbRecurrence.setStart(date);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -91,6 +92,7 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
     */
    public void setIntervalRecurrence(int i) {
       dbRecurrence.setIntervalRecurrence(i);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -125,6 +127,7 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
          throw new InconsistencyDate("Ending date was not after starting date.");
       }
       dbRecurrence.setEnd(date);
+      setChangedAndNotifyObservers();
    }
 
    /**

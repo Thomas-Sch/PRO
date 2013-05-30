@@ -102,6 +102,7 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     */
    public void setAmount(double amount) {
       dbAccount.setAmount(amount);
+      setChangedAndNotifyObservers();
    }
 
    /**

@@ -70,7 +70,7 @@ public class AcManageCategory extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            core.desactivateCategory(view.getSelectedValue());
+            core.deactivateCategory(view.getSelectedValue());
             view.updateModel();
          }
       });
