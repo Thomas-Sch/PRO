@@ -116,6 +116,6 @@ public class JCreateAuthorFrame extends JDialog implements View{
     */
    @Override
    public void update(Observable arg0, Object arg1) {
-      authorName.setText(user.getName());
+      // Pas d'update pour l'instant. Voir rapport.
    } 
 }

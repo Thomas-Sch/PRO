@@ -195,9 +195,6 @@ public class JCreateAccountFrame extends JDialog implements View{
     */
    @Override
    public void update(Observable arg0, Object arg1) {
-//      ltpName.setText(account.getAccountName());
-//      ltpThreshold.setText(String.valueOf(account.getOverdraftLimit()));
-//      ltpInitialAmount.setText(String.valueOf(account.getAccountBalance()));
-//      ltpNumber.setText(account.getAccountNumber());
+      // Pas d'update pour l'instant. Voir rapport.
    }
 }

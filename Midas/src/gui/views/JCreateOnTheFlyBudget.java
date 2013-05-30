@@ -125,15 +125,6 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       
       vclActions = new JValidateCancel();
    }
-
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-    */
-   @Override
-   public void update(Observable arg0, Object arg1) {
-      // TODO Auto-generated method stub
-      
-   }
    
    public void addValidateListener(ActionListener listener) {
       vclActions.addValidateListener(listener);
@@ -143,4 +134,11 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       vclActions.addCancelListener(actionListener);
    }
 
+   /* (non-Javadoc)
+    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+    */
+   @Override
+   public void update(Observable arg0, Object arg1) {
+      // Pas d'update pour l'instant. Voir rapport.
+   }
 }

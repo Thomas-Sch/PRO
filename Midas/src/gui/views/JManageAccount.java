@@ -13,10 +13,12 @@
 package gui.views;
 
 import gui.JManageFrame;
+import gui.View;
 import gui.component.infoedition.JAccountIE;
 import gui.controller.AccountListBox;
 
 import java.awt.BorderLayout;
+import java.util.Observable;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,7 +38,7 @@ import core.components.Account;
  * @author Sinniger Marcel
  *
  */
-public class JManageAccount extends JManageFrame {
+public class JManageAccount extends JManageFrame implements View{
 
    /**
     * ID de sérialisation.
@@ -144,5 +146,13 @@ public class JManageAccount extends JManageFrame {
    @Override
    protected void setEnabledOnView(boolean b) {
       accounts.getGraphicalComponent().setEnabled(b);
+   }
+
+   /* (non-Javadoc)
+    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+    */
+   @Override
+   public void update(Observable o, Object arg) {
+      // Pas d'update pour l'instant. Voir rapport.  
    }
 }

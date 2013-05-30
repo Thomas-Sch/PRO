@@ -118,6 +118,6 @@ public class JCreateCategory extends JDialog implements View{
     * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
     */
    public void update(Observable arg0, Object arg1) {
-      ltpName.setText(category.getName());
+      // Pas d'update pour l'instant. Voir rapport.
    } 
 }

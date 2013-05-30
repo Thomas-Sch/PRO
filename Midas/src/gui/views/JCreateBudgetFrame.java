@@ -198,14 +198,6 @@ public class JCreateBudgetFrame extends JDialog implements View{
       
       vclActions = new JValidateCancel();
    }
-
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-    */
-   @Override
-   public void update(Observable arg0, Object arg1) {
-
-   }
    
    /**
     * Ajoute le listener lors de l'appui sur le bouton de validation.
@@ -251,5 +243,13 @@ public class JCreateBudgetFrame extends JDialog implements View{
                 && accounts.isValidAccountSelected()
                 && lmpAmount.isNumber();
       }
+   }
+   
+   /* (non-Javadoc)
+    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+    */
+   @Override
+   public void update(Observable arg0, Object arg1) {
+      // Pas d'update pour l'instant. Voir rapport.
    }
 }

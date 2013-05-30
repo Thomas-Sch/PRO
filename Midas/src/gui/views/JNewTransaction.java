@@ -141,6 +141,7 @@ public class JNewTransaction extends JDialog implements View {
     */
    @Override
    public void update(Observable arg0, Object arg1) {
+      // Pas d'update pour l'instant. Voir rapport.
    }
 
 }
