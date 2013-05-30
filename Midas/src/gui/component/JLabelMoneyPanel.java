@@ -71,7 +71,6 @@ public class JLabelMoneyPanel extends JLabelTextPanel {
             catch (Exception e) {
                setInvalid();
             }
-            
          }
       });
    }
@@ -89,7 +88,7 @@ public class JLabelMoneyPanel extends JLabelTextPanel {
     */
    public void setValid() {
       isNumber = true;
-      txtData.setForeground(Color.GREEN);
+      txtData.setForeground(Color.BLACK);
    }
    
    /**
