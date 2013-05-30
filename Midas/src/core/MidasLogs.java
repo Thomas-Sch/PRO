@@ -18,7 +18,7 @@ import core.log.LogsFrame;
  */
 
 /**
- * TODO
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
