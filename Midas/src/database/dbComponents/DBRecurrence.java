@@ -25,8 +25,8 @@ public class DBRecurrence extends DBComponent {
     * Initialise les champs qui ne representent pas une référence
     */
    public DBRecurrence() {
-      start = new Date();
-      end = new Date();
+      start = null;
+      end = null;
       intervalRecurrence = 0;
    }
    

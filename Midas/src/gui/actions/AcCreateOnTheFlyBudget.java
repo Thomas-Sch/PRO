@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import settings.Language.Text;
 import core.Core;
 import core.components.BudgetOnTheFly;
+import core.exceptions.InconsistencyDate;
 
 /**
  * Action de création d'un budget à la volée.
@@ -63,10 +64,14 @@ public class AcCreateOnTheFlyBudget extends UserAction {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {            
-            budget.setStartDate(view.getStartDate());
-            budget.setEndtDate(view.getEndDate());
-            core.saveBudgetOnTheFly(budget);
-
+            try {
+               budget.setStartDate(view.getStartDate());
+               budget.setEndDate(view.getEndDate());
+               core.saveBudgetOnTheFly(budget);
+            }
+            catch (InconsistencyDate e) {
+               e.printStackTrace();
+            }
             view.dispose();
          }
       });

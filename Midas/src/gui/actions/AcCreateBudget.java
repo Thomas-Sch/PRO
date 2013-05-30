@@ -56,9 +56,7 @@ public class AcCreateBudget extends UserAction {
    @Override
    protected void execute(final Core core, ActionEvent event, Object[] dependencies) {
       // Initialisation de la récurrence du budget.
-      recurrence = core.createReccurence();
-      core.saveRecurrence(recurrence);
-      
+      recurrence = core.createReccurence();      
       budget = core.createBudget();
       
       view = new JCreateBudgetFrame(controller, budget);
@@ -71,15 +69,13 @@ public class AcCreateBudget extends UserAction {
             Date[] result = TimeSlice.getFirstAndLastDay(view.getTimeSlice(), view.getDate());
             
             try {
-               recurrence.setStartDate(result[0]);
-               recurrence.setEndtDate(result[1]);
-               
-               core.saveRecurrence(recurrence);
-               
                // Ici l'intervalle de récurrence est toujours à 0 car on ne fait pas de récurrence.
                // dans cette version-ci du logiciel.
                recurrence.setIntervalRecurrence(0);
-               
+               recurrence.setStartDate(result[0]);
+               recurrence.setEndDate(result[1]);
+
+               core.saveRecurrence(recurrence);
                budget.setRecurrence(recurrence);
                core.saveBudget(budget);
             }
@@ -94,8 +90,6 @@ public class AcCreateBudget extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            // Pas besoin de garder cette récurrence.
-            core.deleteRecurrence(recurrence); 
             view.dispose();
          }
       });
