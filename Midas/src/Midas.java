@@ -22,7 +22,7 @@ import core.MidasLogs;
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
- * @author Sinniger Marcel
+ * @author Sinniger Marcel 
  *
  */
 public class Midas {
