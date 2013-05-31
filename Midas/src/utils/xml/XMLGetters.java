@@ -18,7 +18,7 @@ import core.MidasLogs;
 
 /**
  * Classe utilitaire regroupant des fonctions générales pour récupérer des
- * informations dans une arborescence xml.
+ * informations dans une arborescence xml. 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
