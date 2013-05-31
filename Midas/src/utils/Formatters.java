@@ -16,7 +16,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * TOD
  * Met à disposition des méthodes statiques permettant de formatter certains
  * affichages sous forme textuelle.
  * 
