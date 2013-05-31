@@ -14,6 +14,8 @@ package gui.actions;
 
 import gui.Controller;
 import gui.UserAction;
+import gui.utils.Positions;
+import gui.utils.Positions.ScreenPosition;
 import gui.views.JNewTransaction;
 
 import java.awt.Dialog.ModalityType;
@@ -23,9 +25,10 @@ import java.awt.event.ActionListener;
 import settings.Language.Text;
 
 import core.Core;
+import core.components.FinancialTransaction;
 
 /**
- * 
+ * Contrôleur et action de l'ajout d'une transaction.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -36,8 +39,9 @@ import core.Core;
 public class AcNewTransaction extends UserAction {
    
    private JNewTransaction view;
-   
    private Controller controller;
+   
+   private FinancialTransaction transaction;
 
    /**
     * @param core
@@ -53,11 +57,25 @@ public class AcNewTransaction extends UserAction {
     */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-      view = new JNewTransaction(controller);
+      transaction = core.createFinancialTransaction();
       
+      view = new JNewTransaction(controller, transaction);
+      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.TRANSACTION_CREATION_TITLE);
+      view.setResizable(false);
+      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
+      
+      initListeners(core);
+
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);  
+   }
+   
+   private void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+            transaction.setDate(view.getDate());
+            core.saveFinancialTransaction(transaction);
             view.dispose();
          }
       });
@@ -70,9 +88,6 @@ public class AcNewTransaction extends UserAction {
          }
       });
     
-    view.setTitle(Text.APP_TITLE.toString() + " - " + Text.TRANSACTION_CREATION_TITLE);
-    view.setModalityType(ModalityType.APPLICATION_MODAL);
-    view.setVisible(true);  
    }
 
 }

@@ -17,22 +17,26 @@ import gui.View;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
-import gui.component.JTimeSliceChooser;
 import gui.component.JValidateCancel;
-import gui.component.combobox.JComboBoxTransactionType;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.controller.combobox.ComboBoxUser;
 import gui.utils.StandardInsets;
+import gui.utils.TextChangedListener;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.Observable;
 
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
+import core.MidasLogs;
+import core.components.FinancialTransaction;
 
 /**
  * Nouvelle transaction sur un compte.
@@ -51,30 +55,34 @@ public class JNewTransaction extends JDialog implements View {
    private static final long serialVersionUID = -3182363764437829156L;
    
    private Controller controller;
+   private FinancialTransaction transaction;
    
    //Composants
    private ComboBoxAccount accounts;
-   private JComboBoxTransactionType cttType;
    private ComboBoxUser users;
-   private JLabelTextPanel ltpReason;
    private JLabelMoneyPanel lmpAmount;
+   private JLabelTextPanel ltpReason;
    private JDateInput ditDate;
 
-   private JTimeSliceChooser rcrRecurrenceOptions;
-   
    private JValidateCancel vclActions;
    
-   public JNewTransaction(Controller controller) {
+   public JNewTransaction(Controller controller, FinancialTransaction transaction) {
       this.controller = controller;
+      this.transaction = transaction;
+      
+      initContent();
+      initListeners();
       setContentPane(buildContent());
       pack();
    }
    
-   public JPanel buildContent() {
+   /**
+    * Construit et place les composants de l'interface.
+    * @return Le panel contenant les composants.
+    */
+   private JPanel buildContent() {
       JPanel pnlContent = new JPanel();
       pnlContent.setLayout(new GridBagLayout());
-      
-      initContent();
       
       GridBagConstraints constraints = new GridBagConstraints();
       constraints.insets = new StandardInsets();
@@ -87,53 +95,121 @@ public class JNewTransaction extends JDialog implements View {
       constraints.gridy = 0;
       pnlContent.add(accounts.getGraphicalComponent(), constraints);
       
-      constraints.gridx = 1;
-      pnlContent.add(cttType, constraints);
       
-      constraints.gridx = 0;
       constraints.gridy = 1;
       pnlContent.add(users.getGraphicalComponent(), constraints);
-      
-      constraints.gridx = 1;
-      pnlContent.add(ltpReason, constraints);
-      
-      constraints.gridx = 2;
+
+      constraints.gridy = 2;
       pnlContent.add(lmpAmount, constraints);
       
-      constraints.gridx = 0;
-      constraints.gridy = 2;
+      constraints.gridy = 3;
+      pnlContent.add(ltpReason, constraints);
+      
+      constraints.gridy = 4;
       pnlContent.add(ditDate, constraints);
       
-      constraints.gridx = 0;
-      constraints.gridy = 3;
-      pnlContent.add(rcrRecurrenceOptions, constraints);
-      
-      constraints.gridx = 2;
-      constraints.gridy = 4;
+      constraints.gridy = 5;
       pnlContent.add(vclActions, constraints);
       
       return pnlContent;
    }
    
-   public void initContent() {
+   /**
+    * Initialise les composants de la fenêtre.
+    */
+   private void initContent() {
       accounts = new ComboBoxAccount(controller.getCore());
-      cttType = new JComboBoxTransactionType();
       users = new ComboBoxUser(controller.getCore());
       ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
       lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
-      rcrRecurrenceOptions = new JTimeSliceChooser();
-
       vclActions = new JValidateCancel();
    }
    
+   private void initListeners() {
+     ltpReason.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            transaction.setReason(ltpReason.getText());
+            checkItemIntegrity();
+         }
+      });
+      
+      lmpAmount.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            try {
+               transaction.setAmount(Double.parseDouble(lmpAmount.getText()));
+               lmpAmount.setValid();
+            } catch (NumberFormatException e) {
+               MidasLogs.errors.push(e.getMessage());
+               lmpAmount.setInvalid();
+            }
+            checkItemIntegrity();
+         }
+      });
+      
+      accounts.addSelectedChangedListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            if(accounts.isValidItemSelected()) {
+               transaction.setAccount(accounts.getSelectedItem());
+            }
+            checkItemIntegrity();
+         }
+      });
+      
+      users.addSelectedChangedListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            if(users.isValidItemSelected()) {
+               transaction.setUser(users.getSelectedItem());
+            }
+            checkItemIntegrity();
+         }
+      });
+   }
+   
+   /**
+    * Ajoute un écouteur sur le bouton de validation.
+    * @param listener Ecouteur ajouté.
+    */
    public void addValidateListener(ActionListener listener) {
       vclActions.addValidateListener(listener);
    }
    
+   /**
+    * Ajoute un écouteur sur le bouton d'annulation.
+    * @param listener Ecouteur ajouté.
+    */
    public void addCancelListener(ActionListener listener) {
       vclActions.addCancelListener(listener);
+   }
+   
+   /**
+    * Retourne la date sélectionnée par l'utilisateur.
+    * @return La date choisie.
+    */
+   public Date getDate() {
+      return ditDate.getDate();
+   }
+   
+   /**
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
+    */
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ltpReason.getText().length() != 0 
+                    && accounts.isValidItemSelected()
+                    && users.isValidItemSelected()
+                    && lmpAmount.isNumber();
+      vclActions.setEnableValidateButton(checkResult);
    }
 
    /* (non-Javadoc)

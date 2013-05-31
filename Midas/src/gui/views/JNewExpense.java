@@ -116,7 +116,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
          @Override
          public void actionPerformed(ActionEvent e) {
             if(budgets.isValidItemSelected()) {
-               expense.setBudget(budgets.getSelectedBudget());
+               expense.setBudget(budgets.getSelectedItem());
             }
             checkItemIntegrity();
          }

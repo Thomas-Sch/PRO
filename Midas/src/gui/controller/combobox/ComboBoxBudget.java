@@ -88,7 +88,7 @@ public class ComboBoxBudget extends Controller {
    /**
     * @return le budget séléctionné.
     */
-   public Budget getSelectedBudget() {
+   public Budget getSelectedItem() {
       return (Budget) view.getSelectedItem();
    }
 
