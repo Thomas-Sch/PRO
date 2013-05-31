@@ -17,7 +17,7 @@ import java.util.Date;
 import settings.Language.Text;
 
 /**
- * Représente les intervalle de temps à disposition et fourni quelques méthodes
+ * Représente les intervalles de temps à disposition et fourni quelques méthodes
  * de traitement.
  * 
  * @author Biolzi Sébastien

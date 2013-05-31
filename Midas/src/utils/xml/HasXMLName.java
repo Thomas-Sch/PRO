@@ -13,16 +13,22 @@
 package utils.xml;
 
 /**
- * TODO
+ * Indique la présence d'un nom utilisable pour les fichiers xml.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public interface HasXMLName {
-   
+
+   /**
+    * Retourne le nom à utiliser comme noeud xml.
+    * 
+    * @return Le nom xml de l'objet.
+    */
    public String getXMLName();
 
 }

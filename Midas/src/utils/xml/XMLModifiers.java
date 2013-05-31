@@ -14,40 +14,49 @@ package utils.xml;
 
 import org.jdom2.Attribute;
 import org.jdom2.Element;
-
 import core.MidasLogs;
 
 /**
  * Classe utilitaire regroupant des fonctions générales pour modifier des
  * informations dans une arborescence xml.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class XMLModifiers {
-   
+
    /**
     * Ajoute un enfant direct au noeud parent donné, et affecte la valeur
     * entière spécifiée à l'enfant.
-    * @param parent - le parent auquel accrocher l'enfant.
-    * @param childName - l'enfant à accrocher au noeud parent.
-    * @param childValue - la valeur de l'enfant.
+    * 
+    * @param parent
+    *           - le parent auquel accrocher l'enfant.
+    * @param childName
+    *           - l'enfant à accrocher au noeud parent.
+    * @param childValue
+    *           - la valeur de l'enfant.
     */
    public static void addChild(Element parent, String childName, int childValue) {
       addChild(parent, childName, Integer.toString(childValue));
    }
-   
+
    /**
     * Ajoute un enfant direct au noeud parent donné, et affecte la valeur
     * spécifiée à l'enfant.
-    * @param parent - le parent auquel accrocher l'enfant.
-    * @param childName - l'enfant à accrocher au noeud parent.
-    * @param childValue - la valeur de l'enfant.
+    * 
+    * @param parent
+    *           - le parent auquel accrocher l'enfant.
+    * @param childName
+    *           - l'enfant à accrocher au noeud parent.
+    * @param childValue
+    *           - la valeur de l'enfant.
     */
-   public static void addChild(Element parent, String childName, String childValue) {
+   public static void addChild(Element parent, String childName,
+         String childValue) {
       if (parent == null) {
          MidasLogs.errors.push("XmlModifiers", "Parent is missing.");
       }
@@ -63,26 +72,36 @@ public class XMLModifiers {
          parent.addContent(newChild);
       }
    }
-   
+
    /**
     * Ajoute un attribut au noeud donné, et affecte la valeur entière spécifiée
     * à l'attribut.
-    * @param parent - le parent auquel ajouter l'attribut.
-    * @param attributeName - l'attribut à ajouter au noeud.
-    * @param attributeValue - la valeur de l'attribut.
+    * 
+    * @param parent
+    *           - le parent auquel ajouter l'attribut.
+    * @param attributeName
+    *           - l'attribut à ajouter au noeud.
+    * @param attributeValue
+    *           - la valeur de l'attribut.
     */
-   public static void addAttribute(Element node, String attributeName, int attributeValue) {
+   public static void addAttribute(Element node, String attributeName,
+         int attributeValue) {
       addAttribute(node, attributeName, Integer.toString(attributeValue));
    }
-   
+
    /**
     * Ajoute un attribut au noeud donné, et affecte la valeur spécifiée à
     * l'attribut.
-    * @param parent - le parent auquel ajouter l'attribut.
-    * @param attributeName - l'attribut à ajouter au noeud.
-    * @param attributeValue - la valeur de l'attribut.
+    * 
+    * @param parent
+    *           - le parent auquel ajouter l'attribut.
+    * @param attributeName
+    *           - l'attribut à ajouter au noeud.
+    * @param attributeValue
+    *           - la valeur de l'attribut.
     */
-   public static void addAttribute(Element node, String attributeName, String attributeValue) {
+   public static void addAttribute(Element node, String attributeName,
+         String attributeValue) {
       if (node == null) {
          MidasLogs.errors.push("XmlModifiers", "Node is missing.");
       }
