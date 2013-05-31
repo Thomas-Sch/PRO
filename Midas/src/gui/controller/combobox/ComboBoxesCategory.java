@@ -66,17 +66,17 @@ public class ComboBoxesCategory extends Controller {
    protected void initListeners() {
       view.addSelectChangedPrimaryListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
-            if (view.isCreateNewCategorySelected()) {
+            if (view.isCreateNewItemSelected()) {
                AcCreateCategory action = new AcCreateCategory(getCore());
                action.actionPerformed(e);
-               view.setSelectedCategory(action.getCreatedCategory());
+               view.setSelectedPrimaryItem(action.getCreatedCategory());
             }else if(view.isPrimaryInviteSelected()) {
                view.setChildrenVisible(false);
             }else {
-               Category parent = view.getSelectedPrimaryCategory();
+               Category parent = view.getSelectedPrimaryItem();
                CategoryList p = getCore().getChildren(parent);
                children.setItems(p.getList());
-               view.setSelectedCategory(parent);
+               view.setSelectedPrimaryItem(parent);
                view.setChildrenVisible(true);
             }
          }
@@ -85,13 +85,13 @@ public class ComboBoxesCategory extends Controller {
       view.addSelectChangedChildrenListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            if (view.isCreateNewSubCategorySelected()) {
-               Category temp = view.getSelectedPrimaryCategory();
+            if (view.isCreateNewChildCategorySelected()) {
+               Category temp = view.getSelectedPrimaryItem();
               
                AcCreateSubCategory action = new AcCreateSubCategory(getCore(), temp, children);
                action.actionPerformed(e);
                
-               view.setSelectedSubCategory(action.getCreatedCategory());
+               view.setSelectedChildItem(action.getCreatedCategory());
             }
          }
       });
@@ -111,5 +111,42 @@ public class ComboBoxesCategory extends Controller {
    
    public CategoryList getChildrenCategories() {
       return children;
+   }
+   
+   /**
+    * Ajout un écouteur de changement de sélection sur la vue.
+    * @param listener Ecouteur ajouté.
+    */
+   public void addSelectedChangedListener(ActionListener listener) {
+      view.addSelectChangedPrimaryListener(listener);
+      view.addSelectChangedChildrenListener(listener);
+   }
+   
+   /**
+    * Renvoie l'item sélectionné dans l'interface.
+    * @return l'item sélectionné dans l'interface.
+    */
+   public Category getSelectedItem() {
+      
+      // On regarde ce que l'utilisateur à selectionné : Catégorie simple ou 
+      // sous catégorie ?.
+      if(view.isValidPrimaryItemSelected()) {
+         if(view.isValidChildItemSelected()) {
+            return view.getSelectedChildItem();
+         } 
+         // Si aucune catégorie enfant n'est sélectionnée alors on renvoi
+         // la catégorie parente.
+         return view.getSelectedPrimaryItem();
+      }
+      return null;
+   }
+   
+   /**
+    * Retourne True si l'item sélectionné dans la liste est actuellement
+    * un compte et pas un libellé d'invitation.
+    * @return True si un compte est sélectionné.
+    */
+   public boolean isValidItemSelected() {
+      return view.isValidPrimaryItemSelected();
    }
 }

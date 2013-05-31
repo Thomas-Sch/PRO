@@ -59,6 +59,7 @@ public class JComboBoxBudget extends JComboBoxTemplate<Budget> {
       setModel(new DefaultComboBoxModel<Budget>(list.toArray(temp)));
    }
    
+   
    private class SortByName implements Comparator<Budget> {
       @Override
       public int compare(Budget arg0, Budget arg1) {

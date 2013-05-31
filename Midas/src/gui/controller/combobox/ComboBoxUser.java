@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
+import core.components.User;
 import core.components.UserList;
 
 /**
@@ -67,5 +68,27 @@ public class ComboBoxUser extends Controller {
       return view;
    }
    
-
+   /**
+    * Retourne True si l'item sélectionné dans la liste est actuellement
+    * un compte et pas un libellé d'invitation.
+    * @return True si un compte est sélectionné.
+    */
+   public boolean isValidItemSelected() {
+      return view.isValidItemSelected();
+   }
+   
+   /**
+    * @return l'utilisateur séléctionné.
+    */
+   public User getSelectedItem() {
+      return (User) view.getSelectedItem();
+   }
+   
+   /**
+    * Ajout un écouteur de changement de sélection sur la vue.
+    * @param listener Ecouteur passé.
+    */
+   public void addSelectedChangedListener(ActionListener listener) {
+      view.addActionListener(listener);
+   }
 }

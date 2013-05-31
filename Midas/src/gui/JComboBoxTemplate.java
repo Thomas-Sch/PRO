@@ -36,7 +36,11 @@ public abstract class JComboBoxTemplate<E> extends JComboBox<E> implements View{
    
    private boolean firstUse = true;
    
-   
+   /**
+    * Est-ce que le message d'invite à ajouter un nouvel item est
+    * sélectionné ?
+    * @return True si c'est le cas.
+    */
    public boolean isCreateNewSelected() {
       if(firstUse) {
          return getSelectedIndex() == INDEX_NEW_FIRST_USE;
@@ -46,24 +50,49 @@ public abstract class JComboBoxTemplate<E> extends JComboBox<E> implements View{
       }
    }
    
+   /**
+    * Est-ce que le message d'invite à sélectionner un item de la liste est
+    * sélectionné ?
+    * @return True si c'est le cas.
+    */
    public boolean isInviteSelected() {
       return getSelectedIndex() == 0;
    }
    
+   /**
+    * Défini que le composant a déjà été utilisé une fois.
+    * @param firstUse
+    */
    public void setFirstUse(boolean firstUse) {
       this.firstUse = firstUse;
    }
    
+   /**
+    * Renvoie si la comboBox à déjà été utilisée.
+    * @return True => Déjà utilisée au moins une fois.
+    */
    public boolean isFirstUse() {
       return firstUse;
    }
    
+   /**
+    * Mise à jour des index de sélection du composant.
+    * @return
+    */
    public int updateIndex() {
       int index = INDEX_NEW;
       if(isFirstUse()) {
          index = INDEX_NEW_FIRST_USE;
-      }
-      
+      }  
       return index;
    }
+   
+   /**
+    * Vérifie si l'item sélectionné dans la liste n'est pas un invite d'action.
+    * @return Si l'item sélectionné dans la liste n'est pas un invite d'action.
+    */
+   public boolean isValidItemSelected() {
+      return !(isCreateNewSelected() || isInviteSelected());
+   }
+
 }

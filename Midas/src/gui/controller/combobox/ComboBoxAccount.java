@@ -41,6 +41,7 @@ public class ComboBoxAccount extends Controller {
 
    /**
     * Crée le contrôleur d'une ComboBox
+    * @param core Coeur logique de l'application.
     */
    public ComboBoxAccount(Core core) {
       super(core);
@@ -66,6 +67,10 @@ public class ComboBoxAccount extends Controller {
       });
    }
    
+   /**
+    * Ajout un écouteur de changement de sélection sur la vue.
+    * @param listener
+    */
    public void addSelectedChangedListener(ActionListener listener) {
       view.addSelectedChangedListener(listener);
    }
@@ -74,16 +79,20 @@ public class ComboBoxAccount extends Controller {
    public JComboBoxAccounts getGraphicalComponent() {
       return view;
    }
+   
+   /**
+    * Retourne True si l'item sélectionné dans la liste est actuellement
+    * un compte et pas un libellé d'invitation.
+    * @return True si un compte est sélectionné.
+    */
+   public boolean isValidItemSelected() {
+      return view.isValidItemSelected();
+   }
 
    /**
     * @return le compte séléctionné.
     */
-   public Account getSelectedAccount() {
+   public Account getSelectedItem() {
       return (Account) view.getSelectedItem();
    }
-   
-   public boolean isValidAccountSelected() {
-      return !(view.isCreateNewSelected() || view.isInviteSelected());
-   }
-
 }

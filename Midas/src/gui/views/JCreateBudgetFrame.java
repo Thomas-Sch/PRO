@@ -90,8 +90,8 @@ public class JCreateBudgetFrame extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
-            vclActions.setEnableValidateButton(isValid());
             budget.setName(ltpName.getText());
+            vclActions.setEnableValidateButton(isValid());
          }
       });
       
@@ -129,8 +129,8 @@ public class JCreateBudgetFrame extends JDialog implements View{
          @Override
          public void actionPerformed(ActionEvent e) {
             vclActions.setEnableValidateButton(isValid());
-            if(accounts.isValidAccountSelected()) {
-               budget.setBindedAccount(accounts.getSelectedAccount());
+            if(accounts.isValidItemSelected()) {
+               budget.setBindedAccount(accounts.getSelectedItem());
             }
          }
       });      
@@ -235,7 +235,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
          return false;
       } else {
          return ltpName.getText().length() != 0 
-                && accounts.isValidAccountSelected()
+                && accounts.isValidItemSelected()
                 && lmpAmount.isNumber();
       }
    }

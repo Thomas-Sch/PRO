@@ -17,19 +17,25 @@ import gui.View;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
-import gui.component.JTimeSliceChooser;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxBudget;
 import gui.controller.combobox.ComboBoxUser;
 import gui.controller.combobox.ComboBoxesCategory;
 import gui.utils.StandardInsets;
+import gui.utils.TextChangedListener;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.Observable;
 
 import javax.swing.JPanel;
+import javax.swing.event.DocumentEvent;
+
+import core.MidasLogs;
+import core.components.FinancialTransaction;
 
 import settings.Language.Text;
 
@@ -50,6 +56,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    private static final long serialVersionUID = 9007162125947939904L;
    
    private Controller controller;
+   private FinancialTransaction expense;
    
    //Composants
    private ComboBoxBudget budgets;
@@ -58,23 +65,89 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    private JLabelTextPanel ltpReason;
    private JLabelMoneyPanel lmpAmount;
    private JDateInput ditDate;
-
-   private JTimeSliceChooser rcrRecurrenceOptions;
    
    private JValidateCancel vclActions;
    
-   
-   public JNewExpense(Controller controller) {
+   /**
+    * Crée une fenêtre pour ajouter une dépense à un budget.
+    * @param controller Contrôleur de la fenêtre.
+    * @param expense Nouvelle dépense à remplir.
+    */
+   public JNewExpense(Controller controller, FinancialTransaction expense) {
       this.controller = controller;
+      this.expense = expense;
+      
+      initContent();
+      initListeners();
       setContentPane(buildContent());
       pack();
+   }
+   
+   /**
+    * Initialise les écouteurs propre à l'interface.
+    */
+   private void initListeners() {
+      ltpReason.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            expense.setReason(ltpReason.getText());
+            checkItemIntegrity();
+         }
+      });
+      
+      lmpAmount.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            try {
+               expense.setAmount(Double.parseDouble(lmpAmount.getText()));
+               lmpAmount.setValid();
+            } catch (NumberFormatException e) {
+               MidasLogs.errors.push(e.getMessage());
+               lmpAmount.setInvalid();
+            }
+            checkItemIntegrity();
+         }
+      });
+      
+      budgets.addSelectedChangedListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            if(budgets.isValidItemSelected()) {
+               expense.setBudget(budgets.getSelectedBudget());
+            }
+            checkItemIntegrity();
+         }
+      });
+      
+      users.addSelectedChangedListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            if(users.isValidItemSelected()) {
+               expense.setUser(users.getSelectedItem());
+            }
+            checkItemIntegrity();
+         }
+      });
+      
+      categories.addSelectedChangedListener(new ActionListener() {
+         
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            if(categories.isValidItemSelected()) {
+               expense.setCategory(categories.getSelectedItem());
+            }
+            checkItemIntegrity();
+         }
+      });
    }
    
    private JPanel buildContent() {
       JPanel pnlContent = new JPanel();
       pnlContent.setLayout(new GridBagLayout());
-      
-      initContent();
       
       GridBagConstraints constraints = new GridBagConstraints();
       
@@ -105,9 +178,6 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       pnlContent.add(ditDate, constraints);
       
       constraints.gridy = 6;
-      pnlContent.add(rcrRecurrenceOptions, constraints);
-      
-      constraints.gridy = 7;
       constraints.anchor = GridBagConstraints.EAST;
       constraints.fill = GridBagConstraints.NONE;
       pnlContent.add(vclActions, constraints);
@@ -123,8 +193,6 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
-      rcrRecurrenceOptions = new JTimeSliceChooser();
-      
       vclActions = new JValidateCancel();
    }
    
@@ -134,6 +202,28 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    
    public void addCancelListener(ActionListener listener) {
       vclActions.addCancelListener(listener);
+   }
+   
+   /**
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
+    */
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ltpReason.getText().length() != 0 
+                    && budgets.isValidItemSelected()
+                    && users.isValidItemSelected()
+                    && categories.isValidItemSelected()
+                    && lmpAmount.isNumber();
+      vclActions.setEnableValidateButton(checkResult);
+   }
+   
+   /**
+    * Renvoie la date choisie pas l'utilisateur.
+    * @return la date choisie pas l'utilisateur.
+    */
+   public Date getDate() {
+      return ditDate.getDate();
    }
 
    /* (non-Javadoc)

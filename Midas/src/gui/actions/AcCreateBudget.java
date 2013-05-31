@@ -54,7 +54,7 @@ public class AcCreateBudget extends UserAction {
    }
 
    @Override
-   protected void execute(final Core core, ActionEvent event, Object[] dependencies) {
+   protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       // Initialisation de la récurrence du budget.
       recurrence = core.createReccurence();      
       budget = core.createBudget();
@@ -63,6 +63,20 @@ public class AcCreateBudget extends UserAction {
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.BUDGET_CREATION_TITLE);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       
+      initListeners(core);
+      
+      budget.addObserver(view);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+   
+   public Budget getCreatedBudget() {
+      return budget;
+   }
+   
+   private void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
@@ -93,16 +107,6 @@ public class AcCreateBudget extends UserAction {
             view.dispose();
          }
       });
-      
-      budget.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
-   }
-   
-   public Budget getCreatedBudget() {
-      return budget;
    }
 
 }

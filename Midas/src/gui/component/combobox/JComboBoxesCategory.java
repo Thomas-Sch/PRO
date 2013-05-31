@@ -15,7 +15,7 @@ package gui.component.combobox;
 import gui.View;
 import gui.controller.combobox.ComboBoxesCategory;
 
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
@@ -56,16 +56,28 @@ public class JComboBoxesCategory extends JPanel implements View {
       cbcChildren.setVisible(false);
    }
    public void buildContent() {
-      setLayout(new FlowLayout(FlowLayout.LEFT, 5,0));
+      setLayout(new GridLayout(1,2,10,0));
       add(cbcPrimary);
       add(cbcChildren);
    }
    
-   public Category getSelectedPrimaryCategory() {
+   /**
+    * Renvoi l'item sélectionné dans la liste de catégories principales.
+    * @return La catégorie sélectionnée.
+    */
+   public Category getSelectedPrimaryItem() {
       return (Category)cbcPrimary.getSelectedItem();
    }
    
-   public boolean isCreateNewCategorySelected() {
+   /**
+    * Renvoi l'item sélectionné dans la liste de catégories enfant.
+    * @return La catégorie sélectionnée.
+    */
+   public Category getSelectedChildItem() {
+      return (Category)cbcChildren.getSelectedItem();
+   }
+   
+   public boolean isCreateNewItemSelected() {
       return cbcPrimary.isCreateNewSelected();      
    }
    
@@ -73,30 +85,73 @@ public class JComboBoxesCategory extends JPanel implements View {
       return cbcPrimary.isInviteSelected();
    }
    
-   public boolean isCreateNewSubCategorySelected() {
+   public boolean isCreateNewChildCategorySelected() {
       return cbcChildren.isCreateNewSelected();
    }
    
-   public void setSelectedCategory(Category category) {
+   /**
+    * Renvoie si l'item sélectionné dans la slite n'est pas un invite d'action.
+    * @return true si l'item sélectioné est valide.
+    */
+   public boolean isValidPrimaryItemSelected() {
+      return cbcPrimary.isValidItemSelected();
+   }
+   
+   /**
+    * Renvoie si l'item sélectionné dans la liste n'est pas un
+    * invite d'action.
+    * @return true si l'item sélectionné est valide.
+    */
+   public boolean isValidChildItemSelected() {
+      return cbcChildren.isValidItemSelected();
+   }
+   
+   /**
+    * Force la sélection d'un item dans le composant.
+    * @param category Item que l'on veut voir sélectionné.
+    */
+   public void setSelectedPrimaryItem(Category category) {
       cbcPrimary.setSelectedItem(category);
    }
    
-   public void setSelectedSubCategory(Category category) {
+   /**
+    * Force la sélection d'un item dans le composant.
+    * @param category Item que l'on veut voir sélectionné.
+    */
+   public void setSelectedChildItem(Category category) {
       cbcChildren.setSelectedItem(category);
    }
    
+   /**
+    * Ajout un écouteur de changement de sélection sur la liste déroulante
+    * de catégorie principale.
+    * @param listener l'écouteur ajouté au composant.
+    */
    public void addSelectChangedPrimaryListener(ActionListener listener) {
       cbcPrimary.addActionListener(listener);
    }
    
+   /**
+    * Ajout un écouteur de changement de sélection sur la liste déroulante
+    * de catégorie secondaire.
+    * @param listener l'écouteur ajouté au composant.
+    */
    public void addSelectChangedChildrenListener(ActionListener listener) {
       cbcChildren.addActionListener(listener);
    }
-   
+      
+   /**
+    * Rends la liste déroulante de sélection de catégories secondaires invisible.
+    * @param visible
+    */
    public void setChildrenVisible(boolean visible) {
       cbcChildren.setVisible(visible);
    }
    
+   /**
+    * Définit les catégories que doit afficher le liste déroulante secondaire.
+    * @param categories Catégories à afficher.
+    */
    public void setChildrenData(CategoryList categories) {
       cbcChildren.setData(categories);
    }
@@ -109,5 +164,4 @@ public class JComboBoxesCategory extends JPanel implements View {
       cbcPrimary.update(arg0, arg1);
       cbcChildren.update(arg0, arg1);
    }
-
 }

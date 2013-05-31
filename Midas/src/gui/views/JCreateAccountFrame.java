@@ -19,7 +19,6 @@ import gui.component.JValidateCancel;
 import gui.utils.StandardInsets;
 import gui.utils.TextChangedListener;
 
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
@@ -61,15 +60,12 @@ public class JCreateAccountFrame extends JDialog implements View{
    /**
     * Construit une nouvelle fenêtre pour ajouter un compte.
     */
-   public JCreateAccountFrame(Component parent, Account account) {
+   public JCreateAccountFrame(Account account) {
       this.account = account;
       
       initComponent();
-      setContentPane(buildContent());
       initListeners();
-      setLocationRelativeTo(parent);
-      setResizable(false);
-      update(null, null);
+      setContentPane(buildContent());
       pack();
    }
    
@@ -169,23 +165,32 @@ public class JCreateAccountFrame extends JDialog implements View{
       return pnlContent;
    }
    
+   /**
+    * Initialise les composants de le fenêtre.
+    */
    private void initComponent() {
       ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL);
       ltpBankName = new JLabelTextPanel(Text.ACCOUNT_BANK_NAME_LABEL);
       ltpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL);
-      ltpThreshold.setText("0");
       ltpInitialAmount = new JLabelMoneyPanel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL);
-      ltpInitialAmount.setText("0");
       ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL);
       ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL);
       vcrActions = new JValidateCancel();
       vcrActions.setEnableValidateButton(true);
    }
    
+   /**
+    * Ajoute un écouteur sur le bouton de validation.
+    * @param listener l'écouteur ajouté.
+    */
    public void addValidateListener(ActionListener listener) {
       vcrActions.addValidateListener(listener);
    }
    
+   /**
+    * Ajout un écouteur sur le bouton d'annulation.
+    * @param listener l'écouteur ajouté.
+    */
    public void addCancelListener(ActionListener listener) {
       vcrActions.addCancelListener(listener);
    }

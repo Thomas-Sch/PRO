@@ -17,7 +17,6 @@ import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import gui.views.JCreateAccountFrame;
 
-import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,10 +52,10 @@ public class AcCreateAccount extends UserAction {
       account = core.createAccount();
             
       // Réglages de la fenêtre.
-      view = new JCreateAccountFrame((Component)event.getSource(), account);
+      view = new JCreateAccountFrame(account);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       view.setTitle(Text.APP_TITLE + " - " + Text.ACCOUNT_CREATION_TITLE);
-      
+      view.setResizable(false);
       initListeners(core);
       account.addObserver(view);
       
