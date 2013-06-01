@@ -43,7 +43,6 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
    private static final long serialVersionUID = 9096965303469092507L;
    
    private JInfoEditionLabel ielName;
-   
 
    /**
     * @param parent Fenêtre contenant le label.
@@ -99,7 +98,7 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
     */
    @Override
    public void buildContent() {
-      setLayout(new GridLayout(1, 0));
+      setLayout(new GridLayout(1, 2));
       add(ielName);
    }
 }

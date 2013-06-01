@@ -451,6 +451,28 @@ public class Core {
    public CategoryList getAllPrimaryCategories() {
       return primaryCategories;
    }
+   
+   public CategoryList getAllCategories() {
+      CategoryList result = new CategoryList(this);
+      
+      LinkedList<DBCategory> dbCategories = null;
+      try {
+         dbCategories = dbController.getAllDbCategories();
+      }
+      catch (DatabaseException e) {
+
+      }
+
+      if (dbCategories != null) {
+         LinkedList<Category> categoryTemp = new LinkedList<>();
+
+         for (DBCategory dbCategory : dbCategories) {
+            categoryTemp.add(new Category(this, dbCategory));
+         }
+         result.setItems(categoryTemp);
+      }
+      return result;
+   }
 
    /**
     * Retourne la liste de tous les budgets.

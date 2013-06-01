@@ -94,8 +94,7 @@ public class JManageCategory extends JManageFrame implements View{
             }
          }
       });
-   }
-   
+   }  
 
    /* (non-Javadoc)
     * @see gui.JManageFrame#setEnabledOnEdition(boolean)
