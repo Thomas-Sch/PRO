@@ -13,14 +13,14 @@
 package gui.controller;
 
 import gui.Controller;
-import gui.frameContent.JQuickExpense;
+import gui.component.JQuickExpense;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import core.Core;
-import core.MidasLogs;
+import core.components.FinancialTransaction;
 
 /**
  * Controleur pour le panel d'ajout de dépenses rapides.
@@ -33,39 +33,38 @@ import core.MidasLogs;
  */
 public class QuickExpense extends Controller{
    
-   JQuickExpense quickExpense;
+   JQuickExpense view;
+   FinancialTransaction expense;
    
    /**
     * 
     */
    public QuickExpense(Core core) {
       super(core);
-      
    }
    
    @Override
    protected void initComponents() {
-      quickExpense = new JQuickExpense(this);
+      expense = getCore().createFinancialTransaction();
+      view = new JQuickExpense(this, expense);
    }
    
    @Override
    protected void initListeners() {
-      quickExpense.getValidateButton().addActionListener(new ActionListener() {
+      view.addValidateListener(new ActionListener() {
          
          @Override
          public void actionPerformed(ActionEvent arg0) {
-            MidasLogs.messages.push("Validation d'un dépense !");
+            expense.setDate(view.getDate());
+            expense.setAccount(expense.getBudget().getBindedAccount());
+            getCore().saveFinancialTransaction(expense);
+            view.reset();
          }
       });
-   }
-   
-   
-   public JQuickExpense getJComponent() {
-      return quickExpense;
    }
 
    @Override
    public Component getGraphicalComponent() {
-      return null;
+      return view;
    }
 }

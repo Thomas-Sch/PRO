@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : JNewExpense.java
+ * Nom du fichier   : QuickExpense.java
  * ============================================================================
- * Date de création : 10 mai 2013
+ * Date de création : 28 avr. 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,37 +10,32 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.views;
+package gui.component;
 
 import gui.Controller;
-import gui.View;
-import gui.component.JDateInput;
-import gui.component.JLabelMoneyPanel;
-import gui.component.JLabelTextPanel;
-import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxBudget;
 import gui.controller.combobox.ComboBoxUser;
 import gui.controller.combobox.ComboBoxesCategory;
-import gui.utils.StandardInsets;
 import gui.utils.TextChangedListener;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-import java.util.Observable;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 
+import settings.Language.Text;
 import core.MidasLogs;
 import core.components.FinancialTransaction;
 
-import settings.Language.Text;
-
 /**
- * Fenêtre graphique pour ajouter une dépense.
+ * Panel permettant l'ajout d'une dépense rapide.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -48,44 +43,47 @@ import settings.Language.Text;
  * @author Sinniger Marcel
  *
  */
-public class JNewExpense extends javax.swing.JDialog implements View {
-
-   /**
-    * ID de sérialisation.
-    */
-   private static final long serialVersionUID = 9007162125947939904L;
-   
+public class JQuickExpense extends JPanel {
    private Controller controller;
    private FinancialTransaction expense;
    
-   //Composants
    private ComboBoxBudget budgets;
    private ComboBoxesCategory categories;
    private ComboBoxUser users;
    private JLabelTextPanel ltpReason;
    private JLabelMoneyPanel lmpAmount;
    private JDateInput ditDate;
-   
-   private JValidateCancel vclActions;
+   private JButton btnValidate;
    
    /**
-    * Crée une fenêtre pour ajouter une dépense à un budget.
-    * @param controller Contrôleur de la fenêtre.
-    * @param expense Nouvelle dépense à remplir.
+    * ID de série.
     */
-   public JNewExpense(Controller controller, FinancialTransaction expense) {
+   private static final long serialVersionUID = -3027141438435669187L;
+
+   /**
+    * 
+    */
+   public JQuickExpense(Controller controller, FinancialTransaction expense) {
       this.controller = controller;
       this.expense = expense;
       
       initContent();
       initListeners();
-      setContentPane(buildContent());
-      pack();
+      buildContent();
    }
    
-   /**
-    * Initialise les écouteurs propre à l'interface.
-    */
+   public void initContent() {
+      budgets = new ComboBoxBudget(controller.getCore());
+      categories = new ComboBoxesCategory(controller.getCore());
+      users = new ComboBoxUser(controller.getCore());
+      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
+      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
+      ditDate = new JDateInput(Text.DATE_LABEL);
+      
+      btnValidate = new JButton(Text.VALIDATE_BUTTON.toString());
+      btnValidate.setEnabled(false);
+   }
+   
    private void initListeners() {
       ltpReason.addTextChangedListener(new TextChangedListener() {
          
@@ -145,71 +143,50 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       });
    }
    
-   private JPanel buildContent() {
-      JPanel pnlContent = new JPanel();
-      pnlContent.setLayout(new GridBagLayout());
+   public void buildContent() {
+      GridBagLayout layout = new GridBagLayout();
+      setLayout(layout);
       
       GridBagConstraints constraints = new GridBagConstraints();
       
       constraints.fill = GridBagConstraints.HORIZONTAL;
-      constraints.anchor = GridBagConstraints.WEST;
-      constraints.insets = new StandardInsets();
-      constraints.weightx = 0.5;
-      constraints.weighty = 0.5;
       
+      constraints.insets = new Insets(5, 5, 5, 5);
+      constraints.weighty = 0.0;
+      
+      // Paramétrage des contraintes et ajout du panel d'alerte.
+      constraints.weightx = 0.1;
       constraints.gridx = 0;
       constraints.gridy = 0;
-      pnlContent.add(budgets.getGraphicalComponent(), constraints);
-      
-      constraints.gridy = 1;
-      pnlContent.add(categories.getGraphicalComponent(), constraints);
+      add(new JLabel(Text.QUICK_EXPENSE_LABEL.toString()), constraints);
       
       constraints.gridx = 0;
+      constraints.gridy = 1;
+      add(budgets.getGraphicalComponent(), constraints);
+      
+      
+      constraints.gridx = 1;
+      constraints.gridwidth = 1;
+      add(users.getGraphicalComponent(), constraints);
+      
+      
+      constraints.gridx = 2;
+      constraints.gridwidth = 1;
+      add(categories.getGraphicalComponent(), constraints);
+        
+      constraints.gridx = 0;
       constraints.gridy = 2;
-      pnlContent.add(users.getGraphicalComponent(), constraints);
+      add(ltpReason, constraints);
       
+      constraints.gridx = 1;
+      add(lmpAmount, constraints);
+      
+      constraints.gridx = 2;
+      add(ditDate, constraints);
+      
+      constraints.gridx = 4;
       constraints.gridy = 3;
-      pnlContent.add(ltpReason, constraints);
-      
-      constraints.gridy = 4;
-      pnlContent.add(lmpAmount, constraints);
-      
-      constraints.gridy = 5;
-      pnlContent.add(ditDate, constraints);
-      
-      constraints.gridy = 6;
-      constraints.anchor = GridBagConstraints.EAST;
-      constraints.fill = GridBagConstraints.NONE;
-      pnlContent.add(vclActions, constraints);
-      
-      return pnlContent;
-   }
-
-   private void initContent() {
-      budgets = new ComboBoxBudget(controller.getCore());
-      categories = new ComboBoxesCategory(controller.getCore());
-      users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
-      ditDate = new JDateInput(Text.DATE_LABEL);
-      
-      vclActions = new JValidateCancel();
-   }
-   
-   /**
-    * Ajoute un écouteur sur le bouton de validation.
-    * @param listener L'écouteur ajouté
-    */
-   public void addValidateListener(ActionListener listener) {
-      vclActions.addValidateListener(listener);
-   }
-   
-   /**
-    * Ajoute un écouteur sur le bouton d'annulation.
-    * @param listener L'écouteur ajouté.
-    */
-   public void addCancelListener(ActionListener listener) {
-      vclActions.addCancelListener(listener);
+      add(btnValidate, constraints);
    }
    
    /**
@@ -223,7 +200,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
                     && users.isValidItemSelected()
                     && categories.isValidItemSelected()
                     && lmpAmount.isNumber();
-      vclActions.setEnableValidateButton(checkResult);
+      btnValidate.setEnabled(checkResult);
    }
    
    /**
@@ -233,12 +210,25 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    public Date getDate() {
       return ditDate.getDate();
    }
-
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+   
+   /**
+    * Ajoute un écouteur sur le bouton de validation.
+    * @param listener Ecouteur ajouté.
     */
-   @Override
-   public void update(Observable arg0, Object arg1) {
-      // Pas d'update pour l'instant. Voir rapport.
+   public void addValidateListener(ActionListener listener) {
+      btnValidate.addActionListener(listener);
+   }
+   
+   /**
+    *  Restaure le contenu de l'interface.
+    */
+   public void reset() {
+      budgets.setInviteSelected();
+      categories.setInviteSelected();
+      users.setInviteSelected();
+      ltpReason.setText("");
+      lmpAmount.setText("0");
+      ditDate.setDate(new Date());
+      btnValidate.setEnabled(false);
    }
 }

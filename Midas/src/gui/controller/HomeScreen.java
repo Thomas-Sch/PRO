@@ -13,7 +13,7 @@
 package gui.controller;
 
 import gui.Controller;
-import gui.frameContent.JHomeScreen;
+import gui.component.JHomeScreen;
 import core.Core;
 
 /**

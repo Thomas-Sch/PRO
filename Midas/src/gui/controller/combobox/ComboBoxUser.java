@@ -91,4 +91,11 @@ public class ComboBoxUser extends Controller {
    public void addSelectedChangedListener(ActionListener listener) {
       view.addActionListener(listener);
    }
+   
+   /**
+    * Force le composant graphique à sélectionner l'invite d'action.
+    */
+   public void setInviteSelected() {
+      view.setInviteSelected();
+   }
 }

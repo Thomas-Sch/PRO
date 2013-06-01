@@ -10,11 +10,9 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.frameContent;
+package gui.component;
 
 import gui.Controller;
-import gui.component.JLabelMoneyPanel;
-import gui.component.JLabelTextPanel;
 import gui.utils.TextChangedListener;
 
 import java.awt.GridBagConstraints;

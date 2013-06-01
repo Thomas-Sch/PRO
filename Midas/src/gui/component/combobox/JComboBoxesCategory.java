@@ -164,4 +164,11 @@ public class JComboBoxesCategory extends JPanel implements View {
       cbcPrimary.update(arg0, arg1);
       cbcChildren.update(arg0, arg1);
    }
+   
+   /**
+    * Force le composant à sélectionner l'invite d'action.
+    */
+   public void setInviteSelected() {
+      cbcPrimary.setInviteSelected();
+   }
 }

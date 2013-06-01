@@ -75,5 +75,13 @@ public class JDateInput extends JPanel {
    public Date getDate() {
       return dchTime.getDate();
    }
+   
+   /**
+    * Fixe la date du composant.
+    * @param date La nouvelle date.
+    */
+   public void setDate(Date date) {
+      dchTime.setDate(date);
+   }
 
 }

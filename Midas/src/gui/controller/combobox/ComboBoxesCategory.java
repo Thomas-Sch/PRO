@@ -149,4 +149,11 @@ public class ComboBoxesCategory extends Controller {
    public boolean isValidItemSelected() {
       return view.isValidPrimaryItemSelected();
    }
+   
+   /**
+    * Force le composant graphique à sélectionner l'invite d'action.
+    */
+   public void setInviteSelected() {
+      view.setInviteSelected();
+   }
 }

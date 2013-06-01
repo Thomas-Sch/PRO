@@ -94,5 +94,12 @@ public abstract class JComboBoxTemplate<E> extends JComboBox<E> implements View{
    public boolean isValidItemSelected() {
       return !(isCreateNewSelected() || isInviteSelected());
    }
+   
+   /** 
+    * Force la liste à sélectionner l'invite d'action.
+    */
+   public void setInviteSelected() {
+      setSelectedIndex(0);
+   }
 
 }

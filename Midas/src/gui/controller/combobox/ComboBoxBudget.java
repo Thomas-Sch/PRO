@@ -100,4 +100,11 @@ public class ComboBoxBudget extends Controller {
    public boolean isValidItemSelected() {
       return view.isValidItemSelected();
    }
+   
+   /**
+    * Force le composant graphique à sélectionner l'invite d'action.
+    */
+   public void setInviteSelected() {
+      view.setInviteSelected();
+   }
 }

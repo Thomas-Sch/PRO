@@ -34,7 +34,7 @@
   <budget_name_label>Nom du budget</budget_name_label>
   <budget_description_label>Description</budget_description_label>
   <budget_binded_account_name_label>Nom du compte lié</budget_binded_account_name_label>
-  <budget_balance_label>Solde</budget_balance_label>
+  <budget_balance_label>Montant dépensé</budget_balance_label>
   <budget_limit_label>Plafond</budget_limit_label>
   
   <account_threshold_label>Seuil</account_threshold_label>
