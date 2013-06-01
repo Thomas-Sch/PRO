@@ -772,6 +772,8 @@ public class Core {
     */
    public void saveBudget(Budget budget) {
       try {
+         
+         
          dbController.saveToDatabase(budget.getDBBudget());
 
          if (!budgets.contains(budget)) {
