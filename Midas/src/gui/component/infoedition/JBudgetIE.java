@@ -123,7 +123,7 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
       ielName = new JInfoEditionLabel(Text.BUDGET_NAME_LABEL, data.getName());
       ielAccountName = new JInfoEditionLabel(Text.BUDGET_BINDED_ACCOUNT_NAME_LABEL, data.getBindedAccount().getName());
       mielLimit = new JMoneyInfoEditionLabel(Text.BUDGET_LIMIT_LABEL, String.valueOf(data.getLimit()));
-      mielAmount = new JMoneyInfoEditionLabel(Text.BUDGET_BALANCE_LABEL,"TEMP UNTIL FIX");
+      mielAmount = new JMoneyInfoEditionLabel(Text.BUDGET_BALANCE_LABEL, String.valueOf(data.getTotalOutgoings()));
       ielDescription = new JInfoEditionLabel(Text.ACCOUNT_DESCRIPTION_LABEL, data.getDescription());
       
       // Ajout des champs à la liste.
