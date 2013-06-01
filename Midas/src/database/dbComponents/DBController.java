@@ -1138,7 +1138,7 @@ public class DBController {
    public LinkedList<DBBudget> getAllDbBudgets() throws DatabaseException {
 
       String sqlString = "SELECT Budget.Bud_Id, Rec_Id, Name, Description, BudgetLimit, Enabled, Acc_ID " +
-                         "FROM Budget";
+                         "FROM Budget WHERE Enabled = 1";
       
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBBudget dbBudget;
