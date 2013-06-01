@@ -12,6 +12,7 @@
   <user_management_title>Gestion des auteurs</user_management_title>
   <budget_creation_title>Ajout d'un budget</budget_creation_title>
   <budget_fly_creation_title>Ajout d'un budget à la volée</budget_fly_creation_title>
+  <budget_management_title>Gestion des budgets</budget_management_title>
   <expense_creation_title>Nouvelle dépense</expense_creation_title>
   <transaction_creation_title>Nouvelle transaction</transaction_creation_title>
   
@@ -32,6 +33,9 @@
   
   <budget_name_label>Nom du budget</budget_name_label>
   <budget_description_label>Description</budget_description_label>
+  <budget_binded_account_name_label>Nom du compte lié</budget_binded_account_name_label>
+  <budget_balance_label>Solde</budget_balance_label>
+  <budget_limit_label>Plafond</budget_limit_label>
   
   <account_threshold_label>Seuil</account_threshold_label>
   <account_initial_amount_label>Montant initial</account_initial_amount_label>

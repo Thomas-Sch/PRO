@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : JFileMenu.java
+ * Nom du fichier   : JInterrogationMenu.java
  * ============================================================================
  * Date de création : 4 mai 2013
  * ============================================================================
@@ -10,17 +10,13 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.menu;
-
-import java.awt.event.ActionListener;
+package gui.component.menu;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import settings.Language.Text;
-
 /**
- * Représente le menu fichier de l'application.
+ * Représente le menu ? de l'application.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -28,34 +24,25 @@ import settings.Language.Text;
  * @author Sinniger Marcel
  *
  */
-public class JFileMenu extends JMenu {
+public class JInterrogationMenu extends JMenu {
 
    /**
     * ID de sérialisation
     */
-   private static final long serialVersionUID = 1583638274791297470L;
-   
-   JMenuItem mniFilequit;
-   
+   private static final long serialVersionUID = 5260470866242311214L;
    
    /**
-    * 
+    * Contructeur du menu graphique "?".
     */
-   public JFileMenu() {
-      this.setText("Fichier");
-      
-      initComponents();
-   }
-   
-   /**
-    * Initialise les composants graphiques.
-    */
-   private void initComponents() {
-      mniFilequit = new JMenuItem(Text.ACTION_QUIT.toString());
-      add(mniFilequit);
-   }
-   
-   public void addQuitListener(ActionListener listener) {
-      mniFilequit.addActionListener(listener);
+   public JInterrogationMenu() {
+      setText("?");
+
+      // Option ?->Aide...
+      JMenuItem mniInterrogationHelp = new JMenuItem("Aide...");
+      add(mniInterrogationHelp);
+
+      // Option ?->A propos...
+      JMenuItem mniInterrogationAbout = new JMenuItem("A propos...");
+      add(mniInterrogationAbout); 
    }
 }

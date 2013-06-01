@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.menu;
+package gui.component.menu;
 
 import java.awt.event.ActionListener;
 

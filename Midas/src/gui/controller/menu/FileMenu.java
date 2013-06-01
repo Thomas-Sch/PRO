@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : InterrogationMenu.java
+ * Nom du fichier   : FileMenu.java
  * ============================================================================
  * Date de création : 4 mai 2013
  * ============================================================================
@@ -10,17 +10,18 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui.controller.menu;
 
 import gui.Controller;
-import gui.menu.JInterrogationMenu;
+import gui.actions.AcQuit;
+import gui.component.menu.JFileMenu;
 
 import java.awt.Component;
 
 import core.Core;
 
 /**
- * TODO
+ * Contrôleur du menu fichier.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -28,14 +29,13 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class InterrogationMenu extends Controller {
-   
-   JInterrogationMenu view;
-   
+public class FileMenu extends Controller {
+
+   JFileMenu view;
    /**
     * @param core
     */
-   public InterrogationMenu(Core core) {
+   public FileMenu(Core core) {
       super(core);
    }
 
@@ -44,7 +44,7 @@ public class InterrogationMenu extends Controller {
     */
    @Override
    protected void initComponents() {
-      view = new JInterrogationMenu();
+      view = new JFileMenu();
    }
 
    /* (non-Javadoc)
@@ -52,8 +52,7 @@ public class InterrogationMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      // TODO Auto-generated method stub
-
+      view.addQuitListener(new AcQuit(getCore(), null));
    }
 
    /* (non-Javadoc)
@@ -61,7 +60,6 @@ public class InterrogationMenu extends Controller {
     */
    @Override
    public Component getGraphicalComponent() {
-      // TODO Auto-generated method stub
       return view;
    }
 

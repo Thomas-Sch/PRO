@@ -27,7 +27,7 @@ import core.MidasLogs;
 
 
 /**
- * TODO
+ * Enumeration des champs de texte de l'application.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -56,6 +56,7 @@ public class Language {
       USER_MANAGEMENT_TITLE,
       BUDGET_CREATION_TITLE,
       BUDGET_FLY_CREATION_TITLE,
+      BUDGET_MANAGEMENT_TITLE,
       EXPENSE_CREATION_TITLE,
       TRANSACTION_CREATION_TITLE,
       
@@ -78,6 +79,9 @@ public class Language {
       
       BUDGET_DESCRIPTION_LABEL,
       BUDGET_NAME_LABEL,
+      BUDGET_BINDED_ACCOUNT_NAME_LABEL,
+      BUDGET_BALANCE_LABEL,
+      BUDGET_LIMIT_LABEL,
       
       ACCOUNT_THRESHOLD_LABEL,
       ACCOUNT_INITIAL_AMOUNT_LABEL,

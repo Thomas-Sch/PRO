@@ -10,10 +10,10 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui.controller.menu;
 
 import gui.Controller;
-import gui.menu.JViewMenu;
+import gui.component.menu.JViewMenu;
 
 import java.awt.Component;
 

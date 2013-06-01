@@ -61,7 +61,7 @@ public class ComboBoxBudget extends Controller {
       view.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
             if (view.isCreateNewSelected()) {
-               AcCreateBudget action = new AcCreateBudget(getCore(), ComboBoxBudget.this);
+               AcCreateBudget action = new AcCreateBudget(getCore());
                action.actionPerformed(arg0);
                view.setSelectedItem(action.getCreatedBudget());
             }

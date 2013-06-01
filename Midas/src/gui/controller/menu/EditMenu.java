@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : FileMenu.java
+ * Nom du fichier   : EditMenu.java
  * ============================================================================
  * Date de création : 4 mai 2013
  * ============================================================================
@@ -10,18 +10,24 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui.controller.menu;
 
 import gui.Controller;
-import gui.actions.AcQuit;
-import gui.menu.JFileMenu;
+import gui.actions.AcCreateOnTheFlyBudget;
+import gui.actions.AcManageAccount;
+import gui.actions.AcManageBudget;
+import gui.actions.AcManageCategory;
+import gui.actions.AcManageUser;
+import gui.actions.AcNewExpense;
+import gui.actions.AcNewTransaction;
+import gui.component.menu.JEditMenu;
 
 import java.awt.Component;
 
 import core.Core;
 
 /**
- * Contrôleur du menu fichier.
+ * Contrôleur du menu d'édition.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -29,13 +35,13 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class FileMenu extends Controller {
+public class EditMenu extends Controller {
+   JEditMenu view;
 
-   JFileMenu view;
    /**
     * @param core
     */
-   public FileMenu(Core core) {
+   public EditMenu(Core core) {
       super(core);
    }
 
@@ -44,7 +50,7 @@ public class FileMenu extends Controller {
     */
    @Override
    protected void initComponents() {
-      view = new JFileMenu();
+      view = new JEditMenu();
    }
 
    /* (non-Javadoc)
@@ -52,7 +58,13 @@ public class FileMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      view.addQuitListener(new AcQuit(getCore(), null));
+      view.addManageAuthorListener(new AcManageUser(getCore(),this, null));
+      view.addManageCategoryListener(new AcManageCategory(getCore()));
+      view.addManageAccountListener(new AcManageAccount(getCore()));
+      view.addManageBudgetListener(new AcManageBudget(getCore()));
+      view.addCreateOnTheFlyBudgetListener(new AcCreateOnTheFlyBudget(getCore(), this));
+      view.addNewExpenseListener(new AcNewExpense(getCore(), this, null));
+      view.addNewTransactionListener(new AcNewTransaction(getCore(), this, null));
    }
 
    /* (non-Javadoc)
@@ -62,5 +74,4 @@ public class FileMenu extends Controller {
    public Component getGraphicalComponent() {
       return view;
    }
-
 }

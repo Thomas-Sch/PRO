@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : JManageCategory.java
+ * Nom du fichier   : JManageBudget.java
  * ============================================================================
- * Date de création : 26 mai 2013
+ * Date de création : 1 juin 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -14,8 +14,8 @@ package gui.views;
 
 import gui.JManageFrame;
 import gui.View;
-import gui.component.infoedition.JCategoryIE;
-import gui.controller.listbox.CategoryListBox;
+import gui.component.infoedition.JBudgetIE;
+import gui.controller.listbox.BudgetListBox;
 
 import java.awt.BorderLayout;
 import java.util.Observable;
@@ -27,10 +27,10 @@ import javax.swing.event.ListSelectionListener;
 
 import settings.Language.Text;
 import core.Core;
-import core.components.Category;
+import core.components.Budget;
 
 /**
- * Fenêtre de gestion des catégories.
+ * Fenêtre de gestion des budgets.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -38,23 +38,24 @@ import core.components.Category;
  * @author Sinniger Marcel
  *
  */
-public class JManageCategory extends JManageFrame implements View{
+public class JManageBudget extends JManageFrame implements View {
 
    /**
     * ID de sérialisation.
     */
-   private static final long serialVersionUID = -6896069068105397629L;
+   private static final long serialVersionUID = 6474851721091887221L;
    
    private JLabel lblListDescription;
    
-   private CategoryListBox categories;
+   private BudgetListBox budgets;
 
-   private JCategoryIE cieInfos;
-
+   private JBudgetIE bieInfos;
+   
    /**
-    * @param core
+    * Contructeur.
+    * @param controller Contrôleur de cet objet.
     */
-   public JManageCategory(Core core) {
+   public JManageBudget(Core core) {  
       super(core);
    }
    
@@ -63,9 +64,9 @@ public class JManageCategory extends JManageFrame implements View{
     */
    protected void initContent() {
       super.initContent();
-      lblListDescription = new JLabel(Text.CATEGORY_LIST_LABEL.toString());
-      categories = new CategoryListBox(core);
-      cieInfos = new JCategoryIE();
+      lblListDescription = new JLabel(Text.ACCOUNT_LIST_LABEL.toString());
+      budgets = new BudgetListBox(core);
+      bieInfos = new JBudgetIE();
    }
    
    /**
@@ -73,19 +74,19 @@ public class JManageCategory extends JManageFrame implements View{
     */
    protected void initListeners() {
       super.initListeners();
-      categories.addSelectionChangedListener(new ListSelectionListener() {
+      budgets.addSelectionChangedListener(new ListSelectionListener() {
          
          @Override
          public void valueChanged(ListSelectionEvent e) {
-            if(categories.getSelectedValue() != null) {
+            if(budgets.getSelectedValue() != null) {
                setEnabledItemDependantButtons(true);
 
                switch (state) {
                   case EDITION:
-                     cieInfos = new JCategoryIE(JManageCategory.this, pnlInfosActions, cieInfos, categories.getSelectedValue());
+                     bieInfos = new JBudgetIE(JManageBudget.this, pnlInfosActions, bieInfos, budgets.getSelectedValue());
                      break;
                   case VIEW:
-                     cieInfos = new JCategoryIE(JManageCategory.this, pnlInfosActions, cieInfos, categories.getSelectedValue());
+                     bieInfos = new JBudgetIE(JManageBudget.this, pnlInfosActions, bieInfos, budgets.getSelectedValue());
                      break;
                }
             }
@@ -96,13 +97,47 @@ public class JManageCategory extends JManageFrame implements View{
       });
    }
    
+   /**
+    * Construction des éléments de la vue.
+    * @return Le panel contenant les éléments graphiques.
+    */
+   protected JPanel buildContent() {
+      JPanel pnlContent = new JPanel(new BorderLayout(5,5));
+      
+      pnlContent.add(lblListDescription, BorderLayout.NORTH);
+      pnlContent.add(budgets.getGraphicalComponent(),BorderLayout.WEST);
+      
+      pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
+      pnlInfosActions.setLayout(new BorderLayout());
+      
+      pnlInfosActions.add(aedActions, BorderLayout.SOUTH);
+      pnlInfosActions.add(bieInfos, BorderLayout.CENTER);
+      return pnlContent;
+   }
+   
+
+   /**
+    * Récupère le compte seléctionné dans l'interface.
+    * @return le compte seléctionné.
+    */
+   public Budget getSelectedValue() {
+      return budgets.getSelectedValue();
+   }
+   
+   /**
+    * Force la mise à jour la liste des comptes.
+    */
+   public void updateModel() {
+      budgets.updateModel();
+      pack();
+   }
 
    /* (non-Javadoc)
     * @see gui.JManageFrame#setEnabledOnEdition(boolean)
     */
    @Override
    protected void setEnabledOnEdition(boolean b) {
-      cieInfos.setEditable(b);  
+      bieInfos.setEditable(b);      
    }
 
    /* (non-Javadoc)
@@ -110,41 +145,7 @@ public class JManageCategory extends JManageFrame implements View{
     */
    @Override
    protected void setEnabledOnView(boolean b) {
-      categories.getGraphicalComponent().setEnabled(b);
-   }
-
-   /* (non-Javadoc)
-    * @see gui.JManageFrame#buildContent()
-    */
-   @Override
-   protected JPanel buildContent() {
-      JPanel pnlContent = new JPanel(new BorderLayout(5,5));
-      
-      pnlContent.add(lblListDescription, BorderLayout.NORTH);
-      pnlContent.add(categories.getGraphicalComponent(),BorderLayout.WEST);
-      
-      pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
-      pnlInfosActions.setLayout(new BorderLayout());
-      
-      pnlInfosActions.add(aedActions, BorderLayout.SOUTH);
-      pnlInfosActions.add(cieInfos, BorderLayout.CENTER);
-      return pnlContent;
-   }
-   
-   /**
-    * Récupère la catégorie seléctionnée dans l'interface.
-    * @return la catégorie seléctionnée.
-    */
-   public Category getSelectedValue() {
-      return categories.getSelectedValue();
-   }
-   
-   /**
-    * Force la mise à jour la liste des catégories.
-    */
-   public void updateModel() {
-      categories.updateModel();
-      pack();
+      budgets.getGraphicalComponent().setEnabled(b);
    }
 
    /* (non-Javadoc)
@@ -152,6 +153,6 @@ public class JManageCategory extends JManageFrame implements View{
     */
    @Override
    public void update(Observable o, Object arg) {
-      // Pas d'update pour l'instant. Voir rapport.
+      // Pas d'update pour l'instant. Voir rapport.  
    }
 }

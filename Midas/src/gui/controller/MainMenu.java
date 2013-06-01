@@ -13,7 +13,7 @@
 package gui.controller;
 
 import gui.Controller;
-import gui.menu.JMainMenu;
+import gui.component.menu.JMainMenu;
 import core.Core;
 
 /**

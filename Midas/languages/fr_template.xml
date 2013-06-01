@@ -11,6 +11,7 @@
   <user_management_title>TODO</user_management_title>
   <budget_creation_title>TODO</budget_creation_title>
   <budget_fly_creation_title>TODO</budget_fly_creation_title>
+  <budget_management_title>TODO</budget_management_title>
   <expense_creation_title>TODO</expense_creation_title>
   <transaction_creation_title>TODO</transaction_creation_title>
   <validate_button>TODO</validate_button>
@@ -26,6 +27,9 @@
   <user_name_label>TODO</user_name_label>
   <budget_description_label>TODO</budget_description_label>
   <budget_name_label>TODO</budget_name_label>
+  <budget_binded_account_name_label>TODO</budget_binded_account_name_label>
+  <budget_balance_label>TODO</budget_balance_label>
+  <budget_limit_label>TODO</budget_limit_label>
   <account_threshold_label>TODO</account_threshold_label>
   <account_initial_amount_label>TODO</account_initial_amount_label>
   <account_number_label>TODO</account_number_label>

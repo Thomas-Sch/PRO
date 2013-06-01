@@ -12,7 +12,6 @@
  */
 package gui.actions;
 
-import gui.Controller;
 import gui.UserAction;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
@@ -45,12 +44,9 @@ public class AcCreateBudget extends UserAction {
    private Budget budget;
    private Recurrence recurrence;
    private JCreateBudgetFrame view;
-   
-   private Controller controller;
 
-   public AcCreateBudget(Core core, Controller controller) {
+   public AcCreateBudget(Core core) {
       super(core);
-      this.controller = controller;
    }
 
    @Override
@@ -59,7 +55,7 @@ public class AcCreateBudget extends UserAction {
       recurrence = core.createReccurence();      
       budget = core.createBudget();
       
-      view = new JCreateBudgetFrame(controller, budget);
+      view = new JCreateBudgetFrame(core, budget);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.BUDGET_CREATION_TITLE);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       

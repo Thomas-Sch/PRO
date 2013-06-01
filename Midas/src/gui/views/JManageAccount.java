@@ -15,7 +15,7 @@ package gui.views;
 import gui.JManageFrame;
 import gui.View;
 import gui.component.infoedition.JAccountIE;
-import gui.controller.AccountListBox;
+import gui.controller.listbox.AccountListBox;
 
 import java.awt.BorderLayout;
 import java.util.Observable;

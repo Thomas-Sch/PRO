@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : AccountList.java
+ * Nom du fichier   : CategoryListBox.java
  * ============================================================================
- * Date de création : 9 mai 2013
+ * Date de création : 26 mai 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,65 +10,58 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui.controller.listbox;
 
 import gui.Controller;
-import gui.component.list.JAccountList;
+import gui.component.list.JCategoryList;
 
 import java.awt.Component;
 
 import javax.swing.event.ListSelectionListener;
 
 import core.Core;
-import core.components.Account;
-import core.components.AccountList;
+import core.components.Category;
+import core.components.CategoryList;
 
 /**
- * Contrôleur pour la liste à séléction simple d'auteurs.
- * 
+ * Classe de contrôle pour les listesbox de catégories.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- * 
+ *
  */
-public class AccountListBox extends Controller {
+public class CategoryListBox extends Controller {
 
-   JAccountList view;
-   AccountList model;
-
+   JCategoryList view;
+   CategoryList model;
+   
    /**
     * @param core
     */
-   public AccountListBox(Core core) {
+   public CategoryListBox(Core core) {
       super(core);
    }
 
-   /*
-    * (non-Javadoc)
-    * 
+   /* (non-Javadoc)
     * @see gui.Controller#initComponents()
     */
    @Override
    protected void initComponents() {
-      model = getCore().getAllAccounts();
-      view = new JAccountList(model);
+      model = getCore().getAllPrimaryCategories();
+      view = new JCategoryList(model);
       model.addObserver(view);
    }
 
-   /*
-    * (non-Javadoc)
-    * 
+   /* (non-Javadoc)
     * @see gui.Controller#initListeners()
     */
    @Override
    protected void initListeners() {
    }
 
-   /*
-    * (non-Javadoc)
-    * 
+   /* (non-Javadoc)
     * @see gui.Controller#getGraphicalComponent()
     */
    @Override
@@ -77,10 +70,10 @@ public class AccountListBox extends Controller {
    }
    
    /**
-    * Retourne le compte selectionné dans la liste.
-    * @return Le compte selectionné.
+    * Retourne la catégorie selectionné dans la liste.
+    * @return La catégorie selectionné.
     */
-   public Account getSelectedValue() {
+   public Category getSelectedValue() {
       return view.getSelectedValue();
    }
 
@@ -91,4 +84,5 @@ public class AccountListBox extends Controller {
    public void addSelectionChangedListener(ListSelectionListener listener) {
       view.addListSelectionListener(listener);
    }
+
 }

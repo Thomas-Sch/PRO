@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : EditMenu.java
+ * Nom du fichier   : InterrogationMenu.java
  * ============================================================================
  * Date de création : 4 mai 2013
  * ============================================================================
@@ -10,24 +10,17 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui.controller.menu;
 
 import gui.Controller;
-import gui.actions.AcCreateBudget;
-import gui.actions.AcCreateOnTheFlyBudget;
-import gui.actions.AcManageAccount;
-import gui.actions.AcManageUser;
-import gui.actions.AcManageCategory;
-import gui.actions.AcNewExpense;
-import gui.actions.AcNewTransaction;
-import gui.menu.JEditMenu;
+import gui.component.menu.JInterrogationMenu;
 
 import java.awt.Component;
 
 import core.Core;
 
 /**
- * Contrôleur du menu d'édition.
+ * TODO
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -35,13 +28,14 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class EditMenu extends Controller {
-   JEditMenu view;
-
+public class InterrogationMenu extends Controller {
+   
+   JInterrogationMenu view;
+   
    /**
     * @param core
     */
-   public EditMenu(Core core) {
+   public InterrogationMenu(Core core) {
       super(core);
    }
 
@@ -50,7 +44,7 @@ public class EditMenu extends Controller {
     */
    @Override
    protected void initComponents() {
-      view = new JEditMenu();
+      view = new JInterrogationMenu();
    }
 
    /* (non-Javadoc)
@@ -58,13 +52,8 @@ public class EditMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      view.addManageAuthorListener(new AcManageUser(getCore(),this, null));
-      view.addManageCategoryListener(new AcManageCategory(getCore()));
-      view.addManageAccountListener(new AcManageAccount(getCore()));
-      view.addManageBudgetListener(new AcCreateBudget(getCore(), this));
-      view.addCreateOnTheFlyBudgetListener(new AcCreateOnTheFlyBudget(getCore(), this));
-      view.addNewExpenseListener(new AcNewExpense(getCore(), this, null));
-      view.addNewTransactionListener(new AcNewTransaction(getCore(), this, null));
+      // TODO Auto-generated method stub
+
    }
 
    /* (non-Javadoc)
@@ -72,6 +61,8 @@ public class EditMenu extends Controller {
     */
    @Override
    public Component getGraphicalComponent() {
+      // TODO Auto-generated method stub
       return view;
    }
+
 }

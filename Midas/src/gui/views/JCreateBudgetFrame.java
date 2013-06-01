@@ -12,7 +12,6 @@
  */
 package gui.views;
 
-import gui.Controller;
 import gui.View;
 import gui.component.JDateInput;
 import gui.component.JLabelMoneyPanel;
@@ -36,6 +35,7 @@ import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
 import utils.TimeSlice;
+import core.Core;
 import core.MidasLogs;
 import core.components.Budget;
 import core.exceptions.NegativeLimit;
@@ -64,7 +64,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
    private JTimeSliceChooser tscBudgetLength;
    private JLabelTextPanel ltpDescription;
    
-   private Controller controller;
+   private Core core;
    private Budget budget;
    
    /**
@@ -72,8 +72,8 @@ public class JCreateBudgetFrame extends JDialog implements View{
     * @param controller Contrôleur de la fenêtre.
     * @param budget Budget actuellement ajouté.
     */
-   public JCreateBudgetFrame(Controller controller, Budget budget) {
-      this.controller = controller;
+   public JCreateBudgetFrame(Core core, Budget budget) {
+      this.core = core;
       this.budget = budget;
       
       initContent();
@@ -183,7 +183,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
    private void initContent() {
       ltpName = new JLabelTextPanel(Text.BUDGET_NAME_LABEL);
       lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
-      accounts = new ComboBoxAccount(controller.getCore());
+      accounts = new ComboBoxAccount(core);
       
       ditDate = new JDateInput(Text.DATE_LABEL);
       
