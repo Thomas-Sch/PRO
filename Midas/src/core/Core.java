@@ -29,6 +29,7 @@ import core.components.User;
 import core.components.UserList;
 import database.dbComponents.DBAccount;
 import database.dbComponents.DBBudget;
+import database.dbComponents.DBBudgetOnTheFly;
 import database.dbComponents.DBCategory;
 import database.dbComponents.DBController;
 import database.dbComponents.DBFinancialTransaction;
@@ -249,12 +250,14 @@ public class Core {
       // vérifier
       if (result == null) {
          try {
-            result = new Account(this, dbController.getDbAccount(id));
-
-            if(!accounts.contains(result)) {
-               // Mise à jour de la liste si présent dans la base de données
+            DBAccount dbAccount = dbController.getDbAccount(id);
+            
+            // Mise à jour de la liste si présent dans la base de données
+            if (dbAccount != null) {
+               result = new Account(this, dbAccount);
                accounts.addItem(result);
             }
+            
          }
          catch (DatabaseException e) {
             MidasLogs.errors.push("Core", "Unable to get the account with id "
@@ -273,7 +276,28 @@ public class Core {
     * @return L'utilisateur correspondant à l'identifiant, null le cas échéant.
     */
    public User getUser(int id) {
-      return users.get(id);
+      User result = users.get(id);
+
+      // Si pas présent dans le coeur, demander à la base de données pour
+      // vérifier
+      if (result == null) {
+         try {
+            DBUser dbUser = dbController.getDbUser(id);
+            
+            // Mise à jour de la liste si présent dans la base de données
+            if (dbUser != null) {
+               result = new User(this, dbUser);
+               users.addItem(result);
+            }
+            
+         }
+         catch (DatabaseException e) {
+            MidasLogs.errors.push("Core", "Unable to get the user with id "
+                  + id + " from the database.");
+         }
+      }
+
+      return result;
    }
 
    /**
@@ -286,17 +310,25 @@ public class Core {
    public Category getCategory(int id) {
       Category result = primaryCategories.get(id);
 
+      // Si pas présent dans le coeur, demander à la base de données pour
+      // vérifier
       if (result == null) {
          try {
-            result = new Category(this, dbController.getDbCategory(id));
-
-            primaryCategories.addItem(result);
+            DBCategory dbCategory = dbController.getDbCategory(id);
+            
+            // Mise à jour de la liste si présent dans la base de données
+            if (dbCategory != null) {
+               result = new Category(this, dbCategory);
+               primaryCategories.addItem(result);
+            }
+            
          }
          catch (DatabaseException e) {
-
+            MidasLogs.errors.push("Core", "Unable to get the category with id "
+                  + id + " from the database.");
          }
       }
-
+      
       return result;
    }
 
@@ -314,14 +346,20 @@ public class Core {
       // Si pas présent dans le cache, demander à la base de données
       if (result == null) {
          try {
-            result = new FinancialTransaction(this,
-                  dbController.getDbFinancialTransaction(id));
+            
+            DBFinancialTransaction dbFinancialTransaction =
+                                    dbController.getDbFinancialTransaction(id);
+            
+            if (dbFinancialTransaction != null) {
+               result = new FinancialTransaction(this, dbFinancialTransaction);
 
-            // Mise à jour du cache
-            cache.putToCache(result);
+               // Mise à jour du cache
+               cache.putToCache(result);
+            }
          }
          catch (DatabaseException e) {
-
+            MidasLogs.errors.push("Core", "Unable to get the financial " +
+                  "transaction with id " + id + " from the database.");
          }
       }
       return result;
@@ -340,14 +378,20 @@ public class Core {
       // Si pas présent dans le cache, demander à la base de données
       if (result == null) {
          try {
-            result = new BudgetOnTheFly(this,
-                  dbController.getDbBudgetOnTheFly(id));
-
-            // Mise à jour du cache
-            cache.putToCache(result);
+            
+            DBBudgetOnTheFly dbBudgetOnTheFly =
+                                          dbController.getDbBudgetOnTheFly(id);
+            
+            if (dbBudgetOnTheFly != null) {
+               result = new BudgetOnTheFly(this, dbBudgetOnTheFly);
+               
+               // Mise à jour du cache
+               cache.putToCache(result);
+            }
          }
          catch (DatabaseException e) {
-
+            MidasLogs.errors.push("Core", "Unable to get the budget on the fly "
+                  + "with id " + id + " from the database.");
          }
       }
 
@@ -378,7 +422,8 @@ public class Core {
 
          }
          catch (DatabaseException e) {
-
+            MidasLogs.errors.push("Core", "Unable to get the recurrence with id "
+                  + id + " from the database.");
          }
       }
 
@@ -400,7 +445,8 @@ public class Core {
          dbChildren = dbController.getAllChildCategories(category.getId());
       }
       catch (DatabaseException e) {
-
+         MidasLogs.errors.push("Core",
+                               "Unable to get children from the database.");
       }
 
       if (dbChildren != null) {
@@ -422,7 +468,28 @@ public class Core {
     * @return Le budget correspondant à l'identifiant, null le cas échéant.
     */
    public Budget getBudget(int id) {
-      return budgets.get(id);
+      Budget result = budgets.get(id);
+
+      // Si pas présent dans le coeur, demander à la base de données pour
+      // vérifier
+      if (result == null) {
+         try {
+            DBBudget dbBudget = dbController.getDbBudget(id);
+            
+            // Mise à jour de la liste si présent dans la base de données
+            if (dbBudget != null) {
+               result = new Budget(this, dbBudget);
+               budgets.addItem(result);
+            }
+            
+         }
+         catch (DatabaseException e) {
+            MidasLogs.errors.push("Core", "Unable to get the budget with id "
+                  + id + " from the database.");
+         }
+      }
+      
+      return result;
    }
 
    /**
