@@ -927,6 +927,7 @@ public class Core {
    public void saveFinancialTransaction(FinancialTransaction transaction) {
       try {
          dbController.saveToDatabase(transaction.getDBFinancialTransaction());
+         transaction.getAccount().credit(transaction.getAmount());
          cache.putToCache(transaction);
       }
       catch (DatabaseConstraintViolation e) {

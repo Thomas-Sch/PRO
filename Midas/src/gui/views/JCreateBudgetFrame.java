@@ -187,7 +187,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
       
       ditDate = new JDateInput(Text.DATE_LABEL);
       
-      tscBudgetLength = new JTimeSliceChooser(TimeSlice.DAILY, TimeSlice.WEEKLY, TimeSlice.MONTHLY, TimeSlice.ANNUAL);
+      tscBudgetLength = new JTimeSliceChooser(TimeSlice.MONTHLY, TimeSlice.ANNUAL);
       
       ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
       
