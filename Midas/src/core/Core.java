@@ -847,7 +847,6 @@ public class Core {
    public void saveFinancialTransaction(FinancialTransaction transaction) {
       try {
          dbController.saveToDatabase(transaction.getDBFinancialTransaction());
-
          cache.putToCache(transaction);
       }
       catch (DatabaseConstraintViolation e) {
