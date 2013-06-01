@@ -153,6 +153,6 @@ public class JManageAccount extends JManageFrame implements View{
     */
    @Override
    public void update(Observable o, Object arg) {
-      // Pas d'update pour l'instant. Voir rapport.  
+      // Pas d'update pour l'instant. Voir rapport.
    }
 }
