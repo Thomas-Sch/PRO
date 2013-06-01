@@ -222,7 +222,8 @@ public class JNewExpense extends javax.swing.JDialog implements View {
                     && budgets.isValidItemSelected()
                     && users.isValidItemSelected()
                     && categories.isValidItemSelected()
-                    && lmpAmount.isNumber();
+                    && lmpAmount.isNumber()
+                    && Double.valueOf(lmpAmount.getText()) >= 0;
       vclActions.setEnableValidateButton(checkResult);
    }
    

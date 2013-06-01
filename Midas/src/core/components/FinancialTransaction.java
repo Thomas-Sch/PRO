@@ -238,6 +238,14 @@ public class FinancialTransaction extends CoreComponent implements
       dbFinancialTransaction.setDbUser(user.getId());
       setChangedAndNotifyObservers();
    }
+   
+   /**
+    * Détermine si l'objet est une dépense ou une transaction.
+    * @return True si l'objet est une dépense et pas une transaction.
+    */
+   public boolean isExpense() {
+      return dbFinancialTransaction.getDbBudget() != null;
+   }
 
    /**
     * Retourne l'identifiant de la transaction financière dans la base de
