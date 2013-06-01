@@ -91,7 +91,7 @@ public class Cache {
     *           - la classe du composant souhaité.
     * @param id
     *           - l'identifiant du composant souhaité.
-    * @return le composant correspondant à la classe et à l'identifiant donné,
+    * @return Le composant correspondant à la classe et à l'identifiant donné,
     *         null s'il n'est pas présent dans le cache.
     */
    @SuppressWarnings("unchecked")
@@ -125,7 +125,7 @@ public class Cache {
     * 
     * @param type
     *           - le type des composants voulus.
-    * @return la liste des composants du type donné présents dans le cache.
+    * @return La liste des composants du type donné présents dans le cache.
     */
    public <T extends IdentifiedComponent> LinkedList<T> getAll(Class<T> type) {
       LinkedList<T> result = new LinkedList<>();
@@ -137,14 +137,17 @@ public class Cache {
       // Récupère toute les valeurs de la table
       Collection<SoftReference<? extends IdentifiedComponent>> values = map
             .values();
+      
+      if (map != null) {
 
-      // Ajoute les références encore existantes
-      T ref;
-      for (SoftReference<? extends IdentifiedComponent> softRef : values) {
-         ref = getRef(softRef);
-
-         if (ref != null) {
-            result.add(ref);
+         // Ajoute les références encore existantes
+         T ref;
+         for (SoftReference<? extends IdentifiedComponent> softRef : values) {
+            ref = getRef(softRef);
+   
+            if (ref != null) {
+               result.add(ref);
+            }
          }
       }
 
