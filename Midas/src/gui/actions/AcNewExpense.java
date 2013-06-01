@@ -40,7 +40,6 @@ public class AcNewExpense extends UserAction {
    private FinancialTransaction expense;
    private Controller controller;
    private JNewExpense view;
-   
 
    /**
     * @param core

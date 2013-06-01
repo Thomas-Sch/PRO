@@ -251,8 +251,10 @@ public class Core {
          try {
             result = new Account(this, dbController.getDbAccount(id));
 
-            // Mise à jour de la liste si présent dans la base de données
-            accounts.addItem(result);
+            if(!accounts.contains(result)) {
+               // Mise à jour de la liste si présent dans la base de données
+               accounts.addItem(result);
+            }
          }
          catch (DatabaseException e) {
             MidasLogs.errors.push("Core", "Unable to get the account with id "
@@ -420,18 +422,7 @@ public class Core {
     * @return Le budget correspondant à l'identifiant, null le cas échéant.
     */
    public Budget getBudget(int id) {
-      Budget result = budgets.get(id);
-
-      try {
-         result = new Budget(this, dbController.getDbBudget(id));
-
-         budgets.addItem(result);
-      }
-      catch (DatabaseException e) {
-
-      }
-
-      return result;
+      return budgets.get(id);
    }
 
    /**
