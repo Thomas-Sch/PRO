@@ -134,11 +134,10 @@ public class Cache {
       HashMap<Integer, SoftReference<? extends IdentifiedComponent>> map = cache
             .get(type);
 
-      // Récupère toute les valeurs de la table
-      Collection<SoftReference<? extends IdentifiedComponent>> values = map
-            .values();
-      
       if (map != null) {
+         // Récupère toute les valeurs de la table
+         Collection<SoftReference<? extends IdentifiedComponent>> values = map
+               .values();
 
          // Ajoute les références encore existantes
          T ref;
