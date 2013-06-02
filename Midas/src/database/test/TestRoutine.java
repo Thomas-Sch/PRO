@@ -194,6 +194,10 @@ public class TestRoutine {
       for (Object line : dbController.getAllDbFinancialTransactionsRelatedToAccount(1)) {
          System.out.println(line);
       }
+      for (Object line : dbController.getAllDbBudgetsRelatedToAccount(1)) {
+         System.out.println(line);
+      }
+      
       
       
       //----------------------------------------------------------------------------------------

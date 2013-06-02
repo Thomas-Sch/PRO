@@ -699,8 +699,8 @@ public class DBController {
    public LinkedList<DBBudget> getAllDbBudgetsRelatedToAccount(int accountId)
       throws DatabaseException {
       
-      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Cat_ID, Bud_ID, Acc_ID, Use_ID " +
-                         "FROM FinancialTransaction " +
+      String sqlString = "SELECT Budget.Bud_Id, Rec_Id, Name, Description, BudgetLimit, Enabled, Acc_ID " +
+                         "FROM Budget " +
                          "WHERE Acc_ID = ?";
 
       PreparedStatement preparedStatement = dbAccess
