@@ -528,9 +528,9 @@ public class DBController {
     */
    public DBFinancialTransaction getDbFinancialTransaction(int id) throws DatabaseException {
    
-      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID " +
+      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Cat_ID, Bud_ID, Acc_ID, Use_ID " +
                          "FROM FinancialTransaction " +
-                         "WHERE Tra_ID = ?"; 
+                         "WHERE Tra_ID = ?";
       
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
@@ -544,11 +544,22 @@ public class DBController {
          dbFinancialTransaction = new DBFinancialTransaction();
          
          dbFinancialTransaction.setId((result.getInt(1)));
-         dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+         if (result.getInt(2) != 0) {
+            dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+         }
          dbFinancialTransaction.setAmount((result.getDouble(3)));
          dbFinancialTransaction.setDate((result.getDate(4)));
          dbFinancialTransaction.setReason((result.getString(5)));
-         dbFinancialTransaction.setDbAccount((result.getInt(6)));
+         if (result.getInt(6) != 0) {
+            dbFinancialTransaction.setDbCategory(result.getInt(6));
+         }
+         if (result.getInt(7) != 0) {
+            dbFinancialTransaction.setDbBudget(result.getInt(7));
+         }
+         if (result.getInt(8) != 0) {
+            dbFinancialTransaction.setDbAccount((result.getInt(8)));
+         }
+         dbFinancialTransaction.setDbUser(result.getInt(9));
 
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -570,15 +581,16 @@ public class DBController {
       getAllDbFinancialTransactionsRelatedToBudget(int budgetId)
       throws DatabaseException {
      
-      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID "
-                       + "FROM FinancialTransaction "
-                       + "WHERE Bud_ID = ?";
+      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Cat_ID, Bud_ID, Acc_ID, Use_ID " +
+                         "FROM FinancialTransaction " +
+                         "WHERE Bud_ID = ?";
       
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
       LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
       
       try {
+         
          preparedStatement.setInt(1, budgetId);
          
          ResultSet result = this.select(preparedStatement);
@@ -587,11 +599,22 @@ public class DBController {
              dbFinancialTransaction = new DBFinancialTransaction();
              
              dbFinancialTransaction.setId((result.getInt(1)));
-             dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+             if (result.getInt(2) != 0) {
+                dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+             }
              dbFinancialTransaction.setAmount((result.getDouble(3)));
              dbFinancialTransaction.setDate((result.getDate(4)));
              dbFinancialTransaction.setReason((result.getString(5)));
-             dbFinancialTransaction.setDbAccount((result.getInt(6)));
+             if (result.getInt(6) != 0) {
+                dbFinancialTransaction.setDbCategory(result.getInt(6));
+             }
+             if (result.getInt(7) != 0) {
+                dbFinancialTransaction.setDbBudget(result.getInt(7));
+             }
+             if (result.getInt(8) != 0) {
+                dbFinancialTransaction.setDbAccount((result.getInt(8)));
+             }
+             dbFinancialTransaction.setDbUser(result.getInt(9));
              
              dbFinancialTransactions.add(dbFinancialTransaction);
          }
@@ -617,8 +640,9 @@ public class DBController {
             getAllDbFinancialTransactionsRelatedToAccount(
                                        int accountId) throws DatabaseException {
 
-      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID "
-            + "FROM FinancialTransaction " + "WHERE Acc_ID = ?";
+      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Cat_ID, Bud_ID, Acc_ID, Use_ID " +
+                         "FROM FinancialTransaction " +
+                         "WHERE Acc_ID = ?";
 
       PreparedStatement preparedStatement = dbAccess
             .getPreparedStatement(sqlString);
@@ -626,19 +650,31 @@ public class DBController {
       LinkedList<DBFinancialTransaction> dbFinancialTransactions = new LinkedList<DBFinancialTransaction>();
 
       try {
+         
          preparedStatement.setInt(1, accountId);
-
+         
          ResultSet result = this.select(preparedStatement);
 
          while (result.next()) {
             dbFinancialTransaction = new DBFinancialTransaction();
 
             dbFinancialTransaction.setId((result.getInt(1)));
-            dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+            if (result.getInt(2) != 0) {
+               dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+            }
             dbFinancialTransaction.setAmount((result.getDouble(3)));
             dbFinancialTransaction.setDate((result.getDate(4)));
             dbFinancialTransaction.setReason((result.getString(5)));
-            dbFinancialTransaction.setDbAccount((result.getInt(6)));
+            if (result.getInt(6) != 0) {
+               dbFinancialTransaction.setDbCategory(result.getInt(6));
+            }
+            if (result.getInt(7) != 0) {
+               dbFinancialTransaction.setDbBudget(result.getInt(7));
+            }
+            if (result.getInt(8) != 0) {
+               dbFinancialTransaction.setDbAccount((result.getInt(8)));
+            }
+            dbFinancialTransaction.setDbUser(result.getInt(9));
 
             dbFinancialTransactions.add(dbFinancialTransaction);
          }
@@ -663,9 +699,9 @@ public class DBController {
    public LinkedList<DBBudget> getAllDbBudgetsRelatedToAccount(int accountId)
       throws DatabaseException {
       
-      String sqlString = "SELECT Budget.Bud_Id, Rec_Id, Name, Description, BudgetLimit, Enabled, Acc_ID "
-            + "FROM Budget"
-            + "WHERE Acc_ID = ?";
+      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Cat_ID, Bud_ID, Acc_ID, Use_ID " +
+                         "FROM FinancialTransaction " +
+                         "WHERE Acc_ID = ?";
 
       PreparedStatement preparedStatement = dbAccess
             .getPreparedStatement(sqlString);
@@ -710,8 +746,8 @@ public class DBController {
     */
    public LinkedList<DBFinancialTransaction> getAllDbFinancialTransactions() throws DatabaseException {
 
-      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Acc_ID " +
-                         "FROM FinancialTransaction";
+      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Cat_ID, Bud_ID, Acc_ID, Use_ID " +
+                         "FROM FinancialTransaction ";
       
       PreparedStatement preparedStatement = dbAccess.getPreparedStatement(sqlString);
       DBFinancialTransaction dbFinancialTransaction = null;
@@ -724,11 +760,22 @@ public class DBController {
              dbFinancialTransaction = new DBFinancialTransaction();
              
              dbFinancialTransaction.setId((result.getInt(1)));
-             dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+             if (result.getInt(2) != 0) {
+                dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+             }
              dbFinancialTransaction.setAmount((result.getDouble(3)));
              dbFinancialTransaction.setDate((result.getDate(4)));
              dbFinancialTransaction.setReason((result.getString(5)));
-             dbFinancialTransaction.setDbAccount((result.getInt(6)));
+             if (result.getInt(6) != 0) {
+                dbFinancialTransaction.setDbCategory(result.getInt(6));
+             }
+             if (result.getInt(7) != 0) {
+                dbFinancialTransaction.setDbBudget(result.getInt(7));
+             }
+             if (result.getInt(8) != 0) {
+                dbFinancialTransaction.setDbAccount((result.getInt(8)));
+             }
+             dbFinancialTransaction.setDbUser(result.getInt(9));
              
              dbFinancialTransactions.add(dbFinancialTransaction);
          }

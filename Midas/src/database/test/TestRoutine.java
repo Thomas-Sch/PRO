@@ -186,6 +186,17 @@ public class TestRoutine {
       System.out.println(tempTrans);
       
       //----------------------------------------------------------------------------------------
+      // FinancialTransaction tests speciaux
+      // ---------------------------------------------------------------------------------------
+      for (Object line : dbController.getAllDbFinancialTransactionsRelatedToBudget(1)) {
+         System.out.println(line);
+      }
+      for (Object line : dbController.getAllDbFinancialTransactionsRelatedToAccount(1)) {
+         System.out.println(line);
+      }
+      
+      
+      //----------------------------------------------------------------------------------------
       // update Test
       // ---------------------------------------------------------------------------------------
       System.out.println("----------------------------------------------------------------------");
@@ -318,6 +329,8 @@ public class TestRoutine {
       for (Object line : dbController.getAllChildCategories(2)) { // rien attendu
          System.out.println(line);
       }
+      
+
       
 
    }
