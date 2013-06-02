@@ -59,7 +59,7 @@ public class TestRoutine {
       
       DBRecurrence r1 = dbController.createRecurence();
       r1.setIntervalRecurrence(30);
-      //r1.setStart(new Date(2012, 04, 1));
+      r1.setStart(new Date(0));
       r1.setEnd(new Date(0));
       dbController.saveToDatabase(r1);
       System.out.println(r1);

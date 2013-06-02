@@ -681,7 +681,9 @@ public class DBController {
             dbBudget = new DBBudget();
 
             dbBudget.setId(result.getInt(1));
-            dbBudget.setDbRecurrence(result.getInt(2));
+            if (result.getInt(2) != 0) {
+               dbBudget.setDbRecurrence(result.getInt(2));
+            }
             dbBudget.setName(result.getString(3));
             dbBudget.setDescription(result.getString(4));
             dbBudget.setLimit(result.getDouble(5));
@@ -882,7 +884,9 @@ public class DBController {
          dbCategory.setId((result.getInt(1)));
          dbCategory.setName((result.getString(2)));
          dbCategory.setEnabled(result.getBoolean(3));
-         dbCategory.setParentDBCategory((result.getInt(4)));
+         if (result.getInt(4) != 0) { 
+            dbCategory.setParentDBCategory((result.getInt(4)));
+         }
 
       } catch (SQLException e) {
          DBErrorHandler.resultSetError(e);
@@ -916,7 +920,9 @@ public class DBController {
             dbCategory.setId((result.getInt(1)));
             dbCategory.setName((result.getString(2)));
             dbCategory.setEnabled(result.getBoolean(3));
-            dbCategory.setParentDBCategory((result.getInt(4)));
+            if (result.getInt(4) != 0) { 
+               dbCategory.setParentDBCategory((result.getInt(4)));
+            }
             dbCategories.add(dbCategory);
          }
 
@@ -1026,7 +1032,9 @@ public class DBController {
                
                dbCategory.setId((result.getInt(1)));
                dbCategory.setName((result.getString(2)));
-               dbCategory.setParentDBCategory((result.getInt(3)));
+               if (result.getInt(3) != 0) {
+                  dbCategory.setParentDBCategory((result.getInt(3)));
+               }
                dbCategory.setEnabled(result.getBoolean(4));
                dbCategories.add(dbCategory);
             }
@@ -1067,7 +1075,9 @@ public class DBController {
             
                dbCategory.setId((result.getInt(1)));
                dbCategory.setName((result.getString(2)));
-               dbCategory.setParentDBCategory((result.getInt(3)));
+               if (result.getInt(3) != 0) {
+                  dbCategory.setParentDBCategory((result.getInt(3)));
+               }
                dbCategory.setEnabled(result.getBoolean(4));
                
                dbCategories.add(dbCategory);
@@ -1114,7 +1124,9 @@ public class DBController {
          dbBudget = new DBBudget();
          
          dbBudget.setId(result.getInt(1));
-         dbBudget.setDbRecurrence(result.getInt(2));
+         if (result.getInt(2) != 0) {
+            dbBudget.setDbRecurrence(result.getInt(2));
+         }
          dbBudget.setName(result.getString(3));  
          dbBudget.setDescription(result.getString(4));
          dbBudget.setLimit(result.getDouble(5));
@@ -1151,7 +1163,9 @@ public class DBController {
             dbBudget = new DBBudget();
             
             dbBudget.setId(result.getInt(1));
-            dbBudget.setDbRecurrence(result.getInt(2));
+            if (result.getInt(2) != 0) {
+               dbBudget.setDbRecurrence(result.getInt(2));
+            }
             dbBudget.setName(result.getString(3));  
             dbBudget.setDescription(result.getString(4));
             dbBudget.setLimit(result.getDouble(5));
@@ -1290,7 +1304,9 @@ public class DBController {
          
          // Budget
          dbBudgetOnTheFly.setId(result.getInt(1));
-         dbBudgetOnTheFly.setDbRecurrence(2);
+         if (result.getInt(2) != 0) {
+            dbBudgetOnTheFly.setDbRecurrence(result.getInt(2));
+         }
          dbBudgetOnTheFly.setName(result.getString(3));
          dbBudgetOnTheFly.setDescription(result.getString(4)); 
          dbBudgetOnTheFly.setLimit(result.getDouble(5));
@@ -1332,7 +1348,9 @@ public class DBController {
             
             // Budget
             dbBudgetOnTheFly.setId(result.getInt(1));
-            dbBudgetOnTheFly.setDbRecurrence(2);
+            if (result.getInt(2) != 0) {
+               dbBudgetOnTheFly.setDbRecurrence(result.getInt(2));
+            }
             dbBudgetOnTheFly.setName(result.getString(3));
             dbBudgetOnTheFly.setDescription(result.getString(4)); 
             dbBudgetOnTheFly.setLimit(result.getDouble(5));
