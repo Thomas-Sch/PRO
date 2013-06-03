@@ -256,6 +256,15 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
 
       return outgoing / financialTransactions.size();
    }
+   
+   /**
+    * Retourne si le budget est tenu ou non.
+    * 
+    * @return Vrai si le budget est tenu, Faux le cas échéant.
+    */
+   public boolean isPositive() {
+      return getRemainingAmount() >= 0;
+   }
 
    /**
     * Retourne l'identifiant du budget dans la base de données.

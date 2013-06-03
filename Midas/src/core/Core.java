@@ -554,6 +554,44 @@ public class Core {
    public BudgetList getAllBudgets() {
       return budgets;
    }
+   
+   /**
+    * Retourne la liste de tous les comptes qui sont sous leur seuil fixé.
+    * 
+    * @return Les comptes dont la limite de crédit est dépassée.
+    */
+   public AccountList getAllNegativeAccounts() {
+      AccountList result = new AccountList(this);
+      LinkedList<Account> list = getAllAccounts().getList();
+
+      // Ajoute les comptes au seuil de crédit dépassé
+      for (Account account : list) {
+         if (account.isNegative()) {
+            result.addItem(account);
+         }
+      }
+
+      return result;
+   }
+
+   /**
+    * Retourne la liste de tous les budgets qui ne sont pas tenus.
+    * 
+    * @return Les budgets non tenus.
+    */
+   public BudgetList getAllNegativeBudgets() {
+      BudgetList result = new BudgetList(this);
+      LinkedList<Budget> list = getAllBudgets().getList();
+
+      // Ajoute tous les budgets négatifs
+      for (Budget budget : list) {
+         if (!budget.isPositive()) {
+            result.addItem(budget);
+         }
+      }
+
+      return result;
+   }
 
    /**
     * Retourne la liste de toutes les transactions financières;

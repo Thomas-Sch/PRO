@@ -241,10 +241,33 @@ public class FinancialTransaction extends CoreComponent implements
    
    /**
     * Détermine si l'objet est une dépense ou une transaction.
-    * @return True si l'objet est une dépense et pas une transaction.
+    * 
+    * @return Vrai si l'objet est une dépense, Faux s'il s'agit d'une
+    *         transaction.
     */
    public boolean isExpense() {
       return dbFinancialTransaction.getDbBudget() != null;
+   }
+   
+   /**
+    * Test et retourne si la transaction peut être effectuée sans mettre le
+    * compte associé en péril s'il s'agit d'une transaction, ou sans mettre le
+    * budget associé en péril s'il s'agit d'une dépense.
+    * 
+    * @return Vrai si la transaction peut s'effectuer sans risque, Faux si cela
+    *         engendre un dépassement de seuil.
+    */
+   public boolean isHealthy() {
+      boolean result = false;
+
+      if (getBudget() != null) {
+         result = getBudget().getRemainingAmount() - getAmount() >= 0;
+      }
+      else if (getAccount() != null) {
+         result = getAccount().getAmount() - getAmount() >= 0;
+      }
+
+      return result;
    }
 
    /**

@@ -62,6 +62,7 @@ public abstract class ListTemplate<E> extends CoreComponent {
     */
    public void removeItem(E item) {
       list.remove(item);
+      setChangedAndNotifyObservers();
    }
 
    /**
@@ -101,6 +102,15 @@ public abstract class ListTemplate<E> extends CoreComponent {
       Collections.sort(result, comp);
 
       return result;
+   }
+   
+   /**
+    * Retourne le nombre d'éléments présents dans cette liste.
+    * 
+    * @return La taille de la liste.
+    */
+   public int size() {
+      return list.size();
    }
 
    /**
