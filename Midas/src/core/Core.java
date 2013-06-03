@@ -583,9 +583,9 @@ public class Core {
       BudgetList result = new BudgetList(this);
       LinkedList<Budget> list = getAllBudgets().getList();
 
-      // Ajoute tous les budgets négatifs
+      // Ajoute tous les budgets négatifs non échus
       for (Budget budget : list) {
-         if (!budget.isPositive()) {
+         if (!budget.isFinished() && !budget.isPositive()) {
             result.addItem(budget);
          }
       }

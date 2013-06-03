@@ -15,6 +15,7 @@ package core.components;
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
+import database.dbComponents.DBBudget;
 import database.dbComponents.DBFinancialTransaction;
 import java.util.Date;
 
@@ -125,7 +126,14 @@ public class FinancialTransaction extends CoreComponent implements
     * @return Le budget concerné par la transaction.
     */
    public Budget getBudget() {
-      return core.getBudget(dbFinancialTransaction.getDbBudget());
+      Budget result = null;
+      
+      Integer dbBudgetID = dbFinancialTransaction.getDbBudget();
+      if (dbBudgetID != null) {
+         result = core.getBudget(dbBudgetID);
+      }
+      
+      return result;
    }
 
    /**
