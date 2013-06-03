@@ -13,7 +13,8 @@
 package database.dbComponents;
 
 /**
- * TODO
+ * Représente une composant de la base de donnée pouvant être actif ou non
+ * afin de le conserver en tant qu'historique dans le second cas.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -25,6 +26,9 @@ public abstract class DBComponentEnableable  extends DBComponent {
 
    private Boolean enabled;
    
+   /**
+    * Crée un composant actif ou non.
+    */
    DBComponentEnableable() {
       enabled = true;
    }

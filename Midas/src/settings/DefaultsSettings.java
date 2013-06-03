@@ -16,37 +16,38 @@ import gui.utils.Positions.ScreenPosition;
 import settings.elements.FrameSettings;
 
 /**
- * TODO
+ * Contient les paramètres par défaut du programme.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 class DefaultsSettings {
-   
-public static String languageCode;
-   
+
+   public static String languageCode;
+
    public static FrameSettings mainFrame = new FrameSettings("mainFrame");
-   
-   
+
    { // Initialisation par défaut des composants
       setDefaults();
    }
-   
+
+   /**
+    * Charge les paramètres par défaut
+    */
    static void setDefaults() {
-      
       // Default for languageCode
       languageCode = "fr";
-      
+
       // Defaults for mainFrame
       mainFrame.anchor = ScreenPosition.CENTER;
       mainFrame.positionX = 0;
       mainFrame.positionY = 0;
       mainFrame.width = 200;
       mainFrame.height = 400;
-      
    }
 
 }

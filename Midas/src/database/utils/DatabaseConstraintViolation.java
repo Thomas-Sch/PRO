@@ -13,28 +13,30 @@
 package database.utils;
 
 /**
- * Classe qui représente une violation de contrainte
- * TODO
+ * Classe qui représente une violation de contrainte de la base de données.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class DatabaseConstraintViolation extends Exception {
 
    /**
-    * Exception dans le cas d'une violation de contrainte
+    * Imposé par le parent pour la sérialisation.
+    */
+   private static final long serialVersionUID = 7724110393758568140L;
+
+   /**
+    * Crée une exception pour une violation de contrainte.
+    * 
     * @param message
+    *           - le message associé à l'exception.
     */
    public DatabaseConstraintViolation(String message) {
       super(message);
    }
-   
-   /**
-    * imposé par le parent pour la séralisation
-    */
-   private static final long serialVersionUID = 7724110393758568140L;
 
 }
