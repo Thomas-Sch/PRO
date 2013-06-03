@@ -28,7 +28,8 @@ public class DBUser extends DBComponentEnableable {
    private String name;
 
    /**
-    * Initialise les champs qui ne représentent pas une référence.
+    * Crée un utilisateur, en initialisant les champs qui ne représentent pas
+    * une référence sur un autre élément.
     */
    public DBUser() {
       name = "";

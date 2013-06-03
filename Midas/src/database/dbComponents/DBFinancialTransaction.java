@@ -24,131 +24,170 @@ public class DBFinancialTransaction extends DBComponent {
    private Integer dbAccount;
    private Integer dbCategory;
    private Integer dbRecurrence;
-   
+
    /**
-    * Initialise les champs qui ne representent pas une référence
+    * Crée une transaction financière, en initialisant les champs qui ne
+    * représentent pas une référence sur un autre élément.
     */
    public DBFinancialTransaction() {
       amount = 0.0;
       date = new java.util.Date(0);
       reason = "";
    }
-   
+
    /**
-    * @return le/la/les amount
+    * Retourne le montant de la transaction.
+    * 
+    * @return Le montant de la transaction.
     */
    public Double getAmount() {
       return amount;
    }
 
    /**
-    * @param amount - la nouvelle valeur pour l'attribut amount
+    * Définit le montant de la transaction.
+    * 
+    * @param amount
+    *           - la nouveau montant.
     */
    public void setAmount(Double amount) {
       this.amount = amount;
    }
 
    /**
-    * @return le/la/les date
+    * Retourne la date de la transaction.
+    * 
+    * @return La date de la transaction.
     */
    public Date getDate() {
       return date;
    }
 
    /**
-    * @param date - la nouvelle valeur pour l'attribut date
+    * Définit la date de la transaction.
+    * 
+    * @param date
+    *           - la nouvelle date.
     */
    public void setDate(Date date) {
       this.date = date;
    }
 
    /**
-    * @return le/la/les reason
+    * Retourne un texte décrivant la raison de la transaction.
+    * 
+    * @return Un descriptif justifiant la transaction.
     */
    public String getReason() {
       return reason;
    }
 
    /**
-    * @param reason - la nouvelle valeur pour l'attribut reason
+    * Définit le texte décrivant la transaction.
+    * 
+    * @param reason
+    *           - la nouvelle description.
     */
    public void setReason(String reason) {
       this.reason = reason;
    }
 
    /**
-    * @return le/la/les dbUser
+    * Retourne l'identifiant de l'utilisateur à l'origine de cette transaction.
+    * 
+    * @return L'identifiant de l'auteur de la transaction.
     */
    public Integer getDbUser() {
       return dbUser;
    }
 
    /**
-    * @param dbUser - la nouvelle valeur pour l'attribut dbUser
+    * Définit l'utilisateur à l'origine de la transaction.
+    * 
+    * @param dbUser
+    *           - l'identifiant de l'auteur de la transaction.
     */
    public void setDbUser(Integer dbUser) {
       this.dbUser = dbUser;
    }
 
    /**
-    * @return le/la/les dbBudget
+    * Retourne l'identifiant du budget concerné par cette transaction.
+    * 
+    * @return L'identifiant du budget concerné.
     */
    public Integer getDbBudget() {
       return dbBudget;
    }
 
    /**
-    * @param dbBudget - la nouvelle valeur pour l'attribut dbBudget
+    * Définit le budget concerné par cette transaction.
+    * 
+    * @param dbBudget
+    *           - l'identifiant du budget concerné.
     */
    public void setDbBudget(Integer dbBudget) {
       this.dbBudget = dbBudget;
    }
 
    /**
-    * @return le/la/les dbAccount
+    * Retourne l'identifiant du compte concerné par cette transaction.
+    * 
+    * @return L'identifiant du compte concerné.
     */
    public Integer getDbAccount() {
       return dbAccount;
    }
 
    /**
-    * @param dbAccount - la nouvelle valeur pour l'attribut dbAccount
+    * Définit le compte concerné par cette transaction.
+    * 
+    * @param dbAccount
+    *           - l'identifiant du compte concerné.
     */
    public void setDbAccount(Integer dbAccount) {
       this.dbAccount = dbAccount;
    }
 
    /**
-    * @return le/la/les dbCategory
+    * Retourne l'identifiant de la catégorie à laquelle appartient cette
+    * transaction.
+    * 
+    * @return L'identifiant de la catégorie de cette transaction.
     */
    public Integer getDbCategory() {
       return dbCategory;
    }
 
    /**
-    * @param dbCategory - la nouvelle valeur pour l'attribut dbCategory
+    * Définit la catégorie à laquelle appartient cette transaction.
+    * 
+    * @param dbCategory
+    *           - l'identifiant de la catégorie.
     */
    public void setDbCategory(Integer dbCategory) {
       this.dbCategory = dbCategory;
    }
 
    /**
-    * @return le/la/les dbRecurrence
+    * Retourne l'identifiant de la récurrence de cette transaction.
+    * 
+    * @return L'identifiant de la récurrence.
     */
    public Integer getDbRecurrence() {
       return dbRecurrence;
    }
 
    /**
-    * @param dbRecurrence - la nouvelle valeur pour l'attribut dbRecurrence
+    * Définit la récurrence de cette transaction.
+    * 
+    * @param dbRecurrence
+    *           - l'identifiant de la récurrence.
     */
    public void setDbRecurrence(Integer dbRecurrence) {
       this.dbRecurrence = dbRecurrence;
    }
 
-   /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
    @Override
    public String toString() {
       return "DBFinancialTransaction [amount=" + amount + ", date=" + date
