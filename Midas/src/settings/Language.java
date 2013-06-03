@@ -15,32 +15,48 @@ package settings;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
+import utils.xml.HasXMLName;
 import utils.xml.XMLGetters;
 import core.MidasLogs;
 
-
 /**
- * Enumeration des champs de texte de l'application.
+ * Contient les outils permettant de gérer l'affichage des textes selon leur
+ * langue au sein du programme.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class Language {
-   
+
    private static final String xmlRootName = "language";
-   
-   public enum Text {
-      /* Déclarations des champs de texte. */
+
+   /**
+    * Énumération des champs de textes de l'application. Il s'agit des champs
+    * courts, comme les textes des menus, boutons etc...
+    * 
+    * @author Biolzi Sébastien
+    * @author Brito Carvalho Bruno
+    * @author Decorvet Grégoire
+    * @author Schweizer Thomas
+    * @author Sinniger Marcel
+    * 
+    */
+   public enum Text implements HasXMLName {
+      
+      /* ----------------------------------------------------------------------
+       * Début des déclarations - ajouter au besoin
+       * ----------------------------------------------------------------------
+       */
       APP_TITLE,
      
       // Menus
@@ -119,15 +135,15 @@ public class Language {
       
       SWISS_FRANC_ACRONYM;
       
-      
-      
-      /* Fin des déclarations, ne pas modifier ci-dessous
+      /*
+       * ----------------------------------------------------------------------
+       * Fin des déclarations, ne pas modifier ci-dessous
+       * ----------------------------------------------------------------------
        */
-      
       private String text;
-      
+
       @Override
-      public String toString(){
+      public String toString() {
          if (text == null) {
             return "Missing String";
          }
@@ -135,106 +151,146 @@ public class Language {
             return text;
          }
       }
-      
-      private String getXMLName(){
+
+      @Override
+      public String getXMLName() {
          return super.toString().toLowerCase();
       }
-      
+
+      /**
+       * Définit le texte à partir de la chaîne de caractères donnée.
+       * 
+       * @param text
+       *           - le texte associé à l'attribut.
+       */
       private void setValue(String text) {
          this.text = text;
       }
-      
+
    }
    
+   /**
+    * Charge les textes à partir du fichier xml donné.
+    * 
+    * @param languageFile
+    *           - le fichier de langue au format xml.
+    */
    public static void loadFromFile(File languageFile) {
-      
-      MidasLogs.messages.push("Language", "Start loading texts from " + languageFile.getAbsolutePath());
-      
-      if (languageFile.exists()) {  
+
+      MidasLogs.messages.push("Language", "Start loading texts from "
+            + languageFile.getAbsolutePath());
+
+      if (languageFile.exists()) {
          Document document = null;
          SAXBuilder saxBuilder = new SAXBuilder();
-         
+
          Element root;
-         
+
          try {
             document = saxBuilder.build(languageFile);
          }
-         catch(Exception e) {
-            MidasLogs.errors.push("Language", "Unable to load the file \"" + languageFile.getName() + "\".");
+         catch (Exception e) {
+            MidasLogs.errors.push("Language", "Unable to load the file \""
+                  + languageFile.getName() + "\".");
          }
-         
+
          // Reconfiguration du type enum en lisant le fichier de langue
          String readValue;
          if (document != null) {
             root = document.getRootElement();
-            
+
             for (Text text : Text.values()) {
                readValue = XMLGetters.getStringChild(root, text.getXMLName());
-               
+
                // Ne modifie que si le texte contient au moins un caractère
                if (!readValue.isEmpty()) {
                   text.setValue(readValue);
                }
-               
+
             }
-         }         
+         }
       }
       else {
-         MidasLogs.errors.push("Language", "File \"" + languageFile.getName() + "\" does not exist.");
+         MidasLogs.errors.push("Language", "File \"" + languageFile.getName()
+               + "\" does not exist.");
       }
-      
    }
-   
+
+   /**
+    * Crée un fichier de langue contenant tous les noeuds et en remplissant les
+    * noeud déjà associés à un texte, laissant les autres à remplir
+    * 
+    * @param languageFile
+    *           - le fichier de langue.
+    */
    public static void createUpdatedLanguageFile(File languageFile) {
       createLanguageFile(languageFile, true);
    }
-   
+
+   /**
+    * Crée un fichier de langue contenant tous les noeuds en laissant les champs
+    * libres pour n'avoir que le canevas.
+    * 
+    * @param languageFile
+    *           - le fichier de langue.
+    */
    public static void createTemplateLanguageFile(File languageFile) {
       createLanguageFile(languageFile, false);
    }
-   
-   private static void createLanguageFile(File languageFile, boolean createUpdate) {
-      
+
+   /**
+    * Crée un fichier de langue selon le fichier donné. Remplit ou non les
+    * champs des nouveaux noeuds.
+    * 
+    * @param languageFile
+    *           - le fichier de langue.
+    * @param createUpdate
+    *           - Vrai remplira les champs par le texte actuel s'il existe,
+    *           alors que Faux créera un canevas de la langue en laissant le
+    *           texte du noeud vide.
+    */
+   private static void createLanguageFile(File languageFile,
+         boolean createUpdate) {
       try {
-         if(!languageFile.getParentFile().exists()) {
+         if (!languageFile.getParentFile().exists()) {
             languageFile.getParentFile().mkdirs();
          }
       }
-      catch(Exception e) {
+      catch (Exception e) {
          MidasLogs.errors.push("Settings", "Unable to create language folder.");
       }
-      
+
       Element root = new Element(xmlRootName);
       Document document = new Document(root);
-      
+
       Element textElement;
       for (Text text : Text.values()) {
          textElement = new Element(text.getXMLName());
-         
+
          if (createUpdate) {
             textElement.setText(text.toString());
          }
          else {
             textElement.setText("TODO");
          }
-         
+
          root.addContent(textElement);
       }
-      
+
       /* Creation du fichier à l'emplacement voulu
        * ----------------------------------------------------------------------
        */
-      FileOutputStream fileOutputStream = null; 
+      FileOutputStream fileOutputStream = null;
       try {
          fileOutputStream = new FileOutputStream(languageFile);
-         
+
          XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
-         
+
          outputter.output(document, fileOutputStream);
       }
       catch (IOException ex) {
          MidasLogs.errors.push("Language",
-                               "Unable to create template file for language.");
+               "Unable to create template file for language.");
       }
       finally {
          if (fileOutputStream != null) {
@@ -243,11 +299,11 @@ public class Language {
             }
             catch (IOException ex) {
                MidasLogs.errors.push("Language",
-                                     "Error while closing the output stream.");
+                     "Error while closing the output stream.");
             }
          }
       }
-      
+
    }
 
 }
