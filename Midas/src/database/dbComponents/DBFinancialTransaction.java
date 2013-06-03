@@ -14,6 +14,16 @@ package database.dbComponents;
 
 import java.util.Date;
 
+/**
+ * 
+ * Cette classe représente une transactions financière 
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ *
+ */
 public class DBFinancialTransaction extends DBComponent {
 
    private Double amount;

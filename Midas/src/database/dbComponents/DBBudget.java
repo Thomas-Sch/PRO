@@ -12,6 +12,16 @@
  */
 package database.dbComponents;
 
+/**
+ * 
+ * Cette classe represente un budget 
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ *
+ */
 public class DBBudget extends DBComponentEnableable {
 
    private String name; 

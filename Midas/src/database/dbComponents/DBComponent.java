@@ -13,7 +13,11 @@
 package database.dbComponents;
 
 /**
- * Représente un composant de la base de données.
+ * Représente un composant en herbergant simplément idéntifiant de l'objet
+ * Cet idéntifiant n'est pas modifiable depuis l'éxterieur (uniquement
+ * par les classes qui heritent de DBComponent)
+ * Cet idéntifiant est (normalement) définit par la base de donnée
+ * (valeur autoincrémentée).
  * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno

@@ -12,6 +12,16 @@
  */
 package database.dbComponents;
 
+/**
+ * 
+ * Cette classe represente un budget à la volé
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ *
+ */
 public class DBBudgetOnTheFly extends DBBudget {
 
    private java.util.Date start;
