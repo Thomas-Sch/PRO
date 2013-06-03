@@ -23,7 +23,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import chart.dataset.TimeSeriesValue;
 
 /**
- * TODO
+ * Cette classe permet de créer un diagramme en fonction du temps
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -36,12 +36,16 @@ public class TimeSeriesChart extends ChartWithAxes {
    TimeSeriesCollection dataset;
    
    /**
-    * @param title
+    * Le constructeur crée un diagramme en fonction du temps complèt avec les données passées par argument
+    * à l'aide de JFreeChart
+    * @param title est le titre du diagramme
+    * @param timeSeriesValues est un tableau de TimeSeriesValue qui représente les données
+    * qui sont prises en compte pour la visualisation 
     */
-   public TimeSeriesChart(String title, TimeSeriesValue[] varValues) {
+   public TimeSeriesChart(String title, TimeSeriesValue[] timeSeriesValues) {
       super(title);
       
-      this.dataset = createDataset(varValues);
+      this.dataset = createDataset(timeSeriesValues);
       
       JFreeChart chart = ChartFactory.createTimeSeriesChart(
             super.getTitle(),

@@ -13,7 +13,7 @@
 package chart.types;
 
 /**
- * TODO
+ * Cette classe herberge les coordonnées X et Y pour des diagrammes qui utilisent ces deux valeurs
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -26,6 +26,10 @@ public class ChartWithAxes extends Chart {
    private String x;
    private String y;
    
+   /**
+    * Ce constructeur définit le titre du diagramme à l'aide du constructeur parent
+    * @param title
+    */
    public ChartWithAxes(String title) {
       super(title);
    }

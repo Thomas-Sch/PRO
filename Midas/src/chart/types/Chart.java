@@ -17,7 +17,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
 /**
- * TODO
+ * Cette classe définit les propriétés communes des diagrammes
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -33,6 +33,11 @@ abstract public class Chart {
    private Boolean url;
    private JFreeChart chart;
    
+   /**
+    * Ce constructeur définit le titre du diagramme et les propriétés non-modifiable
+    * depuis l'extérieur mais qui sont nécessaires pour JFreeChart.
+    * @param title est le titre du diagramme
+    */
    public Chart(String title) {
       this.title = title;
       this.legend = false;
