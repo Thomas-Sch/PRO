@@ -924,6 +924,10 @@ public class Core {
    public void saveBudgetOnTheFly(BudgetOnTheFly budget) {
       try {
          dbController.saveToDatabase(budget.getDBBudgetOnTheFly());
+         
+         if (!budgets.contains(budget)) {
+            budgets.addItem(budget);
+         }
 
          cache.putToCache(budget);
       }

@@ -15,8 +15,8 @@ package gui.views;
 import gui.Controller;
 import gui.View;
 import gui.component.JDateInput;
-import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
+import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxBudget;
 import gui.controller.combobox.ComboBoxUser;
@@ -34,10 +34,9 @@ import java.util.Observable;
 import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 
+import settings.Language.Text;
 import core.MidasLogs;
 import core.components.FinancialTransaction;
-
-import settings.Language.Text;
 
 /**
  * Fenêtre graphique pour ajouter une dépense.
@@ -63,7 +62,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    private ComboBoxesCategory categories;
    private ComboBoxUser users;
    private JLabelTextPanel ltpReason;
-   private JLabelMoneyPanel lmpAmount;
+   private JMoneyInfoEditionLabel lmpAmount;
    private JDateInput ditDate;
    
    private JValidateCancel vclActions;
@@ -190,7 +189,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       categories = new ComboBoxesCategory(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
       ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
+      lmpAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
       vclActions = new JValidateCancel();

@@ -51,7 +51,7 @@ public class JQuickExpense extends JPanel {
    private ComboBoxesCategory categories;
    private ComboBoxUser users;
    private JLabelTextPanel ltpReason;
-   private JLabelMoneyPanel lmpAmount;
+   private JMoneyInfoEditionLabel lmpAmount;
    private JDateInput ditDate;
    private JButton btnValidate;
    
@@ -77,7 +77,7 @@ public class JQuickExpense extends JPanel {
       categories = new ComboBoxesCategory(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
       ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
+      lmpAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
       btnValidate = new JButton(Text.VALIDATE_BUTTON.toString());

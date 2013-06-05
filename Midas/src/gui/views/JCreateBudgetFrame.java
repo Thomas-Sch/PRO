@@ -14,8 +14,8 @@ package gui.views;
 
 import gui.View;
 import gui.component.JDateInput;
-import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
+import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JTimeSliceChooser;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
@@ -57,7 +57,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
    private static final long serialVersionUID = -2619002208500615656L;
    
    private JLabelTextPanel ltpName;
-   private JLabelMoneyPanel lmpAmount;
+   private JMoneyInfoEditionLabel lmpAmount;
    private JValidateCancel vclActions;
    private ComboBoxAccount accounts;
    private JDateInput ditDate;
@@ -182,7 +182,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
     */
    private void initContent() {
       ltpName = new JLabelTextPanel(Text.BUDGET_NAME_LABEL);
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
+      lmpAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(core);
       
       ditDate = new JDateInput(Text.DATE_LABEL);

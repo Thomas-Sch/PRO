@@ -13,8 +13,8 @@
 package gui.views;
 
 import gui.View;
-import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
+import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.utils.StandardInsets;
 import gui.utils.TextChangedListener;
@@ -51,8 +51,8 @@ public class JCreateAccountFrame extends JDialog implements View{
    
    private JLabelTextPanel ltpName;
    private JLabelTextPanel ltpBankName;
-   private JLabelMoneyPanel ltpThreshold;
-   private JLabelMoneyPanel ltpInitialAmount;
+   private JMoneyInfoEditionLabel ltpThreshold;
+   private JMoneyInfoEditionLabel ltpInitialAmount;
    private JLabelTextPanel ltpNumber;
    private JLabelTextPanel ltpDescription;
    private JValidateCancel vcrActions;
@@ -171,8 +171,8 @@ public class JCreateAccountFrame extends JDialog implements View{
    private void initComponent() {
       ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL);
       ltpBankName = new JLabelTextPanel(Text.ACCOUNT_BANK_NAME_LABEL);
-      ltpThreshold = new JLabelMoneyPanel(Text.ACCOUNT_THRESHOLD_LABEL);
-      ltpInitialAmount = new JLabelMoneyPanel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL);
+      ltpThreshold = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL);
+      ltpInitialAmount = new JMoneyInfoEditionLabel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL);
       ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL);
       ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL);
       vcrActions = new JValidateCancel();

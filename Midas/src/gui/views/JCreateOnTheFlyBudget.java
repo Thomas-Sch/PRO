@@ -15,8 +15,8 @@ package gui.views;
 import gui.Controller;
 import gui.View;
 import gui.component.JDateInput;
-import gui.component.JLabelMoneyPanel;
 import gui.component.JLabelTextPanel;
+import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.utils.StandardInsets;
@@ -55,7 +55,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
    private static final long serialVersionUID = -4692092965659440366L;
    
    private JLabelTextPanel ltpName;
-   private JLabelMoneyPanel lmpAmount;
+   private JMoneyInfoEditionLabel lmpAmount;
    private JValidateCancel vclActions;
    private ComboBoxAccount accounts;
 
@@ -88,7 +88,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
     */
    private void initComponents() {
       ltpName = new JLabelTextPanel(Text.BUDGET_NAME_LABEL);
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
+      lmpAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(controller.getCore());
       
       ditStart = new JDateInput(Text.BEGIN_DATE_LABEL);

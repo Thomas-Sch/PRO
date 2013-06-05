@@ -15,6 +15,7 @@ package gui.component;
 import gui.utils.TextChangedListener;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -39,22 +40,38 @@ public class JMoneyInfoEditionLabel extends JInfoEditionLabel {
     * ID de sérialisation.
     */
    private static final long serialVersionUID = -8387676719291740575L;
+   
+   boolean isNumber = false;
+   JLabel lblCurrency;
 
    /**
-    * @param metainfo
-    * @param data
+    * @param metainfo Informations contenues dans le libellé.
+    * @param data Contenu du champ texte.
     */
    public JMoneyInfoEditionLabel(Text metainfo, String data) {
       super(metainfo, data);
       initListeners();
       setDataAlignement(SwingConstants.RIGHT);
+      tfdData.setColumns(tfdData.getColumns() - lblCurrency.getText().length());
+   }
+   
+   /**
+    * @param metainfo Informations contenues dans le libellé.
+    */
+   public JMoneyInfoEditionLabel(Text metainfo) {
+      this(metainfo,"");
+      
+      // Si on met rien comme données dans le champs texte, c'est que l'on
+      // veut saisir quelquechose.
+      setEditable(true); 
+      
    }
    
    /**
     * Place les composants du panel.
     */
    protected void buildContent() {      
-      setLayout(new GridLayout(1, 2));
+      setLayout(new GridLayout(1, 3));
       add(lblMetaInfo);
       
       JPanel pnlMoney = new JPanel(new BorderLayout(5,0));
@@ -63,18 +80,49 @@ public class JMoneyInfoEditionLabel extends JInfoEditionLabel {
       pnlMoney.add(tfdData, BorderLayout.CENTER);
       
       // Le label est défini ici pour des raisons pratiques.
-      JLabel lblCurrency = new JLabel(Text.SWISS_FRANC_ACRONYM.toString());
+      lblCurrency = new JLabel(Text.SWISS_FRANC_ACRONYM.toString());
       pnlMoney.add(lblCurrency, BorderLayout.EAST);
    }
    
+   /**
+    * Indique que le nombre contenu dans le champ texte est invalide.
+    */
+   public void setInvalid() {
+      isNumber = false;
+      tfdData.setForeground(Color.RED);
+   }
    
+   /**
+    * Indique que le nombre contenu dans le champ texte est valide.
+    */
+   public void setValid() {
+      isNumber = true;
+      tfdData.setForeground(Color.BLACK);
+   }
    
+   /**
+    * Est-ce que le contenu du champ text contient un nombre ?
+    * @return true si le contenu du champs text est valide.
+    */
+   public boolean isNumber() {
+      return isNumber;
+   }
+   
+   /**
+    * Initialise les listeners du composant.
+    */
    private void initListeners() {
       addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-         
+            try {
+               Double.parseDouble(tfdData.getText());
+               setValid();
+            }
+            catch (Exception e) {
+               setInvalid();
+            }
          }
       });
    }
