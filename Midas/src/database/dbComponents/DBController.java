@@ -173,7 +173,7 @@ public class DBController {
     * Cette méthode gère les mises à jours d'une table.
     * 
     * @param preparedStatement
-    *           - la requête de msie à jour.
+    *           - la requête de mise à jour.
     * @throws DatabaseException
     *            - levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
