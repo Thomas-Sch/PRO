@@ -64,7 +64,6 @@ public class JMoneyInfoEditionLabel extends JInfoEditionLabel {
       // Si on met rien comme données dans le champs texte, c'est que l'on
       // veut saisir quelquechose.
       setEditable(true); 
-      
    }
    
    /**
