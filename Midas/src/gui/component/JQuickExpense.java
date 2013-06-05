@@ -50,8 +50,8 @@ public class JQuickExpense extends JPanel {
    private ComboBoxBudget budgets;
    private ComboBoxesCategory categories;
    private ComboBoxUser users;
-   private JLabelTextPanel ltpReason;
-   private JMoneyInfoEditionLabel lmpAmount;
+   private JInfoEditionLabel ltpReason;
+   private JMoneyInfoEditionLabel mielAmount;
    private JDateInput ditDate;
    private JButton btnValidate;
    
@@ -76,8 +76,8 @@ public class JQuickExpense extends JPanel {
       budgets = new ComboBoxBudget(controller.getCore());
       categories = new ComboBoxesCategory(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
-      lmpAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
+      ltpReason = new JInfoEditionLabel(Text.REASON_LABEL);
+      mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
       btnValidate = new JButton(Text.VALIDATE_BUTTON.toString());
@@ -94,16 +94,16 @@ public class JQuickExpense extends JPanel {
          }
       });
       
-      lmpAmount.addTextChangedListener(new TextChangedListener() {
+      mielAmount.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               expense.setAmount(Double.parseDouble(lmpAmount.getText()));
-               lmpAmount.setValid();
+               expense.setAmount(Double.parseDouble(mielAmount.getText()));
+               mielAmount.setValid();
             } catch (NumberFormatException e) {
                MidasLogs.errors.push(e.getMessage());
-               lmpAmount.setInvalid();
+               mielAmount.setInvalid();
             }
             checkItemIntegrity();
          }
@@ -179,7 +179,7 @@ public class JQuickExpense extends JPanel {
       add(ltpReason, constraints);
       
       constraints.gridx = 1;
-      add(lmpAmount, constraints);
+      add(mielAmount, constraints);
       
       constraints.gridx = 2;
       add(ditDate, constraints);
@@ -199,7 +199,7 @@ public class JQuickExpense extends JPanel {
                     && budgets.isValidItemSelected()
                     && users.isValidItemSelected()
                     && categories.isValidItemSelected()
-                    && lmpAmount.isNumber();
+                    && mielAmount.isNumber();
       btnValidate.setEnabled(checkResult);
    }
    
@@ -227,7 +227,7 @@ public class JQuickExpense extends JPanel {
       categories.setInviteSelected();
       users.setInviteSelected();
       ltpReason.setText("");
-      lmpAmount.setText("0");
+      mielAmount.setText("0");
       ditDate.setDate(new Date());
       btnValidate.setEnabled(false);
    }

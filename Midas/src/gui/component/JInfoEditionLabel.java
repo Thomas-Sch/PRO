@@ -55,6 +55,17 @@ public class JInfoEditionLabel extends JPanel {
    }
    
    /**
+    * @param metainfo Informations contenues dans le libellé.
+    */
+   public JInfoEditionLabel(Text metainfo) {
+      this(metainfo,"");
+      
+      // Si on met rien comme données dans le champs texte, c'est que l'on
+      // veut saisir quelquechose.
+      setEditable(true); 
+   }
+   
+   /**
     * Initialise les composants du panel.
     * @param metainfo Contenu du label de présentation de la donnée.
     * @param data Donnée présentée.

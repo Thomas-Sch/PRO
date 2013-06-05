@@ -13,7 +13,7 @@
 package gui.views;
 
 import gui.View;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.utils.TextChangedListener;
 
@@ -27,7 +27,6 @@ import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
-
 import core.components.Category;
 
 /**
@@ -48,7 +47,7 @@ public class JCreateCategory extends JDialog implements View{
 
    private Category category;
    
-   private JLabelTextPanel ltpName;
+   private JInfoEditionLabel ielName;
    private JValidateCancel vlcActions;
    
    /**
@@ -70,28 +69,28 @@ public class JCreateCategory extends JDialog implements View{
       pnlContent.setLayout(splLayout);
       
       vlcActions = new JValidateCancel();
-      ltpName = new JLabelTextPanel(Text.CATEGORY_NAME_LABEL);
+      ielName = new JInfoEditionLabel(Text.CATEGORY_NAME_LABEL);
       
-      pnlContent.add(ltpName);
+      pnlContent.add(ielName);
       pnlContent.add(vlcActions);
       
       //Contraintes du label par rapport au contenant.
-      splLayout.putConstraint(SpringLayout.WEST, ltpName, 5, SpringLayout.WEST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, ltpName,8, SpringLayout.NORTH, pnlContent);
+      splLayout.putConstraint(SpringLayout.WEST, ielName, 5, SpringLayout.WEST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, ielName,8, SpringLayout.NORTH, pnlContent);
 
       //Contraintes pour la taille du contenant.
-      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, ltpName);
+      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, ielName);
       splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vlcActions);
       
       // Contraintes pour le bouton de validation.
       splLayout.putConstraint(SpringLayout.EAST, vlcActions, 0, SpringLayout.EAST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, vlcActions, 5, SpringLayout.SOUTH, ltpName);
+      splLayout.putConstraint(SpringLayout.NORTH, vlcActions, 5, SpringLayout.SOUTH, ielName);
       
-      ltpName.addTextChangedListener(new TextChangedListener() {
+      ielName.addTextChangedListener(new TextChangedListener() {
           @Override
           public void textChanged(DocumentEvent event) {
-             vlcActions.setEnableValidateButton(ltpName.getText().length() != 0);
-             category.setName(ltpName.getText());
+             vlcActions.setEnableValidateButton(ielName.getText().length() != 0);
+             category.setName(ielName.getText());
           }
        });
       

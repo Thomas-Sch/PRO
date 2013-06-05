@@ -13,7 +13,7 @@
 package gui.views;
 
 import gui.View;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
 import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.utils.StandardInsets;
@@ -49,12 +49,12 @@ public class JCreateAccountFrame extends JDialog implements View{
    
    private Account account;
    
-   private JLabelTextPanel ltpName;
-   private JLabelTextPanel ltpBankName;
-   private JMoneyInfoEditionLabel ltpThreshold;
-   private JMoneyInfoEditionLabel ltpInitialAmount;
-   private JLabelTextPanel ltpNumber;
-   private JLabelTextPanel ltpDescription;
+   private JInfoEditionLabel ielpName;
+   private JInfoEditionLabel ielBankName;
+   private JMoneyInfoEditionLabel mielThreshold;
+   private JMoneyInfoEditionLabel mielInitialAmount;
+   private JInfoEditionLabel ielNumber;
+   private JInfoEditionLabel ielDescription;
    private JValidateCancel vcrActions;
    
    /**
@@ -73,58 +73,58 @@ public class JCreateAccountFrame extends JDialog implements View{
     * Initialise les écouteurs sur les composants de la vue.
     */
    private void initListeners() {
-      ltpName.addTextChangedListener(new TextChangedListener() {
+      ielpName.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setName(ltpName.getText());
+            account.setName(ielpName.getText());
          }
       });
       
-      ltpName.addTextChangedListener(new TextChangedListener() {
+      ielpName.addTextChangedListener(new TextChangedListener() {
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setBankName(ltpName.getText());
+            account.setBankName(ielpName.getText());
          }
       });
       
-      ltpThreshold.addTextChangedListener(new TextChangedListener() {
+      mielThreshold.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               account.setThreshold(Double.valueOf(ltpThreshold.getText()));
+               account.setThreshold(Double.valueOf(mielThreshold.getText()));
             } catch(NumberFormatException e) {
                MidasLogs.errors.push("NOT PARSING");
             }
          }
       });
       
-      ltpInitialAmount.addTextChangedListener(new TextChangedListener() {
+      mielInitialAmount.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               account.setAmount(Double.valueOf(ltpInitialAmount.getText()));
+               account.setAmount(Double.valueOf(mielInitialAmount.getText()));
             } catch(NumberFormatException e) {
                MidasLogs.errors.push("NOT PARSING");
             }
          }
       });
       
-      ltpNumber.addTextChangedListener(new TextChangedListener() {
+      ielNumber.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setAccountNumber(ltpNumber.getText());
+            account.setAccountNumber(ielNumber.getText());
          }
       });
       
-      ltpDescription.addTextChangedListener(new TextChangedListener() {
+      ielDescription.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setDescription(ltpDescription.getText());
+            account.setDescription(ielDescription.getText());
          }
       });
    }
@@ -141,22 +141,22 @@ public class JCreateAccountFrame extends JDialog implements View{
       constraints.weightx = 0.5;
       constraints.weighty = 0.5;
       constraints.insets = new StandardInsets();
-      pnlContent.add(ltpName, constraints);
+      pnlContent.add(ielpName, constraints);
       
       constraints.gridy = 1;
-      pnlContent.add(ltpBankName, constraints);
+      pnlContent.add(ielBankName, constraints);
       
       constraints.gridy = 2;
-      pnlContent.add(ltpThreshold, constraints);
+      pnlContent.add(mielThreshold, constraints);
       
       constraints.gridy = 3;
-      pnlContent.add(ltpInitialAmount, constraints);
+      pnlContent.add(mielInitialAmount, constraints);
       
       constraints.gridy = 4;
-      pnlContent.add(ltpNumber, constraints);
+      pnlContent.add(ielNumber, constraints);
       
       constraints.gridy = 5;
-      pnlContent.add(ltpDescription, constraints);
+      pnlContent.add(ielDescription, constraints);
       
       constraints.gridy = 6;
       constraints.anchor = GridBagConstraints.EAST;
@@ -169,12 +169,12 @@ public class JCreateAccountFrame extends JDialog implements View{
     * Initialise les composants de le fenêtre.
     */
    private void initComponent() {
-      ltpName = new JLabelTextPanel(Text.ACCOUNT_NAME_LABEL);
-      ltpBankName = new JLabelTextPanel(Text.ACCOUNT_BANK_NAME_LABEL);
-      ltpThreshold = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL);
-      ltpInitialAmount = new JMoneyInfoEditionLabel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL);
-      ltpNumber = new JLabelTextPanel(Text.ACCOUNT_NUMBER_LABEL);
-      ltpDescription = new JLabelTextPanel(Text.ACCOUNT_DESCRIPTION_LABEL);
+      ielpName = new JInfoEditionLabel(Text.ACCOUNT_NAME_LABEL);
+      ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL);
+      mielThreshold = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL);
+      mielInitialAmount = new JMoneyInfoEditionLabel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL);
+      ielNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL);
+      ielDescription = new JInfoEditionLabel(Text.ACCOUNT_DESCRIPTION_LABEL);
       vcrActions = new JValidateCancel();
       vcrActions.setEnableValidateButton(true);
    }
