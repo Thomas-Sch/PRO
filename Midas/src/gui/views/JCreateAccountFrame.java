@@ -49,13 +49,13 @@ public class JCreateAccountFrame extends JDialog implements View{
    
    private Account account;
    
-   private JInfoEditionLabel ielpName;
+   private JInfoEditionLabel ielName;
    private JInfoEditionLabel ielBankName;
    private JMoneyInfoEditionLabel mielThreshold;
    private JMoneyInfoEditionLabel mielInitialAmount;
    private JInfoEditionLabel ielNumber;
    private JInfoEditionLabel ielDescription;
-   private JValidateCancel vcrActions;
+   private JValidateCancel vclActions;
    
    /**
     * Construit une nouvelle fenêtre pour ajouter un compte.
@@ -73,18 +73,20 @@ public class JCreateAccountFrame extends JDialog implements View{
     * Initialise les écouteurs sur les composants de la vue.
     */
    private void initListeners() {
-      ielpName.addTextChangedListener(new TextChangedListener() {
+      ielName.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setName(ielpName.getText());
+            account.setName(ielName.getText());
+            checkItemIntegrity();
          }
       });
       
-      ielpName.addTextChangedListener(new TextChangedListener() {
+      ielBankName.addTextChangedListener(new TextChangedListener() {
          @Override
          public void textChanged(DocumentEvent event) {
-            account.setBankName(ielpName.getText());
+            account.setBankName(ielBankName.getText());
+            checkItemIntegrity();
          }
       });
       
@@ -94,9 +96,12 @@ public class JCreateAccountFrame extends JDialog implements View{
          public void textChanged(DocumentEvent event) {
             try {
                account.setThreshold(Double.valueOf(mielThreshold.getText()));
+               mielThreshold.setValid();
             } catch(NumberFormatException e) {
                MidasLogs.errors.push("NOT PARSING");
+               mielThreshold.setInvalid();
             }
+            checkItemIntegrity();
          }
       });
       
@@ -106,9 +111,12 @@ public class JCreateAccountFrame extends JDialog implements View{
          public void textChanged(DocumentEvent event) {
             try {
                account.setAmount(Double.valueOf(mielInitialAmount.getText()));
+               mielInitialAmount.setValid();
             } catch(NumberFormatException e) {
                MidasLogs.errors.push("NOT PARSING");
+               mielInitialAmount.setInvalid();
             }
+            checkItemIntegrity();
          }
       });
       
@@ -117,6 +125,7 @@ public class JCreateAccountFrame extends JDialog implements View{
          @Override
          public void textChanged(DocumentEvent event) {
             account.setAccountNumber(ielNumber.getText());
+            checkItemIntegrity();
          }
       });
       
@@ -127,6 +136,7 @@ public class JCreateAccountFrame extends JDialog implements View{
             account.setDescription(ielDescription.getText());
          }
       });
+      checkItemIntegrity();
    }
    
    private JPanel buildContent() {
@@ -141,7 +151,7 @@ public class JCreateAccountFrame extends JDialog implements View{
       constraints.weightx = 0.5;
       constraints.weighty = 0.5;
       constraints.insets = new StandardInsets();
-      pnlContent.add(ielpName, constraints);
+      pnlContent.add(ielName, constraints);
       
       constraints.gridy = 1;
       pnlContent.add(ielBankName, constraints);
@@ -161,7 +171,7 @@ public class JCreateAccountFrame extends JDialog implements View{
       constraints.gridy = 6;
       constraints.anchor = GridBagConstraints.EAST;
       constraints.fill = GridBagConstraints.NONE;
-      pnlContent.add(vcrActions, constraints);      
+      pnlContent.add(vclActions, constraints);      
       return pnlContent;
    }
    
@@ -169,14 +179,14 @@ public class JCreateAccountFrame extends JDialog implements View{
     * Initialise les composants de le fenêtre.
     */
    private void initComponent() {
-      ielpName = new JInfoEditionLabel(Text.ACCOUNT_NAME_LABEL);
+      ielName = new JInfoEditionLabel(Text.ACCOUNT_NAME_LABEL);
       ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL);
       mielThreshold = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL);
       mielInitialAmount = new JMoneyInfoEditionLabel(Text.ACCOUNT_INITIAL_AMOUNT_LABEL);
       ielNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL);
       ielDescription = new JInfoEditionLabel(Text.ACCOUNT_DESCRIPTION_LABEL);
-      vcrActions = new JValidateCancel();
-      vcrActions.setEnableValidateButton(true);
+      vclActions = new JValidateCancel();
+      vclActions.setEnableValidateButton(true);
    }
    
    /**
@@ -184,7 +194,7 @@ public class JCreateAccountFrame extends JDialog implements View{
     * @param listener l'écouteur ajouté.
     */
    public void addValidateListener(ActionListener listener) {
-      vcrActions.addValidateListener(listener);
+      vclActions.addValidateListener(listener);
    }
    
    /**
@@ -192,7 +202,21 @@ public class JCreateAccountFrame extends JDialog implements View{
     * @param listener l'écouteur ajouté.
     */
    public void addCancelListener(ActionListener listener) {
-      vcrActions.addCancelListener(listener);
+      vclActions.addCancelListener(listener);
+   }
+   
+   /**
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
+    */
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ielName.isValidData() 
+                     && ielBankName.isValidData()
+                     && ielNumber.isValidData()
+                     && mielThreshold.isNumber()
+                     && mielInitialAmount.isNumber();
+      vclActions.setEnableValidateButton(checkResult);
    }
    
    /* (non-Javadoc)

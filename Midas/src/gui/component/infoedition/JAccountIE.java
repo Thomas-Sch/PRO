@@ -47,6 +47,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
    
    // Composants graphiques.
    private JInfoEditionLabel ielName;
+   private JInfoEditionLabel ielBankName;
    private JInfoEditionLabel ielAccountNumber;
    private JMoneyInfoEditionLabel mielAmount;
    private JMoneyInfoEditionLabel mielOverdraftLimit;
@@ -82,6 +83,15 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          @Override
          public void textChanged(DocumentEvent event) {
             data.setName(ielName.getText());
+         }
+      });
+      
+      ielBankName.addTextChangedListener(new TextChangedListener() {
+         
+         @Override
+         public void textChanged(DocumentEvent event) {
+            data.setBankName(ielBankName.getText());
+            
          }
       });
       
@@ -125,6 +135,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
       
       // Définition des champs.
       ielName = new JInfoEditionLabel(Text.ACCOUNT_NAME_LABEL, data.getName());
+      ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL, data.getBankName());
       ielAccountNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL, data.getAccountNumber());
       mielAmount = new JMoneyInfoEditionLabel(Text.ACCOUNT_BALANCE_LABEL,String.valueOf(data.getAmount()));
       mielOverdraftLimit = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL, String.valueOf(data.getThreshold()));
@@ -132,6 +143,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
       
       // Ajout des champs à la liste.
       result.add(ielName);
+      result.add(ielBankName);
       result.add(ielAccountNumber);
       result.add(mielOverdraftLimit);
       result.add(ielDescription);
@@ -143,8 +155,9 @@ public class JAccountIE extends JInfoEditionPane<Account> {
     */
    @Override
    public void buildContent() {
-      setLayout(new GridLayout(5, 5));
+      setLayout(new GridLayout(6, 1));
       add(ielName);
+      add(ielBankName);
       add(ielAccountNumber);
       add(mielAmount);
       add(mielOverdraftLimit);

@@ -106,6 +106,9 @@ public class JInfoEditionLabel extends JPanel {
     * @return Le contenu de la zone de texte.
     */
    public String getText() {
+      if(tfdData == null) {
+         return "";
+      }
       return tfdData.getText();
    }
    
@@ -131,5 +134,13 @@ public class JInfoEditionLabel extends JPanel {
     */
    public void setText(String s) {
       tfdData.setText(s);
+   }
+   
+   /**
+    * Renvoie true si le champs de saisie contient une saisie valide.
+    * En l'occurence, le champs est valide s'il n'est pas vide.
+    */
+   public boolean isValidData() {
+      return getText().length() != 0;
    }
 }
