@@ -30,6 +30,10 @@
   <budget_binded_account_name_label>TODO</budget_binded_account_name_label>
   <budget_balance_label>TODO</budget_balance_label>
   <budget_limit_label>TODO</budget_limit_label>
+  <budget_is_ok_label>TODO</budget_is_ok_label>
+  <budget_positive_label>TODO</budget_positive_label>
+  <budget_negative_label>TODO</budget_negative_label>
+  <budget_amount_left>TODO</budget_amount_left>
   <account_threshold_label>TODO</account_threshold_label>
   <account_initial_amount_label>TODO</account_initial_amount_label>
   <account_number_label>TODO</account_number_label>

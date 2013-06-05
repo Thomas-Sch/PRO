@@ -14,6 +14,7 @@ package gui.component;
 
 import gui.utils.TextChangedListener;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -103,5 +104,21 @@ public class JInfoEditionLabel extends JPanel {
     */
    public void setDataAlignement(int alignment) {
       tfdData.setHorizontalAlignment(alignment);
+   }
+   
+   /**
+    * Change la couleur du texte des données.
+    * @param c Nouvelle couleur.
+    */
+   public void setColor(Color c) {
+      tfdData.setForeground(c);
+   }
+   
+   /**
+    * Change le texte du champs de données.
+    * @param s Le nouveau texte.
+    */
+   public void setText(String s) {
+      tfdData.setText(s);
    }
 }
