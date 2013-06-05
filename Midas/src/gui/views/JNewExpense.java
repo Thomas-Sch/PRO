@@ -15,7 +15,7 @@ package gui.views;
 import gui.Controller;
 import gui.View;
 import gui.component.JDateInput;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
 import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxBudget;
@@ -61,7 +61,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    private ComboBoxBudget budgets;
    private ComboBoxesCategory categories;
    private ComboBoxUser users;
-   private JLabelTextPanel ltpReason;
+   private JInfoEditionLabel ielReason;
    private JMoneyInfoEditionLabel lmpAmount;
    private JDateInput ditDate;
    
@@ -86,11 +86,11 @@ public class JNewExpense extends javax.swing.JDialog implements View {
     * Initialise les écouteurs propre à l'interface.
     */
    private void initListeners() {
-      ltpReason.addTextChangedListener(new TextChangedListener() {
+      ielReason.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            expense.setReason(ltpReason.getText());
+            expense.setReason(ielReason.getText());
             checkItemIntegrity();
          }
       });
@@ -168,7 +168,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       pnlContent.add(users.getGraphicalComponent(), constraints);
       
       constraints.gridy = 3;
-      pnlContent.add(ltpReason, constraints);
+      pnlContent.add(ielReason, constraints);
       
       constraints.gridy = 4;
       pnlContent.add(lmpAmount, constraints);
@@ -188,7 +188,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       budgets = new ComboBoxBudget(controller.getCore());
       categories = new ComboBoxesCategory(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
+      ielReason = new JInfoEditionLabel(Text.REASON_LABEL);
       lmpAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
@@ -217,7 +217,7 @@ public class JNewExpense extends javax.swing.JDialog implements View {
     */
    private void checkItemIntegrity() {
       boolean checkResult;
-      checkResult = ltpReason.getText().length() != 0 
+      checkResult = ielReason.getText().length() != 0 
                     && budgets.isValidItemSelected()
                     && users.isValidItemSelected()
                     && categories.isValidItemSelected()

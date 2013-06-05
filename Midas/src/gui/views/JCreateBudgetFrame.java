@@ -14,7 +14,7 @@ package gui.views;
 
 import gui.View;
 import gui.component.JDateInput;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
 import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JTimeSliceChooser;
 import gui.component.JValidateCancel;
@@ -56,13 +56,13 @@ public class JCreateBudgetFrame extends JDialog implements View{
     */
    private static final long serialVersionUID = -2619002208500615656L;
    
-   private JLabelTextPanel ltpName;
+   private JInfoEditionLabel ielName;
    private JMoneyInfoEditionLabel lmpAmount;
    private JValidateCancel vclActions;
    private ComboBoxAccount accounts;
    private JDateInput ditDate;
    private JTimeSliceChooser tscBudgetLength;
-   private JLabelTextPanel ltpDescription;
+   private JInfoEditionLabel ielDescription;
    
    private Core core;
    private Budget budget;
@@ -86,20 +86,20 @@ public class JCreateBudgetFrame extends JDialog implements View{
     * Initialise les listeners à usage interne dans l'interface.
     */
    private void initListeners() {
-      ltpName.addTextChangedListener(new TextChangedListener() {
+      ielName.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            budget.setName(ltpName.getText());
+            budget.setName(ielName.getText());
             vclActions.setEnableValidateButton(isValid());
          }
       });
       
-      ltpDescription.addTextChangedListener(new TextChangedListener() {
+      ielDescription.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            budget.setDescription(ltpDescription.getText()); 
+            budget.setDescription(ielDescription.getText()); 
          }
       });
       
@@ -153,7 +153,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
       constraints.weightx = 0.5;
       constraints.weighty = 0.5;
       constraints.insets = new StandardInsets();
-      pnlContent.add(ltpName, constraints);
+      pnlContent.add(ielName, constraints);
       
       constraints.gridy = 1;
       pnlContent.add(lmpAmount, constraints);
@@ -168,7 +168,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
       pnlContent.add(tscBudgetLength, constraints);
       
       constraints.gridy = 5;
-      pnlContent.add(ltpDescription, constraints);
+      pnlContent.add(ielDescription, constraints);
       
       constraints.gridy = 6;
       constraints.fill = GridBagConstraints.NONE;
@@ -181,7 +181,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
     * Initialise les composants de la fenêtre.
     */
    private void initContent() {
-      ltpName = new JLabelTextPanel(Text.BUDGET_NAME_LABEL);
+      ielName = new JInfoEditionLabel(Text.BUDGET_NAME_LABEL);
       lmpAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(core);
       
@@ -189,7 +189,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
       
       tscBudgetLength = new JTimeSliceChooser(TimeSlice.MONTHLY, TimeSlice.ANNUAL);
       
-      ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
+      ielDescription = new JInfoEditionLabel(Text.BUDGET_DESCRIPTION_LABEL);      
       
       vclActions = new JValidateCancel();
    }
@@ -231,10 +231,10 @@ public class JCreateBudgetFrame extends JDialog implements View{
     * sont suffisantes pour être enregistrées.
     */
    public boolean isValid() {
-      if(ltpName == null || accounts == null) {
+      if(ielName == null || accounts == null) {
          return false;
       } else {
-         return ltpName.getText().length() != 0 
+         return ielName.getText().length() != 0 
                 && accounts.isValidItemSelected()
                 && lmpAmount.isNumber();
       }

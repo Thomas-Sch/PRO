@@ -13,7 +13,7 @@
 package gui.views;
 
 import gui.View;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.utils.TextChangedListener;
 
@@ -27,7 +27,6 @@ import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
-
 import core.components.User;
 
 /**
@@ -48,7 +47,7 @@ public class JCreateAuthorFrame extends JDialog implements View{
    
    private User user;
  
-   private JLabelTextPanel authorName;
+   private JInfoEditionLabel ielName;
    private JValidateCancel vclActions;
    
    /**
@@ -71,30 +70,30 @@ public class JCreateAuthorFrame extends JDialog implements View{
       pnlContent.setLayout(splLayout);
       
       vclActions = new JValidateCancel();
-      authorName = new JLabelTextPanel(Text.USER_NAME_LABEL);
+      ielName = new JInfoEditionLabel(Text.USER_NAME_LABEL);
       
-      pnlContent.add(authorName);
+      pnlContent.add(ielName);
       pnlContent.add(vclActions);
       
       //Contraintes du label par rapport au contenant.
-      splLayout.putConstraint(SpringLayout.WEST, authorName, 5, SpringLayout.WEST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, authorName,8, SpringLayout.NORTH, pnlContent);
+      splLayout.putConstraint(SpringLayout.WEST, ielName, 5, SpringLayout.WEST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, ielName,8, SpringLayout.NORTH, pnlContent);
 
       //Contraintes pour la taille du contenant.
-      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, authorName);
+      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, ielName);
       splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vclActions);
       
       // Contraintes pour le bouton de validation.
       splLayout.putConstraint(SpringLayout.EAST, vclActions, 0, SpringLayout.EAST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, vclActions, 5, SpringLayout.SOUTH, authorName);
+      splLayout.putConstraint(SpringLayout.NORTH, vclActions, 5, SpringLayout.SOUTH, ielName);
       
-       authorName.addTextChangedListener(new TextChangedListener() {
+       ielName.addTextChangedListener(new TextChangedListener() {
           @Override
           public void textChanged(DocumentEvent event) {
-             if(authorName.getText().length() == 0) {
+             if(ielName.getText().length() == 0) {
                 vclActions.setEnableValidateButton(false);
              } else {
-                user.setName(authorName.getText());
+                user.setName(ielName.getText());
                 vclActions.setEnableValidateButton(true);
              }
           }

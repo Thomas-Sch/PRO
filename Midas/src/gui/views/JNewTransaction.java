@@ -15,7 +15,7 @@ package gui.views;
 import gui.Controller;
 import gui.View;
 import gui.component.JDateInput;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
 import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
@@ -61,7 +61,7 @@ public class JNewTransaction extends JDialog implements View {
    private ComboBoxAccount accounts;
    private ComboBoxUser users;
    private JMoneyInfoEditionLabel mielAmount;
-   private JLabelTextPanel ltpReason;
+   private JInfoEditionLabel ielReason;
    private JDateInput ditDate;
 
    private JValidateCancel vclActions;
@@ -103,7 +103,7 @@ public class JNewTransaction extends JDialog implements View {
       pnlContent.add(mielAmount, constraints);
       
       constraints.gridy = 3;
-      pnlContent.add(ltpReason, constraints);
+      pnlContent.add(ielReason, constraints);
       
       constraints.gridy = 4;
       pnlContent.add(ditDate, constraints);
@@ -120,7 +120,7 @@ public class JNewTransaction extends JDialog implements View {
    private void initContent() {
       accounts = new ComboBoxAccount(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
+      ielReason = new JInfoEditionLabel(Text.REASON_LABEL);
       mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
@@ -128,11 +128,11 @@ public class JNewTransaction extends JDialog implements View {
    }
    
    private void initListeners() {
-     ltpReason.addTextChangedListener(new TextChangedListener() {
+     ielReason.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            transaction.setReason(ltpReason.getText());
+            transaction.setReason(ielReason.getText());
             checkItemIntegrity();
          }
       });
@@ -205,7 +205,7 @@ public class JNewTransaction extends JDialog implements View {
     */
    private void checkItemIntegrity() {
       boolean checkResult;
-      checkResult = ltpReason.getText().length() != 0 
+      checkResult = ielReason.getText().length() != 0 
                     && accounts.isValidItemSelected()
                     && users.isValidItemSelected()
                     && mielAmount.isNumber();
