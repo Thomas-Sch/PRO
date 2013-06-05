@@ -15,14 +15,15 @@ package database.dbComponents;
 import java.util.Date;
 
 /**
+ * Représente une transaction financière pour la base de données, et met à
+ * disposition les fonctions de manipulations de base.
  * 
- * Cette classe représente une transactions financière 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class DBFinancialTransaction extends DBComponent {
 
@@ -36,7 +37,7 @@ public class DBFinancialTransaction extends DBComponent {
    private Integer dbRecurrence;
 
    /**
-    * Crée une transaction financière, en initialisant les champs qui ne
+    * Crée une transaction financière, et initialise les champs qui ne
     * représentent pas une référence sur un autre élément.
     */
    public DBFinancialTransaction() {

@@ -12,57 +12,71 @@
  */
 package database.dbComponents;
 
+import java.util.Date;
+
 /**
+ * Représente un budget à la volée pour la base de données, et met à disposition
+ * les fonctions de manipulations de base.
  * 
- * Cette classe represente un budget à la volé
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class DBBudgetOnTheFly extends DBBudget {
 
-   private java.util.Date start;
-   private java.util.Date end;
-   
+   private Date start;
+   private Date end;
+
    /**
-    * Initialise les champs qui ne representent pas une référence
+    * Crée un budget à la volée, et initialise les champs qui ne représentent
+    * pas une référence sur un autre élément.
     */
    public DBBudgetOnTheFly() {
       start = null;
       end = null;
    }
-   
+
    /**
-    * @return le/la/les start
+    * Retourne la date du commencement du budget.
+    * 
+    * @return La date de début.
     */
-   public java.util.Date getStart() {
+   public Date getStart() {
       return start;
    }
+
    /**
-    * @param start - la nouvelle valeur pour l'attribut start
+    * Définit la date du commencement du budget.
+    * 
+    * @param start
+    *           - la nouvelle date de début.
     */
-   public void setStart(java.util.Date start) {
+   public void setStart(Date start) {
       this.start = start;
    }
+
    /**
-    * @return le/la/les end
+    * Retourne la date de terminaison du budget.
+    * 
+    * @return La date de fin.
     */
-   public java.util.Date getEnd() {
+   public Date getEnd() {
       return end;
    }
+
    /**
-    * @param end - la nouvelle valeur pour l'attribut end
+    * Définit la date de terminaison du budget.
+    * 
+    * @param end
+    *           - la nouvelle date de fin.
     */
-   public void setEnd(java.util.Date end) {
+   public void setEnd(Date end) {
       this.end = end;
    }
 
-   /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
    @Override
    public String toString() {
       return "DBBudgetOnTheFly [start=" + start + ", end=" + end

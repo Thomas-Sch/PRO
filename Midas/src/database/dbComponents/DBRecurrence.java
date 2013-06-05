@@ -15,8 +15,9 @@ package database.dbComponents;
 import java.util.Date;
 
 /**
+ * Représente une récurrence pour la base de données, et met à disposition les
+ * fonctions de manipulations de base.
  * 
- * Cette classe représente une récurrence par un intervalle
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -31,7 +32,7 @@ public class DBRecurrence extends DBComponent {
    private Integer intervalRecurrence;
 
    /**
-    * Crée une récurrence, en initialisant les champs qui ne représentent pas
+    * Crée une récurrence, et initialise les champs qui ne représentent pas
     * une référence sur un autre élément.
     */
    public DBRecurrence() {

@@ -28,7 +28,7 @@ public class DBUser extends DBComponentEnableable {
    private String name;
 
    /**
-    * Crée un utilisateur, en initialisant les champs qui ne représentent pas
+    * Crée un utilisateur, et initialise les champs qui ne représentent pas
     * une référence sur un autre élément.
     */
    public DBUser() {
