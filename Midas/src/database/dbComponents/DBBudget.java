@@ -13,8 +13,8 @@
 package database.dbComponents;
 
 /**
- * 
- * Cette classe represente un budget 
+ * Représente un budget pour la base de données, et met à disposition
+ * les fonctions de manipulations de base. 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -31,7 +31,8 @@ public class DBBudget extends DBComponentEnableable {
    private Integer dbAccount;
    
    /**
-    * Initialise les champs qui ne representent pas une référence
+    * Crée un budget, et initialise les champs qui ne
+    * représentent pas une référence sur un autre élément.
     */
    public DBBudget() {
       name = "";
@@ -40,12 +41,15 @@ public class DBBudget extends DBComponentEnableable {
    }
    
    /**
-    * @return le/la/les name
+    * Retourne le nom du budget.
+    * @return Le nom du budget.
     */
    public String getName() {
       return name;
    }
+   
    /**
+    * Définit le nom du budget. TODO
     * @param name - la nouvelle valeur pour l'attribut name
     */
    public void setName(String name) {
