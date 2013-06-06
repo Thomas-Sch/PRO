@@ -30,67 +30,6 @@
   <budget_binded_account_name_label>Nom du compte lié</budget_binded_account_name_label>
   <budget_balance_label>Montant dépensé</budget_balance_label>
   <budget_limit_label>Plafond</budget_limit_label>
-  <account_threshold_label>Seuil</account_threshold_label>
-  <account_initial_amount_label>Montant initial</account_initial_amount_label>
-  <account_number_label>Numéro de compte</account_number_label>
-  <account_description_label>Description du compte</account_description_label>
-  <account_name_label>Nom du compte</account_name_label>
-  <account_bank_name_label>Nom de la banque</account_bank_name_label>
-  <account_balance_label>Solde</account_balance_label>
-  <home_screen_name>Accueil</home_screen_name>
-  <quick_expense_label>Effectuer une dépense rapide...</quick_expense_label>
-  <reason_label>Motif</reason_label>
-  <amount_label>Montant</amount_label>
-  <date_label>Date</date_label>
-  <begin_date_label>Date de début</begin_date_label>
-  <end_date_label>Date de fin</end_date_label>
-  <select_category_label>Sélectionner une catégorie</select_category_label>
-  <new_category_label>Nouvelle catégorie...</new_category_label>
-  <select_subcategory_label>Sélectionner une sous catégorie</select_subcategory_label>
-  <new_subcategory_label>Nouvelle sous catégorie...</new_subcategory_label>
-  <daily_label>Journalier</daily_label>
-  <weekly_label>Hebdomadaire</weekly_label>
-  <monthly_label>Mensuel</monthly_label>
-  <annual_label>Annuel</annual_label>
-  <recurrence_label>Récurrence</recurrence_label>
-  <time_slice_settings>Durée</time_slice_settings>
-  <transaction_type_label>Type</transaction_type_label>
-  <transaction_type_credit>Créditer</transaction_type_credit>
-  <transaction_type_debit>Débiter</transaction_type_debit>
-  <swiss_franc_acronym>CHF</swiss_franc_acronym>
-</language>
-<?xml version="1.0" encoding="UTF-8"?>
-<language>
-  <app_title>Midas</app_title>
-  <action_quit>Quitter</action_quit>
-  <account_creation_title>Ajout d'un compte</account_creation_title>
-  <account_management_title>Gestion des comptes</account_management_title>
-  <category_creation_title>Ajout d'une catégorie</category_creation_title>
-  <category_management_title>Gestion des catégories</category_management_title>
-  <subcategory_creation_title>Ajout d'une sous catégorie</subcategory_creation_title>
-  <user_creation_title>Ajout d'un auteur</user_creation_title>
-  <user_management_title>Gestion des auteurs</user_management_title>
-  <budget_creation_title>Ajout d'un budget</budget_creation_title>
-  <budget_fly_creation_title>Ajout d'un budget à la volée</budget_fly_creation_title>
-  <budget_management_title>Gestion des budgets</budget_management_title>
-  <expense_creation_title>Nouvelle dépense</expense_creation_title>
-  <transaction_creation_title>Nouvelle transaction</transaction_creation_title>
-  <validate_button>Valider</validate_button>
-  <cancel_button>Annuler</cancel_button>
-  <reset_button>Initialiser</reset_button>
-  <add_button>Ajouter</add_button>
-  <modify_button>Modifier</modify_button>
-  <delete_button>Supprimer</delete_button>
-  <account_list_label>Liste des comptes</account_list_label>
-  <user_list_label>Liste des utilisateurs</user_list_label>
-  <category_list_label>Liste des catégories</category_list_label>
-  <category_name_label>Nom</category_name_label>
-  <user_name_label>Nom d'utilisateur</user_name_label>
-  <budget_description_label>Description</budget_description_label>
-  <budget_name_label>Nom du budget</budget_name_label>
-  <budget_binded_account_name_label>Nom du compte lié</budget_binded_account_name_label>
-  <budget_balance_label>Montant dépensé</budget_balance_label>
-  <budget_limit_label>Plafond</budget_limit_label>
   <budget_is_ok_label>Etat du budget</budget_is_ok_label>
   <budget_positive_label>Tenu</budget_positive_label>
   <budget_negative_label>Non tenu</budget_negative_label>

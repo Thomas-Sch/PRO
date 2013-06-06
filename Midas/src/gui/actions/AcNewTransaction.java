@@ -14,6 +14,7 @@ package gui.actions;
 
 import gui.Controller;
 import gui.UserAction;
+import gui.alert.AccountBankruptcy;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import gui.views.JNewTransaction;
@@ -25,7 +26,9 @@ import java.awt.event.ActionListener;
 import settings.Language.Text;
 
 import core.Core;
+import core.MidasLogs;
 import core.components.FinancialTransaction;
+import core.exceptions.AmountUnavailable;
 
 /**
  * Contrôleur et action de l'ajout d'une transaction.
@@ -79,8 +82,13 @@ public class AcNewTransaction extends UserAction {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            transaction.setDate(view.getDate());
-            core.saveFinancialTransaction(transaction);
+            
+            try {
+               transaction.setDate(view.getDate());
+               core.saveFinancialTransaction(transaction);
+            } catch (AmountUnavailable e) {
+               new AccountBankruptcy(e);
+            }
             view.dispose();
          }
       });

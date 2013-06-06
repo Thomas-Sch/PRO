@@ -14,6 +14,7 @@ package gui.actions;
 
 import gui.Controller;
 import gui.UserAction;
+import gui.alert.AccountBankruptcy;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import gui.views.JNewExpense;
@@ -25,6 +26,7 @@ import java.awt.event.ActionListener;
 import settings.Language.Text;
 import core.Core;
 import core.components.FinancialTransaction;
+import core.exceptions.AmountUnavailable;
 
 /**
  * Contrôleur et action de l'ajout d'une dépense.
@@ -79,9 +81,14 @@ public class AcNewExpense extends UserAction {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            expense.setDate(view.getDate());
-            expense.setAccount(expense.getBudget().getBindedAccount());
-            core.saveFinancialTransaction(expense);
+            try {
+               expense.setDate(view.getDate());
+               expense.setAccount(expense.getBudget().getBindedAccount());
+               core.saveFinancialTransaction(expense);
+            }
+            catch (AmountUnavailable e) {
+               new AccountBankruptcy(e);
+            }
             view.dispose();
          }
       });

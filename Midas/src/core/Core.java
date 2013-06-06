@@ -15,9 +15,6 @@ package core;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import javax.swing.JOptionPane;
-
-import settings.Language.Text;
 import settings.Settings;
 import core.cache.Cache;
 import core.components.Account;
@@ -971,7 +968,7 @@ public class Core {
     * @param transaction
     *           - la transaction à sauver.
     */
-   public void saveFinancialTransaction(FinancialTransaction transaction) {
+   public void saveFinancialTransaction(FinancialTransaction transaction) throws AmountUnavailable{
       try {
          if(transaction.isExpense()) {
             transaction.getAccount().debit(transaction.getAmount());
@@ -981,12 +978,6 @@ public class Core {
          dbController.saveToDatabase(transaction.getDBFinancialTransaction());
          saveAccount(transaction.getAccount());
          cache.putToCache(transaction);
-      }
-      catch (AmountUnavailable e) {
-         MidasLogs.errors.push(e.getMessage());
-         JOptionPane.showMessageDialog(null, 
-                "Le compte ne dispose pas d'assez de provisions pour effectuer la dépense !", 
-             Text.APP_TITLE.toString(), JOptionPane.OK_OPTION);
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the budget with id "
@@ -1057,6 +1048,9 @@ public class Core {
          transaction.getDBFinancialTransaction().setDbRecurrence(null);
          saveFinancialTransaction(transaction);
          dbController.deleteDbRecurrence(tmpId);
+      }
+      catch (AmountUnavailable e) {
+         MidasLogs.errors.push(e.getMessage());
       }
       catch (DatabaseException | DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core",
