@@ -24,9 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import settings.Language.Text;
-
 import core.Core;
-import core.MidasLogs;
 import core.components.FinancialTransaction;
 import core.exceptions.AmountUnavailable;
 

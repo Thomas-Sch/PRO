@@ -929,6 +929,70 @@ public class DBController {
       }
       return dbFinancialTransactions;
    }
+   
+   /**
+    * Retourne la liste des dernières transactions financières effectuées
+    * présentes dans la base de données.
+    * 
+    * @param number
+    *           - le nombre de transactions voulues.
+    * @return La liste des dernières transactions financières.
+    * @throws DatabaseException
+    *            - levée en cas d'erreur avec la base de données.
+    */
+   public LinkedList<DBFinancialTransaction>
+         getLatestDbFinancialTransactions(int number) throws DatabaseException {
+
+      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Cat_ID, "
+                       + "Bud_ID, Acc_ID, Use_ID "
+                       + "FROM FinancialTransaction "
+                       + "ORDER BY Date DESC"
+                       + "LIMIT 0, ?";
+
+      PreparedStatement preparedStatement = dbAccess
+            .getPreparedStatement(sqlString);
+      DBFinancialTransaction dbFinancialTransaction = null;
+      LinkedList<DBFinancialTransaction> dbFinancialTransactions =
+                                       new LinkedList<DBFinancialTransaction>();
+
+      try {
+         preparedStatement.setInt(1, number);
+         
+         ResultSet result = this.select(preparedStatement);
+
+         while (result.next()) {
+            dbFinancialTransaction = new DBFinancialTransaction();
+
+            dbFinancialTransaction.setId((result.getInt(1)));
+            if (result.getInt(2) != 0) {
+               dbFinancialTransaction.setDbRecurrence((result.getInt(2)));
+            }
+            dbFinancialTransaction.setAmount((result.getDouble(3)));
+            dbFinancialTransaction.setDate((result.getDate(4)));
+            dbFinancialTransaction.setReason((result.getString(5)));
+            if (result.getInt(6) != 0) {
+               dbFinancialTransaction.setDbCategory(result.getInt(6));
+            }
+            if (result.getInt(7) != 0) {
+               dbFinancialTransaction.setDbBudget(result.getInt(7));
+            }
+            if (result.getInt(8) != 0) {
+               dbFinancialTransaction.setDbAccount((result.getInt(8)));
+            }
+            dbFinancialTransaction.setDbUser(result.getInt(9));
+
+            dbFinancialTransactions.add(dbFinancialTransaction);
+         }
+
+      }
+      catch (SQLException e) {
+         DBErrorHandler.resultSetError(e);
+      }
+      finally {
+         dbAccess.destroyPreparedStatement(preparedStatement);
+      }
+      return dbFinancialTransactions;
+   }
 
    /**
     * Sauvegarde ou met à jour dans la base de données la transaction financière
