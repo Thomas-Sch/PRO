@@ -2,8 +2,11 @@
 <language>
   <app_title>Midas</app_title>
   <account_creation_title>Ajout d'un compte</account_creation_title>
+  
+  <!-- Texte des menus -->
   <action_quit>Quitter</action_quit>
   
+  <!-- Titres des fenêtres.  -->
   <account_management_title>Gestion des comptes</account_management_title>
   <category_creation_title>Ajout d'une catégorie</category_creation_title>
   <category_management_title>Gestion des catégories</category_management_title>
@@ -16,6 +19,7 @@
   <expense_creation_title>Nouvelle dépense</expense_creation_title>
   <transaction_creation_title>Nouvelle transaction</transaction_creation_title>
   
+  <!-- Texte des boutons. -->
   <validate_button>Valider</validate_button>
   <cancel_button>Annuler</cancel_button>
   <reset_button>Initialiser</reset_button>
@@ -23,14 +27,26 @@
   <modify_button>Modifier</modify_button>
   <delete_button>Supprimer</delete_button>
   
+  <!-- Décrivent une zone de l'application. -->
   <account_list_label>Liste des comptes</account_list_label>
+  <budget_list_label>Liste des budgets</budget_list_label>
   <user_list_label>Liste des utilisateurs</user_list_label>
   <category_list_label>Liste des catégories</category_list_label>
+  <quick_expense_label>Effectuer une dépense rapide...</quick_expense_label>
   
-  <category_name_label>Nom</category_name_label>
   
+  <!-- Descripteurs. -->
   <user_name_label>Nom d'utilisateur</user_name_label>
-  
+  <home_screen_name>Accueil</home_screen_name>
+  <reason_label>Motif</reason_label>
+  <amount_label>Montant</amount_label>
+  <date_label>Date</date_label>
+  <begin_date_label>Date de début</begin_date_label>
+  <end_date_label>Date de fin</end_date_label>
+  <recurrence_label>Récurrence</recurrence_label>
+  <time_slice_settings>Durée</time_slice_settings>  
+
+  <!-- Champs du budget. -->
   <budget_name_label>Nom du budget</budget_name_label>
   <budget_description_label>Description</budget_description_label>
   <budget_binded_account_name_label>Nom du compte lié</budget_binded_account_name_label>
@@ -41,6 +57,7 @@
   <budget_negative_label>Non tenu</budget_negative_label>
   <budget_amount_left>Montant restant dépensable</budget_amount_left>
   
+  <!-- Champs du compte -->
   <account_threshold_label>Seuil</account_threshold_label>
   <account_initial_amount_label>Montant initial</account_initial_amount_label>
   <account_number_label>Numéro de compte</account_number_label>
@@ -49,28 +66,21 @@
   <account_bank_name_label>Nom de la banque</account_bank_name_label>
   <account_balance_label>Solde</account_balance_label>
   
+  <!-- Invites des catégories -->
   <select_category_label>Sélectionner une catégorie</select_category_label>
   <new_category_label>Nouvelle catégorie...</new_category_label>
   <select_subcategory_label>Sélectionner une sous catégorie</select_subcategory_label>
   <new_subcategory_label>Nouvelle sous catégorie...</new_subcategory_label>
+  <category_parent_label>Parent</category_parent_label>
+  <category_name_label>Nom</category_name_label> 
+
   
-  <home_screen_name>Accueil</home_screen_name>
-  <quick_expense_label>Effectuer une dépense rapide...</quick_expense_label>
-  <date_label>Date</date_label>
-  <begin_date_label>Date de début</begin_date_label>
-  <end_date_label>Date de fin</end_date_label>
-  <reason_label>Motif</reason_label>
-  <amount_label>Montant</amount_label>
+  <!-- Nom des intervalles de temps. -->
   <daily_label>Journalier</daily_label>
   <weekly_label>Hebdomadaire</weekly_label>
   <monthly_label>Mensuel</monthly_label>
   <annual_label>Annuel</annual_label>
-  <recurrence_label>Récurrence</recurrence_label>
-  <time_slice_settings>Durée</time_slice_settings>
   
-  <transaction_type_label>Type</transaction_type_label>
-  <transaction_type_credit>Créditer</transaction_type_credit>
-  <transaction_type_debit>Débiter</transaction_type_debit>
-  
+  <!-- Acronymes des monnaies. -->
   <swiss_franc_acronym>CHF</swiss_franc_acronym>
 </language>

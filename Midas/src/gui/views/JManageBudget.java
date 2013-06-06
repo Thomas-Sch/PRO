@@ -64,7 +64,7 @@ public class JManageBudget extends JManageFrame implements View {
     */
    protected void initContent() {
       super.initContent();
-      lblListDescription = new JLabel(Text.ACCOUNT_LIST_LABEL.toString());
+      lblListDescription = new JLabel(Text.BUDGET_LIST_LABEL.toString());
       budgets = new BudgetListBox(core);
       bieInfos = new JBudgetIE();
    }

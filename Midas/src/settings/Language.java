@@ -62,7 +62,7 @@ public class Language {
       // Menus
       ACTION_QUIT,
       
-      // Titres de fenêtres.
+      // Titres des fenêtres.
       ACCOUNT_CREATION_TITLE,
       ACCOUNT_MANAGEMENT_TITLE,
       CATEGORY_CREATION_TITLE,
@@ -76,7 +76,7 @@ public class Language {
       EXPENSE_CREATION_TITLE,
       TRANSACTION_CREATION_TITLE,
       
-      // Boutons.
+      // Texte des boutons.
       VALIDATE_BUTTON,
       CANCEL_BUTTON,
       RESET_BUTTON,
@@ -84,15 +84,25 @@ public class Language {
       MODIFY_BUTTON,
       DELETE_BUTTON,
       
-      // Dévrivent une zone de l'application
+      // Décrivent une zone de l'application.
       ACCOUNT_LIST_LABEL,
+      BUDGET_LIST_LABEL,
       USER_LIST_LABEL,
       CATEGORY_LIST_LABEL,
+      QUICK_EXPENSE_LABEL,
       
       // Descripteurs.
-      CATEGORY_NAME_LABEL,
       USER_NAME_LABEL,
+      HOME_SCREEN_NAME,
+      REASON_LABEL,
+      AMOUNT_LABEL,
+      DATE_LABEL,
+      BEGIN_DATE_LABEL,
+      END_DATE_LABEL,
+      RECURRENCE_LABEL,
+      TIME_SLICE_SETTINGS,
       
+      // Champs du budget.
       BUDGET_DESCRIPTION_LABEL,
       BUDGET_NAME_LABEL,
       BUDGET_BINDED_ACCOUNT_NAME_LABEL,
@@ -103,6 +113,7 @@ public class Language {
       BUDGET_NEGATIVE_LABEL,
       BUDGET_AMOUNT_LEFT,
       
+      // Champs du compte.
       ACCOUNT_THRESHOLD_LABEL,
       ACCOUNT_INITIAL_AMOUNT_LABEL,
       ACCOUNT_NUMBER_LABEL,
@@ -111,32 +122,21 @@ public class Language {
       ACCOUNT_BANK_NAME_LABEL,
       ACCOUNT_BALANCE_LABEL,
       
-     
-      HOME_SCREEN_NAME,
-      QUICK_EXPENSE_LABEL,
-      REASON_LABEL,
-      AMOUNT_LABEL,
-      DATE_LABEL,
-      BEGIN_DATE_LABEL,
-      END_DATE_LABEL,
-      
+      // Invites des catégories.
+      CATEGORY_NAME_LABEL,
+      CATEGORY_PARENT_LABEL,
       SELECT_CATEGORY_LABEL,
       NEW_CATEGORY_LABEL,
       SELECT_SUBCATEGORY_LABEL,
       NEW_SUBCATEGORY_LABEL,
       
+      // Nom des intervalles de temps.
       DAILY_LABEL,
       WEEKLY_LABEL,
       MONTHLY_LABEL,
       ANNUAL_LABEL, 
       
-      RECURRENCE_LABEL,
-      TIME_SLICE_SETTINGS,
-      
-      TRANSACTION_TYPE_LABEL,
-      TRANSACTION_TYPE_CREDIT,
-      TRANSACTION_TYPE_DEBIT,
-      
+      // Acronymes des monnaies.
       SWISS_FRANC_ACRONYM;
       
       /*

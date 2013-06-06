@@ -49,7 +49,7 @@ public class CategoryListBox extends Controller {
     */
    @Override
    protected void initComponents() {
-      model = getCore().getAllPrimaryCategories();
+      model = getCore().getAllCategories();
       view = new JCategoryList(model);
       model.addObserver(view);
    }

@@ -21,10 +21,19 @@
   <modify_button>TODO</modify_button>
   <delete_button>TODO</delete_button>
   <account_list_label>TODO</account_list_label>
+  <budget_list_label>TODO</budget_list_label>
   <user_list_label>TODO</user_list_label>
   <category_list_label>TODO</category_list_label>
-  <category_name_label>TODO</category_name_label>
+  <quick_expense_label>TODO</quick_expense_label>
   <user_name_label>TODO</user_name_label>
+  <home_screen_name>TODO</home_screen_name>
+  <reason_label>TODO</reason_label>
+  <amount_label>TODO</amount_label>
+  <date_label>TODO</date_label>
+  <begin_date_label>TODO</begin_date_label>
+  <end_date_label>TODO</end_date_label>
+  <recurrence_label>TODO</recurrence_label>
+  <time_slice_settings>TODO</time_slice_settings>
   <budget_description_label>TODO</budget_description_label>
   <budget_name_label>TODO</budget_name_label>
   <budget_binded_account_name_label>TODO</budget_binded_account_name_label>
@@ -41,13 +50,8 @@
   <account_name_label>TODO</account_name_label>
   <account_bank_name_label>TODO</account_bank_name_label>
   <account_balance_label>TODO</account_balance_label>
-  <home_screen_name>TODO</home_screen_name>
-  <quick_expense_label>TODO</quick_expense_label>
-  <reason_label>TODO</reason_label>
-  <amount_label>TODO</amount_label>
-  <date_label>TODO</date_label>
-  <begin_date_label>TODO</begin_date_label>
-  <end_date_label>TODO</end_date_label>
+  <category_name_label>TODO</category_name_label>
+  <category_parent_label>TODO</category_parent_label>
   <select_category_label>TODO</select_category_label>
   <new_category_label>TODO</new_category_label>
   <select_subcategory_label>TODO</select_subcategory_label>
@@ -56,10 +60,5 @@
   <weekly_label>TODO</weekly_label>
   <monthly_label>TODO</monthly_label>
   <annual_label>TODO</annual_label>
-  <recurrence_label>TODO</recurrence_label>
-  <time_slice_settings>TODO</time_slice_settings>
-  <transaction_type_label>TODO</transaction_type_label>
-  <transaction_type_credit>TODO</transaction_type_credit>
-  <transaction_type_debit>TODO</transaction_type_debit>
   <swiss_franc_acronym>TODO</swiss_franc_acronym>
 </language>

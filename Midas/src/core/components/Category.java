@@ -126,6 +126,15 @@ public class Category extends CoreComponent implements IdentifiedComponent {
    public int getId() {
       return dbCategory.getId();
    }
+   
+   /**
+    * 
+    * Détermine si la catégorie est un enfant ou un parent.
+    * @return True si cette catégorie possède un parent.
+    */
+   public boolean isChild() {
+      return dbCategory.getParentDBCategory() != null;
+   }
 
    /**
     * Retourne un affichage sous forme de chaîne de caractères.

@@ -43,6 +43,7 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
    private static final long serialVersionUID = 9096965303469092507L;
    
    private JInfoEditionLabel ielName;
+   private JInfoEditionLabel ielParent;
 
    /**
     * @param parent Fenêtre contenant le label.
@@ -86,7 +87,8 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
       LinkedList<JInfoEditionLabel> result = new LinkedList<>();
       
       // Définition des champs.
-      ielName = new JInfoEditionLabel(Text.CATEGORY_NAME_LABEL, data.getName());    
+      ielName = new JInfoEditionLabel(Text.CATEGORY_NAME_LABEL, data.getName());   
+      ielParent = new JInfoEditionLabel(Text.CATEGORY_PARENT_LABEL, (data.isChild() ? data.getParentCategory().getName() : ""));
       
       // Ajout des champs à la liste.
       result.add(ielName);
@@ -99,8 +101,13 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
     */
    @Override
    public void buildContent() {
-      setLayout(new GridLayout(1, 2));
+      setLayout(new GridLayout(2, 1));
       add(ielName);
+      
+      // On affiche le parent seulement si la catégorie en possède un.
+      if(data.isChild()) {
+         add(ielParent);
+      }
    }
    
    /**
