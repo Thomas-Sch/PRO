@@ -12,6 +12,17 @@
  */
 package database.dbComponents;
 
+/**
+ * Représente un compte pour la base de données, et met à disposition les
+ * fonctions de manipulations de base.
+ * 
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ * 
+ */
 public class DBAccount extends DBComponentEnableable {
 
    private String name;
@@ -20,10 +31,11 @@ public class DBAccount extends DBComponentEnableable {
    private String accountNumber;
    private Double amount;
    private Double Threshold;
-   
-  /**
-   * Initialise les champs qui ne representent pas une référence
-   */
+
+   /**
+    * Crée un compte, et initialise les champs qui ne représentent pas une
+    * référence sur un autre élément.
+    */
    public DBAccount() {
       name = "";
       nameBank = "";
@@ -31,85 +43,121 @@ public class DBAccount extends DBComponentEnableable {
       amount = 0.0;
       Threshold = 0.0;
    }
-   
+
    /**
-    * @return le/la/les name
+    * Retourne le nom du compte.
+    * 
+    * @return Le nom du compte.
     */
    public String getName() {
       return name;
    }
+
    /**
-    * @param name - la nouvelle valeur pour l'attribut name
+    * Définit le nom du compte.
+    * 
+    * @param name
+    *           - le nouveau nom.
     */
    public void setName(String name) {
       this.name = name;
    }
+
    /**
-    * @return le/la/les nameBank
+    * Retourne le nom de la banque auprès de laquelle est enregistré le compte.
+    * 
+    * @return Le nom de la banque.
     */
    public String getNameBank() {
       return nameBank;
    }
+
    /**
-    * @param nameBank - la nouvelle valeur pour l'attribut nameBank
+    * Définit le nom de la banque auprès de laquelle est enregistré le compte.
+    * 
+    * @param nameBank
+    *           - le nouveau nom.
     */
    public void setNameBank(String nameBank) {
       this.nameBank = nameBank;
    }
+
    /**
-    * @return le/la/les accountNumber
+    * Retourne le numéro de compte par rapport à la banque.
+    * 
+    * @return Le numéro de compte.
     */
    public String getAccountNumber() {
       return accountNumber;
    }
+
    /**
-    * @param accountNumber - la nouvelle valeur pour l'attribut accountNumber
+    * Définit le numéro de compte par rapport à la banque.
+    * 
+    * @param accountNumber
+    *           - le nouveau numéro de compte.
     */
    public void setAccountNumber(String accountNumber) {
       this.accountNumber = accountNumber;
    }
+
    /**
-    * @return le/la/les amount
+    * Retourne le montant restant sur le compte.
+    * 
+    * @return Le montant restant sur le compte.
     */
    public Double getAmount() {
       return amount;
    }
+
    /**
-    * @param amount - la nouvelle valeur pour l'attribut amount
+    * Définit le montant restant sur le compte.
+    * 
+    * @param amount
+    *           - le nouveau montant restant.
     */
    public void setAmount(Double amount) {
       this.amount = amount;
    }
+
    /**
-    * @return le/la/les Threshold
+    * Retourne le montant définit comme seuil minimal du compte.
+    * 
+    * @return La valeur du seuil minimal.
     */
    public Double getThreshold() {
       return Threshold;
    }
+
    /**
-    * @param overdraftLimit - la nouvelle valeur pour l'attribut Threshold
+    * Définit le seuil minimal du compte.
+    * 
+    * @param overdraftLimit
+    *           - le montant du seuil minimal.
     */
    public void setThreshold(Double overdraftLimit) {
       this.Threshold = overdraftLimit;
    }
 
    /**
-    * @return le/la/les description
+    * Retourne la description du compte.
+    * 
+    * @return La description du compte.
     */
    public String getDescription() {
       return description;
    }
 
    /**
-    * @param description - la nouvelle valeur pour la description
+    * Définit la description du compte.
+    * 
+    * @param description
+    *           - la nouvelle description.
     */
    public void setDescription(String description) {
       this.description = description;
    }
 
-   /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
    @Override
    public String toString() {
       return "DBAccount [name=" + name + ", description=" + description

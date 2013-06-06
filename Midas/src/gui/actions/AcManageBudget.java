@@ -40,8 +40,8 @@ public class AcManageBudget extends UserAction {
    private JManageBudget view;
 
    /**
-    * @param core
-    * @param dependencies
+    * Crée une nouvelle action qui va gérer la modification des budgets.
+    * @param core Va permettre d'interagir avec la base de donnée.
     */
    public AcManageBudget(Core core) {
       super(core);
@@ -64,6 +64,10 @@ public class AcManageBudget extends UserAction {
       view.setVisible(true);
    }
    
+   /**
+    * Initialise les écouteurs de l'action.
+    * @param core Permet de sauvegarder l'objet modifié.
+    */
    private void initListeners(final Core core) {
       view.addButtonAddListener(new AcCreateBudget(core));
       

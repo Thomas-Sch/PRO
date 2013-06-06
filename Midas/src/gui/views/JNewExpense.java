@@ -15,8 +15,8 @@ package gui.views;
 import gui.Controller;
 import gui.View;
 import gui.component.JDateInput;
-import gui.component.JLabelMoneyPanel;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
+import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxBudget;
 import gui.controller.combobox.ComboBoxUser;
@@ -34,10 +34,9 @@ import java.util.Observable;
 import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 
+import settings.Language.Text;
 import core.MidasLogs;
 import core.components.FinancialTransaction;
-
-import settings.Language.Text;
 
 /**
  * Fenêtre graphique pour ajouter une dépense.
@@ -62,8 +61,8 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    private ComboBoxBudget budgets;
    private ComboBoxesCategory categories;
    private ComboBoxUser users;
-   private JLabelTextPanel ltpReason;
-   private JLabelMoneyPanel lmpAmount;
+   private JInfoEditionLabel ielReason;
+   private JMoneyInfoEditionLabel mielAmount;
    private JDateInput ditDate;
    
    private JValidateCancel vclActions;
@@ -87,25 +86,25 @@ public class JNewExpense extends javax.swing.JDialog implements View {
     * Initialise les écouteurs propre à l'interface.
     */
    private void initListeners() {
-      ltpReason.addTextChangedListener(new TextChangedListener() {
+      ielReason.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            expense.setReason(ltpReason.getText());
+            expense.setReason(ielReason.getText());
             checkItemIntegrity();
          }
       });
       
-      lmpAmount.addTextChangedListener(new TextChangedListener() {
+      mielAmount.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               expense.setAmount(Double.parseDouble(lmpAmount.getText()));
-               lmpAmount.setValid();
+               expense.setAmount(Double.parseDouble(mielAmount.getText()));
+               mielAmount.setValid();
             } catch (NumberFormatException e) {
                MidasLogs.errors.push(e.getMessage());
-               lmpAmount.setInvalid();
+               mielAmount.setInvalid();
             }
             checkItemIntegrity();
          }
@@ -140,11 +139,14 @@ public class JNewExpense extends javax.swing.JDialog implements View {
             if(categories.isValidItemSelected()) {
                expense.setCategory(categories.getSelectedItem());
             }
-            checkItemIntegrity();
          }
       });
    }
    
+   /** 
+    * Construit et place les composants de la fenêtre.
+    * @return Le contenu de la fenêtre.
+    */
    private JPanel buildContent() {
       JPanel pnlContent = new JPanel();
       pnlContent.setLayout(new GridBagLayout());
@@ -169,10 +171,10 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       pnlContent.add(users.getGraphicalComponent(), constraints);
       
       constraints.gridy = 3;
-      pnlContent.add(ltpReason, constraints);
+      pnlContent.add(ielReason, constraints);
       
       constraints.gridy = 4;
-      pnlContent.add(lmpAmount, constraints);
+      pnlContent.add(mielAmount, constraints);
       
       constraints.gridy = 5;
       pnlContent.add(ditDate, constraints);
@@ -185,12 +187,15 @@ public class JNewExpense extends javax.swing.JDialog implements View {
       return pnlContent;
    }
 
+   /**
+    * Initialise le contenu de la fenêtre.
+    */
    private void initContent() {
       budgets = new ComboBoxBudget(controller.getCore());
       categories = new ComboBoxesCategory(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
+      ielReason = new JInfoEditionLabel(Text.REASON_LABEL);
+      mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
       vclActions = new JValidateCancel();
@@ -218,12 +223,11 @@ public class JNewExpense extends javax.swing.JDialog implements View {
     */
    private void checkItemIntegrity() {
       boolean checkResult;
-      checkResult = ltpReason.getText().length() != 0 
+      checkResult = ielReason.isValidData()
                     && budgets.isValidItemSelected()
                     && users.isValidItemSelected()
-                    && categories.isValidItemSelected()
-                    && lmpAmount.isNumber()
-                    && Double.valueOf(lmpAmount.getText()) >= 0;
+                    && mielAmount.isNumber()
+                    && mielAmount.isPositive();
       vclActions.setEnableValidateButton(checkResult);
    }
    

@@ -14,6 +14,7 @@ package gui.component;
 
 import gui.utils.TextChangedListener;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -51,6 +52,17 @@ public class JInfoEditionLabel extends JPanel {
    public JInfoEditionLabel (Text metainfo, String data) {
       initContent(metainfo, data);
       buildContent();
+   }
+   
+   /**
+    * @param metainfo Informations contenues dans le libellé.
+    */
+   public JInfoEditionLabel(Text metainfo) {
+      this(metainfo,"");
+      
+      // Si on met rien comme données dans le champs texte, c'est que l'on
+      // veut saisir quelquechose.
+      setEditable(true); 
    }
    
    /**
@@ -94,6 +106,9 @@ public class JInfoEditionLabel extends JPanel {
     * @return Le contenu de la zone de texte.
     */
    public String getText() {
+      if(tfdData == null) {
+         return "";
+      }
       return tfdData.getText();
    }
    
@@ -103,5 +118,29 @@ public class JInfoEditionLabel extends JPanel {
     */
    public void setDataAlignement(int alignment) {
       tfdData.setHorizontalAlignment(alignment);
+   }
+   
+   /**
+    * Change la couleur du texte des données.
+    * @param c Nouvelle couleur.
+    */
+   public void setColor(Color c) {
+      tfdData.setForeground(c);
+   }
+   
+   /**
+    * Change le texte du champs de données.
+    * @param s Le nouveau texte.
+    */
+   public void setText(String s) {
+      tfdData.setText(s);
+   }
+   
+   /**
+    * Renvoie true si le champs de saisie contient une saisie valide.
+    * En l'occurence, le champs est valide s'il n'est pas vide.
+    */
+   public boolean isValidData() {
+      return getText().length() != 0;
    }
 }

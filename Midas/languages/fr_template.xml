@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
   <app_title>TODO</app_title>
@@ -59,3 +60,70 @@
   <transaction_type_debit>TODO</transaction_type_debit>
   <swiss_franc_acronym>TODO</swiss_franc_acronym>
 </language>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+  <app_title>TODO</app_title>
+  <action_quit>TODO</action_quit>
+  <account_creation_title>TODO</account_creation_title>
+  <account_management_title>TODO</account_management_title>
+  <category_creation_title>TODO</category_creation_title>
+  <category_management_title>TODO</category_management_title>
+  <subcategory_creation_title>TODO</subcategory_creation_title>
+  <user_creation_title>TODO</user_creation_title>
+  <user_management_title>TODO</user_management_title>
+  <budget_creation_title>TODO</budget_creation_title>
+  <budget_fly_creation_title>TODO</budget_fly_creation_title>
+  <budget_management_title>TODO</budget_management_title>
+  <expense_creation_title>TODO</expense_creation_title>
+  <transaction_creation_title>TODO</transaction_creation_title>
+  <validate_button>TODO</validate_button>
+  <cancel_button>TODO</cancel_button>
+  <reset_button>TODO</reset_button>
+  <add_button>TODO</add_button>
+  <modify_button>TODO</modify_button>
+  <delete_button>TODO</delete_button>
+  <account_list_label>TODO</account_list_label>
+  <user_list_label>TODO</user_list_label>
+  <category_list_label>TODO</category_list_label>
+  <category_name_label>TODO</category_name_label>
+  <user_name_label>TODO</user_name_label>
+  <budget_description_label>TODO</budget_description_label>
+  <budget_name_label>TODO</budget_name_label>
+  <budget_binded_account_name_label>TODO</budget_binded_account_name_label>
+  <budget_balance_label>TODO</budget_balance_label>
+  <budget_limit_label>TODO</budget_limit_label>
+  <budget_is_ok_label>TODO</budget_is_ok_label>
+  <budget_positive_label>TODO</budget_positive_label>
+  <budget_negative_label>TODO</budget_negative_label>
+  <budget_amount_left>TODO</budget_amount_left>
+  <account_threshold_label>TODO</account_threshold_label>
+  <account_initial_amount_label>TODO</account_initial_amount_label>
+  <account_number_label>TODO</account_number_label>
+  <account_description_label>TODO</account_description_label>
+  <account_name_label>TODO</account_name_label>
+  <account_bank_name_label>TODO</account_bank_name_label>
+  <account_balance_label>TODO</account_balance_label>
+  <home_screen_name>TODO</home_screen_name>
+  <quick_expense_label>TODO</quick_expense_label>
+  <reason_label>TODO</reason_label>
+  <amount_label>TODO</amount_label>
+  <date_label>TODO</date_label>
+  <begin_date_label>TODO</begin_date_label>
+  <end_date_label>TODO</end_date_label>
+  <select_category_label>TODO</select_category_label>
+  <new_category_label>TODO</new_category_label>
+  <select_subcategory_label>TODO</select_subcategory_label>
+  <new_subcategory_label>TODO</new_subcategory_label>
+  <daily_label>TODO</daily_label>
+  <weekly_label>TODO</weekly_label>
+  <monthly_label>TODO</monthly_label>
+  <annual_label>TODO</annual_label>
+  <recurrence_label>TODO</recurrence_label>
+  <time_slice_settings>TODO</time_slice_settings>
+  <transaction_type_label>TODO</transaction_type_label>
+  <transaction_type_credit>TODO</transaction_type_credit>
+  <transaction_type_debit>TODO</transaction_type_debit>
+  <swiss_franc_acronym>TODO</swiss_franc_acronym>
+</language>
+>>>>>>> branch 'master' of https://github.com/Thomas-Sch/PRO.git

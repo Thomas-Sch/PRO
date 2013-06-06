@@ -12,39 +12,52 @@
  */
 package database.dbComponents;
 
+/**
+ * Représente un utilisateur pour la base de données, et met à disposition les
+ * fonctions de manipulations de base.
+ * 
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ * 
+ */
 public class DBUser extends DBComponentEnableable {
 
-   private String name;   
+   private String name;
 
    /**
-    * Initialise les champs qui ne representent pas une référence
+    * Crée un utilisateur, et initialise les champs qui ne représentent pas
+    * une référence sur un autre élément.
     */
    public DBUser() {
       name = "";
    }
-   
+
    /**
-    * @return le/la/les name
+    * Retourne le nom de l'utilisateur.
+    * 
+    * @return Le nom de l'utilisateur.
     */
    public String getName() {
       return name;
    }
 
    /**
-    * @param name - la nouvelle valeur pour l'attribut name
+    * Définit le nom de l'utilisateur.
+    * 
+    * @param name
+    *           - la nouveau nom de l'utilisateur.
     */
    public void setName(String name) {
       this.name = name;
    }
 
-   /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
    @Override
    public String toString() {
       return "DBUser [name=" + name + ", getEnabled()=" + getEnabled()
             + ", getId()=" + getId() + "]";
    }
 
-   
 }

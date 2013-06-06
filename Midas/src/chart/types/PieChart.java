@@ -19,7 +19,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import chart.dataset.PieValue;
 
 /**
- * TODO
+ * Cette classe permet de créer un diagramme en camembert
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -31,6 +31,13 @@ public class PieChart extends Chart {
    
    private DefaultPieDataset dataset;
    
+   /**
+    * Le constructeur crée un diagramme en comembert complèt avec les données passées par argument
+    * à l'aide de JFreeChart
+    * @param title est le titre du diagramme
+    * @param pieValues est un tableau de PieValue qui représente les données
+    * qui sont prises en compte pour la visualisation 
+    */
    public PieChart(String title, PieValue[] pieValues) {
       super(title);
       

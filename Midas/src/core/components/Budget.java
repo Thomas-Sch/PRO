@@ -17,6 +17,8 @@ import core.CoreComponent;
 import core.IdentifiedComponent;
 import core.exceptions.NegativeLimit;
 import database.dbComponents.DBBudget;
+
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -255,6 +257,24 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
       }
 
       return outgoing / financialTransactions.size();
+   }
+   
+   /**
+    * Retourne si le budget est tenu ou non.
+    * 
+    * @return Vrai si le budget est tenu, Faux le cas échéant.
+    */
+   public boolean isPositive() {
+      return getRemainingAmount() >= 0;
+   }
+   
+   /**
+    * Retourne si le budget est terminé ou non.
+    * 
+    * @return Vrai si le budget est échu, Faux le cas échéant.
+    */
+   public boolean isFinished() {
+      return getRecurrence().getEndDate().before(new Date());
    }
 
    /**

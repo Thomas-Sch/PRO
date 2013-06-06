@@ -13,15 +13,15 @@
 package gui.actions;
 
 import gui.UserAction;
-import gui.views.JCreateAuthorFrame;
+import gui.utils.Positions;
+import gui.utils.Positions.ScreenPosition;
+import gui.views.JCreateUserFrame;
 
-import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import settings.Language.Text;
-
 import core.Core;
 import core.components.User;
 
@@ -37,8 +37,13 @@ import core.components.User;
 public class AcCreateUser extends UserAction {
    
    private User user;
-   private JCreateAuthorFrame view;
+   private JCreateUserFrame view;
    
+   /**
+    * Crée une nouvelle action qui va lancer le processus de création
+    * d'un nouvel utilisateur.
+    * @param core Va permettre d'interagir avec la base de donnée.
+    */
    public AcCreateUser(Core core) {
       super(core);
    }
@@ -48,9 +53,25 @@ public class AcCreateUser extends UserAction {
       
       user = core.createUser();
       
-      view = new JCreateAuthorFrame((Component)event.getSource(), user);
+      view = new JCreateUserFrame(user);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.USER_CREATION_TITLE.toString());
+      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
+      view.setResizable(false);
       
+      initListeners(core);
+      
+      user.addObserver(view);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+   
+   /**
+    * Initialise les écouteurs de l'action.
+    * @param core Permet de sauvegarder l'objet créer.
+    */
+   public void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
@@ -65,14 +86,12 @@ public class AcCreateUser extends UserAction {
             view.dispose();
          }
       });
-      
-      user.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
    }
    
+   /**
+    * Récupère l'utilisateur produit par cette action.
+    * @return L'utilisateur crée.
+    */
    public User getCreatedUser() {
       return user;
    }

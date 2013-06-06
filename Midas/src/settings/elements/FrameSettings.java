@@ -15,35 +15,46 @@ package settings.elements;
 import gui.utils.Positions.ScreenPosition;
 
 /**
- * TODO
+ * Conteneur pour les paramètres
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
  */
 public class FrameSettings {
-   
+
    private String name;
-   
+
    public int width, height;
-   
+
    public int positionX, positionY;
-   
+
    public ScreenPosition anchor;
-   
+
+   /**
+    * Créer un conteneur de paramètres d'une fenêtre avec le nom donné.
+    * 
+    * @param name
+    *           - le nom de la fenêtre.
+    */
    public FrameSettings(String name) {
       if (name == null || name.isEmpty()) {
-        this.name = "unknown";
+         this.name = "unknown";
       }
       else {
          this.name = name;
       }
    }
-   
+
+   /**
+    * Retourne le nom de la fenêtre.
+    * 
+    * @return Le nom de la fenêtre.
+    */
    public String getName() {
       return name;
    }
-   
+
 }

@@ -14,18 +14,19 @@ package database.utils;
 
 /**
  * 
- * Représente un erreur issu du paquet "database" et ses sous-paquet
+ * Représente un erreur issue du paquetage "database" et ses sous-paquetages.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class DatabaseException extends Exception {
 
    /**
-    * imposé par le parent pour la séralisation
+    * Imposé par le parent pour la sérialisation.
     */
    private static final long serialVersionUID = 944510023671478865L;
 

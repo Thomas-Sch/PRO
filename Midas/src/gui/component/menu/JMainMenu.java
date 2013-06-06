@@ -49,7 +49,12 @@ public class JMainMenu extends JMenuBar {
       
       add(file.getGraphicalComponent());
       add(edit.getGraphicalComponent());
+      
+      /*
+       * Ces menus ne sont pas ajoutés car aucune interface ne leur est
+       * associée.
       add(view.getGraphicalComponent());
       add(interrogation.getGraphicalComponent());
+      */
    }
 }

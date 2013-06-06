@@ -15,8 +15,8 @@ package gui.views;
 import gui.Controller;
 import gui.View;
 import gui.component.JDateInput;
-import gui.component.JLabelMoneyPanel;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
+import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.utils.StandardInsets;
@@ -54,15 +54,15 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
     */
    private static final long serialVersionUID = -4692092965659440366L;
    
-   private JLabelTextPanel ltpName;
-   private JLabelMoneyPanel lmpAmount;
+   private JInfoEditionLabel ielName;
+   private JMoneyInfoEditionLabel mielAmount;
    private JValidateCancel vclActions;
    private ComboBoxAccount accounts;
 
    private JDateInput ditStart;
    private JDateInput ditEnd;
    
-   private JLabelTextPanel ltpDescription;
+   private JInfoEditionLabel ielDescription;
    
    private Controller controller;
    
@@ -87,14 +87,14 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
     * Initialisation des composants de la fenêtre.
     */
    private void initComponents() {
-      ltpName = new JLabelTextPanel(Text.BUDGET_NAME_LABEL);
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
+      ielName = new JInfoEditionLabel(Text.BUDGET_NAME_LABEL);
+      mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(controller.getCore());
       
       ditStart = new JDateInput(Text.BEGIN_DATE_LABEL);
       ditEnd = new JDateInput(Text.END_DATE_LABEL);
       
-      ltpDescription = new JLabelTextPanel(Text.BUDGET_DESCRIPTION_LABEL);      
+      ielDescription = new JInfoEditionLabel(Text.BUDGET_DESCRIPTION_LABEL);      
       vclActions = new JValidateCancel();
    }
    
@@ -102,51 +102,50 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
     * Initialise les écouteurs internes à la fenêtre.
     */
    private void initListeners() {
-      ltpName.addTextChangedListener(new TextChangedListener() {
+      ielName.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            vclActions.setEnableValidateButton(isValid());
-            budget.setName(ltpName.getText());
+            budget.setName(ielName.getText());
+            checkItemIntegrity();
          }
       });
       
-      ltpDescription.addTextChangedListener(new TextChangedListener() {
+      ielDescription.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            budget.setDescription(ltpDescription.getText()); 
+            budget.setDescription(ielDescription.getText()); 
          }
       });
       
-      lmpAmount.addTextChangedListener(new TextChangedListener() {
+      mielAmount.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               budget.setLimit(Double.valueOf(lmpAmount.getText()));
-               lmpAmount.setValid();
+               budget.setLimit(Double.valueOf(mielAmount.getText()));
+               mielAmount.setValid();
             }
             catch (NumberFormatException e) {
                MidasLogs.errors.push(e.getMessage());
-               lmpAmount.setInvalid();
+               mielAmount.setInvalid();
             }
             catch (NegativeLimit e) {
-               lmpAmount.setInvalid();
+               mielAmount.setInvalid();
                MidasLogs.errors.push(e.getMessage());
             }
-            
-            vclActions.setEnableValidateButton(isValid());
+            checkItemIntegrity();
          }
       });
       
       accounts.addSelectedChangedListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            vclActions.setEnableValidateButton(isValid());
             if(accounts.isValidItemSelected()) {
                budget.setBindedAccount(accounts.getSelectedItem());
             }
+            checkItemIntegrity();
          }
       });
    }
@@ -168,10 +167,10 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       constraints.weightx = 0.5;
       constraints.weighty = 0.5;
       constraints.insets = new StandardInsets();
-      pnlContent.add(ltpName, constraints);
+      pnlContent.add(ielName, constraints);
       
       constraints.gridy = 1;
-      pnlContent.add(lmpAmount, constraints);
+      pnlContent.add(mielAmount, constraints);
       
       constraints.gridy = 2;
       pnlContent.add(accounts.getGraphicalComponent(), constraints);
@@ -183,7 +182,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       pnlContent.add(ditEnd, constraints);     
       
       constraints.gridy = 5;
-      pnlContent.add(ltpDescription, constraints);
+      pnlContent.add(ielDescription, constraints);
       
       constraints.gridy = 6;
       constraints.fill = GridBagConstraints.NONE;
@@ -224,18 +223,17 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       return ditEnd.getDate();
    }
    
+   
    /**
-    * Définit si les informations entrées dans l'interface
-    * sont suffisantes pour être enregistrées.
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
     */
-   public boolean isValid() {
-      if(ltpName == null || accounts == null) {
-         return false;
-      } else {
-         return ltpName.getText().length() != 0 
-                && accounts.isValidItemSelected()
-                && lmpAmount.isNumber();
-      }
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ielName.isValidData() 
+            && accounts.isValidItemSelected()
+            && mielAmount.isNumber();
+      vclActions.setEnableValidateButton(checkResult);
    }
 
    /* (non-Javadoc)

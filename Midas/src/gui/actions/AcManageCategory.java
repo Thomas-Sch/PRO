@@ -40,7 +40,8 @@ public class AcManageCategory extends UserAction {
    private JManageCategory view;
 
    /**
-    * @param core Coeur de l'application.
+    * Crée une nouvelle action qui va gérer la modification des catégories.
+    * @param core Va permettre d'interagir avec la base de donnée.
     */
    public AcManageCategory(Core core) {
       super(core);
@@ -55,7 +56,19 @@ public class AcManageCategory extends UserAction {
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.CATEGORY_MANAGEMENT_TITLE);
       view.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
+
+      initListeners(core);
       
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+   
+   /**
+    * Initialise les écouteurs de l'action.
+    * @param core Permet de sauvegarder l'objet modifié.
+    */
+   private void initListeners(final Core core) {
       view.addButtonAddListener(new AcCreateCategory(core));
       
       view.addButtonModifyListener(new ActionListener() {
@@ -74,10 +87,6 @@ public class AcManageCategory extends UserAction {
             view.updateModel();
          }
       });
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
    }
 
 }

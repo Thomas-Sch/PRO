@@ -15,8 +15,8 @@ package gui.views;
 import gui.Controller;
 import gui.View;
 import gui.component.JDateInput;
-import gui.component.JLabelMoneyPanel;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
+import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.controller.combobox.ComboBoxUser;
@@ -60,8 +60,8 @@ public class JNewTransaction extends JDialog implements View {
    //Composants
    private ComboBoxAccount accounts;
    private ComboBoxUser users;
-   private JLabelMoneyPanel lmpAmount;
-   private JLabelTextPanel ltpReason;
+   private JMoneyInfoEditionLabel mielAmount;
+   private JInfoEditionLabel ielReason;
    private JDateInput ditDate;
 
    private JValidateCancel vclActions;
@@ -100,10 +100,10 @@ public class JNewTransaction extends JDialog implements View {
       pnlContent.add(users.getGraphicalComponent(), constraints);
 
       constraints.gridy = 2;
-      pnlContent.add(lmpAmount, constraints);
+      pnlContent.add(mielAmount, constraints);
       
       constraints.gridy = 3;
-      pnlContent.add(ltpReason, constraints);
+      pnlContent.add(ielReason, constraints);
       
       constraints.gridy = 4;
       pnlContent.add(ditDate, constraints);
@@ -120,33 +120,36 @@ public class JNewTransaction extends JDialog implements View {
    private void initContent() {
       accounts = new ComboBoxAccount(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JLabelTextPanel(Text.REASON_LABEL);
-      lmpAmount = new JLabelMoneyPanel(Text.AMOUNT_LABEL);
+      ielReason = new JInfoEditionLabel(Text.REASON_LABEL);
+      mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
       vclActions = new JValidateCancel();
    }
    
+   /**
+    * Initialise les écouteurs sur les composants de la fenêtre.
+    */
    private void initListeners() {
-     ltpReason.addTextChangedListener(new TextChangedListener() {
+     ielReason.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            transaction.setReason(ltpReason.getText());
+            transaction.setReason(ielReason.getText());
             checkItemIntegrity();
          }
       });
       
-      lmpAmount.addTextChangedListener(new TextChangedListener() {
+      mielAmount.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               transaction.setAmount(Double.parseDouble(lmpAmount.getText()));
-               lmpAmount.setValid();
+               transaction.setAmount(Double.parseDouble(mielAmount.getText()));
+               mielAmount.setValid();
             } catch (NumberFormatException e) {
                MidasLogs.errors.push(e.getMessage());
-               lmpAmount.setInvalid();
+               mielAmount.setInvalid();
             }
             checkItemIntegrity();
          }
@@ -205,10 +208,10 @@ public class JNewTransaction extends JDialog implements View {
     */
    private void checkItemIntegrity() {
       boolean checkResult;
-      checkResult = ltpReason.getText().length() != 0 
+      checkResult = ielReason.getText().length() != 0 
                     && accounts.isValidItemSelected()
                     && users.isValidItemSelected()
-                    && lmpAmount.isNumber();
+                    && mielAmount.isNumber();
       vclActions.setEnableValidateButton(checkResult);
    }
 

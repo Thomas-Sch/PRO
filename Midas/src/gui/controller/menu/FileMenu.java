@@ -32,6 +32,7 @@ import core.Core;
 public class FileMenu extends Controller {
 
    JFileMenu view;
+   
    /**
     * @param core
     */
@@ -52,7 +53,7 @@ public class FileMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      view.addQuitListener(new AcQuit(getCore(), null));
+      view.addQuitListener(new AcQuit(getCore()));
    }
 
    /* (non-Javadoc)

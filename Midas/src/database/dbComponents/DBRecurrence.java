@@ -14,62 +14,90 @@ package database.dbComponents;
 
 import java.util.Date;
 
+/**
+ * Représente une récurrence pour la base de données, et met à disposition les
+ * fonctions de manipulations de base.
+ * 
+ * @author Biolzi Sébastien
+ * @author Brito Carvalho Bruno
+ * @author Decorvet Grégoire
+ * @author Schweizer Thomas
+ * @author Sinniger Marcel
+ *
+ */
 public class DBRecurrence extends DBComponent {
-   
+
    private Date start;
    private Date end;
    private Integer intervalRecurrence;
-   
-   
+
    /**
-    * Initialise les champs qui ne representent pas une référence
+    * Crée une récurrence, et initialise les champs qui ne représentent pas
+    * une référence sur un autre élément.
     */
    public DBRecurrence() {
       start = null;
       end = null;
       intervalRecurrence = 0;
    }
-   
+
    /**
-    * @return le/la/les start
+    * Retourne la date de début de la récurrence.
+    * 
+    * @return La date de début.
     */
    public Date getStart() {
       return start;
    }
+
    /**
-    * @param start - la nouvelle valeur pour l'attribut start
+    * Définit la date de début de la récurrence.
+    * 
+    * @param start
+    *           - la nouvelle date de début.
     */
    public void setStart(Date start) {
       this.start = start;
    }
+
    /**
-    * @return le/la/les end
+    * Retourne la date de fin de la récurrence.
+    * 
+    * @return La date de fin.
     */
    public Date getEnd() {
       return end;
    }
+
    /**
-    * @param end - la nouvelle valeur pour l'attribut end
+    * Définit la date de fin de la récurrence.
+    * 
+    * @param end
+    *           - la nouvelle date de fin.
     */
    public void setEnd(Date end) {
       this.end = end;
    }
+
    /**
-    * @return le/la/les intervalRecurrence
+    * Retourne l'intervalle de récurrence.
+    * 
+    * @return L'intervalle de recurrence.
     */
    public Integer getintervalRecurrence() {
       return intervalRecurrence;
    }
+
    /**
-    * @param days - la nouvelle valeur pour l'attribut intervalRecurrence
+    * Définit l'intervalle de récurrence.
+    * 
+    * @param intervalRecurrence
+    *           - le nouvel intervalle.
     */
    public void setIntervalRecurrence(Integer intervalRecurrence) {
       this.intervalRecurrence = intervalRecurrence;
    }
 
-   /* (non-Javadoc)
-    * @see java.lang.Object#toString()
-    */
    @Override
    public String toString() {
       return "DBRecurrence [start=" + start + ", end=" + end
@@ -77,6 +105,4 @@ public class DBRecurrence extends DBComponent {
             + getId() + "]";
    }
 
-   
-   
 }

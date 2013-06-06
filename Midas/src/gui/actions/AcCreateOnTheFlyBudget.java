@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 
 import settings.Language.Text;
 import core.Core;
+import core.MidasLogs;
 import core.components.BudgetOnTheFly;
 import core.exceptions.InconsistencyDate;
 
@@ -41,9 +42,11 @@ public class AcCreateOnTheFlyBudget extends UserAction {
    private BudgetOnTheFly budget;
    private JCreateOnTheFlyBudget view;
    private Controller controller;
+   
    /**
-    * @param core
-    * @param dependencies
+    * @param core Objet core qui va être utilisé pour faires des appels à la
+    *             BDD.
+    * @param controller Contrôleur ayant appelé cette action.
     */
    public AcCreateOnTheFlyBudget(Core core, Controller controller) {
       super(core);
@@ -59,8 +62,22 @@ public class AcCreateOnTheFlyBudget extends UserAction {
       
       view = new JCreateOnTheFlyBudget(controller, budget);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.BUDGET_FLY_CREATION_TITLE);
-      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
+      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);   
       
+      initListeners(core);
+      
+      budget.addObserver(view);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+   
+   /**
+    * Initialise les écouteurs de l'action.
+    * @param core Permet de sauvegarder l'objet créer.
+    */
+   public void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {            
@@ -70,7 +87,7 @@ public class AcCreateOnTheFlyBudget extends UserAction {
                core.saveBudgetOnTheFly(budget);
             }
             catch (InconsistencyDate e) {
-               e.printStackTrace();
+               MidasLogs.errors.push(e.getMessage());
             }
             view.dispose();
          }
@@ -82,14 +99,12 @@ public class AcCreateOnTheFlyBudget extends UserAction {
             view.dispose();
          }
       });
-      
-      budget.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
    }
    
+   /**
+    * Récupère le budget à la volée produit par cette action.
+    * @return Le budget crée.
+    */
    public BudgetOnTheFly getCreatedBudget() {
       return budget;
    }

@@ -58,13 +58,13 @@ public class EditMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      view.addManageAuthorListener(new AcManageUser(getCore(),this, null));
+      view.addManageAuthorListener(new AcManageUser(getCore()));
       view.addManageCategoryListener(new AcManageCategory(getCore()));
       view.addManageAccountListener(new AcManageAccount(getCore()));
       view.addManageBudgetListener(new AcManageBudget(getCore()));
       view.addCreateOnTheFlyBudgetListener(new AcCreateOnTheFlyBudget(getCore(), this));
-      view.addNewExpenseListener(new AcNewExpense(getCore(), this, null));
-      view.addNewTransactionListener(new AcNewTransaction(getCore(), this, null));
+      view.addNewExpenseListener(new AcNewExpense(getCore(), this));
+      view.addNewTransactionListener(new AcNewTransaction(getCore(), this));
    }
 
    /* (non-Javadoc)

@@ -13,11 +13,10 @@
 package gui.views;
 
 import gui.View;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.utils.TextChangedListener;
 
-import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
@@ -27,7 +26,6 @@ import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
-
 import core.components.User;
 
 /**
@@ -39,7 +37,7 @@ import core.components.User;
  * @author Sinniger Marcel
  *
  */
-public class JCreateAuthorFrame extends JDialog implements View{
+public class JCreateUserFrame extends JDialog implements View{
 
    /**
     * ID de sérialisation.
@@ -48,67 +46,94 @@ public class JCreateAuthorFrame extends JDialog implements View{
    
    private User user;
  
-   private JLabelTextPanel authorName;
+   private JInfoEditionLabel ielName;
    private JValidateCancel vclActions;
    
    /**
     * Construit la vue.
     */
-   public JCreateAuthorFrame(Component parent, User user) {
+   public JCreateUserFrame(User user) {
       this.user = user;
       
+      initContent();
+      initListeners();
       setContentPane(buildContent());
-      setLocationRelativeTo(parent);
-      setResizable(false);
       pack();
-      update(null, null);
    }
    
+   /**
+    * Initialise les écouteurs internes au composant.
+    */
+   private void initListeners() {
+      ielName.addTextChangedListener(new TextChangedListener() {
+         @Override
+         public void textChanged(DocumentEvent event) {
+            user.setName(ielName.getText());
+            checkItemIntegrity();
+         }
+      });
+   }
+   
+   /**
+    * Initialise le contenu de la fenêtre.
+    */
+   private void initContent() {
+      vclActions = new JValidateCancel();
+      ielName = new JInfoEditionLabel(Text.USER_NAME_LABEL);
+   }
+   
+   /**
+    * Construit et place les composants de l'interface.
+    * @return Le contenu de la fenêtre.
+    */
    private JPanel buildContent() {
       JPanel pnlContent = new JPanel();
       
       SpringLayout splLayout = new SpringLayout();
       pnlContent.setLayout(splLayout);
       
-      vclActions = new JValidateCancel();
-      authorName = new JLabelTextPanel(Text.USER_NAME_LABEL);
-      
-      pnlContent.add(authorName);
+      pnlContent.add(ielName);
       pnlContent.add(vclActions);
       
       //Contraintes du label par rapport au contenant.
-      splLayout.putConstraint(SpringLayout.WEST, authorName, 5, SpringLayout.WEST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, authorName,8, SpringLayout.NORTH, pnlContent);
+      splLayout.putConstraint(SpringLayout.WEST, ielName, 5, SpringLayout.WEST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, ielName,8, SpringLayout.NORTH, pnlContent);
 
       //Contraintes pour la taille du contenant.
-      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, authorName);
+      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, ielName);
       splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vclActions);
       
       // Contraintes pour le bouton de validation.
       splLayout.putConstraint(SpringLayout.EAST, vclActions, 0, SpringLayout.EAST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, vclActions, 5, SpringLayout.SOUTH, authorName);
-      
-       authorName.addTextChangedListener(new TextChangedListener() {
-          @Override
-          public void textChanged(DocumentEvent event) {
-             if(authorName.getText().length() == 0) {
-                vclActions.setEnableValidateButton(false);
-             } else {
-                user.setName(authorName.getText());
-                vclActions.setEnableValidateButton(true);
-             }
-          }
-       });
+      splLayout.putConstraint(SpringLayout.NORTH, vclActions, 5, SpringLayout.SOUTH, ielName);
       
       return pnlContent;
    }
    
+   /**
+    * Ajoute un écouteur sur le bouton de validation.
+    * @param listener L'écouteur ajouté
+    */
    public void addValidateListener(ActionListener listener) {
       vclActions.addValidateListener(listener);
    }
    
+   /**
+    * Ajoute un écouteur sur le bouton d'annulation.
+    * @param listener L'écouteur ajouté.
+    */
    public void addCancelListener(ActionListener listener) {
       vclActions.addCancelListener(listener);
+   }
+   
+   /**
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
+    */
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ielName.isValidData();
+      vclActions.setEnableValidateButton(checkResult);
    }
 
    /* (non-Javadoc)

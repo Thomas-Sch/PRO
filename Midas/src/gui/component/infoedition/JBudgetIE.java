@@ -17,6 +17,7 @@ import gui.component.JInfoEditionLabel;
 import gui.component.JMoneyInfoEditionLabel;
 import gui.utils.TextChangedListener;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.util.LinkedList;
@@ -51,6 +52,8 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
    private JInfoEditionLabel ielAccountName;
    private JMoneyInfoEditionLabel mielLimit;
    private JMoneyInfoEditionLabel mielAmount;
+   private JInfoEditionLabel ielIsOK;
+   private JMoneyInfoEditionLabel mielAmountLeft;
    private JInfoEditionLabel ielDescription;
    
 
@@ -124,7 +127,17 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
       ielAccountName = new JInfoEditionLabel(Text.BUDGET_BINDED_ACCOUNT_NAME_LABEL, data.getBindedAccount().getName());
       mielLimit = new JMoneyInfoEditionLabel(Text.BUDGET_LIMIT_LABEL, String.valueOf(data.getLimit()));
       mielAmount = new JMoneyInfoEditionLabel(Text.BUDGET_BALANCE_LABEL, String.valueOf(data.getTotalOutgoings()));
+      ielIsOK = new JInfoEditionLabel(Text.BUDGET_IS_OK_LABEL, (data.isPositive() ? Text.BUDGET_POSITIVE_LABEL.toString() : Text.BUDGET_NEGATIVE_LABEL.toString()));
+      mielAmountLeft = new JMoneyInfoEditionLabel(Text.BUDGET_AMOUNT_LEFT, String.valueOf(data.getRemainingAmount()));
       ielDescription = new JInfoEditionLabel(Text.ACCOUNT_DESCRIPTION_LABEL, data.getDescription());
+      
+      // Si le budget n'est pas tenu, on doit modifier l'affichage de
+      // certains champs.
+      if(!data.isPositive()) {
+         ielIsOK.setColor(Color.RED);
+         mielAmount.setColor(Color.RED);
+         mielAmountLeft.setText("0"); // Il peut encore dépenser 0.-
+      }
       
       // Ajout des champs à la liste.
       result.add(ielName);
@@ -138,11 +151,13 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
     */
    @Override
    public void buildContent() {
-      setLayout(new GridLayout(5, 5));
+      setLayout(new GridLayout(7, 1));
       add(ielName);
       add(ielAccountName);
       add(mielLimit);
       add(mielAmount);
+      add(ielIsOK);
+      add(mielAmountLeft);
       add(ielDescription);
    }
 }

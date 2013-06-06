@@ -114,10 +114,12 @@ public enum TimeSlice {
             cal.set(Calendar.DAY_OF_YEAR,
                   cal.getActualMaximum(Calendar.DAY_OF_YEAR));
             break;
+            
          case DAILY:
             // Rien à faire de particulier dans ce cas.
             begin = cal.getTime();
             break;
+            
          case MONTHLY:
             cal.set(Calendar.DAY_OF_MONTH,
                   cal.getActualMinimum(Calendar.DAY_OF_MONTH));
@@ -126,6 +128,7 @@ public enum TimeSlice {
             cal.set(Calendar.DAY_OF_MONTH,
                   cal.getActualMaximum(Calendar.DAY_OF_MONTH));
             break;
+            
          case WEEKLY:
             cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
             begin = cal.getTime();
@@ -133,12 +136,14 @@ public enum TimeSlice {
             cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
             break;
       }
+
       // Paramétrage de l'heure et envoi des résultats.
       cal.set(Calendar.HOUR, cal.getActualMaximum(Calendar.HOUR));
       cal.set(Calendar.MINUTE, cal.getActualMaximum(Calendar.MINUTE));
       cal.set(Calendar.SECOND, cal.getActualMaximum(Calendar.SECOND));
       cal.set(Calendar.MILLISECOND, cal.getActualMaximum(Calendar.MILLISECOND));
       end = cal.getTime();
+
       return new Date[] { begin, end };
    }
 

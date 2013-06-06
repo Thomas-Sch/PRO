@@ -13,11 +13,10 @@
 package gui.views;
 
 import gui.View;
-import gui.component.JLabelTextPanel;
+import gui.component.JInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.utils.TextChangedListener;
 
-import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 
@@ -27,7 +26,6 @@ import javax.swing.SpringLayout;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
-
 import core.components.Category;
 
 /**
@@ -48,52 +46,65 @@ public class JCreateCategory extends JDialog implements View{
 
    private Category category;
    
-   private JLabelTextPanel ltpName;
-   private JValidateCancel vlcActions;
+   private JInfoEditionLabel ielName;
+   private JValidateCancel vclActions;
    
    /**
     * Construit la vue.
     */
-   public JCreateCategory(Component parent, Category category) {
+   public JCreateCategory(Category category) {
       this.category = category;
+      initContent();
+      initListeners();
       setContentPane(buildContent());
-      setLocationRelativeTo(parent);
-      setResizable(false);
       pack();
-      update(null, null);
    }
    
+   /**
+    * Initialise le contenu de la fenêtre.
+    */
+   private void initContent() {
+      vclActions = new JValidateCancel();
+      ielName = new JInfoEditionLabel(Text.CATEGORY_NAME_LABEL);
+   }
+   
+   /**
+    * Initialise les écouteurs internes à la fenêtre.
+    */
+   private void initListeners() {
+      ielName.addTextChangedListener(new TextChangedListener() {
+         @Override
+         public void textChanged(DocumentEvent event) {
+            category.setName(ielName.getText());
+            checkItemIntegrity();
+         }
+      });
+   }
+   
+   /**
+    * Construit et place les composants de la fenêtre.
+    * @return
+    */
    private JPanel buildContent() {
       JPanel pnlContent = new JPanel();
       
       SpringLayout splLayout = new SpringLayout();
       pnlContent.setLayout(splLayout);
       
-      vlcActions = new JValidateCancel();
-      ltpName = new JLabelTextPanel(Text.CATEGORY_NAME_LABEL);
-      
-      pnlContent.add(ltpName);
-      pnlContent.add(vlcActions);
+      pnlContent.add(ielName);
+      pnlContent.add(vclActions);
       
       //Contraintes du label par rapport au contenant.
-      splLayout.putConstraint(SpringLayout.WEST, ltpName, 5, SpringLayout.WEST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, ltpName,8, SpringLayout.NORTH, pnlContent);
+      splLayout.putConstraint(SpringLayout.WEST, ielName, 5, SpringLayout.WEST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, ielName,8, SpringLayout.NORTH, pnlContent);
 
       //Contraintes pour la taille du contenant.
-      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, ltpName);
-      splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vlcActions);
+      splLayout.putConstraint(SpringLayout.EAST, pnlContent, 5, SpringLayout.EAST, ielName);
+      splLayout.putConstraint(SpringLayout.SOUTH, pnlContent, 5, SpringLayout.SOUTH, vclActions);
       
       // Contraintes pour le bouton de validation.
-      splLayout.putConstraint(SpringLayout.EAST, vlcActions, 0, SpringLayout.EAST, pnlContent);
-      splLayout.putConstraint(SpringLayout.NORTH, vlcActions, 5, SpringLayout.SOUTH, ltpName);
-      
-      ltpName.addTextChangedListener(new TextChangedListener() {
-          @Override
-          public void textChanged(DocumentEvent event) {
-             vlcActions.setEnableValidateButton(ltpName.getText().length() != 0);
-             category.setName(ltpName.getText());
-          }
-       });
+      splLayout.putConstraint(SpringLayout.EAST, vclActions, 0, SpringLayout.EAST, pnlContent);
+      splLayout.putConstraint(SpringLayout.NORTH, vclActions, 5, SpringLayout.SOUTH, ielName);
       
       return pnlContent;
    }
@@ -103,7 +114,7 @@ public class JCreateCategory extends JDialog implements View{
     * @param listener
     */
    public void addValidateListener(ActionListener listener) {
-      vlcActions.addValidateListener(listener);
+      vclActions.addValidateListener(listener);
    }
    
    /**
@@ -111,7 +122,17 @@ public class JCreateCategory extends JDialog implements View{
     * @param listener
     */
    public void addCancelListener(ActionListener listener) {
-      vlcActions.addCancelListener(listener);
+      vclActions.addCancelListener(listener);
+   }
+   
+   /**
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
+    */
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ielName.isValidData();
+      vclActions.setEnableValidateButton(checkResult);
    }
 
    /* (non-Javadoc)

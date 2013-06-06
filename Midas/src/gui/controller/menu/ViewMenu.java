@@ -20,7 +20,7 @@ import java.awt.Component;
 import core.Core;
 
 /**
- * Contrôleur du menu d'édition.
+ * Contrôleur du menu s'affichage.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -53,7 +53,6 @@ public class ViewMenu extends Controller {
    @Override
    protected void initListeners() {
       // Aucun pour l'instant.
-
    }
 
    /* (non-Javadoc)
@@ -61,7 +60,6 @@ public class ViewMenu extends Controller {
     */
    @Override
    public Component getGraphicalComponent() {
-      // TODO Auto-generated method stub
       return view;
    }
 

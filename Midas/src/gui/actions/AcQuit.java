@@ -30,12 +30,14 @@ import core.MidasLogs;
  */
 public class AcQuit extends UserAction {
 
+
    /**
-    * @param core
-    * @param dependencies
+    * Crée une nouvelle action qui va gérer la fermeture de l'application.
+    * @param core Va permettre d'interagir avec la base de donnée.
+    * @param controller Contrôleur qui a appelé cette action.
     */
-   public AcQuit(Core core, Object[] dependencies) {
-      super(core, dependencies);
+   public AcQuit(Core core) {
+      super(core);
    }
 
    /* (non-Javadoc)

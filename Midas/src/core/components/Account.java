@@ -114,6 +114,14 @@ public class Account extends CoreComponent implements IdentifiedComponent {
    public void setBankName(String name) {
       dbAccount.setNameBank(name);
    }
+   
+   /**
+    * Renvoie le nom de la banque.
+    * @return Le nom de la banque.
+    */
+   public String getBankName() {
+      return dbAccount.getNameBank();
+   }
 
    /**
     * Débite un certain montant donné depuis le compte.

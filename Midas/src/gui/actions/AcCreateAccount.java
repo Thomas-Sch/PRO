@@ -40,6 +40,10 @@ public class AcCreateAccount extends UserAction {
    private Account account;
    private JCreateAccountFrame view;
    
+   /**
+    * Nouvelle action de création de compte.
+    * @param core Coeur de l'application.
+    */
    public AcCreateAccount(Core core) {
       super(core);
    }
@@ -56,7 +60,9 @@ public class AcCreateAccount extends UserAction {
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       view.setTitle(Text.APP_TITLE + " - " + Text.ACCOUNT_CREATION_TITLE);
       view.setResizable(false);
+      
       initListeners(core);
+      
       account.addObserver(view);
       
       // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
@@ -86,6 +92,10 @@ public class AcCreateAccount extends UserAction {
       });
    }
    
+   /**
+    * Récupère le compte produit par cette action.
+    * @return le compte produit.
+    */
    public Account getCreatedAccount() {
       return account;
    }

@@ -20,7 +20,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import chart.dataset.BarValue;
 
 /**
- * TODO
+ * Cette classe permet de créer un diagramme en bar
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -32,10 +32,17 @@ public class BarChart extends ChartWithAxes {
 
    private DefaultCategoryDataset dataset;
    
-   public BarChart(String title, BarValue[] varValue) {
+   /**
+    * Le constructeur crée un diagramme en bar complèt avec les données passées par argument
+    * à l'aide de JFreeChart
+    * @param title est le titre du diagramme
+    * @param barValue est un tableau de BarValue qui représente les données
+    * qui sont prises en compte pour la visualisation 
+    */
+   public BarChart(String title, BarValue[] barValue) {
       super(title);
       
-      this.dataset = createDataset(varValue);
+      this.dataset = createDataset(barValue);
       
       JFreeChart chart = ChartFactory.createBarChart(
             super.getTitle(),

@@ -36,6 +36,10 @@
   <budget_binded_account_name_label>Nom du compte lié</budget_binded_account_name_label>
   <budget_balance_label>Montant dépensé</budget_balance_label>
   <budget_limit_label>Plafond</budget_limit_label>
+  <budget_is_ok_label>Etat du budget</budget_is_ok_label>
+  <budget_positive_label>Tenu</budget_positive_label>
+  <budget_negative_label>Non tenu</budget_negative_label>
+  <budget_amount_left>Montant restant dépensable</budget_amount_left>
   
   <account_threshold_label>Seuil</account_threshold_label>
   <account_initial_amount_label>Montant initial</account_initial_amount_label>

@@ -12,7 +12,6 @@
  */
 package gui.actions;
 
-import gui.Controller;
 import gui.UserAction;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
@@ -39,12 +38,13 @@ import core.Core;
 public class AcManageUser extends UserAction {
    
    private JManageUser view;
+
    /**
-    * @param core
-    * @param dependencies
+    * Crée une nouvelle action qui va gérer la modification des utilisateurs.
+    * @param core Va permettre d'interagir avec la base de donnée.
     */
-   public AcManageUser(Core core, Controller controller, Object[] dependencies) {
-      super(core, dependencies);
+   public AcManageUser(Core core) {
+      super(core);
    }
 
    /* (non-Javadoc)
@@ -57,6 +57,18 @@ public class AcManageUser extends UserAction {
       view.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       
+      initListeners(core);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+   
+   /**
+    * Initialise les écouteurs de l'action.
+    * @param core Permet de sauvegarder l'objet modifié.
+    */
+   private void initListeners(final Core core) {
       view.addButtonAddListener(new AcCreateUser(core));
       
       view.addButtonModifyListener(new ActionListener() {
@@ -75,10 +87,6 @@ public class AcManageUser extends UserAction {
             view.updateModel();
          }
       });
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
    }
 
 }
