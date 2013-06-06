@@ -20,7 +20,7 @@ import java.awt.Component;
 import core.Core;
 
 /**
- * TODO
+ * Contrôleur du menu "?".
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -52,8 +52,7 @@ public class InterrogationMenu extends Controller {
     */
    @Override
    protected void initListeners() {
-      // TODO Auto-generated method stub
-
+      // Aucun pour l'instant.
    }
 
    /* (non-Javadoc)
@@ -61,7 +60,6 @@ public class InterrogationMenu extends Controller {
     */
    @Override
    public Component getGraphicalComponent() {
-      // TODO Auto-generated method stub
       return view;
    }
 

@@ -32,6 +32,7 @@ import core.Core;
 public class FileMenu extends Controller {
 
    JFileMenu view;
+   
    /**
     * @param core
     */
