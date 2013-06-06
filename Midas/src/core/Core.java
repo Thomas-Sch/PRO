@@ -807,12 +807,12 @@ public class Core {
          }
       }
       catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the account with id "
-               + /* id + */" to database, because of constraint violation.");
+         MidasLogs.errors.push("Core", "Unable to save the account "
+               + "to database, because of constraint violation.");
       }
       catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the account with id "
-               + /* id + */" to database.");
+         MidasLogs.errors.push("Core",
+                               "Unable to save the account to database.");
       }
    }
 
@@ -831,12 +831,12 @@ public class Core {
          }
       }
       catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the category with id "
-               + /* id + */" to database, because of constraint violation.");
+         MidasLogs.errors.push("Core", "Unable to save the category "
+               + "to database, because of constraint violation.");
       }
       catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the category with id "
-               + /* id + */" to database.");
+         MidasLogs.errors.push("Core",
+                               "Unable to save the category to database.");
       }
    }
 
@@ -858,12 +858,12 @@ public class Core {
          }
       }
       catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the category with id "
-               + /* id + */" to database, because of constraint violation.");
+         MidasLogs.errors.push("Core", "Unable to save the category "
+               + "to database, because of constraint violation.");
       }
       catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the category with id "
-               + /* id + */" to database.");
+         MidasLogs.errors.push("Core",
+                               "Unable to save the category to database.");
       }
    }
 
@@ -878,12 +878,11 @@ public class Core {
          dbController.saveToDatabase(recurrence.getDBRecurrence());
       }
       catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */" to database, because of constraint violation.");
+         MidasLogs.errors.push("Core", "Unable to save the budget "
+               + "to database, because of constraint violation.");
       }
       catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */" to database.");
+         MidasLogs.errors.push("Core", "Unable to save the budget to database.");
       }
    }
 
@@ -905,12 +904,11 @@ public class Core {
 
       }
       catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */" to database, because of constraint violation.");
+         MidasLogs.errors.push("Core", "Unable to save the budget "
+               + "to database, because of constraint violation.");
       }
       catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */" to database.");
+         MidasLogs.errors.push("Core", "Unable to save the budget to database.");
       }
    }
 
@@ -932,12 +930,11 @@ public class Core {
          cache.putToCache(budget);
       }
       catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */" to database, because of constraint violation.");
+         MidasLogs.errors.push("Core", "Unable to save the budget "
+               + "to database, because of constraint violation.");
       }
       catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */" to database.");
+         MidasLogs.errors.push("Core", "Unable to save the budget to database.");
       }
    }
 
@@ -956,12 +953,11 @@ public class Core {
          }
       }
       catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the user with id "
-               + /* id + */" to database, because of constraint violation.");
+         MidasLogs.errors.push("Core", "Unable to save the user "
+               + "to database, because of constraint violation.");
       }
       catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the user with id "
-               + /* id + */" to database.");
+         MidasLogs.errors.push("Core", "Unable to save the user to database.");
       }
    }
 
@@ -985,16 +981,16 @@ public class Core {
       catch (AmountUnavailable e) {
          MidasLogs.errors.push(e.getMessage());
          JOptionPane.showMessageDialog(null, 
-                "Le compte ne dispose pas d'assez de provisions pour effectuer la dépense !", 
+                "Le compte ne dispose pas d'assez de provisions pour effectuer "
+              + "la dépense !", 
              Text.APP_TITLE.toString(), JOptionPane.OK_OPTION);
       }
       catch (DatabaseConstraintViolation e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */" to database, because of constraint violation.");
+         MidasLogs.errors.push("Core", "Unable to save the budget "
+                        + " to database, because of constraint violation.");
       }
       catch (DatabaseException e) {
-         MidasLogs.errors.push("Core", "Unable to save the budget with id "
-               + /* id + */" to database.");
+         MidasLogs.errors.push("Core", "Unable to save the budget to database.");
       }
    }
 
