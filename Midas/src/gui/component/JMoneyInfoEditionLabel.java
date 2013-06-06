@@ -53,6 +53,7 @@ public class JMoneyInfoEditionLabel extends JInfoEditionLabel {
       initListeners();
       setDataAlignement(SwingConstants.RIGHT);
       tfdData.setColumns(tfdData.getColumns() - lblCurrency.getText().length());
+      checkValidity();
    }
    
    /**
@@ -123,14 +124,21 @@ public class JMoneyInfoEditionLabel extends JInfoEditionLabel {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            try {
-               Double.parseDouble(tfdData.getText());
-               setValid();
-            }
-            catch (Exception e) {
-               setInvalid();
-            }
+            checkValidity();
          }
       });
+   }
+   
+   /**
+    * Vérifie qu'un nombre est contenu dans le champs texte.
+    */
+   private void checkValidity() {
+      try {
+         Double.parseDouble(tfdData.getText());
+         setValid();
+      }
+      catch (Exception e) {
+         setInvalid();
+      }
    }
 }

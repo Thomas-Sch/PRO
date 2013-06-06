@@ -13,6 +13,7 @@
 package gui.component.infoedition;
 
 import gui.JInfoEditionPane;
+import gui.JManageFrame;
 import gui.component.JInfoEditionLabel;
 import gui.utils.TextChangedListener;
 
@@ -20,7 +21,6 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.util.LinkedList;
 
-import javax.swing.JDialog;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
@@ -48,7 +48,7 @@ public class JUserIE extends JInfoEditionPane<User> {
     * @param parent Fenêtre contenant le label.
     * @param data Compte à afficher.
     */
-   public JUserIE(JDialog parent, Container container, JUserIE last, User data) {
+   public JUserIE(JManageFrame parent, Container container, JUserIE last, User data) {
       this(parent, container, last, data, false);
    }
    
@@ -59,7 +59,7 @@ public class JUserIE extends JInfoEditionPane<User> {
       super();
    }
    
-   public JUserIE(JDialog parent, Container container, JUserIE last, User data, boolean edition) {
+   public JUserIE(JManageFrame parent, Container container, JUserIE last, User data, boolean edition) {
       super(parent, container, last, data, edition);
    }
 
@@ -73,6 +73,7 @@ public class JUserIE extends JInfoEditionPane<User> {
          @Override
          public void textChanged(DocumentEvent event) {
             data.setName(ielName.getText());
+            checkItemIntegrity();
          }
       });
    }
@@ -99,6 +100,16 @@ public class JUserIE extends JInfoEditionPane<User> {
       // Ajout du champs à la liste.
       result.add(ielName);
       return result;
+   }
+   
+   /**
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
+    */
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ielName.isValidData();
+      setEnabledValidateButton(checkResult);
    }
 
 }

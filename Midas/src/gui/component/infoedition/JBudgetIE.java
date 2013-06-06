@@ -13,6 +13,7 @@
 package gui.component.infoedition;
 
 import gui.JInfoEditionPane;
+import gui.JManageFrame;
 import gui.component.JInfoEditionLabel;
 import gui.component.JMoneyInfoEditionLabel;
 import gui.utils.TextChangedListener;
@@ -22,7 +23,6 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.util.LinkedList;
 
-import javax.swing.JDialog;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
@@ -61,7 +61,7 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
     * @param parent Fenêtre contenant le label.
     * @param data Compte à afficher.
     */
-   public JBudgetIE(JDialog parent, Container container, JBudgetIE last, Budget data) {
+   public JBudgetIE(JManageFrame parent, Container container, JBudgetIE last, Budget data) {
       this(parent, container, last, data, false);
    }
    
@@ -72,7 +72,7 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
       super();
    }
    
-   public JBudgetIE(JDialog parent, Container container, JBudgetIE last, Budget data, boolean edition) {
+   public JBudgetIE(JManageFrame parent, Container container, JBudgetIE last, Budget data, boolean edition) {
       super(parent, container, last, data, edition);
    }
 
@@ -87,6 +87,7 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
          @Override
          public void textChanged(DocumentEvent event) {
             data.setName(ielName.getText());
+            checkItemIntegrity();
          }
       });
       
@@ -96,13 +97,17 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
          public void textChanged(DocumentEvent event) {
             try {
                data.setLimit(Double.valueOf(mielLimit.getText()));
+               mielLimit.setValid();
             }
             catch(NumberFormatException e) {
                MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
+               mielLimit.setInvalid();
             }
             catch (NegativeLimit e) {
                MidasLogs.errors.push(e.getMessage());
+               mielLimit.setInvalid();
             }
+            checkItemIntegrity();
          }
       });
       
@@ -159,5 +164,16 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
       add(ielIsOK);
       add(mielAmountLeft);
       add(ielDescription);
+   }
+   
+   /**
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
+    */
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ielName.isValidData()
+                     && mielLimit.isNumber();
+      setEnabledValidateButton(checkResult);
    }
 }

@@ -119,6 +119,14 @@ public abstract class JManageFrame extends JDialog {
    }
    
    /**
+    * Active ou désactive le bouton de validation.
+    * @param b Valeur d'activation.
+    */
+   public void setEnabledValidateButton(boolean b) {
+      aedActions.setButtonModifyEnabled(b);
+   }
+   
+   /**
     * Ajout de l'action à effectuer lors du clique sur le bouton d'ajout.
     * @param listener Action à effectuer.
     */

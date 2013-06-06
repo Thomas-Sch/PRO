@@ -17,7 +17,6 @@ import gui.component.JInfoEditionLabel;
 import java.awt.Container;
 import java.util.LinkedList;
 
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 /**
@@ -41,6 +40,8 @@ public abstract class JInfoEditionPane<E> extends JPanel {
    // (En protected pour gagner en lisibilité chez les enfants.)
    protected E data;
    
+   private JManageFrame parent;
+   
    private LinkedList<JInfoEditionLabel> list;
    
    /**
@@ -56,7 +57,7 @@ public abstract class JInfoEditionPane<E> extends JPanel {
     * @param last Objet précédent affiché de cette classe.
     * @param data Les nouvelles données à afficher.
     */
-   public JInfoEditionPane (JDialog parent, Container container, JInfoEditionPane<E> last, E data) {
+   public JInfoEditionPane (JManageFrame parent, Container container, JInfoEditionPane<E> last, E data) {
       this(parent, container, last, data, false);
    }
    
@@ -68,10 +69,11 @@ public abstract class JInfoEditionPane<E> extends JPanel {
     * @param data Les nouvelles données à afficher.
     * @param edition True => mode "Edition". False => "Présentation de données".
     */
-   public JInfoEditionPane (JDialog parent, Container container, JInfoEditionPane<E> last, E data, boolean edition) {
+   public JInfoEditionPane (JManageFrame parent, Container container, JInfoEditionPane<E> last, E data, boolean edition) {
       // On enlève ce qui était affiché avant.
       container.remove(last);
       this.data = data;
+      this.parent = parent;
       
       // On initialise le contenu et récupère la liste des composants.
       list = initContent(data);
@@ -113,5 +115,12 @@ public abstract class JInfoEditionPane<E> extends JPanel {
          }
       }
    }
-
+   
+   /**
+    * Active ou désactive le bouton de validation.
+    * @param b La nouvelle valeur d'activation.
+    */
+   protected void setEnabledValidateButton(boolean b) {
+      parent.setEnabledValidateButton(b);
+   }
 }
