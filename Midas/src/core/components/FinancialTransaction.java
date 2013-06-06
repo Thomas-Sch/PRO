@@ -15,7 +15,6 @@ package core.components;
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
-import database.dbComponents.DBBudget;
 import database.dbComponents.DBFinancialTransaction;
 import java.util.Date;
 
