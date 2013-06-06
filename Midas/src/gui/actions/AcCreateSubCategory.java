@@ -12,23 +12,22 @@
  */
 package gui.actions;
 
-import java.awt.Component;
-import java.awt.Dialog.ModalityType;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import settings.Language.Text;
-
-import core.Core;
-import core.components.Category;
-import core.components.CategoryList;
 import gui.UserAction;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import gui.views.JCreateCategory;
 
+import java.awt.Dialog.ModalityType;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import settings.Language.Text;
+import core.Core;
+import core.components.Category;
+import core.components.CategoryList;
+
 /**
- * TODO
+ * Action et contrôleur de la fenêtre de création d'une sous catégorie.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -61,7 +60,7 @@ public class AcCreateSubCategory extends UserAction {
       // Récupération du modèle
       category = core.createCategory();      
       // Vue
-      view = new JCreateCategory((Component)event.getSource(), category);
+      view = new JCreateCategory(category);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.SUBCATEGORY_CREATION_TITLE.toString());
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       

@@ -127,6 +127,9 @@ public class JNewTransaction extends JDialog implements View {
       vclActions = new JValidateCancel();
    }
    
+   /**
+    * Initialise les écouteurs sur les composants de la fenêtre.
+    */
    private void initListeners() {
      ielReason.addTextChangedListener(new TextChangedListener() {
          

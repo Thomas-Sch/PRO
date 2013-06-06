@@ -17,13 +17,11 @@ import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import gui.views.JCreateCategory;
 
-import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import settings.Language.Text;
-
 import core.Core;
 import core.components.Category;
 
@@ -49,14 +47,18 @@ public class AcCreateCategory extends UserAction {
       super(core);
    }
    
+   /**
+    * Exécute l'action.
+    */
    public void execute(Core core, ActionEvent event, Object[] dependencies) {
       
       // Récupération du modèle
       category = core.createCategory();      
       // Vue
-      view = new JCreateCategory((Component)event.getSource(), category);
+      view = new JCreateCategory(category);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.CATEGORY_CREATION_TITLE.toString());
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
+      view.setResizable(false);
       
       view.addValidateListener(new UserAction(core) {
          @Override
@@ -81,7 +83,7 @@ public class AcCreateCategory extends UserAction {
    }
 
    /**
-    * @return
+    * @return La catégorie crée.
     */
    public Category getCreatedCategory() {
       return category;

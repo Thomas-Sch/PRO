@@ -101,10 +101,18 @@ public class JMoneyInfoEditionLabel extends JInfoEditionLabel {
    
    /**
     * Est-ce que le contenu du champ text contient un nombre ?
-    * @return true si le contenu du champs text est valide.
+    * @return True si le contenu du champs text est valide.
     */
    public boolean isNumber() {
       return isNumber;
+   }
+   
+   /**
+    * Est-ce que le contenu du champ est un nombre positif ?
+    * @return True si le nombre est positif.
+    */
+   public boolean isPositive() {
+      return isNumber() && Double.parseDouble(getText()) >= 0;
    }
    
    /**

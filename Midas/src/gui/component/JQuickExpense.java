@@ -72,6 +72,9 @@ public class JQuickExpense extends JPanel {
       buildContent();
    }
    
+   /**
+    * Initialise les composants de la vue.
+    */
    public void initContent() {
       budgets = new ComboBoxBudget(controller.getCore());
       categories = new ComboBoxesCategory(controller.getCore());
@@ -84,6 +87,9 @@ public class JQuickExpense extends JPanel {
       btnValidate.setEnabled(false);
    }
    
+   /**
+    * Initialise les écouteurs internes à l'interface.
+    */
    private void initListeners() {
       ltpReason.addTextChangedListener(new TextChangedListener() {
          
@@ -143,6 +149,9 @@ public class JQuickExpense extends JPanel {
       });
    }
    
+   /**
+    * Place les composants de l'interface.
+    */
    public void buildContent() {
       GridBagLayout layout = new GridBagLayout();
       setLayout(layout);
@@ -198,7 +207,6 @@ public class JQuickExpense extends JPanel {
       checkResult = ltpReason.getText().length() != 0 
                     && budgets.isValidItemSelected()
                     && users.isValidItemSelected()
-                    && categories.isValidItemSelected()
                     && mielAmount.isNumber();
       btnValidate.setEnabled(checkResult);
    }

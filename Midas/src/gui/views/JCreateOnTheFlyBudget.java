@@ -55,7 +55,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
    private static final long serialVersionUID = -4692092965659440366L;
    
    private JInfoEditionLabel ielName;
-   private JMoneyInfoEditionLabel lmpAmount;
+   private JMoneyInfoEditionLabel mielAmount;
    private JValidateCancel vclActions;
    private ComboBoxAccount accounts;
 
@@ -88,7 +88,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
     */
    private void initComponents() {
       ielName = new JInfoEditionLabel(Text.BUDGET_NAME_LABEL);
-      lmpAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
+      mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       accounts = new ComboBoxAccount(controller.getCore());
       
       ditStart = new JDateInput(Text.BEGIN_DATE_LABEL);
@@ -106,8 +106,8 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
          
          @Override
          public void textChanged(DocumentEvent event) {
-            vclActions.setEnableValidateButton(isValid());
             budget.setName(ielName.getText());
+            checkItemIntegrity();
          }
       });
       
@@ -119,34 +119,33 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
          }
       });
       
-      lmpAmount.addTextChangedListener(new TextChangedListener() {
+      mielAmount.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               budget.setLimit(Double.valueOf(lmpAmount.getText()));
-               lmpAmount.setValid();
+               budget.setLimit(Double.valueOf(mielAmount.getText()));
+               mielAmount.setValid();
             }
             catch (NumberFormatException e) {
                MidasLogs.errors.push(e.getMessage());
-               lmpAmount.setInvalid();
+               mielAmount.setInvalid();
             }
             catch (NegativeLimit e) {
-               lmpAmount.setInvalid();
+               mielAmount.setInvalid();
                MidasLogs.errors.push(e.getMessage());
             }
-            
-            vclActions.setEnableValidateButton(isValid());
+            checkItemIntegrity();
          }
       });
       
       accounts.addSelectedChangedListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            vclActions.setEnableValidateButton(isValid());
             if(accounts.isValidItemSelected()) {
                budget.setBindedAccount(accounts.getSelectedItem());
             }
+            checkItemIntegrity();
          }
       });
    }
@@ -171,7 +170,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       pnlContent.add(ielName, constraints);
       
       constraints.gridy = 1;
-      pnlContent.add(lmpAmount, constraints);
+      pnlContent.add(mielAmount, constraints);
       
       constraints.gridy = 2;
       pnlContent.add(accounts.getGraphicalComponent(), constraints);
@@ -224,18 +223,17 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
       return ditEnd.getDate();
    }
    
+   
    /**
-    * Définit si les informations entrées dans l'interface
-    * sont suffisantes pour être enregistrées.
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
     */
-   public boolean isValid() {
-      if(ielName == null || accounts == null) {
-         return false;
-      } else {
-         return ielName.getText().length() != 0 
-                && accounts.isValidItemSelected()
-                && lmpAmount.isNumber();
-      }
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ielName.isValidData() 
+            && accounts.isValidItemSelected()
+            && mielAmount.isNumber();
+      vclActions.setEnableValidateButton(checkResult);
    }
 
    /* (non-Javadoc)

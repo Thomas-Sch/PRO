@@ -13,15 +13,15 @@
 package gui.actions;
 
 import gui.UserAction;
-import gui.views.JCreateAuthorFrame;
+import gui.utils.Positions;
+import gui.utils.Positions.ScreenPosition;
+import gui.views.JCreateUserFrame;
 
-import java.awt.Component;
 import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import settings.Language.Text;
-
 import core.Core;
 import core.components.User;
 
@@ -37,7 +37,7 @@ import core.components.User;
 public class AcCreateUser extends UserAction {
    
    private User user;
-   private JCreateAuthorFrame view;
+   private JCreateUserFrame view;
    
    public AcCreateUser(Core core) {
       super(core);
@@ -48,8 +48,10 @@ public class AcCreateUser extends UserAction {
       
       user = core.createUser();
       
-      view = new JCreateAuthorFrame((Component)event.getSource(), user);
+      view = new JCreateUserFrame(user);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.USER_CREATION_TITLE.toString());
+      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
+      view.setResizable(false);
       
       view.addValidateListener(new UserAction(core) {
          @Override
