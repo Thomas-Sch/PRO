@@ -13,6 +13,7 @@
 package gui.component.infoedition;
 
 import gui.JInfoEditionPane;
+import gui.JManageFrame;
 import gui.component.JInfoEditionLabel;
 import gui.utils.TextChangedListener;
 
@@ -20,7 +21,6 @@ import java.awt.Container;
 import java.awt.GridLayout;
 import java.util.LinkedList;
 
-import javax.swing.JDialog;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
@@ -48,7 +48,7 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
     * @param parent Fenêtre contenant le label.
     * @param data Catégorie à afficher.
     */
-   public JCategoryIE(JDialog parent, Container container, JCategoryIE last, Category data) {
+   public JCategoryIE(JManageFrame parent, Container container, JCategoryIE last, Category data) {
       this(parent, container, last, data, false);
    }
    
@@ -59,7 +59,7 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
       super();
    }
    
-   public JCategoryIE(JDialog parent, Container container, JCategoryIE last, Category data, boolean edition) {
+   public JCategoryIE(JManageFrame parent, Container container, JCategoryIE last, Category data, boolean edition) {
       super(parent, container, last, data, edition);
    }
 
@@ -73,6 +73,7 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
          @Override
          public void textChanged(DocumentEvent event) {
             data.setName(ielName.getText());
+            checkItemIntegrity();
          }
       });
    }
@@ -100,5 +101,15 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
    public void buildContent() {
       setLayout(new GridLayout(1, 2));
       add(ielName);
+   }
+   
+   /**
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
+    */
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ielName.isValidData();
+      setEnabledValidateButton(checkResult);
    }
 }

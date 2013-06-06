@@ -234,7 +234,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
       result = ielName.isValidData() 
                && tscBudgetLength.getTimeSlice() != null
                && accounts.isValidItemSelected()
-               && mielAmount.isNumber();
+               && mielAmount.isPositive();
       vclActions.setEnableValidateButton(result);
    }
    

@@ -12,22 +12,21 @@
  */
 package gui.component.infoedition;
 
+import gui.JInfoEditionPane;
+import gui.JManageFrame;
+import gui.component.JInfoEditionLabel;
+import gui.component.JMoneyInfoEditionLabel;
+import gui.utils.TextChangedListener;
+
 import java.awt.Container;
 import java.awt.GridLayout;
 import java.util.LinkedList;
 
-import javax.swing.JDialog;
 import javax.swing.event.DocumentEvent;
 
 import settings.Language.Text;
-
 import core.MidasLogs;
 import core.components.Account;
-
-import gui.JInfoEditionPane;
-import gui.component.JInfoEditionLabel;
-import gui.component.JMoneyInfoEditionLabel;
-import gui.utils.TextChangedListener;
 
 /**
  * Représente les informations d'un compte.
@@ -57,7 +56,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
     * @param parent Fenêtre contenant le label.
     * @param data Compte à afficher.
     */
-   public JAccountIE(JDialog parent, Container container, JAccountIE last, Account data) {
+   public JAccountIE(JManageFrame parent, Container container, JAccountIE last, Account data) {
       this(parent, container, last, data, false);
    }
    
@@ -68,7 +67,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
       super();
    }
    
-   public JAccountIE(JDialog parent, Container container, JAccountIE last, Account data, boolean edition) {
+   public JAccountIE(JManageFrame parent, Container container, JAccountIE last, Account data, boolean edition) {
       super(parent, container, last, data, edition);
    }
 
@@ -83,6 +82,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          @Override
          public void textChanged(DocumentEvent event) {
             data.setName(ielName.getText());
+            checkItemIntegrity();
          }
       });
       
@@ -91,7 +91,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          @Override
          public void textChanged(DocumentEvent event) {
             data.setBankName(ielBankName.getText());
-            
+            checkItemIntegrity();
          }
       });
       
@@ -100,7 +100,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          @Override
          public void textChanged(DocumentEvent event) {
             data.setAccountNumber(ielAccountNumber.getText());
-            
+            checkItemIntegrity();
          }
       });
       
@@ -110,10 +110,13 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          public void textChanged(DocumentEvent event) {
             try {
                data.setThreshold(Double.valueOf(mielOverdraftLimit.getText()));
+               mielOverdraftLimit.setValid();
             }
             catch(NumberFormatException e) {
-               MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
+               MidasLogs.errors.push("Not a valid number (" + mielOverdraftLimit.getText() + ")! : Parsing to double failed");
+               mielOverdraftLimit.setInvalid();
             }
+            checkItemIntegrity();
          }
       });
       
@@ -162,5 +165,18 @@ public class JAccountIE extends JInfoEditionPane<Account> {
       add(mielAmount);
       add(mielOverdraftLimit);
       add(ielDescription);
+   }
+   
+   /**
+    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * la base de donnée.
+    */
+   private void checkItemIntegrity() {
+      boolean checkResult;
+      checkResult = ielName.isValidData()
+                    && ielBankName.isValidData()
+                    && ielAccountNumber.isValidData()
+                    && mielOverdraftLimit.isNumber();
+      setEnabledValidateButton(checkResult);
    }
 }
