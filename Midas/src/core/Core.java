@@ -594,7 +594,7 @@ public class Core {
    }
 
    /**
-    * Retourne la liste de toutes les transactions financières;
+    * Retourne la liste de toutes les transactions financières.
     * 
     * @return La liste de toutes les transactions.
     */
@@ -788,6 +788,42 @@ public class Core {
       }
       catch (DatabaseException e) {
 
+      }
+      return result;
+   }
+   
+   /**
+    * Retourne la liste des dernières transactions financières.
+    * 
+    * @param number
+    *           - le nombre de transactions à retourner.
+    * @return La liste des dernières transactions.
+    */
+   public LinkedList<FinancialTransaction>
+                                    getLatestFinancialTransaction(int number) {
+      LinkedList<DBFinancialTransaction> list;
+      LinkedList<FinancialTransaction> result = new LinkedList<>();
+
+      try {
+         list = dbController.getLatestDbFinancialTransactions(number);
+         
+         for (DBFinancialTransaction dbItem : list) {
+            
+            FinancialTransaction transaction = 
+                 cache.getReference(FinancialTransaction.class, dbItem.getId());
+            
+            if (transaction == null) {
+               transaction = new FinancialTransaction(this, dbItem);
+               cache.putToCache(transaction);
+            }
+            
+            result.add(transaction);
+
+         }
+      }
+      catch (DatabaseException e) {
+         MidasLogs.errors.push("Core",
+               "Unable to load the latest financial transactions from database.");
       }
       return result;
    }
