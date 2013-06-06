@@ -42,11 +42,12 @@ public class AcNewExpense extends UserAction {
    private JNewExpense view;
 
    /**
-    * @param core
-    * @param dependencies
+    * Crée une nouvelle action qui va gérer l'ajout d'une dépense.
+    * @param core Va permettre d'interagir avec la base de donnée.
+    * @param controller Contrôleur qui a appelé cette action.
     */
-   public AcNewExpense(Core core, Controller controller, Object[] dependencies) {
-      super(core, dependencies);
+   public AcNewExpense(Core core, Controller controller) {
+      super(core);
       this.controller = controller;
    }
 

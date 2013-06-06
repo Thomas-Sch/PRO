@@ -60,6 +60,20 @@ public class AcCreateCategory extends UserAction {
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       view.setResizable(false);
       
+      initListeners(core);
+      
+      category.addObserver(view);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+   
+   /**
+    * Initialise les écouteurs de l'action.
+    * @param core Coeur de l'application.
+    */
+   public void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
@@ -74,12 +88,6 @@ public class AcCreateCategory extends UserAction {
             view.dispose();
          }
       });
-      
-      category.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
    }
 
    /**

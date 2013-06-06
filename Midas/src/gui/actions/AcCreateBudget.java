@@ -45,6 +45,10 @@ public class AcCreateBudget extends UserAction {
    private Recurrence recurrence;
    private JCreateBudgetFrame view;
 
+   /**
+    * Nouvelle action de création de budget.
+    * @param core Coeur de l'application.
+    */
    public AcCreateBudget(Core core) {
       super(core);
    }
@@ -68,14 +72,24 @@ public class AcCreateBudget extends UserAction {
       view.setVisible(true);
    }
    
+   /**
+    * Récupère le budget produit par cette action.
+    * @return le budget produit.
+    */
    public Budget getCreatedBudget() {
       return budget;
    }
    
+   /**
+    * Initialise les écouteurs de l'action.
+    * @param core Coeur de l'application.
+    */
    private void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+            
+            // Récupération du début et de la fin de la récurrence choisie.
             Date[] result = TimeSlice.getFirstAndLastDay(view.getTimeSlice(), view.getDate());
             
             try {

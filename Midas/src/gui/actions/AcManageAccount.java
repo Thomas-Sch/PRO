@@ -39,7 +39,10 @@ public class AcManageAccount extends UserAction {
    
    private JManageAccount view;
    
-   
+   /**
+    * Crée une nouvelle action qui va gérer la modification des comptes.
+    * @param core Va permettre d'interagir avec la base de donnée.
+    */
    public AcManageAccount(Core core) {
       super(core);
    }
@@ -48,12 +51,24 @@ public class AcManageAccount extends UserAction {
     * @see gui.UserAction#execute(core.Core, java.awt.event.ActionEvent, java.lang.Object[])
     */
    @Override
-   protected void execute(final Core core, ActionEvent event, Object[] dependencies) {
+   protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       view = new JManageAccount(core);
       view.setTitle(Text.APP_TITLE.toString() + " - " + Text.ACCOUNT_MANAGEMENT_TITLE);
       view.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       
+      initListeners(core);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+   
+   /**
+    * Initialise les écouteurs de l'action.
+    * @param core Permet de sauvegarder l'objet modifié.
+    */
+   private void initListeners(final Core core) {
       view.addButtonAddListener(new AcCreateAccount(core));
       
       view.addButtonModifyListener(new ActionListener() {
@@ -72,10 +87,5 @@ public class AcManageAccount extends UserAction {
             view.updateModel();
          }
       });
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
    }
-
 }

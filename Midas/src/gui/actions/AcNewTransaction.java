@@ -44,11 +44,12 @@ public class AcNewTransaction extends UserAction {
    private FinancialTransaction transaction;
 
    /**
-    * @param core
-    * @param dependencies
+    * Crée une nouvelle action qui va gérer l'ajout d'une transaction.
+    * @param core Va permettre d'interagir avec la base de donnée.
+    * @param controller Contrôleur qui a appelé cette action.
     */
-   public AcNewTransaction(Core core, Controller controller, Object[] dependencies) {
-      super(core, dependencies);
+   public AcNewTransaction(Core core, Controller controller) {
+      super(core);
       this.controller = controller;
    }
 
@@ -70,6 +71,10 @@ public class AcNewTransaction extends UserAction {
       view.setVisible(true);  
    }
    
+   /**
+    * Initialise les listeners de cette action.
+    * @param core Coeur logique de l'application.
+    */
    private void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override

@@ -39,6 +39,11 @@ public class AcCreateUser extends UserAction {
    private User user;
    private JCreateUserFrame view;
    
+   /**
+    * Crée une nouvelle action qui va lancer le processus de création
+    * d'un nouvel utilisateur.
+    * @param core Va permettre d'interagir avec la base de donnée.
+    */
    public AcCreateUser(Core core) {
       super(core);
    }
@@ -53,6 +58,20 @@ public class AcCreateUser extends UserAction {
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       view.setResizable(false);
       
+      initListeners(core);
+      
+      user.addObserver(view);
+      
+      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+      view.setModalityType(ModalityType.APPLICATION_MODAL);
+      view.setVisible(true);
+   }
+   
+   /**
+    * Initialise les écouteurs de l'action.
+    * @param core Permet de sauvegarder l'objet créer.
+    */
+   public void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
@@ -67,14 +86,12 @@ public class AcCreateUser extends UserAction {
             view.dispose();
          }
       });
-      
-      user.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
-      view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);
    }
    
+   /**
+    * Récupère l'utilisateur produit par cette action.
+    * @return L'utilisateur crée.
+    */
    public User getCreatedUser() {
       return user;
    }
