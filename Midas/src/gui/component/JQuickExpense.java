@@ -207,7 +207,8 @@ public class JQuickExpense extends JPanel {
       checkResult = ltpReason.getText().length() != 0 
                     && budgets.isValidItemSelected()
                     && users.isValidItemSelected()
-                    && mielAmount.isNumber();
+                    && mielAmount.isNumber()
+                    && mielAmount.isPositive();
       btnValidate.setEnabled(checkResult);
    }
    

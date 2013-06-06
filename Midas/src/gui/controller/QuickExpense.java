@@ -58,9 +58,9 @@ public class QuickExpense extends Controller{
          @Override
          public void actionPerformed(ActionEvent arg0) {
             try {
-            expense.setDate(view.getDate());
-            expense.setAccount(expense.getBudget().getBindedAccount());
-            getCore().saveFinancialTransaction(expense);
+               expense.setDate(view.getDate());
+               expense.setAccount(expense.getBudget().getBindedAccount());
+               getCore().saveFinancialTransaction(expense);
             }
             catch (AmountUnavailable e) {
                new AccountBankruptcy(e);
