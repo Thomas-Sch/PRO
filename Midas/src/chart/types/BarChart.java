@@ -20,62 +20,62 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import chart.dataset.BarValue;
 
 /**
- * Cette classe permet de créer un diagramme en bar
+ * Représente un diagramme en barres, et permet de l'afficher graphiquement.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class BarChart extends ChartWithAxes {
+public class BarChart extends ChartWithAxis {
 
    private DefaultCategoryDataset dataset;
-   
+
    /**
-    * Le constructeur crée un diagramme en bar complèt avec les données passées par argument
-    * à l'aide de JFreeChart
-    * @param title est le titre du diagramme
-    * @param barValue est un tableau de BarValue qui représente les données
-    * qui sont prises en compte pour la visualisation 
+    * Crée un diagramme en barres selon les données spécifiées.
+    * 
+    * @param title
+    *           - le titre du diagramme.
+    * @param barValue
+    *           - le tableau des entrées à afficher dans le diagramme.
     */
    public BarChart(String title, BarValue[] barValue) {
-      super(title);
-      
+      super(title, "", "");
+
       this.dataset = createDataset(barValue);
-      
-      JFreeChart chart = ChartFactory.createBarChart(
-            super.getTitle(),
-            super.getX(),
-            super.getY(),
-            dataset,
-            PlotOrientation.VERTICAL,
-            super.getLegend(),
-            super.getTooltip(),
-            super.getUrl()
-            );
-      
+
+      JFreeChart chart = ChartFactory.createBarChart(super.getTitle(),
+            super.getX(), super.getY(), dataset, PlotOrientation.VERTICAL,
+            super.getLegend(), super.getTooltip(), super.getUrl());
+
       super.setChart(chart);
    }
 
    /**
+    * Crée et retourne les données graphiques utilisables par JFreeChart à
+    * partir des entrées spécifiées.
     * 
-    * @param piebarValuesValues - un tableau de BarValue qui est utilisé pour dessiner le diagramme
-    * @return un DefaultCategoryDataset le dataset utilisé dans JFreeChart
+    * @param barValues
+    *           - les entrées pour le graphique en barres.
+    * @return Les données du graphique utilisables par JFreeChart.
     */
    private DefaultCategoryDataset createDataset(BarValue[] barValues) {
       DefaultCategoryDataset data = new DefaultCategoryDataset();
-      
+
       for (BarValue value : barValues) {
-         data.setValue(value.getValue(), "Row", value.getColumn()); // "Row" is not used
+         data.setValue(value.getValue(), "Row", value.getColumn()); // "Row" is
+                                                                    // not used
       }
-      
+
       return data;
    }
-   
+
    /**
+    * Retourne les données du graphique utilisables par JFreeChart.
     * 
-    * @return le/la/les dataset
+    * @return Les données du graphique.
     */
    public DefaultCategoryDataset getDataset() {
       return dataset;
