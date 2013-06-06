@@ -13,31 +13,43 @@
 package chart.dataset;
 
 /**
- * TODO
+ * Représente une entrée d'un graphique et sa valeur.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class DatasetValue {
 
    private Double value;
-   
+
+   /**
+    * Créer une entrée pour un graphique.
+    * 
+    * @param value
+    *           - la valeur de l'entrée.
+    */
    public DatasetValue(Double value) {
       this.value = value;
    }
 
    /**
-    * @return le/la/les value
+    * Retourne la valeur de l'entrée.
+    * 
+    * @return La valeur de l'entrée.
     */
    public Double getValue() {
       return value;
    }
 
    /**
-    * @param value - la nouvelle valeur pour l'attribut value
+    * Définit la valeur de l'entrée.
+    * 
+    * @param value
+    *           - la nouvelle valeur d'entrée.
     */
    public void setValue(Double value) {
       this.value = value;

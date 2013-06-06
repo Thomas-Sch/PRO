@@ -17,13 +17,14 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
 /**
- * Cette classe définit les propriétés communes des diagrammes
+ * Représente un graphique et met à dispositions les fonctionnalités de base.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 abstract public class Chart {
 
@@ -32,67 +33,85 @@ abstract public class Chart {
    private Boolean tooltip;
    private Boolean url;
    private JFreeChart chart;
-   
+
    /**
-    * Ce constructeur définit le titre du diagramme et les propriétés non-modifiable
-    * depuis l'extérieur mais qui sont nécessaires pour JFreeChart.
-    * @param title est le titre du diagramme
+    * Crée un graphique et initialise les propriétés nécessaires pour
+    * JFreeChart.
+    * 
+    * @param title
+    *           - le titre du graphique.
     */
    public Chart(String title) {
       this.title = title;
       this.legend = false;
       this.tooltip = false;
-      this.url = false;      
+      this.url = false;
    }
-   
+
    /**
+    * Retourne le panneau affichant le graphique.
     * 
-    * @return le diagramme sous la forme d'un JPanel
+    * @return Le panneau affichant le graphique.
     */
    public JPanel getChartPanel() {
       return new ChartPanel(chart);
    }
 
    /**
-    * @return le/la/les chart
+    * Retourne le graphique.
+    * 
+    * @return Le graphique.
     */
    public JFreeChart getChart() {
       return chart;
    }
 
    /**
-    * @param chart - la nouvelle valeur pour l'attribut chart
+    * Définit le graphique à utiliser.
+    * 
+    * @param chart
+    *           - le graphique à utiliser.
     */
    protected void setChart(JFreeChart chart) {
       this.chart = chart;
    }
 
    /**
-    * @return le/la/les title
+    * Retourne le titre du graphique.
+    * 
+    * @return Le titre du graphique.
     */
    protected String getTitle() {
       return title;
    }
 
    /**
-    * @return le/la/les legend
+    * Retourne s'il faut ou non une légende.
+    * 
+    * @return Vrai s'il faut une légende, Faux le cas échéant.
     */
    protected Boolean getLegend() {
       return legend;
    }
 
    /**
-    * @return le/la/les tooltip
+    * Retourne s'il faut ou non générer les texte d'indications au survol de la
+    * souris.
+    * 
+    * @return Vrai s'il faut les générer, Faux le cas échéant.
     */
    protected Boolean getTooltip() {
       return tooltip;
    }
 
    /**
-    * @return le/la/les url
+    * Retourne s'il faut ou non générer les URL lors de la création du
+    * graphique.
+    * 
+    * @return Vrai s'il faut les générer, Faux le cas échéant.
     */
    protected Boolean getUrl() {
       return url;
    }
-   
+
 }

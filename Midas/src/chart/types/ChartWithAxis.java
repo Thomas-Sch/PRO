@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : ChartWithAxes.java
+ * Nom du fichier   : ChartWithAxis.java
  * ============================================================================
  * Date de création : 16.05.2013
  * ============================================================================
@@ -13,35 +13,45 @@
 package chart.types;
 
 /**
- * Cette classe herberge les coordonnées X et Y pour des diagrammes qui utilisent ces deux valeurs
+ * Représente un graphique ayant des noms pour les axes X et Y.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class ChartWithAxes extends Chart {
+public class ChartWithAxis extends Chart {
 
    private String x;
    private String y;
-   
+
    /**
-    * Ce constructeur définit le titre du diagramme à l'aide du constructeur parent
+    * Crée un graphique avec des noms pour les axes X et Y.
+    * 
     * @param title
+    *           - le titre du graphique.
     */
-   public ChartWithAxes(String title) {
+   public ChartWithAxis(String title, String xAxis, String yAxis) {
       super(title);
+      x = xAxis;
+      y = yAxis;
    }
-   
+
    /**
-    * @return le/la/les x
+    * Retourne le nom de l'axe X.
+    * 
+    * @return Le nom de l'axe X.
     */
    protected String getX() {
       return x;
    }
+
    /**
-    * @return le/la/les y
+    * Retourne le nom de l'axe Y.
+    * 
+    * @return Le nom de l'axe Y.
     */
    protected String getY() {
       return y;

@@ -19,54 +19,54 @@ import org.jfree.data.general.DefaultPieDataset;
 import chart.dataset.PieValue;
 
 /**
- * Cette classe permet de créer un diagramme en camembert
+ * Représente un graphique de type "camembert".
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class PieChart extends Chart {
-   
+
    private DefaultPieDataset dataset;
-   
+
    /**
-    * Le constructeur crée un diagramme en comembert complèt avec les données passées par argument
-    * à l'aide de JFreeChart
-    * @param title est le titre du diagramme
-    * @param pieValues est un tableau de PieValue qui représente les données
-    * qui sont prises en compte pour la visualisation 
+    * Crée le graphique de type "camembert" à partir des valeurs données.
+    * 
+    * @param title
+    *           - le titre du graphique.
+    * @param pieValues
+    *           - les entrées du graphique.
     */
    public PieChart(String title, PieValue[] pieValues) {
       super(title);
-      
+
       this.dataset = createDataset(pieValues);
-      
-      JFreeChart chart = ChartFactory.createPieChart(
-            super.getTitle(),
-            dataset,
-            super.getLegend(),
-            super.getTooltip(),
-            super.getUrl()
-            );
-      
+
+      JFreeChart chart = ChartFactory.createPieChart(super.getTitle(), dataset,
+            super.getLegend(), super.getTooltip(), super.getUrl());
+
       super.setChart(chart);
    }
 
    /**
+    * Crée et retourne les données graphiques utilisables par JFreeChart à
+    * partir des entrées spécifiées.
     * 
-    * @param pieValues - un tableau de PieValue qui est utilisé pour dessiner le diagramme
-    * @return un DefaultPieDataset le dataset utilisé dans JFreeChart
+    * @param pieValues
+    *           - les entrées pour le graphique de type "camembert".
+    * @return Les données du graphique utilisables par JFreeChart.
     */
    private DefaultPieDataset createDataset(PieValue[] pieValues) {
       DefaultPieDataset data = new DefaultPieDataset();
-      
+
       for (PieValue value : pieValues) {
          data.setValue(value.getCategory(), value.getValue());
       }
-      
+
       return data;
    }
-   
+
 }
