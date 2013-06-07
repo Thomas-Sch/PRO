@@ -15,6 +15,8 @@ package gui.component.menu;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import settings.Language.Text;
+
 /**
  * Représente le menu afficher de l'application.
  * @author Biolzi Sébastien
@@ -36,22 +38,22 @@ public class JViewMenu extends JMenu {
     */
    public JViewMenu() {
       
-      setText("Afficher");
+      setText(Text.VIEW_MENU.toString());
 
       // Sous menu Afficher->Graphiques.
-      JMenu mnuViewGraphic = new JMenu("Graphiques");
+      JMenu mnuViewGraphic = new JMenu(Text.ACTION_LIST.toString());
       add(mnuViewGraphic);
 
       // Sous menu Afficher->Listes.
-      JMenu mnuViewList = new JMenu("Listes");
+      JMenu mnuViewList = new JMenu(Text.ACTION_GRAPH.toString());
       add(mnuViewList);
          
       // Option Afficher->Listes->20 derniers mouvements d'argent.
-      JMenuItem mniViewListLast20 = new JMenuItem("Les 20 derniers mouvements d'argent");
+      JMenuItem mniViewListLast20 = new JMenuItem(Text.ACTION_LIST_LAST20.toString());
       mnuViewList.add(mniViewListLast20);
 
       // Option Afficher->Listes->Mouvements entre deux dates.
-      JMenuItem mniViewListInterval = new JMenuItem("Mouvements d'argent dans un interval");
+      JMenuItem mniViewListInterval = new JMenuItem(Text.ACTION_LIST_TRANSACTION.toString());
       mnuViewList.add(mniViewListInterval);
    }
 

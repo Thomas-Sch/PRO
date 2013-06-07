@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
   <app_title>Midas</app_title>
+  <file_menu>Fichier</file_menu>
+  <edit_menu>Edition</edit_menu>
+  <view_menu>Afficher</view_menu>
+  <interrogation_menu>?</interrogation_menu>
   <action_quit>Quitter</action_quit>
+  <action_manage_account>Gérer les comptes</action_manage_account>
+  <action_manage_budget>Gérer les budgets</action_manage_budget>
+  <action_create_onthefly_budget>Créer un budget à la volée</action_create_onthefly_budget>
+  <action_manage_category>Gérer les catégories</action_manage_category>
+  <action_manage_user>Gérer les auteurs</action_manage_user>
+  <action_new_expense>Effectuer une dépense</action_new_expense>
+  <action_new_transaction>Faire une transaction</action_new_transaction>
+  <action_list>Listes</action_list>
+  <action_graph>Graphiques</action_graph>
+  <action_list_last20>Les 20 derniers mouvements d'argent</action_list_last20>
+  <action_list_transaction>Mouvements d'argent dans un interval</action_list_transaction>
+  <action_help>Aide...</action_help>
+  <action_about>A propos...</action_about>
   <account_creation_title>Ajout d'un compte</account_creation_title>
   <account_management_title>Gestion des comptes</account_management_title>
   <category_creation_title>Ajout d'une catégorie</category_creation_title>
@@ -34,6 +51,7 @@
   <end_date_label>Date de fin</end_date_label>
   <recurrence_label>Récurrence</recurrence_label>
   <time_slice_settings>Durée</time_slice_settings>
+  <budget_label>Budget</budget_label>
   <budget_description_label>Description</budget_description_label>
   <budget_name_label>Nom du budget</budget_name_label>
   <budget_binded_account_name_label>Nom du compte lié</budget_binded_account_name_label>
@@ -60,5 +78,10 @@
   <weekly_label>Hebdomadaire</weekly_label>
   <monthly_label>Mensuel</monthly_label>
   <annual_label>Annuel</annual_label>
+  <account_bankruptcy_message>Le compte ne dispose pas d'assez de provisions pour effectuer la dépense.</account_bankruptcy_message>
+  <bad_date_message>La date choisie n'est pas valide.</bad_date_message>
+  <inconsistency_date_message>Les dates choisies sont incohérentes entre elles.</inconsistency_date_message>
+  <bad_time_slice_message>L'intervalle de temps est inconnue.</bad_time_slice_message>
+  <negative_budget_message>Le budget suivant n'est désormais plus tenu.</negative_budget_message>
   <swiss_franc_acronym>CHF</swiss_franc_acronym>
 </language>

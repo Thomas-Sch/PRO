@@ -30,7 +30,7 @@ import core.MidasLogs;
  *
  */
 public class BadTimeSlice {
-   private final String message = "Veuillez sélectionner une intervalle de temps valide.";
+   private final String message = Text.BAD_TIME_SLICE_MESSAGE.toString();
 
    /**
     * Affiche le message d'information à l'utilisateur.
@@ -38,6 +38,6 @@ public class BadTimeSlice {
     */
    public BadTimeSlice (BadTimeSliceException e) {
       MidasLogs.errors.push(e.getMessage());
-      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.OK_OPTION);
+      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.ERROR_MESSAGE);
    }
 }

@@ -15,6 +15,7 @@ package gui.controller;
 import gui.Controller;
 import gui.alert.AccountBankruptcy;
 import gui.alert.BadDate;
+import gui.alert.NegativeBudget;
 import gui.component.JQuickExpense;
 import gui.exception.BadDateException;
 
@@ -62,8 +63,15 @@ public class QuickExpense extends Controller{
             try {
                expense.setDate(view.getDate());
                expense.setAccount(expense.getBudget().getBindedAccount());
+               
+               // On regarde si le budget était tenu avant.
+               boolean wasPositive = expense.getBudget().isPositive();
+               
                getCore().saveFinancialTransaction(expense);
                view.reset();
+               if(wasPositive && !expense.getBudget().isPositive()) {
+                  new NegativeBudget(expense.getBudget());
+               }
             }
             catch (AmountUnavailableException e) {
                new AccountBankruptcy(e);

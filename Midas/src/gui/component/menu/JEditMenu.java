@@ -18,6 +18,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 
+import settings.Language.Text;
+
 /**
  * Représente le menu d'édition de l'application.
  * @author Biolzi Sébastien
@@ -35,22 +37,27 @@ public class JEditMenu extends JMenu {
    private static final long serialVersionUID = -8256836741751163343L;
    
    private JMenuItem mniEditManageCategory;
-   private JMenuItem mniEditManageAuthor;
+   private JMenuItem mniEditManageUser;
    private JMenuItem mniEditAccount;
    private JMenuItem mniEditBudget;
    private JMenuItem mniEditOnTheFlyBudget;
-   
    private JMenuItem mniEditNewExpense;
    private JMenuItem mniEditNewTransaction;
 
    /**
-    * 
+    * Construit le menu graphique d'édition.
     */
    public JEditMenu() {
-      setText("Edition");
+      setText(Text.EDIT_MENU.toString());
       
       initContent();
-      
+      buildContent();
+   }
+   
+   /**
+    * Construit le menu.
+    */
+   private void buildContent() {
       // Sous menu Edition->Comptes.
       add(mniEditAccount);
      
@@ -68,7 +75,7 @@ public class JEditMenu extends JMenu {
       add(mniEditManageCategory);
 
       // Option Edition->Gérer les auteurs.
-      add(mniEditManageAuthor);
+      add(mniEditManageUser);
      
       // Séparateur Edition->Separateur2.
       JSeparator sepEditTwo = new JSeparator();
@@ -84,23 +91,22 @@ public class JEditMenu extends JMenu {
    /**
     * Initialise les composants du menu d'édition.
     */
-   public void initContent() {
-      mniEditAccount = new JMenuItem("Comptes...");
-      mniEditBudget = new JMenuItem("Budgets...");
-      mniEditOnTheFlyBudget = new JMenuItem("Créer un budget à la volée");
-      mniEditManageCategory = new JMenuItem("Gérer les catégories");
-      mniEditManageAuthor = new JMenuItem("Gérer les auteurs");
-      
-      mniEditNewExpense = new JMenuItem("Effectuer une dépense");
-      mniEditNewTransaction = new JMenuItem("Faire une transaction...");
+   private void initContent() {
+      mniEditAccount = new JMenuItem(Text.ACTION_MANAGE_ACCOUNT.toString());
+      mniEditBudget = new JMenuItem(Text.ACTION_MANAGE_BUDGET.toString());
+      mniEditOnTheFlyBudget = new JMenuItem(Text.ACTION_CREATE_ONTHEFLY_BUDGET.toString());
+      mniEditManageCategory = new JMenuItem(Text.ACTION_MANAGE_CATEGORY.toString());
+      mniEditManageUser = new JMenuItem(Text.ACTION_MANAGE_USER.toString());
+      mniEditNewExpense = new JMenuItem(Text.ACTION_NEW_EXPENSE.toString());
+      mniEditNewTransaction = new JMenuItem(Text.ACTION_NEW_TRANSACTION.toString());
    }
    
    public void addManageCategoryListener(ActionListener listener) {
       mniEditManageCategory.addActionListener(listener);
    }
    
-   public void addManageAuthorListener(ActionListener listener) {
-      mniEditManageAuthor.addActionListener(listener);
+   public void addManageUserListener(ActionListener listener) {
+      mniEditManageUser.addActionListener(listener);
    }
    
    public void addManageAccountListener(ActionListener listener) {

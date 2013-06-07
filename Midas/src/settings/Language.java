@@ -59,8 +59,34 @@ public class Language {
        */
       APP_TITLE,
      
-      // Menus
+      // Titres des menus principaux.
+      FILE_MENU,
+      EDIT_MENU,
+      VIEW_MENU,
+      INTERROGATION_MENU,
+      
+      // Sous menus de FILE_MENU.
       ACTION_QUIT,
+      
+      // Sous menus de EDIT_MENU.
+      ACTION_MANAGE_ACCOUNT,
+      ACTION_MANAGE_BUDGET,
+      ACTION_CREATE_ONTHEFLY_BUDGET,
+      ACTION_MANAGE_CATEGORY,
+      ACTION_MANAGE_USER,
+      ACTION_NEW_EXPENSE,
+      ACTION_NEW_TRANSACTION,
+      
+      // Sous menus de VIEW_MENU.
+      ACTION_LIST,
+      ACTION_GRAPH,
+      
+      ACTION_LIST_LAST20,
+      ACTION_LIST_TRANSACTION,
+      
+      // Sous menus de INTERROGATION_MENU.
+      ACTION_HELP,
+      ACTION_ABOUT,
       
       // Titres des fenêtres.
       ACCOUNT_CREATION_TITLE,
@@ -101,6 +127,7 @@ public class Language {
       END_DATE_LABEL,
       RECURRENCE_LABEL,
       TIME_SLICE_SETTINGS,
+      BUDGET_LABEL,
       
       // Champs du budget.
       BUDGET_DESCRIPTION_LABEL,
@@ -135,6 +162,13 @@ public class Language {
       WEEKLY_LABEL,
       MONTHLY_LABEL,
       ANNUAL_LABEL, 
+      
+      // Messages d'alerte.
+      ACCOUNT_BANKRUPTCY_MESSAGE,
+      BAD_DATE_MESSAGE,
+      INCONSISTENCY_DATE_MESSAGE,
+      BAD_TIME_SLICE_MESSAGE,
+      NEGATIVE_BUDGET_MESSAGE,
       
       // Acronymes des monnaies.
       SWISS_FRANC_ACRONYM;

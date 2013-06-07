@@ -15,6 +15,8 @@ package gui.component.menu;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import settings.Language.Text;
+
 /**
  * Représente le menu ? de l'application.
  * @author Biolzi Sébastien
@@ -35,14 +37,14 @@ public class JInterrogationMenu extends JMenu {
     * Contructeur du menu graphique "?".
     */
    public JInterrogationMenu() {
-      setText("?");
+      setText(Text.INTERROGATION_MENU.toString());
 
       // Option ?->Aide...
-      JMenuItem mniInterrogationHelp = new JMenuItem("Aide...");
+      JMenuItem mniInterrogationHelp = new JMenuItem(Text.ACTION_HELP.toString());
       add(mniInterrogationHelp);
 
       // Option ?->A propos...
-      JMenuItem mniInterrogationAbout = new JMenuItem("A propos...");
+      JMenuItem mniInterrogationAbout = new JMenuItem(Text.ACTION_ABOUT.toString());
       add(mniInterrogationAbout); 
    }
 }

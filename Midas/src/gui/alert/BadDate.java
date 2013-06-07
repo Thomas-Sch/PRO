@@ -29,7 +29,7 @@ import core.MidasLogs;
  */
 public class BadDate {
    
-   private final String message = "La date saisie n'est pas valide.";
+   private final String message = Text.BAD_DATE_MESSAGE.toString();
    
    /**
     * Affiche le message d'information à l'utilisateur.
@@ -37,6 +37,6 @@ public class BadDate {
     */
    public BadDate(BadDateException e) {
       MidasLogs.errors.push(e.getMessage());
-      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.OK_OPTION);
+      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.ERROR_MESSAGE);
    }
 }

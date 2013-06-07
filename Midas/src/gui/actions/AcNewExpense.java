@@ -16,6 +16,7 @@ import gui.Controller;
 import gui.UserAction;
 import gui.alert.AccountBankruptcy;
 import gui.alert.BadDate;
+import gui.alert.NegativeBudget;
 import gui.exception.BadDateException;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
@@ -86,8 +87,14 @@ public class AcNewExpense extends UserAction {
             try {               
                expense.setDate(view.getDate());
                expense.setAccount(expense.getBudget().getBindedAccount());
+               
+               // On regarde si le budget était tenu avant.
+               boolean wasPositive = expense.getBudget().isPositive();
                core.saveFinancialTransaction(expense);
                view.dispose();
+               if(wasPositive && !expense.getBudget().isPositive()) {
+                  new NegativeBudget(expense.getBudget());
+               }
             }
             catch (AmountUnavailableException e) {
                new AccountBankruptcy(e);

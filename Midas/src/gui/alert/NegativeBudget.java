@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : InconsistensyDate.java
+ * Nom du fichier   : NegativeBudget.java
  * ============================================================================
  * Date de création : 7 juin 2013
  * ============================================================================
@@ -14,13 +14,12 @@ package gui.alert;
 
 import javax.swing.JOptionPane;
 
+import core.components.Budget;
+
 import settings.Language.Text;
-import core.MidasLogs;
-import core.exceptions.InconsistencyDateException;
 
 /**
- * Affiche un message d'alerte à l'utilisateur s'il ne choisit pas un couple de
- * dates correctes.
+ * Affiche un message à l'utilisateur indiquant que son budget est dépassé.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -28,15 +27,16 @@ import core.exceptions.InconsistencyDateException;
  * @author Sinniger Marcel
  *
  */
-public class InconsistencyDate {
-   private final String message = Text.INCONSISTENCY_DATE_MESSAGE.toString();
-
+public class NegativeBudget {
+   private String message = Text.NEGATIVE_BUDGET_MESSAGE.toString();
+   
    /**
-    * Affiche le message d'information à l'utilisateur.
-    * @param e L'exception qui a déclenché l'alerte.
+    * Affiche un message d'information concernant un budget.
+    * @param budget Le budget concerné.
     */
-   public InconsistencyDate (InconsistencyDateException e) {
-      MidasLogs.errors.push(e.getMessage());
-      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.ERROR_MESSAGE);
+   public NegativeBudget(Budget budget) {
+      message += " [" + Text.BUDGET_LABEL.toString() + " : " + budget.getName() + "]";
+      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.INFORMATION_MESSAGE);
    }
+
 }

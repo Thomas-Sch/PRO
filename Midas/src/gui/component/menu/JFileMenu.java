@@ -35,14 +35,13 @@ public class JFileMenu extends JMenu {
     */
    private static final long serialVersionUID = 1583638274791297470L;
    
-   JMenuItem mniFilequit;
-   
+   JMenuItem mniFilequit;   
    
    /**
     * 
     */
    public JFileMenu() {
-      this.setText("Fichier");
+      this.setText(Text.FILE_MENU.toString());
       
       initComponents();
    }

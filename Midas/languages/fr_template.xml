@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
   <app_title>TODO</app_title>
+  <file_menu>TODO</file_menu>
+  <edit_menu>TODO</edit_menu>
+  <view_menu>TODO</view_menu>
+  <interrogation_menu>TODO</interrogation_menu>
   <action_quit>TODO</action_quit>
+  <action_manage_account>TODO</action_manage_account>
+  <action_manage_budget>TODO</action_manage_budget>
+  <action_create_onthefly_budget>TODO</action_create_onthefly_budget>
+  <action_manage_category>TODO</action_manage_category>
+  <action_manage_user>TODO</action_manage_user>
+  <action_new_expense>TODO</action_new_expense>
+  <action_new_transaction>TODO</action_new_transaction>
+  <action_list>TODO</action_list>
+  <action_graph>TODO</action_graph>
+  <action_list_last20>TODO</action_list_last20>
+  <action_list_transaction>TODO</action_list_transaction>
+  <action_help>TODO</action_help>
+  <action_about>TODO</action_about>
   <account_creation_title>TODO</account_creation_title>
   <account_management_title>TODO</account_management_title>
   <category_creation_title>TODO</category_creation_title>
@@ -34,6 +51,7 @@
   <end_date_label>TODO</end_date_label>
   <recurrence_label>TODO</recurrence_label>
   <time_slice_settings>TODO</time_slice_settings>
+  <budget_label>TODO</budget_label>
   <budget_description_label>TODO</budget_description_label>
   <budget_name_label>TODO</budget_name_label>
   <budget_binded_account_name_label>TODO</budget_binded_account_name_label>
@@ -60,5 +78,10 @@
   <weekly_label>TODO</weekly_label>
   <monthly_label>TODO</monthly_label>
   <annual_label>TODO</annual_label>
+  <account_bankruptcy_message>TODO</account_bankruptcy_message>
+  <bad_date_message>TODO</bad_date_message>
+  <inconsistency_date_message>TODO</inconsistency_date_message>
+  <bad_time_slice_message>TODO</bad_time_slice_message>
+  <negative_budget_message>TODO</negative_budget_message>
   <swiss_franc_acronym>TODO</swiss_franc_acronym>
 </language>

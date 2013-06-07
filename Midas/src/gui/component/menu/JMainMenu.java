@@ -29,9 +29,12 @@ import javax.swing.JMenuBar;
  * @author Sinniger Marcel
  *
  */
-@SuppressWarnings("serial")
 public class JMainMenu extends JMenuBar {
    
+   /**
+    * ID de sérialisation.
+    */
+   private static final long serialVersionUID = 4143588954471515225L;
    public FileMenu file;
    public EditMenu edit;
    public ViewMenu view;

@@ -30,7 +30,7 @@ import settings.Language.Text;
  */
 public class AccountBankruptcy {
    
-   private final String message = "Le compte ne dispose pas d'assez de provisions pour effectuer la dépense !";
+   private final String message = Text.ACCOUNT_BANKRUPTCY_MESSAGE.toString();
    
    /**
     * Affiche le message d'information à l'utilisateur.
@@ -38,6 +38,6 @@ public class AccountBankruptcy {
     */
    public AccountBankruptcy (AmountUnavailableException e) {
       MidasLogs.errors.push(e.getMessage());
-      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.OK_OPTION);
+      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.ERROR_MESSAGE);
    }
 }
