@@ -129,6 +129,10 @@ public class Language {
       RECURRENCE_LABEL,
       TIME_SLICE_SETTINGS,
       BUDGET_LABEL,
+      USER_LABEL,
+      ACCOUNT_LABEL,
+      EXPENSE_LABEL,
+      TRANSACTION_LABEL,
       
       // Champs du budget.
       BUDGET_DESCRIPTION_LABEL,

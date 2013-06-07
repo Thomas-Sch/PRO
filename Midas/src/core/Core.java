@@ -85,14 +85,14 @@ public class Core {
       loadAccounts();
       loadPrimaryCategories();
       loadBudgets();
-      loadTransactions();
+      loadLatestFinancialTransactions();
    }
    
    /**
     * Charge et établis la liste des numberOfTransactions dernières 
     * transactions.
     */
-   private void loadTransactions() {
+   private void loadLatestFinancialTransactions() {
       LinkedList<DBFinancialTransaction> dbTransactions = null;
       try {
          dbTransactions = dbController.getLatestDbFinancialTransactions(numberOfTransactions);
@@ -1050,11 +1050,12 @@ public class Core {
          }
          dbController.saveToDatabase(transaction.getDBFinancialTransaction());
          saveAccount(transaction.getAccount());
-         cache.putToCache(transaction);
          
          // Mise à jour de la liste des dernères transactions.
-         lastTransactions.addItem(transaction);
+         lastTransactions.addFirst(transaction);
          lastTransactions.removeLast();
+         
+         cache.putToCache(transaction);
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the budget "

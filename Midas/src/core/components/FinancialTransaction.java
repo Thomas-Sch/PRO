@@ -18,6 +18,8 @@ import core.IdentifiedComponent;
 import database.dbComponents.DBFinancialTransaction;
 import java.util.Date;
 
+import settings.Language.Text;
+
 /**
  * Cette classe représente une transaction financière et met à disposition un
  * moyen d'obtenir certaines informations associées à ladite transaction.
@@ -285,5 +287,20 @@ public class FinancialTransaction extends CoreComponent implements
     */
    public int getId() {
       return dbFinancialTransaction.getId();
+   }
+   
+   /**
+    * Affichage des transactions financières.
+    */
+   public String toString() {
+      String result = "[" + (isExpense() ? Text.EXPENSE_LABEL : Text.TRANSACTION_LABEL) + "] ";
+
+      result += Text.USER_LABEL + ": " + getUser() + ", ";
+      result += Text.ACCOUNT_LABEL + ": " + getAccountId() + ", ";
+      if(isExpense())
+         result += Text.BUDGET_LABEL + ": " + getBudget() + ", ";
+      result += Text.REASON_LABEL + ": " + getReason() + ", ";
+      result += Text.AMOUNT_LABEL + ": " + getAmount() + " " + Text.SWISS_FRANC_ACRONYM.toString();
+      return result;
    }
 }

@@ -53,6 +53,10 @@
   <recurrence_label>Récurrence</recurrence_label>
   <time_slice_settings>Durée</time_slice_settings>
   <budget_label>Budget</budget_label>
+  <user_label>Auteur</user_label>
+  <account_label>Compte</account_label>
+  <expense_label>Dépense</expense_label>
+  <transaction_label>Transaction</transaction_label>
   <budget_description_label>Description</budget_description_label>
   <budget_name_label>Nom du budget</budget_name_label>
   <budget_binded_account_name_label>Nom du compte lié</budget_binded_account_name_label>

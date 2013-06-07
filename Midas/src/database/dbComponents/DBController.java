@@ -946,7 +946,7 @@ public class DBController {
       String sqlString = "SELECT Tra_ID, Rec_ID, Amount, Date, Reason, Cat_ID, "
                        + "Bud_ID, Acc_ID, Use_ID "
                        + "FROM FinancialTransaction "
-                       + "ORDER BY Date DESC "
+                       + "ORDER BY Tra_ID DESC "
                        + "LIMIT 0, ?";
 
       PreparedStatement preparedStatement = dbAccess

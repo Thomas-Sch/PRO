@@ -62,7 +62,7 @@ public class JMoneyMove extends JPanel {
       
       // Ajout des composants au panel.
       add(lblDescription, BorderLayout.NORTH);      
-      add(lastTransactions.getGraphicalComponent(), BorderLayout.CENTER);
+      add(new JScrollPaneDefault(lastTransactions.getGraphicalComponent()), BorderLayout.CENTER);
    }
 }
 

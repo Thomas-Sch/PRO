@@ -68,10 +68,12 @@ public class QuickExpense extends Controller{
                boolean wasPositive = expense.getBudget().isPositive();
                
                getCore().saveFinancialTransaction(expense);
-               view.reset();
+               
                if(wasPositive && !expense.getBudget().isPositive()) {
                   new NegativeBudget(expense.getBudget());
                }
+               
+               view.reset();
             }
             catch (AmountUnavailableException e) {
                new AccountBankruptcy(e);

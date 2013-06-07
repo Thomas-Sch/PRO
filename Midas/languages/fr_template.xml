@@ -53,6 +53,10 @@
   <recurrence_label>TODO</recurrence_label>
   <time_slice_settings>TODO</time_slice_settings>
   <budget_label>TODO</budget_label>
+  <user_label>TODO</user_label>
+  <account_label>TODO</account_label>
+  <expense_label>TODO</expense_label>
+  <transaction_label>TODO</transaction_label>
   <budget_description_label>TODO</budget_description_label>
   <budget_name_label>TODO</budget_name_label>
   <budget_binded_account_name_label>TODO</budget_binded_account_name_label>

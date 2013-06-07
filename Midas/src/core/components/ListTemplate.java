@@ -53,7 +53,18 @@ public abstract class ListTemplate<E> extends CoreComponent {
       list.add(item);
       setChangedAndNotifyObservers();
    }
-
+   
+   /**
+    * Ajout un élément au début de la liste.
+    * 
+    * @param item
+    *           - l'élément ajouté.
+    */
+   public void addFirst(E item) {
+      list.addFirst(item);
+      setChangedAndNotifyObservers();
+   }
+   
    /**
     * Enlève un élément de la liste.
     * 
@@ -62,6 +73,14 @@ public abstract class ListTemplate<E> extends CoreComponent {
     */
    public void removeItem(E item) {
       list.remove(item);
+      setChangedAndNotifyObservers();
+   }   
+   
+   /**
+    * Supprime le dernier item de la liste.
+    */
+   public void removeLast() {
+      list.removeLast();
       setChangedAndNotifyObservers();
    }
 

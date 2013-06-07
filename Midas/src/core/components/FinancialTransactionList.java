@@ -50,11 +50,4 @@ public class FinancialTransactionList extends ListTemplate<FinancialTransaction>
       }
       return null;
    }
-   
-   /**
-    * Supprime la dernière transaction de la liste.
-    */
-   public void removeLast() {
-      removeLast();
-   }
 }
