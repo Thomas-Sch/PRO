@@ -16,12 +16,10 @@ import gui.Controller;
 import gui.controller.QuickExpense;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -83,7 +81,7 @@ public class JHomeScreen extends JPanel {
       gblConstraints.weightx = 0.5;
       gblConstraints.gridx = 1;
       gblConstraints.gridy = 0;
-      add(getLastMoneyMovesPanel(),gblConstraints);
+      add(new JMoneyMove(controller.getCore()),gblConstraints);
       
       // Désormais, les composants suivants prennent toute la largeur verticale.
       gblConstraints.gridwidth = 2;
@@ -101,39 +99,6 @@ public class JHomeScreen extends JPanel {
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 2;
       add(quickExpense.getGraphicalComponent(),gblConstraints);
-   }
-
-   /**
-    * Renvoie le panel des derniers mouvements d'argent.
-    * @return le panels des dernies mouvements d'argent.
-    */
-   private JPanel getLastMoneyMovesPanel() {
-      JPanel pnlLastMoneyMoves = new JPanel();
-      
-      pnlLastMoneyMoves.setLayout(new BorderLayout());
-      
-      // Ajout des composants au panel.
-      pnlLastMoneyMoves.add(new JLabel("Derniers mouvements d'argent:"), BorderLayout.NORTH);
-      
-      // Définission du modèle de test.
-      DefaultListModel<String> dlmLastMoneyMoves = new DefaultListModel<>();
-      dlmLastMoneyMoves.addElement("P PP PPP");
-      dlmLastMoneyMoves.addElement("C'est n'est pas le panel que vous recherchez.");
-      
-      JList<String> lstLastMoneyMoves = new JList<>(dlmLastMoneyMoves);
-      // Code obtenu sur http://tutiez.com/how-to-disable-jlist-selection-in-java.html
-      lstLastMoneyMoves.setCellRenderer(new DefaultListCellRenderer() {
-         
-         public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-                 boolean isSelected, boolean cellHasFocus) {
-             super.getListCellRendererComponent(list, value, index, false, false);
-      
-             return this;
-         }
-     });
-      
-      pnlLastMoneyMoves.add(lstLastMoneyMoves, BorderLayout.CENTER);
-      return pnlLastMoneyMoves;
    }
 
    /**

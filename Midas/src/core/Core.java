@@ -26,6 +26,7 @@ import core.components.Category;
 import core.components.CategoryList;
 import core.components.FinancialTransaction;
 import core.components.Recurrence;
+import core.components.FinancialTransactionList;
 import core.components.User;
 import core.components.UserList;
 import core.exceptions.AmountUnavailableException;
@@ -62,6 +63,9 @@ public class Core {
    private AccountList accounts;
    private CategoryList primaryCategories;
    private BudgetList budgets;
+   private FinancialTransactionList lastTransactions;
+   
+   private final int numberOfTransactions = 20;
 
    public Core() {
       settings = new Settings();
@@ -72,6 +76,8 @@ public class Core {
       accounts = new AccountList(this);
       primaryCategories = new CategoryList(this);
       budgets = new BudgetList(this);
+      
+      lastTransactions = new FinancialTransactionList(this);
 
       settings.loadSettings();
 
@@ -79,6 +85,32 @@ public class Core {
       loadAccounts();
       loadPrimaryCategories();
       loadBudgets();
+      loadTransactions();
+   }
+   
+   /**
+    * Charge et établis la liste des numberOfTransactions dernières 
+    * transactions.
+    */
+   private void loadTransactions() {
+      LinkedList<DBFinancialTransaction> dbTransactions = null;
+      try {
+         dbTransactions = dbController.getLatestDbFinancialTransactions(numberOfTransactions);
+      }
+      catch (DatabaseException e) {
+
+      }
+
+      if (dbTransactions != null) {
+         LinkedList<FinancialTransaction> transactionTemp = new LinkedList<>();
+
+         for (DBFinancialTransaction dbTransaction : dbTransactions) {
+            transactionTemp.add(new FinancialTransaction(this, dbTransaction));
+         }
+
+         lastTransactions.setItems(transactionTemp);
+      }
+
    }
 
    /**
@@ -512,6 +544,15 @@ public class Core {
       return accounts;
    }
 
+   /**
+    * Retourne la liste des dernières transactions financières.
+    * 
+    * @return La liste des transactions..
+    */
+   public FinancialTransactionList getLastFinancialTransactions() {
+      return lastTransactions;
+   }
+   
    /**
     * Retourne la liste de toutes les catégories principales.
     * 
@@ -1010,6 +1051,10 @@ public class Core {
          dbController.saveToDatabase(transaction.getDBFinancialTransaction());
          saveAccount(transaction.getAccount());
          cache.putToCache(transaction);
+         
+         // Mise à jour de la liste des dernères transactions.
+         lastTransactions.addItem(transaction);
+         lastTransactions.removeLast();
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the budget "

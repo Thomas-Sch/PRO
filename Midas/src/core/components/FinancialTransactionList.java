@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : BudgetList.java
+ * Nom du fichier   : FinancialTransactionList.java
  * ============================================================================
- * Date de création : 15 mai 2013
+ * Date de création : 7 juin 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -15,40 +15,46 @@ package core.components;
 import core.Core;
 
 /**
- * Représente une liste de budgets.
- * 
+ * Représente une liste de transactions financières.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- * 
+ *
  */
-public class BudgetList extends ListTemplate<Budget> {
+public class FinancialTransactionList extends ListTemplate<FinancialTransaction> {
 
    /**
-    * Crée une liste de budgets, notifiant ses observateurs lorsqu'elle est mise
-    * à jour.
+    * Crée une liste de transaction financière, notifiant ses observateurs 
+    * lorsqu'elle est mise à jour.
     * 
     * @param core
     *           - le coeur logique du programme.
     */
-   public BudgetList(Core core) {
+   public FinancialTransactionList(Core core) {
       super(core);
    }
 
    @Override
-   public Budget createFalseEntry(String name) {
-      return new Budget(core, name);
+   public FinancialTransaction createFalseEntry(String name) {
+      return null;
    }
 
    @Override
-   public Budget get(int id) {
-      for (Budget budget : getList()) {
-         if (budget.getId() == id) {
-            return budget;
+   public FinancialTransaction get(int id) {
+      for (FinancialTransaction financialTransaction : getList()) {
+         if (financialTransaction.getId() == id) {
+            return financialTransaction;
          }
       }
       return null;
+   }
+   
+   /**
+    * Supprime la dernière transaction de la liste.
+    */
+   public void removeLast() {
+      removeLast();
    }
 }

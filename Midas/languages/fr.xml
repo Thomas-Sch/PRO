@@ -58,7 +58,8 @@
   <budget_list_label>Liste des budgets</budget_list_label>
   <user_list_label>Liste des utilisateurs</user_list_label>
   <category_list_label>Liste des catégories</category_list_label>
-  <quick_expense_label>Effectuer une dépense rapide...</quick_expense_label>
+  <quick_expense_label>Effectuer une dépense rapide</quick_expense_label>
+  <last_money_move_label>Derniers mouvements d'argent</last_money_move_label>
   
   
   <!-- Descripteurs. -->

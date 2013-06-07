@@ -116,6 +116,7 @@ public class Language {
       USER_LIST_LABEL,
       CATEGORY_LIST_LABEL,
       QUICK_EXPENSE_LABEL,
+      LAST_MONEY_MOVE_LABEL,
       
       // Descripteurs.
       USER_NAME_LABEL,

@@ -943,7 +943,7 @@ public class DBController {
    public LinkedList<DBFinancialTransaction>
          getLatestDbFinancialTransactions(int number) throws DatabaseException {
 
-      String sqlString = "SELECT Tra_ID, Rec_Id, Amount, Date, Reason, Cat_ID, "
+      String sqlString = "SELECT Tra_ID, Rec_ID, Amount, Date, Reason, Cat_ID, "
                        + "Bud_ID, Acc_ID, Use_ID "
                        + "FROM FinancialTransaction "
                        + "ORDER BY Date DESC"
@@ -951,6 +951,7 @@ public class DBController {
 
       PreparedStatement preparedStatement = dbAccess
             .getPreparedStatement(sqlString);
+
       DBFinancialTransaction dbFinancialTransaction = null;
       LinkedList<DBFinancialTransaction> dbFinancialTransactions =
                                        new LinkedList<DBFinancialTransaction>();
@@ -958,7 +959,7 @@ public class DBController {
       try {
          preparedStatement.setInt(1, number);
          
-         ResultSet result = this.select(preparedStatement);
+         ResultSet result = this.select(preparedStatement);  
 
          while (result.next()) {
             dbFinancialTransaction = new DBFinancialTransaction();
