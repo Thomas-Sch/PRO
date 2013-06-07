@@ -14,7 +14,6 @@ package gui.component.list;
 
 import gui.View;
 
-import java.awt.Dimension;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -47,6 +46,7 @@ public class JCategoryList extends JList<Category> implements View{
     */
    public JCategoryList(CategoryList categories) {
       this.categories = categories;
+      setFixedCellWidth(200);
       update(categories, null);  
    }
 
@@ -67,12 +67,4 @@ public class JCategoryList extends JList<Category> implements View{
          return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
    }
-   
-   /**
-    * Retourne les dimensions préférées de la liste.
-    */
-   public Dimension getPreferredSize() {
-      return new Dimension(200, 50);
-   }
-
 }

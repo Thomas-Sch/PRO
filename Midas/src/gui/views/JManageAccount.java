@@ -14,6 +14,7 @@ package gui.views;
 
 import gui.JManageFrame;
 import gui.View;
+import gui.component.JScrollPaneDefault;
 import gui.component.infoedition.JAccountIE;
 import gui.controller.listbox.AccountListBox;
 
@@ -105,7 +106,7 @@ public class JManageAccount extends JManageFrame implements View{
       JPanel pnlContent = new JPanel(new BorderLayout(5,5));
       
       pnlContent.add(lblListDescription, BorderLayout.NORTH);
-      pnlContent.add(accounts.getGraphicalComponent(),BorderLayout.WEST);
+      pnlContent.add(new JScrollPaneDefault(accounts.getGraphicalComponent()),BorderLayout.WEST);
       
       pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
       pnlInfosActions.setLayout(new BorderLayout());

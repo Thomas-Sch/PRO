@@ -14,6 +14,7 @@ package gui.views;
 
 import gui.JManageFrame;
 import gui.View;
+import gui.component.JScrollPaneDefault;
 import gui.component.infoedition.JUserIE;
 import gui.controller.UserListBox;
 
@@ -105,7 +106,7 @@ public class JManageUser extends JManageFrame implements View{
       JPanel pnlContent = new JPanel(new BorderLayout(5,5));
       
       pnlContent.add(lblListDescription, BorderLayout.NORTH);
-      pnlContent.add(users.getGraphicalComponent(),BorderLayout.WEST);
+      pnlContent.add(new JScrollPaneDefault(users.getGraphicalComponent()),BorderLayout.WEST);
       
       pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
       pnlInfosActions.setLayout(new BorderLayout());

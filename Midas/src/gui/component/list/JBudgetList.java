@@ -14,7 +14,6 @@ package gui.component.list;
 
 import gui.View;
 
-import java.awt.Dimension;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -48,6 +47,7 @@ public class JBudgetList extends JList<Budget> implements View{
     */
    public JBudgetList(BudgetList budgets) {
       this.budgets = budgets;
+      setFixedCellWidth(200);
       update(budgets, null);  
    }
 
@@ -68,12 +68,4 @@ public class JBudgetList extends JList<Budget> implements View{
          return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
    }
-   
-   /**
-    * Retourne les dimensions préférées de la liste.
-    */
-   public Dimension getPreferredSize() {
-      return new Dimension(200, 100);
-   }
-
 }

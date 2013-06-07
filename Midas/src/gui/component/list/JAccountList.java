@@ -14,7 +14,6 @@ package gui.component.list;
 
 import gui.View;
 
-import java.awt.Dimension;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Observable;
@@ -48,6 +47,7 @@ public class JAccountList extends JList<Account> implements View{
     */
    public JAccountList(AccountList accounts) {
       this.accounts = accounts;
+      this.setFixedCellWidth(200);
       update(accounts, null);  
    }
 
@@ -67,12 +67,5 @@ public class JAccountList extends JList<Account> implements View{
       public int compare(Account arg0, Account arg1) {
          return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
-   }
-   
-   /**
-    * Retourne les dimensions préférées de la liste.
-    */
-   public Dimension getPreferredSize() {
-      return new Dimension(200, 100);
    }
 }

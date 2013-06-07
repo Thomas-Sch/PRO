@@ -26,7 +26,7 @@ import core.components.User;
 import core.components.UserList;
 
 /**
- * TODO
+ * Représente une liste d'utilisateurs.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -48,6 +48,7 @@ public class JUserList extends JList<User> implements View {
     */
    public JUserList(UserList users) {
       this.users = users;
+      setFixedCellWidth(200);
       update(users, null);  
    }
 

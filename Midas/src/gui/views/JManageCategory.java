@@ -14,6 +14,7 @@ package gui.views;
 
 import gui.JManageFrame;
 import gui.View;
+import gui.component.JScrollPaneDefault;
 import gui.component.infoedition.JCategoryIE;
 import gui.controller.listbox.CategoryListBox;
 
@@ -120,7 +121,7 @@ public class JManageCategory extends JManageFrame implements View{
       JPanel pnlContent = new JPanel(new BorderLayout(5,5));
       
       pnlContent.add(lblListDescription, BorderLayout.NORTH);
-      pnlContent.add(categories.getGraphicalComponent(),BorderLayout.WEST);
+      pnlContent.add(new JScrollPaneDefault(categories.getGraphicalComponent()),BorderLayout.WEST);
       
       pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
       pnlInfosActions.setLayout(new BorderLayout());

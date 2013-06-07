@@ -14,6 +14,7 @@ package gui.views;
 
 import gui.JManageFrame;
 import gui.View;
+import gui.component.JScrollPaneDefault;
 import gui.component.infoedition.JBudgetIE;
 import gui.controller.listbox.BudgetListBox;
 
@@ -105,7 +106,8 @@ public class JManageBudget extends JManageFrame implements View {
       JPanel pnlContent = new JPanel(new BorderLayout(5,5));
       
       pnlContent.add(lblListDescription, BorderLayout.NORTH);
-      pnlContent.add(budgets.getGraphicalComponent(),BorderLayout.WEST);
+  
+      pnlContent.add(new JScrollPaneDefault(budgets.getGraphicalComponent()),BorderLayout.WEST);
       
       pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
       pnlInfosActions.setLayout(new BorderLayout());
