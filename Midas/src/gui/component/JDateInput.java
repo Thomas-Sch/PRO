@@ -12,6 +12,8 @@
  */
 package gui.component;
 
+import gui.exception.BadDateException;
+
 import java.awt.BorderLayout;
 import java.util.Date;
 
@@ -71,8 +73,12 @@ public class JDateInput extends JPanel {
    /**
     * Renvoie la date sélectionnée.
     * @return la date sélectionnée.
+    * @throws BadDateException Si la date choisie est invalide.
     */
-   public Date getDate() {
+   public Date getDate() throws BadDateException {
+      if(dchTime.getDate() == null) {
+         throw new BadDateException("Invalid date");
+      }
       return dchTime.getDate();
    }
    
@@ -83,5 +89,4 @@ public class JDateInput extends JPanel {
    public void setDate(Date date) {
       dchTime.setDate(date);
    }
-
 }

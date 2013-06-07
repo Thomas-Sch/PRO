@@ -19,6 +19,7 @@ import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JTimeSliceChooser;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
+import gui.exception.BadDateException;
 import gui.utils.StandardInsets;
 import gui.utils.TextChangedListener;
 
@@ -38,7 +39,7 @@ import utils.TimeSlice;
 import core.Core;
 import core.MidasLogs;
 import core.components.Budget;
-import core.exceptions.NegativeLimit;
+import core.exceptions.NegativeLimitException;
 
 /**
  * Fenêtre de création d'un budget.
@@ -115,7 +116,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
                MidasLogs.errors.push(e.getMessage());
                mielAmount.setInvalid();
             }
-            catch (NegativeLimit e) {
+            catch (NegativeLimitException e) {
                mielAmount.setInvalid();
                MidasLogs.errors.push(e.getMessage());
             }
@@ -212,8 +213,9 @@ public class JCreateBudgetFrame extends JDialog implements View{
    /**
     * Renvoie la date sélectionnée.
     * @return la date sélectionnée.
+    * @throws BadDateException Si la date est invalide.
     */
-   public Date getDate() {
+   public Date getDate() throws BadDateException {
       return ditDate.getDate();
    }
    
@@ -231,8 +233,7 @@ public class JCreateBudgetFrame extends JDialog implements View{
     */
    public void checkItemIntegrity() {
       boolean result;
-      result = ielName.isValidData() 
-               && tscBudgetLength.getTimeSlice() != null
+      result = ielName.isValidData()
                && accounts.isValidItemSelected()
                && mielAmount.isPositive();
       vclActions.setEnableValidateButton(result);

@@ -14,7 +14,9 @@ package gui.controller;
 
 import gui.Controller;
 import gui.alert.AccountBankruptcy;
+import gui.alert.BadDate;
 import gui.component.JQuickExpense;
+import gui.exception.BadDateException;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -22,7 +24,7 @@ import java.awt.event.ActionListener;
 
 import core.Core;
 import core.components.FinancialTransaction;
-import core.exceptions.AmountUnavailable;
+import core.exceptions.AmountUnavailableException;
 
 /**
  * Controleur pour le panel d'ajout de dépenses rapides.
@@ -61,11 +63,15 @@ public class QuickExpense extends Controller{
                expense.setDate(view.getDate());
                expense.setAccount(expense.getBudget().getBindedAccount());
                getCore().saveFinancialTransaction(expense);
+               view.reset();
             }
-            catch (AmountUnavailable e) {
+            catch (AmountUnavailableException e) {
                new AccountBankruptcy(e);
             }
-            view.reset();
+            catch (BadDateException e) {
+              new BadDate(e);
+            }
+            
          }
       });
    }

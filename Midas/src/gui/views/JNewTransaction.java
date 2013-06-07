@@ -20,6 +20,7 @@ import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
 import gui.controller.combobox.ComboBoxUser;
+import gui.exception.BadDateException;
 import gui.utils.StandardInsets;
 import gui.utils.TextChangedListener;
 
@@ -197,8 +198,9 @@ public class JNewTransaction extends JDialog implements View {
    /**
     * Retourne la date sélectionnée par l'utilisateur.
     * @return La date choisie.
+    * @throws BadDateException Si la date choisie est invalide.
     */
-   public Date getDate() {
+   public Date getDate() throws BadDateException {
       return ditDate.getDate();
    }
    

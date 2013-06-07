@@ -28,7 +28,7 @@ import core.components.FinancialTransaction;
 import core.components.Recurrence;
 import core.components.User;
 import core.components.UserList;
-import core.exceptions.AmountUnavailable;
+import core.exceptions.AmountUnavailableException;
 import database.dbComponents.DBAccount;
 import database.dbComponents.DBBudget;
 import database.dbComponents.DBBudgetOnTheFly;
@@ -1000,7 +1000,7 @@ public class Core {
     * @param transaction
     *           - la transaction à sauver.
     */
-   public void saveFinancialTransaction(FinancialTransaction transaction) throws AmountUnavailable{
+   public void saveFinancialTransaction(FinancialTransaction transaction) throws AmountUnavailableException{
       try {
          if(transaction.isExpense()) {
             transaction.getAccount().debit(transaction.getAmount());
@@ -1080,7 +1080,7 @@ public class Core {
          saveFinancialTransaction(transaction);
          dbController.deleteDbRecurrence(tmpId);
       }
-      catch (AmountUnavailable e) {
+      catch (AmountUnavailableException e) {
          MidasLogs.errors.push(e.getMessage());
       }
       catch (DatabaseException | DatabaseConstraintViolation e) {

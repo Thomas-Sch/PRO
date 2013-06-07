@@ -19,6 +19,7 @@ import gui.component.JInfoEditionLabel;
 import gui.component.JMoneyInfoEditionLabel;
 import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxAccount;
+import gui.exception.BadDateException;
 import gui.utils.StandardInsets;
 import gui.utils.TextChangedListener;
 
@@ -36,7 +37,7 @@ import javax.swing.event.DocumentEvent;
 import settings.Language.Text;
 import core.MidasLogs;
 import core.components.BudgetOnTheFly;
-import core.exceptions.NegativeLimit;
+import core.exceptions.NegativeLimitException;
 
 /**
  * Fenêtre de création d'un budget à la volée.
@@ -131,7 +132,7 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
                MidasLogs.errors.push(e.getMessage());
                mielAmount.setInvalid();
             }
-            catch (NegativeLimit e) {
+            catch (NegativeLimitException e) {
                mielAmount.setInvalid();
                MidasLogs.errors.push(e.getMessage());
             }
@@ -210,16 +211,18 @@ public class JCreateOnTheFlyBudget extends JDialog implements View{
    /**
     * Retourne la date de début du budget sélectionné dans l'interface.
     * @return la date de début du budget sélectionné dans l'interface.
+    * @throws BadDateException Si la date est invalide.
     */
-   public Date getStartDate() {
+   public Date getStartDate() throws BadDateException {
       return ditStart.getDate();
    }
    
    /**
     * Retourne la date de fin du budget sélectionné dans l'interface.
     * @return la date de fin du budget sélectionné dans l'interface.
+    * @throws BadDateException Si la date est invalide.
     */
-   public Date getEndDate() {
+   public Date getEndDate() throws BadDateException {
       return ditEnd.getDate();
    }
    

@@ -17,7 +17,7 @@ import java.util.Date;
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
-import core.exceptions.InconsistencyDate;
+import core.exceptions.InconsistencyDateException;
 import database.dbComponents.DBRecurrence;
 
 /**
@@ -71,13 +71,13 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
     * 
     * @param date
     *           - la date de début.
-    * @throws InconsistencyDate
+    * @throws InconsistencyDateException
     *            si la date de début est ultérieure à la date de fin.
     */
-   public void setStartDate(Date date) throws InconsistencyDate {
+   public void setStartDate(Date date) throws InconsistencyDateException {
       Date endDate = dbRecurrence.getEnd();
       if (endDate != null && date.after(endDate)) {
-         throw new InconsistencyDate(
+         throw new InconsistencyDateException(
                "Starting date was not before ending date.");
       }
       dbRecurrence.setStart(date);
@@ -118,13 +118,13 @@ public class Recurrence extends CoreComponent implements IdentifiedComponent {
     * 
     * @param date
     *           - la date de fin.
-    * @throws InconsistencyDate
+    * @throws InconsistencyDateException
     *            si la date de fin est antérieure à la date de début.
     */
-   public void setEndDate(Date date) throws InconsistencyDate {
+   public void setEndDate(Date date) throws InconsistencyDateException {
       Date startDate = dbRecurrence.getStart();
       if (startDate != null && date.before(startDate)) {
-         throw new InconsistencyDate("Ending date was not after starting date.");
+         throw new InconsistencyDateException("Ending date was not after starting date.");
       }
       dbRecurrence.setEnd(date);
       setChangedAndNotifyObservers();

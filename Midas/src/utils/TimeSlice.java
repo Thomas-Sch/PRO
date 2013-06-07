@@ -12,8 +12,11 @@
  */
 package utils;
 
+import gui.exception.BadTimeSliceException;
+
 import java.util.Calendar;
 import java.util.Date;
+
 import settings.Language.Text;
 
 /**
@@ -95,8 +98,10 @@ public enum TimeSlice {
     * @return Un tableau de deux cases de date. La première case [0] contient la
     *         date de début de l'intervalle et la deuxième case [1] contient la
     *         date de fin de l'intervalle.
+    * @throws BadTimeSliceException Se produit lorsque l'on passe slice qui
+    *                               vaut null.
     */
-   public static Date[] getFirstAndLastDay(TimeSlice slice, Date date) {
+   public static Date[] getFirstAndLastDay(TimeSlice slice, Date date) throws BadTimeSliceException {
       Date begin = null, end = null;
 
       Calendar cal = Calendar.getInstance();
@@ -105,6 +110,10 @@ public enum TimeSlice {
       cal.clear(Calendar.MINUTE);
       cal.clear(Calendar.SECOND);
       cal.clear(Calendar.MILLISECOND);
+      
+      if(slice == null) {
+         throw new BadTimeSliceException();
+      }
 
       switch (slice) {
          case ANNUAL:
@@ -135,6 +144,7 @@ public enum TimeSlice {
 
             cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
             break;
+            
       }
 
       // Paramétrage de l'heure et envoi des résultats.

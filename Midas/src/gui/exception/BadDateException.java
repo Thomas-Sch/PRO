@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : NegativeLimit.java
+ * Nom du fichier   : BadDateException.java
  * ============================================================================
- * Date de création : 26 mai 2013
+ * Date de création : 7 juin 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -10,10 +10,10 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package core.exceptions;
+package gui.exception;
 
 /**
- * Exception indiquant un mauvais choix de limite.
+ * Exception relevant d'une date invalide.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -21,46 +21,48 @@ package core.exceptions;
  * @author Sinniger Marcel
  *
  */
-public class NegativeLimit extends CoreComponentException {
-
-   private static final long serialVersionUID = 30002L;
-   
+public class BadDateException extends Exception{
    /**
-    * Crée une exception indiquant un mauvais choix de limite.
+    * ID de sérialisation.
     */
-   public NegativeLimit() {
+   private static final long serialVersionUID = -8598398981080874380L;
+
+   /**
+    * Crée une exception indiquant une date invalide.
+    */
+   public BadDateException() {
       super();
    }
 
    /**
-    * Crée une exception indiquant un mauvais choix de limite.
+    * Crée une exception indiquant une date invalide.
     * 
     * @param message
     *           - le message à joindre à l'exception.
     */
-   public NegativeLimit(String message) {
+   public BadDateException(String message) {
       super(message);
    }
 
    /**
-    * Crée une exception indiquant un mauvais choix de limite.
+    * Crée une exception indiquant une date invalide.
     * 
     * @param cause
     *           - la cause de l'exception.
     */
-   public NegativeLimit(Throwable cause) {
+   public BadDateException(Throwable cause) {
       super(cause);
    }
 
    /**
-    * Crée une exception indiquant un mauvais choix de limite.
+    * Crée une exception indiquant une date invalide.
     * 
     * @param message
     *           - le message à joindre à l'exception.
     * @param cause
     *           - la cause de l'exception.
     */
-   public NegativeLimit(String message, Throwable cause) {
+   public BadDateException(String message, Throwable cause) {
       super(message, cause);
    }
 

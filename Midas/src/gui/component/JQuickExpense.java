@@ -16,6 +16,7 @@ import gui.Controller;
 import gui.controller.combobox.ComboBoxBudget;
 import gui.controller.combobox.ComboBoxUser;
 import gui.controller.combobox.ComboBoxesCategory;
+import gui.exception.BadDateException;
 import gui.utils.TextChangedListener;
 
 import java.awt.GridBagConstraints;
@@ -215,8 +216,9 @@ public class JQuickExpense extends JPanel {
    /**
     * Renvoie la date choisie pas l'utilisateur.
     * @return la date choisie pas l'utilisateur.
+    * @throws BadDateException Si la date choisie est invalide.
     */
-   public Date getDate() {
+   public Date getDate() throws BadDateException {
       return ditDate.getDate();
    }
    

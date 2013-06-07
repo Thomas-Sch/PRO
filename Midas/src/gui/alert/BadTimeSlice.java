@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : AccountBankruptcy.java
+ * Nom du fichier   : BadTimeSlice.java
  * ============================================================================
- * Date de création : 6 juin 2013
+ * Date de création : 7 juin 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -12,15 +12,16 @@
  */
 package gui.alert;
 
+import gui.exception.BadTimeSliceException;
+
 import javax.swing.JOptionPane;
 
-import core.MidasLogs;
-import core.exceptions.AmountUnavailableException;
-
 import settings.Language.Text;
+import core.MidasLogs;
 
 /**
- * Classe qui affiche un message d'alerte si le compte n'a plus d'argent.
+ * Classe qui affiche un message d'alerte si l'utilisateur ne choisi pas
+ * d'intervalle de temps.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -28,15 +29,14 @@ import settings.Language.Text;
  * @author Sinniger Marcel
  *
  */
-public class AccountBankruptcy {
-   
-   private final String message = "Le compte ne dispose pas d'assez de provisions pour effectuer la dépense !";
-   
+public class BadTimeSlice {
+   private final String message = "Veuillez sélectionner une intervalle de temps valide.";
+
    /**
     * Affiche le message d'information à l'utilisateur.
     * @param e L'exception qui a déclenché l'alerte.
     */
-   public AccountBankruptcy (AmountUnavailableException e) {
+   public BadTimeSlice (BadTimeSliceException e) {
       MidasLogs.errors.push(e.getMessage());
       JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.OK_OPTION);
    }

@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
-import core.exceptions.AmountUnavailable;
+import core.exceptions.AmountUnavailableException;
 import database.dbComponents.DBAccount;
 
 /**
@@ -129,13 +129,13 @@ public class Account extends CoreComponent implements IdentifiedComponent {
     * @param amount
     *           - le montant à débiter.
     *           
-    * @throws AmountUnavailable 
+    * @throws AmountUnavailableException 
     *           - lors que l'on veut prelever plus
     *             d'argent que ce qui est disponnible
     */
-   public void debit(double amount) throws AmountUnavailable {
+   public void debit(double amount) throws AmountUnavailableException {
       if (dbAccount.getAmount() - dbAccount.getThreshold() < amount) {
-         throw new AmountUnavailable("Account : amount available on the account to make the debit");
+         throw new AmountUnavailableException("Account : amount available on the account to make the debit");
       }
       dbAccount.setAmount(dbAccount.getAmount() - amount);
    }

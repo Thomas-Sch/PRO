@@ -28,7 +28,7 @@ import javax.swing.event.DocumentEvent;
 import settings.Language.Text;
 import core.MidasLogs;
 import core.components.Budget;
-import core.exceptions.NegativeLimit;
+import core.exceptions.NegativeLimitException;
 
 /**
  * Composant permettant d'éditer ou afficher simplement des champs d'information
@@ -103,7 +103,7 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
                MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
                mielLimit.setInvalid();
             }
-            catch (NegativeLimit e) {
+            catch (NegativeLimitException e) {
                MidasLogs.errors.push(e.getMessage());
                mielLimit.setInvalid();
             }

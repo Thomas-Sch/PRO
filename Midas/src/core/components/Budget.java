@@ -15,7 +15,7 @@ package core.components;
 import core.Core;
 import core.CoreComponent;
 import core.IdentifiedComponent;
-import core.exceptions.NegativeLimit;
+import core.exceptions.NegativeLimitException;
 import database.dbComponents.DBBudget;
 
 import java.util.Date;
@@ -132,12 +132,12 @@ public class Budget extends CoreComponent implements IdentifiedComponent {
     * @param limit
     *           - le montant limite du budget.
     * 
-    * @throws NegativeLimit : 
+    * @throws NegativeLimitException : 
     *             si une limite negative est passée en paramètre
     */
-   public void setLimit(double limit) throws NegativeLimit {
+   public void setLimit(double limit) throws NegativeLimitException {
       if (limit < 0) {
-         throw new NegativeLimit("Budget : the Limit can not be a negative number");
+         throw new NegativeLimitException("Budget : the Limit can not be a negative number");
       }
       else {
          dbBudget.setLimit(limit);

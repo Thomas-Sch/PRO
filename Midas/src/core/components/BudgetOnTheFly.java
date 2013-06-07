@@ -14,7 +14,7 @@ package core.components;
 
 import core.Core;
 import core.IdentifiedComponent;
-import core.exceptions.InconsistencyDate;
+import core.exceptions.InconsistencyDateException;
 import database.dbComponents.DBBudgetOnTheFly;
 import java.util.Date;
 
@@ -71,13 +71,13 @@ public class BudgetOnTheFly extends Budget implements IdentifiedComponent {
     * 
     * @param date
     *           - la nouvelle date de début
-    * @throws InconsistencyDate
+    * @throws InconsistencyDateException
     *            si la date de début survient après celle de fin.
     */
-   public void setStartDate(Date date) throws InconsistencyDate {
+   public void setStartDate(Date date) throws InconsistencyDateException {
       Date endDate = dbBudetOnTheFly.getEnd();
       if (endDate != null && date.after(endDate)) {
-         throw new InconsistencyDate("BudgetOnTheFly : " +
+         throw new InconsistencyDateException("BudgetOnTheFly : " +
                "The starting date has to be before the ending date");
       }
       dbBudetOnTheFly.setStart(date);
@@ -98,13 +98,13 @@ public class BudgetOnTheFly extends Budget implements IdentifiedComponent {
     * 
     * @param date
     *           - la nouvelle date de fin
-    * @throws InconsistencyDate
+    * @throws InconsistencyDateException
     *            si la date de fin survient avant celle du début.
     */
-   public void setEndDate(Date date) throws InconsistencyDate {
+   public void setEndDate(Date date) throws InconsistencyDateException {
       Date startDate = dbBudetOnTheFly.getStart();
       if (startDate != null && date.before(startDate)) {
-         throw new InconsistencyDate("BudgetOnTheFly : " +
+         throw new InconsistencyDateException("BudgetOnTheFly : " +
                "The ending date has to be after the starting date");
       }
       dbBudetOnTheFly.setEnd(date);

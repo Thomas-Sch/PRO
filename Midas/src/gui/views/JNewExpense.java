@@ -21,6 +21,7 @@ import gui.component.JValidateCancel;
 import gui.controller.combobox.ComboBoxBudget;
 import gui.controller.combobox.ComboBoxUser;
 import gui.controller.combobox.ComboBoxesCategory;
+import gui.exception.BadDateException;
 import gui.utils.StandardInsets;
 import gui.utils.TextChangedListener;
 
@@ -234,8 +235,9 @@ public class JNewExpense extends javax.swing.JDialog implements View {
    /**
     * Renvoie la date choisie pas l'utilisateur.
     * @return la date choisie pas l'utilisateur.
+    * @throws BadDateException Si la date saisie n'est pas valide.
     */
-   public Date getDate() {
+   public Date getDate() throws BadDateException{
       return ditDate.getDate();
    }
 

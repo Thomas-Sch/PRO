@@ -15,6 +15,8 @@ package gui.actions;
 import gui.Controller;
 import gui.UserAction;
 import gui.alert.AccountBankruptcy;
+import gui.alert.BadDate;
+import gui.exception.BadDateException;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import gui.views.JNewTransaction;
@@ -26,7 +28,7 @@ import java.awt.event.ActionListener;
 import settings.Language.Text;
 import core.Core;
 import core.components.FinancialTransaction;
-import core.exceptions.AmountUnavailable;
+import core.exceptions.AmountUnavailableException;
 
 /**
  * Contrôleur et action de l'ajout d'une transaction.
@@ -84,10 +86,13 @@ public class AcNewTransaction extends UserAction {
             try {
                transaction.setDate(view.getDate());
                core.saveFinancialTransaction(transaction);
-            } catch (AmountUnavailable e) {
+               view.dispose();
+            } catch (AmountUnavailableException e) {
                new AccountBankruptcy(e);
             }
-            view.dispose();
+            catch (BadDateException e) {
+               new BadDate(e);
+            }
          }
       });
       

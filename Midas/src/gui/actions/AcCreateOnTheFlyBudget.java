@@ -14,6 +14,9 @@ package gui.actions;
 
 import gui.Controller;
 import gui.UserAction;
+import gui.alert.BadDate;
+import gui.alert.InconsistencyDate;
+import gui.exception.BadDateException;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import gui.views.JCreateOnTheFlyBudget;
@@ -24,9 +27,8 @@ import java.awt.event.ActionListener;
 
 import settings.Language.Text;
 import core.Core;
-import core.MidasLogs;
 import core.components.BudgetOnTheFly;
-import core.exceptions.InconsistencyDate;
+import core.exceptions.InconsistencyDateException;
 
 /**
  * Action de création d'un budget à la volée.
@@ -85,11 +87,14 @@ public class AcCreateOnTheFlyBudget extends UserAction {
                budget.setStartDate(view.getStartDate());
                budget.setEndDate(view.getEndDate());
                core.saveBudgetOnTheFly(budget);
+               view.dispose();
             }
-            catch (InconsistencyDate e) {
-               MidasLogs.errors.push(e.getMessage());
+            catch (InconsistencyDateException e) {
+               new InconsistencyDate(e);
+            } 
+            catch (BadDateException e) {
+               new BadDate(e);
             }
-            view.dispose();
          }
       });
       

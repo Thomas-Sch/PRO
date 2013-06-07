@@ -13,6 +13,11 @@
 package gui.actions;
 
 import gui.UserAction;
+import gui.alert.BadDate;
+import gui.alert.BadTimeSlice;
+import gui.alert.InconsistencyDate;
+import gui.exception.BadDateException;
+import gui.exception.BadTimeSliceException;
 import gui.utils.Positions;
 import gui.utils.Positions.ScreenPosition;
 import gui.views.JCreateBudgetFrame;
@@ -25,10 +30,9 @@ import java.util.Date;
 import settings.Language.Text;
 import utils.TimeSlice;
 import core.Core;
-import core.MidasLogs;
 import core.components.Budget;
 import core.components.Recurrence;
-import core.exceptions.InconsistencyDate;
+import core.exceptions.InconsistencyDateException;
 
 /**
  * Contrôleur et action d'ajout d'un budget.
@@ -88,11 +92,9 @@ public class AcCreateBudget extends UserAction {
       view.addValidateListener(new UserAction(core) {
          @Override
          protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            
-            // Récupération du début et de la fin de la récurrence choisie.
-            Date[] result = TimeSlice.getFirstAndLastDay(view.getTimeSlice(), view.getDate());
-            
             try {
+               // Récupération du début et de la fin de la récurrence choisie.
+               Date[] result = TimeSlice.getFirstAndLastDay(view.getTimeSlice(), view.getDate());
                // Ici l'intervalle de récurrence est toujours à 0 car on ne fait pas de récurrence.
                // dans cette version-ci du logiciel.
                recurrence.setIntervalRecurrence(0);
@@ -102,11 +104,17 @@ public class AcCreateBudget extends UserAction {
                core.saveRecurrence(recurrence);
                budget.setRecurrence(recurrence);
                core.saveBudget(budget);
+               view.dispose();
             }
-            catch (InconsistencyDate e) {
-               MidasLogs.errors.push(e.getMessage());
+            catch (BadTimeSliceException e) {
+               new BadTimeSlice(e);
             }
-            view.dispose();
+            catch (BadDateException e) {
+               new BadDate(e);
+            }
+            catch (InconsistencyDateException e) {
+               new InconsistencyDate(e);
+            }
          }
       });
       

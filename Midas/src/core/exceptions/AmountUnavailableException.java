@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : AmountUnavailable.java
+ * Nom du fichier   : AmountUnavailableException.java
  * ============================================================================
  * Date de création : 26 mai 2013
  * ============================================================================
@@ -22,14 +22,14 @@ package core.exceptions;
  * @author Sinniger Marcel
  * 
  */
-public class AmountUnavailable extends CoreComponentException {
+public class AmountUnavailableException extends CoreComponentException {
 
    private static final long serialVersionUID = 30001L;
 
    /**
     * Crée une exception indiquant une manipulation invalide d'un montant.
     */
-   public AmountUnavailable() {
+   public AmountUnavailableException() {
       super();
    }
 
@@ -39,7 +39,7 @@ public class AmountUnavailable extends CoreComponentException {
     * @param message
     *           - le message à joindre à l'exception.
     */
-   public AmountUnavailable(String message) {
+   public AmountUnavailableException(String message) {
       super(message);
    }
 
@@ -49,7 +49,7 @@ public class AmountUnavailable extends CoreComponentException {
     * @param cause
     *           - la cause de l'exception.
     */
-   public AmountUnavailable(Throwable cause) {
+   public AmountUnavailableException(Throwable cause) {
       super(cause);
    }
 
@@ -61,7 +61,7 @@ public class AmountUnavailable extends CoreComponentException {
     * @param cause
     *           - la cause de l'exception.
     */
-   public AmountUnavailable(String message, Throwable cause) {
+   public AmountUnavailableException(String message, Throwable cause) {
       super(message, cause);
    }
 
