@@ -161,10 +161,10 @@ public class JCreateBudgetFrame extends JDialog implements View{
       pnlContent.add(accounts.getGraphicalComponent(), constraints);
       
       constraints.gridy = 3;
-      pnlContent.add(ditDate, constraints);
+      pnlContent.add(tscBudgetLength, constraints);
 
       constraints.gridy = 4;
-      pnlContent.add(tscBudgetLength, constraints);
+      pnlContent.add(ditDate, constraints);
       
       constraints.gridy = 5;
       pnlContent.add(ielDescription, constraints);

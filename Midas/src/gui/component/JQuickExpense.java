@@ -50,7 +50,7 @@ public class JQuickExpense extends JPanel {
    private ComboBoxBudget budgets;
    private ComboBoxesCategory categories;
    private ComboBoxUser users;
-   private JInfoEditionLabel ltpReason;
+   private JInfoEditionLabel ielReason;
    private JMoneyInfoEditionLabel mielAmount;
    private JDateInput ditDate;
    private JButton btnValidate;
@@ -79,7 +79,7 @@ public class JQuickExpense extends JPanel {
       budgets = new ComboBoxBudget(controller.getCore());
       categories = new ComboBoxesCategory(controller.getCore());
       users = new ComboBoxUser(controller.getCore());
-      ltpReason = new JInfoEditionLabel(Text.REASON_LABEL);
+      ielReason = new JInfoEditionLabel(Text.REASON_LABEL);
       mielAmount = new JMoneyInfoEditionLabel(Text.AMOUNT_LABEL);
       ditDate = new JDateInput(Text.DATE_LABEL);
       
@@ -91,11 +91,11 @@ public class JQuickExpense extends JPanel {
     * Initialise les écouteurs internes à l'interface.
     */
    private void initListeners() {
-      ltpReason.addTextChangedListener(new TextChangedListener() {
+      ielReason.addTextChangedListener(new TextChangedListener() {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            expense.setReason(ltpReason.getText());
+            expense.setReason(ielReason.getText());
             checkItemIntegrity();
          }
       });
@@ -185,13 +185,13 @@ public class JQuickExpense extends JPanel {
         
       constraints.gridx = 0;
       constraints.gridy = 2;
-      add(ltpReason, constraints);
-      
-      constraints.gridx = 1;
       add(mielAmount, constraints);
       
-      constraints.gridx = 2;
+      constraints.gridx = 1;
       add(ditDate, constraints);
+      
+      constraints.gridx = 2;
+      add(ielReason, constraints);
       
       constraints.gridx = 4;
       constraints.gridy = 3;
@@ -204,7 +204,7 @@ public class JQuickExpense extends JPanel {
     */
    private void checkItemIntegrity() {
       boolean checkResult;
-      checkResult = ltpReason.getText().length() != 0 
+      checkResult = ielReason.getText().length() != 0 
                     && budgets.isValidItemSelected()
                     && users.isValidItemSelected()
                     && mielAmount.isNumber()
@@ -235,7 +235,7 @@ public class JQuickExpense extends JPanel {
       budgets.setInviteSelected();
       categories.setInviteSelected();
       users.setInviteSelected();
-      ltpReason.setText("");
+      ielReason.setText("");
       mielAmount.setText("0");
       ditDate.setDate(new Date());
       btnValidate.setEnabled(false);

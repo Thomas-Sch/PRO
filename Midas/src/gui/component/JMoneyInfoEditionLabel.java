@@ -16,7 +16,9 @@ import gui.utils.TextChangedListener;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -70,18 +72,32 @@ public class JMoneyInfoEditionLabel extends JInfoEditionLabel {
    /**
     * Place les composants du panel.
     */
-   protected void buildContent() {      
-      setLayout(new GridLayout(1, 3));
-      add(lblMetaInfo);
+   protected void buildContent() {   
       
-      JPanel pnlMoney = new JPanel(new BorderLayout(5,0));
-      add(pnlMoney);
+      setLayout(new GridBagLayout());
       
+      GridBagConstraints constraints = new GridBagConstraints();
+      constraints.anchor = GridBagConstraints.WEST;
+      constraints.fill = GridBagConstraints.HORIZONTAL;
+      constraints.weightx = 0.0;
+      constraints.gridx = 0;
+      constraints.gridy = 0;
+      add(lblMetaInfo, constraints);
+      
+      JPanel pnlMoney = new JPanel(new BorderLayout(4,0));      
       pnlMoney.add(tfdData, BorderLayout.CENTER);
       
       // Le label est défini ici pour des raisons pratiques.
       lblCurrency = new JLabel(Text.SWISS_FRANC_ACRONYM.toString());
       pnlMoney.add(lblCurrency, BorderLayout.EAST);
+      
+      constraints.fill = GridBagConstraints.NONE;
+      constraints.anchor = GridBagConstraints.EAST;
+      constraints.weightx = 1.0;
+      constraints.gridx = 1;
+      constraints.insets = new Insets(0, 20, 0, 0);
+      add(pnlMoney, constraints);
+      
    }
    
    /**

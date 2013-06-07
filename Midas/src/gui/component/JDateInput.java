@@ -65,7 +65,7 @@ public class JDateInput extends JPanel {
    public void buildContent() {
       setLayout(new BorderLayout(5,5));
       add(lblMetaInfo, BorderLayout.WEST);
-      add(dchTime, BorderLayout.CENTER);
+      add(dchTime, BorderLayout.EAST);
    }
    
    /**

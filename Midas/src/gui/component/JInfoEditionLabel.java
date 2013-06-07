@@ -15,7 +15,9 @@ package gui.component;
 import gui.utils.TextChangedListener;
 
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -80,9 +82,22 @@ public class JInfoEditionLabel extends JPanel {
     * Place les composants du panel.
     */
    protected void buildContent() {
-      setLayout(new GridLayout(1, 2));
-      add(lblMetaInfo);
-      add(tfdData); 
+      setLayout(new GridBagLayout());
+      
+      GridBagConstraints constraints = new GridBagConstraints();
+      constraints.anchor = GridBagConstraints.WEST;
+      constraints.fill = GridBagConstraints.HORIZONTAL;
+      constraints.weightx = 0.0;
+      constraints.gridx = 0;
+      constraints.gridy = 0;
+      add(lblMetaInfo, constraints);
+      
+      constraints.fill = GridBagConstraints.NONE;
+      constraints.insets = new Insets(0, 20, 0, 0);
+      constraints.anchor = GridBagConstraints.EAST;
+      constraints.weightx = 1.0;
+      constraints.gridx = 1;
+      add(tfdData, constraints); 
    }
    
    /**
