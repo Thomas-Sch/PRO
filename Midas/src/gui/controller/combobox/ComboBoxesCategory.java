@@ -92,7 +92,8 @@ public class ComboBoxesCategory extends Controller {
                action.actionPerformed(e);
                
                view.setSelectedChildItem(action.getCreatedCategory());
-            }
+               view.setSelectedPrimaryItem(temp);
+            }   
          }
       });
    }
