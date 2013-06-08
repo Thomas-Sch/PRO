@@ -574,10 +574,19 @@ public class Core {
    /**
     * Retourne la liste des dernières transactions financières.
     * 
-    * @return La liste des transactions..
+    * @return La liste des transactions.
     */
    public FinancialTransactionList getLastFinancialTransactions() {
       return lastTransactions;
+   }
+   
+   /**
+    * Retourne la liste des alertes.
+    * 
+    * @return La liste des aletes.
+    */
+   public AlertList getAllAlerts() {
+      return alerts;
    }
    
    /**
@@ -1081,8 +1090,8 @@ public class Core {
          
          // Mise à jour des alertes si dépassement
          Budget budget = transaction.getBudget();
-         if (budget.isPositive()) {
-            alerts.addOrUpdate(new Alert(this, budget));
+         if (transaction.isExpense() && !budget.isPositive()) {
+            alerts.addItem(new Alert(this, budget));
          }
          
          // Mise à jour de la liste des dernières transactions.

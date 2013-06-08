@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : FinancialTransactionListBox.java
+ * Nom du fichier   : WarningListBox.java
  * ============================================================================
- * Date de création : 7 juin 2013
+ * Date de création : 8 juin 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -13,15 +13,15 @@
 package gui.controller.listbox;
 
 import gui.Controller;
-import gui.component.list.JFinancialTransactionList;
+import gui.component.list.JAlertList;
 
 import java.awt.Component;
 
 import core.Core;
-import core.components.FinancialTransactionList;
+import core.components.AlertList;
 
 /**
- * Contrôleur de la liste des transactions financières.
+ * Contrôleur de la liste des alertes.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -29,14 +29,14 @@ import core.components.FinancialTransactionList;
  * @author Sinniger Marcel
  *
  */
-public class FinancialTransactionListBox extends Controller {
+public class WarningListBox extends Controller {
 
-   JFinancialTransactionList view;
-   FinancialTransactionList model;
+   JAlertList view;
+   AlertList model;
    /**
     * @param core
     */
-   public FinancialTransactionListBox(Core core) {
+   public WarningListBox(Core core) {
       super(core);
    }
 
@@ -45,8 +45,8 @@ public class FinancialTransactionListBox extends Controller {
     */
    @Override
    protected void initComponents() {
-      model = getCore().getLastFinancialTransactions();
-      view = new JFinancialTransactionList(model);
+      model = getCore().getAllAlerts();
+      view = new JAlertList(model);
       model.addObserver(view);
    }
 

@@ -60,6 +60,7 @@
   <category_list_label>Liste des catégories</category_list_label>
   <quick_expense_label>Effectuer une dépense rapide</quick_expense_label>
   <last_money_move_label>Derniers mouvements d'argent</last_money_move_label>
+  <warning_label>Alertes</warning_label>
   
   
   <!-- Descripteurs. -->

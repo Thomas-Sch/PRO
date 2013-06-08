@@ -1,7 +1,7 @@
 /* ============================================================================
- * Nom du fichier   : JMoneyMove.java
+ * Nom du fichier   : JWarningPanel.java
  * ============================================================================
- * Date de création : 7 juin 2013
+ * Date de création : 8 juin 2013
  * ============================================================================
  * Auteurs          : Biolzi Sébastien
  *                    Brito Carvalho Bruno
@@ -12,7 +12,7 @@
  */
 package gui.component;
 
-import gui.controller.listbox.FinancialTransactionListBox;
+import gui.controller.listbox.WarningListBox;
 
 import java.awt.BorderLayout;
 
@@ -23,7 +23,7 @@ import settings.Language.Text;
 import core.Core;
 
 /**
- * Panel d'affichage des mouvements d'argent.
+ * Panel contenant les alertes concernants les budgets en retard.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -31,41 +31,38 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
-public class JMoneyMove extends JPanel {
-   
+public class JWarningPanel extends JPanel {
+
    /**
     * ID de sérialisation.
     */
-   private static final long serialVersionUID = 1880549632117034840L;
-
-   private JLabel lblDescription;
-   private FinancialTransactionListBox lastTransactions;
+   private static final long serialVersionUID = 5322488419806964881L;
    
-   /**
-    * Construit le panel indiquant les dernières dépense efféctuées.
-    * @param core Le coeur logique de l'application.
-    */
-   public JMoneyMove(Core core) {
+   private JLabel lblDescription;
+   private WarningListBox warnings;
+   
+   public JWarningPanel(Core core) {
       initContent(core);
       buildContent();
    }
    
    /**
-    * Initialise les composants de l'interface.
+    * Initialise les composants du panel.
+    * @param core Coeur logique de l'application.
     */
    private void initContent(Core core) {
-      lblDescription = new JLabel(Text.LAST_MONEY_MOVE_LABEL.toString());
-      lastTransactions = new FinancialTransactionListBox(core);
+      lblDescription = new JLabel(Text.WARNING_LABEL.toString());
+      warnings = new WarningListBox(core);
    }
    
    /**
     * Construit le layout et place les composants.
     */
    private void buildContent() {
-      setLayout(new BorderLayout(5,5));
+      setLayout(new BorderLayout());
       
-      // Ajout des composants au panel.
-      add(lblDescription, BorderLayout.NORTH);      
-      add(new JScrollPaneDefault(lastTransactions.getGraphicalComponent()), BorderLayout.CENTER);
+      add(lblDescription, BorderLayout.NORTH);
+      add(new JScrollPaneDefault(warnings.getGraphicalComponent()), BorderLayout.CENTER);
    }
+
 }

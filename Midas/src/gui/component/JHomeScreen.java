@@ -15,14 +15,10 @@ package gui.component;
 import gui.Controller;
 import gui.controller.QuickExpense;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
@@ -38,8 +34,10 @@ import javax.swing.JSeparator;
 @SuppressWarnings("serial")
 public class JHomeScreen extends JPanel {
    
-   Controller controller;
-   QuickExpense quickExpense;
+   private Controller controller;
+   private QuickExpense quickExpense;
+   private JMoneyMove mmePanel;
+   private JWarningPanel wplPanel;
    
    /**
     * Constructeur par défaut.
@@ -56,6 +54,8 @@ public class JHomeScreen extends JPanel {
     */
    public void initContent() {
       quickExpense = new QuickExpense(controller.getCore());
+      mmePanel = new JMoneyMove(controller.getCore());
+      wplPanel = new JWarningPanel(controller.getCore());
    }
    
    /**
@@ -75,13 +75,13 @@ public class JHomeScreen extends JPanel {
       gblConstraints.weightx = 0.5;
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 0;      
-      add(getWarningPanel(),gblConstraints);
+      add(wplPanel,gblConstraints);
       
       // Paramétrage des contraintes et ajout du panel des derniers mouvements d'argent.
       gblConstraints.weightx = 0.5;
       gblConstraints.gridx = 1;
       gblConstraints.gridy = 0;
-      add(new JMoneyMove(controller.getCore()),gblConstraints);
+      add(mmePanel,gblConstraints);
       
       // Désormais, les composants suivants prennent toute la largeur verticale.
       gblConstraints.gridwidth = 2;
@@ -99,29 +99,5 @@ public class JHomeScreen extends JPanel {
       gblConstraints.gridx = 0;
       gblConstraints.gridy = 2;
       add(quickExpense.getGraphicalComponent(),gblConstraints);
-   }
-
-   /**
-    * Renvoie le panel d'alertes.
-    * @return le panel d'alertes.
-    */
-   private JPanel getWarningPanel() {
-      JPanel pnlWarning = new JPanel();
-      
-      pnlWarning.setLayout(new BorderLayout());
-      
-      // Ajout des composants au panel d'alertes.
-      pnlWarning.add(new JLabel("Alertes:"), BorderLayout.NORTH);
-      
-      // Contenu de la liste
-      DefaultListModel<String> dlmWarning = new DefaultListModel<>();
-      dlmWarning.addElement("C'est la fin du monde");
-      dlmWarning.addElement("J'aurais pas du dépenser autant :(");
-      
-      JList<String> lstWarning = new JList<>(dlmWarning);
-      
-      pnlWarning.add(lstWarning, BorderLayout.CENTER);
-      
-      return pnlWarning;
    }
 }
