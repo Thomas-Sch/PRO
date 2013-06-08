@@ -19,6 +19,8 @@ import settings.Settings;
 import core.cache.Cache;
 import core.components.Account;
 import core.components.AccountList;
+import core.components.Alert;
+import core.components.AlertList;
 import core.components.Budget;
 import core.components.BudgetList;
 import core.components.BudgetOnTheFly;
@@ -64,6 +66,7 @@ public class Core {
    private CategoryList primaryCategories;
    private BudgetList budgets;
    private FinancialTransactionList lastTransactions;
+   private AlertList alerts;
    
    private final int numberOfTransactions = 20;
 
@@ -78,6 +81,7 @@ public class Core {
       budgets = new BudgetList(this);
       
       lastTransactions = new FinancialTransactionList(this);
+      alerts = new AlertList(this);
 
       settings.loadSettings();
 
@@ -86,6 +90,7 @@ public class Core {
       loadPrimaryCategories();
       loadBudgets();
       loadLatestFinancialTransactions();
+      loadAlerts();
    }
    
    /**
@@ -95,7 +100,8 @@ public class Core {
    private void loadLatestFinancialTransactions() {
       LinkedList<DBFinancialTransaction> dbTransactions = null;
       try {
-         dbTransactions = dbController.getLatestDbFinancialTransactions(numberOfTransactions);
+         dbTransactions =
+            dbController.getLatestDbFinancialTransactions(numberOfTransactions);
       }
       catch (DatabaseException e) {
 
@@ -111,6 +117,26 @@ public class Core {
          lastTransactions.setItems(transactionTemp);
       }
 
+   }
+   
+   /**
+    * Charge et établis la liste des alertes pour chaque budget à partir de la
+    * liste des budgets.
+    */
+   private void loadAlerts() {
+      
+      LinkedList<Budget> list = budgets.getList();
+      
+      Iterator<Budget> it = list.iterator();
+      Budget current;
+      
+      while (it.hasNext()) {
+         current = it.next();
+         
+         if (!current.isPositive()) {
+            alerts.addOrUpdate(new Alert(this, current));
+         }
+      }
    }
 
    /**
@@ -677,8 +703,8 @@ public class Core {
     *           - l'identifiant du budget associé.
     * @return La liste des transactions liées au budget donné.
     */
-   public LinkedList<FinancialTransaction> getAllFinancialTransactionRelatedToBudget(
-         int budgetId) {
+   public LinkedList<FinancialTransaction>
+                     getAllFinancialTransactionRelatedToBudget(int budgetId) {
       LinkedList<DBFinancialTransaction> list;
       LinkedList<FinancialTransaction> result;
       result = cache.getAll(FinancialTransaction.class);
@@ -731,8 +757,8 @@ public class Core {
     *           - l'identifiant du compte associé.
     * @return La liste des transactions liées au compte donné.
     */
-   public LinkedList<FinancialTransaction> getAllFinancialTransactionRelatedToAccount(
-         int accountId) {
+   public LinkedList<FinancialTransaction>
+                     getAllFinancialTransactionRelatedToAccount(int accountId) {
       LinkedList<DBFinancialTransaction> list;
       LinkedList<FinancialTransaction> result;
       result = cache.getAll(FinancialTransaction.class);
@@ -1041,7 +1067,8 @@ public class Core {
     * @param transaction
     *           - la transaction à sauver.
     */
-   public void saveFinancialTransaction(FinancialTransaction transaction) throws AmountUnavailableException{
+   public void saveFinancialTransaction(FinancialTransaction transaction)
+                                             throws AmountUnavailableException{
       try {
          if(transaction.isExpense()) {
             transaction.getAccount().debit(transaction.getAmount());

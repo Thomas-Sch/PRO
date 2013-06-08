@@ -58,10 +58,21 @@ public class Alert extends CoreComponent implements IdentifiedComponent {
    /**
     * Affichage des transactions financières.
     */
+   @Override
    public String toString() {
       String result = "[" + budget.getName() + "] " + getDeficit()
             + Text.SWISS_FRANC_ACRONYM.toString();
       return result;
+   }
+   
+   @Override
+   public boolean equals(Object obj) {
+      if (obj.getClass() == Alert.class) {
+         return getId() == ((Alert)obj).getId();
+      }
+      else {
+         return false;
+      }
    }
 
    @Override

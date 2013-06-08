@@ -16,17 +16,19 @@ import core.Core;
 
 /**
  * Représente une liste de transactions financières.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class FinancialTransactionList extends ListTemplate<FinancialTransaction> {
+public class FinancialTransactionList extends
+                                          ListTemplate<FinancialTransaction> {
 
    /**
-    * Crée une liste de transaction financière, notifiant ses observateurs 
+    * Crée une liste de transaction financière, notifiant ses observateurs
     * lorsqu'elle est mise à jour.
     * 
     * @param core

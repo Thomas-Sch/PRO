@@ -66,6 +66,24 @@ public abstract class ListTemplate<E> extends CoreComponent {
    }
    
    /**
+    * Ajoute l'élément donné, ou le met à jour s'il est déjà présent dans la
+    * liste.
+    * 
+    * @param item
+    *           - l'élément à ajouter.
+    */
+   public void addOrUpdate(E item) {
+      int index = list.indexOf(item);
+
+      if (index >= 0) {
+         list.set(index, item);
+      }
+      else {
+         list.add(item);
+      }
+   }
+   
+   /**
     * Enlève un élément de la liste.
     * 
     * @param item
