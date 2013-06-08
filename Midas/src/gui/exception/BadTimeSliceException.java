@@ -12,9 +12,8 @@
  */
 package gui.exception;
 
-
 /**
- * Exception relevant d'une intervalle de temps incohérente.
+ * Exception relevant d'un intervalle de temps incohérent.
  * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
@@ -25,17 +24,20 @@ package gui.exception;
  */
 public class BadTimeSliceException extends Exception {
 
-   private static final long serialVersionUID = 30003L;
+   /**
+    * ID de sérialisation.
+    */
+   private static final long serialVersionUID = -5281539967699282826L;
 
    /**
-    * Crée une exception indiquant une intervalle incohérente.
+    * Crée une exception indiquant un intervalle incohérent.
     */
    public BadTimeSliceException() {
       super();
    }
 
    /**
-    * Crée une exception indiquant une intervalle incohérente.
+    * Crée une exception indiquant un intervalle incohérent.
     * 
     * @param message
     *           - le message à joindre à l'exception.
@@ -45,7 +47,7 @@ public class BadTimeSliceException extends Exception {
    }
 
    /**
-    * Crée une exception indiquant une intervalle incohérente.
+    * Crée une exception indiquant un intervalle incohérent.
     * 
     * @param cause
     *           - la cause de l'exception.
@@ -55,7 +57,7 @@ public class BadTimeSliceException extends Exception {
    }
 
    /**
-    * Crée une exception indiquant une intervalle incohérente.
+    * Crée une exception indiquant un intervalle incohérent.
     * 
     * @param message
     *           - le message à joindre à l'exception.

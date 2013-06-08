@@ -14,14 +14,16 @@ package gui.exception;
 
 /**
  * Exception relevant d'une date invalide.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class BadDateException extends Exception{
+public class BadDateException extends Exception {
+
    /**
     * ID de sérialisation.
     */
