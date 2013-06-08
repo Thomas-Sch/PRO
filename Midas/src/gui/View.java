@@ -15,14 +15,17 @@ package gui;
 import java.util.Observer;
 
 /**
- * Renommage de l'interface Observer.
+ * Indique que l'objet peut s'enregister auprès d'un modèle observable et être
+ * prévenu lorsque celui-ci change un ou plusieurs de ses paramètres.
+ * <p>
+ * Il s'agit actuellement d'un renommage de l'interface Observer.
  * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  * @see java.util.Observer
  */
 public interface View extends Observer {

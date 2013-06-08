@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : ListTemplate.java
+ * Nom du fichier   : JListTemplate.java
  * ============================================================================
  * Date de création : 22 avr. 2013
  * ============================================================================
@@ -12,19 +12,20 @@
  */
 package gui;
 
+import core.Core;
 import gui.component.JAddEditDelete;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import core.Core;
-
 /**
- * TODO
+ * Représente un modèle de liste.
+ * 
+ * TODO - apparemment pas utilisé => déprécié pour l'instant.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -32,6 +33,7 @@ import core.Core;
  * @author Sinniger Marcel
  *
  */
+@Deprecated
 public abstract class JListTemplate extends JPanel {
 
    /**
