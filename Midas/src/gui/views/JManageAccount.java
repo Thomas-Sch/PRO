@@ -32,34 +32,37 @@ import core.components.Account;
 
 /**
  * Fenêtre de gestion de comptes.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class JManageAccount extends JManageFrame implements View{
+public class JManageAccount extends JManageFrame implements View {
 
    /**
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 6474851721091887221L;
-   
+
    private JLabel lblListDescription;
-   
+
    private AccountListBox accounts;
 
    private JAccountIE aieInfos;
-   
+
    /**
-    * Contructeur.
-    * @param controller Contrôleur de cet objet.
+    * Crée la fenêtre de gestion des comptes.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
     */
-   public JManageAccount(Core core) {  
+   public JManageAccount(Core core) {
       super(core);
    }
-   
+
    /**
     * Initialise les composants graphiques.
     */
@@ -69,25 +72,29 @@ public class JManageAccount extends JManageFrame implements View{
       accounts = new AccountListBox(core);
       aieInfos = new JAccountIE();
    }
-   
+
    /**
     * Initialise les listeners internes au composant graphique.
     */
    protected void initListeners() {
       super.initListeners();
       accounts.addSelectionChangedListener(new ListSelectionListener() {
-         
+
          @Override
          public void valueChanged(ListSelectionEvent e) {
-            if(accounts.getSelectedValue() != null) {
+            if (accounts.getSelectedValue() != null) {
                setEnabledItemDependantButtons(true);
 
                switch (state) {
                   case EDITION:
-                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedValue());
+                     aieInfos = new JAccountIE(JManageAccount.this,
+                           pnlInfosActions, aieInfos, accounts
+                                 .getSelectedValue());
                      break;
                   case VIEW:
-                     aieInfos = new JAccountIE(JManageAccount.this, pnlInfosActions, aieInfos, accounts.getSelectedValue());
+                     aieInfos = new JAccountIE(JManageAccount.this,
+                           pnlInfosActions, aieInfos, accounts
+                                 .getSelectedValue());
                      break;
                }
             }
@@ -97,61 +104,54 @@ public class JManageAccount extends JManageFrame implements View{
          }
       });
    }
-   
+
    /**
     * Construction des éléments de la vue.
-    * @return Le panel contenant les éléments graphiques.
+    * 
+    * @return Le panneau contenant les éléments graphiques.
     */
    protected JPanel buildContent() {
-      JPanel pnlContent = new JPanel(new BorderLayout(5,5));
-      
+      JPanel pnlContent = new JPanel(new BorderLayout(5, 5));
+
       pnlContent.add(lblListDescription, BorderLayout.NORTH);
-      pnlContent.add(new JScrollPaneDefault(accounts.getGraphicalComponent()),BorderLayout.WEST);
-      
+      pnlContent.add(new JScrollPaneDefault(accounts.getGraphicalComponent()),
+            BorderLayout.WEST);
+
       pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
       pnlInfosActions.setLayout(new BorderLayout());
-      
+
       pnlInfosActions.add(aedActions, BorderLayout.SOUTH);
       pnlInfosActions.add(aieInfos, BorderLayout.CENTER);
       return pnlContent;
    }
-   
 
    /**
-    * Récupère le compte seléctionné dans l'interface.
-    * @return le compte seléctionné.
+    * Récupère le compte sélectionné dans l'interface.
+    * 
+    * @return Le compte sélectionné.
     */
    public Account getSelectedValue() {
       return accounts.getSelectedValue();
    }
-   
+
    /**
-    * Force la mise à jour la liste des comptes.
+    * Force la mise à jour de la liste des comptes.
     */
    public void updateModel() {
       accounts.updateModel();
       pack();
    }
 
-   /* (non-Javadoc)
-    * @see gui.JManageFrame#setEnabledOnEdition(boolean)
-    */
    @Override
    protected void setEnabledOnEdition(boolean b) {
-      aieInfos.setEditable(b);      
+      aieInfos.setEditable(b);
    }
 
-   /* (non-Javadoc)
-    * @see gui.JManageFrame#setEnabledOnView(boolean)
-    */
    @Override
    protected void setEnabledOnView(boolean b) {
       accounts.getGraphicalComponent().setEnabled(b);
    }
 
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-    */
    @Override
    public void update(Observable o, Object arg) {
       // Pas d'update pour l'instant. Voir rapport.

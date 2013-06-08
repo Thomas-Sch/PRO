@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : ManageAuthorFrame.java
+ * Nom du fichier   : JManageUser.java
  * ============================================================================
  * Date de création : 22 avr. 2013
  * ============================================================================
@@ -31,30 +31,34 @@ import core.Core;
 import core.components.User;
 
 /**
- * Management des utilisateurs du programme.
+ * Fenêtre de gestion des utilisateurs du programme.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 
-public class JManageUser extends JManageFrame implements View{
+public class JManageUser extends JManageFrame implements View {
 
    /**
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 1820447188846446278L;
-   
+
    private JLabel lblListDescription;
-   
+
    private UserListBox users;
 
    private JUserIE uieInfos;
 
    /**
-    * @param controller Contrôleur de cet objet graphique.
+    * Crée la fenêtre de gestion.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
     */
    public JManageUser(Core core) {
       super(core);
@@ -69,25 +73,27 @@ public class JManageUser extends JManageFrame implements View{
       users = new UserListBox(core);
       uieInfos = new JUserIE();
    }
-   
+
    /**
     * Initialise les listeners internes au composant graphique.
     */
    protected void initListeners() {
       super.initListeners();
       users.addSelectionChangedListener(new ListSelectionListener() {
-         
+
          @Override
          public void valueChanged(ListSelectionEvent e) {
-            if(users.getSelectedValue() != null) {
+            if (users.getSelectedValue() != null) {
                setEnabledItemDependantButtons(true);
 
                switch (state) {
                   case EDITION:
-                     uieInfos = new JUserIE(JManageUser.this, pnlInfosActions, uieInfos, users.getSelectedValue());
+                     uieInfos = new JUserIE(JManageUser.this, pnlInfosActions,
+                           uieInfos, users.getSelectedValue());
                      break;
                   case VIEW:
-                     uieInfos = new JUserIE(JManageUser.this, pnlInfosActions, uieInfos, users.getSelectedValue());
+                     uieInfos = new JUserIE(JManageUser.this, pnlInfosActions,
+                           uieInfos, users.getSelectedValue());
                      break;
                }
             }
@@ -97,64 +103,56 @@ public class JManageUser extends JManageFrame implements View{
          }
       });
    }
-   
+
    /**
     * Construction des éléments de la vue.
-    * @return Le panel contenant les éléments graphiques.
+    * 
+    * @return Le panneau contenant les éléments graphiques.
     */
    protected JPanel buildContent() {
-      JPanel pnlContent = new JPanel(new BorderLayout(5,5));
-      
+      JPanel pnlContent = new JPanel(new BorderLayout(5, 5));
+
       pnlContent.add(lblListDescription, BorderLayout.NORTH);
-      pnlContent.add(new JScrollPaneDefault(users.getGraphicalComponent()),BorderLayout.WEST);
-      
+      pnlContent.add(new JScrollPaneDefault(users.getGraphicalComponent()),
+            BorderLayout.WEST);
+
       pnlContent.add(pnlInfosActions, BorderLayout.CENTER);
       pnlInfosActions.setLayout(new BorderLayout());
-      
+
       pnlInfosActions.add(aedActions, BorderLayout.SOUTH);
       pnlInfosActions.add(uieInfos, BorderLayout.CENTER);
       return pnlContent;
    }
-   
 
    /**
-    * Récupère le compte seléctionné dans l'interface.
-    * @return le compte seléctionné.
+    * Récupère l'utilisateur sélectionné dans l'interface.
+    * 
+    * @return L'utilisateur sélectionné.
     */
    public User getSelectedUser() {
       return users.getSelectedValue();
    }
-   
+
    /**
-    * Force la mise à jour la liste des comptes.
+    * Force la mise à jour de la liste des comptes.
     */
    public void updateModel() {
       users.updateModel();
       pack();
    }
 
-   /* (non-Javadoc)
-    * @see gui.JManageFrame#setEnabledOnEdition(boolean)
-    */
    @Override
    protected void setEnabledOnEdition(boolean b) {
-      uieInfos.setEditable(b);      
+      uieInfos.setEditable(b);
    }
 
-   /* (non-Javadoc)
-    * @see gui.JManageFrame#setEnabledOnView(boolean)
-    */
    @Override
    protected void setEnabledOnView(boolean b) {
       users.getGraphicalComponent().setEnabled(b);
    }
 
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-    */
    @Override
    public void update(Observable arg0, Object arg1) {
       // Pas d'update pour l'instant. Voir rapport.
-   } 
+   }
 }
-

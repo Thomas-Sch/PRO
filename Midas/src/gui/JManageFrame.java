@@ -38,7 +38,7 @@ public abstract class JManageFrame extends JDialog {
     */
    private static final long serialVersionUID = 3532238860718872672L;
 
-   // Etat de l'interface (contrôlé internement).
+   // Etat de l'interface (contrôlé en interne).
    protected enum State {
       EDITION, VIEW
    };

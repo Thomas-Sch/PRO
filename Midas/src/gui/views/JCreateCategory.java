@@ -50,7 +50,8 @@ public class JCreateCategory extends JDialog implements View{
    private JValidateCancel vclActions;
    
    /**
-    * Construit la vue.
+    * Crée la fenêtre de création de catégorie.
+    * @param category - la nouvelle catégorie à remplir.
     */
    public JCreateCategory(Category category) {
       this.category = category;
@@ -83,7 +84,7 @@ public class JCreateCategory extends JDialog implements View{
    
    /**
     * Construit et place les composants de la fenêtre.
-    * @return
+    * @return Le contenu graphique de la fenêtre.
     */
    private JPanel buildContent() {
       JPanel pnlContent = new JPanel();
@@ -110,34 +111,35 @@ public class JCreateCategory extends JDialog implements View{
    }
    
    /**
-    * Ajoute un listener sur le bouton de validation.
+    * Ajoute un écouteur sur le bouton de validation.
+    * 
     * @param listener
+    *           - l'écouteur ajouté.
     */
    public void addValidateListener(ActionListener listener) {
       vclActions.addValidateListener(listener);
    }
    
    /**
-    * Ajout un listener sur le bouton d'annulation.
+    * Ajoute un écouteur sur le bouton d'annulation.
+    * 
     * @param listener
+    *           - l'écouteur ajouté.
     */
    public void addCancelListener(ActionListener listener) {
       vclActions.addCancelListener(listener);
    }
    
    /**
-    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
-    * la base de donnée.
+    * Vérifie que l'objet complété par l'utilisateur peut être sauvegardé dans
+    * la base de données.
     */
    private void checkItemIntegrity() {
       boolean checkResult;
       checkResult = ielName.isValidData();
       vclActions.setEnableValidateButton(checkResult);
    }
-
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-    */
+   
    public void update(Observable arg0, Object arg1) {
       // Pas d'update pour l'instant. Voir rapport.
    } 
