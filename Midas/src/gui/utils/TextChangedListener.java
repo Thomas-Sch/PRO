@@ -18,12 +18,13 @@ import javax.swing.text.JTextComponent;
 
 /**
  * Listener simplifié réagissant au changement d'un texte.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 abstract public class TextChangedListener implements DocumentListener {
 
@@ -41,20 +42,25 @@ abstract public class TextChangedListener implements DocumentListener {
    public void removeUpdate(DocumentEvent arg0) {
       textChanged(arg0);
    }
-   
+
    /**
     * Fonction appelée lors d'un changement de contenu du texte.
-    * @param event - l'évenement survenu.
+    * 
+    * @param event
+    *           - l'évenement survenu.
     */
-   abstract public void textChanged(DocumentEvent event);
-   
+   public abstract void textChanged(DocumentEvent event);
+
    /**
     * Ajoute le listener donné au composant spécifié.
-    * @param textComponent - le champ texte étant la source de l'événement.
-    * @param listener - le listener gérant l'événement.
+    * 
+    * @param textComponent
+    *           - le champ texte étant la source de l'événement.
+    * @param listener
+    *           - le listener gérant l'événement.
     */
    public static void addListener(JTextComponent textComponent,
-                                  TextChangedListener listener) {
+         TextChangedListener listener) {
       textComponent.getDocument().addDocumentListener(listener);
    }
 
