@@ -1091,7 +1091,7 @@ public class Core {
          // Mise à jour des alertes si dépassement
          Budget budget = transaction.getBudget();
          if (transaction.isExpense() && !budget.isPositive()) {
-            alerts.addItem(new Alert(this, budget));
+            alerts.addOrUpdate(new Alert(this, budget));
          }
          
          // Mise à jour de la liste des dernières transactions.
