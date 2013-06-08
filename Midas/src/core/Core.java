@@ -133,7 +133,8 @@ public class Core {
       while (it.hasNext()) {
          current = it.next();
          
-         if (!current.isPositive()) {
+         // Ajout d'une alerte si le budget n'est pas tenu et encore actif
+         if (!current.isPositive() && !current.isFinished()) {
             alerts.addOrUpdate(new Alert(this, current));
          }
       }
@@ -1078,7 +1079,13 @@ public class Core {
          dbController.saveToDatabase(transaction.getDBFinancialTransaction());
          saveAccount(transaction.getAccount());
          
-         // Mise à jour de la liste des dernères transactions.
+         // Mise à jour des alertes si dépassement
+         Budget budget = transaction.getBudget();
+         if (budget.isPositive()) {
+            alerts.addOrUpdate(new Alert(this, budget));
+         }
+         
+         // Mise à jour de la liste des dernières transactions.
          lastTransactions.addFirst(transaction);
          lastTransactions.removeLast();
          
