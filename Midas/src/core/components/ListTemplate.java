@@ -81,6 +81,7 @@ public abstract class ListTemplate<E> extends CoreComponent {
       else {
          list.add(item);
       }
+      setChangedAndNotifyObservers();
    }
    
    /**
