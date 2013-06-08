@@ -53,10 +53,9 @@ public class DBController {
     * Cette méthode est uniquement utilisée pour les tests.
     * 
     * @throws DatabaseException
-    *            - levée en cas d'erreur quelconque avec la base données.
+    *            levée en cas d'erreur quelconque avec la base données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation de contrainte de la base de
-    *            données.
+    *            levée en cas de violation de contrainte de la base de données.
     */
    public void clearDatabase() throws DatabaseException,
          DatabaseConstraintViolation {
@@ -110,9 +109,9 @@ public class DBController {
     * @param dbComponent
     *           - le composant à insérer.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    private void insert(PreparedStatement preparedStatement,
@@ -146,10 +145,10 @@ public class DBController {
     *           - la requête d'insertion.
     * @param dbComponent
     *           le composant à insérer.
-    * @throws @throws DatabaseException - levée en cas d'erreur avec la base de
-    *         données.
+    * @throws DatabaseException
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    private void insertWithoutSettingID(PreparedStatement preparedStatement,
@@ -175,9 +174,9 @@ public class DBController {
     * @param preparedStatement
     *           - la requête de mise à jour.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    private void update(PreparedStatement preparedStatement)
@@ -203,9 +202,9 @@ public class DBController {
     * @param preparedStatement
     *           - la requête de suppression.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    private void delete(PreparedStatement preparedStatement)
@@ -232,7 +231,7 @@ public class DBController {
     *           - la requête de sélection.
     * @return Les entrées retournées par la sélections.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    private ResultSet select(PreparedStatement preparedStatement)
          throws DatabaseException {
@@ -265,7 +264,7 @@ public class DBController {
     * @return L'utilisateur associé à l'identifiant s'il existe, null le cas
     *         échéant.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public DBUser getDbUser(int id) throws DatabaseException {
 
@@ -303,7 +302,7 @@ public class DBController {
     * 
     * @return La liste de tous les utilisateurs.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBUser> getAllDbUsers() throws DatabaseException {
 
@@ -342,9 +341,9 @@ public class DBController {
     * @param dbUser
     *           - l'utilisateur à sauver / mettre à jour.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void saveToDatabase(DBUser dbUser) throws DatabaseException,
@@ -392,9 +391,9 @@ public class DBController {
     * @param id
     *           - l'identifiant de l'utilisateur à supprimer.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void deleteDbUser(Integer id) throws DatabaseException,
@@ -437,7 +436,7 @@ public class DBController {
     *           - l'identifiant du compte.
     * @return Le compte correspondant à l'identifiant, null s'il n'existe pas.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public DBAccount getDbAccount(int id) throws DatabaseException {
 
@@ -482,7 +481,7 @@ public class DBController {
     * 
     * @return La liste de tous les comptes.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBAccount> getAllDbAccounts() throws DatabaseException {
 
@@ -529,9 +528,9 @@ public class DBController {
     * @param dbAccount
     *           - le compte à sauver / metre à jour.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void saveToDatabase(DBAccount dbAccount) throws DatabaseException,
@@ -591,9 +590,9 @@ public class DBController {
     * @param id
     *           - l'identifiant du compte à supprimer.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void deleteDbAccount(Integer id) throws DatabaseException,
@@ -637,7 +636,7 @@ public class DBController {
     * @return La transaction financière correspondante, null si elle n'existe
     *         pas.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public DBFinancialTransaction getDbFinancialTransaction(int id)
          throws DatabaseException {
@@ -695,7 +694,7 @@ public class DBController {
     *           - l'identifiant du budget.
     * @return La liste des transaction financières associées au budget donné.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBFinancialTransaction>
          getAllDbFinancialTransactionsRelatedToBudget(int budgetId)
@@ -761,7 +760,7 @@ public class DBController {
     *           - l'identifiant du compte.
     * @return La liste des transactions financières associées au compte donné.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBFinancialTransaction>
          getAllDbFinancialTransactionsRelatedToAccount(int accountId)
@@ -827,7 +826,7 @@ public class DBController {
     *           - l'identifiant du compte.
     * @return La liste des budgets associés au compte donné.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBBudget> getAllDbBudgetsRelatedToAccount(int accountId)
                                                       throws DatabaseException {
@@ -878,7 +877,7 @@ public class DBController {
     * 
     * @return La liste de toutes les transactions financières.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBFinancialTransaction> getAllDbFinancialTransactions()
          throws DatabaseException {
@@ -938,7 +937,7 @@ public class DBController {
     *           - le nombre de transactions voulues.
     * @return La liste des dernières transactions financières.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBFinancialTransaction>
          getLatestDbFinancialTransactions(int number) throws DatabaseException {
@@ -1002,9 +1001,9 @@ public class DBController {
     * @param dbFinancialTransaction
     *           - la transaction à sauver / mettre à jour.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void saveToDatabase(DBFinancialTransaction dbFinancialTransaction)
@@ -1107,9 +1106,9 @@ public class DBController {
     * @param id
     *           - l'identifiant de la transaction.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void deleteDbFinancialTransaction(Integer id)
@@ -1154,7 +1153,7 @@ public class DBController {
     * @return La catégorie correspondant à l'identifiant si elle existe, null le
     *         cas échéant.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public DBCategory getDbCategory(int id) throws DatabaseException {
 
@@ -1196,7 +1195,7 @@ public class DBController {
     * 
     * @return La liste des catégories.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBCategory> getAllDbCategories() throws DatabaseException {
 
@@ -1239,9 +1238,9 @@ public class DBController {
     * @param dbCategory
     *           - la catégorie à sauvegarder / mettre à jour.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void saveToDatabase(DBCategory dbCategory) throws DatabaseException,
@@ -1294,9 +1293,9 @@ public class DBController {
     * @param id
     *           - l'identifiant de la catégorie à supprimer.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void deleteDbCategory(Integer id) throws DatabaseException,
@@ -1327,7 +1326,7 @@ public class DBController {
     * 
     * @return La liste des catégories primaires.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBCategory> getAllParentCategories()
          throws DatabaseException {
@@ -1374,7 +1373,7 @@ public class DBController {
     *           - l'identifiant de la catégorie parente.
     * @return La liste des sous-catégories de celle spécifiée.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBCategory> getAllChildCategories(int id)
          throws DatabaseException {
@@ -1435,7 +1434,7 @@ public class DBController {
     *           - l'identifiant du budget voulu.
     * @return Le budget correspondant à l'identifiant, null s'il n'existe pas.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public DBBudget getDbBudget(int id) throws DatabaseException {
 
@@ -1480,7 +1479,7 @@ public class DBController {
     * 
     * @return La liste des budgets.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBBudget> getAllDbBudgets() throws DatabaseException {
 
@@ -1528,9 +1527,9 @@ public class DBController {
     * @param dbBudget
     *           - le budget à sauver / mettre à jour.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void saveToDatabase(DBBudget dbBudget) throws DatabaseException,
@@ -1600,9 +1599,9 @@ public class DBController {
     * @param id
     *           - l'identifiant du budget à supprimer.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void deleteDbBudget(Integer id) throws DatabaseException,
@@ -1645,7 +1644,7 @@ public class DBController {
     * @return Le budget à la volée correspondant à l'identifiant, null s'il
     *         n'existe pas.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public DBBudgetOnTheFly getDbBudgetOnTheFly(int id) throws DatabaseException {
 
@@ -1696,7 +1695,7 @@ public class DBController {
     * 
     * @return La liste des budgets à la volée.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBBudgetOnTheFly> getAllDbBudgetOnTheFly()
          throws DatabaseException {
@@ -1753,9 +1752,9 @@ public class DBController {
     * @param dbBudgetOnTheFly
     *           - le budget à la volée à sauver / metre à jour.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void saveToDatabase(DBBudgetOnTheFly dbBudgetOnTheFly)
@@ -1863,9 +1862,9 @@ public class DBController {
     * @param id
     *           - l'identifiant du budget à la volée à supprimer.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void deleteDbBudgetOnTheFly(Integer id) throws DatabaseException,
@@ -1928,7 +1927,7 @@ public class DBController {
     * @return La récurrence correspondant à l'identifiant, null si elle n'existe
     *         pas.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public DBRecurrence getDbRecurrence(int id) throws DatabaseException {
 
@@ -1969,7 +1968,7 @@ public class DBController {
     * 
     * @return La liste de toutes les récurrences.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     */
    public LinkedList<DBRecurrence> getAllDbRecurrences()
          throws DatabaseException {
@@ -2012,9 +2011,9 @@ public class DBController {
     * @param dbRecurrence
     *           - la récurrence à sauver / mettre à jour.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void saveToDatabase(DBRecurrence dbRecurrence)
@@ -2068,9 +2067,9 @@ public class DBController {
     * @param id
     *           - l'identifiant de la récurrence à supprimer.
     * @throws DatabaseException
-    *            - levée en cas d'erreur avec la base de données.
+    *            levée en cas d'erreur avec la base de données.
     * @throws DatabaseConstraintViolation
-    *            - levée en cas de violation d'une contrainte de la base de
+    *            levée en cas de violation d'une contrainte de la base de
     *            données.
     */
    public void deleteDbRecurrence(Integer id) throws DatabaseException,
