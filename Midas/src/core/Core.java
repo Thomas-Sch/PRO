@@ -1249,17 +1249,23 @@ public class Core {
     * 
     * @param category
     *           - la catégorie à désactiver.
+    *        list
+    *           - La liste contenant la catégorie.
     */
    public void deactivateCategory(Category category, CategoryList list) {
       category.getDBCategory().setEnabled(false);
       if(category.isChild()) {
-         throw new RuntimeException("Connard");
+         saveSubCategory(category, list);
       } else {
          saveCategory(category);
          primaryCategories.removeItem(category);
-         list.removeItem(category);
+         
+         // On désactive aussi tous les enfants.
+         CategoryList children = getChildren(category);
+         for(Category c : children.getList()) {
+            deactivateCategory(c, list);
+         }
       }
-      
+      list.removeItem(category);
    }
-
 }
