@@ -16,7 +16,7 @@ import gui.JManageFrame;
 import gui.View;
 import gui.component.JScrollPaneDefault;
 import gui.component.infoedition.JUserIE;
-import gui.controller.UserListBox;
+import gui.controller.listbox.UserListBox;
 
 import java.awt.BorderLayout;
 import java.util.Observable;
@@ -154,5 +154,24 @@ public class JManageUser extends JManageFrame implements View {
    @Override
    public void update(Observable arg0, Object arg1) {
       // Pas d'update pour l'instant. Voir rapport.
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#saveItem()
+    */
+   @Override
+   public void saveItem() {
+      uieInfos.saveItem();
+   }
+   
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#selectNoItem()
+    */
+   @Override
+   public void selectNoItem() {
+      users.selectNoItem();
+      pnlInfosActions.remove(uieInfos);
+      uieInfos = new JUserIE();
+      pnlInfosActions.add(uieInfos);
    }
 }

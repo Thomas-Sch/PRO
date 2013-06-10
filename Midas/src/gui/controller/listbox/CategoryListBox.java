@@ -81,8 +81,28 @@ public class CategoryListBox extends Controller {
       model.setChangedAndNotifyObservers();
    }
    
+   /**
+    * Ajoute l'écouteur sur la liste de ce contrôleur.
+    * @param listener
+    *          - écouteur ajouté.
+    */
    public void addSelectionChangedListener(ListSelectionListener listener) {
       view.addListSelectionListener(listener);
    }
-
+   
+   /**
+    * Force la déselection sur la liste.
+    */
+   public void selectNoItem() {
+      view.setSelectedIndex(-1);
+      model.setChangedAndNotifyObservers();
+   }
+   
+   /**
+    * Retourne la liste des catégories de ce contrôleur.
+    * @return La liste des catégories.
+    */
+   public CategoryList getList() {
+      return model;
+   }
 }

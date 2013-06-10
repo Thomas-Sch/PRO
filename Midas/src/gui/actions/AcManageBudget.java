@@ -75,6 +75,7 @@ public class AcManageBudget extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
+            view.saveItem();
             core.saveBudget(view.getSelectedValue());
          }
       });
@@ -84,6 +85,7 @@ public class AcManageBudget extends UserAction {
          @Override
          public void actionPerformed(ActionEvent e) {
             core.deactivateBudget(view.getSelectedValue());
+            view.selectNoItem();
             view.updateModel();
          }
       });

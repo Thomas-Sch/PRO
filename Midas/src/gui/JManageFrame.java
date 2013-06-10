@@ -176,4 +176,14 @@ public abstract class JManageFrame extends JDialog {
    public void addButtonDeleteListener(ActionListener listener) {
       aedActions.addDeleteActionListener(listener);
    }
+   
+   /**
+    * Sauvegarde l'item modifié dans l'interface.
+    */
+   public abstract void saveItem();
+   
+   /**
+    * Force la liste de l'interface à ne sélectionner aucun item.
+    */
+   public abstract void selectNoItem();
 }

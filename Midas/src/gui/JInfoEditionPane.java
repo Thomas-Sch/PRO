@@ -144,4 +144,9 @@ public abstract class JInfoEditionPane<E> extends JPanel {
    protected void setEnabledValidateButton(boolean b) {
       parent.setEnabledValidateButton(b);
    }
+   
+   /**
+    * Sauvegarde l'item modifié dans l'interface.
+    */
+   public abstract void saveItem();
 }

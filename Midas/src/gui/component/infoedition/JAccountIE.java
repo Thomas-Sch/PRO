@@ -81,7 +81,6 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            data.setName(ielName.getText());
             checkItemIntegrity();
          }
       });
@@ -90,7 +89,6 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            data.setBankName(ielBankName.getText());
             checkItemIntegrity();
          }
       });
@@ -99,7 +97,6 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            data.setAccountNumber(ielAccountNumber.getText());
             checkItemIntegrity();
          }
       });
@@ -109,7 +106,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               data.setThreshold(Double.valueOf(mielOverdraftLimit.getText()));
+               Double.valueOf(mielOverdraftLimit.getText());
                mielOverdraftLimit.setValid();
             }
             catch(NumberFormatException e) {
@@ -117,14 +114,6 @@ public class JAccountIE extends JInfoEditionPane<Account> {
                mielOverdraftLimit.setInvalid();
             }
             checkItemIntegrity();
-         }
-      });
-      
-      ielDescription.addTextChangedListener(new TextChangedListener() {
-         
-         @Override
-         public void textChanged(DocumentEvent event) {
-            data.setDescription(ielDescription.getText());
          }
       });
    }
@@ -136,20 +125,20 @@ public class JAccountIE extends JInfoEditionPane<Account> {
    public LinkedList<JInfoEditionLabel> initContent(Account data) {
       LinkedList<JInfoEditionLabel> result = new LinkedList<>();
       
-      // Définition des champs.
-      ielName = new JInfoEditionLabel(Text.ACCOUNT_NAME_LABEL, data.getName());
-      ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL, data.getBankName());
-      ielAccountNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL, data.getAccountNumber());
-      mielAmount = new JMoneyInfoEditionLabel(Text.ACCOUNT_BALANCE_LABEL,String.valueOf(data.getAmount()));
-      mielOverdraftLimit = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL, String.valueOf(data.getThreshold()));
-      ielDescription = new JInfoEditionLabel(Text.ACCOUNT_DESCRIPTION_LABEL, data.getDescription());
-      
-      // Ajout des champs à la liste.
-      result.add(ielName);
-      result.add(ielBankName);
-      result.add(ielAccountNumber);
-      result.add(mielOverdraftLimit);
-      result.add(ielDescription);
+         // Définition des champs.
+         ielName = new JInfoEditionLabel(Text.ACCOUNT_NAME_LABEL, data.getName());
+         ielBankName = new JInfoEditionLabel(Text.ACCOUNT_BANK_NAME_LABEL, data.getBankName());
+         ielAccountNumber = new JInfoEditionLabel(Text.ACCOUNT_NUMBER_LABEL, data.getAccountNumber());
+         mielAmount = new JMoneyInfoEditionLabel(Text.ACCOUNT_BALANCE_LABEL,String.valueOf(data.getAmount()));
+         mielOverdraftLimit = new JMoneyInfoEditionLabel(Text.ACCOUNT_THRESHOLD_LABEL, String.valueOf(data.getThreshold()));
+         ielDescription = new JInfoEditionLabel(Text.ACCOUNT_DESCRIPTION_LABEL, data.getDescription());
+         
+         // Ajout des champs à la liste.
+         result.add(ielName);
+         result.add(ielBankName);
+         result.add(ielAccountNumber);
+         result.add(mielOverdraftLimit);
+         result.add(ielDescription);
       return result;
    }
 
@@ -179,4 +168,17 @@ public class JAccountIE extends JInfoEditionPane<Account> {
                     && mielOverdraftLimit.isNumber();
       setEnabledValidateButton(checkResult);
    }
+
+   /* (non-Javadoc)
+    * @see gui.JInfoEditionPane#saveItem()
+    */
+   @Override
+   public void saveItem() {
+      data.setName(ielName.getText());
+      data.setBankName(ielBankName.getText());
+      data.setAccountNumber(ielAccountNumber.getText());
+      data.setThreshold(Double.valueOf(mielOverdraftLimit.getText()));
+      data.setDescription(ielDescription.getText());
+   }
+   
 }

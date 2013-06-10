@@ -136,7 +136,7 @@ public class JManageBudget extends JManageFrame implements View {
    }
 
    /**
-    * Force la mise à jour de la liste des comptes.
+    * Force la mise à jour de la liste des budgets.
     */
    public void updateModel() {
       budgets.updateModel();
@@ -156,5 +156,24 @@ public class JManageBudget extends JManageFrame implements View {
    @Override
    public void update(Observable o, Object arg) {
       // Pas d'update pour l'instant. Voir rapport.
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#saveItem()
+    */
+   @Override
+   public void saveItem() {
+      bieInfos.saveItem();
+   }
+   
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#selectNoItem()
+    */
+   @Override
+   public void selectNoItem() {
+      budgets.selectNoItem();
+      pnlInfosActions.remove(bieInfos);
+      bieInfos = new JBudgetIE();
+      pnlInfosActions.add(bieInfos);
    }
 }

@@ -29,6 +29,7 @@ import javax.swing.event.ListSelectionListener;
 import settings.Language.Text;
 import core.Core;
 import core.components.Category;
+import core.components.CategoryList;
 
 /**
  * Fenêtre de gestion des catégories.
@@ -152,5 +153,32 @@ public class JManageCategory extends JManageFrame implements View {
    @Override
    public void update(Observable o, Object arg) {
       // Pas d'update pour l'instant. Voir rapport.
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#saveItem()
+    */
+   @Override
+   public void saveItem() {
+      cieInfos.saveItem();
+   }
+   
+   /**
+    * Renvoie la liste des catégories de l'interface.
+    * @return La liste des catégories.
+    */
+   public CategoryList getCategoryList() {
+      return categories.getList();
+   }
+   
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#selectNoItem()
+    */
+   @Override
+   public void selectNoItem() {
+      categories.selectNoItem();
+      pnlInfosActions.remove(cieInfos);
+      cieInfos = new JCategoryIE();
+      pnlInfosActions.add(cieInfos);
    }
 }

@@ -156,4 +156,23 @@ public class JManageAccount extends JManageFrame implements View {
    public void update(Observable o, Object arg) {
       // Pas d'update pour l'instant. Voir rapport.
    }
+
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#saveItem()
+    */
+   @Override
+   public void saveItem() {
+      aieInfos.saveItem();
+   }
+   
+   /* (non-Javadoc)
+    * @see gui.JManageFrame#selectNoItem()
+    */
+   @Override
+   public void selectNoItem() {
+      accounts.selectNoItem();
+      pnlInfosActions.remove(aieInfos);
+      aieInfos = new JAccountIE();
+      pnlInfosActions.add(aieInfos);
+   }
 }

@@ -15,8 +15,6 @@ package gui.controller.listbox;
 import gui.Controller;
 import gui.component.list.JAccountList;
 
-import java.awt.Component;
-
 import javax.swing.event.ListSelectionListener;
 
 import core.Core;
@@ -72,7 +70,7 @@ public class AccountListBox extends Controller {
     * @see gui.Controller#getGraphicalComponent()
     */
    @Override
-   public Component getGraphicalComponent() {
+   public JAccountList getGraphicalComponent() {
       return view;
    }
    
@@ -97,5 +95,13 @@ public class AccountListBox extends Controller {
     */
    public void addSelectionChangedListener(ListSelectionListener listener) {
       view.addListSelectionListener(listener);
+   }
+   
+   /**
+    * Force la déselection sur la liste.
+    */
+   public void selectNoItem() {
+      view.setSelectedIndex(-1);
+      model.setChangedAndNotifyObservers();
    }
 }

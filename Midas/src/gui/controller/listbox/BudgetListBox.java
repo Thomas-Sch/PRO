@@ -91,5 +91,13 @@ public class BudgetListBox extends Controller {
    public void addSelectionChangedListener(ListSelectionListener listener) {
       view.addListSelectionListener(listener);
    }
+   
+   /**
+    * Force la déselection sur la liste.
+    */
+   public void selectNoItem() {
+      view.setSelectedIndex(-1);
+      model.setChangedAndNotifyObservers();
+   }
 
 }

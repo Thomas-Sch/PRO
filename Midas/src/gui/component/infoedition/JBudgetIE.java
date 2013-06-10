@@ -86,7 +86,6 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            data.setName(ielName.getText());
             checkItemIntegrity();
          }
       });
@@ -96,26 +95,14 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
          @Override
          public void textChanged(DocumentEvent event) {
             try {
-               data.setLimit(Double.valueOf(mielLimit.getText()));
+               Double.valueOf(mielLimit.getText());
                mielLimit.setValid();
             }
             catch(NumberFormatException e) {
                MidasLogs.errors.push("Not a valid number ! : Parsing to double failed");
                mielLimit.setInvalid();
             }
-            catch (NegativeLimitException e) {
-               MidasLogs.errors.push(e.getMessage());
-               mielLimit.setInvalid();
-            }
             checkItemIntegrity();
-         }
-      });
-      
-      ielDescription.addTextChangedListener(new TextChangedListener() {
-         
-         @Override
-         public void textChanged(DocumentEvent event) {
-            data.setDescription(ielDescription.getText());
          }
       });
    }
@@ -173,7 +160,25 @@ public class JBudgetIE extends JInfoEditionPane<Budget> {
    private void checkItemIntegrity() {
       boolean checkResult;
       checkResult = ielName.isValidData()
-                     && mielLimit.isNumber();
+                     && mielLimit.isNumber()
+                     && mielLimit.isPositive();
       setEnabledValidateButton(checkResult);
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JInfoEditionPane#saveItem()
+    */
+   @Override
+   public void saveItem() {
+      try {
+         data.setLimit(Double.valueOf(mielLimit.getText()));
+         mielLimit.setValid();
+      }
+      catch (NegativeLimitException e) {
+         MidasLogs.errors.push(e.getMessage());
+         mielLimit.setInvalid();
+      }
+      data.setName(ielName.getText());
+      data.setDescription(ielDescription.getText());
    }
 }

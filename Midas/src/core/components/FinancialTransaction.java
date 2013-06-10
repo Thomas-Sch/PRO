@@ -296,7 +296,7 @@ public class FinancialTransaction extends CoreComponent implements
       String result = "[" + (isExpense() ? Text.EXPENSE_LABEL : Text.TRANSACTION_LABEL) + "] ";
 
       result += Text.USER_LABEL + ": " + getUser() + ", ";
-      result += Text.ACCOUNT_LABEL + ": " + getAccountId() + ", ";
+      result += Text.ACCOUNT_LABEL + ": " + getAccount() + ", ";
       if(isExpense())
          result += Text.BUDGET_LABEL + ": " + getBudget() + ", ";
       result += Text.REASON_LABEL + ": " + getReason() + ", ";

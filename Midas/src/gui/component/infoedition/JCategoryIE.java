@@ -73,7 +73,6 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
       ielName.addTextChangedListener(new TextChangedListener() {
          @Override
          public void textChanged(DocumentEvent event) {
-            data.setName(ielName.getText());
             checkItemIntegrity();
          }
       });
@@ -118,5 +117,13 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
       boolean checkResult;
       checkResult = ielName.isValidData();
       setEnabledValidateButton(checkResult);
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JInfoEditionPane#saveItem()
+    */
+   @Override
+   public void saveItem() {
+      data.setName(ielName.getText());
    }
 }

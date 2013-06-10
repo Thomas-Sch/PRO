@@ -1200,7 +1200,8 @@ public class DBController {
    public LinkedList<DBCategory> getAllDbCategories() throws DatabaseException {
 
       String sqlString = "SELECT Cat_ID, Name, Enabled, Par_Cat_ID "
-                       + "FROM Category";
+                       + "FROM Category " 
+                       + "WHERE Enabled = 1";
 
       PreparedStatement preparedStatement = dbAccess
             .getPreparedStatement(sqlString);
@@ -1380,7 +1381,7 @@ public class DBController {
 
       String sqlString = "SELECT Cat_ID, Name, Par_Cat_ID, Enabled "
                        + "FROM Category "
-                       + "WHERE Par_Cat_Id = ?";
+                       + "WHERE Par_Cat_Id = ? AND Enabled = 1";
 
       PreparedStatement preparedStatement = dbAccess
             .getPreparedStatement(sqlString);

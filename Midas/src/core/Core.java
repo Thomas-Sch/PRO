@@ -316,7 +316,11 @@ public class Core {
             // Mise à jour de la liste si présent dans la base de données
             if (dbAccount != null) {
                result = new Account(this, dbAccount);
-               accounts.addItem(result);
+               
+               // On ne charge le compte que s'il est actif !
+               if(dbAccount.getEnabled()) {
+                  accounts.addItem(result);
+               }
             }
             
          }
@@ -348,7 +352,11 @@ public class Core {
             // Mise à jour de la liste si présent dans la base de données
             if (dbUser != null) {
                result = new User(this, dbUser);
-               users.addItem(result);
+               
+            // On ne charge l'utilisateur que s'il est actif !
+               if(dbUser.getEnabled()) {
+                  users.addItem(result);
+               }
             }
             
          }
@@ -540,7 +548,11 @@ public class Core {
             // Mise à jour de la liste si présent dans la base de données
             if (dbBudget != null) {
                result = new Budget(this, dbBudget);
-               budgets.addItem(result);
+               
+               // On ne charge le budget que s'il est actif !
+               if(dbBudget.getEnabled()) {
+                  budgets.addItem(result);
+               }
             }
             
          }
@@ -914,6 +926,9 @@ public class Core {
 
          if (!accounts.contains(account)) {
             accounts.addItem(account);
+         } else {
+            // Mise à jour des transactions.
+            lastTransactions.setChangedAndNotifyObservers();
          }
       }
       catch (DatabaseConstraintViolation e) {
@@ -938,6 +953,8 @@ public class Core {
 
          if (!primaryCategories.contains(category)) {
             primaryCategories.addItem(category);
+         } else {
+            primaryCategories.setChangedAndNotifyObservers();
          }
       }
       catch (DatabaseConstraintViolation e) {
@@ -965,6 +982,8 @@ public class Core {
 
          if (!list.contains(category)) {
             list.addItem(category);
+         } else {
+            list.setChangedAndNotifyObservers();
          }
       }
       catch (DatabaseConstraintViolation e) {
@@ -1004,14 +1023,14 @@ public class Core {
     */
    public void saveBudget(Budget budget) {
       try {
-         
-         
          dbController.saveToDatabase(budget.getDBBudget());
 
          if (!budgets.contains(budget)) {
             budgets.addItem(budget);
+         } else {
+            alerts.setChangedAndNotifyObservers();
+            lastTransactions.setChangedAndNotifyObservers();
          }
-
       }
       catch (DatabaseConstraintViolation e) {
          MidasLogs.errors.push("Core", "Unable to save the budget "
@@ -1035,6 +1054,9 @@ public class Core {
          
          if (!budgets.contains(budget)) {
             budgets.addItem(budget);
+         } else {
+            alerts.setChangedAndNotifyObservers();
+            lastTransactions.setChangedAndNotifyObservers();
          }
 
          cache.putToCache(budget);
@@ -1060,6 +1082,8 @@ public class Core {
 
          if (!users.contains(user)) {
             users.addItem(user);
+         } else {
+            lastTransactions.setChangedAndNotifyObservers();
          }
       }
       catch (DatabaseConstraintViolation e) {
@@ -1096,7 +1120,9 @@ public class Core {
          
          // Mise à jour de la liste des dernières transactions.
          lastTransactions.addFirst(transaction);
-         lastTransactions.removeLast();
+         if(lastTransactions.size() > numberOfTransactions) {
+            lastTransactions.removeLast();
+         }
          
          cache.putToCache(transaction);
       }
@@ -1224,10 +1250,16 @@ public class Core {
     * @param category
     *           - la catégorie à désactiver.
     */
-   public void deactivateCategory(Category category) {
+   public void deactivateCategory(Category category, CategoryList list) {
       category.getDBCategory().setEnabled(false);
-      saveCategory(category);
-      primaryCategories.removeItem(category);
+      if(category.isChild()) {
+         throw new RuntimeException("Connard");
+      } else {
+         saveCategory(category);
+         primaryCategories.removeItem(category);
+         list.removeItem(category);
+      }
+      
    }
 
 }

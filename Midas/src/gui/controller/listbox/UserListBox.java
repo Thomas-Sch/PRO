@@ -10,7 +10,7 @@
  *                    Sinniger Marcel
  * ============================================================================
  */
-package gui.controller;
+package gui.controller.listbox;
 
 import gui.Controller;
 import gui.component.list.JUserList;
@@ -82,8 +82,20 @@ public class UserListBox extends Controller {
       model.setChangedAndNotifyObservers();
    }
    
+   /**
+    * Ajoute l'écouteur sur la liste du contrôleur.
+    * @param listener Ecouteur ajouté.
+    */
    public void addSelectionChangedListener(ListSelectionListener listener) {
       view.addListSelectionListener(listener);
+   }
+   
+   /**
+    * Force la déselection sur la liste.
+    */
+   public void selectNoItem() {
+      view.setSelectedIndex(-1);
+      model.setChangedAndNotifyObservers();
    }
 
 }

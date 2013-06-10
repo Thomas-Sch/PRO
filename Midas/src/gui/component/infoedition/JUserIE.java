@@ -72,7 +72,6 @@ public class JUserIE extends JInfoEditionPane<User> {
          
          @Override
          public void textChanged(DocumentEvent event) {
-            data.setName(ielName.getText());
             checkItemIntegrity();
          }
       });
@@ -110,6 +109,14 @@ public class JUserIE extends JInfoEditionPane<User> {
       boolean checkResult;
       checkResult = ielName.isValidData();
       setEnabledValidateButton(checkResult);
+   }
+
+   /* (non-Javadoc)
+    * @see gui.JInfoEditionPane#saveItem()
+    */
+   @Override
+   public void saveItem() {
+      data.setName(ielName.getText());
    }
 
 }

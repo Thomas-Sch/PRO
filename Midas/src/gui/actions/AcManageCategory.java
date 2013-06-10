@@ -75,6 +75,7 @@ public class AcManageCategory extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
+            view.saveItem();
             core.saveCategory(view.getSelectedValue());
          }
       });
@@ -83,7 +84,8 @@ public class AcManageCategory extends UserAction {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            core.deactivateCategory(view.getSelectedValue());
+            core.deactivateCategory(view.getSelectedValue(), view.getCategoryList());
+            view.selectNoItem();
             view.updateModel();
          }
       });
