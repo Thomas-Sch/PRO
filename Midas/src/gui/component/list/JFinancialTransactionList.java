@@ -24,39 +24,39 @@ import core.components.FinancialTransaction;
 import core.components.FinancialTransactionList;
 
 /**
- * Composant graphique pour l'affichage des listes de transactions financères.
+ * Composant graphique pour l'affichage des listes de transactions financières.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class JFinancialTransactionList extends JList<FinancialTransaction> implements View {
+public class JFinancialTransactionList extends JList<FinancialTransaction>
+      implements View {
 
    /**
     * ID de sérialisation.
     */
    private static final long serialVersionUID = -349345898946417973L;
-   
+
    private FinancialTransactionList transactions;
-   
+
    /**
-    * Constructeur par défaut.
+    * Crée la vue d'une liste de transactions financières.
     */
    public JFinancialTransactionList(FinancialTransactionList transactions) {
       this.transactions = transactions;
-      update(transactions, null);  
+      update(transactions, null);
    }
 
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-    */
    @Override
    public void update(Observable arg0, Object arg1) {
       LinkedList<FinancialTransaction> list = transactions.getList();
-      
+
       FinancialTransaction[] temp = new FinancialTransaction[0];
-      setModel(new DefaultComboBoxModel<FinancialTransaction>(list.toArray(temp)));
+      setModel(new DefaultComboBoxModel<FinancialTransaction>(
+            list.toArray(temp)));
    }
 }

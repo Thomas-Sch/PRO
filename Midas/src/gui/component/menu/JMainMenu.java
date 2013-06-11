@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : MainMenu.java
+ * Nom du fichier   : JMainMenu.java
  * ============================================================================
  * Date de création : 13 avr. 2013
  * ============================================================================
@@ -22,42 +22,43 @@ import javax.swing.JMenuBar;
 
 /**
  * Classe contenant le menu principal de notre application.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JMainMenu extends JMenuBar {
-   
+
    /**
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 4143588954471515225L;
+
    public FileMenu file;
    public EditMenu edit;
    public ViewMenu view;
    public InterrogationMenu interrogation;
-   
+
    /**
     * Construit le menu avec ses composants.
     */
-   public JMainMenu(Controller controller) {  
+   public JMainMenu(Controller controller) {
       file = new FileMenu(controller.getCore());
       edit = new EditMenu(controller.getCore());
-      
+
       view = new ViewMenu(controller.getCore());
       interrogation = new InterrogationMenu(controller.getCore());
-      
+
       add(file.getGraphicalComponent());
       add(edit.getGraphicalComponent());
-      
-      /*
-       * Ces menus ne sont pas ajoutés car aucune interface ne leur est
-       * associée.
-      add(view.getGraphicalComponent());
-      add(interrogation.getGraphicalComponent());
-      */
+
+      // Ces menus ne sont pas ajoutés dans cette version car aucune interface
+      // ne leur est associée.
+      // add(view.getGraphicalComponent());
+      // add(interrogation.getGraphicalComponent());
+
    }
 }
