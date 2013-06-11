@@ -20,23 +20,28 @@ import settings.Language.Text;
 
 /**
  * Affiche un message à l'utilisateur indiquant que son budget est dépassé.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class NegativeBudget {
    private String message = Text.NEGATIVE_BUDGET_MESSAGE.toString();
-   
+
    /**
     * Affiche un message d'information concernant un budget.
-    * @param budget Le budget concerné.
+    * 
+    * @param budget
+    *           - le budget concerné.
     */
    public NegativeBudget(Budget budget) {
-      message += " [" + Text.BUDGET_LABEL.toString() + " : " + budget.getName() + "]";
-      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.INFORMATION_MESSAGE);
+      message += " [" + Text.BUDGET_LABEL.toString() + " : " + budget.getName()
+            + "]";
+      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(),
+            JOptionPane.INFORMATION_MESSAGE);
    }
 
 }

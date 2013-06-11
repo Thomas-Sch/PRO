@@ -21,22 +21,26 @@ import core.exceptions.InconsistencyDateException;
 /**
  * Affiche un message d'alerte à l'utilisateur s'il ne choisit pas un couple de
  * dates correctes.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class InconsistencyDate {
    private final String message = Text.INCONSISTENCY_DATE_MESSAGE.toString();
 
    /**
     * Affiche le message d'information à l'utilisateur.
-    * @param e L'exception qui a déclenché l'alerte.
+    * 
+    * @param e
+    *           - l'exception qui a déclenché l'alerte.
     */
-   public InconsistencyDate (InconsistencyDateException e) {
+   public InconsistencyDate(InconsistencyDateException e) {
       MidasLogs.errors.push(e.getMessage());
-      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(),
+            JOptionPane.ERROR_MESSAGE);
    }
 }
