@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : NewEditDelete.java
+ * Nom du fichier   : JAddEditDelete.java
  * ============================================================================
  * Date de création : 21 avr. 2013
  * ============================================================================
@@ -22,52 +22,55 @@ import javax.swing.JPanel;
 import settings.Language.Text;
 
 /**
- * Contient les bouttons pour modifier une liste standard.
+ * Panneau contenant les boutons pour modifier une liste standard.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JAddEditDelete extends JPanel {
-   
+
    /**
-    * ID de série.
+    * ID de sérialisation.
     */
    private static final long serialVersionUID = -2871705858912856162L;
-   
+
    // Boutons de contrôle de ce panel.
    private JButton btnAdd;
    private JButton btnModify;
    private JButton btnDelete;
 
    /**
-    * Constructeur par défaut.
+    * Crée le panneau avec les bouton pour modifier une liste standard.
     */
    public JAddEditDelete() {
       initContent();
       initListeners();
       buildContent();
    }
-   
+
    /**
-    * Initialisation des listeners pour le comportement interne de ce composant.
+    * Initialisation des écouteur pour le comportement interne de ce composant.
     */
    public void initListeners() {
       btnModify.addActionListener(new ActionListener() {
-         
+
          @Override
          public void actionPerformed(ActionEvent arg0) {
-            if(btnModify.getText().equalsIgnoreCase(Text.MODIFY_BUTTON.toString())) {
+            if (btnModify.getText().equalsIgnoreCase(
+                  Text.MODIFY_BUTTON.toString())) {
                btnModify.setText(Text.VALIDATE_BUTTON.toString());
-            } else {
+            }
+            else {
                btnModify.setText(Text.MODIFY_BUTTON.toString());
             }
          }
       });
    }
-   
+
    /**
     * Initialise les composants graphiques.
     */
@@ -76,9 +79,9 @@ public class JAddEditDelete extends JPanel {
       btnModify = new JButton(Text.MODIFY_BUTTON.toString());
       btnDelete = new JButton(Text.DELETE_BUTTON.toString());
    }
-   
+
    /**
-    * Construction des éléments grahpiques du panel.
+    * Construction des éléments graphiques du panneau.
     */
    private void buildContent() {
       setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -87,49 +90,62 @@ public class JAddEditDelete extends JPanel {
       add(btnModify);
       add(btnDelete);
    }
-   
+
    /**
-    * Désactive ou active le bouton d'ajout.
-    * @param b nouvelle valeur d'activation.
+    * Définit l'état du bouton d'ajout comme actif ou non.
+    * 
+    * @param b
+    *           - la nouvelle valeur d'activation.
     */
    public void setButtonAddEnabled(boolean b) {
       btnAdd.setEnabled(b);
    }
-   
+
    /**
-    * Désactive ou active le bouton de modification.
-    * @param b nouvelle valeur d'activation.
+    * Définit l'état du bouton de modification comme actif ou non.
+    * 
+    * @param b
+    *           - la nouvelle valeur d'activation.
     */
    public void setButtonModifyEnabled(boolean b) {
       btnModify.setEnabled(b);
    }
-   
+
    /**
-    * Désactive ou active le bouton de suppression.
-    * @param b nouvelle valeur d'activation.
+    * Définit l'état du bouton de suppression comme actif ou non.
+    * 
+    * @param b
+    *           - nouvelle valeur d'activation.
     */
    public void setButtonDeleteEnabled(boolean b) {
       btnDelete.setEnabled(b);
    }
+
    /**
-    * Ajout d'une action sur le bouton btnAdd.
-    * @param listener Action à effectuer.
+    * Ajoute un écouteur sur le bouton d'ajout.
+    * 
+    * @param listener
+    *           - l'écouteur à ajouter.
     */
    public void addAddActionListener(ActionListener listener) {
       btnAdd.addActionListener(listener);
    }
-   
+
    /**
-    * Ajout d'une action sur le bouton btnModify.
-    * @param listener Action à effectuer.
+    * Ajoute un écouteur sur le bouton de modification.
+    * 
+    * @param listener
+    *           - l'écouteur à ajouter.
     */
    public void addModifyActionListener(ActionListener listener) {
       btnModify.addActionListener(listener);
    }
 
    /**
-    * Ajout d'une action sur le bouton btnDelete.
-    * @param listener Action à effectuer.
+    * Ajoute un écouteur sur le bouton de suppression.
+    * 
+    * @param listener
+    *           - l'écouteur à ajouter.
     */
    public void addDeleteActionListener(ActionListener listener) {
       btnDelete.addActionListener(listener);
