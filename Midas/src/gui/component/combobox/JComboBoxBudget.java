@@ -45,14 +45,10 @@ public class JComboBoxBudget extends JComboBoxTemplate<Budget> {
    private BudgetList budgets;
 
    /**
-<<<<<<< HEAD
-    * @param primary
-=======
     * Crée la liste déroulante des budgets.
     * 
     * @param budgets
     *           - la liste des budgets.
->>>>>>> branch 'master' of https://github.com/Thomas-Sch/PRO.git
     */
    public JComboBoxBudget(BudgetList budgets) {
       this.budgets = budgets;
@@ -62,29 +58,15 @@ public class JComboBoxBudget extends JComboBoxTemplate<Budget> {
    @Override
    public void update(Observable o, Object arg) {
       LinkedList<Budget> list = budgets.getAll(new SortByName());
-<<<<<<< HEAD
-      
+
       if(isFirstUse()) {
          list.addFirst(budgets.createFalseEntry(Text.SELECT_BUDGET_LABEL.
                                                                   toString()));
-=======
-
-      if (isFirstUse()) {
-         list.addFirst(budgets.createFalseEntry("Sélectionner un budget")); // TO
-                                                                            // UPDATE
->>>>>>> branch 'master' of https://github.com/Thomas-Sch/PRO.git
       }
 
       int index = updateIndex();
-<<<<<<< HEAD
       list.add(index, budgets.createFalseEntry(Text.NEW_BUDGET_LABEL.
                                                                   toString())); 
-      
-=======
-      list.add(index, budgets.createFalseEntry("Nouveau budget...")); // TO
-                                                                      // UPDATE
-
->>>>>>> branch 'master' of https://github.com/Thomas-Sch/PRO.git
       Budget[] temp = new Budget[0];
       setModel(new DefaultComboBoxModel<Budget>(list.toArray(temp)));
    }

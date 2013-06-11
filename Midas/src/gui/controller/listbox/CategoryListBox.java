@@ -36,17 +36,10 @@ import core.components.CategoryList;
  * 
  */
 public class CategoryListBox extends Controller implements View{
-
-<<<<<<< HEAD
    JCategoryList view;
    CategoryList primary; // Liste des catégories primaires du Core.
    CategoryList model; // Liste contenue dans la vue.
    
-=======
-   private JCategoryList view;
-   private CategoryList model;
-
->>>>>>> branch 'master' of https://github.com/Thomas-Sch/PRO.git
    /**
     * Crée le contrôleur de la liste des catégories.
     * 

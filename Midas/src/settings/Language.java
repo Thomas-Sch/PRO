@@ -120,7 +120,6 @@ public class Language {
       WARNING_LABEL,
       
       // Descripteurs.
-      USER_NAME_LABEL,
       HOME_SCREEN_NAME,
       REASON_LABEL,
       AMOUNT_LABEL,
@@ -134,6 +133,11 @@ public class Language {
       ACCOUNT_LABEL,
       EXPENSE_LABEL,
       TRANSACTION_LABEL,
+      
+      // Champs d'un utilisateur
+      USER_NAME_LABEL,
+      SELECT_USER_LABEL,
+      NEW_USER_LABEL,
       
       // Champs du budget.
       BUDGET_DESCRIPTION_LABEL,

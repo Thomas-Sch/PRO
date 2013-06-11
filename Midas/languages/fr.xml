@@ -64,7 +64,6 @@
   
   
   <!-- Descripteurs. -->
-  <user_name_label>Nom d'utilisateur</user_name_label>
   <home_screen_name>Accueil</home_screen_name>
   <reason_label>Motif</reason_label>
   <amount_label>Montant</amount_label>
@@ -78,6 +77,11 @@
   <account_label>Compte</account_label>
   <expense_label>Dépense</expense_label>
   <transaction_label>Transaction</transaction_label>
+  
+  <!-- Champs des utilisateurs. -->
+  <user_name_label>Nom d'utilisateur</user_name_label>
+  <select_user_label>Sélectionner un auteur</select_user_label>
+  <new_user_label>Nouvel auteur...</new_user_label>
 
   <!-- Champs du budget. -->
   <budget_name_label>Nom du budget</budget_name_label>

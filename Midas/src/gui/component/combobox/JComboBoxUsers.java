@@ -19,6 +19,8 @@ import java.util.Observable;
 
 import javax.swing.DefaultComboBoxModel;
 
+import settings.Language.Text;
+
 import core.components.User;
 import core.components.UserList;
 
@@ -56,12 +58,12 @@ public class JComboBoxUsers extends JComboBoxTemplate<User> {
       LinkedList<User> list = users.getAll(new SortByName());
 
       if (isFirstUse()) {
-         list.addFirst(users.createFalseEntry("Sélectionner un auteur")); // TO
-                                                                          // UPDATE
+         list.addFirst(users.createFalseEntry(Text.SELECT_USER_LABEL.
+                                                                  toString()));
       }
 
       int index = updateIndex();
-      list.add(index, users.createFalseEntry("Nouvel auteur...")); // TO UPDATE
+      list.add(index, users.createFalseEntry(Text.NEW_USER_LABEL.toString()));
 
       User[] temp = new User[0];
       setModel(new DefaultComboBoxModel<User>(list.toArray(temp)));
