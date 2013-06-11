@@ -76,7 +76,7 @@ public class ComboBoxAccount extends Controller {
     *           - l'écouter ajouté.
     */
    public void addSelectedChangedListener(ActionListener listener) {
-      view.addSelectedChangedListener(listener);
+      view.addActionListener(listener);
    }
 
    @Override

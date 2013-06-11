@@ -27,13 +27,14 @@ import settings.Language.Text;
 import core.components.User;
 
 /**
- * Représente les informations d'un utilisateur.
+ * Panneau représentant les informations d'un utilisateur.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JUserIE extends JInfoEditionPane<User> {
 
@@ -41,35 +42,56 @@ public class JUserIE extends JInfoEditionPane<User> {
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 7787382732040268350L;
-   
+
    private JInfoEditionLabel ielName;
-   
+
    /**
-    * @param parent Fenêtre contenant le label.
-    * @param data Compte à afficher.
+    * Crée un panneau pour l'affichage des informations d'un utilisateur.
+    * 
+    * @param parent
+    *           - la fenêtre parente.
+    * @param container
+    *           - le conteneur de ce panneau.
+    * @param last
+    *           - le précédent panneau.
+    * @param data
+    *           - le compte à afficher.
     */
-   public JUserIE(JManageFrame parent, Container container, JUserIE last, User data) {
+   public JUserIE(JManageFrame parent, Container container, JUserIE last,
+         User data) {
       this(parent, container, last, data, false);
    }
-   
+
    /**
-    * Rien à afficher.
+    * Crée un panneau lors qu'il n'y a rien à afficher.
     */
    public JUserIE() {
       super();
    }
-   
-   public JUserIE(JManageFrame parent, Container container, JUserIE last, User data, boolean edition) {
+
+   /**
+    * Crée un panneau pour l'affichage des informations d'un utilisateur.
+    * 
+    * @param parent
+    *           - la fenêtre parente.
+    * @param container
+    *           - le conteneur de ce panneau.
+    * @param last
+    *           - le précédent panneau.
+    * @param data
+    *           - le compte à afficher.
+    * @param edition
+    *           - si les informations sont éditables ou non.
+    */
+   public JUserIE(JManageFrame parent, Container container, JUserIE last,
+         User data, boolean edition) {
       super(parent, container, last, data, edition);
    }
 
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#initListeners()
-    */
    @Override
    public void initListeners() {
       ielName.addTextChangedListener(new TextChangedListener() {
-         
+
          @Override
          public void textChanged(DocumentEvent event) {
             checkItemIntegrity();
@@ -77,22 +99,16 @@ public class JUserIE extends JInfoEditionPane<User> {
       });
    }
 
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#buildContent()
-    */
    @Override
    public void buildContent() {
       setLayout(new GridLayout(1, 5));
       add(ielName);
    }
 
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#initContent(java.lang.Object)
-    */
    @Override
    public LinkedList<JInfoEditionLabel> initContent(User data) {
       LinkedList<JInfoEditionLabel> result = new LinkedList<>();
-      
+
       // Définition des champs.
       ielName = new JInfoEditionLabel(Text.USER_NAME_LABEL, data.getName());
 
@@ -101,9 +117,14 @@ public class JUserIE extends JInfoEditionPane<User> {
       return result;
    }
    
+   @Override
+   public void saveItem() {
+      data.setName(ielName.getText());
+   }
+
    /**
-    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
-    * la base de donnée.
+    * Vérifie que l'objet complété par l'utilisateur peut être sauvegardé dans
+    * la base de données.
     */
    private void checkItemIntegrity() {
       boolean checkResult;
@@ -111,12 +132,6 @@ public class JUserIE extends JInfoEditionPane<User> {
       setEnabledValidateButton(checkResult);
    }
 
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#saveItem()
-    */
-   @Override
-   public void saveItem() {
-      data.setName(ielName.getText());
-   }
+   
 
 }

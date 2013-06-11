@@ -27,13 +27,14 @@ import settings.Language.Text;
 import core.components.Category;
 
 /**
- * Panel d'édition des informations d'une catégorie.
+ * Panneau d'édition des informations d'une catégorie.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JCategoryIE extends JInfoEditionPane<Category> {
 
@@ -41,33 +42,53 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 9096965303469092507L;
-   
+
    private JInfoEditionLabel ielName;
    private JInfoEditionLabel ielParent;
 
    /**
-    * @param parent Fenêtre contenant le label.
-    * @param data Catégorie à afficher.
+    * Crée un panneau pour l'affichage des informations d'une catégorie.
+    * 
+    * @param parent
+    *           - la fenêtre parente.
+    * @param container
+    *           - le conteneur de ce panneau.
+    * @param last
+    *           - le précédent panneau.
+    * @param data
+    *           - la catégorie à afficher.
     */
-   public JCategoryIE(JManageFrame parent, Container container, JCategoryIE last, Category data) {
+   public JCategoryIE(JManageFrame parent, Container container,
+         JCategoryIE last, Category data) {
       this(parent, container, last, data, false);
    }
-   
+
    /**
-    * Rien à afficher.
+    * Crée un panneau avec rien à afficher.
     */
    public JCategoryIE() {
       super();
    }
-   
-   public JCategoryIE(JManageFrame parent, Container container, JCategoryIE last, Category data, boolean edition) {
+
+   /**
+    * Crée un panneau pour l'affichage des informations d'une catégorie.
+    * 
+    * @param parent
+    *           - la fenêtre parente.
+    * @param container
+    *           - le conteneur de ce panneau.
+    * @param last
+    *           - le précédent panneau.
+    * @param data
+    *           - la catégorie à afficher.
+    * @param edition
+    *           - si les informations sont éditables ou non.
+    */
+   public JCategoryIE(JManageFrame parent, Container container,
+         JCategoryIE last, Category data, boolean edition) {
       super(parent, container, last, data, edition);
    }
 
-
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#initListeners()
-    */
    @Override
    public void initListeners() {
       ielName.addTextChangedListener(new TextChangedListener() {
@@ -78,40 +99,35 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
       });
    }
 
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#initContent(java.lang.Object)
-    */
    @Override
    public LinkedList<JInfoEditionLabel> initContent(Category data) {
       LinkedList<JInfoEditionLabel> result = new LinkedList<>();
-      
+
       // Définition des champs.
-      ielName = new JInfoEditionLabel(Text.CATEGORY_NAME_LABEL, data.getName());   
-      ielParent = new JInfoEditionLabel(Text.CATEGORY_PARENT_LABEL, (data.isChild() ? data.getParentCategory().getName() : ""));
-      
+      ielName = new JInfoEditionLabel(Text.CATEGORY_NAME_LABEL, data.getName());
+      ielParent = new JInfoEditionLabel(Text.CATEGORY_PARENT_LABEL,
+            (data.isChild() ? data.getParentCategory().getName() : ""));
+
       // Ajout des champs à la liste.
       result.add(ielName);
 
       return result;
    }
 
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#buildContent()
-    */
    @Override
    public void buildContent() {
       setLayout(new GridLayout(2, 1));
       add(ielName);
-      
+
       // On affiche le parent seulement si la catégorie en possède un.
-      if(data.isChild()) {
+      if (data.isChild()) {
          add(ielParent);
       }
    }
-   
+
    /**
-    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
-    * la base de donnée.
+    * Vérifie que l'objet complété par l'utilisateur peut être sauvegardé dans
+    * la base de données.
     */
    private void checkItemIntegrity() {
       boolean checkResult;
@@ -119,9 +135,6 @@ public class JCategoryIE extends JInfoEditionPane<Category> {
       setEnabledValidateButton(checkResult);
    }
 
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#saveItem()
-    */
    @Override
    public void saveItem() {
       data.setName(ielName.getText());

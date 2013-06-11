@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : ComboBoxBudget.java
+ * Nom du fichier   : JComboBoxBudget.java
  * ============================================================================
  * Date de création : 16 avr. 2013
  * ============================================================================
@@ -25,41 +25,61 @@ import core.components.BudgetList;
 
 /**
  * Liste déroulante graphique de budgets.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JComboBoxBudget extends JComboBoxTemplate<Budget> {
-   private static final long serialVersionUID = 1L;
+   
+   /**
+    * ID de sérialisation.
+    */
+   private static final long serialVersionUID = -5689004704089338643L;
    
    private BudgetList budgets;
 
    /**
-    * @param model
+    * Crée la liste déroulante des budgets.
+    * 
+    * @param budgets
+    *           - la liste des budgets.
     */
    public JComboBoxBudget(BudgetList budgets) {
       this.budgets = budgets;
-      update(budgets,null);
+      update(budgets, null);
    }
 
+   @Override
    public void update(Observable o, Object arg) {
       LinkedList<Budget> list = budgets.getAll(new SortByName());
-      
-      if(isFirstUse()) {
-         list.addFirst(budgets.createFalseEntry("Sélectionner un budget")); // TO UPDATE
+
+      if (isFirstUse()) {
+         list.addFirst(budgets.createFalseEntry("Sélectionner un budget")); // TO
+                                                                            // UPDATE
       }
-      
+
       int index = updateIndex();
-      list.add(index, budgets.createFalseEntry("Nouveau budget...")); // TO UPDATE
-      
+      list.add(index, budgets.createFalseEntry("Nouveau budget...")); // TO
+                                                                      // UPDATE
+
       Budget[] temp = new Budget[0];
       setModel(new DefaultComboBoxModel<Budget>(list.toArray(temp)));
    }
-   
-   
+
+   /**
+    * Comparateur de budgets selon leurs noms.
+    * 
+    * @author Biolzi Sébastien
+    * @author Brito Carvalho Bruno
+    * @author Decorvet Grégoire
+    * @author Schweizer Thomas
+    * @author Sinniger Marcel
+    * 
+    */
    private class SortByName implements Comparator<Budget> {
       @Override
       public int compare(Budget arg0, Budget arg1) {

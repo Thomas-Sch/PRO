@@ -25,13 +25,14 @@ import core.components.Category;
 import core.components.CategoryList;
 
 /**
- * Conteneur pour les combobox de catégories.
+ * Conteneur pour les listes déroulantes de catégories.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JComboBoxesCategory extends JPanel implements View {
 
@@ -39,132 +40,182 @@ public class JComboBoxesCategory extends JPanel implements View {
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 1830925821518642587L;
-   
+
    private JComboBoxCategory cbcPrimary;
    private JComboBoxCategory cbcChildren;
    private ComboBoxesCategory controller;
-   
+
+   /**
+    * Crée la vue sur les listes déroulantes de catégories.
+    * 
+    * @param controller
+    *           - le contrôleur appelant.
+    */
    public JComboBoxesCategory(ComboBoxesCategory controller) {
       this.controller = controller;
       initContent();
       buildContent();
    }
-   
+
+   /**
+    * Initialise les composants graphiques.
+    */
    public void initContent() {
       cbcPrimary = new JComboBoxCategory(controller.getPrimaryCategories());
-      cbcChildren = new JComboBoxCategory(controller.getChildrenCategories(), true);
+      cbcChildren = new JComboBoxCategory(controller.getChildrenCategories(),
+            true);
       cbcChildren.setVisible(false);
    }
+
+   /**
+    * Construit et positionne les composants graphiques.
+    */
    public void buildContent() {
-      setLayout(new GridLayout(1,2,10,0));
+      setLayout(new GridLayout(1, 2, 10, 0));
       add(cbcPrimary);
       add(cbcChildren);
    }
-   
+
    /**
-    * Renvoi l'item sélectionné dans la liste de catégories principales.
-    * @return La catégorie sélectionnée.
+    * Retourne la catégorie sélectionnée dans la liste des catégories
+    * principales.
+    * 
+    * @return La catégorie principale sélectionnée.
     */
    public Category getSelectedPrimaryItem() {
-      return (Category)cbcPrimary.getSelectedItem();
+      return (Category) cbcPrimary.getSelectedItem();
    }
-   
+
    /**
-    * Renvoi l'item sélectionné dans la liste de catégories enfant.
-    * @return La catégorie sélectionnée.
+    * Retourne la catégorie sélectionnée dans la liste des sous-catégories.
+    * 
+    * @return La sous-catégorie sélectionnée.
     */
    public Category getSelectedChildItem() {
-      return (Category)cbcChildren.getSelectedItem();
+      return (Category) cbcChildren.getSelectedItem();
    }
-   
+
+   /**
+    * Retourne si l'élément sélectionné correspond à l'action de création d'un
+    * nouvel élément dans la liste des catégories primaires.
+    * 
+    * @return Vrai si l'élément sélectionné est celui d'une nouvelle création,
+    *         Faux le cas échéant.
+    */
    public boolean isCreateNewItemSelected() {
-      return cbcPrimary.isCreateNewSelected();      
+      return cbcPrimary.isCreateNewSelected();
    }
-   
+
+   /**
+    * Retourne si l'élément sélectionné correspond à l'invite de saisie d'un
+    * élément.
+    * 
+    * @return Vrai si l'élément sélectionné est l'invite, Faux le cas échéant.
+    */
    public boolean isPrimaryInviteSelected() {
       return cbcPrimary.isInviteSelected();
    }
-   
+
+   /**
+    * Retourne si l'élément sélectionné correspond à l'action de création d'un
+    * nouvel élément dans la liste des sous-catégories.
+    * 
+    * @return Vrai si l'élément sélectionné est celui d'une nouvelle création,
+    *         Faux le cas échéant.
+    */
    public boolean isCreateNewChildCategorySelected() {
       return cbcChildren.isCreateNewSelected();
    }
-   
+
    /**
-    * Renvoie si l'item sélectionné dans la slite n'est pas un invite d'action.
-    * @return true si l'item sélectioné est valide.
+    * Renvoie si l'élément sélectionné dans la liste de catégories primaires
+    * n'est pas une invite d'action.
+    * 
+    * @return Vrai si l'élément sélectionné est valide, Faux le cas échéant.
     */
    public boolean isValidPrimaryItemSelected() {
       return cbcPrimary.isValidItemSelected();
    }
-   
+
    /**
-    * Renvoie si l'item sélectionné dans la liste n'est pas un
-    * invite d'action.
-    * @return true si l'item sélectionné est valide.
+    * Renvoie si l'élément sélectionné dans la liste de sous-catégories n'est
+    * pas une invite d'action.
+    * 
+    * @return Vrai si l'élément sélectionné est valide, Faux le cas échéant.
     */
    public boolean isValidChildItemSelected() {
       return cbcChildren.isValidItemSelected();
    }
-   
+
    /**
-    * Force la sélection d'un item dans le composant.
-    * @param category Item que l'on veut voir sélectionné.
+    * Force la sélection d'un élément de la liste des catégories primaires.
+    * 
+    * @param category
+    *           - l'élément que l'on veut voir sélectionné.
     */
    public void setSelectedPrimaryItem(Category category) {
       cbcPrimary.setSelectedItem(category);
    }
-   
+
    /**
-    * Force la sélection d'un item dans le composant.
-    * @param category Item que l'on veut voir sélectionné.
+    * Force la sélection d'un élément de la liste des sous-catégories.
+    * 
+    * @param category
+    *           - l'élément que l'on veut voir sélectionné.
     */
    public void setSelectedChildItem(Category category) {
       cbcChildren.setSelectedItem(category);
    }
-   
+
    /**
-    * Ajout un écouteur de changement de sélection sur la liste déroulante
-    * de catégorie principale.
-    * @param listener l'écouteur ajouté au composant.
+    * Ajoute un écouteur de changement de sélection sur la liste déroulante de
+    * catégorie principale.
+    * 
+    * @param listener
+    *           - l'écouteur ajouté au composant.
     */
    public void addSelectChangedPrimaryListener(ActionListener listener) {
       cbcPrimary.addActionListener(listener);
    }
-   
+
    /**
-    * Ajout un écouteur de changement de sélection sur la liste déroulante
-    * de catégorie secondaire.
-    * @param listener l'écouteur ajouté au composant.
+    * Ajoute un écouteur de changement de sélection sur la liste déroulante des
+    * sous-catégories.
+    * 
+    * @param listener
+    *           - l'écouteur ajouté au composant.
     */
    public void addSelectChangedChildrenListener(ActionListener listener) {
       cbcChildren.addActionListener(listener);
    }
-      
+
    /**
-    * Rends la liste déroulante de sélection de catégories secondaires invisible.
+    * Défini si la liste déroulante de sélection de catégories secondaires est
+    * visible ou non.
+    * 
     * @param visible
+    *           - si la liste des catégories secondaire est visible ou non.
     */
    public void setChildrenVisible(boolean visible) {
       cbcChildren.setVisible(visible);
    }
-   
+
    /**
-    * Définit les catégories que doit afficher le liste déroulante secondaire.
-    * @param categories Catégories à afficher.
+    * Défini les catégories que doit afficher le liste déroulante secondaire.
+    * 
+    * @param categories
+    *           - la liste des catégories à afficher.
     */
    public void setChildrenData(CategoryList categories) {
       cbcChildren.setData(categories);
    }
 
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-    */
    @Override
    public void update(Observable arg0, Object arg1) {
       cbcPrimary.update(arg0, arg1);
       cbcChildren.update(arg0, arg1);
    }
-   
+
    /**
     * Force le composant à sélectionner l'invite d'action.
     */
