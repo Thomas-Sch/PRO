@@ -26,23 +26,26 @@ import core.Core;
 import core.components.User;
 
 /**
- * Action de management de la liste des catégories.
+ * Action réalisant la création d'un nouvel utilisateur.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class AcCreateUser extends UserAction {
-   
+
    private User user;
    private JCreateUserFrame view;
-   
+
    /**
-    * Crée une nouvelle action qui va lancer le processus de création
-    * d'un nouvel utilisateur.
-    * @param core Va permettre d'interagir avec la base de donnée.
+    * Crée l'action qui va lancer le processus de création d'un nouvel
+    * utilisateur.
+    * 
+    * @param core
+    *           Va permettre d'interagir avec la base de donnée.
     */
    public AcCreateUser(Core core) {
       super(core);
@@ -50,36 +53,41 @@ public class AcCreateUser extends UserAction {
 
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-      
+
       user = core.createUser();
-      
+
       view = new JCreateUserFrame(user);
-      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.USER_CREATION_TITLE.toString());
+      view.setTitle(Text.APP_TITLE.toString() + " - "
+            + Text.USER_CREATION_TITLE.toString());
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       view.setResizable(false);
-      
+
       initListeners(core);
-      
+
       user.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+
+      // ATTENTION : le réglage de la modalité doit être fait après la
+      // paramétrisation de la fenêtre !
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
    }
-   
+
    /**
     * Initialise les écouteurs de l'action.
-    * @param core Permet de sauvegarder l'objet créer.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
     */
    public void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
-         protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+         protected void execute(Core core, ActionEvent event,
+               Object[] dependencies) {
             core.saveUser(user);
             view.dispose();
          }
       });
-      
+
       view.addCancelListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent arg0) {
@@ -87,9 +95,10 @@ public class AcCreateUser extends UserAction {
          }
       });
    }
-   
+
    /**
-    * Récupère l'utilisateur produit par cette action.
+    * Retourne l'utilisateur produit par cette action.
+    * 
     * @return L'utilisateur crée.
     */
    public User getCreatedUser() {

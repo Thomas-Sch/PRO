@@ -31,63 +31,69 @@ import core.components.FinancialTransaction;
 import core.exceptions.AmountUnavailableException;
 
 /**
- * Contrôleur et action de l'ajout d'une transaction.
+ * Action / contrôleur gérant la création d'une transaction.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class AcNewTransaction extends UserAction {
-   
+
    private JNewTransaction view;
    private Controller controller;
-   
+
    private FinancialTransaction transaction;
 
    /**
     * Crée une nouvelle action qui va gérer l'ajout d'une transaction.
-    * @param core Va permettre d'interagir avec la base de donnée.
-    * @param controller Contrôleur qui a appelé cette action.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
+    * @param controller
+    *           - le contrôleur qui a appelé cette action.
     */
    public AcNewTransaction(Core core, Controller controller) {
       super(core);
       this.controller = controller;
    }
 
-   /* (non-Javadoc)
-    * @see gui.UserAction#execute(core.Core, java.awt.event.ActionEvent, java.lang.Object[])
-    */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       transaction = core.createFinancialTransaction();
-      
+
       view = new JNewTransaction(controller, transaction);
-      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.TRANSACTION_CREATION_TITLE);
+      view.setTitle(Text.APP_TITLE.toString() + " - "
+            + Text.TRANSACTION_CREATION_TITLE);
       view.setResizable(false);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
-      
+
       initListeners(core);
 
       view.setModalityType(ModalityType.APPLICATION_MODAL);
-      view.setVisible(true);  
+      view.setVisible(true);
    }
-   
+
    /**
-    * Initialise les listeners de cette action.
-    * @param core Coeur logique de l'application.
+    * Initialise les écouteurs de cette action.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
     */
    private void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
-         protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            
+         protected void execute(Core core, ActionEvent event,
+               Object[] dependencies) {
+
             try {
                transaction.setDate(view.getDate());
                core.saveFinancialTransaction(transaction);
                view.dispose();
-            } catch (AmountUnavailableException e) {
+            }
+            catch (AmountUnavailableException e) {
                new AccountBankruptcy(e);
             }
             catch (BadDateException e) {
@@ -95,15 +101,15 @@ public class AcNewTransaction extends UserAction {
             }
          }
       });
-      
+
       view.addCancelListener(new ActionListener() {
-         
+
          @Override
          public void actionPerformed(ActionEvent arg0) {
             view.dispose();
          }
       });
-    
+
    }
 
 }

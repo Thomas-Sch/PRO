@@ -26,75 +26,80 @@ import core.Core;
 import core.components.Account;
 
 /**
- * Action de création de compte. Contrôle également la fenêtre d'ajout
- * de compte.
+ * Action de création de compte. Contrôle également la fenêtre d'ajout de
+ * compte.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class AcCreateAccount extends UserAction {
-   
+
    private Account account;
    private JCreateAccountFrame view;
-   
+
    /**
-    * Nouvelle action de création de compte.
-    * @param core Coeur de l'application.
+    * Crée l'action de création de compte.
+    * 
+    * @param core
+    *           - le coeur logique de l'application.
     */
    public AcCreateAccount(Core core) {
       super(core);
    }
 
-   /* (non-Javadoc)
-    * @see gui.UserAction#execute(core.Core, java.awt.event.ActionEvent, java.lang.Object[])
-    */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       account = core.createAccount();
-            
+
       // Réglages de la fenêtre.
       view = new JCreateAccountFrame(account);
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       view.setTitle(Text.APP_TITLE + " - " + Text.ACCOUNT_CREATION_TITLE);
       view.setResizable(false);
-      
+
       initListeners(core);
-      
+
       account.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+
+      // ATTENTION : le réglage de la modalité doit être fait après la
+      // paramétrisation de la fenêtre !
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
    }
-   
+
    /**
-    * Initialise les listeners pour ce contrôleur/action.
+    * Initialise les écouteurs pour ce contrôleur/action.
+    * 
     * @param core
+    *           - le coeur logique du programme.
     */
    public void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
-         protected void execute(Core core, ActionEvent event, Object[] dependencies) {
+         protected void execute(Core core, ActionEvent event,
+               Object[] dependencies) {
             core.saveAccount(account);
             view.dispose();
          }
       });
-      
+
       view.addCancelListener(new ActionListener() {
-         
+
          @Override
          public void actionPerformed(ActionEvent arg0) {
             view.dispose();
          }
       });
    }
-   
+
    /**
-    * Récupère le compte produit par cette action.
-    * @return le compte produit.
+    * Retourne le compte produit par cette action.
+    * 
+    * @return Le compte produit.
     */
    public Account getCreatedAccount() {
       return account;
