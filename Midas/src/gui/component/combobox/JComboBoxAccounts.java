@@ -21,6 +21,8 @@ import java.util.Observable;
 
 import javax.swing.DefaultComboBoxModel;
 
+import settings.Language.Text;
+
 import core.components.Account;
 import core.components.AccountList;
 
@@ -54,11 +56,13 @@ public class JComboBoxAccounts extends JComboBoxTemplate<Account>{
       LinkedList<Account> list = accounts.getAll(new SortByName());
       
       if(isFirstUse()) {
-         list.addFirst(accounts.createFalseEntry("Sélectionner un compte")); // TO UPDATE
+         list.addFirst(accounts.createFalseEntry(Text.SELECT_ACCOUNT_LABEL.
+                                                                  toString()));
       }
       
       int index = updateIndex();
-      list.add(index, accounts.createFalseEntry("Nouveau compte...")); // TO UPDATE
+      list.add(index, accounts.createFalseEntry(Text.NEW_ACCOUNT_LABEL.
+                                                                  toString()));
       
       Account[] temp = new Account[0];
       setModel(new DefaultComboBoxModel<Account>(list.toArray(temp)));

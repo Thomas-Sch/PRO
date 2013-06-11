@@ -13,9 +13,11 @@
 package gui.controller.listbox;
 
 import gui.Controller;
+import gui.View;
 import gui.component.list.JCategoryList;
 
 import java.awt.Component;
+import java.util.Observable;
 
 import javax.swing.event.ListSelectionListener;
 
@@ -32,16 +34,20 @@ import core.components.CategoryList;
  * @author Sinniger Marcel
  *
  */
-public class CategoryListBox extends Controller {
+public class CategoryListBox extends Controller implements View{
 
    JCategoryList view;
-   CategoryList model;
+   CategoryList primary; // Liste des catégories primaires du Core.
+   CategoryList model; // Liste contenue dans la vue.
    
    /**
     * @param core
     */
    public CategoryListBox(Core core) {
       super(core);
+      // On observe la liste des catégories primaires afin de gérer nos 
+      // composants graphiques.
+      primary.addObserver(this);
    }
 
    /* (non-Javadoc)
@@ -49,9 +55,26 @@ public class CategoryListBox extends Controller {
     */
    @Override
    protected void initComponents() {
-      model = getCore().getAllCategories();
+      primary = getCore().getAllPrimaryCategories();
+      model = new CategoryList(getCore());
+      initModel();
+
       view = new JCategoryList(model);
+      
       model.addObserver(view);
+   }
+   
+   private void initModel() {
+      model.getList().clear();
+      model.setItems(primary.getList());
+      
+      CategoryList allChilds = new CategoryList(getCore());
+      
+      for(Category c : model.getList()) {
+         allChilds.addAll(getCore().getChildren(c));
+      }
+      
+      model.addAll(allChilds);
    }
 
    /* (non-Javadoc)
@@ -78,7 +101,7 @@ public class CategoryListBox extends Controller {
    }
 
    public void updateModel() {
-      model.setChangedAndNotifyObservers();
+      primary.setChangedAndNotifyObservers();
    }
    
    /**
@@ -95,7 +118,7 @@ public class CategoryListBox extends Controller {
     */
    public void selectNoItem() {
       view.setSelectedIndex(-1);
-      model.setChangedAndNotifyObservers();
+      primary.setChangedAndNotifyObservers();
    }
    
    /**
@@ -104,5 +127,13 @@ public class CategoryListBox extends Controller {
     */
    public CategoryList getList() {
       return model;
+   }
+
+   /* (non-Javadoc)
+    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
+    */
+   @Override
+   public void update(Observable arg0, Object arg1) {
+      initModel();
    }
 }

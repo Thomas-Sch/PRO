@@ -67,6 +67,8 @@
   <budget_positive_label>Tenu</budget_positive_label>
   <budget_negative_label>Non tenu</budget_negative_label>
   <budget_amount_left>Montant restant dépensable</budget_amount_left>
+  <select_budget_label>Sélectionner un budget</select_budget_label>
+  <new_budget_label>Nouveau budget...</new_budget_label>
   <account_threshold_label>Seuil</account_threshold_label>
   <account_initial_amount_label>Montant initial</account_initial_amount_label>
   <account_number_label>Numéro de compte</account_number_label>
@@ -74,6 +76,8 @@
   <account_name_label>Nom du compte</account_name_label>
   <account_bank_name_label>Nom de la banque</account_bank_name_label>
   <account_balance_label>Solde</account_balance_label>
+  <select_account_label>Sélectionner un compte</select_account_label>
+  <new_account_label>Nouveau compte...</new_account_label>
   <category_name_label>Nom</category_name_label>
   <category_parent_label>Parent</category_parent_label>
   <select_category_label>Sélectionner une catégorie</select_category_label>

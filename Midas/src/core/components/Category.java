@@ -135,6 +135,15 @@ public class Category extends CoreComponent implements IdentifiedComponent {
    public boolean isChild() {
       return dbCategory.getParentDBCategory() != null;
    }
+   
+   /**
+    * 
+    * Détermine si la catégorie est activée.
+    * @return True si la catégorie est activée.
+    */
+   public boolean isEnabled() {
+      return dbCategory.getEnabled();
+   }
 
    /**
     * Retourne un affichage sous forme de chaîne de caractères.

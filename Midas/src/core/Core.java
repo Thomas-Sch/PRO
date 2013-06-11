@@ -353,7 +353,7 @@ public class Core {
             if (dbUser != null) {
                result = new User(this, dbUser);
                
-            // On ne charge l'utilisateur que s'il est actif !
+               // On ne charge l'utilisateur que s'il est actif !
                if(dbUser.getEnabled()) {
                   users.addItem(result);
                }
@@ -388,8 +388,12 @@ public class Core {
             // Mise à jour de la liste si présent dans la base de données
             if (dbCategory != null) {
                result = new Category(this, dbCategory);
-               primaryCategories.addItem(result);
-            }
+               
+               // On ne charge l'utilisateur que s'il est actif !
+               if(dbCategory.getEnabled()) {
+                  primaryCategories.addItem(result);
+               }
+            }  
             
          }
          catch (DatabaseException e) {
@@ -1246,26 +1250,28 @@ public class Core {
    /**
     * Désactive une catégorie, la catégorie est archivée dans la base de données
     * et n'est plus disponible dans les operations comptables.
+    * S'il s'agit d'une catégorie parent, ses enfants sont également activés.
     * 
     * @param category
     *           - la catégorie à désactiver.
     *        list
-    *           - La liste contenant la catégorie.
+    *           - La liste contenant la catégorie. (Ignorée si c'est une
+    *             catégorie parente)
     */
    public void deactivateCategory(Category category, CategoryList list) {
       category.getDBCategory().setEnabled(false);
       if(category.isChild()) {
          saveSubCategory(category, list);
+         list.removeItem(category);
       } else {
          saveCategory(category);
-         primaryCategories.removeItem(category);
-         
-         // On désactive aussi tous les enfants.
+
+         // On désactive aussi tous les enfants de la catégorie.
          CategoryList children = getChildren(category);
          for(Category c : children.getList()) {
             deactivateCategory(c, list);
          }
+         primaryCategories.removeItem(category);
       }
-      list.removeItem(category);
    }
 }

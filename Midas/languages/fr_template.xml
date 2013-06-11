@@ -67,6 +67,8 @@
   <budget_positive_label>TODO</budget_positive_label>
   <budget_negative_label>TODO</budget_negative_label>
   <budget_amount_left>TODO</budget_amount_left>
+  <select_budget_label>TODO</select_budget_label>
+  <new_budget_label>TODO</new_budget_label>
   <account_threshold_label>TODO</account_threshold_label>
   <account_initial_amount_label>TODO</account_initial_amount_label>
   <account_number_label>TODO</account_number_label>
@@ -74,6 +76,8 @@
   <account_name_label>TODO</account_name_label>
   <account_bank_name_label>TODO</account_bank_name_label>
   <account_balance_label>TODO</account_balance_label>
+  <select_account_label>TODO</select_account_label>
+  <new_account_label>TODO</new_account_label>
   <category_name_label>TODO</category_name_label>
   <category_parent_label>TODO</category_parent_label>
   <select_category_label>TODO</select_category_label>

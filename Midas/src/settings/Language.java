@@ -145,6 +145,8 @@ public class Language {
       BUDGET_POSITIVE_LABEL,
       BUDGET_NEGATIVE_LABEL,
       BUDGET_AMOUNT_LEFT,
+      SELECT_BUDGET_LABEL,
+      NEW_BUDGET_LABEL,
       
       // Champs du compte.
       ACCOUNT_THRESHOLD_LABEL,
@@ -154,6 +156,8 @@ public class Language {
       ACCOUNT_NAME_LABEL,
       ACCOUNT_BANK_NAME_LABEL,
       ACCOUNT_BALANCE_LABEL,
+      SELECT_ACCOUNT_LABEL,
+      NEW_ACCOUNT_LABEL,
       
       // Invites des catégories.
       CATEGORY_NAME_LABEL,

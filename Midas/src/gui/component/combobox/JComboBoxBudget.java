@@ -20,6 +20,8 @@ import java.util.Observable;
 
 import javax.swing.DefaultComboBoxModel;
 
+import settings.Language.Text;
+
 import core.components.Budget;
 import core.components.BudgetList;
 
@@ -38,7 +40,7 @@ public class JComboBoxBudget extends JComboBoxTemplate<Budget> {
    private BudgetList budgets;
 
    /**
-    * @param model
+    * @param primary
     */
    public JComboBoxBudget(BudgetList budgets) {
       this.budgets = budgets;
@@ -49,11 +51,13 @@ public class JComboBoxBudget extends JComboBoxTemplate<Budget> {
       LinkedList<Budget> list = budgets.getAll(new SortByName());
       
       if(isFirstUse()) {
-         list.addFirst(budgets.createFalseEntry("Sélectionner un budget")); // TO UPDATE
+         list.addFirst(budgets.createFalseEntry(Text.SELECT_BUDGET_LABEL.
+                                                                  toString()));
       }
       
       int index = updateIndex();
-      list.add(index, budgets.createFalseEntry("Nouveau budget...")); // TO UPDATE
+      list.add(index, budgets.createFalseEntry(Text.NEW_BUDGET_LABEL.
+                                                                  toString())); 
       
       Budget[] temp = new Budget[0];
       setModel(new DefaultComboBoxModel<Budget>(list.toArray(temp)));

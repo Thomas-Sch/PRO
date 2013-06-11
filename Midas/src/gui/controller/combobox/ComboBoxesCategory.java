@@ -15,11 +15,14 @@ package gui.controller.combobox;
 import gui.Controller;
 import gui.actions.AcCreateCategory;
 import gui.actions.AcCreateSubCategory;
-import gui.component.combobox.JComboBoxesCategory;
+import gui.component.combobox.JComboBoxCategory;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
 
 import core.Core;
 import core.components.Category;
@@ -36,8 +39,9 @@ import core.components.CategoryList;
  */
 public class ComboBoxesCategory extends Controller {
    
-   JComboBoxesCategory view;
-   CategoryList model;
+   JComboBoxCategory viewPrimary;
+   JComboBoxCategory viewChildren;
+   CategoryList primary;
    CategoryList children;
 
    /**
@@ -45,8 +49,8 @@ public class ComboBoxesCategory extends Controller {
     */
    public ComboBoxesCategory(Core core) {
       super(core);
-      model.addObserver(view);
-      children.addObserver(view);
+      primary.addObserver(viewPrimary);
+      children.addObserver(viewChildren);
    }
 
    /* (non-Javadoc)
@@ -54,9 +58,11 @@ public class ComboBoxesCategory extends Controller {
     */
    @Override
    protected void initComponents() {
-      model = getCore().getAllPrimaryCategories();
+      primary = getCore().getAllPrimaryCategories();
       children = new CategoryList(getCore());
-      view = new JComboBoxesCategory(this);
+      viewPrimary = new JComboBoxCategory(primary);
+      viewChildren = new JComboBoxCategory(children, true);
+      viewChildren.setVisible(false);
    }
 
    /* (non-Javadoc)
@@ -64,35 +70,34 @@ public class ComboBoxesCategory extends Controller {
     */
    @Override
    protected void initListeners() {
-      view.addSelectChangedPrimaryListener(new ActionListener() {
-         public void actionPerformed(ActionEvent e) {
-            if (view.isCreateNewItemSelected()) {
+      viewPrimary.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent arg0) {
+            if (viewPrimary.isCreateNewSelected()) {
                AcCreateCategory action = new AcCreateCategory(getCore());
-               action.actionPerformed(e);
-               view.setSelectedPrimaryItem(action.getCreatedCategory());
-            }else if(view.isPrimaryInviteSelected()) {
-               view.setChildrenVisible(false);
+               action.actionPerformed(arg0);
+               viewPrimary.setSelectedItem(action.getCreatedCategory());
+               viewChildren.setVisible(true);
+            } else if(viewPrimary.isInviteSelected()) {
+               viewChildren.setVisible(false);
             }else {
-               Category parent = view.getSelectedPrimaryItem();
-               CategoryList p = getCore().getChildren(parent);
-               children.setItems(p.getList());
-               view.setSelectedPrimaryItem(parent);
-               view.setChildrenVisible(true);
+               Category parent = (Category) viewPrimary.getSelectedItem();
+               children.setItems(getCore().getChildren(parent).getList());
+               viewPrimary.setSelectedItem(parent);
+               viewChildren.setVisible(true);
             }
          }
       });
       
-      view.addSelectChangedChildrenListener(new ActionListener() {
+      viewChildren.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            if (view.isCreateNewChildCategorySelected()) {
-               Category temp = view.getSelectedPrimaryItem();
+            if (viewChildren.isCreateNewSelected()) {
+               Category parent = (Category) viewPrimary.getSelectedItem();
               
-               AcCreateSubCategory action = new AcCreateSubCategory(getCore(), temp, children);
+               AcCreateSubCategory action = new AcCreateSubCategory(getCore(), 
+                                                              parent, children);
                action.actionPerformed(e);
-               
-               view.setSelectedChildItem(action.getCreatedCategory());
-               view.setSelectedPrimaryItem(temp);
+               viewChildren.setSelectedItem(action.getCreatedCategory());
             }   
          }
       });
@@ -103,15 +108,7 @@ public class ComboBoxesCategory extends Controller {
     */
    @Override
    public Component getGraphicalComponent() {
-      return view;
-   }
-   
-   public CategoryList getPrimaryCategories() {
-      return model;
-   }
-   
-   public CategoryList getChildrenCategories() {
-      return children;
+      return buildContent();
    }
    
    /**
@@ -119,8 +116,7 @@ public class ComboBoxesCategory extends Controller {
     * @param listener Ecouteur ajouté.
     */
    public void addSelectedChangedListener(ActionListener listener) {
-      view.addSelectChangedPrimaryListener(listener);
-      view.addSelectChangedChildrenListener(listener);
+      viewPrimary.addActionListener(listener);
    }
    
    /**
@@ -128,18 +124,29 @@ public class ComboBoxesCategory extends Controller {
     * @return l'item sélectionné dans l'interface.
     */
    public Category getSelectedItem() {
-      
       // On regarde ce que l'utilisateur à selectionné : Catégorie simple ou 
       // sous catégorie ?.
-      if(view.isValidPrimaryItemSelected()) {
-         if(view.isValidChildItemSelected()) {
-            return view.getSelectedChildItem();
+      if(viewPrimary.isValidItemSelected()) {
+         if(viewChildren.isValidItemSelected()) {
+            return (Category) viewChildren.getSelectedItem();
          } 
          // Si aucune catégorie enfant n'est sélectionnée alors on renvoi
          // la catégorie parente.
-         return view.getSelectedPrimaryItem();
+         return (Category) viewPrimary.getSelectedItem();
       }
       return null;
+   }
+   
+   /**
+    * Construit et place les composants contrôlés par cet objet.
+    * @return Le contenu controlé par cet objet.
+    */
+   public JPanel buildContent() {
+      JPanel pnlContent = new JPanel();
+      pnlContent.setLayout(new BorderLayout(5,5));
+      pnlContent.add(viewPrimary, BorderLayout.CENTER);
+      pnlContent.add(viewChildren, BorderLayout.EAST);
+      return pnlContent;
    }
    
    /**
@@ -148,13 +155,13 @@ public class ComboBoxesCategory extends Controller {
     * @return True si un compte est sélectionné.
     */
    public boolean isValidItemSelected() {
-      return view.isValidPrimaryItemSelected();
+      return viewPrimary.isValidItemSelected();
    }
    
    /**
-    * Force le composant graphique à sélectionner l'invite d'action.
+    * Force le composant graphique à sélectionner l'invite d'action de base.
     */
    public void setInviteSelected() {
-      view.setInviteSelected();
+      viewPrimary.setInviteSelected();
    }
 }

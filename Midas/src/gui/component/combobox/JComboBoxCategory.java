@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : ComboBoxCategory.java
+ * Nom du fichier   : ComboBoxesCategory.java
  * ============================================================================
  * Date de création : 16 avr. 2013
  * ============================================================================
@@ -49,8 +49,8 @@ public class JComboBoxCategory extends JComboBoxTemplate<Category> {
       this(categories, false);
    }
    
-   public JComboBoxCategory(CategoryList children, boolean isChildren) {
-      this.categories = children;
+   public JComboBoxCategory(CategoryList categories, boolean isChildren) {
+      this.categories = categories;
       
       if(isChildren) {
          select = new String(Text.SELECT_SUBCATEGORY_LABEL.toString());
@@ -67,19 +67,16 @@ public class JComboBoxCategory extends JComboBoxTemplate<Category> {
       LinkedList<Category> list = categories.getAll(new SortByName());
       
       if(isFirstUse()) {
-         list.addFirst(categories.createFalseEntry(select)); // TO UPDATE
+         list.addFirst(categories.createFalseEntry(select));
       }
       
       int index = updateIndex();
-      list.add(index, categories.createFalseEntry(newEntry)); // TO UPDATE
+      list.add(index, categories.createFalseEntry(newEntry));
       
       Category[] temp = new Category[0];
       setModel(new DefaultComboBoxModel<Category>(list.toArray(temp)));
    }
-   public void setData(CategoryList categories) {
-      categories.setItems(categories.getList());
-      update(null, null);
-   }
+   
    private class SortByName implements Comparator<Category> {
       @Override
       public int compare(Category arg0, Category arg1) {

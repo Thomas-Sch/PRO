@@ -163,6 +163,17 @@ public abstract class ListTemplate<E> extends CoreComponent {
 
       setChangedAndNotifyObservers();
    }
+   
+   /**
+    * Ajoute du contenu à la liste à partir d'une autre liste.
+    * 
+    * @param items
+    *          - les nouveaux items ajoutés à la liste.
+    */
+   public void addAll(ListTemplate<E> items) {
+      list.addAll(items.getList());
+      setChangedAndNotifyObservers();
+   }
 
    /**
     * Test si l'élément donné est déjà présent dans la liste.
