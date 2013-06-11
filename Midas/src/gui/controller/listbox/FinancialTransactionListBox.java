@@ -22,27 +22,29 @@ import core.components.FinancialTransactionList;
 
 /**
  * Contrôleur de la liste des transactions financières.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class FinancialTransactionListBox extends Controller {
 
-   JFinancialTransactionList view;
-   FinancialTransactionList model;
+   private JFinancialTransactionList view;
+   private FinancialTransactionList model;
+
    /**
+    * Crée le contrôleur du de la liste des transactions financières.
+    * 
     * @param core
+    *           - le coeur logique du programme.
     */
    public FinancialTransactionListBox(Core core) {
       super(core);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       model = getCore().getLastFinancialTransactions();
@@ -50,17 +52,11 @@ public class FinancialTransactionListBox extends Controller {
       model.addObserver(view);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
-
+      // Aucun pour l'instant
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#getGraphicalComponent()
-    */
    @Override
    public Component getGraphicalComponent() {
       return view;

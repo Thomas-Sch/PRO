@@ -32,67 +32,72 @@ import core.components.FinancialTransaction;
 import core.exceptions.AmountUnavailableException;
 
 /**
- * Contrôleur et action de l'ajout d'une dépense.
+ * Action / contrôleur permettant l'ajout d'une dépense.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class AcNewExpense extends UserAction {
-   
+
    private FinancialTransaction expense;
    private Controller controller;
    private JNewExpense view;
 
    /**
     * Crée une nouvelle action qui va gérer l'ajout d'une dépense.
-    * @param core Va permettre d'interagir avec la base de donnée.
-    * @param controller Contrôleur qui a appelé cette action.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
+    * @param controller
+    *           - le contrôleur qui a appelé cette action.
     */
    public AcNewExpense(Core core, Controller controller) {
       super(core);
       this.controller = controller;
    }
 
-   /* (non-Javadoc)
-    * @see gui.UserAction#execute(core.Core, java.awt.event.ActionEvent, java.lang.Object[])
-    */
    @Override
    protected void execute(Core core, ActionEvent event, Object[] dependencies) {
       expense = core.createFinancialTransaction();
-      
+
       // Réglages de la fenêtre.
       view = new JNewExpense(controller, expense);
-      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.EXPENSE_CREATION_TITLE.toString());
+      view.setTitle(Text.APP_TITLE.toString() + " - "
+            + Text.EXPENSE_CREATION_TITLE.toString());
       Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
       view.setResizable(false);
-      
+
       initListeners(core);
-   
+
       expense.addObserver(view);
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
    }
-   
+
    /**
-    * Initialise les listeners de cette action.
-    * @param core Coeur logique de l'application.
+    * Initialise les écouteurs de cette action.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
     */
    private void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
-         protected void execute(Core core, ActionEvent event, Object[] dependencies) {
-            try {               
+         protected void execute(Core core, ActionEvent event,
+               Object[] dependencies) {
+            try {
                expense.setDate(view.getDate());
                expense.setAccount(expense.getBudget().getBindedAccount());
-               
+
                // On regarde si le budget était tenu avant.
                boolean wasPositive = expense.getBudget().isPositive();
                core.saveFinancialTransaction(expense);
                view.dispose();
-               if(wasPositive && !expense.getBudget().isPositive()) {
+               if (wasPositive && !expense.getBudget().isPositive()) {
                   new NegativeBudget(expense.getBudget());
                }
             }
@@ -104,9 +109,9 @@ public class AcNewExpense extends UserAction {
             }
          }
       });
-      
+
       view.addCancelListener(new ActionListener() {
-         
+
          @Override
          public void actionPerformed(ActionEvent arg0) {
             view.dispose();

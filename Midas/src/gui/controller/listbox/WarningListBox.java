@@ -22,27 +22,29 @@ import core.components.AlertList;
 
 /**
  * Contrôleur de la liste des alertes.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class WarningListBox extends Controller {
 
-   JAlertList view;
-   AlertList model;
+   private JAlertList view;
+   private AlertList model;
+
    /**
+    * Crée le contrôleur de la liste des alertes.
+    * 
     * @param core
+    *           - le coeur logique du programme.
     */
    public WarningListBox(Core core) {
       super(core);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       model = getCore().getAllAlerts();
@@ -50,17 +52,11 @@ public class WarningListBox extends Controller {
       model.addObserver(view);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
-
+      // Aucun pour l'instant.
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#getGraphicalComponent()
-    */
    @Override
    public Component getGraphicalComponent() {
       return view;

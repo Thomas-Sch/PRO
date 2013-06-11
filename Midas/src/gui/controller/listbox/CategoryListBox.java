@@ -26,22 +26,32 @@ import core.components.Category;
 import core.components.CategoryList;
 
 /**
- * Classe de contrôle pour les listesbox de catégories.
+ * Contrôleur pour une liste de catégories.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class CategoryListBox extends Controller implements View{
 
+<<<<<<< HEAD
    JCategoryList view;
    CategoryList primary; // Liste des catégories primaires du Core.
    CategoryList model; // Liste contenue dans la vue.
    
+=======
+   private JCategoryList view;
+   private CategoryList model;
+
+>>>>>>> branch 'master' of https://github.com/Thomas-Sch/PRO.git
    /**
+    * Crée le contrôleur de la liste des catégories.
+    * 
     * @param core
+    *           - le coeur logique du programme.
     */
    public CategoryListBox(Core core) {
       super(core);
@@ -50,9 +60,6 @@ public class CategoryListBox extends Controller implements View{
       primary.addObserver(this);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       primary = getCore().getAllPrimaryCategories();
@@ -77,52 +84,52 @@ public class CategoryListBox extends Controller implements View{
       model.addAll(allChilds);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#getGraphicalComponent()
-    */
    @Override
    public Component getGraphicalComponent() {
       return view;
    }
-   
+
    /**
-    * Retourne la catégorie selectionné dans la liste.
-    * @return La catégorie selectionné.
+    * Retourne la catégorie sélectionnée dans la liste.
+    * 
+    * @return La catégorie sélectionnée.
     */
    public Category getSelectedValue() {
       return view.getSelectedValue();
    }
 
+   /**
+    * Force une mise à jour du modèle.
+    */
    public void updateModel() {
       primary.setChangedAndNotifyObservers();
    }
-   
+
    /**
-    * Ajoute l'écouteur sur la liste de ce contrôleur.
+    * Ajoute un écouteur sur la liste de ce contrôleur.
+    * 
     * @param listener
-    *          - écouteur ajouté.
+    *           - l'écouteur ajouté.
     */
    public void addSelectionChangedListener(ListSelectionListener listener) {
       view.addListSelectionListener(listener);
    }
-   
+
    /**
-    * Force la déselection sur la liste.
+    * Force la désélection sur la liste.
     */
    public void selectNoItem() {
       view.setSelectedIndex(-1);
       primary.setChangedAndNotifyObservers();
    }
-   
+
    /**
     * Retourne la liste des catégories de ce contrôleur.
+    * 
     * @return La liste des catégories.
     */
    public CategoryList getList() {

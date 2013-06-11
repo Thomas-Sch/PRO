@@ -21,23 +21,27 @@ import settings.Language.Text;
 
 /**
  * Classe qui affiche un message d'alerte si le compte n'a plus d'argent.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class AccountBankruptcy {
-   
+
    private final String message = Text.ACCOUNT_BANKRUPTCY_MESSAGE.toString();
-   
+
    /**
     * Affiche le message d'information à l'utilisateur.
-    * @param e L'exception qui a déclenché l'alerte.
+    * 
+    * @param e
+    *           - l'exception qui a déclenché l'alerte.
     */
-   public AccountBankruptcy (AmountUnavailableException e) {
+   public AccountBankruptcy(AmountUnavailableException e) {
       MidasLogs.errors.push(e.getMessage());
-      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(), JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(null, message, Text.APP_TITLE.toString(),
+            JOptionPane.ERROR_MESSAGE);
    }
 }

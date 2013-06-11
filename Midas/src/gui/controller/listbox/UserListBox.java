@@ -25,29 +25,29 @@ import core.components.UserList;
 
 /**
  * Contrôleur pour la liste graphique d'auteurs.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class UserListBox extends Controller {
-   
+
    private JUserList view;
    private UserList model;
-   
 
    /**
+    * Crée le contrôleur de la liste d'auteurs.
+    * 
     * @param core
+    *           - le coeur logique du programme.
     */
    public UserListBox(Core core) {
       super(core);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       model = getCore().getAllUsers();
@@ -55,43 +55,43 @@ public class UserListBox extends Controller {
       model.addObserver(view);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#getGraphicalComponent()
-    */
    @Override
    public Component getGraphicalComponent() {
       return view;
    }
-      
+
    /**
-    * Retourne l'utilisateur selectionné dans la liste.
-    * @return L'utilisateur selectionné.
+    * Retourne l'utilisateur sélectionné dans la liste.
+    * 
+    * @return L'utilisateur sélectionné.
     */
    public User getSelectedValue() {
       return view.getSelectedValue();
    }
 
+   /**
+    * Force une mise à jour du modèle.
+    */
    public void updateModel() {
       model.setChangedAndNotifyObservers();
    }
-   
+
    /**
-    * Ajoute l'écouteur sur la liste du contrôleur.
-    * @param listener Ecouteur ajouté.
+    * Ajoute un écouteur sur la liste du contrôleur.
+    * 
+    * @param listener
+    *           - l'écouteur ajouté.
     */
    public void addSelectionChangedListener(ListSelectionListener listener) {
       view.addListSelectionListener(listener);
    }
-   
+
    /**
-    * Force la déselection sur la liste.
+    * Force la désélection sur la liste.
     */
    public void selectNoItem() {
       view.setSelectedIndex(-1);

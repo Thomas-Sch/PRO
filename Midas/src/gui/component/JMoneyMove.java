@@ -23,16 +23,17 @@ import settings.Language.Text;
 import core.Core;
 
 /**
- * Panel d'affichage des mouvements d'argent.
+ * Panneau d'affichage des mouvements d'argent.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JMoneyMove extends JPanel {
-   
+
    /**
     * ID de sérialisation.
     */
@@ -40,16 +41,18 @@ public class JMoneyMove extends JPanel {
 
    private JLabel lblDescription;
    private FinancialTransactionListBox lastTransactions;
-   
+
    /**
-    * Construit le panel indiquant les dernières dépense efféctuées.
-    * @param core Le coeur logique de l'application.
+    * Construit le panneau indiquant les dernières dépenses effectuées.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
     */
    public JMoneyMove(Core core) {
       initContent(core);
       buildContent();
    }
-   
+
    /**
     * Initialise les composants de l'interface.
     */
@@ -57,15 +60,16 @@ public class JMoneyMove extends JPanel {
       lblDescription = new JLabel(Text.LAST_MONEY_MOVE_LABEL.toString());
       lastTransactions = new FinancialTransactionListBox(core);
    }
-   
+
    /**
-    * Construit le layout et place les composants.
+    * Construit le contenu et place les composants.
     */
    private void buildContent() {
-      setLayout(new BorderLayout(5,5));
-      
+      setLayout(new BorderLayout(5, 5));
+
       // Ajout des composants au panel.
-      add(lblDescription, BorderLayout.NORTH);      
-      add(new JScrollPaneDefault(lastTransactions.getGraphicalComponent()), BorderLayout.CENTER);
+      add(lblDescription, BorderLayout.NORTH);
+      add(new JScrollPaneDefault(lastTransactions.getGraphicalComponent()),
+            BorderLayout.CENTER);
    }
 }

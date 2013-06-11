@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : ComboBoxAuthors.java
+ * Nom du fichier   : JComboBoxAuthors.java
  * ============================================================================
  * Date de création : 1 mai 2013
  * ============================================================================
@@ -24,23 +24,27 @@ import core.components.UserList;
 
 /**
  * Liste déroulante d'utilisateurs du programme.
+ * 
  * @author Crescenzio Fabio
  * @author Decorvet Grégoire
  * @author Jaquier Kevin
  * @author Schweizer Thomas
- *
+ * 
  */
 public class JComboBoxUsers extends JComboBoxTemplate<User> {
-   
+
    /**
     * ID de sérialisation.
     */
    private static final long serialVersionUID = -7152847868675750776L;
-   
+
    private UserList users;
-   
+
    /**
-    * Constructeur de la liste déroulante.
+    * Crée la vue sur une liste déroulante d'utilisateurs.
+    * 
+    * @param users
+    *           - la liste des utilisateurs
     */
    public JComboBoxUsers(UserList users) {
       this.users = users;
@@ -50,18 +54,29 @@ public class JComboBoxUsers extends JComboBoxTemplate<User> {
    @Override
    public void update(Observable o, Object arg) {
       LinkedList<User> list = users.getAll(new SortByName());
-      
-      if(isFirstUse()) {
-         list.addFirst(users.createFalseEntry("Sélectionner un auteur")); // TO UPDATE
+
+      if (isFirstUse()) {
+         list.addFirst(users.createFalseEntry("Sélectionner un auteur")); // TO
+                                                                          // UPDATE
       }
-      
+
       int index = updateIndex();
       list.add(index, users.createFalseEntry("Nouvel auteur...")); // TO UPDATE
-      
+
       User[] temp = new User[0];
       setModel(new DefaultComboBoxModel<User>(list.toArray(temp)));
    }
-   
+
+   /**
+    * Comparateur d'utilisateurs selon leurs noms.
+    * 
+    * @author Biolzi Sébastien
+    * @author Brito Carvalho Bruno
+    * @author Decorvet Grégoire
+    * @author Schweizer Thomas
+    * @author Sinniger Marcel
+    * 
+    */
    private class SortByName implements Comparator<User> {
       @Override
       public int compare(User arg0, User arg1) {

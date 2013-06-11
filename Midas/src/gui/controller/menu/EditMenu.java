@@ -28,48 +28,44 @@ import core.Core;
 
 /**
  * Contrôleur du menu d'édition.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class EditMenu extends Controller {
    JEditMenu view;
 
    /**
+    * Crée le contrôleur du menu d'édition.
+    * 
     * @param core
+    *           - le coeur logique du programme.
     */
    public EditMenu(Core core) {
       super(core);
    }
 
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       view = new JEditMenu();
    }
 
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
       view.addManageUserListener(new AcManageUser(getCore()));
       view.addManageCategoryListener(new AcManageCategory(getCore()));
       view.addManageAccountListener(new AcManageAccount(getCore()));
       view.addManageBudgetListener(new AcManageBudget(getCore()));
-      view.addCreateOnTheFlyBudgetListener(new AcCreateOnTheFlyBudget(getCore(), this));
+      view.addCreateOnTheFlyBudgetListener(new AcCreateOnTheFlyBudget(
+            getCore(), this));
       view.addNewExpenseListener(new AcNewExpense(getCore(), this));
       view.addNewTransactionListener(new AcNewTransaction(getCore(), this));
    }
 
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#getGraphicalComponent()
-    */
    @Override
    public Component getGraphicalComponent() {
       return view;

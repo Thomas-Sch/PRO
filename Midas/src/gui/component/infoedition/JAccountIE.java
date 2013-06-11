@@ -29,7 +29,7 @@ import core.MidasLogs;
 import core.components.Account;
 
 /**
- * Représente les informations d'un compte.
+ * Panneau d'affichage pour les informations d'un compte.
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
@@ -53,28 +53,35 @@ public class JAccountIE extends JInfoEditionPane<Account> {
    private JInfoEditionLabel ielDescription;
 
    /**
-    * @param parent Fenêtre contenant le label.
-    * @param data Compte à afficher.
+    * Crée un panneau pour l'affichage des informations d'un compte.
+    * @param parent - la fenêtre parente.
+    * @param container - le conteneur de ce panneau.
+    * @param last - le précédent panneau.
+    * @param data - le compte à afficher.
     */
    public JAccountIE(JManageFrame parent, Container container, JAccountIE last, Account data) {
       this(parent, container, last, data, false);
    }
    
    /**
-    * Rien à afficher.
+    * Crée un panneau n'ayant rien à afficher.
     */
    public JAccountIE() {
       super();
    }
    
+   /**
+    * Crée un panneau pour l'affichage des informations d'un compte.
+    * @param parent - la fenêtre parente.
+    * @param container - le conteneur de ce panneau.
+    * @param last - le précédent panneau.
+    * @param data - le compte à afficher.
+    * @param edition - si les informations sont éditables ou non.
+    */
    public JAccountIE(JManageFrame parent, Container container, JAccountIE last, Account data, boolean edition) {
       super(parent, container, last, data, edition);
    }
-
-
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#initListeners()
-    */
+   
    @Override
    public void initListeners() {
       ielName.addTextChangedListener(new TextChangedListener() {
@@ -117,10 +124,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          }
       });
    }
-
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#initContent()
-    */
+   
    @Override
    public LinkedList<JInfoEditionLabel> initContent(Account data) {
       LinkedList<JInfoEditionLabel> result = new LinkedList<>();
@@ -141,10 +145,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
          result.add(ielDescription);
       return result;
    }
-
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#buildContent()
-    */
+   
    @Override
    public void buildContent() {
       setLayout(new GridLayout(6, 1));
@@ -157,7 +158,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
    }
    
    /**
-    * Vérifie que l'objet complété par l'utilisateur est sauvegardable dans
+    * Vérifie que l'objet complété par l'utilisateur peut être sauvegardé dans
     * la base de donnée.
     */
    private void checkItemIntegrity() {
@@ -168,10 +169,7 @@ public class JAccountIE extends JInfoEditionPane<Account> {
                     && mielOverdraftLimit.isNumber();
       setEnabledValidateButton(checkResult);
    }
-
-   /* (non-Javadoc)
-    * @see gui.JInfoEditionPane#saveItem()
-    */
+   
    @Override
    public void saveItem() {
       data.setName(ielName.getText());

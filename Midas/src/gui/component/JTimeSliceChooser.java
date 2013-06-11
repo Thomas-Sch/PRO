@@ -26,13 +26,14 @@ import settings.Language.Text;
 import utils.TimeSlice;
 
 /**
- * Panel de sélection d'intervalle de temps (Journalier, Mois, etc...).
+ * Panneau de sélection d'intervalle de temps (Journalier, Mois, etc...).
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JTimeSliceChooser extends JPanel {
 
@@ -40,77 +41,84 @@ public class JTimeSliceChooser extends JPanel {
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 2161876509341301904L;
-   
-   // Composants. 
+
+   // Composants.
    private ButtonGroup radioGroup;
    private LinkedList<JRadioButton> list;
 
    /**
+    * Crée le panneau de sélection d'intervalle
     * 
-    * @param slices Les différentes intervalles de temps
-    *               à afficher.
+    * @param slices
+    *           - les différents intervalles de temps à afficher.
     */
-   public JTimeSliceChooser(TimeSlice ... slices) {
+   public JTimeSliceChooser(TimeSlice... slices) {
       initContent(slices);
       buildContent(slices);
    }
-    
+
    /**
-    * Initialise le contenur de la fenêtre.
-    * @param slices Les différentes intervalles de temps
-    *               à afficher.
+    * Initialise le contenu de la fenêtre.
+    * 
+    * @param slices
+    *           - les différents intervalles de temps à afficher.
     */
-   private void initContent(TimeSlice ... slices) {
+   private void initContent(TimeSlice... slices) {
       radioGroup = new ButtonGroup();
       list = new LinkedList<>();
-      
-      for(TimeSlice slice : slices) {
+
+      for (TimeSlice slice : slices) {
          list.add(new JRadioButton(slice.getName()));
          radioGroup.add(list.getLast());
       }
    }
-   
+
    /**
     * Construit le composant graphique.
-    * @param slices Les différentes intervalles de temps
-    *               à afficher.
+    * 
+    * @param slices
+    *           - les différents intervalles de temps à afficher.
     */
-   private void buildContent(TimeSlice ... slices) {
+   private void buildContent(TimeSlice... slices) {
       setLayout(new GridBagLayout());
-      
+
       GridBagConstraints constraints = new GridBagConstraints();
       constraints.fill = GridBagConstraints.HORIZONTAL;
       constraints.weightx = 0.5;
       constraints.weighty = 0.5;
-      
+
       constraints.gridx = 0;
       constraints.gridy = 0;
-      add(buildRadioButtonGroup(), constraints);    
+      add(buildRadioButtonGroup(), constraints);
    }
-   
+
    /**
-    * Construit le groupe de radio boutons sur le panel.
-    * @return Les boutons radios.
+    * Construit et retourne le groupe de radio boutons sur le panneau.
+    * 
+    * @return Le panneau créé.
     */
    private JPanel buildRadioButtonGroup() {
       JPanel pnlContent = new JPanel();
-      
-      pnlContent.setLayout(new GridLayout(radioGroup.getButtonCount()/2, 2));
-      pnlContent.setBorder(BorderFactory.createTitledBorder(Text.TIME_SLICE_SETTINGS.toString()));
-      
+
+      pnlContent.setLayout(new GridLayout(radioGroup.getButtonCount() / 2, 2));
+      pnlContent.setBorder(BorderFactory
+            .createTitledBorder(Text.TIME_SLICE_SETTINGS.toString()));
+
       for (JRadioButton button : list) {
          pnlContent.add(button);
       }
       return pnlContent;
    }
-   
+
    /**
-    * Renvoie l'identifiant de l'intervalle de temps sélectionnée dans le composant.
-    * @return
+    * Retourne l'identifiant de l'intervalle de temps sélectionné dans le
+    * composant.
+    * 
+    * @return L'intervalle sélectionné.
     */
    public TimeSlice getTimeSlice() {
-      for(JRadioButton button : list) {
-         if(button.isSelected()) {
+      for (JRadioButton button : list) {
+         if (button.isSelected()) {
             return TimeSlice.getTimeSlice(button.getText());
          }
       }

@@ -26,42 +26,53 @@ import core.components.BudgetList;
 
 /**
  * Composant graphique pour l'affichage des listes de budget.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class JBudgetList extends JList<Budget> implements View{
+public class JBudgetList extends JList<Budget> implements View {
 
    /**
     * ID de sérialisation.
     */
    private static final long serialVersionUID = -8808271053870485590L;
-   
+
    private BudgetList budgets;
-   
+
    /**
-    * Constructeur par défaut.
+    * Crée la vue sur la liste des budgets.
+    * 
+    * @param budgets
+    *           - la liste des budgets.
     */
    public JBudgetList(BudgetList budgets) {
       this.budgets = budgets;
       setFixedCellWidth(200);
-      update(budgets, null);  
+      update(budgets, null);
    }
 
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-    */
    @Override
    public void update(Observable arg0, Object arg1) {
       LinkedList<Budget> list = budgets.getAll(new SortByName());
-      
+
       Budget[] temp = new Budget[0];
       setModel(new DefaultComboBoxModel<Budget>(list.toArray(temp)));
    }
-   
+
+   /**
+    * Comparateur de budget selon leurs noms.
+    * 
+    * @author Biolzi Sébastien
+    * @author Brito Carvalho Bruno
+    * @author Decorvet Grégoire
+    * @author Schweizer Thomas
+    * @author Sinniger Marcel
+    * 
+    */
    private class SortByName implements Comparator<Budget> {
       @Override
       public int compare(Budget arg0, Budget arg1) {

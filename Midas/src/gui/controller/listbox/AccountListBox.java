@@ -22,7 +22,7 @@ import core.components.Account;
 import core.components.AccountList;
 
 /**
- * Contrôleur pour la liste à séléction simple d'auteurs.
+ * Contrôleur pour la liste à sélection simple d'auteurs.
  * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
@@ -33,21 +33,19 @@ import core.components.AccountList;
  */
 public class AccountListBox extends Controller {
 
-   JAccountList view;
-   AccountList model;
+   private JAccountList view;
+   private AccountList model;
 
    /**
+    * Crée le contrôleur d'une liste d'auteurs.
+    * 
     * @param core
+    *           - le coeur logique du programme.
     */
    public AccountListBox(Core core) {
       super(core);
    }
 
-   /*
-    * (non-Javadoc)
-    * 
-    * @see gui.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       model = getCore().getAllAccounts();
@@ -55,28 +53,19 @@ public class AccountListBox extends Controller {
       model.addObserver(view);
    }
 
-   /*
-    * (non-Javadoc)
-    * 
-    * @see gui.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
    }
 
-   /*
-    * (non-Javadoc)
-    * 
-    * @see gui.Controller#getGraphicalComponent()
-    */
    @Override
    public JAccountList getGraphicalComponent() {
       return view;
    }
-   
+
    /**
-    * Retourne le compte selectionné dans la liste.
-    * @return Le compte selectionné.
+    * Retourne le compte sélectionné dans la liste.
+    * 
+    * @return Le compte sélectionné.
     */
    public Account getSelectedValue() {
       return view.getSelectedValue();
@@ -88,17 +77,19 @@ public class AccountListBox extends Controller {
    public void updateModel() {
       model.setChangedAndNotifyObservers();
    }
-   
+
    /**
     * Ajoute un écouteur lorsque la sélection change dans la liste.
-    * @param listener L'écouteur ajouté
+    * 
+    * @param listener
+    *           - l'écouteur ajouté.
     */
    public void addSelectionChangedListener(ListSelectionListener listener) {
       view.addListSelectionListener(listener);
    }
-   
+
    /**
-    * Force la déselection sur la liste.
+    * Force la désélection sur la liste.
     */
    public void selectNoItem() {
       view.setSelectedIndex(-1);

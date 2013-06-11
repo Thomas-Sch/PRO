@@ -20,13 +20,14 @@ import javax.swing.JMenuItem;
 import settings.Language.Text;
 
 /**
- * Représente le menu fichier de l'application.
+ * Représente le menu "Fichier" de l'application.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JFileMenu extends JMenu {
 
@@ -34,18 +35,18 @@ public class JFileMenu extends JMenu {
     * ID de sérialisation
     */
    private static final long serialVersionUID = 1583638274791297470L;
-   
-   JMenuItem mniFilequit;   
-   
+
+   private JMenuItem mniFilequit;
+
    /**
-    * 
+    * Crée le menu "Fichier".
     */
    public JFileMenu() {
       this.setText(Text.FILE_MENU.toString());
-      
+
       initComponents();
    }
-   
+
    /**
     * Initialise les composants graphiques.
     */
@@ -53,7 +54,13 @@ public class JFileMenu extends JMenu {
       mniFilequit = new JMenuItem(Text.ACTION_QUIT.toString());
       add(mniFilequit);
    }
-   
+
+   /**
+    * Ajoute un écouteur sur l'action quitter.
+    * 
+    * @param listener
+    *           - l'écouteur à ajouter.
+    */
    public void addQuitListener(ActionListener listener) {
       mniFilequit.addActionListener(listener);
    }

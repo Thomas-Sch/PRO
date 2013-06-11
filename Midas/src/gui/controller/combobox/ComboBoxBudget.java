@@ -26,36 +26,36 @@ import core.components.BudgetList;
 
 /**
  * Contrôleur de la liste déroulante de budget.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class ComboBoxBudget extends Controller {
-   
-   JComboBoxBudget view;
-   BudgetList model;
-   
+
+   private JComboBoxBudget view;
+   private BudgetList model;
+
+   /**
+    * Crée le contrôleur de liste déroulante de budget.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
+    */
    public ComboBoxBudget(Core core) {
       super(core);
       model.addObserver(view);
    }
-   
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       model = getCore().getAllBudgets();
       view = new JComboBoxBudget(model);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
       view.addActionListener(new ActionListener() {
@@ -69,38 +69,40 @@ public class ComboBoxBudget extends Controller {
       });
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#getGraphicalComponent()
-    */
    @Override
    public Component getGraphicalComponent() {
       return view;
    }
-   
+
    /**
-    * Ajout un écouteur de changement de sélection sur la vue.
-    * @param listener Ecouteur ajouté.
+    * Ajoute un écouteur de changement de sélection sur la vue.
+    * 
+    * @param listener
+    *           - l'écouteur ajouté.
     */
    public void addSelectedChangedListener(ActionListener listener) {
       view.addActionListener(listener);
    }
-   
+
    /**
-    * @return le budget séléctionné.
+    * Retourne le budget sélectionné.
+    * 
+    * @return Le budget sélectionné.
     */
    public Budget getSelectedItem() {
       return (Budget) view.getSelectedItem();
    }
 
    /**
-    * Retourne True si l'item sélectionné dans la liste est actuellement
+    * Test et retourne si l'élément sélectionné dans la liste est actuellement
     * un compte et pas un libellé d'invitation.
-    * @return True si un compte est sélectionné.
+    * 
+    * @return Vrai si un compte est sélectionné, Faux le cas échéant.
     */
    public boolean isValidItemSelected() {
       return view.isValidItemSelected();
    }
-   
+
    /**
     * Force le composant graphique à sélectionner l'invite d'action.
     */

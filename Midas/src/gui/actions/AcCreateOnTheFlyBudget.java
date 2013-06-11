@@ -32,57 +32,64 @@ import core.exceptions.InconsistencyDateException;
 
 /**
  * Action de création d'un budget à la volée.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class AcCreateOnTheFlyBudget extends UserAction {
 
    private BudgetOnTheFly budget;
    private JCreateOnTheFlyBudget view;
    private Controller controller;
-   
+
    /**
-    * @param core Objet core qui va être utilisé pour faires des appels à la
-    *             BDD.
-    * @param controller Contrôleur ayant appelé cette action.
+    * Crée l'action de création de budget à la volée.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
+    * @param controller
+    *           - le contrôleur ayant appelé cette action.
     */
    public AcCreateOnTheFlyBudget(Core core, Controller controller) {
       super(core);
       this.controller = controller;
    }
 
-   /* (non-Javadoc)
-    * @see gui.UserAction#execute(core.Core, java.awt.event.ActionEvent, java.lang.Object[])
-    */
    @Override
-   protected void execute(final Core core, ActionEvent event, Object[] dependencies) {     
+   protected void execute(final Core core, ActionEvent event,
+         Object[] dependencies) {
       budget = core.createBudgetOnTheFly();
-      
+
       view = new JCreateOnTheFlyBudget(controller, budget);
-      view.setTitle(Text.APP_TITLE.toString() + " - " + Text.BUDGET_FLY_CREATION_TITLE);
-      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);   
-      
+      view.setTitle(Text.APP_TITLE.toString() + " - "
+            + Text.BUDGET_FLY_CREATION_TITLE);
+      Positions.setPositionOnScreen(view, ScreenPosition.CENTER);
+
       initListeners(core);
-      
+
       budget.addObserver(view);
-      
-      // ATTENTION  : le réglage de la modalité doit être fait après la paramétrisation de la fenêtre !
+
+      // ATTENTION : le réglage de la modalité doit être fait après la
+      // paramétrisation de la fenêtre !
       view.setModalityType(ModalityType.APPLICATION_MODAL);
       view.setVisible(true);
    }
-   
+
    /**
     * Initialise les écouteurs de l'action.
-    * @param core Permet de sauvegarder l'objet créer.
+    * 
+    * @param core
+    *           Permet de sauvegarder l'objet créer.
     */
    public void initListeners(Core core) {
       view.addValidateListener(new UserAction(core) {
          @Override
-         protected void execute(Core core, ActionEvent event, Object[] dependencies) {            
+         protected void execute(Core core, ActionEvent event,
+               Object[] dependencies) {
             try {
                budget.setStartDate(view.getStartDate());
                budget.setEndDate(view.getEndDate());
@@ -91,24 +98,25 @@ public class AcCreateOnTheFlyBudget extends UserAction {
             }
             catch (InconsistencyDateException e) {
                new InconsistencyDate(e);
-            } 
+            }
             catch (BadDateException e) {
                new BadDate(e);
             }
          }
       });
-      
-      view.addCancelListener(new ActionListener() {  
+
+      view.addCancelListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
             view.dispose();
          }
       });
    }
-   
+
    /**
-    * Récupère le budget à la volée produit par cette action.
-    * @return Le budget crée.
+    * Retourne le budget à la volée produit par cette action.
+    * 
+    * @return Le budget à la volée créé.
     */
    public BudgetOnTheFly getCreatedBudget() {
       return budget;

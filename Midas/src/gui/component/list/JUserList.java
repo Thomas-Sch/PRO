@@ -26,13 +26,14 @@ import core.components.User;
 import core.components.UserList;
 
 /**
- * Représente une liste d'utilisateurs.
+ * Représente l'affichage graphique d'une liste d'utilisateurs.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JUserList extends JList<User> implements View {
 
@@ -40,37 +41,49 @@ public class JUserList extends JList<User> implements View {
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 1933782144590081485L;
-   
+
    private UserList users;
 
    /**
-    * @param controller
+    * Crée la vue sur la liste des utilisateurs donnée.
+    * 
+    * @param users
+    *           - la liste des utilisateurs.
     */
    public JUserList(UserList users) {
       this.users = users;
       setFixedCellWidth(200);
-      update(users, null);  
+      update(users, null);
    }
 
-   /* (non-Javadoc)
-    * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
-    */
+   @Override
    public void update(Observable arg0, Object arg1) {
       LinkedList<User> list = users.getAll(new SortByName());
-      
+
       User[] temp = new User[0];
       setModel(new DefaultComboBoxModel<User>(list.toArray(temp)));
    }
-   
+
+   /**
+    * Comparateur d'utilisateurs selon leurs noms.
+    * 
+    * @author Biolzi Sébastien
+    * @author Brito Carvalho Bruno
+    * @author Decorvet Grégoire
+    * @author Schweizer Thomas
+    * @author Sinniger Marcel
+    * 
+    */
    private class SortByName implements Comparator<User> {
       @Override
       public int compare(User arg0, User arg1) {
          return arg0.getName().compareToIgnoreCase(arg1.getName());
       }
    }
-   
+
+   @Override
    public Dimension getPreferredSize() {
       return new Dimension(200, 100);
    }
-   
+
 }

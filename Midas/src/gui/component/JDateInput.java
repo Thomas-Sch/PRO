@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : DateInput.java
+ * Nom du fichier   : JDateInput.java
  * ============================================================================
  * Date de création : 16 avr. 2013
  * ============================================================================
@@ -25,66 +25,73 @@ import settings.Language.Text;
 import com.toedter.calendar.JDateChooser;
 
 /**
- * Elément comportant la saisie d'une date.
+ * Panneau comportant la saisie d'une date.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JDateInput extends JPanel {
+
    /**
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 1L;
-   
+
    private JDateChooser dchTime;
    private JLabel lblMetaInfo;
-   
+
    /**
-    * Initialise le panel avec le dateChooser et un label indiquant ce que
-    * c'est.
+    * Crée le panneau de saisie de date.
     */
    public JDateInput(Text labelContent) {
       initContent(labelContent);
       buildContent();
    }
-   
+
    /**
-    * Initialiser les éléments du panel.
-    * @param labelContent Contenu du label de metainformation du composant
-    * graphique
+    * Initialiser les éléments du panneau.
+    * 
+    * @param labelContent
+    *           - le contenu de l'étiquette de meta-information du composant
+    *           graphique.
     */
    public void initContent(Text labelContent) {
       dchTime = new JDateChooser(new Date());
       lblMetaInfo = new JLabel(labelContent.toString());
    }
-   
+
    /**
-    * Posistionne les éléments dans le panel
+    * Positionne les éléments dans le panneau.
     */
    public void buildContent() {
-      setLayout(new BorderLayout(5,5));
+      setLayout(new BorderLayout(5, 5));
       add(lblMetaInfo, BorderLayout.WEST);
       add(dchTime, BorderLayout.EAST);
    }
-   
+
    /**
-    * Renvoie la date sélectionnée.
-    * @return la date sélectionnée.
-    * @throws BadDateException Si la date choisie est invalide.
+    * Retourne la date sélectionnée.
+    * 
+    * @return La date sélectionnée.
+    * @throws BadDateException
+    *            si la date choisie est invalide.
     */
    public Date getDate() throws BadDateException {
-      if(dchTime.getDate() == null) {
+      if (dchTime.getDate() == null) {
          throw new BadDateException("Invalid date");
       }
       return dchTime.getDate();
    }
-   
+
    /**
     * Fixe la date du composant.
-    * @param date La nouvelle date.
+    * 
+    * @param date
+    *           - La nouvelle date.
     */
    public void setDate(Date date) {
       dchTime.setDate(date);

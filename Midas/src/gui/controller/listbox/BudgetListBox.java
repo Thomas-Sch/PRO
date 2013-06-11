@@ -24,29 +24,30 @@ import core.components.Budget;
 import core.components.BudgetList;
 
 /**
- * Contrôleur des listes de budget.
+ * Contrôleur d'une liste de budget.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class BudgetListBox extends Controller {
-   
-   JBudgetList view;
-   BudgetList model;
+
+   private JBudgetList view;
+   private BudgetList model;
 
    /**
-    * @param core Coeur logique du programme.
+    * Crée le contrôleur de la liste des budgets.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
     */
    public BudgetListBox(Core core) {
       super(core);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       model = getCore().getAllBudgets();
@@ -54,21 +55,20 @@ public class BudgetListBox extends Controller {
       model.addObserver(view);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initListeners()
-    */
    @Override
-   protected void initListeners() {      
+   protected void initListeners() {
+      // Aucun pour l'instant
    }
-   
+
    /**
-    * Retourne le budget selectionné dans la liste.
-    * @return Le budget selectionné.
+    * Retourne le budget sélectionné dans la liste.
+    * 
+    * @return Le budget sélectionné.
     */
    public Budget getSelectedValue() {
       return view.getSelectedValue();
    }
-   
+
    /**
     * Force la mise à jour du modèle.
     */
@@ -76,24 +76,23 @@ public class BudgetListBox extends Controller {
       model.setChangedAndNotifyObservers();
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#getGraphicalComponent()
-    */
    @Override
    public Component getGraphicalComponent() {
       return view;
    }
-   
+
    /**
     * Ajoute un écouteur lorsque la sélection change dans la liste.
-    * @param listener L'écouteur ajouté
+    * 
+    * @param listener
+    *           - l'écouteur ajouté.
     */
    public void addSelectionChangedListener(ListSelectionListener listener) {
       view.addListSelectionListener(listener);
    }
-   
+
    /**
-    * Force la déselection sur la liste.
+    * Force la désélection sur la liste.
     */
    public void selectNoItem() {
       view.setSelectedIndex(-1);

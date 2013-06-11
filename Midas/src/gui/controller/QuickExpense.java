@@ -28,60 +28,61 @@ import core.components.FinancialTransaction;
 import core.exceptions.AmountUnavailableException;
 
 /**
- * Controleur pour le panel d'ajout de dépenses rapides.
+ * Contrôleur pour le panneau d'ajout de dépenses rapides.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
-public class QuickExpense extends Controller{
-   
+public class QuickExpense extends Controller {
+
    JQuickExpense view;
    FinancialTransaction expense;
-   
+
    /**
-    * 
+    * Crée le contrôleur du panneau.
     */
    public QuickExpense(Core core) {
       super(core);
    }
-   
+
    @Override
    protected void initComponents() {
       expense = getCore().createFinancialTransaction();
       view = new JQuickExpense(this, expense);
    }
-   
+
    @Override
    protected void initListeners() {
       view.addValidateListener(new ActionListener() {
-         
+
          @Override
          public void actionPerformed(ActionEvent arg0) {
             try {
                expense.setDate(view.getDate());
                expense.setAccount(expense.getBudget().getBindedAccount());
-               
+
                // On regarde si le budget était tenu avant.
                boolean wasPositive = expense.getBudget().isPositive();
-               
+
                getCore().saveFinancialTransaction(expense);
-               
-               if(wasPositive && !expense.getBudget().isPositive()) {
+
+               if (wasPositive && !expense.getBudget().isPositive()) {
                   new NegativeBudget(expense.getBudget());
                }
-               
+
                view.reset();
             }
             catch (AmountUnavailableException e) {
                new AccountBankruptcy(e);
             }
             catch (BadDateException e) {
-              new BadDate(e);
+               new BadDate(e);
             }
-            
+
          }
       });
    }
