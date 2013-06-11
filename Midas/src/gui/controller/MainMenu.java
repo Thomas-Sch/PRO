@@ -18,34 +18,39 @@ import core.Core;
 
 /**
  * Contrôleur du menu principal.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class MainMenu extends Controller {
-   
+
    JMainMenu mainMenu;
-   
+
+   /**
+    * Crée le contrôleur du menu principal.
+    * 
+    * @param core - le coeur logique du programme.
+    */
    public MainMenu(Core core) {
       super(core);
    }
-   
+
    @Override
    protected void initComponents() {
       mainMenu = new JMainMenu(this);
    }
-   
+
    @Override
    protected void initListeners() {
    }
-   
+
+   @Override
    public JMainMenu getGraphicalComponent() {
       return mainMenu;
    }
-   
-   
 
 }

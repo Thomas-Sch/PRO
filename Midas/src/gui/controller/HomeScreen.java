@@ -18,31 +18,39 @@ import core.Core;
 
 /**
  * Contrôleur de l'écran d'accueil.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class HomeScreen extends Controller {
-   
+
    JHomeScreen homeScreen;
-   
-   public HomeScreen (Core core) {
+
+   /**
+    * Crée le contrôleur de l'écran d'accueil.
+    * 
+    * @param core
+    *           - le coeur logique du programme.
+    */
+   public HomeScreen(Core core) {
       super(core);
-   }   
+   }
 
    @Override
    protected void initComponents() {
       homeScreen = new JHomeScreen(this);
    }
-   
+
    @Override
    protected void initListeners() {
       // Pas de listener
    }
-   
+
+   @Override
    public JHomeScreen getGraphicalComponent() {
       return homeScreen;
    }

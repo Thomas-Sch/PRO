@@ -27,21 +27,25 @@ import core.components.CategoryList;
 
 /**
  * Contrôleur pour les deux listes déroulantes de catégories.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class ComboBoxesCategory extends Controller {
-   
-   JComboBoxesCategory view;
-   CategoryList model;
-   CategoryList children;
+
+   private JComboBoxesCategory view;
+   private CategoryList model;
+   private CategoryList children;
 
    /**
+    * Crée le contrôleur des deux listes déroulantes de catégories.
+    * 
     * @param core
+    *           - le coeur logique du programme.
     */
    public ComboBoxesCategory(Core core) {
       super(core);
@@ -49,9 +53,6 @@ public class ComboBoxesCategory extends Controller {
       children.addObserver(view);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       model = getCore().getAllPrimaryCategories();
@@ -59,9 +60,6 @@ public class ComboBoxesCategory extends Controller {
       view = new JComboBoxesCategory(this);
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
       view.addSelectChangedPrimaryListener(new ActionListener() {
@@ -70,9 +68,11 @@ public class ComboBoxesCategory extends Controller {
                AcCreateCategory action = new AcCreateCategory(getCore());
                action.actionPerformed(e);
                view.setSelectedPrimaryItem(action.getCreatedCategory());
-            }else if(view.isPrimaryInviteSelected()) {
+            }
+            else if (view.isPrimaryInviteSelected()) {
                view.setChildrenVisible(false);
-            }else {
+            }
+            else {
                Category parent = view.getSelectedPrimaryItem();
                CategoryList p = getCore().getChildren(parent);
                children.setItems(p.getList());
@@ -81,76 +81,88 @@ public class ComboBoxesCategory extends Controller {
             }
          }
       });
-      
+
       view.addSelectChangedChildrenListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
             if (view.isCreateNewChildCategorySelected()) {
                Category temp = view.getSelectedPrimaryItem();
-              
-               AcCreateSubCategory action = new AcCreateSubCategory(getCore(), temp, children);
+
+               AcCreateSubCategory action = new AcCreateSubCategory(getCore(),
+                     temp, children);
                action.actionPerformed(e);
-               
+
                view.setSelectedChildItem(action.getCreatedCategory());
                view.setSelectedPrimaryItem(temp);
-            }   
+            }
          }
       });
    }
 
-   /* (non-Javadoc)
-    * @see gui.Controller#getGraphicalComponent()
-    */
    @Override
    public Component getGraphicalComponent() {
       return view;
    }
-   
+
+   /**
+    * Retourne la liste des catégories primaires.
+    * 
+    * @return La liste des catégories primaires.
+    */
    public CategoryList getPrimaryCategories() {
       return model;
    }
-   
+
+   /**
+    * Retourne la liste des sous-catégories.
+    * 
+    * @return La liste des sous-catégories.
+    */
    public CategoryList getChildrenCategories() {
       return children;
    }
-   
+
    /**
-    * Ajout un écouteur de changement de sélection sur la vue.
-    * @param listener Ecouteur ajouté.
+    * Ajoute un écouteur de changement de sélection sur la vue.
+    * 
+    * @param listener
+    *           - l'écouteur ajouté.
     */
    public void addSelectedChangedListener(ActionListener listener) {
       view.addSelectChangedPrimaryListener(listener);
       view.addSelectChangedChildrenListener(listener);
    }
-   
+
    /**
     * Renvoie l'item sélectionné dans l'interface.
+    * 
     * @return l'item sélectionné dans l'interface.
     */
    public Category getSelectedItem() {
-      
-      // On regarde ce que l'utilisateur à selectionné : Catégorie simple ou 
-      // sous catégorie ?.
-      if(view.isValidPrimaryItemSelected()) {
-         if(view.isValidChildItemSelected()) {
+
+      // On regarde ce que l'utilisateur à sélectionné : Catégorie simple ou
+      // sous catégorie ?
+      if (view.isValidPrimaryItemSelected()) {
+         if (view.isValidChildItemSelected()) {
             return view.getSelectedChildItem();
-         } 
+         }
          // Si aucune catégorie enfant n'est sélectionnée alors on renvoi
          // la catégorie parente.
          return view.getSelectedPrimaryItem();
       }
       return null;
    }
-   
+
    /**
-    * Retourne True si l'item sélectionné dans la liste est actuellement
+    * Test et retourne si l'élément sélectionné dans la liste est actuellement
     * un compte et pas un libellé d'invitation.
-    * @return True si un compte est sélectionné.
+    * 
+    * @return Vrai si un compte est sélectionné, Faux le cas échéant.
     */
    public boolean isValidItemSelected() {
       return view.isValidPrimaryItemSelected();
    }
-   
+
    /**
     * Force le composant graphique à sélectionner l'invite d'action.
     */

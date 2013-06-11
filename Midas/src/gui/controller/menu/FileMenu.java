@@ -22,43 +22,38 @@ import core.Core;
 
 /**
  * Contrôleur du menu fichier.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class FileMenu extends Controller {
 
    JFileMenu view;
-   
+
    /**
+    * Crée le contrôleur du menu fichier.
+    * 
     * @param core
+    *           - le coeur logique du programme.
     */
    public FileMenu(Core core) {
       super(core);
    }
 
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#initComponents()
-    */
    @Override
    protected void initComponents() {
       view = new JFileMenu();
    }
 
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#initListeners()
-    */
    @Override
    protected void initListeners() {
       view.addQuitListener(new AcQuit(getCore()));
    }
 
-   /* (non-Javadoc)
-    * @see gui.controller.Controller#getGraphicalComponent()
-    */
    @Override
    public Component getGraphicalComponent() {
       return view;
