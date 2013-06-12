@@ -28,8 +28,8 @@ import core.MidasLogs;
  */
 public class Midas {
 
-   private final static boolean LOG_FRAME_ON = true;
-   private final static boolean DEVELOPPEMENT_MODE_ON = true;
+   private final static boolean LOG_FRAME_ON = false;
+   private final static boolean DEVELOPPEMENT_MODE_ON = false;
 
    /**
     * Méthode principale utilisée automatiquement au lancement.
