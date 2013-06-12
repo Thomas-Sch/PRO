@@ -27,8 +27,8 @@ import core.Core;
 public class AlertList extends ListTemplate<Alert> {
 
    /**
-    * Crée une liste d'alertes, notifiant ses observateurs 
-    * lorsqu'elle est mise à jour.
+    * Crée une liste d'alertes, notifiant ses observateurs lorsqu'elle est mise
+    * à jour.
     * 
     * @param core
     *           - le coeur logique du programme.

@@ -19,8 +19,8 @@ import core.IdentifiedComponent;
 import settings.Language.Text;
 
 /**
- * Cette classe représente une transaction financière et met à disposition un
- * moyen d'obtenir certaines informations associées à ladite transaction.
+ * Cette classe représente une alerte et met à disposition un moyen d'obtenir
+ * certaines informations associées à ladite alerte.
  * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
@@ -56,7 +56,7 @@ public class Alert extends CoreComponent implements IdentifiedComponent {
    }
 
    /**
-    * Affichage des transactions financières.
+    * Affichage de l'alerte.
     */
    @Override
    public String toString() {
