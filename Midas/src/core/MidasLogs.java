@@ -14,7 +14,6 @@ package core;
 
 import java.io.File;
 
-import settings.Settings;
 import core.log.Log;
 import core.log.LogsFrame;
 
