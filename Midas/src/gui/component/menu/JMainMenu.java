@@ -15,8 +15,6 @@ package gui.component.menu;
 import gui.Controller;
 import gui.controller.menu.EditMenu;
 import gui.controller.menu.FileMenu;
-import gui.controller.menu.InterrogationMenu;
-import gui.controller.menu.ViewMenu;
 
 import javax.swing.JMenuBar;
 
