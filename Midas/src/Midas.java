@@ -28,7 +28,8 @@ import core.MidasLogs;
  */
 public class Midas {
 
-   private final static boolean LOG_FRAME_ON = false;
+   private final static boolean LOGS_ON = false;
+   private final static boolean LOGS_FRAME_ON = false;
    private final static boolean DEVELOPPEMENT_MODE_ON = false;
 
    /**
@@ -42,7 +43,7 @@ public class Midas {
       Core core = new Core();
 
       // Lancement de la partie graphique du logiciel.
-      new GlobalGUIController(core, LOG_FRAME_ON);
+      new GlobalGUIController(core, LOGS_ON, LOGS_FRAME_ON);
 
       MidasLogs.messages.push("Launcher", "Initialization done.");
 

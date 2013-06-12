@@ -45,7 +45,7 @@ public class GlobalGUIController extends Controller {
     *           - le coeur logique du programme.
     */
    public GlobalGUIController(Core core) {
-      this(core, false);
+      this(core, false, false);
    }
 
    /**
@@ -53,10 +53,10 @@ public class GlobalGUIController extends Controller {
     * 
     * @param core
     *           - le coeur logique de l'application.
-    * @param logFrame
+    * @param logsFrame
     *           - définit s'il faut ou non afficher la fenêtre de logs.
     */
-   public GlobalGUIController(Core core, boolean logFrame) {
+   public GlobalGUIController(Core core, boolean enableLogs, boolean enableLogsFrame) {
       super(core);
 
       // Définition du look and feel.
@@ -83,9 +83,13 @@ public class GlobalGUIController extends Controller {
          MidasLogs.errors.push("Launcher",
                "Choosen LookAndFeel is not a real LookAndFeel.");
       }
+      
+      if (enableLogs) {
+         MidasLogs.setupFiles();
+      }
 
-      if (logFrame) {
-         if (logFrame) {
+      if (enableLogs && enableLogsFrame) {
+         if (enableLogsFrame) {
             LogsFrame logsFrame = new LogsFrame("Midas - logs", 700, 0, 600,
                   400);
             Positions.setPositionOnScreen(logsFrame, ScreenPosition.TOP_RIGHT);

@@ -276,6 +276,11 @@ public class Log {
             push("Log", ex.getMessage());
          }
       }
+      // Si pas de fichier, suppression de l'élément (afin de ne pas remplir
+      // inutilement la mémoire)
+      else {
+         messages.remove(0);
+      }
    }
 
 }

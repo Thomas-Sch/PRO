@@ -13,6 +13,8 @@
 package core;
 
 import java.io.File;
+
+import settings.Settings;
 import core.log.Log;
 import core.log.LogsFrame;
 
@@ -28,12 +30,23 @@ import core.log.LogsFrame;
  */
 public class MidasLogs {
 
-   public static Log messages = new Log("messages", new File("Midas.log"), 1);
-
-   public static Log errors = new Log("errors", new File("Errors.log"), 1);
-
-   public static Log sqlErrors = new Log("sqlErrors",
-         new File("sqlErrors.log"), 1);
+   public static Log messages = new Log("messages");
+   public static Log errors = new Log("sqlErrors");
+   public static Log sqlErrors = new Log("sqlErrors");
+   
+   /**
+    * Initialise les fichiers de sorties
+    */
+   public static void setupFiles() {
+      messages.setOutputFile(new File("Midas.log"));
+      messages.setBufferSize(1);
+      
+      errors.setOutputFile(new File("Errors.log"));
+      errors.setBufferSize(1);
+      
+      sqlErrors.setOutputFile(new File("SqlErrors.log"));
+      sqlErrors.setBufferSize(1);
+   }
 
    /**
     * Ajoute les logs à la fenêtre de logs donnée.
