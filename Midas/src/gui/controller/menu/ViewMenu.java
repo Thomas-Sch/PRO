@@ -31,7 +31,7 @@ import core.Core;
  */
 public class ViewMenu extends Controller {
 
-   JViewMenu view;
+   private JViewMenu view;
 
    /**
     * Crée le contrôleur.

@@ -37,7 +37,7 @@ import core.Core;
  * 
  */
 public class EditMenu extends Controller {
-   JEditMenu view;
+   private JEditMenu view;
 
    /**
     * Crée le contrôleur du menu d'édition.

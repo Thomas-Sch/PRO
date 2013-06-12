@@ -37,10 +37,12 @@ public class JMainMenu extends JMenuBar {
     */
    private static final long serialVersionUID = 4143588954471515225L;
 
-   public FileMenu file;
-   public EditMenu edit;
-   public ViewMenu view;
-   public InterrogationMenu interrogation;
+   private FileMenu file;
+   private EditMenu edit;
+   
+   // Ces menus ne sont pas utilisés pour l'instant.
+   //   private ViewMenu view;
+   //   private InterrogationMenu interrogation;
 
    /**
     * Construit le menu avec ses composants.
@@ -49,8 +51,8 @@ public class JMainMenu extends JMenuBar {
       file = new FileMenu(controller.getCore());
       edit = new EditMenu(controller.getCore());
 
-      view = new ViewMenu(controller.getCore());
-      interrogation = new InterrogationMenu(controller.getCore());
+      //      view = new ViewMenu(controller.getCore());
+      //      interrogation = new InterrogationMenu(controller.getCore());
 
       add(file.getGraphicalComponent());
       add(edit.getGraphicalComponent());

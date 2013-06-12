@@ -32,7 +32,7 @@ import core.Core;
  */
 public class FileMenu extends Controller {
 
-   JFileMenu view;
+   private JFileMenu view;
 
    /**
     * Crée le contrôleur du menu fichier.

@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : QuickExpenseC.java
+ * Nom du fichier   : QuickExpense.java
  * ============================================================================
  * Date de création : 29 avr. 2013
  * ============================================================================
@@ -39,8 +39,8 @@ import core.exceptions.AmountUnavailableException;
  */
 public class QuickExpense extends Controller {
 
-   JQuickExpense view;
-   FinancialTransaction expense;
+   private JQuickExpense view;
+   private FinancialTransaction expense;
 
    /**
     * Crée le contrôleur du panneau.

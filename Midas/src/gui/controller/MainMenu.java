@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : MainMenuC.java
+ * Nom du fichier   : MainMenu.java
  * ============================================================================
  * Date de création : 28 avr. 2013
  * ============================================================================
@@ -28,7 +28,7 @@ import core.Core;
  */
 public class MainMenu extends Controller {
 
-   JMainMenu mainMenu;
+   private JMainMenu mainMenu;
 
    /**
     * Crée le contrôleur du menu principal.

@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : HomeScreenC.java
+ * Nom du fichier   : HomeScreen.java
  * ============================================================================
  * Date de création : 28 avr. 2013
  * ============================================================================
@@ -28,7 +28,7 @@ import core.Core;
  */
 public class HomeScreen extends Controller {
 
-   JHomeScreen homeScreen;
+   private JHomeScreen homeScreen;
 
    /**
     * Crée le contrôleur de l'écran d'accueil.

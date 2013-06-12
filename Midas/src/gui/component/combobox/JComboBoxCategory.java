@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : ComboBoxesCategory.java
+ * Nom du fichier   : JComboBoxesCategory.java
  * ============================================================================
  * Date de création : 16 avr. 2013
  * ============================================================================
@@ -27,12 +27,13 @@ import core.components.CategoryList;
 
 /**
  * Liste déroulante de catégorie.
+ * 
  * @author Biolzi Sébastien
  * @author Brito Carvalho Bruno
  * @author Decorvet Grégoire
  * @author Schweizer Thomas
  * @author Sinniger Marcel
- *
+ * 
  */
 public class JComboBoxCategory extends JComboBoxTemplate<Category> {
    

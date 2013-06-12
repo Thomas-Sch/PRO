@@ -1,5 +1,5 @@
 /* ============================================================================
- * Nom du fichier   : MainFrameC.java
+ * Nom du fichier   : MainFrame.java
  * ============================================================================
  * Date de création : 28 avr. 2013
  * ============================================================================
@@ -35,7 +35,7 @@ import core.Core;
  */
 public class MainFrame extends Controller {
    
-   JMainFrame mainFrame;
+   private JMainFrame mainFrame;
    
    /**
     * Contrôleur de la fenêtre principale.

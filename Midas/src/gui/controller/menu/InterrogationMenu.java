@@ -31,7 +31,7 @@ import core.Core;
  */
 public class InterrogationMenu extends Controller {
 
-   JInterrogationMenu view;
+   private JInterrogationMenu view;
 
    /**
     * Crée le contrôleur du menu.

@@ -40,12 +40,10 @@ public class JMainFrame extends JFrame {
     * ID de sérialisation.
     */
    private static final long serialVersionUID = 1933259049533441028L;
-
-   Controller controller;
-
+   
    // Composants graphiques extérieurs.
-   MainMenu menu;
-   HomeScreen home;
+   private MainMenu menu;
+   private HomeScreen home;
 
    /**
     * Crée la fenêtre principale.
@@ -57,7 +55,6 @@ public class JMainFrame extends JFrame {
     */
    public JMainFrame(Controller controller, String title) {
       super(title);
-      this.controller = controller;
 
       menu = new MainMenu(controller.getCore());
       home = new HomeScreen(controller.getCore());
