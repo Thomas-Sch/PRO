@@ -43,7 +43,7 @@ import core.MidasLogs;
  * 
  */
 public class Settings extends DefaultsSettings {
-
+   
    private static final String CONFIG_FOLDER_PATH = "config";
    private static final String CONFIG_FILE_NAME = "config";
    private static final String CONFIG_FILE_EXTENSION = "xml";

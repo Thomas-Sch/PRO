@@ -18,6 +18,7 @@ import gui.views.JMainFrame;
 
 import java.awt.Component;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import settings.Language.Text;
@@ -51,6 +52,7 @@ public class MainFrame extends Controller {
       mainFrame = new JMainFrame(this, Text.APP_TITLE.toString());
       mainFrame.setSize(Settings.mainFrame.width, Settings.mainFrame.height);
       Positions.setPositionOnScreen(mainFrame,  Settings.mainFrame.anchor);
+      mainFrame.setIconImage(new ImageIcon(Settings.imagesLogoPath).getImage());
       mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       mainFrame.setVisible(true);
    }

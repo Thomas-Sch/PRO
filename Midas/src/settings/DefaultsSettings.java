@@ -12,6 +12,8 @@
  */
 package settings;
 
+import java.io.File;
+
 import gui.utils.Positions.ScreenPosition;
 import settings.elements.FrameSettings;
 
@@ -28,6 +30,8 @@ import settings.elements.FrameSettings;
 class DefaultsSettings {
 
    public static String languageCode;
+   
+   public static String imagesLogoPath;
 
    public static FrameSettings mainFrame = new FrameSettings("mainFrame");
 
@@ -39,6 +43,9 @@ class DefaultsSettings {
     * Charge les paramètres par défaut
     */
    static void setDefaults() {
+      // Default for imagesLogoPath
+      imagesLogoPath = "images" + File.separator + "logo.png";
+      
       // Default for languageCode
       languageCode = "fr";
 
